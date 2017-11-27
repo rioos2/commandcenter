@@ -1,0 +1,200 @@
+@keyframes "draw_haxagon" {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes "hide_clip" {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes "draw_line" {
+	0% {
+		stroke-dashoffset: 500;
+	}
+	30% {
+		stroke-dashoffset: 0;
+	}
+	70% {
+		stroke-dashoffset: 0;
+	}
+	100% {
+		stroke-dashoffset: 500;
+	}
+}
+@keyframes "scale_hex2" {
+	to {
+		transform: scale(0.85);
+		transform-origin: center center;
+	}
+}
+@keyframes "scale_hex3" {
+	to {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+}
+@keyframes "scale_hex3_part2" {
+	0% {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+	25% {
+		transform: scale(1.25);
+		transform-origin: center center;
+	}
+	50% {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+	100% {
+		transform: scale(1.2);
+		transform-origin: center center;
+	}
+}
+@keyframes "scaleAndHidenH4" {
+	from {
+		transform: scale(0);
+		transform-origin: center center;
+		opacity: 0.5;
+	}
+	to {
+		transform: scale(1.8);
+		transform-origin: center center;
+		opacity: 0;
+	}
+}
+@keyframes "scaleAndHiden_part2" {
+	0% {
+		transform: scale(0);
+		transform-origin: center center;
+		opacity: 0.5;
+	}
+	19% {
+		transform: scale(0);
+		transform-origin: center center;
+		opacity: 0.5;
+	}
+	100% {
+		transform: scale(1.8);
+		transform-origin: center center;
+		opacity: 0;
+	}
+}
+@keyframes "scale_corners" {
+	from {
+		opacity: 1;
+		transform: scale(0.7);
+		transform-origin: center center;
+	}
+	to {
+		opacity: 1;
+		transform: scale(0.92);
+		transform-origin: center center;
+	}
+}
+@keyframes "rotate_lines" {
+	0% {
+		transform: rotate(0deg);
+		transform-origin: center center;
+	}
+	35% {
+		transform: rotate(60deg);
+		transform-origin: center center;
+	}
+	65% {
+		transform: rotate(60deg);
+		transform-origin: center center;
+	}
+	100% {
+		transform: rotate(-60deg);
+		transform-origin: center center;
+	}
+}
+body {
+	margin: 0;
+	background: black;
+}
+// svg {
+// 	max-width: 400px;
+// }
+#hexagon1 {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	animation: draw_haxagon 0.35s linear forwards;
+}
+#clip_hexagon1 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_haxagon 0.5s linear forwards, hide_clip 0.1s linear 0.6s forwards;
+}
+#hexagon1_part2 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_haxagon 0.16s linear 0.34s forwards, hide_clip 0.1s linear 0.8s forwards;
+}
+#hexagon2 {
+	transform: scale(0);
+	transform-origin: center center;
+	animation: scale_hex2 0.85s linear 0.18s forwards;
+}
+#hexagon3 {
+	opacity: 0.25;
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	transform: scale(1.08);
+	transform-origin: center center;
+	animation: scale_hex3 0.5s linear 0.58s forwards, draw_haxagon .5s linear 0.58s forwards, scale_hex3_part2 2s linear 1.85s infinite;
+}
+#hexagon4 {
+	opacity: 0.5;
+	transform: scale(0);
+	transform-origin: center center;
+	animation: scaleAndHidenH4 1.42s linear 0.25s forwards, scaleAndHiden_part2 2s linear 2.5s infinite;
+}
+#hexagon5 {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	transform: scale(0.65);
+	transform-origin: center center;
+	animation: draw_haxagon 1s linear 1s forwards;
+}
+#corners {
+	opacity: 0;
+	transform: scale(0.7);
+	transform-origin: center center;
+	animation: scale_corners 0.75s linear 1s forwards;
+}
+#line1 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.1s forwards;
+}
+#line2 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.2s forwards;
+}
+#line3 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.3s forwards;
+}
+#line4 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.4s forwards;
+}
+#line5 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.5s forwards;
+}
+#line6 {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw_line 3.6s linear 1.6s forwards;
+}
+.lines {
+	animation: rotate_lines 1.5s linear 2.3s forwards;
+}

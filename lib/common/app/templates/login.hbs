@@ -1,0 +1,47 @@
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="logo-div col-md-12">
+        <a href="#"><img class="logo-img tuna-signup-logo img-responsive center-block" src="images/logo1.png"></a>
+      </div>
+    </div>
+    <div class="row content">
+      <div class="col-lg-8 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-2 middle-div">
+        <div class="center-block main-div col-md-12">
+          <div class="row">
+            <h4 class="title">Login</h4>
+          </div>
+          <br/><br/><br/><br/>
+          <div class="row main-container">
+            <form role="form">
+              <div class="panel-primary setup-content" id="step-1">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="control-label">User Name</label>
+                    {{text-field value=loginEmail placeholderKey="login.email_placeholder" class ="form-control" id="login-account-name" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Password</label>
+                    {{password-field value=loginPassword type="password" placeholderKey="login.password_placeholder" class ="form-control" id="login-account-password" maxlength="200" capsLockOn=capsLockOn}}
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color:red">
+                     {{passwordValidation.reason}}
+                    </div>
+                  </div>
+                  <button class="btn btn-success nextBtn pull-right" type="button" disabled= {{submitDisabled}} {{action "login"}}>Login</button>
+
+                </div>
+                <span class="btn btn-warning nextBtn pull-right">{{#link-to "signup"}}Signup{{/link-to}}</span>
+              </div>
+            </form>
+
+          </div>
+          <div class="row">
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

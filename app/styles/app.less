@@ -1,0 +1,46 @@
+// Theme Globals
+@import 'bootstrap';
+@import 'bootstrap-variables';
+@import 'theme-variables';
+@import 'base-classes';
+
+// Components
+@import 'pods/theme-navbar';
+@import 'pods/theme-head-cover';
+@import 'pods/os-percent';
+
+// Pages
+@import 'homes/home';
+
+// Pages
+@import 'homes/home';
+@import 'login/login.less';
+@import 'login/login-font.less';
+
+
+@font-face {
+  font-family: 'fselliot';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/FSElliot-Regular.otf') format("opentype");
+}
+
+// Global Elements
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+  outline: none;
+  background-color: #e9eff9;
+  min-width: 1200px;
+  font-family: 'fselliot';
+}
+
+a:focus {
+  outline: none;
+}
+
+// Extra large devices (large desktops, 1200px and up)
+.container {
+  width: 1170px !important;
+}
