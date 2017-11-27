@@ -1,0 +1,22 @@
+  <div class="cloud">
+    <div>
+      <p class="sub-title"> CLOUD PERFORMANCE </p>
+      <p class="sub-description"> Select system configuration</p>
+    </div>
+    <div class="row core-storage">
+      <div class="col-xs-6">
+        {{theme-cpu model=model}}
+
+      </div>
+      {{theme-storage-type model=model}}
+    </div>
+    <div class="row">
+      <div class="col-xs-6 p-0 ram">
+        {{theme-ram model=model}}
+      </div>
+      <div class="col-xs-6 p-0 storage">
+        {{theme-storage model=model}}
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,38 @@
+    <div class="row m-30">
+        <div class="col-xs-3">
+            <p class="sub-title">Select Location</p>
+            <p class="sub-description">This is sub description. Input text here.</p>
+            <div class="points"></div>
+            <div class="locate-me">
+                <img class="btn-locate-me" src="images/second/locateme.png">
+            </div>
+        </div>
+        <div class="col-xs-6 earth">
+            <img class="bg-location" src="images/second/location.png">
+            <div id="inputlocation" class="inactive">
+                <div>
+                    <img class="btn-close" src="images/second/location_close.png">
+                </div>
+                {{input type="text" name="field1" placeholder="Type your location" value=region}}
+
+                <div>
+                    <img class="btn-add" {{action 'createLocation'}} src="images/second/location_add.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 m-t-30">
+            <p class="your-location">Your location(s)</p>
+            <div class="loc-country">
+                <img class="btn-location" src="images/second/locaion_ico.png">
+                <span class="city">Ohio</span><span class="country"> - USA</span>
+                <img class="btn-location-cancel" src="images/second/location_x.png">
+            </div>
+            <div class="loc-country">
+                <img class="btn-location" src="images/second/locaion_ico.png">
+                <span class="city">Tokyo</span><span class="country"> - Japan</span>
+            </div>
+            <div class="add-more">
+                <img src="images/second/addmore.png">
+            </div>
+        </div>
+    </div>
