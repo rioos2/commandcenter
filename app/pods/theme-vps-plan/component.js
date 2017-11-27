@@ -2,7 +2,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['setup-content'],
+  activate: false,
+  store: Ember.inject.service(),
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
@@ -33,23 +34,10 @@ export default Ember.Component.extend({
       self.$(".btn-version").removeClass("active");
       self.$(this).addClass("active");
     });
-
-
     this.loadDependencies();
   }),
 
   loadDependencies: function() {
-    var self = this;
-    // var store = this.get('store');
-    // return Ember.RSVP.hash({
-    // 	planfactory: store.findAll('planfactory', {
-    // 		url: 'planfactory'
-    // 	}),
-    // }).then((results) => {
-    // 	  alert(JSON.stringify(results));
-    //
-    // });
-    //
     var a = {
       "kind": "PlanList",
       "api_version": "v1",
@@ -237,14 +225,15 @@ export default Ember.Component.extend({
         }
       ]
     };
-    self.set("planfactory", a);
+    this.set("planfactory", a.items);
+    // this.set("planfactory", this.get("model.plans._result.content"));
   },
 
   groupPlanFactory: function() {
     var planGroup = [];
     var uniqueVmGroup = [];
     var groupVms = [];
-    var planfactory = this.get("planfactory.items");
+    var planfactory = this.get("planfactory");
 
     planfactory.forEach(function(plan) {
       if (plan.group_name.split("_")[1] == "virtualmachine") {
@@ -265,7 +254,8 @@ export default Ember.Component.extend({
           createVmGroup.item.pushObject(plan);
           createVmGroup.version.pushObject({
             "version": plan.services[0].characteristics.version,
-            "url": plan.url
+            "url": plan.url,
+            "type": plan.group_name.split("_")[2]
           });
         }
       })
@@ -279,6 +269,8 @@ export default Ember.Component.extend({
 
     refreshAfterSelect(item) {
       this.set("selected", item);
+      this.set("model.assemblyfactory.os", item.type);
+      this.toggleProperty('activate');
     },
 
   }

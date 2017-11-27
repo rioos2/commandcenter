@@ -52,53 +52,14 @@ export default Ember.Route.extend({
       this.get('controller').set('hideBottomBar', true);
     },
 
-    loading(transition) {
-      this.incrementProperty('loadingId');
-      let id = this.get('loadingId');
-      Ember.run.cancel(this.get('hideTimer'));
-
-      //console.log('Loading', id);
-      if (!this.get('loadingShown')) {
-        this.set('loadingShown', true);
-        //console.log('Loading Show', id);
-
-        $('#loading-underlay').stop().show().fadeIn({
-          duration: 100,
-          queue: false,
-          easing: 'linear',
-          complete: function() {
-            $('#loading-overlay').stop().show().fadeIn({ duration: 200, queue: false, easing: 'linear' });
-          }
+    loading(transition, originRoute) {
+      let controller = this.controllerFor('application');
+      controller.set('currentlyLoading', true);
+      setTimeout(function() {
+        transition.promise. finally(function() {
+          controller.set('currentlyLoading', false);
         });
-      }
-
-      transition.finally(() => {
-        var self = this;
-
-        function hide() {
-          //console.log('Loading hide', id);
-          self.set('loadingShown', false);
-          $('#loading-overlay').stop().fadeOut({
-            duration: 200,
-            queue: false,
-            easing: 'linear',
-            complete: function() {
-              $('#loading-underlay').stop().fadeOut({ duration: 100, queue: false, easing: 'linear' });
-            }
-          });
-        }
-
-        if (this.get('loadingId') === id) {
-          if (transition.isAborted) {
-            //console.log('Loading aborted', id, this.get('loadingId'));
-            this.set('hideTimer', Ember.run.next(hide));
-          } else {
-            //console.log('Loading finished', id, this.get('loadingId'));
-            hide();
-          }
-        }
-      });
-
+      }, 3000);
       return true;
     },
 

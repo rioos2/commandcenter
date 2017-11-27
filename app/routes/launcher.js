@@ -1,11 +1,11 @@
 import Ember from 'ember';
 // import PolledModel from 'nilavu/mixins/polled-model';
-// import DefaultHeaders from 'nilavu/mixins/default-headers';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
 
 
-export default Ember.Route.extend( /*PolledModel,DefaultHeaders,*/ {
+export default Ember.Route.extend( /*PolledModel,*/DefaultHeaders, {
   activate: function() {
     this.send('unfixedTop');
     this.send('unfixedBottom');
@@ -16,11 +16,11 @@ export default Ember.Route.extend( /*PolledModel,DefaultHeaders,*/ {
   },
   access: Ember.inject.service(),
 
-  model: function() {
+  model: function(value) {
     var store = this.get('store');
 
     var assemblyfactoryData;
-    // var secretData;
+    var secretData;
     assemblyfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
       type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
@@ -68,31 +68,29 @@ export default Ember.Route.extend( /*PolledModel,DefaultHeaders,*/ {
     };
 
 
-    // secretData = {
-    //   type: 'secret',
-    //   secret_type: "root",
-    //   data: {
-    //     username: "USERNAME",
-    //     password: "PASSWORD",
-    //     rsa_key: "PRIVATEKEY",
-    //     rsa_pub: "PUBLICKEY",
-    //     tls_key: "PRIVATEKEY",
-    //     tls_pub: "PUBLICKEY",
-    //     anykey: "<anykey>"
-    //   },
-    //   object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
-    //   type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1")
-    // };
+    secretData = {
+      type: 'secret',
+      secret_type: "root",
+      data: {
+        username: "USERNAME",
+        password: "PASSWORD",
+        rsa_key: "PRIVATEKEY",
+        rsa_pub: "PUBLICKEY",
+        tls_key: "PRIVATEKEY",
+        tls_pub: "PUBLICKEY",
+        anykey: "<anykey>"
+      },
+      object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
+      type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1")
+    };
 
     var assemblyfactory = store.createRecord(assemblyfactoryData);
-    // var secret = store.createRecord(secretData);
-
+    var secret = store.createRecord(secretData);
     return Ember.Object.create({
-      assemblyfactory: assemblyfactory
-      /*,
-            secret: secret*/
+      assemblyfactory: assemblyfactory,
+      secret: secret,
+      plans: this.get('store').findAll('plan',  {url: 'plans',reload: true}),
     });
-
   },
 
 });
