@@ -1,4 +1,4 @@
-
+<div class="setup-content" id="step-5">
   <div class="create-digital">
     <p class="sub-title"> Server OS </p>
     <p class="sub-description"> Select preferred system</p>
@@ -12,8 +12,9 @@
       </div>
       <div class="items">
         {{#each groupedVms as |vm|}}
-          {{theme-plan model=model refreshAfterAction="refreshAfterSelect" vm=vm}}
+          {{theme-plan model=model refreshAfterAction="refreshAfterSelect" activate=activate vm=vm}}
         {{/each}}
       </div>
     </div>
   </div>
+</div>

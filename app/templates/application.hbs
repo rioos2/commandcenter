@@ -1,5 +1,9 @@
-<div class="application">
-{{theme-navbar fixedTop=fixedTop hide=hideTopBar}}
-    {{liquid-outlet}}
-    {{!-- {{theme-footer fixedBottom=fixedBottom hide=hideBottomBar}} --}}
-</div>
+{{#if currentlyLoading}}
+{{theme-loader}}
+  {{else}}
+    <div class="application">
+      {{theme-navbar fixedTop=fixedTop hide=hideTopBar}}
+        {{liquid-outlet}}
+        {{!-- {{theme-footer fixedBottom=fixedBottom hide=hideBottomBar}} --}}
+    </div>
+{{/if}}

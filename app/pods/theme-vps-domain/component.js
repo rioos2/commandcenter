@@ -1,11 +1,17 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
+import DefaultVps from 'nilavu/models/default-vps';
 
 export default Ember.Component.extend({
-  classNames: ['setup-content'],
+
+  domain: DefaultVps.domain,
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
+    //default
+    this.set("model.assemblyfactory.properties.domain",this.get('domain'));
+
+
     self.$(".key-type").click(function(e) {
       self.$(".key-type").removeClass("selected");
       self.$(this).addClass("selected");
@@ -15,7 +21,11 @@ export default Ember.Component.extend({
 
   actions: {
     createDomain: function() {
-      this.set("model.assemblyfactory.properties.domain", this.get('domain'));
-    }
+      this.set("model.assemblyfactory.properties.domain",this.get('domain'));
+    },
+
+    createSecret() {
+     this.get('model.secret').save();
+    },
   }
 });
