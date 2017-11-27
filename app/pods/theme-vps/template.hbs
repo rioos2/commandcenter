@@ -1,104 +1,104 @@
 <div class="home">
-     <div class="container">
-        <div class="row">
-            <div class="logo-div col-xs-12">
-                <a href="#"><img class="logo-img" src="images/logo2.png"></a>
-            </div>
-        </div>
-    
-        <div class="content row"> 
-            <div class="tab-left">
-                <div class="stepwizard">
-                    <div class="stepwizard-row setup-panel">
-                        <div class="stepwizard-step">
-                            <div class="step1 btn-pending btn btn-select">
-                                <a class="first-show" href="#step-1" type="button" value="step1">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Pick Cloud Type</p>
-                                <a href="#step-2" type="button" value="step2">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step2 btn-pending btn">
-                                <a href="#step-1" type="button" value="step1">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Select a Domain</p>
-                                <a href="#step-3" type="button" value="step3">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step3 btn-pending btn">
-                                <a href="#step-2" type="button" value="step2">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Select Location</p>
-                                <a href="#step-4" type="button" value="step4">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step4 btn-pending btn">
-                                <a href="#step-3" type="button" value="step3">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Cloud Performance</p>
-                                <a href="#step-5" type="button" value="step5">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step5 btn-pending btn">
-                                <a href="#step-4" type="button" value="step4">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Server OS</p>
-                                <a href="#step-6" type="button" value="step6">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step6 btn-pending btn">
-                                <a href="#step-5" type="button" value="step5">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Networking</p>
-                                <a href="#step-7" type="button" value="step7">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="stepwizard-step">
-                            <div class="step7 btn-pending btn">
-                                <a href="#step-6" type="button" value="step6">
-                                    <i class="arrow-up fa fa-long-arrow-up"></i>
-                                </a>
-                                <p class="description vertical-text">Summary</p>
-                                <a href="#step-7" type="button" value="step7">
-                                    <i class="arrow-down fa fa-long-arrow-down"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           <div class="tab-right">
-                {{theme-vps-create model=model id="step-1"}}
-                {{theme-vps-domain model=model id="step-2"}}
-                {{theme-vps-location model=model id="step-3"}}
-                {{theme-vps-resource model=model id="step-4"}}
-                {{theme-vps-plan model=model id="step-5"}}
-                {{theme-vps-networking model=model id="step-6"}}
-                {{theme-vps-summary model=model id="step-7"}}
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="logo-div col-xs-12">
+        <a href="#"><img class="logo-img" src="images/logo2.png"></a>
+      </div>
     </div>
+
+    <div class="content row">
+      <div class="tab-left">
+        <div class="stepwizard">
+          <div class="stepwizard-row setup-panel">
+            <div class="stepwizard-step">
+              <div class="step1 btn-pending btn btn-select">
+                <a class="first-show" href="#step-1" type="button" value="step1">
+                    <i class="arrow-up fa fa-long-arrow-up"></i>
+               </a>
+                <p class="description vertical-text">Pick Cloud Type</p>
+                <a href="#step-2" type="button" value="step2">
+                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step2 btn-pending btn">
+                <a href="#step-1" type="button" value="step1">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Select a Domain</p>
+                <a href="#step-3" type="button" value="step3">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step3 btn-pending btn">
+                <a href="#step-2" type="button" value="step2">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Select Location</p>
+                <a href="#step-4" type="button" value="step4">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step4 btn-pending btn">
+                <a href="#step-3" type="button" value="step3">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Cloud Performance</p>
+                <a href="#step-5" type="button" value="step5">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step5 btn-pending btn">
+                <a href="#step-4" type="button" value="step4">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Server OS</p>
+                <a href="#step-6" type="button" value="step6">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step6 btn-pending btn">
+                <a href="#step-5" type="button" value="step5">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Networking</p>
+                <a href="#step-7" type="button" value="step7">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+            <div class="stepwizard-step">
+              <div class="step7 btn-pending btn">
+                <a href="#step-6" type="button" value="step6">
+                                    <i class="arrow-up fa fa-long-arrow-up"></i>
+                                </a>
+                <p class="description vertical-text">Summary</p>
+                <a href="#step-7" type="button" value="step7">
+                                    <i class="arrow-down fa fa-long-arrow-down"></i>
+                                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-right">
+        {{theme-vps-create model=model}}
+        {{theme-vps-domain model=model}}
+        {{theme-vps-location model=model}}
+        {{theme-vps-resource model=model}}
+        {{theme-vps-plan model=model}}
+        {{theme-vps-networking model=model}}
+        {{theme-vps-summary model=model}}
+      </div>
+    </div>
+  </div>
 </div>

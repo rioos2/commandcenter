@@ -1,7 +1,18 @@
 import Ember from 'ember';
+import DefaultVps from 'nilavu/models/default-vps';
 
 export default Ember.Component.extend({
   tagName: '',
+
+  initializeChart: Ember.on('didInsertElement', function() {
+    // this.set(DefaultVps.network, "selected");
+    if (DefaultVps.destro == this.get('versionDetail.type') && DefaultVps.destroVersion == this.get('versionDetail.version')) {
+      this.set("model.assemblyfactory.plan", this.get('versionDetail.url'));
+      this.set("model.assemblyfactory.properties.version", this.get('versionDetail.version'));
+      this.set("active", "active");
+      this.sendAction("done");
+    }
+  }),
 
   selectionChecker: function() {
     var check = this.get("model.assemblyfactory.properties.version") == this.get("versionDetail.version");
@@ -13,9 +24,8 @@ export default Ember.Component.extend({
   actions: {
     chooseVM: function() {
       this.set("model.assemblyfactory.plan", this.get('versionDetail.url'));
-      this.set("model.assemblyfactory.properties.version",this.get('versionDetail.version'));
+      this.set("model.assemblyfactory.properties.version", this.get('versionDetail.version'));
       this.set("active", "active");
-      console.log(JSON.stringify(this.get('model')));
       this.sendAction("done");
     }
   }

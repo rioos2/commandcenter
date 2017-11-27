@@ -41,6 +41,7 @@ module.exports = function(app, options) {
       // include root path in proxied request
       req.url = path.join(base, req.url);
       req.headers['Authorization'] = config.token;
+      req.headers['X-AUTH-RIOOS-EMAIL'] = config.email;
       req.headers['X-Forwarded-Proto'] = req.protocol;
 
       proxyLog(label, req);

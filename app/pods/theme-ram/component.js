@@ -1,5 +1,6 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
+import DefaultVps from 'nilavu/models/default-vps';
 
 export default Ember.Component.extend({
   tagName: '',
@@ -10,7 +11,7 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
     //chart
     var data2 = {
-      value: 30,
+      value: DefaultVps.ram,
       min: 0,
       max: 100,
       suffix: ' Gb',
