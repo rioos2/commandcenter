@@ -46,10 +46,5 @@
     "ember-resolver": "^2.0.3",
     "liquid-fire": "0.23.0",
     "loader.js": "^4.0.0"
-  },
-  "ember-addon": {
-    "paths": [
-      "lib/common"
-    ]
   }
 }

@@ -681,14 +681,12 @@ var Store = Ember.Service.extend({
     var cls = getOwner(this).lookup('model:collection');
 
     let choppedKind = normalizeType(input.kind.replace("List", ""));
-
     var content = input[key].map(x => {
       x.kind = choppedKind;
       x.type = choppedKind;
-      x.id = x.metadata.uid;
+      x.id = x.id;
       return this._typeify(x, opt);
     });
-
     var output = cls.constructor.create({
       content: content
     });
