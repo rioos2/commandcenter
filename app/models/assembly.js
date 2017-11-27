@@ -5,6 +5,7 @@ var Assembly = Resource.extend({
   actions: {},
 
 
+
 });
 
 export default Assembly;

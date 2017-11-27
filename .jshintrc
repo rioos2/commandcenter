@@ -9,6 +9,8 @@
         "Nilavu"
     ],
     "browser": true,
+    "async": true,
+    "-Promise": true,
     "boss": true,
     "curly": true,
     "debug": false,

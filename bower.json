@@ -2,6 +2,7 @@
   "name": "nilavu",
   "dependencies":
   {
+    "async": "2.1.2",
     "ember": "~2.3.1",
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",

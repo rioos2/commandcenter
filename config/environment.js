@@ -85,6 +85,7 @@ module.exports = function(environment) {
       version: pkg.version,
       appName: 'nilavu',
       apiServer: 'http://localhost:9636/',
+      token: 'Bearer j83PF2_rzpace9btwu_WfvnObvQfqX2d5eRo3mynuXs',
       legacyApiEndpoint: '/v1',
       apiEndpoint: '/api/v1',
       oapiEndpoint: '/oapi/v1',
