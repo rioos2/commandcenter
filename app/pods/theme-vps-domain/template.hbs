@@ -2,10 +2,13 @@
   <p class="sub-title">Select a Domain Name</p>
   <p class="sub-description">You create own domain or uses configured domain name</p>
   <!-- <p class="domain-name">levis.rio</p> -->
-  {{input type="text" id="domain" name="field2" placeholder="Type your domain" value=domain}}
+  {{input type="text" id="domain" name="field2" placeholder="Type your domain" style="color: #324fcc; font-size: 30px; text-align: center;" value=domain}}
 
   <div class="domain-edit">
+    {{theme-spinner size=25 condition=showSpinner}}
+    {{#unless showSpinner}}
     <img {{action "createDomain"}} src="images/second/edit.png">
+    {{/unless}}
     <hr>
   </div>
   <div class="security row">

@@ -5,6 +5,7 @@ import DefaultVps from 'nilavu/models/default-vps';
 export default Ember.Component.extend({
 
   domain: DefaultVps.domain,
+  showSpinner: false,
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
@@ -21,7 +22,9 @@ export default Ember.Component.extend({
 
   actions: {
     createDomain: function() {
+      this.set('showSpinner', true);
       this.set("model.assemblyfactory.properties.domain",this.get('domain'));
+      this.set('showSpinner',false);
     },
 
     createSecret() {

@@ -4,6 +4,7 @@ import DefaultVps from 'nilavu/models/default-vps';
 
 export default Ember.Component.extend({
   region: DefaultVps.region,
+  showSpinner: false,
 
 	initializeChart: Ember.on('didInsertElement', function() {
 
@@ -30,7 +31,9 @@ export default Ember.Component.extend({
 
 	actions: {
 		createLocation: function() {
+      this.set('showSpinner', true);
 			this.set("model.assemblyfactory.properties.region", this.get('region'));
+      this.set('showSpinner', false);
 		}
 	}
 

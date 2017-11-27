@@ -30,7 +30,6 @@ export default Ember.Component.extend({
       self.$("#gpu").addClass("gpu-checked");
       self.$("#cpu").removeClass("cpu-checked");
 			self.set("model.assemblyfactory.component_collection.compute_type", "gpu");
-      console.log(JSON.stringify(this.get('model')));
     },
 
     cpu: function() {
