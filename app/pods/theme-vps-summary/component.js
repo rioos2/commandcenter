@@ -1,7 +1,8 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(DefaultHeaders,{
   selectionChecker: function() {
     this.set("network", this.get("model.assemblyfactory.network"));
   }.observes('model.assemblyfactory.network'),
@@ -13,7 +14,8 @@ export default Ember.Component.extend({
 
   actions: {
     createAssemblyFactory() {
-      this.get('model.assemblyfactory').save();
+      this.get('model.assemblyfactory').save(this.opts('origins/rioos/assemblyfactorys'));
+      location.reload();
     },
   }
 

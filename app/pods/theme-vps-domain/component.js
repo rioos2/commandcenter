@@ -11,6 +11,7 @@ export default Ember.Component.extend({
     var self = this;
     //default
     this.set("model.assemblyfactory.properties.domain",this.get('domain'));
+    this.set("model.assemblyfactory.name",this.get('domain'));
 
 
     self.$(".key-type").click(function(e) {
@@ -24,6 +25,7 @@ export default Ember.Component.extend({
     createDomain: function() {
       this.set('showSpinner', true);
       this.set("model.assemblyfactory.properties.domain",this.get('domain'));
+      this.set("model.assemblyfactory.name",this.get('domain'));
       this.set('showSpinner',false);
     },
 
