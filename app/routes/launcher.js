@@ -88,7 +88,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
       type: 'origins/rioos/assemblyfactorys',
 
-      name: "test",
+      name: "",
       uri: "",
       description: "installation",
       tags: [],

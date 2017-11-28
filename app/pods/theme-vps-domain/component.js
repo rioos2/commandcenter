@@ -13,7 +13,6 @@ export default Ember.Component.extend({
     this.set("model.assemblyfactory.properties.domain",this.get('domain'));
     this.set("model.assemblyfactory.name",this.get('domain'));
 
-
     self.$(".key-type").click(function(e) {
       self.$(".key-type").removeClass("selected");
       self.$(this).addClass("selected");
