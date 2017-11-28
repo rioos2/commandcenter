@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   large: 25,
   medium: 20,
   small: 16,
-  show: Ember.computed.alias('condition'),
+  show: false,
 
   value: function() {
      return this.get('large');

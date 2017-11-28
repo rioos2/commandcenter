@@ -8,29 +8,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
-    // self.$(".step5").addClass("btn-success");
     self.$(".step4").addClass("btn-success");
-
-    self.$(".arrow-left").click(function(e) {
-      var active_img = self.$(".items img").index(self.$(".items .active"));
-      if (active_img != 0) {
-        self.$(".items .active").removeClass("active").prev().addClass("active");
-      } else {
-        self.$(".items .active").removeClass("active");
-        self.$("#windows").addClass("active");
-      }
-    });
-
-    self.$(".arrow-right").click(function(e) {
-      var active_img = self.$(".items img").index(self.$(".items .active"));
-      if (active_img != 4) {
-        self.$(".items .active").removeClass("active").next().addClass("active");
-      } else {
-        self.$(".items .active").removeClass("active");
-        self.$("#ubuntu").addClass("active");
-      }
-    });
-
     self.$(".btn-version").click(function(e) {
       self.$(".btn-version").removeClass("active");
       self.$(this).addClass("active");
@@ -74,6 +52,13 @@ export default Ember.Component.extend({
     return groupVms;
   }.property('model.plans'),
 
+  indexReader: function() {
+    var types = this.get('groupedVms').map(function(vm) {
+      return vm.type
+    })
+    return types.indexOf(this.get('selected.type'));
+  },
+
   actions: {
 
     refreshAfterSelect(item) {
@@ -82,6 +67,20 @@ export default Ember.Component.extend({
       this.toggleProperty('activate');
     },
 
+    navigatorRight() {
+      var index = this.indexReader();
+      if (index < ((this.get('groupedVms')).length) - 1) {
+        this.send('refreshAfterSelect', this.get('groupedVms')[index + 1]);
+      }
+    },
+
+    navigatorLeft() {
+      var index = this.indexReader();
+      if (!index == 0) {
+        this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
+      }
+    },
   }
+
 
 });

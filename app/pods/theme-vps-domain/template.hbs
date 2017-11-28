@@ -1,14 +1,13 @@
 <div class="setup-content" id="step-2">
   <p class="sub-title">Select a Domain Name</p>
   <p class="sub-description">You create own domain or uses configured domain name</p>
-  <!-- <p class="domain-name">levis.rio</p> -->
-  {{input type="text" id="domain" name="field2" placeholder="Type your domain" style="color: #324fcc; font-size: 30px; text-align: center;" value=domain}}
-
+  {{#unless showEdit}}
+    <p class="domain-name">{{domain}}</p>
+    {{else}}
+      {{input type="text" id="domain" name="field2" placeholder="Type your domain" style="color: #324fcc; font-size: 30px; text-align: center;" value=domain}}
+  {{/unless}}
   <div class="domain-edit">
-    {{theme-spinner size=25 condition=showSpinner}}
-    {{#unless showSpinner}}
-    <img {{action "createDomain"}} src="images/second/edit.png">
-    {{/unless}}
+      <img {{action "createDomain"}} src="images/second/edit.png">
     <hr>
   </div>
   <div class="security row">
@@ -22,24 +21,22 @@
           </div>
         </div>
         <div class="m-t-40">
-          <div class="key-type ">
-            <img class="typeofkey_btn" src="images/second/typeofkey_uncheck.png"> SSH-1(RSA)
-          </div>
-          <div class="key-type">
-            <img class="typeofkey_btn" src="images/second/typeofkey_uncheck.png"> SSH-1(RSA)
-          </div>
-          <div class="key-type">
-            <img class="typeofkey_btn" src="images/second/typeofkey_uncheck.png"> SSH-1(RSA)
-          </div>
+          {{#each secretTypes as |key|}}
+            {{theme-key secretType=secretType getSecretType="getSecretType" activate=activate key=key}}
+          {{/each}}
         </div>
       </div>
       <div class="col-xs-3">
         <p class="sec-title"> BITS IN KEY</p>
-        <div class="bits-key">2048</div>
+        <div class="bits-key">{{bitsInKey}}</div>
       </div>
     </div>
     <div class="col-xs-3 sec-right p-0">
+      {{theme-spinner size=25 condition=showSpinner}}
+      {{#unless showSpinner}}
       <img class="generate" {{action 'createSecret'}} src="images/second/generate.png">
+      {{/unless}}
+
     </div>
   </div>
 </div>

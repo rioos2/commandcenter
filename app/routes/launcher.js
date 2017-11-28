@@ -63,8 +63,8 @@ export default Ember.Route.extend(DefaultHeaders, {
 
   loadSecret() {
     var secretData = {
-      type: 'secret',
-      secret_type: "root",
+      type: 'secrets',
+      secret_type: "rsa",
       data: {
         username: "USERNAME",
         password: "PASSWORD",
