@@ -9,7 +9,7 @@ DefaultVps.reopenClass({
   storage: 20,
   network:"private_ipv4",
   destro:"ubuntu",
-  destroVersion: "14.04",
+  destroVersion: "16.04",
   secret: "SSH-1(RSA)",
   secretTypes: ["SSH-1(RSA)", "SSH-1(RSA2)", "SSH-1(RSA3)"],
   bitsInKey: 2048,
