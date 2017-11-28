@@ -52,7 +52,8 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set("model.secret.data.anykey", certDetails.certificate);
       //singned operations end
 
-      this.get('model.secret').save(this.opts('origins/rioos/secrets')).then(() => {
+      this.get('model.secret').save(this.opts('origins/rioos/secrets')).then((result) => {
+        this.set("model.assemblyfactory.secret", {id: result.id});
         this.set('showSpinner', false);
         }).catch(err => {
           this.set('showSpinner', false);

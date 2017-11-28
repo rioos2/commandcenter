@@ -14,8 +14,11 @@ export default Ember.Component.extend(DefaultHeaders,{
 
   actions: {
     createAssemblyFactory() {
-      this.get('model.assemblyfactory').save(this.opts('origins/rioos/assemblyfactorys'));
-      location.reload();
+      this.get('model.assemblyfactory').save(this.opts('origins/rioos/assemblyfactorys')).then(() => {
+        location.reload();
+        }).catch(err => {
+          //Error case
+        });
     },
   }
 
