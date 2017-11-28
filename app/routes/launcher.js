@@ -63,8 +63,8 @@ export default Ember.Route.extend(DefaultHeaders, {
 
   loadSecret() {
     var secretData = {
-      type: 'secret',
-      secret_type: "root",
+      type: 'secrets',
+      secret_type: "rsa",
       data: {
         username: "USERNAME",
         password: "PASSWORD",
@@ -86,7 +86,7 @@ export default Ember.Route.extend(DefaultHeaders, {
     assemblyfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
       type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
-      type: 'rioos/assemblyfactorys',
+      type: 'origins/rioos/assemblyfactorys',
 
       name: "",
       uri: "",

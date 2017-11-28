@@ -7,8 +7,8 @@
     {{theme-virtual-machine model=model selected=selected}}
     <div class="os">
       <div class="arrow">
-        <div class="arrow-left"><span class="fa fa-long-arrow-left"></span></div>
-        <div class="arrow-right"><span class="fa fa-long-arrow-right"></span></div>
+        <div class="arrow-left" {{action 'navigatorLeft'}}><span class="fa fa-long-arrow-left"></span></div>
+        <div class="arrow-right" {{action 'navigatorRight'}}><span class="fa fa-long-arrow-right"></span></div>
       </div>
       <div class="items">
         {{#each groupedVms as |vm|}}

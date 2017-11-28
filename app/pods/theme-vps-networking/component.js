@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
     this.set(DefaultVps.network, "selected");
     var cc = this.get("model.assemblyfactory.component_collection");
-    cc[DefaultVps.network] = true;
+    cc[DefaultVps.network] = "true";
     this.set("model.assemblyfactory.component_collection", cc);
     this.set("model.assemblyfactory.network", this.get("networks")[DefaultVps.network]);
   }),
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
       this.selectionChecker();
       this.set(net_type, "selected");
       var cc = this.get("model.assemblyfactory.component_collection");
-      cc[net_type] = true;
+      cc[net_type] = "true";
       this.set("model.assemblyfactory.component_collection", cc);
       this.set("model.assemblyfactory.network", this.get("networks")[net_type]);
     }

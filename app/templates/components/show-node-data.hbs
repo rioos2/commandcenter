@@ -1,4 +1,4 @@
-<div class="servertab row m-0"> 
+<div class="servertab row m-0">
   <div class="col-md-10 col-xs-11 tab-right">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id= {{tabname_1}}>
@@ -7,7 +7,7 @@
             <div class="row">
               <div class="dashboard-text-common dashboard-text-name-top"><b>Name : </b></div>
               <div class="dashboard-text-common dashboard-text-name-top dashboard-text-name-left">{{name}}</div>
-            </div>            
+            </div>
             <div class="row">
               <div class="dashboard-text-common dashboard-text-region-top"><b>Region : </b></div>
               <div class="dashboard-text-common dashboard-text-region-top dashboard-text-region-left">{{region}}</div>
@@ -23,7 +23,7 @@
           </div>
           <div class="col-xs-6">
             <div class="row">
-              <span style="position:relative;display:inline" >
+              <span style="position:relative;display:inline">
                 <img src="images/second/serveros/os-{{distro}}.png" onerror="javascript:this.src='images/second/serveros/os-empty.png'">
               </span>
             </div>
@@ -44,9 +44,12 @@
           <div class="col-xs-6">
             <div class="tabalert">{{theme-svg-alert}}</div>
             <div class="alert-desc">Be on alert if your server health state goes below 25%</div>
+            <div>
+              {{#link-to "vnc" target="_blank"}}<i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i>{{/link-to}}
+            </div>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   </div>
 </div>
