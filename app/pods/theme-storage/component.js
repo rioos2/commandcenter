@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   storage: function() {
     var storage = this.get('storageData') + " GiB";
-    this.set("model.assemblyfactory.properties.storage", storage);
+    this.set("model.assemblyfactory.component_collection.storage", storage);
   }.observes('storageData'),
 
   renderChartLinearProgressSlider: function(self, params) {
