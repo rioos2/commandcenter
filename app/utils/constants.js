@@ -264,6 +264,7 @@ var C = {
     GITHUB_TEAMS   : 'teams',
     LANGUAGE       : 'language',
     LOGIN_LANGUAGE : 'loginLanguage',
+    ORIGIN         : 'origin',
   },
 
   // Ephemeral and unique for each browser tab
