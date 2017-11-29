@@ -18,7 +18,7 @@ Router.map(function() {
   this.route('login');
   this.route('signup');
   this.route('logout');
-  this.route('vnc');
+  this.route('vnc', { path: '/vnc' });
 
   this.route('authenticated', { path: '/' }, function() {
     this.route('home', { resetNamespace: true });

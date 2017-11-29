@@ -6,7 +6,8 @@
         "jQuery",
         "$",
         "charts",
-        "Nilavu"
+        "Nilavu",
+        "NoVNC"
     ],
     "browser": true,
     "async": true,

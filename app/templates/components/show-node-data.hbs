@@ -45,7 +45,7 @@
             <div class="tabalert">{{theme-svg-alert}}</div>
             <div class="alert-desc">Be on alert if your server health state goes below 25%</div>
             <div>
-              {{#link-to "vnc" target="_blank"}}<i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i>{{/link-to}}
+              {{#link-to "vnc" (query-params vnchost=host vncport=port) target="_blank"}}<i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i>{{/link-to}}
             </div>
           </div>
         </div>

@@ -34,6 +34,14 @@ export default Ember.Component.extend({
     return this.get('model.spec.plan').split("/")[3];
   }.property(),
 
+  host: function() {
+    return this.getSelector("vnchost");
+  }.property(),
+
+  port: function() {
+    return this.getSelector("vncport");
+  }.property(),
+
   timestamp: function() {
     var a = new Date(this.get('model').created_at);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -45,6 +53,16 @@ export default Ember.Component.extend({
     var sec = a.getSeconds();
     return date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
   }.property(),
+
+  getSelector: function(str) {
+    var ss = '';
+    this.get('model.selector').forEach(function(item) {
+      if (item.toLowerCase().includes(str.toLowerCase())) {
+        ss = item.split(":")[1];
+      }
+    });
+    return ss;
+  }
 
 
 });

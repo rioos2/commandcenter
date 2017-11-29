@@ -84,8 +84,7 @@ module.exports = function(environment) {
       // when it is created
       version: pkg.version,
       appName: 'nilavu',
-      apiServer: process.env.API_SERVER,
-      token: 'Bearer j83PF2_rzpace9btwu_WfvnObvQfqX2d5eRo3mynuXs',
+      apiServer: process.env.RIOOS_API_SERVER,
       legacyApiEndpoint: '/v1',
       apiEndpoint: '/api/v1',
       oapiEndpoint: '/oapi/v1',
@@ -122,6 +121,10 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+  }
+
+  if (process.env.RIOOS_VNC_SERVER) {
+    ENV.VNCSERVER = process.env.RIOOS_VNC_SERVER;
   }
 
   if (process.env.BASE_URL) {
