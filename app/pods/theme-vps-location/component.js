@@ -10,6 +10,7 @@ export default Ember.Component.extend({
 
         var self = this;
 				this.set("model.assemblyfactory.properties.region", this.get('region'));
+        this.sendAction('done', "step3");
 				var element = $("#step-3").find(".loc-country");
         if (element.length > 0)
             self.$(".step3").addClass("btn-success");
@@ -31,6 +32,7 @@ export default Ember.Component.extend({
 
 	actions: {
 		createLocation: function() {
+      this.sendAction('done', "step3");
       this.set('showSpinner', true);
 			this.set("model.assemblyfactory.properties.region", this.get('region'));
       this.set('showSpinner', false);

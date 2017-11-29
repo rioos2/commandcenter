@@ -17,6 +17,7 @@ export default Ember.Component.extend({
     cc[DefaultVps.network] = "true";
     this.set("model.assemblyfactory.component_collection", cc);
     this.set("model.assemblyfactory.network", this.get("networks")[DefaultVps.network]);
+    this.sendAction('done', "step6");
   }),
 
   selectionChecker: function() {
@@ -34,6 +35,7 @@ export default Ember.Component.extend({
 
   actions: {
     selected: function(net_type) {
+      this.sendAction('done', "step6");
       this.selectionChecker();
       this.set(net_type, "selected");
       var cc = this.get("model.assemblyfactory.component_collection");
