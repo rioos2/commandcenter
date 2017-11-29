@@ -58,10 +58,10 @@ module.exports = function(environment) {
       }
     },
 
-    'ember-cli-notifications': {
-      includeFontAwesome: true,
-      icons: 'bootstrap'
-    },
+    // ember-cli-notifications: {
+    //   includeFontAwesome: true,
+    //   icons: 'bootstrap'
+    // },
 
     minifyCSS: {
       enabled: false

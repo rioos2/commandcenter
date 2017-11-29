@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
-export default Ember.Service.extend({
+export default Ember.Service.extend(DefaultHeaders, {
   userStore: Ember.inject.service('store'),
   cookies: Ember.inject.service(),
   session: Ember.inject.service(),
+  store: Ember.inject.service(),
   /*github:  Ember.inject.service(),
   shibbolethAuth: Ember.inject.service(),
   store: Ember.inject.service(),
@@ -104,6 +106,12 @@ export default Ember.Service.extend({
     return rv;
   },*/
 
+  storeDefaultOrigin: function(id) {
+    return this.get('store').find('origin', id, {
+      url: 'origins/' + id
+    });
+  },
+
   login: function(username, password) {
     var session = this.get('session');
 
@@ -117,25 +125,35 @@ export default Ember.Service.extend({
     }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
+      var origin;
 
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
         }
       });
-
       this.get('cookies').setWithOptions(C.COOKIE.TOKEN, auth.token, {
         path: '/',
         secure: window.location.protocol === 'http:'
       });
       session.setProperties(interesting);
-      return xhr;
+      return this.storeDefaultOrigin(auth.id).then((origin) => {
+        origin = {
+          origin: origin.object_meta.origin
+        };
+        session.setProperties($.extend(interesting, origin));
+        return xhr;
+      });
+
     }).catch((res) => {
       let err;
       try {
         err = res.body;
       } catch (e) {
-        err = { type: 'error', message: 'Error logging in' };
+        err = {
+          type: 'error',
+          message: 'Error logging in'
+        };
       }
       return Ember.RSVP.reject(err);
     });
@@ -151,6 +169,8 @@ export default Ember.Service.extend({
     }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
+      var origin;
+
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
@@ -160,9 +180,14 @@ export default Ember.Service.extend({
         path: '/',
         secure: window.location.protocol === 'http:'
       });
-
       session.setProperties(interesting);
-      return xhr;
+      return this.storeDefaultOrigin(auth.id).then((origin) => {
+        origin = {
+          origin: origin.object_meta.origin
+        };
+        session.setProperties($.extend(interesting, origin));
+        return xhr;
+      });
     }).catch((res) => {
       let err;
       try {
