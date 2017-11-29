@@ -2,10 +2,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  
+
   initializeChart: Ember.on('didInsertElement', function() {
-    var self = this;
-    self.$(".step4").addClass("btn-success");
+    this.sendAction('done', "step4");
   })
 
 });

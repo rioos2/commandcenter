@@ -31,4 +31,10 @@ export default Ember.Component.extend({
     self.$('div.setup-panel div .btn-select a.first-show').trigger('click');
   }),
 
+  actions: {
+    done: function(step) {
+      self.$("."+step).addClass("btn-success");
+    },
+  }
+
 });

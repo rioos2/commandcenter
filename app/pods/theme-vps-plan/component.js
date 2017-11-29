@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
-    self.$(".step4").addClass("btn-success");
+    self.sendAction('done', "step5");
     self.$(".btn-version").click(function(e) {
       self.$(".btn-version").removeClass("active");
       self.$(this).addClass("active");
@@ -64,6 +64,7 @@ export default Ember.Component.extend({
   actions: {
 
     refreshAfterSelect(item) {
+      this.sendAction('done', "step5");
       this.set("selected", item);
       this.set("model.assemblyfactory.os", item.type);
       this.toggleProperty('activate');
