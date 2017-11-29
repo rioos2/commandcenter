@@ -7,9 +7,13 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
-    let id = "#" + DefaultVps.computeType;
-    let computeClass = DefaultVps.computeType + "-checked";
-    self.$(id).addClass(computeClass);
+
+    if (DefaultVps.computeType == "cpu") {
+      self.set('cpuselect', 'cpu-checked');
+    } else {
+      self.set('gpuselect', 'gpu-checked');
+    }
+
     self.set("model.assemblyfactory.component_collection.compute_type", DefaultVps.computeType);
     self.sendAction('done', "step1");
     self.$("#cg-close").click(function(e) {
@@ -26,19 +30,17 @@ export default Ember.Component.extend({
 
   actions: {
     gpu: function() {
-      var self = this;
-      self.$("#gpu").addClass("gpu-checked");
-      self.$("#cpu").removeClass("cpu-checked");
-			self.set("model.assemblyfactory.component_collection.compute_type", "gpu");
-      self.sendAction('done', "step1");
+      this.set('cpuselect', '');
+      this.set('gpuselect', 'gpu-checked');
+      this.set("model.assemblyfactory.component_collection.compute_type", "gpu");
+      this.sendAction('done', "step1");
     },
 
     cpu: function() {
-      var self = this;
-      self.$("#cpu").addClass("cpu-checked");
-      self.$("#gpu").removeClass("gpu-checked");
-			self.set("model.assemblyfactory.component_collection.compute_type", "cpu");
-      self.sendAction('done', "step1");
+      this.set('gpuselect', '');
+      this.set('cpuselect', 'cpu-checked');
+      this.set("model.assemblyfactory.component_collection.compute_type", "cpu");
+      this.sendAction('done', "step1");
     },
   }
 });
