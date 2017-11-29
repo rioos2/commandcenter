@@ -20,8 +20,6 @@ export default Ember.Component.extend({
     var planGroup = [];
     var uniqueVmGroup = [];
     var groupVms = [];
-    alert("hoi");
-    console.log(JSON.stringify(this.get("model.plans.content")));
     var planfactory = this.get("model.plans.content");
 
     planfactory.forEach(function(plan) {

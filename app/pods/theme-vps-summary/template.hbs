@@ -66,7 +66,10 @@
     <div class="btn-version"><img><span>{{model.assemblyfactory.properties.version}}</span></div>
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     <div class="launch">
-      <p class="title" {{action 'createAssemblyFactory'}} >Launch your cloud<img src="images/second/summary/ico_cloud.png"></p>
+      {{theme-spinner size=25 condition=showSpinner}}
+      {{#unless showSpinner}}
+        <p class="title" {{action 'createAssemblyFactory'}}>Launch your cloud<img src="images/second/summary/ico_cloud.png"></p>
+      {{/unless}}
     </div>
   </div>
 </div>
