@@ -12,6 +12,14 @@ export default Ember.Route.extend(DefaultHeaders, {
     this.send('unfixedBottom');
   },
 
+  beforeModel: function() {
+    var previousRoutes = this.router.router.currentHandlerInfos;
+    var previousRoute = previousRoutes && previousRoutes.pop();
+    if (previousRoute) {
+      localStorage["lastVisitedRoute"] = previousRoute.name;
+    }
+  },
+
   model: function() {
     var self = this;
     return this.get('store').findAll('assembly', this.opts('assemblys')).then((assemblys) => {
