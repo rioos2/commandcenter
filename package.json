@@ -50,6 +50,7 @@
     "self-cert": "^1.0.1"
   },
   "dependencies": {
+    "ember-cli-notifications": "^4.2.1",
     "ember-cryptojs-shim": "^4.1.0"
   }
 }

@@ -5,7 +5,10 @@
       {{#if shownavbar}}
       {{theme-navbar fixedTop=fixedTop hide=hideTopBar}}
       {{/if}}
+
         {{liquid-outlet}}
+        {{notification-container position="bottom-right"}}
         {{!-- {{theme-footer fixedBottom=fixedBottom hide=hideBottomBar}} --}}
     </div>
+    
 {{/if}}
