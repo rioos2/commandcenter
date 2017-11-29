@@ -48,5 +48,8 @@
     "liquid-fire": "0.23.0",
     "loader.js": "^4.0.0",
     "self-cert": "^1.0.1"
+  },
+  "dependencies": {
+    "ember-cryptojs-shim": "^4.1.0"
   }
 }

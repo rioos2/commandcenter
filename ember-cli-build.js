@@ -47,6 +47,8 @@ module.exports = function(defaults) {
   app.import('vendor/second/ram.js');
   app.import('vendor/second/storage.js');
 
+  app.import('vendor/novnc.js');
+
   app.import('vendor/particles.min.js');
   app.import('bower_components/async/dist/async.js');
   app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', { destDir: 'fonts' });
