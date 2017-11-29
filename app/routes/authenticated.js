@@ -19,6 +19,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
     if (this.get('access.enabled')) {
       if (this.get('access').isLoggedIn()) {
         //this.testAuthToken();
+        this.controllerFor('application').set("shownavbar", true);
         transition.send('finishLogin');
       } else {
         transition.send('logout', transition, false);

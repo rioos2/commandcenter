@@ -17,10 +17,12 @@ export default Ember.Component.extend(DefaultHeaders, {
     //default
     this.set("model.assemblyfactory.properties.domain", this.get('domain'));
     this.set("model.assemblyfactory.name", this.get('domain'));
+    this.sendAction('done', "step2");
 
   }),
 
   updateName: function() {
+    this.sendAction('done', "step2");
     this.set("model.assemblyfactory.properties.domain", this.get('domain'));
     this.set("model.assemblyfactory.name", this.get('domain'));
   }.observes('domain'),
@@ -37,6 +39,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
     createSecret() {
       this.set('showSpinner', true);
+      this.sendAction('done', "step2");
       this.set("model.secret.secret_type", this.get("secretType"));
       //Signed operations
       let certDetails = SelfCert({

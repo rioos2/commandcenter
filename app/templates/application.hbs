@@ -2,7 +2,9 @@
 {{theme-loader}}
   {{else}}
     <div class="application">
+      {{#if shownavbar}}
       {{theme-navbar fixedTop=fixedTop hide=hideTopBar}}
+      {{/if}}
         {{liquid-outlet}}
         {{!-- {{theme-footer fixedBottom=fixedBottom hide=hideBottomBar}} --}}
     </div>
