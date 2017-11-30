@@ -27,10 +27,10 @@
                      {{passwordValidation.reason}}
                     </div>
                   </div>
-                  <button class="btn btn-success nextBtn pull-right" type="button" style="padding: 16px; padding-bottom: 6px; padding-top: 7px;" disabled= {{submitDisabled}} {{action "login"}}>Login</button>
+                  <button class="btn btn-success nextBtn pull-right login-btn-space" type="button" disabled= {{submitDisabled}} {{action "login"}}>Login</button>
 
                 </div>
-                <span class="btn btn-warning nextBtn pull-right" style="margin-top: -9px;margin-right: 14px;">{{#link-to "signup"}}Signup{{/link-to}}</span>
+                <span class="btn btn-warning nextBtn pull-right login-signup-space">{{#link-to "signup"}}Signup{{/link-to}}</span>
               </div>
             </form>
 
