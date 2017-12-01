@@ -195,7 +195,6 @@ var Store = Ember.Service.extend({
   // find(type) && return all(type)
   findAll(type, opt) {
     type = normalizeType(type);
-
     opt = opt || {};
 
     if (this.haveAll(type) && opt.forceReload !== true) {
