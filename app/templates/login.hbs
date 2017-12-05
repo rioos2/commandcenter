@@ -1,47 +1,37 @@
-<div class="login">
+<div class="signin signform">
+  {{#link-to "signup"}}<img class="logo-img" src="images/logo1.png">{{/link-to}}
   <div class="container">
-    <div class="row">
-      <div class="logo-div col-md-12">
-        <a href="#"><img class="logo-img tuna-signup-logo img-responsive center-block" src="images/logo1.png"></a>
+    <h1>SIGN IN</h1>
+    <form>
+      <div class="form-group {{val_username}}">
+        {{input type="text" value=username}}
+        <label class="{{if username 'data-exist'}} control-label" for="input">User name</label><i class="bar"></i>
       </div>
-    </div>
-    <div class="row content">
-      <div class="col-lg-8 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-2 middle-div">
-        <div class="center-block main-div col-md-12">
-          <div class="row">
-            <h4 class="title">Login</h4>
-          </div>
-          <br/><br/><br/><br/>
-          <div class="row main-container">
-            <form role="form">
-              <div class="panel-primary setup-content" id="step-1">
-                <div class="panel-body">
-                  <div class="form-group">
-                    <label class="control-label">User Name</label>
-                    {{text-field value=loginEmail placeholderKey="login.email_placeholder" class ="form-control" id="login-account-name" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Password</label>
-                    {{password-field value=loginPassword type="password" placeholderKey="login.password_placeholder" class ="form-control" id="login-account-password" maxlength="200" capsLockOn=capsLockOn}}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color:red">
-                     {{passwordValidation.reason}}
-                    </div>
-                  </div>
-                  <button class="btn btn-success nextBtn pull-right login-btn-space" type="button" disabled= {{submitDisabled}} {{action "login"}}>Login</button>
 
-                </div>
-                <span class="btn btn-warning nextBtn pull-right login-signup-space">{{#link-to "signup"}}Signup{{/link-to}}</span>
-              </div>
-            </form>
-
-          </div>
-          <div class="row">
-          </div>
-        </div>
-
+      <div class="form-group {{val_password}}">
+        {{input  type=(if eyeStatus "text" "password") value=password}}
+        <label class="{{if password 'data-exist'}} control-label" for="input">Password</label>
+        <!-- <i class="eye-icon icon-eye-open {{unless eyeStatus "open"}}" {{action 'changeEye'}}></i> -->
+        {{fa-icon "eye" click=(action "changeEye") class="eye-icon icon-eye-open"}}
+        <i class="bar"></i>
 
       </div>
 
+    </form>
+
+    <div class="button-container">
+      <button class="button" {{action 'login'}}><span>SIGN IN<span class="startvalidation"> (START VERIFICATION)</span>
+        <!-- <i class="right-arrow icon-long-arrow-right"></i> -->
+        {{fa-icon "long-arrow-right" class="right-arrow"}}
+      </span>
+    </button>
     </div>
+
+    <div class="sub-description">
+      {{#link-to "signup" class="signform-link" }}Sign up{{/link-to}}
+      {{fa-icon "edit" class="signup-icon"}}
+
+    </div>
+
   </div>
 </div>
