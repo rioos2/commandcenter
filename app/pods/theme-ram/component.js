@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   ram: function() {
     var ram = this.get('ramData') + " GiB";
-    this.set("model.assemblyfactory.component_collection.memory", ram);
+    this.set("model.assemblyfactory.resources.memory", ram);
   }.observes('ramData'),
 
   renderChartRam: function(self, params) {

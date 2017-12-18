@@ -31,7 +31,10 @@ export default Ember.Component.extend({
   }.property('model'),
 
   distro: function() {
-    return this.get('model.spec.plan').split("/")[3];
+    if (!this.get('model.spec.plan') == "") {
+      return this.get('model.spec.plan').split("/")[3];
+    }
+    return "";
   }.property(),
 
   host: function() {

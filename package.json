@@ -46,8 +46,7 @@
     "ember-masonry-grid": "1.1.0",
     "ember-resolver": "^2.0.3",
     "liquid-fire": "0.23.0",
-    "loader.js": "^4.0.0",
-    "self-cert": "^1.0.1"
+    "loader.js": "^4.0.0"
   },
   "dependencies": {
     "ember-cli-notifications": "^4.2.1",

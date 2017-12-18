@@ -13,15 +13,15 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     this.set(DefaultVps.network, "selected");
-    var cc = this.get("model.assemblyfactory.component_collection");
+    var cc = this.get("model.assemblyfactory.resources");
     cc[DefaultVps.network] = "true";
-    this.set("model.assemblyfactory.component_collection", cc);
+    this.set("model.assemblyfactory.resources", cc);
     this.set("model.assemblyfactory.network", this.get("networks")[DefaultVps.network]);
     this.sendAction('done', "step6");
   }),
 
   selectionChecker: function() {
-    var cc = this.get("model.assemblyfactory.component_collection");
+    var cc = this.get("model.assemblyfactory.resources");
     this.set("private_ipv4", "");
     delete cc["private_ipv4"];
     this.set("public_ipv4", "");
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     delete cc["private_ipv6"];
     this.set("public_ipv6", "");
     delete cc["public_ipv6"];
-    this.set("model.assemblyfactory.component_collection", cc);
+    this.set("model.assemblyfactory.resources", cc);
   },
 
   actions: {
@@ -38,9 +38,9 @@ export default Ember.Component.extend({
       this.sendAction('done', "step6");
       this.selectionChecker();
       this.set(net_type, "selected");
-      var cc = this.get("model.assemblyfactory.component_collection");
+      var cc = this.get("model.assemblyfactory.resources");
       cc[net_type] = "true";
-      this.set("model.assemblyfactory.component_collection", cc);
+      this.set("model.assemblyfactory.resources", cc);
       this.set("model.assemblyfactory.network", this.get("networks")[net_type]);
     }
   }

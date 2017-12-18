@@ -106,11 +106,11 @@ export default Ember.Service.extend(DefaultHeaders, {
     return rv;
   },*/
 
-  storeDefaultOrigin: function(id) {
-    return this.get('store').find('origin', id, {
-      url: 'origins/' + id
-    });
-  },
+  // storeDefaultOrigin: function(id) {
+  //   return this.get('store').find('origin', id, {
+  //     url: 'origins/' + id
+  //   });
+  // },
 
   login: function(username, password) {
     var session = this.get('session');
@@ -137,13 +137,13 @@ export default Ember.Service.extend(DefaultHeaders, {
         secure: window.location.protocol === 'http:'
       });
       session.setProperties(interesting);
-      return this.storeDefaultOrigin(auth.id).then((origin) => {
-        origin = {
-          origin: origin.object_meta.origin
-        };
-        session.setProperties($.extend(interesting, origin));
-        return xhr;
-      });
+      // return this.storeDefaultOrigin(auth.id).then((origin) => {
+      //   origin = {
+      //     origin: origin.object_meta.origin
+      //   };
+      //   session.setProperties($.extend(interesting, origin));
+      //   return xhr;
+      // });
 
     }).catch((res) => {
       let err;
@@ -181,13 +181,14 @@ export default Ember.Service.extend(DefaultHeaders, {
         secure: window.location.protocol === 'http:'
       });
       session.setProperties(interesting);
-      return this.storeDefaultOrigin(auth.id).then((origin) => {
-        origin = {
-          origin: origin.object_meta.origin
-        };
-        session.setProperties($.extend(interesting, origin));
-        return xhr;
-      });
+      //Default origin create and store id on the session
+      // return this.storeDefaultOrigin(auth.id).then((origin) => {
+      //   origin = {
+      //     origin: origin.object_meta.origin
+      //   };
+      //   session.setProperties($.extend(interesting, origin));
+      //   return xhr;
+      // });
     }).catch((res) => {
       let err;
       try {

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 	initializeChart: Ember.on('didInsertElement', function() {
 
         var self = this;
-				this.set("model.assemblyfactory.properties.region", this.get('region'));
+				this.set("model.assemblyfactory.object_meta.cluster_name", this.get('region'));
         this.sendAction('done', "step3");
 				var element = $("#step-3").find(".loc-country");
         if (element.length > 0)
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 		createLocation: function() {
       this.sendAction('done', "step3");
       this.set('showSpinner', true);
-			this.set("model.assemblyfactory.properties.region", this.get('region'));
+			this.set("model.assemblyfactory.object_meta.cluster_name", this.get('region'));
       this.set('showSpinner', false);
 		}
 	}

@@ -24,8 +24,12 @@ ObjectMetaBuilder.reopenClass({
         name: "abc",
         uid: "",
         block_owner_deletion: true
-      }]
-
+      }],
+      account:"",
+      deleted_at:"",
+      deletion_grace_period_seconds:"",
+      initializers:{},
+      finalizers:[]
     };
     return objectMeta;
   },

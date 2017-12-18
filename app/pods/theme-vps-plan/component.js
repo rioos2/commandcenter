@@ -23,8 +23,8 @@ export default Ember.Component.extend({
     var planfactory = this.get("model.plans.content");
 
     planfactory.forEach(function(plan) {
-      if (plan.group_name.split("_")[1] == "virtualmachine") {
-        planGroup.pushObject(plan.group_name.split("_")[2]);
+      if (plan.category == "machine" && plan.status.phase == "ready") {
+        planGroup.pushObject(plan.object_meta.name);
       }
       uniqueVmGroup = planGroup.filter(function(elem, index, self) {
         return index == self.indexOf(elem);
@@ -37,15 +37,13 @@ export default Ember.Component.extend({
         "item": []
       }
       planfactory.forEach(function(plan) {
-        if (plan.group_name.split("_")[2] == vm) {
+        if (plan.object_meta.name == vm) {
           createVmGroup.item.pushObject(plan);
-          plan.services.forEach(function(version) {
           createVmGroup.version.pushObject({
-            "version": version.characteristics.version,
-            "url": plan.url,
-            "type": plan.group_name.split("_")[2]
+            "version": plan.version,
+            "id": plan.id,
+            "type": plan.object_meta.name
           });
-          })
         }
       })
       groupVms.pushObject(createVmGroup);

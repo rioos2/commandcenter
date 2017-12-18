@@ -6,19 +6,14 @@ export default Ember.Controller.extend({
   name: Em.computed.alias('first_name'),
 
   getform() {
-    let attrs = this.getProperties('name', 'email', 'first_name', 'last_name', 'firstname', 'password', 'phone');
+    let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'password', 'phone');
     var unUsedAttrs = this.unUsedAccountFields();
     return $.extend(attrs, unUsedAttrs);
   },
 
   unUsedAccountFields() {
     let unUsedFields = {
-      api_key: "",
-      states: "",
-      approval: "",
-      suspend: "",
       registration_ip_address: "",
-      roles: []
     };
     return unUsedFields;
   },
@@ -46,7 +41,7 @@ export default Ember.Controller.extend({
   },
 
   check() {
-    this.get('company') != null && this.get('company') != "" ? this.set('val_company', '') : this.set('val_company', 'has-error');
+    this.get('company_name') != null && this.get('company_name') != "" ? this.set('val_company', '') : this.set('val_company', 'has-error');
     this.get('first_name') != null && this.get('first_name') != "" ? this.set('val_firstName', '') : this.set('val_firstName', 'has-error');
     this.get('last_name') != null && this.get('last_name') != "" ? this.set('val_lastName', '') : this.set('val_lastName', 'has-error');
     this.get('phone') != null && this.get('phone') != "" ? this.set('val_phone', '') : this.set('val_phone', 'has-error');
