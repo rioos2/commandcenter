@@ -23,7 +23,7 @@ Router.map(function() {
   this.route('authenticated', { path: '/' }, function() {
     this.route('home', { resetNamespace: true });
     this.route('launcher', { resetNamespace: true });
-    this.route('dashboard', { resetNamespace: true });
+    this.route('manage', { resetNamespace: true });
 
     /*this.route('dropdowns', {
       resetNamespace: true

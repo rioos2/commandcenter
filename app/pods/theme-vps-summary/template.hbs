@@ -3,16 +3,16 @@
   <p class="sub-description"> Select preferred system</p>
   <div class="row m-b-30">
     <div class="col-xs-4 cgpu">
-      <img src="images/second/{{model.assemblyfactory.component_collection.compute_type}}.png">
+      <img src="images/second/{{model.assemblyfactory.resources.compute_type}}.png">
       <div class="description">
-        <p class="topic1">{{model.assemblyfactory.component_collection.compute_type}}</p>
+        <p class="topic1">{{model.assemblyfactory.resources.compute_type}}</p>
         <p class="topic2">CLOUD TYPE</p>
       </div>
       <img class="right-light" src="images/second/summary/right_light.png">
     </div>
     <div class="col-xs-4 domain-name">
       <div class="description">
-        <p class="topic1">{{model.assemblyfactory.properties.domain}}</p>
+        <p class="topic1">{{model.assemblyfactory.name}}</p>
         <p class="topic2">Domain Name</p>
       </div>
       <img class="display-line" src="images/second/summary/right_light.png">
@@ -21,7 +21,7 @@
       <div class="set-location">
         <img class="btn-location" src="images/second/locaion_ico.png">
         <!-- <span class="city">Ohio</span> -->
-        <span class="country">{{model.assemblyfactory.properties.region}}</span>
+        <span class="country">{{model.assemblyfactory.object_meta.cluster_name}}</span>
         <p class="topic2">Region</p>
       </div>
     </div>
@@ -29,8 +29,8 @@
   <div class="row m-b-30 storage">
     <div class="col-xs-6">
       <div class="s-ram">
-        <p class="topic0">{{model.assemblyfactory.component_collection.cpu}}</p>
         <img src="images/second/summary/hexCore.png">
+        <div class="topic0">{{model.assemblyfactory.resources.cpu}}</div>
       </div>
       <div class="description">
         <p class="topic1">Cores</p>
@@ -38,7 +38,7 @@
       </div>
       <img class="right-light p-r-30" src="images/second/summary/right_dark.png">
       <div class="description">
-        <p class="topic3">{{model.assemblyfactory.component_collection.memory}}</p>
+        <p class="topic3">{{model.assemblyfactory.resources.memory}}</p>
         <p class="topic2">Ram</p>
       </div>
       <img class="right-light p-l-30" src="images/second/summary/right_dark.png">
@@ -51,7 +51,7 @@
       </div>
       <img class="right-light p-r-30" src="images/second/summary/right_dark.png">
       <div class="description">
-        <p class="topic4">{{model.assemblyfactory.component_collection.storage}}</p>
+        <p class="topic4">{{model.assemblyfactory.resources.storage}}</p>
         <p class="topic2">Storage Capacity</p>
       </div>
     </div>
@@ -63,7 +63,7 @@
     </div>
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     <img src="images/second/summary/ico_{{distroNameFromPlan}}.png">
-    <div class="btn-version"><img><span>{{model.assemblyfactory.properties.version}}</span></div>
+    <div class="btn-version"><img><span>{{model.assemblyfactory.resources.version}}</span></div>
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     <div class="launch">
       {{theme-spinner size=25 condition=showSpinner}}

@@ -1,54 +1,65 @@
 <div class="servertab row m-0">
+  <div class="col-md-2 col-xs-1 tab-left">
+    <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
+      <li role="presentation" class="brand-nav active"><a href= {{tabnamewithhash_1}} aria-controls="tab1" role="tab" data-toggle="tab" class="tabspeed">{{theme-svg-user}}</a></li>
+      <li role="presentation" class="brand-nav"><a href= {{tabnamewithhash_2}} aria-controls="tab2" role="tab" data-toggle="tab" class="tabspeed">{{theme-svg-speed}}</a></li>
+      <li role="presentation" class="brand-nav"><a href= {{tabnamewithhash_3}} aria-controls="tab3" role="tab" data-toggle="tab" class="tabsecur">{{theme-svg-secur}}</a></li>
+      <li role="presentation" class="brand-nav"><a href= {{tabnamewithhash_4}} aria-controls="tab4" role="tab" data-toggle="tab" class="tabstats">{{theme-svg-stats}}</a></li>
+      <li role="presentation" class="brand-nav ul-desc">
+        <div>
+          <div class="vertical-text choose-desc">CHOOSE</div>
+          <div class="vertical-text category-desc">CATEGORY</div>
+        </div>
+      </li>
+    </ul>
+  </div>
   <div class="col-md-10 col-xs-11 tab-right">
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id= {{tabname_1}}>
         <div class="row">
           <div class="col-xs-6">
-            <div class="row">
-              <div class="dashboard-text-common dashboard-text-name-top"><b>Name : </b></div>
-              <div class="dashboard-text-common dashboard-text-name-top dashboard-text-name-left">{{name}}</div>
-            </div>
-            <div class="row">
-              <div class="dashboard-text-common dashboard-text-region-top"><b>Region : </b></div>
-              <div class="dashboard-text-common dashboard-text-region-top dashboard-text-region-left">{{region}}</div>
-            </div>
-            <div class="row">
-              <div class="dashboard-text-common dashboard-text-storage-top"><b>Storage : </b></div>
-              <div class="dashboard-text-common dashboard-text-storage-top dashboard-text-storage-left">{{storage}}</div>
-            </div>
-            <div class="row">
-              <div class="dashboard-text-common dashboard-text-status-top"><b>Status : </b></div>
-              <div class="dashboard-text-common dashboard-text-status-top dashboard-text-status-left">{{status}}</div>
-            </div>
+            <div class="vertical-text">{{name}}</div>
+            <div class= {{guageBoxClass}}></div>
           </div>
           <div class="col-xs-6">
             <div class="row">
-              <span style="position:relative;display:inline">
-                <img src="images/second/serveros/os-{{distro}}.png" onerror="javascript:this.src='images/second/serveros/os-empty.png'">
-              </span>
+              <span style="position:relative;display:inline" class={{guageSvgClass}}></span>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-6 p-r-0">
             <div class="content1">
-              <p class="title1 m-0">{{timestamp}}</p>
+              <p class="title1 m-0">March 2017</p>
               <p class="title2 m-0">Price per month</p>
             </div>
             <div class="content2">
             </div>
             <div class="content3">
-              <p>0 USD</p>
+              <p>3200 USD</p>
             </div>
           </div>
           <div class="col-xs-6">
             <div class="tabalert">{{theme-svg-alert}}</div>
             <div class="alert-desc">Be on alert if your server health state goes below 25%</div>
-            <div>
-              {{#link-to "vnc" (query-params vnchost=host vncport=port) target="_blank"}}<i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i>{{/link-to}}
-            </div>
           </div>
         </div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id= {{tabname_2}}>
+        <p>
+          The voodoo sacerdos flesh eater, suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.
+        </p>
+      </div>
+      <div role="tabpanel" class="tab-pane" id= {{tabname_3}}>
+        <p>
+          Lorem ipsizzle dolor away amizzle, consectetuer pizzle elizzle. Nullizzle yo velizzle, check it out volutpizzle, quis, gravida vel, yo. Ma nizzle eget tortor. Sizzle eros. My shizz izzle dolizzle gizzle turpis tempizzle fo shizzle mah nizzle fo rizzle,
+          mah home g-dizzle. Maurizzle pellentesque nibh izzle own yo'. Check it out in tortor. Pellentesque fizzle rhoncizzle nisi.
+        </p>
+      </div>
+      <div role="tabpanel" class="tab-pane" id= {{tabname_4}}>
+        <p>
+          Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
+        </p>
       </div>
     </div>
   </div>

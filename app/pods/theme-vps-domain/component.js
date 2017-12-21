@@ -3,7 +3,6 @@ import Ember from 'ember';
 import DefaultVps from 'nilavu/models/default-vps';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
-import SelfCert from 'npm:self-cert';
 
 
 export default Ember.Component.extend(DefaultHeaders, {
@@ -18,7 +17,6 @@ export default Ember.Component.extend(DefaultHeaders, {
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
     //default
-    this.set("model.assemblyfactory.properties.domain", this.get('domain'));
     this.set("model.assemblyfactory.name", this.get('domain'));
     this.sendAction('done', "step2");
 
@@ -26,8 +24,10 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   updateName: function() {
     this.sendAction('done', "step2");
-    this.set("model.assemblyfactory.properties.domain", this.get('domain'));
-    this.set("model.assemblyfactory.name", this.get('domain'));
+    this.set("model.assemblyfactory.name", this.get('domain') + "." + DefaultVps.domain);
+    this.set("model.assemblyfactory.object_meta.name", this.get("model.assemblyfactory.name"));
+
+
   }.observes('domain'),
 
   actions: {
@@ -43,26 +43,15 @@ export default Ember.Component.extend(DefaultHeaders, {
     createSecret() {
       this.set('showSpinner', true);
       this.sendAction('done', "step2");
-      this.set("model.secret.secret_type", this.get("secretType"));
-      //Signed operations
-      let certDetails = SelfCert({
-        attrs: {
-          orgName: 'RioCorp',
-          shortName: 'rioos'
-        },
-        bits: this.get('bitsInKey'),
-        expires: new Date('2030-12-31')
-      });
-      this.set("model.secret.data.rsa_pub", certDetails.publicKey);
-      this.set("model.secret.data.rsa_key", certDetails.privateKey);
-      this.set("model.secret.data.anykey", certDetails.certificate);
-      //singned operations end
+      this.set("model.secret.data.ssh-algorithm", this.get("secretType"));
+      this.set("model.secret.data.ssh-keypair-size", this.get("bitsInKey"));
+      this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta("", "Secret"));
       var session = this.get("session");
-      var origin = this.get("session").get("origin");
-      this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta("", origin));
-      var url = 'origins/' + origin +'/secrets';
+      var id = this.get("session").get("id");
+      this.set("model.secret.object_meta.account", id);
+      var url = 'accounts/' + id + '/secrets';
       this.get('model.secret').save(this.opts(url)).then((result) => {
-        this.set("model.assemblyfactory.secret", {id: result.id});
+        this.set("model.assemblyfactory.secret.id", result.id);
         this.get('notifications').success('Secret key generated successfully.', {
           autoClear: true,
           clearDuration: 5200

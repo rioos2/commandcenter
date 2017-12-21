@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       self.set('gpuselect', 'gpu-checked');
     }
 
-    self.set("model.assemblyfactory.component_collection.compute_type", DefaultVps.computeType);
+    self.set("model.assemblyfactory.resources.compute_type", DefaultVps.computeType);
     self.sendAction('done', "step1");
     self.$("#cg-close").click(function(e) {
       self.$(".opened-info").addClass("disabled");
@@ -32,14 +32,14 @@ export default Ember.Component.extend({
     gpu: function() {
       this.set('cpuselect', '');
       this.set('gpuselect', 'gpu-checked');
-      this.set("model.assemblyfactory.component_collection.compute_type", "gpu");
+      this.set("model.assemblyfactory.resources.compute_type", "gpu");
       this.sendAction('done', "step1");
     },
 
     cpu: function() {
       this.set('gpuselect', '');
       this.set('cpuselect', 'cpu-checked');
-      this.set("model.assemblyfactory.component_collection.compute_type", "cpu");
+      this.set("model.assemblyfactory.resources.compute_type", "cpu");
       this.sendAction('done', "step1");
     },
   }

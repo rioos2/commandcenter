@@ -11,18 +11,17 @@ export default Ember.Component.extend(DefaultHeaders,{
   }.observes('model.assemblyfactory.network'),
 
   distroNameFromPlan: function() {
-    var dn = this.get("model.assemblyfactory.plan").split("/")[3];
-    return dn;
-  }.property('model.assemblyfactory.plan'),
+    return this.get("model.assemblyfactory.os");
+  }.property('model.assemblyfactory.os'),
 
   actions: {
     createAssemblyFactory() {
       this.set('showSpinner', true);
 
       var session = this.get("session");
-      var origin = this.get("session").get("origin");
-      this.set('model.assemblyfactory.object_meta', ObjectMetaBuilder.buildObjectMeta("", origin));
-      var url = 'origins/' + origin +'/assemblyfactorys';
+      var id = this.get("session").get("id");
+      this.set("model.assemblyfactory.object_meta.account", id);
+      var url = 'accounts/' + id + '/assemblyfactorys';
 
       this.get('model.assemblyfactory').save(this.opts(url)).then(() => {
         location.reload();

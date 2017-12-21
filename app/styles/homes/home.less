@@ -892,9 +892,15 @@
             }
 
             .topic1 {
-                font-size: 30px;
-                color: #2342c8;
-                margin-bottom: 0;
+              font-size: 20px;
+              color: #2342c8;
+              margin-bottom: 0;
+              float: left;
+              padding: 1%;
+              width: 150px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
 
             .topic2 {
@@ -904,7 +910,7 @@
 
             img {
                 position: relative;
-                top: 20px;
+                top: 38px;
                 padding-left: 50px;
             }
         }
@@ -973,13 +979,14 @@
                 position: relative;
 
                 .topic0 {
-                    left: 41%;
-                    top: 40%;
+                    left: 50%;
+                    top: 50%;
                     position: absolute;
                     font-size: 25px;
                     font-weight: bold;
                     color: #26fdff;
                     text-shadow: 0 0 20px #2a98ff;
+                    transform: translate(-50%, -50%);
                 }
             }
 
@@ -1149,5 +1156,330 @@
                 }
             }
         }
+    }
+}
+
+.manage {
+
+      .gauge-chart {
+      padding: 20px 0;
+    }
+
+    #blueGaugeDiv1,
+    #blueGaugeDiv2,
+    #blueGaugeDiv3 {
+      position: relative;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      z-index: 1;
+
+      canvas {
+        overflow: hidden;
+        display: inline-block;
+        background: #1A086F;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    .main-guages,
+    .os-usage,
+    .statistics {
+      height: auto;
+    }
+
+    .main-guages {
+      .cover-3;
+
+      .gauge-chart {
+        .p-b-30;
+      }
+
+      .description {
+        margin-left: 20px;
+      }
+
+      .txt-guage {
+        color: #404040;
+        font-size: 24px;
+      }
+
+      .txt-power {
+        color: #8790a1;
+        font-size: 18px;
+      }
+
+      .txt-percent {
+        color: #2d9aff;
+        font-size: 18px;
+      }
+
+      .middle-guage {
+        .p-0;
+        margin-top: -40px;
+      }
+      @media (max-width: 1200px) {
+        .txt-guage {
+          font-size: 21px;
+        }
+
+        .txt-power {
+          font-size: 15px;
+        }
+
+        .txt-percent {
+          font-size: 15px;
+        }
+
+        h4 {
+          font-size: 20px !important;
+        }
+      }
+      @media (max-width: 992px) {
+        .txt-guage {
+          font-size: 16px;
+        }
+
+        .txt-power {
+          font-size: 12px;
+        }
+
+        .txt-percent {
+          font-size: 12px;
+        }
+
+        h4 {
+          font-size: 15px !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .txt-guage {
+          font-size: 14px;
+        }
+
+        .txt-power {
+          font-size: 10px;
+        }
+
+        .txt-percent {
+          font-size: 10px;
+        }
+
+        h4 {
+          font-size: 13px !important;
+        }
+      }
+    }
+
+    .os-usage {
+      background-color: #e3e9f6;
+
+      .area-container {
+        .gauge5 svg {
+          padding-left: 30px;
+        }
+
+        .os-hex-desc {
+          color: #3e3f51;
+          font-size: 18px;
+          position: fixed;
+          right: 98px;
+          bottom: 80px;
+        }
+        margin: 0 50px 0 30px;
+        padding: 10px 0 0;
+        background-color: #f8f9fd;
+        @media (max-width: 1200px) {
+          padding: 10px 0 35px !important;
+
+          .gauge5 svg {
+            margin-top: 10px;
+          }
+
+          .os-hex-desc {
+            font-size: 14px;
+            right: 85px;
+            bottom: 100px;
+          }
+        }
+        @media (max-width: 992px) {
+          .gauge5 svg {
+            margin-top: 40px;
+          }
+          padding: 10px 0 35px !important;
+
+          .os-hex-desc {
+            font-size: 10px;
+            right: 68px;
+            bottom: 130px;
+          }
+        }
+        @media (max-width: 768px) {
+          margin: 0;
+          padding: 0;
+
+          #areaGraph {
+            width: 500px;
+          }
+          #areaGraphOs {
+            width: 900px;
+          }
+
+          .os-hex-desc {
+            font-size: 35px;
+            right: 127px;
+            bottom: 153px;
+          }
+        }
+      }
+    }
+
+    .statistics {
+      background-color: #f0f4fa;
+
+      .servertab .tab-left ul {
+        height: 350px;
+      }
+
+      .gauge_svg svg {
+        padding-top: 40px;
+      }
+
+      li.brand-nav.active a:after {
+        content: " ";
+        display: block;
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        border-left: 7px solid #2f3375;
+        position: absolute;
+        margin-top: 15px;
+        top: 0;
+        left: 44px;
+        z-index: 2;
+      }
+
+      .servertab ul > li {
+        padding: 7px 7px 0;
+      }
+
+      .tabuser {
+        padding: 10px 12px 5px;
+      }
+
+      .tabspeed {
+        padding: 12px 10px 7px;
+      }
+
+      .tabsecur {
+        padding: 9px 11px 4px;
+      }
+
+      .tabstats {
+        padding: 10px 10px 5px;
+      }
+      @media (max-width: 1200px) {
+        li.brand-nav.active a:after {
+          left: 36px;
+          top: -3px;
+        }
+
+        .servertab ul .ul-desc {
+          padding-left: 6px !important;
+        }
+
+        .servertab ul > li {
+          padding: 5px 5px 0;
+        }
+
+        .tabuser {
+          padding: 9px 10px 5px;
+        }
+
+        .tabspeed {
+          padding: 9px 8px 6px;
+        }
+
+        .tabsecur {
+          padding: 9px 9px 3px;
+        }
+
+        .tabstats {
+          padding: 9px 9px 3px;
+        }
+
+        h4 {
+          font-size: 20px !important;
+        }
+      }
+      @media (max-width: 992px) {
+        li.brand-nav.active a:after {
+          left: 54px;
+          top: 2px;
+        }
+
+        .servertab ul .ul-desc {
+          padding-left: 17px !important;
+        }
+
+        .servertab ul > li {
+          padding: 10px 10px 0;
+        }
+
+        .tabuser {
+          padding: 12px 14px 7px;
+        }
+
+        .tabspeed {
+          padding: 14px 11px 8px;
+        }
+
+        .tabsecur {
+          padding: 11px 13px 5px;
+        }
+
+        .tabstats {
+          padding: 14px 12px 6px;
+        }
+
+        h4 {
+          font-size: 15px !important;
+        }
+      }
+      @media (max-width: 768px) {
+        li.brand-nav.active a:after {
+          left: 41px;
+          top: 0;
+        }
+
+        .servertab ul .ul-desc {
+          padding-left: 8px !important;
+        }
+
+        .servertab ul > li {
+          padding: 12px 4px 0;
+        }
+
+        h4 {
+          font-size: 13px !important;
+        }
+      }
+      @media (max-width: 1200px) {
+        .servertab .tab-left ul {
+          height: 300px;
+        }
+      }
+      @media (max-width: 992px) {
+        .servertab .tab-left ul {
+          height: 386px;
+        }
+      }
+      @media (max-width: 768px) {
+        .servertab .tab-left ul {
+          height: 300px;
+        }
+      }
     }
 }

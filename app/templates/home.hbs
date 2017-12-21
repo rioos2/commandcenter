@@ -1,0 +1,84 @@
+<div class="manage">
+  {{#theme-head-cover class='main-guages' }}
+    <div class="cover-text">
+      <h4><span class="title_underline">M</span>AIN GUAGES</h4>
+    </div>
+
+    {{#blue-gauge-comp model=model}}
+      <div class="row">
+        <div class="col-xs-12 m-l-30">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-3">
+            <div id="blueGaugeDiv1">
+              <span style="margin:10px;position:relative;display:inline" class="cpu"></span>
+            </div>
+            <div class="description center-text">
+              <p class="txt-guage m-b-0"> CPU</p>
+              <p class="">
+                <span class="txt-power">POWER ― </span>
+                <span class="txt-percent cpu_percent"></span>
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-3 middle-guage">
+            <div id="blueGaugeDiv2">
+              <span style="margin:10px;position:relative;display:inline" class="ram"></span>
+            </div>
+            <div class="description center-text">
+              <p class="txt-guage m-b-0"> RAM</p>
+              <p class="">
+                <span class="txt-power">POWER ― </span>
+                <span class="txt-percent ram_percent"></span>
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div id="blueGaugeDiv3">
+              <span style="margin:10px;position:relative;display:inline" class="disk"></span>
+            </div>
+            <div class="description center-text">
+              <p class="txt-guage m-b-0"> DISK</p>
+              <p class="">
+                <span class="txt-power">POWER ― </span>
+                <span class="txt-percent disk_percent"></span>
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+    {{/blue-gauge-comp}}
+  {{/theme-head-cover}}
+
+  {{#theme-head-cover class='statistics' data="statistics" }}
+    <div class="cover-text">
+      <h4><span class="title_underline">S</span>TATISTICS</h4>
+    </div>
+    <div class="row m-20 m-b-0">
+      {{#each cacheNodes as |sdata|}}
+        {{show-node-data model=sdata }}
+      {{/each}}
+    </div>
+  {{/theme-head-cover}}
+
+  {{#theme-head-cover class='os-usage p-b-30' }}
+    <div class="cover-text">
+      <h4><span class="title_underline">O</span>S USAGE BY TIME</h4>
+    </div>
+    <div class="row area-container">
+      {{#os-chart model=model}}
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="col-xs-12 col-sm-9" id="areaGraph">
+            </div>
+            <div class="col-xs-12 col-sm-3">
+              <div class="gauge5"></div>
+              <p class="os-hex-desc">OVERAL USAGE</p>
+            </div>
+          </div>
+        </div>
+      {{/os-chart}}
+    </div>
+  {{/theme-head-cover}}
+
+</div>

@@ -7,15 +7,15 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
     // this.set(DefaultVps.network, "selected");
     if (DefaultVps.destro == this.get('versionDetail.type') && DefaultVps.destroVersion == this.get('versionDetail.version')) {
-      this.set("model.assemblyfactory.plan", this.get('versionDetail.url'));
-      this.set("model.assemblyfactory.properties.version", this.get('versionDetail.version'));
+      this.set("model.assemblyfactory.plan", this.get('versionDetail.id'));
+      this.set("model.assemblyfactory.resources.version", this.get('versionDetail.version'));
       this.set("active", "active");
       this.sendAction("done");
     }
   }),
 
   selectionChecker: function() {
-    var check = this.get("model.assemblyfactory.properties.version") == this.get("versionDetail.version");
+    var check = this.get("model.assemblyfactory.resources.version") == this.get("versionDetail.version");
     if (!check) {
       this.set("active", "");
     }
@@ -23,8 +23,8 @@ export default Ember.Component.extend({
 
   actions: {
     chooseVM: function() {
-      this.set("model.assemblyfactory.plan", this.get('versionDetail.url'));
-      this.set("model.assemblyfactory.properties.version", this.get('versionDetail.version'));
+      this.set("model.assemblyfactory.plan", this.get('versionDetail.id'));
+      this.set("model.assemblyfactory.resources.version", this.get('versionDetail.version'));
       this.set("active", "active");
       this.sendAction("done");
     }

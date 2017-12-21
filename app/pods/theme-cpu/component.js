@@ -27,7 +27,7 @@ export default Ember.Component.extend({
 
   cpu: function() {
     var cpu = this.get('cpuData') + "";
-    this.set("model.assemblyfactory.component_collection.cpu", cpu);
+    this.set("model.assemblyfactory.resources.cpu", cpu);
   }.observes('cpuData'),
 
   renderChartNumberOfCores: function(self, params) {

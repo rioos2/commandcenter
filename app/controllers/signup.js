@@ -1,128 +1,61 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
   access: Ember.inject.service(),
-  formSubmitted: false,
   name: Em.computed.alias('first_name'),
 
   getform() {
-    let attrs = this.getProperties('name', 'email', 'first_name', 'last_name', 'firstname', 'password');
+    let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'password', 'phone');
     var unUsedAttrs = this.unUsedAccountFields();
     return $.extend(attrs, unUsedAttrs);
   },
 
   unUsedAccountFields() {
     let unUsedFields = {
-      phone: "",
-      api_key: "",
-      states: "",
-      approval: "",
-      suspend: "",
       registration_ip_address: "",
-      roles: []
     };
     return unUsedFields;
   },
 
-  submitDisabled: function() {
-    if (this.get('formSubmitted'))
-      return true;
-    if (this.get('nameValidation.failed'))
-      return true;
-    if (this.get('emailValidation.failed'))
-      return true;
-    if (this.get('passwordValidation.failed'))
-      return true;
-    if (this.get('passwordConfirmValidation.failed'))
-      return true;
-    return false;
-  }.property('nameValidation.failed', 'emailValidation.failed', 'passwordValidation.failed', 'passwordConfirmValidation.failed', 'formSubmitted'),
-
-  nameValidation: function() {
-    if (Ember.isEmpty(this.get('first_name')) || Ember.isEmpty(this.get('last_name'))) {
-      return {
-        failed: true
-      };
-    }
-    return {
-      ok: true
-    };
-  }.property('first_name', 'last_name'),
-
-  emailValidation: function() {
-    if (Ember.isEmpty(this.get('email'))) {
-      return {
-        failed: true
-      };
-    }
-    return {
-      ok: true
-    };
-  }.property('email'),
-
-  passwordValidation: function() {
-    const password = this.get("password");
-
-    if (Ember.isEmpty(this.get('password')))
-      return {
-        failed: true
-      };
-    if (password.length < 6)
-      return {
-        failed: true,
-        reason: "Password length is too short"
-      };
-    if (!Ember.isEmpty(this.get('email')) && this.get('password') === this.get('email'))
-      return {
-        failed: true,
-        reason: "Password same as email"
-      };
-    return {
-      ok: true
-    };
-  }.property('password', 'signupPasswordConfirm'),
-
-  passwordConfirmValidation: function() {
-    if (Ember.isEmpty(this.get('signupPasswordConfirm')))
-      return {
-        failed: true
-      };
-
-    if (!Ember.isEmpty(this.get('signupPasswordConfirm')) && this.get('password') === this.get('signupPasswordConfirm'))
-      return {
-        ok: true
-      };
-
-    if (!Ember.isEmpty(this.get('signupPasswordConfirm')) && this.get('password') !== this.get('signupPasswordConfirm'))
-      return {
-        failed: true,
-        reason: "Password is not matching"
-      };
-  }.property('signupPasswordConfirm', 'password'),
 
   actions: {
+    singUp() {
+      this.check();
+      if (this.shouldProceed()) {
+        Ember.run.later(() => {
+          this.get('access').signup(this.getform()).then(() => {
+            this.send('finishLogin');
+          }).catch((err) => {
 
-
-    signup: function() {
-      this.set('loggingIn', true);
-      this.set('formSubmitted', true);
-      Ember.run.later(() => {
-        this.get('access').signup(this.getform()).then(() => {
-          this.send('finishLogin');
-        }).catch((err) => {
-          this.set('waiting', false);
-
-          if (err && err.status === 401) {
-            this.set('formSubmitted', false);
-            //this.set('errorMsg', this.get('intl').t('loginPage.error.authFailed'));
-          } else {
-            //this.set('errorMsg', (err ? err.message : "No response received"));
-          }
-        }).finally(() => {
-          this.set('waiting', false);
-        });
-      }, 10);
+            if (err && err.status === 401) {
+              //this.set('errorMsg', this.get('intl').t('loginPage.error.authFailed'));
+            } else {
+              //this.set('errorMsg', (err ? err.message : "No response received"));
+            }
+          }).finally(() => {});
+        }, 10);
+      }
     }
-  }
+
+  },
+
+  check() {
+    this.get('company_name') != null && this.get('company_name') != "" ? this.set('val_company', '') : this.set('val_company', 'has-error');
+    this.get('first_name') != null && this.get('first_name') != "" ? this.set('val_firstName', '') : this.set('val_firstName', 'has-error');
+    this.get('last_name') != null && this.get('last_name') != "" ? this.set('val_lastName', '') : this.set('val_lastName', 'has-error');
+    this.get('phone') != null && this.get('phone') != "" ? this.set('val_phone', '') : this.set('val_phone', 'has-error');
+    this.get('password') != null && this.get('password') != "" ? this.set('val_code', '') : this.set('val_code', 'has-error');
+    this.validationEmail(this.get('email')) && this.get('email') != "" ? this.set('val_email', '') : this.set('val_email', 'has-error');
+  },
+
+  validationEmail(value) {
+    let emailReg = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return emailReg.test(value);
+  },
+
+  shouldProceed() {
+    return Ember.isEmpty(this.get('val_company')) && Ember.isEmpty(this.get('val_firstName')) && Ember.isEmpty(this.get('val_lastName')) && Ember.isEmpty(this.get('val_phone')) && Ember.isEmpty(this.get('val_code')) && Ember.isEmpty(this.get('val_email'));
+  },
 
 });

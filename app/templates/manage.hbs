@@ -1,13 +1,13 @@
-<div class="home">  
+<div class="home">
   {{#theme-head-cover class='statistics' data="statistics" }}
     <div class="cover-text">
       <h4><span class="title_underline">VIRTUAL</span> MACHINES</h4>
     </div>
     <div class="row m-20 m-b-0">
       {{#each cacheAssemblys as |sdata|}}
-        {{show-node-data model=sdata }}
+        {{show-assembly-data model=sdata }}
       {{/each}}
     </div>
-  {{/theme-head-cover}}  
+  {{/theme-head-cover}}
 
 </div>

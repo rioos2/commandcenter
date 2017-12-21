@@ -2,7 +2,9 @@ import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
-import { xhrConcur } from 'nilavu/utils/platform';
+import {
+  xhrConcur
+} from 'nilavu/utils/platform';
 
 export default Ember.Route.extend(DefaultHeaders, {
   activate: function() {
@@ -19,7 +21,7 @@ export default Ember.Route.extend(DefaultHeaders, {
 
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-        plans: this.cbFind('plan', 'plans'),
+        plans: this.cbFind('planfactory', 'plans'),
       };
 
       async.auto(tasks, xhrConcur, function(err, res) {
@@ -64,7 +66,7 @@ export default Ember.Route.extend(DefaultHeaders, {
   loadSecret() {
     var secretData = {
       type: 'secrets',
-      secret_type: "rsa",
+      secret_type: 'rio.digital/ssh-auth',
       data: {
         username: "USERNAME",
         password: "PASSWORD",
@@ -87,26 +89,10 @@ export default Ember.Route.extend(DefaultHeaders, {
       object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
       type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
       type: 'origins/rioos/assemblyfactorys',
-
-      name: "",
-      uri: "",
-      description: "installation",
-      tags: [],
-      origin: "rioos",
       replicas: 1,
-      properties: {
-        domain: "",
-        cloudsetting: "/clouds/one",
-        region: "",
+      resources: {
+        compute_type: "",
         storage_type: "ssd"
-      },
-      plan: "/v3/plan/ubuntu",
-      external_management_resource: [
-        ""
-      ],
-      component_collection: {
-        flavor: "/url",
-        network: "/url"
       },
       status: {
         phase: "pending",
@@ -118,14 +104,25 @@ export default Ember.Route.extend(DefaultHeaders, {
           status: "",
           last_transition_time: "",
           last_probe_time: "",
-          condition_type: ""
+          condition_type: "",
+          last_update_time: ""
         }]
       },
-      opssettings: {
-        nodeselector: "",
-        priority: "",
-        nodename: "",
-        restartpolicy: ""
+      created_at: "",
+      secret: {
+        id: ""
+      },
+      plan: "", //TODO: Need to get from api
+      metadata: {
+        "io:rioos:orginin::name": "rioos",
+        "io:rioos:team::name": "development"
+      },
+      spec: {
+        node_selector: {},
+        affinity: {
+          "assemblyfactory_affinity": "requiredDuringSchedulingIgnoredDuringExecution"
+        },
+        restart_policy: "Always"
       }
     };
     return this.get('store').createRecord(assemblyfactoryData);

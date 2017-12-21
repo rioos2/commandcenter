@@ -1,52 +1,53 @@
-<div class="login">
+<div class="signup signform">
+  {{#link-to "signup"}}<img class="logo-img" src="images/logo2.png">{{/link-to}}
   <div class="container">
-    <div class="row">
-      <div class="logo-div col-md-12">
-        <a href="#"><img class="logo-img tuna-signup-logo img-responsive center-block" src="images/logo1.png"></a>
+    <!-- <img class="signup-icon" src="images/signup/signupicon.png"> -->
+    <form>
+      <h1>SIGN UP</h1>
+
+      <div class="form-group {{val_company}}">
+        {{input type="text" value=company_name}}
+        <label class="{{if company_name 'data-exist'}} control-label" for="input">Company name</label><i class="bar"></i>
       </div>
-    </div>
-    <div class="row content">
-      <div class="col-lg-8 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-2 middle-div">
-        <div class="center-block main-div col-md-12">
-          <div class="row">
-            <h4 class="title">Signup</h4>
-          </div>
-          <br/><br/><br/><br/>
-          <div class="row main-container">
-           <form role="form" style="margin: -21px auto auto;">
-            <div class="panel-primary setup-content" id="step-1">
-             <div class="panel-body" style="padding: 1px;">
-              <div class="form-group">
-                    <label class="control-label">First Name</label> {{text-field value=first_name placeholderKey="signup.email_placeholder" class ="form-control" id="signup-account-first-name" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Last Name</label> {{text-field value=last_name placeholderKey="signup.email_placeholder" class ="form-control" id="signup-account-last-name" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Email</label> {{text-field value=email placeholderKey="signup.email_placeholder" class ="form-control" id="signup-account-email" autocorrect="off" autocapitalize="off" autofocus="autofocus"}}
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">New Password</label> {{password-field value=password type="password" placeholderKey="signup.password_placeholder" class ="form-control" id="signup-account-password" maxlength="200" capsLockOn=capsLockOn}}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color:red">
-                      {{passwordValidation.reason}}
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">Confirm Password</label> {{password-field value=signupPasswordConfirm type="password" placeholderKey="signup.password_placeholder" class ="form-control" id="signup-account-password-confirm" maxlength="200" capsLockOn=capsLockOn}}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color:red">
-                      {{passwordConfirmValidation.reason}}
-                    </div>
-                  </div>
-                  <button class="btn btn-success nextBtn pull-right" type="button" style="padding: 32px; padding-bottom: 6px; padding-top: 7px;" disabled= {{submitDisabled}} {{action "signup"}}>Signup</button>
-                </div>
-                 <span class="btn btn-warning nextBtn pull-right">{{#link-to "login"}}Back to login{{/link-to}}</span>
-              </div>
-            </form>
-          </div>
-          <div class="row">
-          </div>
-        </div>
+
+      <div class="form-group {{val_firstName}}">
+        {{input type="text" value=first_name}}
+        <label class="{{if first_name 'data-exist'}} control-label" for="input">First name</label><i class="bar"></i>
       </div>
+
+      <div class="form-group {{val_lastName}}">
+        {{input type="text" value=last_name}}
+        <label class="{{if last_name 'data-exist'}} control-label" for="input">Last name</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_phone}}">
+        {{input type="text" value=phone}}
+        <label class="{{if phone 'data-exist'}} control-label" for="input">Phone</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_email}}">
+        {{input type="text" value=email}}
+        <label class="{{if email 'data-exist'}} control-label" for="input">email</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_code}}">
+        {{input type="text" value=password}}
+        <label class="{{if password 'data-exist'}} control-label" for="input">Activate on code</label><i class="bar"></i>
+      </div>
+
+    </form>
+
+    <div class="button-container">
+      <button class="button" {{action 'singUp'}}><span>Create account
+        {{fa-icon "long-arrow-right" class="right-arrow"}}
+
+      </span></button>
     </div>
+
+    <div class="sub-description">
+      Already have an account?
+      {{#link-to "login" class="signup-link" }}Sign in{{/link-to}}
+    </div>
+
   </div>
 </div>

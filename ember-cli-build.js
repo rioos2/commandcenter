@@ -42,7 +42,13 @@ module.exports = function(defaults) {
   // app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
   //     destDir: 'assets'
   // });
+
   app.import('vendor/charts/d3.v4.min.js');
+  app.import('vendor/charts/d3script-area.js');
+  app.import('vendor/charts/d3script-gauge.js');
+  app.import('vendor/charts/d3script-blue-gauge.js');
+
+
   app.import('vendor/second/numberofcores.js');
   app.import('vendor/second/ram.js');
   app.import('vendor/second/storage.js');
