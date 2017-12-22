@@ -9,7 +9,7 @@ export default Ember.Component.extend({
     //     function() {$(this).addClass('animated quick-shake')},
     //     function() {$(this).removeClass('animated quick-shake')}
     //     );
-  }, 
+  },
 
   actions: {
 
