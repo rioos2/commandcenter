@@ -27,7 +27,6 @@ export default Component.extend({
 
         let blue = renderBlueGaugeChart()
         .data({ value: 100 });
-
         particlesJS(id, {
             "particles": {
                 "number": {

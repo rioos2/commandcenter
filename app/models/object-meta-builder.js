@@ -27,8 +27,7 @@ ObjectMetaBuilder.reopenClass({
       }],
       account:"",
       deleted_at:"",
-      deletion_grace_period_seconds:"",
-      initializers:{},
+      deletion_grace_period_seconds:0,
       finalizers:[]
     };
     return objectMeta;
