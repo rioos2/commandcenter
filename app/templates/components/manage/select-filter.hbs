@@ -1,0 +1,8 @@
+<div class='md-select {{if isActive 'active'}}' {{action "clickSelect" on="click"}} {{action "focusOutSelect" on='focusOut'}}>
+    <label for="ul-id"><button type="button" class="ng-binding">{{model.name}}</button></label>
+    <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+        {{#each model.data as |data|}}
+            <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" data on="mouseDown"}}>{{data}}</li>
+        {{/each}}
+    </ul>
+</div>
