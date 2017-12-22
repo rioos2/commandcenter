@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     var planfactory = this.get("model.plans.content");
     planfactory.pushObject(
       {
-"id":"872338390278742016",
+"id":"876624595061317632",
 "type_meta":{
 "kind":"PlanFactory",
 "api_version":"v1"
@@ -88,7 +88,7 @@ export default Ember.Component.extend({
 },
     );
     planfactory.pushObject(      {
-    "id":"872338390278742016",
+    "id":"876624595061317632",
     "type_meta":{
     "kind":"PlanFactory",
     "api_version":"v1"

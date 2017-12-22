@@ -1,0 +1,29 @@
+<div class="left">
+    <div class="domain">
+        <div class="icon" data-tooltip="On">
+            {{svg/svg-status}}
+        </div>
+        <p class="text1">{{model.object_meta.name}}</p>
+        <p class="text2">{{model.status.phase}}</p>
+    </div>
+    <div class="ip">
+        <div class="icon">
+            {{fa-icon "tasks"}}
+        </div>
+        <p class="text1">Private IPv4</p>
+        <p class="text2">192.168.0.105</p>
+    </div>
+    <div class="location">
+        <div class="icon">
+            {{fa-icon "tag"}}
+        </div>
+        <p class="text1">Ohio</p>
+        <p class="text2">USA</p>
+    </div>
+</div>
+<div class="right">
+    {{fa-icon "cog" class="settingIcon"}}
+    <div class="gauge">
+        {{home2/chart-gauge model=dummy showName=false showOS=true}}
+    </div>
+</div>

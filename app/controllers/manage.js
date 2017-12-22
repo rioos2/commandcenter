@@ -1,33 +1,15 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
-  notifications: Ember.inject.service('notification-messages'),
-  session: Ember.inject.service(),
+export default Controller.extend({
+    isSearchVisible : false,
 
-  init: function() {
-    this._super();
-    var session = this.get('session');
-    Ember.run.schedule("afterRender", this, function() {
-      if (localStorage["lastVisitedRoute"] == "login") {
-        this.get('notifications').info('Welcome back ' + session.get("email"), {
-          autoClear: true,
-          clearDuration: 5200
-        });
-        localStorage["lastVisitedRoute"] = "";
-      }
-      if (localStorage["lastVisitedRoute"] == "signup") {
-        this.get('notifications').info('Welcome ' + session.get("email"), {
-          autoClear: true,
-          clearDuration: 5200
-        });
-        localStorage["lastVisitedRoute"] = "";
-      }
-    });
-  },
+    assemblyLength: function() {
+      return this.get('model.content').length;
+    }.property('model'),
 
-  cacheAssemblys: function() {
-    return this.get('model');
-  }.property('model'),
-
-
+    actions: {
+        search() {
+            this.toggleProperty('isSearchVisible');
+        }
+    }
 });
