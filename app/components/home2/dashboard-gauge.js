@@ -11,29 +11,28 @@ export default Component.extend({
   }.observes('model'),
 
 
-  cpu: function(){
-      const content = this.get('model.content').objectAt(0);
-      return content.results.guages.counters[0];
+  cpu: function() {
+    const content = this.get('model.content').objectAt(0);
+    return content.results.guages.counters[0];
   }.property('model.content'),
-  ram: function(){
-      const content = this.get('model.content').objectAt(0);
-      return content.results.guages.counters[1];
+  ram: function() {
+    const content = this.get('model.content').objectAt(0);
+    return content.results.guages.counters[1];
   }.property('model.content'),
-  disk: function(){
-      const content = this.get('model.content').objectAt(0);
-      return content.results.guages.counters[2];
+  disk: function() {
+    const content = this.get('model.content').objectAt(0);
+    return content.results.guages.counters[2];
   }.property('model.content'),
-  unknown: function(){
-      const content = this.get('model.content').objectAt(0);
-      return content.results.guages.counters[3];
+  unknown: function() {
+    const content = this.get('model.content').objectAt(0);
+    return content.results.guages.counters[3];
   }.property('model.content'),
 
-  update(){
+  update() {
     const content = this.get('model.content').objectAt(0);
-    // alert(JSON.stringify(content.results.guages.counters[0]));
 
     this.set('cpu', content.results.guages.counters[0]);
- this.set('ram', content.results.guages.counters[1]);
+    this.set('ram', content.results.guages.counters[1]);
   }
 
 
