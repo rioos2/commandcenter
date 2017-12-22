@@ -1,0 +1,30 @@
+.chart-os {
+
+    background-color: #e3e9f6;
+    box-shadow: 4px 5px 26px rgba(41, 83, 189, .4);
+
+    margin: 0px 30px;
+    background-color: #f8f9fd;
+
+      @media (max-width: 568px) {
+        margin: 0 10px;
+      }
+      
+    
+    .hex_chart_os svg{
+      padding-left: 30px;
+    }
+
+    .os-hex-desc {
+      color: #3e3f51;
+      font-size:18px;
+      position: absolute;
+      left: 87px;
+      top: 200px;
+    }
+
+    #areaGraph {
+      margin-top: 20px;
+      margin-left: 5px;
+    }
+  }

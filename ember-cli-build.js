@@ -4,24 +4,29 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    SRI: {
-      enabled: false
-    },
-    fingerprint: {
-      enabled: false
-    },
-    minifyJS: {
-      enabled: false
-    },
-    minifyCSS: {
-      enabled: true
-    },
+    // SRI: {
+    //   enabled: false
+    // },
+    // fingerprint: {
+    //   enabled: false
+    // },
+    // minifyJS: {
+    //   enabled: false
+    // },
+    // minifyCSS: {
+    //   enabled: true
+    // },
     // Add options here
-    lessOptions: {
-      paths: [
-        'bower_components/bootstrap/less'
-      ],
-    }
+    // lessOptions: {
+    //   paths: [
+    //     'bower_components/bootstrap/less'
+    //   ],
+    // },
+    // sassOptions: {
+    //   includePaths: [
+    //     'bower_components/SpinKit/scss',
+    //   ]
+    // }
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -57,11 +62,21 @@ module.exports = function(defaults) {
 
   app.import('vendor/particles.min.js');
   app.import('bower_components/async/dist/async.js');
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', { destDir: 'fonts' });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', { destDir: 'fonts' });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', { destDir: 'fonts' });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', { destDir: 'fonts' });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', { destDir: 'fonts' });
+  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {
+    destDir: 'fonts'
+  });
+  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', {
+    destDir: 'fonts'
+  });
+  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {
+    destDir: 'fonts'
+  });
+  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
+    destDir: 'fonts'
+  });
+  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
+    destDir: 'fonts'
+  });
 
   app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 

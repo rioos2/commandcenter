@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100.97 116">
+    <defs>
+		<filter id="innershadow" x0="-50%" y0="-50%" width="200%" height="200%">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+			<feOffset dy="4" dx="4"></feOffset>
+			<feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+			
+           <feFlood flood-color="white" flood-opacity="0.15"></feFlood>
+		   <feComposite in2="shadowDiff" operator="in"></feComposite>
+		   <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+          
+          
+          <feGaussianBlur in="firstfilter" stdDeviation="8" result="blur2"></feGaussianBlur>
+			<feOffset dy="6" dx="0"></feOffset>
+			<feComposite in2="firstfilter" operator="arithmetic" k2="1" k3="-1" result="shadowDiff"></feComposite>
+			
+           <feFlood flood-color="#1a3a8d" flood-opacity="0.2"></feFlood>
+			<feComposite in2="shadowDiff" operator="in"></feComposite>
+			<feComposite in2="firstfilter" operator="over"></feComposite>
+		</filter>
+        <filter id="blur-filter" x="-2" y="-2" width="200" height="200">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+        </filter>
+    </defs>
+    <g data-name="Layer 1">
+        <path class="cls-1" d="M50.49,0,101,29V87L50.49,116,0,87V29Z"/>
+        <path class="cls-2" d="M50,11,91,34.5v47L50,105,9,81.5v-47Z" stroke-width="1" stroke="none" stroke-linecap="round"  fill="white"  filter="url(#innershadow)"/>
+
+        <path class="certi-glow" stroke-miterlimit="10" d="M59,54H43a1,1,0,0,1,0-2H59a1,1,0,0,1,0,2Z"/>
+        <path class="certi-glow" stroke-miterlimit="10" d="M59,59H43a1,1,0,0,1,0-2H59a1,1,0,0,1,0,2Z"/>
+        <path class="certi-glow" stroke-miterlimit="10" d="M67,46.93a1,1,0,0,0,0-.26v-.09a1,1,0,0,0-.2-.29l-9-9a1,1,0,0,0-.29-.2h-.1a1,1,0,0,0-.3-.09H36a1,1,0,0,0-1,1V75a1,1,0,0,0,1,1h5v3a1,1,0,0,0,1.45.89L44,79.07l1.55.78A1,1,0,0,0,47,79V76H66a1,1,0,0,0,1-1V46.93ZM63.59,46H58V40.41ZM45.52,69.53h0a3.13,3.13,0,0,1-.7.3h-.06a2.82,2.82,0,0,1-1.48,0h-.06a3.07,3.07,0,0,1-.7-.3h0a3,3,0,1,1,3,0ZM45,77.34l-.55-.28a1.31,1.31,0,0,0-.9,0l-.55.24V71.86A5,5,0,0,0,44,72a4.94,4.94,0,0,0,1-.1ZM47,74V71a5,5,0,1,0-6,0v3H37V39H56v8a1,1,0,0,0,1,1h8V74Z"/>
+
+        <path class="certi-color" fill="#26fdff" stroke-width="1" stroke-miterlimit="5" d="M59,54H43a1,1,0,0,1,0-2H59a1,1,0,0,1,0,2Z"/>
+        <path class="certi-color" fill="#26fdff" stroke-width="1" stroke-miterlimit="5" d="M59,59H43a1,1,0,0,1,0-2H59a1,1,0,0,1,0,2Z"/>
+        <path class="certi-color" fill="#26fdff" stroke-width="1" stroke-miterlimit="5" d="M67,46.93a1,1,0,0,0,0-.26v-.09a1,1,0,0,0-.2-.29l-9-9a1,1,0,0,0-.29-.2h-.1a1,1,0,0,0-.3-.09H36a1,1,0,0,0-1,1V75a1,1,0,0,0,1,1h5v3a1,1,0,0,0,1.45.89L44,79.07l1.55.78A1,1,0,0,0,47,79V76H66a1,1,0,0,0,1-1V46.93ZM63.59,46H58V40.41ZM45.52,69.53h0a3.13,3.13,0,0,1-.7.3h-.06a2.82,2.82,0,0,1-1.48,0h-.06a3.07,3.07,0,0,1-.7-.3h0a3,3,0,1,1,3,0ZM45,77.34l-.55-.28a1.31,1.31,0,0,0-.9,0l-.55.24V71.86A5,5,0,0,0,44,72a4.94,4.94,0,0,0,1-.1ZM47,74V71a5,5,0,1,0-6,0v3H37V39H56v8a1,1,0,0,0,1,1h8V74Z"/>
+
+    </g>
+</svg>

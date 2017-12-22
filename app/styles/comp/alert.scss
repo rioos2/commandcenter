@@ -1,0 +1,32 @@
+.theme-alert {
+    .warning,
+    .error {
+        margin: 30px 0;
+        // border-radius: 4px;
+        // border: 2px solid #dde2ec;
+        .alert {
+            padding: 10px;
+            border: 2px solid #dde2ec;
+            color: #a0a3b4;
+        }
+        
+        .closebtn {
+            margin-left: 15px;
+            color: #fd593e;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .closebtn:hover {
+            color: black;
+        }
+
+        i {
+            padding-right: 10px;
+        }
+    }
+}
+
