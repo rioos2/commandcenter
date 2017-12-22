@@ -7,28 +7,9 @@ export default Component.extend({
   tagName: '',
 
   guageOne: function() {
-    // this.updateGuages();
-    // alert('helo');
     this.update();
   }.observes('model'),
-  // updatedGauges: function() {
-  //   const self = this;
-  //   var g = {};
-  //   // alert(JSON.stringify(this.get('model')));
-  //
-  //   const content = this.get('model.content').objectAt(0);
-  //   var gauges = content.results.guages.counters.map(function(data) {
-  //     // $.extend(gauges, data);
-  //     // alert(JSON.stringify(data));
-  //       g[data.id] = data
-  //     return data
-  //   });
-  //   alert(JSON.stringify(gauges));
-  //   // this.set('gauges', gauges)
-  //   alert("hai");
-  //
-  //   return gauges;
-  // }.property('model.content'),
+
 
   cpu: function(){
       const content = this.get('model.content').objectAt(0);
