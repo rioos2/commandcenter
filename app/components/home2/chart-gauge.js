@@ -5,6 +5,7 @@ import Ember from 'ember';
 export default Component.extend({
     classNames: ["gauge-chart"],
     power: 100,
+    guage: '',
 
     guageOne: function() {
       this.updateGuages();
@@ -12,12 +13,8 @@ export default Component.extend({
 
     updateGuages() {
       let value = this.get('model.counter');
-
-      let blue = renderBlueGaugeChart()
-      .data({ value: 100 });
-      blue.data({ value: value });
       this.set('power', value);
-      blue.data({ value: value});
+      this.get('gauge').data({ value: value });
 
       let id = "g-" + this.get('model.name');
       self.$("#" + id + " text").text(Math.round(value)+ "%");
@@ -68,9 +65,10 @@ export default Component.extend({
         //     }, 2000);
         // }, 1);
         let value = this.get('model.counter');
-        blue.data({ value: value });
         this.set('power', value);
         blue.data({ value: value});
+
+          this.set('gauge', blue);
 
     })
 });
