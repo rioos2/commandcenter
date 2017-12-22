@@ -7,10 +7,7 @@ export default Component.extend({
     power: 100,
 
     guageOne: function() {
-      // alert(JSON.stringify(this.get('model.counter')));
       this.updateGuages();
-      // alert('helo');
-
     }.observes('model'),
 
     updateGuages() {
