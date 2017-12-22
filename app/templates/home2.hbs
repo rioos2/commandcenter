@@ -15,14 +15,14 @@
         </div>
     </div>
 
-    <!-- {{!-- Statistics --}}
+    {{!-- Statistics --}}
     <div id="statistics" class="statistics p-t-50 p-b-50">
         <p class="title p-l-50 p-b-20"><span class="underline">S</span>tatistics</p>
         <div class="row list-content">
-            {{#each model.categorys as |category|}}
-                <div class="col-md-6 col-sm-12 list">
-                    {{home2/category-tab model=category}}
-                </div>
+          {{#each cacheNodes as |sdata|}}
+          <div class="col-md-6 col-sm-12 list">
+              {{home2/category-tab model=sdata}}
+          </div>
             {{/each}}
         </div>
     </div>
@@ -30,6 +30,6 @@
     {{!-- OS useage by time    No horiz error. but not middle.         --}}
     <div id="osusage" class="os-useage-bytime p-t-50 p-b-50">
         <p class="title p-l-50 p-b-30"><span class="underline">O</span>s useage by time</p>
-        {{home2/chart-os}}
-    </div> -->
+        {{home2/chart-os model=model}}
+    </div>
 </div>
