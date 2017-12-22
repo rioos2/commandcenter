@@ -16,7 +16,7 @@ export default Ember.Component.extend({
 
   selectionChecker: function() {
     var check = this.get("model.assemblyfactory.resources.version") == this.get("versionDetail.version");
-    alert(this.get("model.assemblyfactory.resources.version"));
+    // alert(this.get("model.assemblyfactory.resources.version"));
     if (!check) {
       this.set("active", "");
     }
