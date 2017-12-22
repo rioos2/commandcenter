@@ -1,0 +1,180 @@
+.category-tab {
+    
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    width: 100%;
+    z-index: 0;
+    color: white;
+
+    .brand-pills {
+        li > a {
+            border-radius: 5px;
+            border: 1px solid #3c4087;            
+            background: none;
+            
+            &:hover,
+            &:focus {
+                background-color: #4a4a7f;
+
+                svg {
+                    fill: #decf2b;
+                }
+            }
+
+            svg {
+                fill: #797ba6;
+            }
+        }
+
+    }
+
+    .servertab {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 4px 5px 26px rgba(41, 83, 189, .4);
+
+        .tab-left {
+            padding: 0px;
+            width: 10%;
+
+            ul {
+                height: 380px;
+            }
+        }
+    
+        .tab-right {
+            width: 90%;
+        }
+
+        ul {
+            background-color: #2f3375;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            padding: 10px 0px;
+
+            .ul-desc {
+                position: absolute;
+                bottom: 0;
+                padding-left: 10px;        
+            }
+
+            li {
+                padding: 7px 7px 0 7px;
+            }
+        }
+    }
+
+    .choose-desc {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform-origin: left top 0;
+
+        font-size: 12px;
+        color: #b7bae0;
+    }
+
+    .category-desc {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform-origin: left top 0;
+
+        margin: -18px 0px 0px 14px;
+        font-size: 9px;
+        color: #b7bae0;
+    }
+
+    //tag
+
+    li.brand-nav.active a:after{
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid #2f3375;
+      position: absolute;            
+      margin-top: 15px;
+      top: 0;
+      left: 44px;
+      z-index: 2;
+    }    
+
+    .tabuser {padding: 10px 12px 5px 12px;}
+    .tabspeed {padding: 12px 10px 7px 10px;}
+    .tabsecur {padding: 9px 11px 4px 11px;}
+    .tabstats {padding: 10px 10px 5px 10px;}    
+
+    @media (max-width: 1200px) {
+        li.brand-nav.active a:after{
+            left: 14px;
+            top: 32px;
+        }
+
+        .choose-desc {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+
+            margin: 0 0 -4px 8px;
+            font-size: 14px;
+        }
+    
+        .category-desc {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+
+            margin: 0px 0px 8px 8px;
+            font-size: 14px;            
+        }
+
+        .servertab {
+
+            .tab-left {
+                width: 100%;
+                height: 58px;
+
+                ul {
+                    height: 100%;
+                    border-bottom-left-radius: 0;                    
+                    border-top-right-radius: 10px;
+
+
+                    li {
+                        float: right;                    
+                        padding: 0 10px 0 0;
+                        margin: 0;
+
+                        a {
+                            width: 38px;
+                        }
+                    }
+                }
+
+                li.brand-nav.active a:after{
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 7px solid #2f3375;
+                }
+            }
+
+            .tab-right {
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        .tabuser {padding: 8px 10px 2px 10px;}
+        .tabspeed {padding: 10px 7px 3px 7px;}
+        .tabsecur {padding: 8px 9px 0 9px;}
+        .tabstats {padding: 9px 8px 1px 8px;}
+    }
+}

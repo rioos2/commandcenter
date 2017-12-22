@@ -200,6 +200,12 @@ function guages() {
         description: "DISK ..Throttled",
         cpu: "percentage",
         counter: getRandomInt(1, 100).toString()
+      },
+      {
+        name: "unknown",
+        description: "DISK ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString()
       }
     ]
   };

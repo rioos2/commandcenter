@@ -1,0 +1,31 @@
+<div class="row p-t-10">
+    <div class="col-xs-6">
+        <div class="server-desc">{{model.serverName}}</div>
+        {{!-- left chart --}}
+        <div class="gauge_box"></div>
+    </div>
+    <div class="col-xs-6">
+        <img class="dot-to-dot" src="images/home/dot_to_dot.png">
+        <div class="row p-t-24" style="max-width:300px">
+            {{!-- right chart --}}
+            <span style="position:relative;display:inline" class="hex_chart{{model.id}}"></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 p-l-20">
+        <div class="content1">
+            <p class="title1 m-0">{{model.date}}</p>
+            <p class="title2 m-0">Price per month</p>
+        </div>
+        <div class="content2">
+        </div>
+        <div class="content3">
+            <p>{{model.price}} USD</p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 m-b-10">
+        <div class="tabalert">{{svg/svg-alert}}</div>
+        <div class="alert-desc">{{model.alert}}</div>
+    </div>
+</div>

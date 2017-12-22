@@ -1,0 +1,78 @@
+.select-filter {
+    label {
+        margin: 0;
+        width: 100%;
+    }
+
+    .md-select {
+        *, :after, :before {
+            box-sizing: border-box;
+        }
+    
+        display: block;
+        padding: 0 3px;
+        margin: 5px 0;
+        
+        [type=button] {
+            background: white;
+            color: #686b78;
+            cursor: default;
+            display: block;
+            line-height: 40px;
+            padding: 0 0 0 16px;
+            position: relative;
+            text-align: left;
+            text-shadow: none;
+            width: 100%;
+            z-index: 1;
+            outline: none;
+            overflow: hidden;
+            border: 1px solid #dfe4ef;
+        
+            &:focus, &:hover {
+                // background: rgba(0,0,0,0.1);
+            }
+            &:after {
+                content: '\25be';
+                float: right;
+                padding-right: 16px;
+            }
+        }
+        ul[role=listbox] {            
+            background-color: white;            
+            cursor: default;
+            list-style: none;
+            line-height: 26px;
+            overflow: hidden;
+            margin: 0;
+            max-height: 0;
+            position: absolute;
+            padding: 0;
+            transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);            
+            box-shadow: 0 19px 38px rgba(30,38,99,0.30), 0 15px 12px rgba(30,38,99,0.22);
+        
+            li {
+                height: 48px;
+                width: 125px;
+                margin: 0;                
+                padding: 10px 16px;
+                outline: none;
+                overflow: hidden;
+                color: #686b78;
+                text-align: left;
+        
+                &:focus, &:hover, &.active {
+                background: rgba(0,0,0,0.1);
+                }
+            }
+        }
+    
+        &.active ul {
+        max-height: 200px;
+        overflow: auto;
+        padding: 8px 0 16px 0px;
+        z-index: 2;
+        transition: all .2s ease
+        }
+    }
+}

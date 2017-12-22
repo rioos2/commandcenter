@@ -1,0 +1,61 @@
+@import "bootstrap";
+@import "basic_classes.scss";
+@import "basic_variables";
+@import "settings.scss";
+@import 'signform.scss';
+@import 'navbar';
+@import 'home.scss';
+// @import 'login.scss';
+@import 'dashboard.scss';
+@import 'comp/chart-os.scss';
+@import 'comp/two-chart.scss';
+@import 'comp/alert.scss';
+@import 'comp/table.scss';
+@import 'comp/footer.scss';
+@import 'comp/category-tab.scss';
+@import 'comp/select-filter.scss';
+@import 'comp/chart-gauge.scss';
+@import 'comp/container-list.scss';
+@import 'comp/data-tooltip.scss';
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+@font-face {
+    font-family: 'fselliot';
+    font-style: normal;
+    font-weight: lighter;
+    src:url('../fonts/FSElliot-Regular.otf') format("opentype");
+}
+
+body,
+input,
+select,
+textarea,
+body * {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  font-family: 'fselliot';
+}
+body::after, body::before,
+input::after,
+input::before,
+select::after,
+select::before,
+textarea::after,
+textarea::before,
+body *::after,
+body *::before {
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #132fa9;
+}
+
+.container {
+  padding: 0px;
+}
+
+.display-inline {
+  display: inline-block;
+}

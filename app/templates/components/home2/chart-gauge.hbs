@@ -1,0 +1,17 @@
+<div id="g-{{model.name}}" class="blueGaugeDiv">
+    <span style="margin:10px;position:relative;display:inline" class="b-{{model.name}}"></span>
+</div>
+{{#if showName}}
+    <p class="gauge-name">{{model.name}}</p>
+    <p class="gauge-power">power - <span class="gauge-value">{{power}}%</span></p>
+{{/if}}
+
+{{#if showOS}}
+    <div class="showOS">
+        <img style="float:left" src="../images/logos/ubuntu.png">
+        <div class="os-version" style="float:right">
+            {{svg/svg-version class="version-bg"}}
+            <p>v.1.21</p>
+        </div>
+    </div>
+{{/if}}

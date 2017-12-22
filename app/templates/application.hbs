@@ -1,14 +1,20 @@
+<!-- <div class="container">
+    <div class="application">
+        {{theme-navbar}}
+        {{outlet}}
+    </div>
+</div> -->
+
 {{#if currentlyLoading}}
 {{theme-loader}}
   {{else}}
+  <div class="container">
     <div class="application">
       {{#if shownavbar}}
-      {{theme-navbar fixedTop=fixedTop hide=hideTopBar}}
+      {{theme-navbar}}
       {{/if}}
-
-        {{liquid-outlet}}
-        {{notification-container position="bottom-right"}}
-        {{!-- {{theme-footer fixedBottom=fixedBottom hide=hideBottomBar}} --}}
+        {{outlet}}
+      </div>
     </div>
-    
+
 {{/if}}
