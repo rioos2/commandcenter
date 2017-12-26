@@ -11,9 +11,5 @@ export default Component.extend({
       }
     }.property('model'),
 
-    updateDummy: function() {
-      alert("hai");
-        this.set('dummy.counter',Math.floor(Math.random() * 100));
-    }.observes('model'),
 
 });
