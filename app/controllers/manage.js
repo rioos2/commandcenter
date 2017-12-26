@@ -3,12 +3,20 @@ import Controller from '@ember/controller';
 export default Controller.extend({
   isSearchVisible: false,
 
+  assemblyLength: function() {
+    return this.get('model.content').length;
+  }.property('model'),
+
+  updated: function() {
+    // alert("hai2");
+  }.observes('model'),
+
   allAssemblys: function() {
     return this.get('model.content');
   }.property('model'),
 
   machineAssemblys: function() {
-    return this.filterAssembly("machine");
+    return this.filterAssembly("Assemblys");
   }.property('model'),
 
   containerAssemblys: function() {
@@ -22,7 +30,7 @@ export default Controller.extend({
 
   filterAssembly: function(value) {
     return this.get('model.content').reduce(function(res, assembly) {
-      if (assembly.assembly_factory.object_meta.labels.rioos_category == value) {
+      if (assembly.type_meta.kind == value) {
         res.push(assembly);
       }
       return res;
