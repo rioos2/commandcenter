@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   access: Ember.inject.service(),
+  dropdownOpen: false,
 
   selector: null,
   didInsertElement: function() {
@@ -14,7 +15,10 @@ export default Ember.Component.extend({
   actions: {
 
     logout: function() {
-      this.get('access').clearSessionKeys(true,true);
+      this.get('access').clearSessionKeys(true, true);
+    },
+    toggleDropdown() {
+      this.toggleProperty('dropdownOpen');
     }
   }
 });
