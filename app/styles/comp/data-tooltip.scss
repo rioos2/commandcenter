@@ -43,15 +43,13 @@
         filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
         opacity: 1;
     }
-    
-    
+        
     [data-tooltip]:before {        
         z-index: 1001;
         border: 6px solid transparent;
         background: transparent;
         content: "";
-    }
-    
+    }    
     
     [data-tooltip]:after {
         z-index: 1000;

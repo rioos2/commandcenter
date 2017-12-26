@@ -1,5 +1,4 @@
-.dashboard {
-    
+.dashboard {    
     /* tab setting */
     $tab-count: 3;
     $indicator-height: 3px;
@@ -9,7 +8,6 @@
         medium: #{$tab-count*250px},
         small: #{$tab-count*150px}
     );
-
 
     /* selectors relative to radio inputs */
     $label-selector: "~ ul > li";
@@ -47,7 +45,7 @@
         }
     
         .dashboardNav {
-            background-color: #24294f;
+            background-color: $rio-fifth-color;
             list-style-type: none;
             padding-left: 0;
             display: flex;

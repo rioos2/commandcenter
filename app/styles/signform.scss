@@ -1,6 +1,9 @@
+
+// For signup.hbs, signin.hbs
+
 .signform {
  
-    .right-arrow {
+    .ico-ico-ico-right-arrow {
       float: right;
       padding-top: 4px;
     }
@@ -137,6 +140,7 @@
     .has-error.form-group .helper {
       color: #d9534f;
     }
+
     .has-error .bar::before {
       background: #d9534f;
       left: 0;
@@ -202,7 +206,8 @@
     }
   }
   
-  .signup {    
+  // for only signup page
+  .signup-page {    
       background-image: url(../images/signup/bg.png);
       background-repeat: no-repeat;
       background-size: 100% auto;
@@ -302,12 +307,13 @@
           margin: 26px 0 0 0;
       }
     
-      .button-container {
+      .btn-container {
         text-align: center;
         font-size: 24px;
       }
   }
   
+  // for only signin page
   .signin {
     background-image: url(../images/signin/bg.png);
     background-repeat: no-repeat;
@@ -405,11 +411,9 @@
       font-size: 14px;
     }
   
-    .right-arrow {
+    .ico-ico-ico-right-arrow {
       padding-top: 2px;
     }
-  
-
   
     .startvalidation {
       color: #989ae8 !important;

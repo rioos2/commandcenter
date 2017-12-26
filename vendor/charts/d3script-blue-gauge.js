@@ -2,6 +2,7 @@
 
 
 function renderBlueGaugeChart(params) {
+
   var consts = {
     TYPE_COLORED: "TYPE_COLORED",
     TYPE_EMPTY: "TYPE_EMPTY"
@@ -18,9 +19,9 @@ function renderBlueGaugeChart(params) {
     backgroundCircleColor: '#1A086F',
     middleBackgroundCircleColor: '#5249A1',
     outerBackgroundCircleColor: '#5753B6',
-    mainDonutColor: '#DDD500',
+    mainDonutColor: '#ecdc23',
     fontFamily: 'Arial Unicode MS',
-    fontSize: 45,
+    fontSize: 50,
     backgroundFill: 'rgba(0, 0, 0, 0)',
     data: null
   };
