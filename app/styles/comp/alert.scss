@@ -2,9 +2,7 @@
     .warning,
     .error {
         margin: 30px 0;
-        // border-radius: 4px;
-        // border: 2px solid #dde2ec;
-        .alert {
+        .content {
             padding: 10px;
             border: 2px solid #dde2ec;
             color: #a0a3b4;
@@ -27,6 +25,11 @@
         i {
             padding-right: 10px;
         }
+    }
+    .success,
+    .info,
+    .danger {
+        /* add more here*/
     }
 }
 

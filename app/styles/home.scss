@@ -1,44 +1,5 @@
 
-.stickybar {
-    background-color: #2a2f4f;
-    box-shadow: 0px 7px 10px -4px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    margin-bottom: -6px;
-
-    position: sticky;
-    z-index: 2;
-    top: 0px;
-    display: none;
-    
-    a {            
-        label {
-            padding: 20px 10px;
-            font-size: 13px;
-            color: #80879c;
-            margin-bottom: 0;
-            border-bottom: 2px solid transparent;
-
-            &:hover,
-            &:active {
-                color: white;
-                text-shadow: 0 0 15px rgba(255, 255, 255, .3);
-                border-bottom-color: #26fdff;
-                box-shadow: inset 0px -11px 9px -12px #26fdff;
-            }
-        }
-    }
-}
-
-@media (max-width: 992px) {
-    .stickybar {
-        display: block;
-    }
-}
-
 .home {
-
     .title {
         color: #37395a;
         font-size: 20px;
@@ -70,10 +31,6 @@
         background-color: #f0f4fa;        
     }
 
-    .os-useage-bytime{
-        background-color: #e3e9f6;
-    }
-
     /* Clear floats after the columns */
     .row:after {
         content: "";
@@ -89,6 +46,10 @@
         }
     }
 
+    .os-useage-bytime{
+        background-color: #e3e9f6;
+    }
+    
     @media (max-width: 576px) {
         .list-content {
             margin: 0;

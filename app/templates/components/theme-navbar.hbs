@@ -32,27 +32,19 @@
             <li>{{#link-to "manage"}}Manage{{/link-to}}</li>
             <li>{{#link-to "launcher"}}Launcher{{/link-to}}</li>
 
-            <!-- <li class="dropdown"> -->
-              <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> -->
-                <!-- Drop-down1 <span class="caret"></span> -->
-              <!-- </a> -->
-              <!-- <ul class="dropdown-menu"> -->
-                <!-- <li>{{#link-to "home"}}dropdown 1{{/link-to}}</li> -->
-                <!-- <li>{{#link-to "home"}}dropdown 2{{/link-to}}</li> -->
-              <!-- </ul> -->
-            <!-- </li> -->
           </ul>
 
           <ul class="nav navbar-nav navbar-right profile">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle p-b-15" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <li class="dropdown {{if dropdownOpen 'open'}}">
+              <a href="#" class="dropdown-toggle p-b-15" data-toggle="dropdown" role="button" {{action "toggleDropdown"}}>
                 <div class="profilehex profilehex1"><div class="profilehex-in1"><div class="profilehex-in2"></div></div></div>
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li>User Profile</li>
-                <li>Settings</li>
-                <!-- <li {{action "logout"}}>Logout</li> -->
+                <li>{{#link-to "home2"}}User Profile{{/link-to}}</li>
+                <li>{{#link-to "home2"}}Settings{{/link-to}}</li>
+                <li {{action "logout"}}><a href="#">Logout</a></li>
+
               </ul>
             </li>
           </ul>

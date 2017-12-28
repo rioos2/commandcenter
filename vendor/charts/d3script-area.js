@@ -1,6 +1,3 @@
-
-
-
 function renderChartArea(params) {
   // exposed variables
   var attrs = {
@@ -9,15 +6,15 @@ function renderChartArea(params) {
     svgHeight: 500,
     marginTop: 50,
     marginBottom: 40,
-    marginRight: -5,
-    marginLeft: 1,
+    marginRight: 0,
+    marginLeft: 0,
     gridColor: '#F7F7F9',
     axisColor: '#B9B9C5',
     activeScrollLineColor: '#8D90C5',
     legendRestTextColor: '#9FA1B4',
     legendActiveTextColor: '#BEB72D',
     activeButtonColor: '#4D4092',
-    fontFamily: 'Arial Unicode MS',
+    fontFamily: 'Helvetica',
     backgroundFill: 'white',
     firstTime: true,
     data: null
@@ -114,7 +111,7 @@ function renderChartArea(params) {
 
       //########################  CONTAINERS  #############################
       var container = d3.select(this).html("");
-        console.log('setting area dimensions');
+
       // NEEDS PATTERNIFY
       var svg = container
         .append('svg')
@@ -128,9 +125,9 @@ function renderChartArea(params) {
 
       svg.append('rect')
         .attr('x', -20)
-        .attr('y', -10)
-        .attr('width', attrs.svgWidth + 55)
-        .attr('height', attrs.svgHeight + 50)
+        .attr('y', -20)
+        .attr('width', attrs.svgWidth + 40)
+        .attr('height', attrs.svgHeight + 44)
         .attr('fill', attrs.backgroundFill)
 
 
@@ -215,7 +212,7 @@ function renderChartArea(params) {
       eachAreaWrapper.exit().remove();
       eachAreaWrapper = eachAreaWrapper.enter().append('g').merge(eachAreaWrapper);
       eachAreaWrapper.attr('class', 'each-area-wrapper')
-        .attr("fill", (d, i) => { return `url(#grad${d.id}` })
+        .attr("fill", (d) => { return `url(#grad${d.id}` })
         .attr('data-id', d => d.id)
 
 
@@ -229,12 +226,12 @@ function renderChartArea(params) {
         .attr('opacity', 0.7)
 
 
-      var hidder = patternify({ container: chart, selector: 'hidder-rect', elementTag: 'rect' });
-      hidder.attr('width', 15)
-        .attr('height', calc.chartHeight + 6)
-        .attr('x', calc.chartWidth - 10)
-        .attr('y', -3)
-        .attr('fill', attrs.backgroundFill)
+      // var hidder = patternify({ container: chart, selector: 'hidder-rect', elementTag: 'rect' });
+      // hidder.attr('width', 15)
+      //   .attr('height', calc.chartHeight + 6)
+      //   .attr('x', calc.chartWidth - 10)
+      //   .attr('y', -3)
+      //   .attr('fill', attrs.backgroundFill)
 
 
       var rightBorder = patternify({ container: chart, selector: 'right-border-rect', elementTag: 'rect' });
@@ -251,10 +248,10 @@ function renderChartArea(params) {
         .attr('fill', 'none')
         .attr('pointer-events', 'all')
         .call(behaviors.zoom)
-        .on('mousemove', function (d) {
+        .on('mousemove', function () {
           var mouse = d3.mouse(this);
           var x = mouse[0];
-          if (x > calc.chartWidth - 10) x = calc.chartWidth - 10;
+          // if (x > calc.chartWidth - 10) x = calc.chartWidth - 10;
           var area = d3.select(`[data-id='${calc.activeAreaId}']`)
           var y = findYatXbyBisection(x, area.select('path').node(), 0.0001)
           tooltipG.attr('transform', `translate(${x},${y})`)
@@ -263,8 +260,7 @@ function renderChartArea(params) {
 
 
           tooltipG.select('text').text(scales.y.invert(y).toFixed(0) + '%')
-          console.log(d)
-        }).on('mouseleave', function (d) {
+        }).on('mouseleave', function () {
           tooltipG.attr('opacity', 0)
         })
 
@@ -355,16 +351,16 @@ function renderChartArea(params) {
         .attr('stroke', attrs.activeScrollLineColor)
         .attr('stroke-width', 5)
 
-      var scrollHidder = patternify({ container: chart, selector: 'scroll-hidder-rect', elementTag: 'rect' });
-      scrollHidder.attr('width', 15)
-        .attr('height', 40)
-        .attr('x', calc.chartWidth - 10)
-        .attr('y', calc.chartHeight + 40)
-        .attr('fill', 'white')
+      // var scrollHidder = patternify({ container: chart, selector: 'scroll-hidder-rect', elementTag: 'rect' });
+      // scrollHidder.attr('width', 15)
+      //   .attr('height', 40)
+      //   .attr('x', calc.chartWidth - 10)
+      //   .attr('y', calc.chartHeight + 40)
+      //   .attr('fill', 'white')
 
 
-      var rightBorder = patternify({ container: chart, selector: 'right-border-rect', elementTag: 'rect' });
-      rightBorder.attr('width', 1)
+      var re_rightBorder = patternify({ container: chart, selector: 'right-border-rect', elementTag: 'rect' });
+      re_rightBorder.attr('width', 1)
         .attr('height', calc.chartHeight)
         .attr('x', calc.chartWidth - 10)
         .attr('fill', attrs.gridColor)
@@ -373,9 +369,10 @@ function renderChartArea(params) {
       //legend wrappers
       var activeButton = patternify({ container: svg, selector: 'active-button', elementTag: 'rect' });
       activeButton.attr('width', function () {
-        var spacing = 140;
-        if (calc.chartWidth < 533) spacing = 110;
-        if (calc.chartWidth < 400) spacing = 90;
+        var spacing = 130;
+        if (calc.chartWidth < 533) spacing = 85;
+        if (calc.chartWidth < 400) spacing = 70;
+        if (calc.chartWidth < 265) spacing = 50;
         return spacing;
       })
         .attr('height', 45)
@@ -389,8 +386,9 @@ function renderChartArea(params) {
       legendWrappers.attr('class', 'legend-wrapper')
         .attr('transform', (d, i) => {
           var spacing = 140;
-          if (calc.chartWidth < 533) spacing = 110;
-          if (calc.chartWidth < 400) spacing = 90;
+          if (calc.chartWidth < 533) spacing = 85;
+          if (calc.chartWidth < 400) spacing = 70;
+          if (calc.chartWidth < 265) spacing = 50;
 
           return `translate(${i * spacing + 10},15)`
         })
@@ -398,8 +396,9 @@ function renderChartArea(params) {
         .each((d, i) => d.parentIndex = i)
         .on('click', function (d) {
           var spacing = 140;
-          if (calc.chartWidth < 533) spacing = 110;
-          if (calc.chartWidth < 400) spacing = 90;
+          if (calc.chartWidth < 533) spacing = 85;
+          if (calc.chartWidth < 400) spacing = 70;
+          if (calc.chartWidth < 265) spacing = 50;
 
           calc.activeAreaId = d.id;
           var g = d3.select(this);
@@ -408,7 +407,7 @@ function renderChartArea(params) {
 
           activeButton.attr('x', d.parentIndex * spacing + 0)
 
-          svg.selectAll('.each-area-wrapper').sort(function (a, b) {
+          svg.selectAll('.each-area-wrapper').sort(function (a) {
             // select the parent and sort the path's
             if (a.id != d.id) return -1;
 
@@ -420,11 +419,11 @@ function renderChartArea(params) {
 
       //click rects
       legendWrappers.append('rect')
-        .attr('width', d => {
+        .attr('width', () => {
           var spacing = 135;
           if (calc.chartWidth < 533) spacing = 110;
           if (calc.chartWidth < 400) spacing = 90;
-
+          if (calc.chartWidth < 265) spacing = 70;
           return spacing;
         })
         .attr('height', 45)
@@ -438,32 +437,36 @@ function renderChartArea(params) {
       legendRects.exit().remove();
       legendRects = legendRects.enter().append('rect').merge(legendRects);
       legendRects.attr('class', 'legend-symbol')
-        .attr('width', 30)
-        .attr('height', 15)
+        .attr('width', 20)
+        .attr('height', 10)
+        .attr('y', 2)
         .attr('rx', 7)
-        .attr("fill", (d, i) => { return `url(#legGrad${d.id}` })
+        .attr("fill", (d) => { return `url(#legGrad${d.id}` })
 
       //legend texts
-      var legendTexts = legendWrappers.selectAll('.legend-text').data((d, i) => [d]);
+      var legendTexts = legendWrappers.selectAll('.legend-text').data((d) => [d]);
       legendTexts.exit().remove();
       legendTexts = legendTexts.enter().append('text').merge(legendTexts);
       legendTexts.attr('class', 'legend-text')
         .text(d => d.name.slice(0, 9))
-        .attr('fill', (d, i) => d.parentIndex ? attrs.legendRestTextColor : attrs.legendActiveTextColor)
-        .attr('x', 35)
-        .attr('y', 13)
+        .attr('fill', (d) => d.parentIndex ? attrs.legendRestTextColor : attrs.legendActiveTextColor)
+        .attr('x', () => {
+          var spacing = 25;
+          if (calc.chartWidth < 265) spacing = 22;
+          return spacing;
+        })
+        .attr('y', () => {
+          var spacing = 12;
+          if (calc.chartWidth < 533) spacing = 11;
+          if (calc.chartWidth < 400) spacing = 10;
+          return spacing;
+        })
         .style('text-transform', 'uppercase')
-        .attr('font-size', d => {
-          console.log(calc.chartWidth)
+        .attr('font-size', () => {
           if (calc.chartWidth <= 400) return 7;
           if (calc.chartWidth < 533) return 10;
-
           return 13;
         })
-
-
-
-
 
       // ################### function invokations ##################
 
@@ -471,16 +474,17 @@ function renderChartArea(params) {
 
       // smoothly handle data updating
       updateData = function () {
+
       }
 
 
 
       // ####################  FUNCTIONS ###############
-      function addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-      }
+      // function addDays(date, days) {
+      //   var result = new Date(date);
+      //   result.setDate(result.getDate() + days);
+      //   return result;
+      // }
 
       function run() {
         behaviors.zoom.translateExtent([[scales.x(calc.min), -Infinity], [scales.x(calc.max), Infinity]]);
@@ -503,14 +507,8 @@ function renderChartArea(params) {
           return;
         }
 
-        var width = container.node().getBoundingClientRect().width;
-
-
-
-
-
-
-        var grids = xAxisWrapper.call(axes.x.scale(xz));
+        container.node().getBoundingClientRect().width;
+        xAxisWrapper.call(axes.x.scale(xz));
         setXAxisStyles();
         setScrollLinePositions(xz);
         svg.selectAll('.area').attr('d', k => {
@@ -565,7 +563,6 @@ function renderChartArea(params) {
         setDimensitons();
       }
       d3.select(window).on('resize.area', function () {
-        console.log('setting area dimensions');
         setDimensitons();
       })
 
@@ -582,22 +579,15 @@ function renderChartArea(params) {
     });
   };
 
-
-
-
-
   ['svgWidth', 'svgHeight', 'backgroundFill'].forEach(key => {
     // Attach variables to main function
-    return main[key] = function (_) {
-      var string = `attrs['${key}'] = _`;
+    return main[key] = function (d) {
+      var string = `attrs['${key}'] = d`;
       if (!arguments.length) { eval(`return attrs['${key}']`); }
       eval(string);
       return main;
     };
   });
-
-
-
 
   //exposed update functions
   main.data = function (value) {

@@ -89,7 +89,7 @@ module.exports = function(environment) {
       // when it is created
       version: pkg.version,
       appName: 'nilavu',
-      apiServer: 'http://localhost:9636/',
+      apiServer: process.env.RIOOS_API_SERVER,
       legacyApiEndpoint: '/v1',
       apiEndpoint: '/api/v1',
       oapiEndpoint: '/oapi/v1',

@@ -3,7 +3,7 @@
   position: relative;
   z-index: 3;
 
-  
+
   .logo {
     padding: 0px;
     margin-left: 0px;
@@ -84,7 +84,7 @@
     &:hover,
     &:focus {
       color:  $nav-second-color;
-      border-bottom: 2px solid $rio-second-color;    
+      border-bottom: 2px solid $rio-second-color;
     }
   }
 
@@ -96,27 +96,18 @@
     min-height: 70px;
     margin-bottom: 0px;
   }
-  
-  .navbar-flow {
-      margin-bottom: 0px !important;
-      border-radius: 0 !important;
-      background-color: #f9faff;
-      border: none;
-      z-index: 1;
-      box-shadow: 0 0 30px $nav-shadow-color;
-  }
 
   //search input
   .navbar-search {
     border: none;
     color: $nav-primary-color;
     background-color: #eef2f9;
-    padding: 10px 30px 7px 15px;      
+    padding: 10px 30px 7px 15px;
     margin-top: 8px;
     width: 290px;
     outline: none;
   }
-  
+
   .riosearch {
     margin: 10px 15px 10px;
     position: relative;
@@ -129,14 +120,14 @@
       cursor: pointer;
     }
   }
-    
+
   //vertical line
   .vr {
     border-left:1px solid $nav-vr-color;
     height: 20px;
     margin-top: 28px;
   }
-  
+
   //news and stats
   .svg-news {
     width: 43px;
@@ -145,9 +136,9 @@
 
     svg {
       cursor: pointer;
-  
-      .cls-1 {      
-        fill: #2953bd;
+
+      .cls-1 {
+        fill: $rio-fourth-color;
       }
 
       .cls-2 {
@@ -172,11 +163,11 @@
     width: 43px;
     margin: 18px 13px 0 16px;
     filter: drop-shadow(0px 4px 10px $nav-shadow-color);
-    
+
     svg {
       cursor: pointer;
-  
-      .cls-1 {      
+
+      .cls-1 {
         fill: #fefeff;
       }
 
@@ -249,7 +240,7 @@
     right: -4px;
     top: 26px;
   }
-  
+
   //Responsive
 
   @media (max-width: 1200px) {
@@ -257,9 +248,9 @@
         height: 70px;
         float: none;
         background-color: $rio-fourth-color;
-        
+
         .nav-left-hex {
-          display: block;          
+          display: block;
           position: absolute;
           width: 27px;
           top: 26px;
@@ -267,7 +258,7 @@
         }
 
         .nav-right-hex{
-          display: block;          
+          display: block;
           position: absolute;
           width: 40px;
           top: 0;
@@ -282,7 +273,7 @@
       float: right;
       margin: 20px 30px 0 0;
       z-index: 2;
-      
+
       .dropdown-menu {
         right: -30px;
         left: unset;
@@ -355,7 +346,7 @@
         margin: 15px 0;
     }
     /* since 3.1.0 */
-    .navbar-collapse.collapse.in { 
+    .navbar-collapse.collapse.in {
         display: block!important;
     }
     .collapsing {
@@ -389,4 +380,3 @@
     }
   }
 }
-  

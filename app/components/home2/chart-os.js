@@ -1,7 +1,7 @@
 /* global renderChartGauge,renderChartArea, d3 */
 import Ember from 'ember';
 export default Ember.Component.extend({
-  classNames: ["text-center os-chart-wrapper"],
+  classNames: ["chart-os"],
   overall: '',
   ch3: '',
   osUsage: function() {

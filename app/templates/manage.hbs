@@ -1,88 +1,44 @@
 <div class="dashboard">
-    <div class="tabs">
-        <input type="radio" id="tab1" name="tab-control" checked>
-        <input type="radio" id="tab2" name="tab-control">
-        <input type="radio" id="tab3" name="tab-control">
-        <ul class="dashboardNav">
-            <li title="Container">
-                <label for="tab1" role="button">
+  <div class="tabs">
+    <input type="radio" id="tab1" name="tab-control" checked>
+    <input type="radio" id="tab2" name="tab-control">
+    <input type="radio" id="tab3" name="tab-control">
+    <ul class="dashboardNav">
+      <li title="Container">
+        <label for="tab1" role="button">
                     {{svg/svg-container class="display-inline"}}<br>
                     <span>Container</span>
                 </label>
-            </li>
-            <li title="Digital Cloud">
-                <label for="tab2" role="button">
+      </li>
+      <li title="Digital Cloud">
+        <label for="tab2" role="button">
                     {{svg/svg-digital-cloud class="display-inline"}}<br>
                     <span>Digital Cloud</span>
                 </label>
-            </li>
-            <li title="Blockchain">
-                <label for="tab3" role="button">
+      </li>
+      <li title="Blockchain">
+        <label for="tab3" role="button">
                     {{svg/svg-blockchain class="display-inline"}}<br>
                     <span>Blockchain</span>
                 </label>
-            </li>
-        </ul>
+      </li>
+    </ul>
 
-        <div class="slider">
-            <div class="indicator"></div>
-        </div>
-        <div class="content">
-            <section>
-                <h2>Features</h2>
-                <div class="filter">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-2">
-                            <div class="cloud-count">
-                                {{svg/svg-cloud-count}}
-                                <label>{{assemblyLength}} clouds</label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-10">
-                            <div class="row p-r-15">
-                                <div class="col-sm-2 col-md-2 col-lg-1 filter-text">
-                                    <span>Filter by:</span>
-                                </div>
-                                <div class="col-sm-10 col-md-10 col-lg-11">
-                                    <div class="row">
-                                        {{#each model.filter as |filter|}}
-                                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                                {{manage/select-filter model=filter}}
-                                            </div>
-                                        {{/each}}
-                                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                            <div class="search-content">
-                                                {{#if isSearchVisible}}
-                                                    {{input class="searchInput" placeholder="Search"}}
-                                                {{/if}}
-                                                {{fa-icon "search" click=(action "search") class="searchButton"}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cloud-lists row">
-                    {{#each model.content as |content|}}
-                    <div class="list col-sm-6 col-md-4">
-                        {{manage/container-list model=content}}
-                    </div>
-                    {{/each}}
-                </div>
-            </section>
-            <section>
-                <h2>Digital Cloud</h2>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quas adipisci a accusantium eius ut voluptatibus ad impedit nulla, ipsa qui. Quasi temporibus eos commodi aliquid impedit amet, similique nulla.
-            </section>
-            <section>
-                <h2>Blockchain</h2>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam nemo ducimus eius, magnam error quisquam sunt voluptate labore, excepturi numquam! Alias libero optio sed harum debitis! Veniam, quia in eum.
-            </section>
-        </div>
+    <div class="slider">
+      <div class="indicator"></div>
     </div>
+    <div class="content">
+      <section>
+        {{manage/assembly-list model=model assemblys=containerAssemblys}}
+      </section>
+      <section>
+        {{manage/assembly-list model=model assemblys=machineAssemblys}}
+      </section>
+      <section>
+        {{manage/assembly-list model=model assemblys=blockChainAssemblys}}
+      </section>
+    </div>
+  </div>
 
-    <!-- {{theme-footer}} -->
+  <!-- {{theme-footer}} -->
 </div>
