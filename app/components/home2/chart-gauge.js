@@ -9,7 +9,7 @@ export default Component.extend({
 
     guageOne: function() {
       this.updateGuages();
-    }.observes('model'),
+    }.observes('model.counter'),
 
     updateGuages() {
       let value = this.get('model.counter');

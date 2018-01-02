@@ -10,7 +10,7 @@
         .domain {
             height: 35%;
             padding: 27px 0 0 60px;
-            border-bottom: 1px solid #eeeff5;                    
+            border-bottom: 1px solid #eeeff5;
             position: relative;
 
             .icon {
@@ -20,13 +20,30 @@
                 top: 31px;
                 filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
 
-                .cls-1 {
+                .cls-1Running{
                     fill: #2958cd;
                 }
 
-                .cls-2 {
+                .cls-2Running{
                     fill: $rio-second-color;
                 }
+
+                .cls-1Initializing{
+                    fill: #D84315;
+                }
+
+                .cls-2Initializing{
+                    fill: #FFAB91;
+                }
+
+                .cls-1Pending{
+                    fill: #FFC107;
+                }
+
+                .cls-2Pending{
+                    fill: #FFEB3B;
+                }
+
             }
 
             .text1 {

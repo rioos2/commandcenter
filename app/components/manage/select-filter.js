@@ -1,8 +1,9 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-    classNames: ['select-filter'],
+    // classNames: ['select-filter'],
     isActive: false,
+    tagName: '',
 
     actions: {
         clickSelect: function(){
@@ -15,6 +16,7 @@ export default Component.extend({
         },
         clickOption: function(data){
             this.set('model.name', data);
-        }        
+            this.sendAction('filterProcess', {type:this.get('model.id'), selected: data})
+        }
     }
 });

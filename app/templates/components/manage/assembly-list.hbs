@@ -14,15 +14,11 @@
                 </div>
                 <div class="col-sm-10 col-md-10 col-lg-11">
                     <div class="row">
-                        {{#each model.filter as |filter|}}
-                            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                                {{manage/select-filter model=filter}}
-                            </div>
-                        {{/each}}
+                                {{manage/select-filters model=filterProperties filterProcess="filterProcess"}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                             <div class="search-content">
                                 {{#if isSearchVisible}}
-                                    {{input class="searchInput" placeholder="Search"}}
+                                    {{input class="searchInput" placeholder="Search" value=theFilter}}
                                 {{/if}}
                                 {{fa-icon "search" click=(action "search") class="searchButton"}}
                             </div>
@@ -35,7 +31,7 @@
 </div>
 
 <div class="cloud-lists row">
-    {{#each assemblys as |content|}}
+    {{#each filteredAssemblys as |content|}}
     <div class="list col-sm-6 col-md-4">
         {{manage/container-list model=content}}
     </div>
