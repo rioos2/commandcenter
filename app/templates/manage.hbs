@@ -1,7 +1,7 @@
 <div class="dashboard">
   <div class="tabs">
-    <input type="radio" id="tab1" name="tab-control" checked>
-    <input type="radio" id="tab2" name="tab-control">
+    <input type="radio" id="tab1" name="tab-control">
+    <input type="radio" id="tab2" name="tab-control" checked>
     <input type="radio" id="tab3" name="tab-control">
     <ul class="dashboardNav">
       <li title="Container">
@@ -29,13 +29,13 @@
     </div>
     <div class="content">
       <section>
-        {{manage/assembly-list assemblys=containerAssemblys defaultfilterss=dFiltersContainer}}
+        {{manage/assembly-list assemblys=containerAssemblys defaultfilters=dFiltersContainer assemblyType=container}}
       </section>
       <section>
-        {{manage/assembly-list assemblys=machineAssemblys defaultfilterss=dFiltersMachine}}
+        {{manage/assembly-list assemblys=machineAssemblys defaultfilters=dFiltersMachine assemblyType=machine}}
       </section>
       <section>
-        {{manage/assembly-list assemblys=blockChainAssemblys defaultfilterss=dFiltersBlockChain}}
+        {{manage/assembly-list assemblys=blockChainAssemblys defaultfilters=dFiltersBlockChain assemblyType=blockchain}}
       </section>
     </div>
   </div>

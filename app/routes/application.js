@@ -138,7 +138,7 @@ export default Ember.Route.extend({
     } else {
       this.replaceWith('authenticated');
     }*/
-    this.replaceWith('home2');
+    this.replaceWith('home');
   },
 
   /*model(params, transition) {

@@ -4,7 +4,7 @@
       <label for="ul-id"><button type="button" class="ng-binding">{{model.a.name}}</button></label>
       <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
         {{#each model.a.data as |data|}}
-          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.a.name" data on="mouseDown"}}>{{data}}</li>
+          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.a.id" "model.a.name" data on="mouseDown"}}>{{data}}</li>
         {{/each}}
       </ul>
     </div>
@@ -17,7 +17,7 @@
       <label for="ul-id"><button type="button" class="ng-binding">{{model.b.name}}</button></label>
       <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
         {{#each model.b.data as |data|}}
-          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.b.name" data on="mouseDown"}}>{{data}}</li>
+          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.b.id" "model.b.name" data on="mouseDown"}}>{{data}}</li>
         {{/each}}
       </ul>
     </div>
@@ -31,7 +31,7 @@
       <label for="ul-id"><button type="button" class="ng-binding">{{model.c.name}}</button></label>
       <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
         {{#each model.c.data as |data|}}
-          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.c.name" data on="mouseDown"}}>{{data}}</li>
+          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.c.id" "model.c.name" data on="mouseDown"}}>{{data}}</li>
         {{/each}}
       </ul>
     </div>
@@ -45,7 +45,7 @@
       <label for="ul-id"><button type="button" class="ng-binding">{{model.d.name}}</button></label>
       <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
         {{#each model.d.data as |data|}}
-          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.d.name" data on="mouseDown"}}>{{data}}</li>
+          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.d.id" "model.d.name" data on="mouseDown"}}>{{data}}</li>
         {{/each}}
       </ul>
     </div>
@@ -59,7 +59,7 @@
       <label for="ul-id"><button type="button" class="ng-binding">{{model.e.name}}</button></label>
       <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
         {{#each model.e.data as |data|}}
-          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.e.name" data on="mouseDown"}}>{{data}}</li>
+          <li role="option" value="{{data}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" "model.e.id" "model.e.name" data on="mouseDown"}}>{{data}}</li>
         {{/each}}
       </ul>
     </div>

@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "ember-cli-notifications": "^4.2.1",
-    "ember-cryptojs-shim": "^4.1.0"
+    "ember-cryptojs-shim": "^4.1.0",
+    "flat": "4.0.0"
   }
 }

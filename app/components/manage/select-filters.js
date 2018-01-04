@@ -18,9 +18,10 @@ export default Component.extend({
                 this.set(isActive, false);
             }
         },
-        clickOption: function(path,data){
+        clickOption: function(id,path,data){
+          // this.set('model.name', data)
             this.set(path, data);
-            this.sendAction('filterProcess', {type:this.get('model.id'), selected: data})
+            this.sendAction('filterProcess', {type:this.get(id), selected: data})
         }
     }
 });

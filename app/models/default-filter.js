@@ -142,23 +142,94 @@ defaultFiltersBlockChain() {
 return filter;
 },
 
-selectableType() {
+selectableType(type) {
+  switch (type) {
+    case "machine":
+      return this.selectableTypeMachine();
+      break;
+    case "container":
+      return this.selectableTypeContainer();
+      break;
+    case "blockchain":
+      return this.selectableTypeBlockchain();
+      break;
+    default:
+      return this.selectableTypeMachine();
+
+  }
+},
+
+selectableTypeMachine() {
   var selectableType = [{
     'key': 'selectOs',
     'value': '',
-    'path': 'spec.plan_data.object_meta.name'
+    'path': 'spec.plan_data.object_meta.name',
   }, {
     'key': 'selectLocation',
     'value': '',
-    'path': 'spec.assembly_factory.object_meta.cluster_name'
+    'path': 'spec.assembly_factory.object_meta.cluster_name',
   }, {
     'key': 'selectNetwork',
     'value': '',
-    'path': 'object_meta.name'
+    'path': '',
   }, {
     'key': 'selectStatus',
     'value': '',
-    'path': 'status.phase'
+    'path': 'status.phase',
+  }, {
+    'key': 'selectDb',
+    'value': '',
+    'path': '',
+  }];
+  return selectableType;
+},
+
+selectableTypeContainer() {
+  var selectableType = [{
+    'key': 'selectOs',
+    'value': '',
+    'path': 'spec.plan_data.object_meta.name',
+  }, {
+    'key': 'selectLocation',
+    'value': '',
+    'path': 'spec.assembly_factory.object_meta.cluster_name',
+  }, {
+    'key': 'selectNetwork',
+    'value': '',
+    'path': '',
+  }, {
+    'key': 'selectStatus',
+    'value': '',
+    'path': 'status.phase',
+  }, {
+    'key': 'selectDb',
+    'value': '',
+    'path': '',
+  }];
+  return selectableType;
+},
+
+selectableTypeBlockchain() {
+  var selectableType = [{
+    'key': 'selectOs',
+    'value': '',
+    'path': 'spec.plan_data.object_meta.name',
+  }, {
+    'key': 'selectLocation',
+    'value': '',
+    'path': 'spec.assembly_factory.object_meta.cluster_name',
+  }, {
+    'key': 'selectNetwork',
+    'value': '',
+    'path': '',
+  }, {
+    'key': 'selectStatus',
+    'value': '',
+    'path': 'status.phase',
+  }, {
+    'key': 'selectDb',
+    'value': '',
+    'path': '',
   }];
   return selectableType;
 },

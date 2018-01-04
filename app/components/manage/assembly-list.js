@@ -1,19 +1,25 @@
 import Component from '@ember/component';
 import DefaultFilter from 'nilavu/models/default-filter';
+import jsonFinder from 'npm:flat';
 
 export default Component.extend({
   tagName: '',
   isSearchVisible: false,
   theFilter: "",
-  selectedFilter: DefaultFilter.selectableType(),
   defaultFilter: DefaultFilter.defaultFilter(),
 
   assemblyLength: function() {
     return this.get('assemblys').length;
   }.property('model'),
 
+  selectedFilter: function() {
+    return DefaultFilter.selectableType(this.get('assemblyType'));
+  }.property('model'),
+
   assemblyUpdated: function() {
     this.uniquefilteredAssembly();
+    this.set('assemblyLength', this.get('assemblys').length);
+    this.set('filterProperties', this.fillDataForFilterProperties());
   }.observes('assemblys'),
 
   filterData: function() {
@@ -76,57 +82,28 @@ export default Component.extend({
 
   filterProperties: function() {
     return this.fillDataForFilterProperties();
-  }.property('defaultfilterss'),
+  }.property('defaultfilters'),
 
-
+ //Here these data has to be updated when ever assemblys get updated. And new assembly's comes.
   fillDataForFilterProperties: function() {
-    this.set('defaultfilterss.a.data', this.filterUniqueDataFromAssembly(this.get('defaultfilterss.a')));
-    return this.get('defaultfilterss');
+    this.set('defaultfilters.a.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.a')));
+    this.set('defaultfilters.b.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.b')));
+    this.set('defaultfilters.c.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.c')));
+    this.set('defaultfilters.d.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.d')));
+    this.set('defaultfilters.e.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.e')));
+    return this.get('defaultfilters');
   },
 
   filterUniqueDataFromAssembly: function(filter) {
     var filtered = [];
     this.get('assemblys').forEach(function(assembly) {
-      // var b = assembly['plan_data']['object_meta']['name'];
-      // alert(JSON.stringify(this.findNestedKey(assembly, 'name')));
-      filtered.pushObject(assembly[filter.path]);
+      var result = jsonFinder(assembly)[filter.path];
+      if (result !== undefined) {
+        filtered.pushObject(result);
+      }
     }.bind(this));
     return [...new Set(filtered)];
   },
-
-
-  filterFromAssemblys: function() {
-    var location = [];
-    var os = [];
-    var status = [];
-    this.get('defaultFilter').forEach(function(filter) {
-      this.get('assemblys').forEach(function(assembly) {
-        switch (filter.id) {
-          case 'selectOs':
-            os.pushObject(assembly.spec.plan_data.object_meta.name)
-            break;
-          case 'selectLocation':
-            location.pushObject(assembly.spec.assembly_factory.object_meta.cluster_name)
-            break;
-          case 'selectStatus':
-            status.pushObject(assembly.status.phase)
-            break;
-        }
-      });
-      if (filter.id == 'selectOs') {
-        filter.data = [...new Set(os)];
-      }
-      if (filter.id == 'selectLocation') {
-        filter.data = [...new Set(location)];
-      }
-      if (filter.id == 'selectStatus') {
-        filter.data = [...new Set(status)];
-      }
-    }.bind(this));
-    // this.set('model.filter',this.get('defaultFilter'));
-    return this.get('defaultFilter');
-  },
-
 
   actions: {
 
@@ -142,6 +119,6 @@ export default Component.extend({
       });
       this.uniquefilteredAssembly();
     }
-  }
+  },
 
 });

@@ -4,15 +4,22 @@ import DefaultFilter from 'nilavu/models/default-filter';
 export default Controller.extend({
   isSearchVisible: false,
   cacheAssemblys: [],
+  container: 'container',
+  machine: 'machine',
+  blockchain: 'blockchain',
 
   assemblyLength: function() {
     return this.get('cacheAssemblys').length;
   }.property('model'),
 
   modelchanged: function() {
-    if(this.get('model.content')) {
+    if (this.get('model.content')) {
       this._addCache();
-      this._removeCache();
+      // this._removeCache();
+      this._removeCacheAssemblys();
+      this.set('machineAssemblys', this.filterAssembly("machine"));
+      this.set('containerAssemblys', this.filterAssembly("container"));
+      this.set('blockChainAssemblys', this.filterAssembly("blockchain"));
     }
   }.observes('model'),
 
@@ -25,11 +32,12 @@ export default Controller.extend({
         self.get('cacheAssemblys').addObject(assembly);
       }
     });
+    return this.get('cacheAssemblys');
   },
 
   _removeCache: function() {
     const self = this;
-    self.get('cacheAssemblys').forEach(function(assembly) {
+    self.get('cacheAssemblys').forEach(function(assembly) { //here we just removing index value when we remove some object. So it'll collapsed when @each
       if (self._hasRemoveRecordFor(assembly)) {
         self.get('cacheAssemblys').removeObject(assembly);
       }
@@ -47,17 +55,38 @@ export default Controller.extend({
     return flag;
   },
 
-  _hasRemoveRecordFor: function(assembly) {
+  _hasRemoveRecordFor: function(cache) {
     var assemblys = null;
     var flag = true;
     const self = this;
     assemblys = self.get('model.content');
-    assemblys.forEach(function(cache) {
+    assemblys.forEach(function(assembly) {
       if (cache.id === assembly.id) {
         flag = false;
       }
     });
     return flag;
+  },
+
+  fetchAllAssemblyId: function(assemblys) {
+    var ids = [];
+    assemblys.forEach(assembly => {
+      ids.push(assembly.id)
+    });
+    return ids;
+  },
+
+  _removeCacheAssemblys: function() {
+    const self = this;
+    var rmvAssembly = self.fetchAllAssemblyId(self.get('cacheAssemblys')).filter(function(el) {
+      return !self.fetchAllAssemblyId(self.get('model.content')).includes(el);
+    });
+    rmvAssembly.forEach(val => {
+      var newcache = self.get('cacheAssemblys').filter(function(elem) {
+        return elem.id != val;
+      });
+      self.set('cacheAssemblys', newcache);
+    });
   },
 
   allAssemblys: function() {
@@ -73,7 +102,7 @@ export default Controller.extend({
   }.property('cacheAssemblys'),
 
   blockChainAssemblys: function() {
-    return this.filterAssembly("bloackchain");
+    return this.filterAssembly("blockchain");
   }.property('cacheAssemblys'),
 
   filterProperties: function() {
