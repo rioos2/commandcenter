@@ -97,8 +97,6 @@ export default Component.extend({
   filterUniqueDataFromAssembly: function(filter) {
     var filtered = [];
     this.get('assemblys').forEach(function(assembly) {
-      console.log("spec.assembly_factory.spec.plan.object_meta.name");
-      console.log(filter.path);
       var result = jsonFinder(assembly)[filter.path];
       if (result !== undefined) {
         filtered.pushObject(result);
