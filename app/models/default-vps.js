@@ -12,7 +12,7 @@ DefaultVps.reopenClass({
   destroVersion: "14.04",
   secret: "SSH-1(RSA)",
   secretTypes: ["SSH-1(RSA)", "SSH-1(RSA2)", "SSH-1(RSA3)"],
-  bitsInKey: 2048,
+  bitsInKey: "2048",
 
 });
 export default DefaultVps;

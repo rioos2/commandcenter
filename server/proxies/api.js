@@ -264,7 +264,7 @@ function statistics() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       },
@@ -279,7 +279,7 @@ function statistics() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       },
@@ -294,7 +294,7 @@ function statistics() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       },
@@ -309,7 +309,7 @@ function statistics() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       },
@@ -324,7 +324,7 @@ function statistics() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       }
@@ -346,7 +346,7 @@ function statisticsTwo() {
         name: "192.168.1.100",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 1,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       },
@@ -361,7 +361,7 @@ function statisticsTwo() {
         name: "192.168.1.101",
         description: "CPU ..Throttled",
         cpu: "percentage",
-        counter: 20,
+        counter: getRandomInt(1, 100).toString(),
         cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
         health: "green/red/yellow"
       }

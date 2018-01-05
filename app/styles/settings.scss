@@ -8,7 +8,7 @@
     .userinfo {
         padding-left: 15px;
         padding-right: 15px;
-        
+
         .person {
             background-color: white;
             padding: 38px 47px;
@@ -29,12 +29,12 @@
                 height: 95px;
                 margin-right: 28px;
                 float: left;
-                display: inline-block;               
+                display: inline-block;
             }
 
             .avata {
                 display: inline-block;
-            
+
                 .name {
                     font-size: 42px;
                     font-weight: bold;
@@ -43,7 +43,7 @@
 
                 .state {
                     margin-left: 3px;
-                    margin-top: -3px;                                        
+                    margin-top: -3px;
                     width: 110px;
                     border-radius: 4px;
                     color: white;
@@ -138,10 +138,10 @@
                     stroke: rgba(21, 58, 141, 0.36);
                     filter: url(#blur-filter);
                 }
-                svg:hover .certi-color { 
+                svg:hover .certi-color {
                     stroke: rgba(21, 58, 141, 0.36);
                 }
-                
+
                 .cls-2, .cls-1 {
                     fill: white;
                 }

@@ -14,10 +14,7 @@ export default Ember.Route.extend(PolledModel, DefaultHeaders, {
 
   model: function() {
     const store = this.get('store');
-    return store.find('assemblylist', /*this.opts('mockapiassembly'), */ null, {
-      url: 'mockapiassembly',
-      forceReload: true /*, removeMissing: true*/
-    }).then((assemblys) => {
+    return store.find('assemblylist', /*this.opts('mockapiassembly'), */ null,this.opts('assemblys')).then((assemblys) => {
       return assemblys;
     }).catch(function() {
       self.set('loading', false);

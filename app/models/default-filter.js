@@ -34,7 +34,7 @@ DefaultFilter.reopenClass({
       a: {
         id: "selectOs",
         name: "Select OS",
-        path: "spec.plan_data.object_meta.name",
+        path: "assembly_factory.spec.plan.object_meta.name",
         data: [],
       },
       b: {
@@ -72,7 +72,7 @@ defaultFiltersMachine() {
     a: {
       id: "selectOs",
       name: "Select OS",
-      path: "spec.plan_data.object_meta.name",
+      path: "spec.assembly_factory.spec.plan.object_meta.name",
       data: [""],
     },
     b: {
@@ -110,7 +110,7 @@ defaultFiltersBlockChain() {
     a: {
       id: "selectOs",
       name: "Select OS",
-      path: "spec.plan_data.object_meta.name",
+      path: "spec.assembly_factory.spec.plan.object_meta.name",
       data: [""],
     },
     b: {
@@ -163,7 +163,7 @@ selectableTypeMachine() {
   var selectableType = [{
     'key': 'selectOs',
     'value': '',
-    'path': 'spec.plan_data.object_meta.name',
+    'path': 'spec.assembly_factory.spec.plan.object_meta.name',
   }, {
     'key': 'selectLocation',
     'value': '',
@@ -188,7 +188,7 @@ selectableTypeContainer() {
   var selectableType = [{
     'key': 'selectOs',
     'value': '',
-    'path': 'spec.plan_data.object_meta.name',
+    'path': 'spec.assembly_factory.spec.plan.object_meta.name',
   }, {
     'key': 'selectLocation',
     'value': '',
@@ -213,7 +213,7 @@ selectableTypeBlockchain() {
   var selectableType = [{
     'key': 'selectOs',
     'value': '',
-    'path': 'spec.plan_data.object_meta.name',
+    'path': 'spec.assembly_factory.spec.plan.object_meta.name',
   }, {
     'key': 'selectLocation',
     'value': '',

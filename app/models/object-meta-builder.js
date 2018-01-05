@@ -2,17 +2,17 @@ const ObjectMetaBuilder = Ember.Object.extend({});
 
 ObjectMetaBuilder.reopenClass({
 
-  buildObjectMeta(name, origin) {
+  buildObjectMeta() {
     var objectMeta;
 
     objectMeta = {
-      name: name,
-      origin: origin,
+      name: "",
       uid: " ",
       created_at: "",
       cluster_name: "",
       labels: {
-        group: "deployment"
+        rioos_category: "machine",
+        rioos_environment: "development"
       },
       annotations: {
         key1: "value1",

@@ -25,6 +25,9 @@ Router.map(function() {
     this.route('home', { resetNamespace: true });
     this.route('launcher', { resetNamespace: true });
     this.route('manage', { resetNamespace: true });
+    this.route('settings', {resetNamespace: true}, function() {
+    this.route('user');
+   });
 
     /*this.route('dropdowns', {
       resetNamespace: true
