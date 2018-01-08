@@ -163,11 +163,9 @@ var Store = Ember.Service.extend({
         }
       }
     }
-
     // If URL is explicitly given, go straight to making the request.  Do not pass go, do not collect $200.
     // This is used for bootstraping to load the schema initially, and shouldn't be used for much else.
     if (opt.url) {
-
       return this._findWithUrl(opt.url, type, opt);
     } else {
       // Otherwise lookup the schema for the type and generate the URL based on it.
@@ -458,7 +456,9 @@ var Store = Ember.Service.extend({
 
   _requestFailed(xhr, opt) {
     var body;
-
+    if (xhr.statusText === 'Not Found') {
+      return {};
+    }
     if (xhr.err) {
       if (xhr.err === 'timeout') {
         body = {

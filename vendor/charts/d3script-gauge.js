@@ -298,7 +298,7 @@ function renderChartGauge(params) {
         var bigSide = Math.sqrt(width * width - smallSide * smallSide);
 
         //path string building
-        var path = `M 0 ${2 * smallSide} 
+        var path = `M 0 ${2 * smallSide}
                     l ${-bigSide} ${-smallSide}
                     l ${0} ${-width}
                     l ${bigSide} ${-smallSide}`;
@@ -311,7 +311,7 @@ function renderChartGauge(params) {
         var bigSide = Math.sqrt(width * width - smallSide * smallSide);
 
         //path string building
-        var path = `M 0 ${2 * smallSide} 
+        var path = `M 0 ${2 * smallSide}
                     l ${bigSide} ${-smallSide}
                     l ${0} ${-width}
                     l ${-bigSide} ${-smallSide}`;
@@ -342,7 +342,7 @@ function renderChartGauge(params) {
         var bigSideP = Math.sqrt(widthP * widthP - smallSideP * smallSideP);
 
         //path string building
-        var path = `M 0 0 
+        var path = `M 0 0
       l ${bigSideP} ${smallSideP}
       l ${0} ${widthP * 1.2}
       l ${-bigSideP * 2} 0

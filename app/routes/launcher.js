@@ -76,8 +76,9 @@ export default Ember.Route.extend(DefaultHeaders, {
         tls_pub: "PUBLICKEY",
         anykey: "<anykey>"
       },
-      object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
-      type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1")
+      object_meta: ObjectMetaBuilder.buildObjectMeta(),
+      type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1"),
+      metadata:{},
     };
 
     return this.get('store').createRecord(secretData);
@@ -86,7 +87,7 @@ export default Ember.Route.extend(DefaultHeaders, {
   loadAssemblyFactory() {
     var assemblyfactoryData;
     assemblyfactoryData = {
-      object_meta: ObjectMetaBuilder.buildObjectMeta("", "rioos"),
+      object_meta: ObjectMetaBuilder.buildObjectMeta(),
       type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
       type: 'origins/rioos/assemblyfactorys',
       replicas: 1,

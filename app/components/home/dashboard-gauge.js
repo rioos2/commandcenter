@@ -23,7 +23,7 @@ export default Component.extend({
     const content = this.get('model.content').objectAt(0);
     return content.results.guages.counters[2];
   }.property('model.content'),
-  unknown: function() {
+  gpu: function() {
     const content = this.get('model.content').objectAt(0);
     return content.results.guages.counters[3];
   }.property('model.content'),
