@@ -3,6 +3,8 @@ import PolledModel from 'nilavu/mixins/polled-model';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 
 export default Ember.Route.extend(PolledModel, DefaultHeaders, {
+  session: Ember.inject.service(),
+
   activate: function() {
     this.send('unfixedTop');
     this.send('unfixedBottom');
@@ -14,7 +16,7 @@ export default Ember.Route.extend(PolledModel, DefaultHeaders, {
 
   model: function() {
     const store = this.get('store');
-    return store.find('assemblylist', /*this.opts('mockapiassembly'), */ null,this.opts('assemblys')).then((assemblys) => {
+    return store.find('assemblylist', /*this.opts('mockapiassembly'), */ null,this.opts('accounts/' + this.get('session').get("id") +'/assemblys')).then((assemblys) => {
       return assemblys;
     }).catch(function() {
       self.set('loading', false);
