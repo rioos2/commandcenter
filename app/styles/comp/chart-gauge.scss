@@ -1,69 +1,94 @@
+.guage_chart {
+	#particle-canvas {
+		width: 130px;
+		height: 130px;
+		left: 85px;
+		top: 75px;
+	}
+
+	.symbol2 {
+		stroke-dasharray: 100;
+		stroke-miterlimit: 0;
+		stroke-dashoffset: 0;
+		animation: s2_dash 2s linear infinite;
+	}
+	@keyframes s2_dash {
+		0% {
+			stroke-dashoffset: 240;
+		}
+
+		100% {
+			stroke-dashoffset: 0;
+		}
+	}
+}
+
 .gauge-chart {
-    text-align: center;
+	text-align: center;
 
-    .blueGaugeDiv {
-        position: relative;
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-        z-index: 1;
+	.blueGaugeDiv {
+		position: relative;
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+		z-index: 1;
 
-        canvas {
-        overflow: hidden;
-        display: inline-block;
-        background: #1A086F;
-        position: absolute;
-        z-index: -1;
-        background-attachment:fixed;
-        }
-    }
+		canvas {
+			overflow: hidden;
+			display: inline-block;
+			background: #1A086F;
+			position: absolute;
+			z-index: -1;
+			background-attachment: fixed;
+		}
+	}
 
-    .gauge-name {
-        color: #40403f;
-        font-size: 25px;
-    }
+	.gauge-name {
+		color: #40403f;
+		font-size: 25px;
+	}
 
-    .gauge-power {
-        color: #8790a1;
-        font-size: 16px;
-    }
+	.gauge-power {
+		color: #8790a1;
+		font-size: 16px;
+	}
 
-    .gauge-value {
-        color: #2d9aff;
-    }
+	.gauge-value {
+		color: #2d9aff;
+	}
 
-    .showOS {
-        padding: 8px 0 0 25px;
+	.showOS {
+		padding: 8px 0 0 25px;
 
-        img {
-            width: 60px;
-            padding-top: 4px;
-        }
+		img {
+			width: 60px;
+			padding-top: 4px;
+		}
 
-        .os-version {
-            text-align: center;
-            width: 46px;
-            position: relative;
-            filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.16));
+		.os-version {
+			text-align: center;
+			width: 46px;
+			position: relative;
+			filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.16));
 
-            .version-bg {
-                position: absolute;
-                width: 100%;
-                top: 0px;
-                left: 0px;
+			.version-bg {
+				position: absolute;
+				width: 100%;
+				top: 0;
+				left: 0;
 
-                svg .cls-1 {
-                    fill: white;
-                }
-            }
+				svg .cls-1 {
+					fill: white;
+				}
+			}
 
-            p {
-                position: relative;
-                font-size: 12px;
-                color: #6c6e78;
-                margin: 0;
-                padding-top: 6px;
-            }
-        }
-    }
+			p {
+				position: relative;
+				font-size: 12px;
+				color: #6c6e78;
+				margin: 0;
+				padding-top: 6px;
+			}
+		}
+	}
 }
