@@ -30,6 +30,9 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   actions: {
     createDomain: function() {
+      if (!this.get('showEdit')){
+        this.set('domain', " ");
+      }
       this.toggleProperty('showEdit');
     },
 

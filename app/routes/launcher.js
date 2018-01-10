@@ -68,12 +68,12 @@ export default Ember.Route.extend(DefaultHeaders, {
       type: 'secrets',
       secret_type: 'rio.digital/ssh-auth',
       data: {
-        username: "USERNAME",
-        password: "PASSWORD",
-        rsa_key: "PRIVATEKEY",
-        rsa_pub: "PUBLICKEY",
-        tls_key: "PRIVATEKEY",
-        tls_pub: "PUBLICKEY",
+        username: "",
+        password: "",
+        rsa_key: "",
+        rsa_pub: "",
+        tls_key: "",
+        tls_pub: "",
         anykey: "<anykey>"
       },
       object_meta: ObjectMetaBuilder.buildObjectMeta(),

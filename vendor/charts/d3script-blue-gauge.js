@@ -1,6 +1,3 @@
-
-
-
 function renderBlueGaugeChart(params) {
 
   var consts = {
@@ -19,279 +16,34 @@ function renderBlueGaugeChart(params) {
     backgroundCircleColor: '#1A086F',
     middleBackgroundCircleColor: '#5249A1',
     outerBackgroundCircleColor: '#5753B6',
-    mainDonutColor: '#ecdc23',
+    mainDonutColor: '#C8C9CC',
     fontFamily: 'Arial Unicode MS',
     fontSize: 50,
-    backgroundFill: 'rgba(0, 0, 0, 0)',
+    backgroundFill: '#142da3',
     data: null
   };
 
 
-
-  // // middle background circle
-  // var middleBackgroundCircle = patternify({ container: centerPoint, selector: 'middle-background-circle', elementTag: 'circle' })
-  // middleBackgroundCircle.attr('r', calc.middleBackgroundCircleRadius)
-  //   .attr('fill', attrs.middleBackgroundCircleColor)
-  //   .attr('opacity', 0)
-
-
-  // // background circle
-  // var backgroundCircle = patternify({ container: centerPoint, selector: 'background-circle', elementTag: 'circle' })
-  // backgroundCircle.attr('r', calc.backgroundCircleRadius)
-  //   .attr('fill', attrs.backgroundCircleColor)
-  //   .attr('opacity', 0)
-
-
-
   staticArcProperties = {
-    fullBackgroundCircle: {
-      color: 'white',
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 360
-      }]
-
-    },
-    outerBackgroundCircle: {
-      // color: attrs.outerBackgroundCircleColor,
-      color: "url(#outer-background-gradient)",
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 360
-      }]
-    },
-    middleBackground: {
-      color: attrs.middleBackgroundCircleColor,
-      //color: "url(#outer-background-gradient)",
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 360
-      }]
-    },
     outerTopHeadBackground: {
       color: '#EDEFF9',
-      values: [
-        {
-          type: consts.TYPE_COLORED,
-          value: 40
-        }, {
-          type: consts.TYPE_EMPTY,
-          value: 280
-        }, {
-          type: consts.TYPE_COLORED,
-          value: 40
-        }]
-    },
-    // outerTopHead: {
-    //   color: '#39F1EF',
-    //   values: [
-    //     {
-    //       type: consts.TYPE_COLORED,
-    //       value: 80
-    //     }, {
-    //       type: consts.TYPE_EMPTY,
-    //       value: 280
-    //     }]
-    // },
-    innerYellowBackground: {
-      color: '#5145FA',
-      values: [
-        {
-          type: consts.TYPE_COLORED,
-          value: 360
-        }]
-    },
-    yellowDonut: {
-      color: attrs.mainDonutColor,
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 360
-      }]
-
-    },
-    outerDarkThin: {
-      color: '#C0C5ED',
-      values: [
-        {
-          type: consts.TYPE_EMPTY,
-          value: 100
-        }, {
-          type: consts.TYPE_COLORED,
-          value: 15
-        }, {
-          type: consts.TYPE_EMPTY,
-          value: 160
-        }, {
-          type: consts.TYPE_COLORED,
-          value: 20
-        }, {
-          type: consts.TYPE_EMPTY,
-          value: 60
-        }]
-    },
-    outerLightThin: {
-      color: '#CACFEF',
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 30
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 100
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 80
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 110
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 45
-      }]
-    },
-    innerOuterThinGradient: {
-      color: "url(#outer-arc-gradient)",
       values: [{
         type: consts.TYPE_COLORED,
         value: 40
       }, {
         type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 70
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 45
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 65
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 30
-      }]
-    },
-    middleThickDark: {
-      color: "#605FF4",
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 50
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 70
+        value: 280
       }, {
         type: consts.TYPE_COLORED,
         value: 40
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 60
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 50
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 80
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 50
       }]
     },
-    middleThickLight: {
-      color: "#4AF1F2",
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 30
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 30
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 70
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 50
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 30
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 50
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 60
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 30
-      }]
-    },
-    middleThinBack: {
-      color: '#71ABD8',
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 360
-      }]
-    },
-    middleThinFront: {
-      color: "#7EF0E8",
-      values: [{
-        type: consts.TYPE_COLORED,
-        value: 30
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 20
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 35
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 5
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 40
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 10
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 60
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 10
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 40
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 10
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 30
-      }, {
-        type: consts.TYPE_EMPTY,
-        value: 15
-      }, {
-        type: consts.TYPE_COLORED,
-        value: 10
-      }]
-    },
-
   }
 
   /*############### IF EXISTS OVERWRITE ATTRIBUTES FROM PASSED PARAM  #######  */
 
   var attrKeys = Object.keys(attrs);
-  attrKeys.forEach(function (key) {
+  attrKeys.forEach(function(key) {
     if (params && params[key]) {
       attrs[key] = params[key];
     }
@@ -303,10 +55,10 @@ function renderBlueGaugeChart(params) {
 
 
   //main chart object
-  var main = function (selection) {
-    selection.each(function () {
+  var main = function(selection) {
+    selection.each(function() {
 
-      staticArcProperties.fullBackgroundCircle.color = attrs.backgroundFill;
+      // staticArcProperties.fullBackgroundCircle.color = attrs.backgroundFill;
 
       //calculated properties
       var calc = {}
@@ -337,6 +89,18 @@ function renderBlueGaugeChart(params) {
         outerBackgroundCircle: {
           inner: calc.middleBackgroundCircleRadius,
           outer: calc.outerBackgroundCircleRadius
+        },
+        outerStepBackgroundCircle: {
+          inner: calc.backgroundCircleRadius,
+          outer: calc.middleBackgroundCircleRadius
+        },
+        outerStepTwoBackgroundCircle: {
+          inner: calc.backgroundCircleRadius,
+          outer: calc.middleBackgroundCircleRadius
+        },
+        outerStepThreeBackgroundCircle: {
+          inner: calc.backgroundCircleRadius,
+          outer: calc.middleBackgroundCircleRadius
         },
         middleBackground: {
           inner: calc.backgroundCircleRadius,
@@ -449,8 +213,6 @@ function renderBlueGaugeChart(params) {
 
       var svg = container
         .append('svg')
-        // .attr('width', attrs.svgWidth)
-        // .attr('height', attrs.svgHeight)
         .attr('font-family', attrs.fontFamily)
         .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
         .attr("preserveAspectRatio", "xMidYMid meet")
@@ -460,12 +222,15 @@ function renderBlueGaugeChart(params) {
         .attr('height', calc.chartHeight)
         .attr('transform', 'translate(' + (calc.chartLeftMargin) + ',' + calc.chartTopMargin + ')')
 
-      var centerPoint = patternify({ container: chart, selector: 'center-point', elementTag: 'g' })
+      var centerPoint = patternify({
+        container: chart,
+        selector: 'center-point',
+        elementTag: 'g'
+      })
       centerPoint.attr('transform', `translate(${calc.centerPointX},${calc.centerPointY})`)
 
 
       //########################################  FILTERS #################################
-
 
 
       //-----------------  Drop Shadow Filters ------------------
@@ -529,99 +294,205 @@ function renderBlueGaugeChart(params) {
         .attr("x1", -280).attr("y1", 0)
         .attr("x2", calc.chartWidth).attr("y2", 10)
         .selectAll("stop")
-        .data([
-          { offset: "0%", color: "blue" },
-          { offset: "40%", color: "#3AF5F0" },
+        .data([{
+            offset: "0%",
+            color: "blue"
+          },
+          {
+            offset: "30%",
+            color: "#C8C9CC"
+          },
+          {
+            offset: "50%",
+            color: "#FFD338"
+          },
+          {
+            offset: "60%",
+            color: "red"
+          },
         ])
         .enter().append("stop")
-        .attr("offset", function (d) { return d.offset; })
-        .attr("stop-color", function (d) { return d.color; });
-
-
-      svg.append("linearGradient")
-        .attr("id", "outer-arc-gradient")
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", 20).attr("y1", 0)
-        .attr("x2", calc.chartWidth).attr("y2", 40)
-        .selectAll("stop")
-        .data([
-          { offset: "0%", color: "#61B5F5" },
-          { offset: "40%", color: "#4E4EBE" },
-        ])
-        .enter().append("stop")
-        .attr("offset", function (d) { return d.offset; })
-        .attr("stop-color", function (d) { return d.color; });
-
-      svg.append("linearGradient")
-        .attr("id", "outer-background-gradient")
-        .attr("gradientUnits", "userSpaceOnUse")
-        .attr("x1", -40).attr("y1", 0)
-        .attr("x2", calc.chartWidth).attr("y2", 40)
-        .selectAll("stop")
-        .data([
-          { offset: "0%", color: "#4E40B6" },
-          { offset: "40%", color: "blue" },
-        ])
-        .enter().append("stop")
-        .attr("offset", function (d) { return d.offset; })
-        .attr("stop-color", function (d) { return d.color; });
-
-
+        .attr("offset", function(d) {
+          return d.offset;
+        })
+        .attr("stop-color", function(d) {
+          return d.color;
+        });
 
       // ########################################### DRAWING ####################################
 
       // outer background circle
-      var outerBackgroundCircle = patternify({ container: centerPoint, selector: 'outer-background-circle', elementTag: 'circle' })
-      outerBackgroundCircle.attr('r', calc.outerBackgroundCircleRadius)
-        .attr('fill', attrs.outerBackgroundCircleColor)
-        .attr('opacity', 0)
-        .style("filter", "url(#drop-shadow)")
-
+      var outerBackgroundCircle = patternify({
+        container: centerPoint,
+        selector: 'outer-background-circle',
+        elementTag: 'circle'
+      })
+      outerBackgroundCircle.attr('r', 128)
+        .attr('stroke', '#3B58BE')
+        .attr('stroke-width', 30)
+        .attr('fill', '#142DA3')
 
 
       // middle background circle
-      var middleBackgroundCircle = patternify({ container: centerPoint, selector: 'middle-background-circle', elementTag: 'circle' })
-      middleBackgroundCircle.attr('r', calc.middleBackgroundCircleRadius)
-        .attr('fill', attrs.middleBackgroundCircleColor)
-        .attr('opacity', 0)
+      var middleBackgroundCircle = patternify({
+        container: centerPoint,
+        selector: 'middle-background-circle',
+        elementTag: 'circle'
+      })
+      middleBackgroundCircle.attr('r', 105)
+        .attr('stroke', '#3B58BE')
+        .attr('stroke-width', 5)
+        .attr('fill', 'none')
+
+      // middle background circle
+      var outerStepBackgroundCircle = patternify({
+        container: centerPoint,
+        selector: 'outerstep-background-circle',
+        elementTag: 'circle'
+      })
+      outerStepBackgroundCircle.attr('r', 128)
+        .attr('stroke', '#A7E2F7')
+        .attr('stroke-width', 2)
+        .attr('fill', 'none')
 
 
-      // background circle
-      var backgroundCircle = patternify({ container: centerPoint, selector: 'background-circle', elementTag: 'circle' })
-      backgroundCircle.attr('r', calc.backgroundCircleRadius)
-        .attr('fill', attrs.backgroundCircleColor)
-        .attr('opacity', 0)
-
-
+      //outerStepTwoBackgroundCircle
+      var outerStepTwoBackgroundCircle = patternify({
+        container: centerPoint,
+        selector: 'outertwostep-background-circle',
+        elementTag: 'circle'
+      })
+      outerStepTwoBackgroundCircle.attr('r', 130)
+        .attr('class', "symbol2")
+        .attr('stroke', '#A7E2F7')
+        .attr('stroke-width', 7)
+        .attr('fill', 'none')
+      //outerStepThreeBackgroundCircle
+      var outerStepThreeBackgroundCircle = patternify({
+        container: centerPoint,
+        selector: 'outerthreestep-background-circle',
+        elementTag: 'circle'
+      })
+      outerStepThreeBackgroundCircle.attr('r', 153)
+        .attr('stroke', '#B5BACF')
+        .attr('stroke-width', 5)
+        .attr('fill', 'none')
 
       // links and nodes background
-      var wrapper = patternify({ container: centerPoint, selector: 'nodes-wrapper', elementTag: 'g' })
+      var wrapper = patternify({
+        container: centerPoint,
+        selector: 'nodes-wrapper',
+        elementTag: 'g'
+      })
       wrapper.attr('transform', `translate(${-calc.backgroundCircleRadius},${-calc.backgroundCircleRadius})`)
         .attr('opacity', 0)
 
       var width = calc.backgroundCircleRadius * 2;
       var pointConfig = {
-        nodes: [{ x: 45, y: 5 }, { x: 53, y: 3 }, { x: 70, y: 15 }, { x: 50, y: 40 }, { x: 80, y: 25 }
-          , { x: 20, y: 40 }, { x: 50, y: 50 }, { x: 10, y: 60 }, { x: 70, y: 60 }, { x: 80, y: 60 }
-          , { x: 50, y: 70 }, { x: 60, y: 75 }, { x: 30, y: 80 }, { x: 35, y: 95 }, { x: 55, y: 97 }
-        ],
-        links: [
-          { source: 0, target: 2 }, { source: 0, target: 3 }, { source: 1, target: 3 }, { source: 1, target: 2 }, { source: 2, target: 3 }
-          , { source: 5, target: 3 }
-          , { source: 8, target: 9 }
-          , { source: 8, target: 10 }
-          , { source: 8, target: 11 }
-          , { source: 9, target: 10 }
-          , { source: 9, target: 11 }
-          , { source: 10, target: 12 }
-          , { source: 10, target: 13 }
-          , { source: 11, target: 12 }
-          , { source: 11, target: 13 }
-          , { source: 12, target: 13 }
-          , { source: 11, target: 14 }
-          , { source: 10, target: 14 }
-          , { source: 13, target: 14 }
-        ]
+        nodes: [{
+          x: 45,
+          y: 5
+        }, {
+          x: 53,
+          y: 3
+        }, {
+          x: 70,
+          y: 15
+        }, {
+          x: 50,
+          y: 40
+        }, {
+          x: 80,
+          y: 25
+        }, {
+          x: 20,
+          y: 40
+        }, {
+          x: 50,
+          y: 50
+        }, {
+          x: 10,
+          y: 60
+        }, {
+          x: 70,
+          y: 60
+        }, {
+          x: 80,
+          y: 60
+        }, {
+          x: 50,
+          y: 70
+        }, {
+          x: 60,
+          y: 75
+        }, {
+          x: 30,
+          y: 80
+        }, {
+          x: 35,
+          y: 95
+        }, {
+          x: 55,
+          y: 97
+        }],
+        links: [{
+          source: 0,
+          target: 2
+        }, {
+          source: 0,
+          target: 3
+        }, {
+          source: 1,
+          target: 3
+        }, {
+          source: 1,
+          target: 2
+        }, {
+          source: 2,
+          target: 3
+        }, {
+          source: 5,
+          target: 3
+        }, {
+          source: 8,
+          target: 9
+        }, {
+          source: 8,
+          target: 10
+        }, {
+          source: 8,
+          target: 11
+        }, {
+          source: 9,
+          target: 10
+        }, {
+          source: 9,
+          target: 11
+        }, {
+          source: 10,
+          target: 12
+        }, {
+          source: 10,
+          target: 13
+        }, {
+          source: 11,
+          target: 12
+        }, {
+          source: 11,
+          target: 13
+        }, {
+          source: 12,
+          target: 13
+        }, {
+          source: 11,
+          target: 14
+        }, {
+          source: 10,
+          target: 14
+        }, {
+          source: 13,
+          target: 14
+        }]
       }
 
       var nodes = wrapper.selectAll('.nodes')
@@ -635,28 +506,6 @@ function renderBlueGaugeChart(params) {
         .attr('fill', '#6EAAFA')
         .attr('opacity', (d, i) => Math.random())
 
-      var links = wrapper.selectAll('.links')
-        .data(pointConfig.links)
-        .enter()
-        .append('line')
-        .attr('stroke', 'white')
-        .attr('stroke-width', 3)
-        .attr('x1', d => pointConfig.nodes[d.source].x / 100 * width)
-        .attr('x2', d => pointConfig.nodes[d.target].x / 100 * width)
-        .attr('y1', d => pointConfig.nodes[d.source].y / 100 * width)
-        .attr('y2', d => pointConfig.nodes[d.target].y / 100 * width)
-        .attr('fill', '#6EAAFA')
-        .attr('opacity', (d, i) => Math.random() / 4)
-
-
-      var backgroundDonut = centerPoint.selectAll('.background-donut-paths')
-        .data(layouts.pie([{
-          value: 360
-        }]))
-        .enter()
-        .append('path')
-        .attr('d', arcs.backgroundDonut)
-        .attr('filter', 'url(#drop-shadow)')
 
       //----------------------------------------------------------
       //static arcs
@@ -679,50 +528,12 @@ function renderBlueGaugeChart(params) {
           this._current = d;
         })
 
-
-
-      var yellowDonut = centerPoint.selectAll('.yellow-donut-paths')
-        .data(layouts.pie([{
-          value: 0,
-          color: attrs.mainDonutColor
-        }, {
-          color: 'none',
-          value: 360
-        }]))
-        .enter()
-        .append('path')
-        .attr('d', arcs.yellowDonut)
-        .attr('fill', 'none')
-        .attr('stroke', d => d.data.color)
-        .attr('stroke-width', 5)
-        .each(function (d) { this._current = d; })
-
-      var newData = layouts.pie([{
-        value: calc.currentValue / 100 * 360,
-        color: attrs.mainDonutColor
-      }, {
-        color: 'none',
-        value: (1 - calc.currentValue / 100) * 360
-      }])
-
-      yellowDonut
-        .data(newData)
-        .transition()
-        .duration(500)
-        .attrTween("d", function (a) {
-
-          var i = d3.interpolate(this._current, a);
-
-          this._current = i(0);
-          return function (t) {
-            return arcs.yellowDonut(i(t));
-          };
-        })
-
-
-
       //white circle
-      var whiteCircle = patternify({ container: centerPoint, selector: 'white-circle-slider', elementTag: 'circle' })
+      var whiteCircle = patternify({
+        container: centerPoint,
+        selector: 'white-circle-slider',
+        elementTag: 'circle'
+      })
       whiteCircle.attr('r', 17)
         .attr('fill', 'white')
         .style("filter", "url(#drop-shadow)")
@@ -746,11 +557,16 @@ function renderBlueGaugeChart(params) {
         .attr('fill', d => d.data.color)
         .attr('stroke', d => d.data.color)
         .attr('class', 'top-paths')
-        .each(function (d) { this._current = d; })
+        .each(function(d) {
+          this._current = d;
+        })
         .each((d, i) => {
           if (i == 0) {
             var angle = d.startAngle;
-            var pos = arcs.greenDonut.centroid({ startAngle: angle, endAngle: angle });
+            var pos = arcs.greenDonut.centroid({
+              startAngle: angle,
+              endAngle: angle
+            });
             whiteCircle.attr('cx', pos[0]).attr('cy', pos[1]);
           }
         })
@@ -758,22 +574,40 @@ function renderBlueGaugeChart(params) {
 
       centerPoint.insert('circle', '.top-paths')
         .attr('r', 7)
-        .attr('cx', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[0])
-        .attr('cy', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[1])
+        .attr('cx', arcs.greenDonut.centroid({
+          startAngle: calc.sliderStartAngle,
+          endAngle: calc.sliderStartAngle
+        })[0])
+        .attr('cy', arcs.greenDonut.centroid({
+          startAngle: calc.sliderStartAngle,
+          endAngle: calc.sliderStartAngle
+        })[1])
         .attr('class', '.round-corner-gray-left')
         .attr('fill', '#EDEFF9')
 
       centerPoint.insert('circle', '.top-paths')
         .attr('r', 3.8)
-        .attr('cx', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[0])
-        .attr('cy', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[1])
+        .attr('cx', arcs.greenDonut.centroid({
+          startAngle: calc.sliderStartAngle,
+          endAngle: calc.sliderStartAngle
+        })[0])
+        .attr('cy', arcs.greenDonut.centroid({
+          startAngle: calc.sliderStartAngle,
+          endAngle: calc.sliderStartAngle
+        })[1])
         .attr('class', '.round-corner-gray-blue')
         .attr('fill', '#1969F8')
 
       centerPoint.insert('circle', '.top-paths')
         .attr('r', 7)
-        .attr('cx', arcs.greenDonut.centroid({ startAngle: calc.sliderEndAngle, endAngle: calc.sliderEndAngle })[0])
-        .attr('cy', arcs.greenDonut.centroid({ startAngle: calc.sliderEndAngle, endAngle: calc.sliderEndAngle })[1])
+        .attr('cx', arcs.greenDonut.centroid({
+          startAngle: calc.sliderEndAngle,
+          endAngle: calc.sliderEndAngle
+        })[0])
+        .attr('cy', arcs.greenDonut.centroid({
+          startAngle: calc.sliderEndAngle,
+          endAngle: calc.sliderEndAngle
+        })[1])
         .attr('class', '.round-corner-gray-right')
         .attr('fill', '#EDEFF9')
 
@@ -796,13 +630,16 @@ function renderBlueGaugeChart(params) {
         })
         .transition()
         .duration(500)
-        .attrTween("d", function (a, index) {
+        .attrTween("d", function(a, index) {
           var i = d3.interpolate(this._current, a);
           var current = this._current = i(0);
-          return function (t) {
+          return function(t) {
             if (index == 0) {
               var angle = current.endAngle;
-              var pos = arcs.greenDonut.centroid({ startAngle: angle, endAngle: angle });
+              var pos = arcs.greenDonut.centroid({
+                startAngle: angle,
+                endAngle: angle
+              });
               whiteCircle.attr('cx', pos[0]).attr('cy', pos[1]);
             }
             return arcs.greenDonut(i(t));
@@ -812,7 +649,11 @@ function renderBlueGaugeChart(params) {
 
       // inner text
 
-      var middleText = patternify({ container: centerPoint, selector: 'middle-text', elementTag: 'text' })
+      var middleText = patternify({
+        container: centerPoint,
+        selector: 'middle-text',
+        elementTag: 'text'
+      })
       middleText.text(calc.currentValue + '%')
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'middle')
@@ -828,28 +669,14 @@ function renderBlueGaugeChart(params) {
 
 
       // smoothly handle data updating
-      updateData = function () {
+      updateData = function() {
         calc.currentValue = attrs.data.value;
         middleText.text(calc.currentValue + '%')
-
-        yellowDonut.data(layouts.pie([{
-          value: calc.currentValue / 100 * 360,
-          color: attrs.mainDonutColor
-        }, {
-          color: 'none',
-          value: (1 - calc.currentValue / 100) * 360
-        }]))
-          .transition()
-          .duration(500)
-          .attrTween("d", function (a) {
-            var i = d3.interpolate(this._current, a);
-            this._current = i(0);
-            return function (t) {
-
-
-              return arcs.yellowDonut(i(t));
-            };
-          })
+        if (calc.currentValue < 60) {
+          middleText.attr('fill', '#C8C9CC')
+        } else {
+          middleText.attr('fill', '#FFD338')
+        }
 
         topHead
           .data(layouts.pie([{
@@ -865,14 +692,17 @@ function renderBlueGaugeChart(params) {
           })
           .transition()
           .duration(500)
-          .attrTween("d", function (a, index) {
+          .attrTween("d", function(a, index) {
             var i = d3.interpolate(this._current, a);
             var current = this._current = i(0);
-            return function (t) {
+            return function(t) {
 
               if (index == 0) {
                 var angle = current.endAngle;
-                var pos = arcs.greenDonut.centroid({ startAngle: angle, endAngle: angle });
+                var pos = arcs.greenDonut.centroid({
+                  startAngle: angle,
+                  endAngle: angle
+                });
                 whiteCircle.attr('cx', pos[0]).attr('cy', pos[1]);
               }
               return arcs.greenDonut(i(t));
@@ -896,25 +726,6 @@ function renderBlueGaugeChart(params) {
         return selection;
       }
 
-      setTimeout(setDimensitons, 0);
-
-      d3.select(window).on('resize.' + attrs.id, function () {
-        setDimensitons();
-      })
-
-
-      function setDimensitons() {
-        var outerContainer = d3.select(container.node().parentNode)
-        var width = outerContainer.node().getBoundingClientRect().width;
-
-        outerContainer.select('canvas')
-          .style('top', (width / 4 + 3) + 'px')
-          .style('left', (width / 4 + 10) + 'px')
-          .style('width', width / 2 + 'px')
-          .style('height', width / 2 + 'px')
-
-      }
-
     });
   };
 
@@ -924,9 +735,11 @@ function renderBlueGaugeChart(params) {
 
   ['svgWidth', 'svgHeight', 'backgroundFill'].forEach(key => {
     // Attach variables to main function
-    return main[key] = function (_) {
+    return main[key] = function(_) {
       var string = `attrs['${key}'] = _`;
-      if (!arguments.length) { eval(`return attrs['${key}']`); }
+      if (!arguments.length) {
+        eval(`return attrs['${key}']`);
+      }
       eval(string);
       return main;
     };
@@ -936,7 +749,7 @@ function renderBlueGaugeChart(params) {
 
 
   //exposed update functions
-  main.data = function (value) {
+  main.data = function(value) {
     if (!arguments.length) return attrs.data;
     attrs.data = value;
     if (typeof updateData === 'function') {
