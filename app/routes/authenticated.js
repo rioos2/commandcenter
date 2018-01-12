@@ -1,16 +1,21 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import Subscribe from 'nilavu/mixins/subscribe';
-//import { xhrConcur } from 'commandcenter/utils/platform';
+import {
+  xhrConcur
+} from 'nilavu/utils/platform';
 import PromiseToCb from 'nilavu/mixins/promise-to-cb';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
 const CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
-export default Ember.Route.extend(Subscribe, PromiseToCb, {
+export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders,{
   access: Ember.inject.service(),
   storeReset: Ember.inject.service(),
-  //projects  : Ember.inject.service(),
-  //modalService: Ember.inject.service('modal'),
+  // settings  : Ember.inject.service(),
+  store: Ember.inject.service(),
+
+
 
   testTimer: null,
 
@@ -40,7 +45,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
     this.set('testTimer', timer);
   },
 
-  /*model(params, transition) {
+  model(params, transition) {
     // Save whether the user is admin
     console.log("=======================model==============================");
     let type = this.get(`session.${C.SESSION.USER_TYPE}`);
@@ -51,12 +56,10 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
 
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-
-        projects:                                this.toCb('loadProjects',transition),
+        // settingsMap: this.toCb('settingsMap'),
       };
-
       async.auto(tasks, xhrConcur, function(err, res) {
-        if ( err ) {
+        if (err) {
           reject(err);
         } else {
           resolve(res);
@@ -67,12 +70,13 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
     return promise.then((hash) => {
       return Ember.Object.create(hash);
     }).catch((err) => {
+
       return this.loadingError(err, transition, Ember.Object.create({
         projects: [],
         project: null,
       }));
     });
-  },*/
+  },
 
 
   activate() {
@@ -122,20 +126,24 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
     return ret;
   },
 
-  /*cbFind(type, url, store='store') {
+  cbFind(type, url, store = 'store') {
     return (results, cb) => {
-      if ( typeof results === 'function' ) {
+      if (typeof results === 'function') {
         cb = results;
         results = null;
       }
-
       return this.get(store).find(type, null, url).then(function(res) {
+
         cb(null, res);
       }).catch(function(err) {
         cb(err, null);
       });
     };
-  },*/
+  },
+
+  settingsMap() {
+    return this.get('store').findAll('settingsMap', this.opts('origins/rioos/settingsmap/cluster_info'));
+  },
 
   loadProjects() {
     let svc = this.get('projects');

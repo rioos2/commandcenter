@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   access: Ember.inject.service(),
   eyeStatus: false,
+  notifications: Ember.inject.service('notification-messages'),
 
   check() {
     this.get('username') != null && this.get('username') != "" ? this.set('val_username', '') : this.set('val_username', 'has-error');
@@ -20,16 +21,18 @@ export default Ember.Controller.extend({
     },
 
     login: function() {
+      this.check();
       if (this.shouldProceed()) {
         Ember.run.later(() => {
           this.get('access').login(this.get('username'), this.get('password')).then(() => {
             this.send('finishLogin');
           }).catch((err) => {
-            if (err && err.status === 401) {
-              //this.set('errorMsg', this.get('intl').t('loginPage.error.authFailed'));
-            } else {
-              //this.set('errorMsg', (err ? err.message : "No response received"));
-            }
+            if (err.code === '401') {
+              this.get('notifications').error('Incorrect login details used', {
+                autoClear: true,
+                clearDuration: 4200
+              });
+            } 
           }).finally(() => {});
         }, 10);
       }

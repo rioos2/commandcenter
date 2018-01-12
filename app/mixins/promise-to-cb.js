@@ -14,7 +14,6 @@ export default Ember.Mixin.create({
       } else {
         promise = name_or_fn(...args, results);
       }
-
       promise.then(function(res) {
         cb(null, res);
       }).catch(function(err) {
@@ -23,4 +22,3 @@ export default Ember.Mixin.create({
     };
   }
 });
-

@@ -1,157 +1,211 @@
 .container-list {
-    width: 100%;
-    .left {
-        float: left;
-        width: calc(100% - 162px);
-        height: 230px;
-        background-color: white;
-        box-shadow: 0 2px 3px -2px rgba(57, 70, 147, 0.14);
+  width: 100%;
 
-        .domain {
-            height: 35%;
-            padding: 27px 0 0 60px;
-            border-bottom: 1px solid #eeeff5;
-            position: relative;
+  .left {
+    float: left;
+    width: calc(100% - 162px);
+    height: 230px;
+    background-color: white;
+    box-shadow: 0 2px 3px -2px rgba(57, 70, 147, 0.14);
 
-            .icon {
-                position: absolute;
-                width: 20px;
-                left: 27px;
-                top: 31px;
-                filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
+    .domain {
+      height: 35%;
+      padding: 27px 0 0 60px;
+      border-bottom: 1px solid #eeeff5;
+      position: relative;
 
-                .cls-1Running{
-                    fill: #2958cd;
-                }
+      .icon {
+        position: absolute;
+        width: 20px;
+        left: 27px;
+        top: 31px;
+        filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
 
-                .cls-2Running{
-                    fill: $rio-second-color;
-                }
-
-                .cls-1Initializing{
-                    fill: #D84315;
-                }
-
-                .cls-2Initializing{
-                    fill: #FFAB91;
-                }
-
-                .cls-1Pending{
-                    fill: #FFC107;
-                }
-
-                .cls-2Pending{
-                    fill: #FFEB3B;
-                }
-
-                .cls-1AssemblyScheduled{
-                    fill: #FFC107;
-                }
-
-                .cls-2AssemblyScheduled{
-                    fill: #FFEB3B;
-                }
-
-            }
-
-            .text1 {
-                color:#3e4152;
-                font-weight: bold;
-                font-size: 15px;
-                margin: 0px;
-            }
-
-            .text2 {
-                color: #a6a7ad;
-                text-transform: uppercase;
-                margin: 0px;
-                font-size: 12px;
-            }
+        .cls-1bootstrapped {
+          fill: #FF9800;
         }
 
-        .ip {
-            height: 30%;
-            padding: 18px 0 0 60px;
-            border-bottom: 1px solid #eeeff5;
-            position: relative;
-
-            .icon {
-                position: absolute;
-                left: 27px;
-                top: 26px;
-
-                i {
-                    font-size: 20px;
-                    color: #8d90a2;
-                }
-            }
-
-            .text1 {
-                color:#9094ae;
-                font-weight: bold;
-                font-size: 15px;
-                margin: 0px;
-            }
-
-            .text2 {
-                color: #99a0ad;
-                text-transform: uppercase;
-                margin: 0px;
-                font-size: 12px;
-            }
+        .cls-1pending {
+          fill: #FF9800;
         }
 
-        .location {
-            height: 35%;
-            padding: 16px 0 0 60px;
-            position: relative;
-
-            .icon {
-                position: absolute;
-                left: 27px;
-                top: 22px;
-
-                i {
-                    font-size: 20px;
-                    color: #8d90a2;
-                }
-            }
-
-            .text1 {
-                color:#9094ae;
-                font-weight: bold;
-                font-size: 15px;
-                margin: 0px;
-            }
-
-            .text2 {
-                color: #c1c1c3;
-                text-transform: uppercase;
-                margin: 0px;
-                font-size: 12px;
-            }
+        .cls-1scheduled {
+          fill: #FF9800;
         }
+
+        .cls-1initializing {
+          fill: #FF9800;
+        }
+
+        .cls-1booting {
+          fill: #FF9800;
+        }
+
+        .cls-1rebooting {
+          fill: #FF9800;
+        }
+
+        .cls-1starting {
+          fill: #FF9800;
+        }
+        .cls-1stopping {
+          fill: #FF9800;
+        }
+
+        .cls-2bootstrapped {
+          fill: #FFCC80;
+        }
+
+        .cls-2pending {
+          fill: #FFCC80;
+        }
+
+        .cls-2scheduled {
+          fill: #FFCC80;
+        }
+
+        .cls-2initializing {
+          fill: #FFCC80;
+        }
+
+        .cls-2booting {
+          fill: #FFCC80;
+        }
+
+        .cls-2rebooting {
+          fill: #FFCC80;
+        }
+
+        .cls-2starting {
+          fill: #FFCC80;
+        }
+        .cls-2stopping {
+          fill: #FFCC80;
+        }
+
+        .cls-1stopped {
+          fill: #D84315;
+        }
+
+        .cls-1failed {
+          fill: #D84315;
+        }
+
+        .cls-2stopped {
+          fill: #FFAB91;
+        }
+
+        .cls-2failed {
+          fill: #FFAB91;
+        }
+
+        .cls-1running {
+          fill: #2958cd;
+        }
+
+        .cls-2running {
+          fill: $rio-second-color;
+        }
+      }
+
+      .text1 {
+        color: #3e4152;
+        font-weight: bold;
+        font-size: 15px;
+        margin: 0;
+      }
+
+      .text2 {
+        color: #a6a7ad;
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 12px;
+      }
     }
 
-    .right{
-        float: right;
-        height: 230px;
-        width: 162px;
-        background-color: white;
-        border-left: 1px solid #eeeff5;
-        box-shadow: 2px 0px 50px -2px rgba(60, 119, 199, 0.1);
-        position: relative;
+    .ip {
+      height: 30%;
+      padding: 18px 0 0 60px;
+      border-bottom: 1px solid #eeeff5;
+      position: relative;
 
-        .settingIcon{
-            position: absolute;
-            color: #c4c6d2;
-            font-size: 18px;
-            left: 20px;
-            top: 20px;
-        }
+      .icon {
+        position: absolute;
+        left: 27px;
+        top: 26px;
 
-        .gauge {
-            padding: 30px 20px 0 0;
+        i {
+          font-size: 20px;
+          color: #8d90a2;
         }
+      }
+
+      .text1 {
+        color: #9094ae;
+        font-weight: bold;
+        font-size: 15px;
+        margin: 0;
+      }
+
+      .text2 {
+        color: #99a0ad;
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 12px;
+      }
     }
+
+    .location {
+      height: 35%;
+      padding: 16px 0 0 60px;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        left: 27px;
+        top: 22px;
+
+        i {
+          font-size: 20px;
+          color: #8d90a2;
+        }
+      }
+
+      .text1 {
+        color: #9094ae;
+        font-weight: bold;
+        font-size: 15px;
+        margin: 0;
+      }
+
+      .text2 {
+        color: #c1c1c3;
+        text-transform: uppercase;
+        margin: 0;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .right {
+    float: right;
+    height: 230px;
+    width: 162px;
+    background-color: white;
+    border-left: 1px solid #eeeff5;
+    box-shadow: 2px 0 50px -2px rgba(60, 119, 199, 0.1);
+    position: relative;
+
+    .settingIcon {
+      position: absolute;
+      color: #c4c6d2;
+      font-size: 18px;
+      left: 20px;
+      top: 20px;
+    }
+
+    .gauge {
+      padding: 30px 20px 0 0;
+    }
+  }
 }

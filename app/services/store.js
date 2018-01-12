@@ -418,7 +418,9 @@ var Store = Ember.Service.extend({
     if (xhr.status === 204) {
       return;
     }
-
+    if (xhr.body.type_meta) {
+        xhr.body.kind = xhr.body.type_meta.kind
+    }
     if (xhr.body && typeof xhr.body === 'object') {
       Ember.beginPropertyChanges();
       let response = this._typeify(xhr.body);
