@@ -90,7 +90,6 @@ module.exports = function(environment) {
       version: pkg.version,
       appName: 'nilavu',
       apiServer: process.env.RIOOS_API_SERVER,
-      apiServer: "http://51.15.214.241:9639/",
       legacyApiEndpoint: '/v1',
       apiEndpoint: '/api/v1',
       oapiEndpoint: '/oapi/v1',
