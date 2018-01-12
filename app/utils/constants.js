@@ -15,6 +15,7 @@ var C = {
     ASSEMBLYOFFPHASES: ["Stopped", "Failed"],
     ASSEMBLYOFF: "OFF",
     ASSEMBLYON: "ON",
+    ASSEMBLYIPV4: "IPv4",
   },
   BULK_ACTIONS: [
     {

@@ -80,7 +80,7 @@ export default Component.extend({
     if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
     }
-    return "IPv4";
+    return C.ASSEMBLY.ASSEMBLYIPV4;
   }.property('model'),
 
   metricsData: function() {
