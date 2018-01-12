@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import C from 'nilavu/utils/constants';
 
 export default Component.extend({
   classNames: ['container-list'],
@@ -6,39 +7,48 @@ export default Component.extend({
   pollTimer: null,
   store: Ember.inject.service(),
   offAssembly: ["Stopped", "Failed"],
+  assemblyFactory: Ember.computed.alias('model.spec.assembly_factory'),
+  assemblyEndpoint: Ember.computed.alias('model.spec.endpoints'),
+  spec: Ember.computed.alias('model.spec'),
+  metaData: Ember.computed.alias('model.metadata'),
+
+
 
   region: function() {
-    return this.get('model.spec.assembly_factory.object_meta.cluster_name');
+    return this.get('assemblyFactory.object_meta.cluster_name');
   }.property('model'),
 
   name: function() {
-    return this.get('model.object_meta.name').split(".")[0];
+    let nameCollection = this.get('model.object_meta.name').split(".");
+    if (!Ember.isEmpty(nameCollection)) {
+      return nameCollection[0];
+    }
   }.property('model'),
 
   host: function() {
-    if (this.get('model.metadata.host')) {
-      return this.get('model.metadata.host');
+    if (this.get('metaData.host')) {
+      return this.get('metaData.host');
     }
     return ""
   }.property('model'),
 
   port: function() {
-    if (this.get('model.metadata.port')) {
-      return this.get('model.metadata.port');
+    if (this.get('metaData.port')) {
+      return this.get('metaData.port');
     }
     return ""
   }.property('model'),
 
   image: function() {
-    return 'ico_' + this.get('model.spec.assembly_factory.spec.plan.object_meta.name');
+    return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
   }.property('model'),
 
   version: function() {
-    return this.get('model.spec.assembly_factory.spec.plan.version');
+    return this.get('assemblyFactory.spec.plan.version');
   }.property('model'),
 
   addressesLength: function() {
-    return this.get('model.spec.endpoints.subsets.addresses').length;
+    return this.get('assemblyEndpoint.subsets.addresses').length;
   }.property('model'),
 
   country: function() {
@@ -50,10 +60,10 @@ export default Component.extend({
   }.property('model'),
 
   assemblyState: function() {
-    var state = "ON";
-    this.get('offAssembly').forEach(phase => {
+    var state = C.ASSEMBLY.ASSEMBLYON;
+    C.ASSEMBLY.ASSEMBLYOFFPHASES.forEach(phase => {
       if (this.get('model.status.phase') === phase) {
-        state = "OFF"
+        state = C.ASSEMBLY.ASSEMBLYOFF
       }
     });
     return state;
@@ -61,25 +71,23 @@ export default Component.extend({
 
   ip: function() {
     if (this.get('addressesLength') < 0) {
-      return this.get('model.spec.endpoints.subsets.addresses')[0].ip;
+      return this.get('assemblyEndpoint.subsets.addresses')[0].ip;
     }
     return "Not yet assigned";
   }.property('model'),
 
   ipType: function() {
     if (this.get('addressesLength') < 0) {
-      return this.get('model.spec.endpoints.subsets.addresses')[0].protocol_version;
+      return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
     }
     return "IPv4";
   }.property('model'),
 
   metricsData: function() {
-    if (!JSON.stringify(this.get('model.spec.metrics')) === JSON.stringify({})) {
-      this.set('model.spec.metrics.name', "gauge" + this.get('model.id'));
-      let path = 'model.spec.metrics.' + this.get('model.id');
-      let counter = this.get(path);
-      this.set('model.spec.metrics.counter', counter);
-      return this.get('model.spec.metrics');
+    if (!JSON.stringify(this.get('spec.metrics')) === JSON.stringify({})) {
+      this.set('spec.metrics.name', "gauge" + this.get('model.id'));
+      this.set('model.spec.metrics.counter', this.get('model.spec.metrics.' + this.get('model.id')));
+      return this.get('spec.metrics');
     }
     return {
       name: "gauge" + this.get('model.id'),
@@ -87,9 +95,6 @@ export default Component.extend({
     }
   }.property('model'),
 
-  dynamicDummyUpdate: function() {
-    this.set('dummyMet.counter', Math.floor(Math.random() * 10) + 1)
-  },
 
   modelUpdated: function() {
     const self = this;

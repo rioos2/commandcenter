@@ -21,32 +21,25 @@ export default Ember.Controller.extend({
     return unUsedFields;
   },
 
-  getform: function() {
-    if (this.validationEmail(this.get('email'))) {
-      this.emailFinders(this.get('email'));
-    }
-  }.observes('email'),
-
-  emailFinders(email) {
-    this.set('emailAvailableSpinner', true);
+  emailFinders: function() {
     var self = this;
     return this.get('userStore').rawRequest({
-      url: '/api/v1/accounts/name/' + email,
+      url: '/api/v1/accounts/name/' + this.get('email'),
       method: 'GET',
       headers: {
-        'X-AUTH-RIOOS-EMAIL': email,
-        'Authorization': 'Bearer ' + email,
+        'X-AUTH-RIOOS-EMAIL': this.get('email'),
+        'Authorization': 'Bearer ' + this.get('email'),
       },
     }).then((xhr) => {
-      self.set('emailExistence', false);
       this.set('val_email', 'has-error')
+      self.set('emailExistence', false);
     }).catch((res) => {
       if (res.status === 401) {
-        self.set('emailExistence', true);
         this.set('val_email', '')
+        self.set('emailExistence', true);
       }
     });
-  },
+  }.observes('email'),
 
 
   actions: {

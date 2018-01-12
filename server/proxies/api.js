@@ -159,10 +159,6 @@ function proxyLog(label, req) {
 var mockjson = function() {
   return {
     kind: "ReportsStatistics",
-    type_meta: {
-      kind: "ReportsStatistics",
-      api_version: "v1"
-    },
     apiVersion: "v1",
     metadata: {
       selfLink: "/api/v1/reports",
@@ -245,10 +241,6 @@ function statistics() {
     nodes: [{
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "325"
@@ -264,10 +256,6 @@ function statistics() {
       {
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "325"
@@ -283,10 +271,6 @@ function statistics() {
       {
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "326"
@@ -302,10 +286,6 @@ function statistics() {
       {
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "327"
@@ -321,10 +301,6 @@ function statistics() {
       {
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "328"
@@ -340,10 +316,6 @@ function statistics() {
       {
         kind: "Node",
         apiVersion: "v1",
-        type_meta: {
-          kind: "Node",
-          api_version: "v1"
-        },
         metadata: {
           selfLink: "/api/v1/node",
           resourceVersion: "329"
@@ -449,7 +421,7 @@ var mockjsonAssembly = function() {
       resourceVersion: "325"
     },
     id: "12345",
-    items: findAssembly(Math.floor(Math.random() * 3) + 1),
+    items: findAssembly(Math.floor(Math.random() * 3) + 1 ),
     // items: findAssembly(1),
   };
 };
@@ -486,10 +458,10 @@ var findAssemblyStatus = function(which) {
       return "Pending";
 
       break;
-      // case 4:
-      //   return "Test";
-      //
-      //   break;
+    // case 4:
+    //   return "Test";
+    //
+    //   break;
     default:
       return "Running";
 
@@ -1092,8 +1064,7 @@ var assemblysTwo = function() {
           },
         }
       }
-    },
-  ]
+    },]
 
 };
 

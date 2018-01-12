@@ -25,43 +25,6 @@ function renderBlueGaugeChart(params) {
 
 
   staticArcProperties = {
-    // outerBackgroundCircle: {
-    //   color: attrs.outerBackgroundCircleColor,
-    //   // color: "url(#outer-background-gradient)",
-    //   values: [{
-    //     type: consts.TYPE_COLORED,
-    //     value: 360
-    //   }]
-    // },
-    // middleBackground: {
-    //   color: attrs.middleBackgroundCircleColor,
-    //   //color: "url(#outer-background-gradient)",
-    //   values: [{
-    //     type: consts.TYPE_COLORED,
-    //     value: 360
-    //   }]
-    // },
-    // outerStepBackgroundCircle: {
-    //   color: attrs.outerBackgroundCircleColor,
-    //   values: [{
-    //     type: consts.TYPE_COLORED,
-    //     value: 360
-    //   }]
-    // },
-    // outerStepTwoBackgroundCircle: {
-    //   color: attrs.outerBackgroundCircleColor,
-    //   values: [{
-    //     type: consts.TYPE_COLORED,
-    //     value: 360
-    //   }]
-    // },
-    // outerStepThreeBackgroundCircle: {
-    //   color: attrs.outerBackgroundCircleColor,
-    //   values: [{
-    //     type: consts.TYPE_COLORED,
-    //     value: 360
-    //   }]
-    // },
     outerTopHeadBackground: {
       color: '#EDEFF9',
       values: [{

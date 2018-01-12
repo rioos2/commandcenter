@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   access: Ember.inject.service(),
-  eyeStatus: false,
   notifications: Ember.inject.service('notification-messages'),
+  eyeStatus: false,
 
   check() {
     this.get('username') != null && this.get('username') != "" ? this.set('val_username', '') : this.set('val_username', 'has-error');
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
                 autoClear: true,
                 clearDuration: 4200
               });
-            } 
+            }
           }).finally(() => {});
         }, 10);
       }
