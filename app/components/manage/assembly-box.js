@@ -26,15 +26,15 @@ export default Component.extend({
   }.property('model'),
 
   host: function() {
-    if (this.get('metaData.host')) {
-      return this.get('metaData.host');
+    if (this.get('metaData.rioos_machine_vnc_host')) {
+      return this.get('metaData.rioos_machine_vnc_host');
     }
     return ""
   }.property('model'),
 
   port: function() {
-    if (this.get('metaData.port')) {
-      return this.get('metaData.port');
+    if (this.get('metaData.rioos_machine_vnc_port')) {
+      return this.get('metaData.rioos_machine_vnc_port');
     }
     return ""
   }.property('model'),
@@ -70,14 +70,14 @@ export default Component.extend({
   }.property('model'),
 
   ip: function() {
-    if (this.get('addressesLength') < 0) {
+    if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].ip;
     }
     return "Not yet assigned";
   }.property('model'),
 
   ipType: function() {
-    if (this.get('addressesLength') < 0) {
+    if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
     }
     return "IPv4";
