@@ -5,6 +5,7 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 export default Ember.Route.extend(PolledModel, DefaultHeaders, {
   session: Ember.inject.service(),
 
+
   activate: function() {
     this.send('unfixedTop');
     this.send('unfixedBottom');
@@ -21,6 +22,7 @@ export default Ember.Route.extend(PolledModel, DefaultHeaders, {
     }).catch(function() {
       self.set('loading', false);
     });
+    return {};
   },
 
 });

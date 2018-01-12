@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   session: Ember.inject.service(),
 
-  opts(url = '') {
+  opts(url = '', forceReload = true) {
     var session = this.get('session');
     let rioos_headers = {
       headers: {
@@ -11,7 +11,7 @@ export default Ember.Mixin.create({
         'Authorization': 'Bearer ' + session.get("token"),
       },
       url: url,
-      forceReload: true,
+      forceReload: forceReload,
       removeAfterDelete: true
     };
     return rioos_headers;

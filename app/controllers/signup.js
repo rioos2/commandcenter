@@ -3,7 +3,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
   access: Ember.inject.service(),
+  store: Ember.inject.service(),
+  userStore: Ember.inject.service('store'),
   name: Em.computed.alias('first_name'),
+  emailExistence: true,
 
   getform() {
     let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'password', 'phone');
@@ -18,6 +21,26 @@ export default Ember.Controller.extend({
     return unUsedFields;
   },
 
+  emailFinders: function() {
+    var self = this;
+    return this.get('userStore').rawRequest({
+      url: '/api/v1/accounts/name/' + this.get('email'),
+      method: 'GET',
+      headers: {
+        'X-AUTH-RIOOS-EMAIL': this.get('email'),
+        'Authorization': 'Bearer ' + this.get('email'),
+      },
+    }).then((xhr) => {
+      this.set('val_email', 'has-error')
+      self.set('emailExistence', false);
+    }).catch((res) => {
+      if (res.status === 401) {
+        this.set('val_email', '')
+        self.set('emailExistence', true);
+      }
+    });
+  }.observes('email'),
+
 
   actions: {
     singUp() {
@@ -28,11 +51,12 @@ export default Ember.Controller.extend({
             this.send('finishLogin');
           }).catch((err) => {
 
-            if (err && err.status === 401) {
-              //this.set('errorMsg', this.get('intl').t('loginPage.error.authFailed'));
-            } else {
-              //this.set('errorMsg', (err ? err.message : "No response received"));
-            }
+              if (err.code === '500') {
+                this.get('notifications').error('Something went wrong', {
+                  autoClear: true,
+                  clearDuration: 4200
+                });
+              }
           }).finally(() => {});
         }, 10);
       }

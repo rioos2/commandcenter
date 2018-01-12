@@ -213,6 +213,8 @@ function renderBlueGaugeChart(params) {
 
       var svg = container
         .append('svg')
+        // .attr('width', attrs.svgWidth)
+        // .attr('height', attrs.svgHeight)
         .attr('font-family', attrs.fontFamily)
         .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
         .attr("preserveAspectRatio", "xMidYMid meet")
@@ -328,10 +330,17 @@ function renderBlueGaugeChart(params) {
         elementTag: 'circle'
       })
       outerBackgroundCircle.attr('r', 128)
+        // .attr('cx', attrs.svgWidth)
+        // .attr('cy', attrs.svgHeight)
+        // .attr('r', calc.outerBackgroundCircleRadius)
         .attr('stroke', '#3B58BE')
         .attr('stroke-width', 30)
         .attr('fill', '#142DA3')
 
+      // cx="150" cy="140" r="73" stroke="#3B58BE" stroke-width="20" fill="none"
+      // .attr('fill', attrs.outerBackgroundCircleColor)
+      // .attr('opacity', 0)
+      // .style("filter", "url(#drop-shadow)")
 
       // middle background circle
       var middleBackgroundCircle = patternify({
@@ -350,7 +359,7 @@ function renderBlueGaugeChart(params) {
         selector: 'outerstep-background-circle',
         elementTag: 'circle'
       })
-      outerStepBackgroundCircle.attr('r', 128)
+      outerStepBackgroundCircle.attr('r', 126)
         .attr('stroke', '#A7E2F7')
         .attr('stroke-width', 2)
         .attr('fill', 'none')
@@ -362,7 +371,7 @@ function renderBlueGaugeChart(params) {
         selector: 'outertwostep-background-circle',
         elementTag: 'circle'
       })
-      outerStepTwoBackgroundCircle.attr('r', 130)
+      outerStepTwoBackgroundCircle.attr('r', 128)
         .attr('class', "symbol2")
         .attr('stroke', '#A7E2F7')
         .attr('stroke-width', 7)
@@ -376,7 +385,17 @@ function renderBlueGaugeChart(params) {
       outerStepThreeBackgroundCircle.attr('r', 153)
         .attr('stroke', '#B5BACF')
         .attr('stroke-width', 5)
+        // .attr('fill', '#142DA3')
         .attr('fill', 'none')
+      // .attr('shadowColor', '#142DA3')
+      // .attr('color', '#142da3')
+      // ctx_back.fillStyle = "#142DA3";
+      // ctx_back.beginPath();
+      // ctx_back.shadowColor = "#142DA3";
+      // ctx_back.shadowBlur = 15;
+      // .attr('style', 'background-color: #e65525;border-radius:50%;box-shadow: 3px 3px 3px #e78267;')
+
+
 
       // links and nodes background
       var wrapper = patternify({
@@ -506,6 +525,22 @@ function renderBlueGaugeChart(params) {
         .attr('fill', '#6EAAFA')
         .attr('opacity', (d, i) => Math.random())
 
+      // var links = wrapper.selectAll('.links')
+      //   .data(pointConfig.links)
+      //   .enter()
+      //   .append('line')
+      //   .attr('stroke', 'white')
+      //   .attr('stroke-width', 3)
+      //   .attr('x1', d => pointConfig.nodes[d.source].x / 100 * width)
+      //   .attr('x2', d => pointConfig.nodes[d.target].x / 100 * width)
+      //   .attr('y1', d => pointConfig.nodes[d.source].y / 100 * width)
+      //   .attr('y2', d => pointConfig.nodes[d.target].y / 100 * width)
+      //   .attr('fill', '#6EAAFA')
+      //   .attr('opacity', (d, i) => Math.random() / 4)
+
+
+
+
 
       //----------------------------------------------------------
       //static arcs
@@ -570,7 +605,19 @@ function renderBlueGaugeChart(params) {
             whiteCircle.attr('cx', pos[0]).attr('cy', pos[1]);
           }
         })
+      // <canvas id="back_loop" width="300" height="300"></canvas>
+      // var canvas = centerPoint.insert('circle')
+      // .attr('id', 'back_loop')
+      // .attr('width', 300)
+      //   .attr('height', 300)
+      //     .attr("fill", "steelblue")
 
+      // var context = canvas.node().getContext("2d");
+
+      // .attr('cx', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[0])
+      // .attr('cy', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[1])
+      // .attr('class', '.round-corner-gray-left')
+      // .attr('fill', '#EDEFF9')
 
       centerPoint.insert('circle', '.top-paths')
         .attr('r', 7)
@@ -596,7 +643,8 @@ function renderBlueGaugeChart(params) {
           endAngle: calc.sliderStartAngle
         })[1])
         .attr('class', '.round-corner-gray-blue')
-        .attr('fill', '#1969F8')
+        // .attr('fill', '#1969F8')
+        .attr('fill', '#a5a6d4')
 
       centerPoint.insert('circle', '.top-paths')
         .attr('r', 7)
@@ -725,6 +773,25 @@ function renderBlueGaugeChart(params) {
         selection.attr('class', selector);
         return selection;
       }
+
+      // setTimeout(setDimensitons, 0);
+      //
+      // d3.select(window).on('resize.' + attrs.id, function () {
+      //   setDimensitons();
+      // })
+      //
+      //
+      // function setDimensitons() {
+      //   var outerContainer = d3.select(container.node().parentNode)
+      //   var width = outerContainer.node().getBoundingClientRect().width;
+      //
+      //   outerContainer.select('canvas')
+      //     .style('top', (width / 4 + 3) + 'px')
+      //     .style('left', (width / 4 + 10) + 'px')
+      //     .style('width', width / 2 + 'px')
+      //     .style('height', width / 2 + 'px')
+      //
+      // }
 
     });
   };

@@ -10,6 +10,12 @@ const KIND_INFRA = 'infra';
 const KIND_NOT_ORCHESTRATION = 'cattle';
 
 var C = {
+
+  ASSEMBLY: {
+    ASSEMBLYOFFPHASES: ["Stopped", "Failed"],
+    ASSEMBLYOFF: "OFF",
+    ASSEMBLYON: "ON",
+  },
   BULK_ACTIONS: [
     {
       "label": "action.start",

@@ -20,36 +20,98 @@
                 top: 31px;
                 filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
 
-                .cls-1Running{
-                    fill: #2958cd;
+                .cls-1bootstrapped {
+                  fill: #FF9800;
                 }
 
-                .cls-2Running{
-                    fill: $rio-second-color;
+                .cls-1pending {
+                  fill: #FF9800;
                 }
 
-                .cls-1Initializing{
-                    fill: #D84315;
+                .cls-1scheduled {
+                  fill: #FF9800;
                 }
 
-                .cls-2Initializing{
-                    fill: #FFAB91;
+                .cls-1initializing {
+                  fill: #FF9800;
                 }
 
-                .cls-1Pending{
-                    fill: #FFC107;
+                .cls-1initialized {
+                  fill: #FF9800;
                 }
 
-                .cls-2Pending{
-                    fill: #FFEB3B;
+                .cls-1booting {
+                  fill: #FF9800;
                 }
 
-                .cls-1AssemblyScheduled{
-                    fill: #FFC107;
+                .cls-1rebooting {
+                  fill: #FF9800;
                 }
 
-                .cls-2AssemblyScheduled{
-                    fill: #FFEB3B;
+                .cls-1starting {
+                  fill: #FF9800;
+                }
+                .cls-1stopping {
+                  fill: #FF9800;
+                }
+
+                .cls-2bootstrapped {
+                  fill: #FFCC80;
+                }
+
+                .cls-2pending {
+                  fill: #FFCC80;
+                }
+
+                .cls-2scheduled {
+                  fill: #FFCC80;
+                }
+
+                .cls-2initializing {
+                  fill: #FFCC80;
+                }
+
+                .cls-2initialized {
+                  fill: #FFCC80;
+                }
+
+                .cls-2booting {
+                  fill: #FFCC80;
+                }
+
+                .cls-2rebooting {
+                  fill: #FFCC80;
+                }
+
+                .cls-2starting {
+                  fill: #FFCC80;
+                }
+                .cls-2stopping {
+                  fill: #FFCC80;
+                }
+
+                .cls-1stopped {
+                  fill: #D84315;
+                }
+
+                .cls-1failed {
+                  fill: #D84315;
+                }
+
+                .cls-2stopped {
+                  fill: #FFAB91;
+                }
+
+                .cls-2failed {
+                  fill: #FFAB91;
+                }
+
+                .cls-1running {
+                  fill: #2958cd;
+                }
+
+                .cls-2running {
+                  fill: $rio-second-color;
                 }
 
             }

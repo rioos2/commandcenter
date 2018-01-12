@@ -1,29 +1,33 @@
 <div class="left">
-    <div class="domain">
-        <div class="icon" data-tooltip="{{model.status.phase}}">
-            {{svg/svg-status status=model.status.phase}}
-        </div>
-        <p class="text1">{{name}}</p>
-        <p class="text2">{{model.status.phase}}</p>
+  <div class="domain">
+    <div class="icon" data-tooltip="{{assemblyState}}">
+      {{svg/svg-status status=assemblyStatus}}
     </div>
-    <div class="ip">
-        <div class="icon">
-            {{fa-icon "tasks"}}
-        </div>
-        <p class="text1">{{ipType}}</p>
-        <p class="text2">{{ip}}</p>
+    <p class="text1">{{name}}</p>
+    <p class="text2">{{model.status.phase}}</p>
+  </div>
+  <div class="ip">
+    <div class="icon">
+      {{fa-icon "tasks"}}
     </div>
-    <div class="location">
-        <div class="icon">
-            {{fa-icon "tag"}}
-        </div>
-        <p class="text1">{{region}}</p>
-        <p class="text2">{{country}}</p>
+    <p class="text1">{{ipType}}</p>
+    <p class="text2">{{ip}}</p>
+  </div>
+  <div class="location">
+    <div class="icon">
+      {{fa-icon "tag"}}
     </div>
+    <p class="text1">{{region}}</p>
+    <p class="text2">{{country}}</p>
+  </div>
 </div>
 <div class="right">
+  {{#link-to "vnc" (query-params vnchost=host vncport=port) target="_blank" }}
     {{fa-icon "cog" class="settingIcon"}}
-    <div class="gauge">
-        {{home/chart-gauge model=dummyMet showName=false showOS=true image=image version=version}}
-    </div>
+    <!-- <i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i> -->
+  {{/link-to}}
+
+  <div class="gauge">
+    {{home/chart-gauge model=metricsData showName=false showOS=true image=image version=version}}
+  </div>
 </div>
