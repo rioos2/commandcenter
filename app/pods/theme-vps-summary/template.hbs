@@ -69,8 +69,12 @@
       <p class="topic2">Networking</p>
     </div>
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
+    {{#if noImage}}
+    <span> {{fa-icon "exclamation-circle"}} No image selected </span>
+    {{else}}
     <img src="images/second/summary/ico_{{distroNameFromPlan}}.png">
     <div class="btn-version"><img><span>{{model.assemblyfactory.resources.version}}</span></div>
+    {{/if}}
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     <div class="launch" style="margin-left: -80px;">
       {{theme-spinner size=25 condition=showSpinner}}

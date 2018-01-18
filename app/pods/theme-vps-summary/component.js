@@ -6,26 +6,46 @@ import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 export default Ember.Component.extend(DefaultHeaders, {
   session: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
+  noImage: true,
+  validationWarning: '',
 
   selectionChecker: function() {
     this.set("network", this.get("model.assemblyfactory.network"));
   }.observes('model.assemblyfactory.network'),
 
+  distroChecker: function() {
+    this.set("noImage", false);
+  }.observes('model.assemblyfactory.os'),
+
   distroNameFromPlan: function() {
+    if(this.get("model.assemblyfactory.os") == undefined) {
+      this.set('noImage', true);
+    } else {
+      this.set('noImage', false);
+    }
     return this.get("model.assemblyfactory.os");
   }.property('model.assemblyfactory.os'),
 
   domainExisit: function() {
-    return this.checkDomain();
+    return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
   }.property('model.assemblyfactory.name'),
 
-  checkDomain() {
-    return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
+
+  validation() {
+    if(Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'))) {
+      this.set('validationWarning', 'Please enter domain name on step 2');
+      return true;
+    } else if (Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
+      this.set('validationWarning', 'Please select image on step 5');
+      return true;
+    } else {
+      return false;
+    }
   },
 
   actions: {
     createAssemblyFactory() {
-      if (!this.checkDomain()) {
+      if (!this.validation()) {
         this.set('showSpinner', true);
         var session = this.get("session");
         var id = this.get("session").get("id");
@@ -39,7 +59,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           this.set('showSpinner', false);
         });
       } else {
-        this.get('notifications').warning('Please enter domain name on step 2', {
+        this.get('notifications').warning(this.get('validationWarning'), {
           autoClear: true,
           clearDuration: 4200
         });

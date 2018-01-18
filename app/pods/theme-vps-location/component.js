@@ -11,8 +11,6 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
 
     var self = this;
-    this.set("model.assemblyfactory.object_meta.cluster_name", this.get('region'));
-    this.sendAction('done', "step3");
     var element = $("#step-3").find(".loc-country");
     if (element.length > 0)
       self.$(".step3").addClass("btn-success");

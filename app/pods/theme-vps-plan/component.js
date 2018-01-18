@@ -6,7 +6,6 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
-    self.sendAction('done', "step5");
     self.$(".btn-version").click(function(e) {
       self.$(".btn-version").removeClass("active");
       self.$(this).addClass("active");

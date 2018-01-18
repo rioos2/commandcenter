@@ -16,8 +16,6 @@ export default Ember.Component.extend(DefaultHeaders, {
         var self = this;
         //default
         this.set("model.assemblyfactory.name", this.get('domain'));
-        this.sendAction('done', "step2");
-
       }),
 
       updateName: function() {
