@@ -114,6 +114,7 @@ module.exports = function(environment) {
       cpuCore: 4,
       ram: 1,
       storage: 20,
+      storageType: "ssd",
       network:"private_ipv4",
       destro:"ubuntu",
       destroVersion: "14.04",

@@ -1289,7 +1289,15 @@
 
           p {
             font-size: 18px;
-            color: #fff;
+            color: #cbe4e4;
+            text-shadow: 0 0 20px #63d8e4;
+          }
+
+          .storage-active {
+            border: none;
+            width: 20px;
+            margin-left: 45%;
+            border-bottom: 2px solid #00f6ff;
           }
         }
 

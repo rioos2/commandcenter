@@ -26,6 +26,10 @@ var C = {
     LOCATION: {
       DROPDOWNNAME: "Location"
     },
+    RESOURSE: {
+      HDD: "hdd",
+      SSD: "ssd",
+    }
   },
 
   BULK_ACTIONS: [
