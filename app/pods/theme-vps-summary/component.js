@@ -30,6 +30,10 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
   }.property('model.assemblyfactory.name'),
 
+  regionExisit: function() {
+    return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name'));
+  }.property('model.assemblyfactory.object_meta.cluster_name'),
+
 
   validation() {
     if(Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'))) {

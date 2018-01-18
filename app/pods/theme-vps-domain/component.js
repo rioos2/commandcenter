@@ -12,14 +12,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       notifications: Ember.inject.service('notification-messages'),
       doneCreate: false,
 
-      initializeChart: Ember.on('didInsertElement', function() {
-        var self = this;
-        //default
-        this.set("model.assemblyfactory.name", this.get('domain'));
-      }),
-
       updateName: function() {
-        this.sendAction('done', "step2");
         if (!this.checkDomain()) {
           this.set("model.assemblyfactory.name", (this.get('domain') + "." + this.get('model.settings.domain')).replace(/\s/g, ''));
           this.set("model.assemblyfactory.object_meta.name", this.get("model.assemblyfactory.name"));
