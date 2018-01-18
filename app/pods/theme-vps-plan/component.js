@@ -17,12 +17,6 @@ export default Ember.Component.extend({
     return this.groupingVms();
   }.property('model.plans'),
 
-  // stepDone: function() {
-  //   if(!Ember.isEmpty(this.get('model.assemblyfactory.resources.version'))) {
-  //     this.sendAction('done', "step5");
-  //   }
-  // },
-
   groupingVms() {
     var planGroup = [];
     var uniqueVmGroup = [];
