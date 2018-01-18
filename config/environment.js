@@ -90,7 +90,6 @@ module.exports = function(environment) {
       version: pkg.version,
       appName: 'nilavu',
       apiServer: process.env.RIOOS_API_SERVER,
-      apiServer: "http://51.15.214.241:9639/",
       legacyApiEndpoint: '/v1',
       apiEndpoint: '/api/v1',
       oapiEndpoint: '/oapi/v1',
@@ -106,6 +105,22 @@ module.exports = function(environment) {
         '&limit=-1',
       baseAssets: '/',
       //locales: readLocales(environment)
+    },
+
+    VPS: {
+      computeType: "cpu",
+      domain: "rioosbox.com",
+      region: "chennai",
+      cpuCore: 4,
+      ram: 1,
+      storage: 20,
+      storageType: "ssd",
+      network:"private_ipv4",
+      destro:"ubuntu",
+      destroVersion: "14.04",
+      secret: "SSH-1(RSA)",
+      secretTypes: ["SSH-1(RSA)", "SSH-1(RSA2)", "SSH-1(RSA3)"],
+      bitsInKey: "2048",
     },
   };
 

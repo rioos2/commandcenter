@@ -17,6 +17,21 @@ var C = {
     ASSEMBLYON: "ON",
     ASSEMBLYIPV4: "IPv4",
   },
+
+  PHASE: {
+    READY: "ready",
+  },
+
+  VPS: {
+    LOCATION: {
+      DROPDOWNNAME: "Location"
+    },
+    RESOURSE: {
+      HDD: "hdd",
+      SSD: "ssd",
+    }
+  },
+
   BULK_ACTIONS: [
     {
       "label": "action.start",

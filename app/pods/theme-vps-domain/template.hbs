@@ -1,11 +1,9 @@
 <div class="setup-content" id="step-2">
   <p class="sub-title">Select a Domain Name</p>
   <p class="sub-description">You create own domain or uses configured domain name</p>
-  {{#unless showEdit}}
-    <p class="domain-name">{{domain}}</p>
-    {{else}}
+
       {{input type="text" id="domain" name="field2" placeholder="Type your domain" style="color: #324fcc; font-size: 30px; text-align: center;" value=domain}}
-  {{/unless}}
+
   <div class="domain-edit">
       <img {{action "createDomain"}} src="images/second/edit.png">
     <hr>
@@ -22,7 +20,7 @@
         </div>
         <div class="m-t-40">
           {{#each secretTypes as |key|}}
-            {{theme-key secretType=secretType getSecretType="getSecretType" activate=activate key=key}}
+            {{theme-key secretType=secretType getSecretType="getSecretType" model=model activate=activate key=key}}
           {{/each}}
         </div>
       </div>
@@ -34,7 +32,11 @@
     <div class="col-xs-3 sec-right p-0">
       {{theme-spinner size=25 condition=showSpinner}}
       {{#unless showSpinner}}
+      {{#if doneCreate}}
+      <img class="generated" src="images/second/generate.png">
+      {{else}}
       <img class="generate" {{action 'createSecret'}} src="images/second/generate.png">
+      {{/if}}
       {{/unless}}
 
     </div>

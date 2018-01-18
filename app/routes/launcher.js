@@ -1,12 +1,14 @@
 import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Config from 'nilavu/mixins/config';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
 import {
   xhrConcur
 } from 'nilavu/utils/platform';
 
-export default Ember.Route.extend(DefaultHeaders, {
+export default Ember.Route.extend(DefaultHeaders, Config, {
+
   activate: function() {
     this.send('unfixedTop');
     this.send('unfixedBottom');
@@ -18,9 +20,9 @@ export default Ember.Route.extend(DefaultHeaders, {
   access: Ember.inject.service(),
 
   model() {
-
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
+        datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
       };
 
@@ -37,7 +39,9 @@ export default Ember.Route.extend(DefaultHeaders, {
       return Ember.Object.create({
         assemblyfactory: this.loadAssemblyFactory(),
         secret: this.loadSecret(),
+        datacenters: hash.datacenters,
         plans: hash.plans,
+        settings: this.defaultVPS(),
       });
     }).catch((err) => {
       /*return this.loadingError(err, transition, Ember.Object.create({
