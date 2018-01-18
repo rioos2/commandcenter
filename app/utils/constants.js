@@ -17,6 +17,17 @@ var C = {
     ASSEMBLYON: "ON",
     ASSEMBLYIPV4: "IPv4",
   },
+
+  PHASE: {
+    READY: "ready",
+  },
+
+  VPS: {
+    LOCATION: {
+      DROPDOWNNAME: "Location"
+    },
+  },
+
   BULK_ACTIONS: [
     {
       "label": "action.start",

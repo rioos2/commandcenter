@@ -1,20 +1,17 @@
-/* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-import DefaultVps from 'nilavu/models/default-vps';
-
 
 export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
 
-    if (DefaultVps.computeType == "cpu") {
+    if (this.get('model.settings.computeType') == "cpu") {
       self.set('cpuselect', 'cpu-checked');
     } else {
       self.set('gpuselect', 'gpu-checked');
     }
 
-    self.set("model.assemblyfactory.resources.compute_type", DefaultVps.computeType);
+    self.set("model.assemblyfactory.resources.compute_type", this.get('model.settings.computeType'));
     self.sendAction('done', "step1");
     self.$("#cg-close").click(function(e) {
       self.$(".opened-info").addClass("disabled");

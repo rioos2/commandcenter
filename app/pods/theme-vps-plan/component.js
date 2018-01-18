@@ -1,6 +1,4 @@
-/* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-
 
 export default Ember.Component.extend({
   activate: false,
@@ -17,141 +15,14 @@ export default Ember.Component.extend({
 
 
   groupedVms: function() {
+    return this.groupingVms();
+  }.property('model.plans'),
+
+  groupingVms() {
     var planGroup = [];
     var uniqueVmGroup = [];
     var groupVms = [];
     var planfactory = this.get("model.plans.content");
-//     planfactory.pushObject(
-//       {
-// "id":"876624595061317632",
-// "type_meta":{
-// "kind":"PlanFactory",
-// "api_version":"v1"
-// },
-// "object_meta":{
-// "name":"fedora",
-// "account":"",
-// "created_at":"",
-// "deleted_at":"",
-// "deletion_grace_period_seconds":"",
-// "labels":{
-// },
-// "annotations":{
-// },
-// "owner_references":[
-// {
-// "kind":"",
-// "api_version":"",
-// "name":"",
-// "uid":"",
-// "block_owner_deletion":false
-// }
-// ],
-// "initializers":{
-// },
-// "finalizers":[
-// ],
-// "cluster_name":""
-// },
-// "category":"machine",
-// "version":"4.04",
-// "characteristics":{
-// "extension":"raw"
-// },
-// "icon":"ubuntu.png",
-// "description":"Ubuntu is a Debian-based Linux operating system. Trusty Tahr is the Ubuntu codename for version 14.04 LTS of the Ubuntu Linux-based operating system",
-// "ports":[
-// ],
-// "envs":{
-// },
-// "lifecycle":{
-// },
-// "status":{
-// "phase":"ready",
-// "message":"",
-// "reason":"",
-// "conditions":[
-// {
-// "condition_type":"",
-// "message":"",
-// "reason":"",
-// "status":"ready",
-// "last_update_time":"",
-// "last_transition_time":"",
-// "last_probe_time":""
-// }
-// ]
-// },
-// "created_at":"",
-// "kind":"planfactory",
-// "type":"planfactory"
-// },
-//     );
-//     planfactory.pushObject(      {
-//     "id":"876624595061317632",
-//     "type_meta":{
-//     "kind":"PlanFactory",
-//     "api_version":"v1"
-//     },
-//     "object_meta":{
-//     "name":"ubuntu",
-//     "account":"",
-//     "created_at":"",
-//     "deleted_at":"",
-//     "deletion_grace_period_seconds":"",
-//     "labels":{
-//     },
-//     "annotations":{
-//     },
-//     "owner_references":[
-//     {
-//     "kind":"",
-//     "api_version":"",
-//     "name":"",
-//     "uid":"",
-//     "block_owner_deletion":false
-//     }
-//     ],
-//     "initializers":{
-//     },
-//     "finalizers":[
-//     ],
-//     "cluster_name":""
-//     },
-//     "category":"machine",
-//     "version":"16.04",
-//     "characteristics":{
-//     "extension":"raw"
-//     },
-//     "icon":"ubuntu.png",
-//     "description":"Ubuntu is a Debian-based Linux operating system. Trusty Tahr is the Ubuntu codename for version 14.04 LTS of the Ubuntu Linux-based operating system",
-//     "ports":[
-//     ],
-//     "envs":{
-//     },
-//     "lifecycle":{
-//     },
-//     "status":{
-//     "phase":"ready",
-//     "message":"",
-//     "reason":"",
-//     "conditions":[
-//     {
-//     "condition_type":"",
-//     "message":"",
-//     "reason":"",
-//     "status":"ready",
-//     "last_update_time":"",
-//     "last_transition_time":"",
-//     "last_probe_time":""
-//     }
-//     ]
-//     },
-//     "created_at":"",
-//     "kind":"planfactory",
-//     "type":"planfactory"
-//     },);
-
     planfactory.forEach(function(plan) {
       if (plan.category == "machine" && plan.status.phase == "ready") {
         planGroup.pushObject(plan.object_meta.name);
@@ -180,7 +51,7 @@ export default Ember.Component.extend({
       createVmGroup = {};
     })
     return groupVms;
-  }.property('model.plans'),
+  },
 
   indexReader: function() {
     var types = this.get('groupedVms').map(function(vm) {
@@ -194,7 +65,7 @@ export default Ember.Component.extend({
     refreshAfterSelect(item) {
       this.sendAction('done', "step5");
       this.set("selected", item);
-      this.set("model.assemblyfactory.os", item.type);
+      this.set("model.assemblyfactory.current_os_tab", item.type);
       this.toggleProperty('activate');
     },
 
