@@ -1,6 +1,5 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-import DefaultVps from 'nilavu/models/default-vps';
 
 export default Ember.Component.extend({
 
@@ -12,11 +11,11 @@ export default Ember.Component.extend({
   },
 
   initializeChart: Ember.on('didInsertElement', function() {
-    this.set(DefaultVps.network, "selected");
+    this.set(this.get('model.settings.network'), "selected");
     var cc = this.get("model.assemblyfactory.resources");
-    cc[DefaultVps.network] = "true";
+    cc[this.get('model.settings.network')] = "true";
     this.set("model.assemblyfactory.resources", cc);
-    this.set("model.assemblyfactory.network", this.get("networks")[DefaultVps.network]);
+    this.set("model.assemblyfactory.network", this.get("networks")[this.get('model.settings.network')]);
     this.sendAction('done', "step6");
   }),
 
@@ -36,10 +35,7 @@ export default Ember.Component.extend({
         delete cc[net_type];
       }
       this.set("model.assemblyfactory.resources", cc);
-      // if(cc[net_type]){
-      alert("chnages");
-        this.set("model.assemblyfactory.network", this.get("networks")[net_type]);
-      // }
+        this.set("model.assemblyfactory.network", net_type);
     }
   }
 

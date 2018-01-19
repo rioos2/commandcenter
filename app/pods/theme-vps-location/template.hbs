@@ -10,34 +10,43 @@
         </div>
         <div class="col-xs-6 earth">
             <img class="bg-location" src="images/second/location.png">
-            <div id="inputlocation" class="inactive">
-                <div>
-                    <img class="btn-close" src="images/second/location_close.png">
+            <div id="inputlocation" class="{{addMoreActive}}">
+                <div class="close-btn">
+                    <img class="btn-close" {{action "addMoreClose"}} src="images/second/location_close.png">
                 </div>
-                {{input type="text" name="field1" placeholder="Type your location" value=region}}
+                <!-- {{input type="text" name="field1" placeholder="Type your location" value=region}} -->
+                <!-- <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"> -->
+                  <div class="select-filter">
+                    <div class='md-select {{if isActive 'active'}}' {{action "clickSelect" "isActive" on="click"}} {{action "focusOutSelect" "isActive" on='focusOut'}}>
+                      <label for="ul-id"><button type="button" class="ng-binding">{{select}}</button></label>
+                      <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+                        {{#each model.datacenters.content as |data|}}
+                          <li role="option" value="{{data.object_meta.name}}" class="ng-binding ng-scope" tabindex="-1" {{action "clickOption" data.object_meta.name on="mouseDown"}}>{{data.object_meta.name}}</li>
+                        {{/each}}
+                      </ul>
+                    </div>
+                  </div>
+                <!-- </div> -->
 
                 <div>
                   {{theme-spinner size=25 condition=showSpinner}}
-                  {{#unless showSpinner}}
-                  <img class="btn-add" {{action 'createLocation'}} src="images/second/location_add.png">
-                  {{/unless}}
+
                 </div>
             </div>
         </div>
         <div class="col-xs-3 m-t-30">
             <p class="your-location">Your location(s)</p>
-            <div class="loc-country">
-                <img class="btn-location" src="images/second/locaion_ico.png">
-                <span class="city">Ohio</span><span class="country"> - USA</span>
-                <img class="btn-location-cancel" src="images/second/location_x.png">
-            </div>
-            <div class="loc-country">
-                <img class="btn-location" src="images/second/locaion_ico.png">
-                <span class="city">Tokyo</span><span class="country"> - Japan</span>
-            </div>
-            <div class="add-more">
+            {{#if emptyRegion}}
+            <span class="no-region">{{fa-icon "exclamation-circle"}} Nothing found</span>
+            {{/if}}
+            {{#each model.datacenters.content as |data|}}
+              {{theme-vps-region-status model=data}}
+            {{/each}}
+            {{#unless emptyRegion}}
+            <div class="add-more" {{action "addMore"}}>
                 <img src="images/second/addmore.png">
             </div>
+          {{/unless}}
         </div>
     </div>
 </div>

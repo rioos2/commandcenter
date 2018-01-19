@@ -39,6 +39,11 @@ export default Component.extend({
     return ""
   }.property('model'),
 
+  assemblyStatusUpdate: function() {
+    this.set('assemblyStatus', this.get('model.status.phase').toLowerCase());
+    this.set('assemblyState', this.assemblyStateFinder());
+  }.observes('model.status.phase'),
+
   image: function() {
     return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
   }.property('model'),
@@ -60,6 +65,10 @@ export default Component.extend({
   }.property('model'),
 
   assemblyState: function() {
+    return this.assemblyStateFinder();
+  }.property('model'),
+
+  assemblyStateFinder() {
     var state = C.ASSEMBLY.ASSEMBLYON;
     C.ASSEMBLY.ASSEMBLYOFFPHASES.forEach(phase => {
       if (this.get('model.status.phase') === phase) {
@@ -67,7 +76,7 @@ export default Component.extend({
       }
     });
     return state;
-  }.property('model'),
+  },
 
   ip: function() {
     if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {

@@ -74,7 +74,7 @@ export default Ember.Controller.extend({
   },
 
   validationEmail(value) {
-    let emailReg = /^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    let emailReg = /^([\w-.]+@([\w-]+\.)+[\w-]{2,9})?$/;
     return emailReg.test(value);
   },
 

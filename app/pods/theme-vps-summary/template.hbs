@@ -12,7 +12,15 @@
     </div>
     <div class="col-xs-4 domain-name">
       <div class="description">
+        {{#if domainExisit}}
+        <div class="icon">
+          <p class="topic3">empty domain</p>
+          {{fa-icon "exclamation-circle"}}
+        </div>
+
+        {{else}}
         <p class="topic1">{{model.assemblyfactory.name}}</p>
+        {{/if}}
         <p class="topic2">Domain Name</p>
       </div>
       <img class="display-line" src="images/second/summary/right_light.png">
@@ -20,7 +28,6 @@
     <div class="col-xs-4">
       <div class="set-location">
         <img class="btn-location" src="images/second/locaion_ico.png">
-        <!-- <span class="city">Ohio</span> -->
         <span class="country">{{model.assemblyfactory.object_meta.cluster_name}}</span>
         <p class="topic2">Region</p>
       </div>
@@ -44,9 +51,9 @@
       <img class="right-light p-l-30" src="images/second/summary/right_dark.png">
     </div>
     <div class="col-xs-6 s-storage">
-      <img class="flash" src="images/second/summary/flash.png">
+      <img class="flash" src="images/second/summary/{{model.assemblyfactory.resources.storage_type}}.png">
       <div class="description">
-        <p class="topic1">FLASH</p>
+        <p class="topic1 cap">{{model.assemblyfactory.resources.storage_type}}</p>
         <p class="topic2">Storage type</p>
       </div>
       <img class="right-light p-r-30" src="images/second/summary/right_dark.png">
@@ -58,12 +65,19 @@
   </div>
   <div class="row ip-os">
     <div class="description">
-      <p class="topic1">{{network}}<span>{{Network}}</span></p>
+      {{#if networkExist}}
+    <span> {{fa-icon "exclamation-circle"}} No network selected </span>
+      {{else}}
+      <p class="topic1">{{network}}<span>{{Network}}</span></p>{{/if}}
       <p class="topic2">Networking</p>
     </div>
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
+    {{#if noImage}}
+    <span> {{fa-icon "exclamation-circle"}} No image selected </span>
+    {{else}}
     <img src="images/second/summary/ico_{{distroNameFromPlan}}.png">
     <div class="btn-version"><img><span>{{model.assemblyfactory.resources.version}}</span></div>
+    {{/if}}
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     <div class="launch" style="margin-left: -80px;">
       {{theme-spinner size=25 condition=showSpinner}}
