@@ -21,9 +21,11 @@ export default Ember.Component.extend(DefaultHeaders, {
     var NetworkData =[];
     const self =this;
     Object.keys(this.get("model.assemblyfactory.resources")).filter(function(k){
-      if(k.startsWith("p", 0)){
+      Object.keys(self.get('networks')).filter(function(n){
+        if(k == n){
         NetworkData.addObject(self.get("networks")[k]);
-      }
+          }
+        });
     });
     if(NetworkData.length > 0){
       this.set("networkExist",false);
@@ -52,8 +54,14 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.property('model.assemblyfactory.name'),
 
   validation() {
-    if(Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'))) {
+    if(this.get('domainExisit')) {
       this.set('validationWarning', 'Please enter domain name on step 2');
+      return true;
+    } else if (this.get('regionExisit')) {
+      this.set('validationWarning', 'Please select region on step 3');
+      return true;
+    } else if (this.get('networkExist')) {
+      this.set('validationWarning', 'Please select network on step 6');
       return true;
     } else if (Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
       this.set('validationWarning', 'Please select image on step 5');

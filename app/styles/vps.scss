@@ -1021,7 +1021,6 @@
       .topic3 {
         color: #ff5722;
         font-size: 20px;
-        // color: #2342c8;
         margin-bottom: 0;
         float: left;
         padding: 1%;
@@ -1060,6 +1059,20 @@
         font-size: 17px;
         color: #1a1d31;
         font-weight: bold;
+      }
+
+      .no-country {
+       color: #ff5722;
+       font-size: 20px;
+       margin-bottom: 0;
+       padding: 1%;
+       width: 150px;
+      }
+
+      .fa {
+        color: #ff5722;
+        padding-top: 8px;
+        padding-left: 6px;
       }
 
       .topic2 {
@@ -1187,8 +1200,13 @@
       }
 
       span {
-        font-size: 22px;
+        font-size: 20px;
         color: #ff5722;
+      }
+
+      .fa {
+        color: #ff5722;
+        padding-left: 6px;
       }
 
       .btn-version {

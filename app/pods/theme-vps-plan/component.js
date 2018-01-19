@@ -62,7 +62,6 @@ export default Ember.Component.extend({
   actions: {
 
     refreshAfterSelect(item) {
-      this.sendAction('done', "step5");
       this.set("selected", item);
       this.set("model.assemblyfactory.current_os_tab", item.type);
       this.toggleProperty('activate');
@@ -80,6 +79,10 @@ export default Ember.Component.extend({
       if (!index == 0) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
       }
+    },
+
+    stepDone(){
+      this.sendAction('done', "step5");
     },
   }
 
