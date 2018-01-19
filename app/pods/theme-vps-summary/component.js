@@ -62,13 +62,18 @@ export default Ember.Component.extend(DefaultHeaders, {
         this.get('model.assemblyfactory').save(this.opts(url)).then(() => {
           location.reload();
         }).catch(err => {
-          this.get('notifications').error('Launch failed.', {});
+          this.get('notifications').warning('Launch failed.', {
+            autoClear: true,
+            clearDuration: 4200,
+            cssClasses:'notification-warning'
+          });
           this.set('showSpinner', false);
         });
       } else {
         this.get('notifications').warning(this.get('validationWarning'), {
           autoClear: true,
-          clearDuration: 4200
+          clearDuration: 4200,
+          cssClasses:'notification-warning'
         });
       }
     },

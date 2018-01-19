@@ -64,9 +64,10 @@ export default Ember.Controller.extend({
           }).catch((err) => {
 
               if (err.code === '500') {
-                this.get('notifications').error('Something went wrong', {
+                this.get('notifications').warning('Something went wrong', {
                   autoClear: true,
-                  clearDuration: 4200
+                  clearDuration: 4200,
+                  cssClasses:'notification-warning'
                 });
               }
           }).finally(() => {});
