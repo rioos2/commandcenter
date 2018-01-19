@@ -30,7 +30,7 @@
         <label class="{{if email 'data-exist'}} control-label" for="input">email</label>
         <i class="bar"></i>
         {{#unless emailExistence}}
-          {{fa-icon "exclamation-circle" class="wariningcolor"}} <span class='wariningcolor'>Not available</span>
+          {{fa-icon "exclamation-circle" class="wariningcolor"}} <span class='wariningcolor'>{{emailErrorMsg}}</span>
         {{/unless}}
       </div>
 
