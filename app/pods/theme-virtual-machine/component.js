@@ -16,8 +16,9 @@ export default Ember.Component.extend({
 
   actions: {
     done(data) {
-      this.toggleProperty("activate");
+        this.toggleProperty("activate");
         this.set('meSelected', true);
+        this.sendAction('stepDone');
     },
   }
 

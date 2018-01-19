@@ -22,6 +22,7 @@ export default Ember.Controller.extend({
   },
 
   emailFinders: function() {
+    if(this.validationEmail(this.get('email'))) {
     var self = this;
     return this.get('userStore').rawRequest({
       url: '/api/v1/accounts/name/' + this.get('email'),
@@ -31,15 +32,26 @@ export default Ember.Controller.extend({
         'Authorization': 'Bearer ' + this.get('email'),
       },
     }).then((xhr) => {
-      this.set('val_email', 'has-error')
+      self.set('val_email', 'has-error')
       self.set('emailExistence', false);
+      self.set('emailErrorMsg', 'Not available');
     }).catch((res) => {
       if (res.status === 401) {
-        this.set('val_email', '')
+        self.set('val_email', '')
         self.set('emailExistence', true);
       }
     });
+  } else {
+    this.set('val_email', '')
+    this.set('emailExistence', true);
+  }
   }.observes('email'),
+
+  emailValidation: function() {
+    this.validationEmail(this.get('email')) && this.get('email') != "" ? this.set('val_email', '') : this.set('val_email', 'has-error');
+    this.set('emailErrorMsg', 'Enter valid email-id');
+    this.set('emailExistence', false);
+  },
 
 
   actions: {
@@ -70,11 +82,11 @@ export default Ember.Controller.extend({
     this.get('last_name') != null && this.get('last_name') != "" ? this.set('val_lastName', '') : this.set('val_lastName', 'has-error');
     this.get('phone') != null && this.get('phone') != "" ? this.set('val_phone', '') : this.set('val_phone', 'has-error');
     this.get('password') != null && this.get('password') != "" ? this.set('val_code', '') : this.set('val_code', 'has-error');
-    this.validationEmail(this.get('email')) && this.get('email') != "" ? this.set('val_email', '') : this.set('val_email', 'has-error');
+    this.emailValidation();
   },
 
   validationEmail(value) {
-    let emailReg = /^([\w-.]+@([\w-]+\.)+[\w-]{2,9})?$/;
+    let emailReg = /^([\w-.]+@([\w-]+\.)+[\w-]{2,15})?$/;
     return emailReg.test(value);
   },
 
