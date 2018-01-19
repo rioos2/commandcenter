@@ -5,7 +5,7 @@ import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 
 export default Ember.Component.extend(DefaultHeaders,{
   session: Ember.inject.service(),
-  NetworkData:[],
+  // NetworkData:[],
   networks: {
     "private_ipv4": "Private IPv4",
     "public_ipv4": "Public IPv4",
@@ -14,6 +14,7 @@ export default Ember.Component.extend(DefaultHeaders,{
   },
 
   selectionChecker: function() {
+    alert("observe");
     const self =this;
     Object.keys(self.get("model.assemblyfactory.resources")).filter(function(k){
       if(k.startsWith("p", 0)){
@@ -21,8 +22,12 @@ export default Ember.Component.extend(DefaultHeaders,{
       }
     });
     self.set("Network", self.get('NetworkData').toString());
-    self.set("network", self.get("model.assemblyfactory.network"));
+    if(self.get('NetworkData').length > 1){
+      alert("net set");
+      self.set("network", self.get("NetworkData").objectAt(0));
+    }
   }.observes('model.assemblyfactory.network'),
+
 
   distroNameFromPlan: function() {
     return this.get("model.assemblyfactory.os");

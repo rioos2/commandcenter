@@ -36,9 +36,10 @@ export default Ember.Component.extend({
         delete cc[net_type];
       }
       this.set("model.assemblyfactory.resources", cc);
-      if(cc[net_type]){
+      // if(cc[net_type]){
+      alert("chnages");
         this.set("model.assemblyfactory.network", this.get("networks")[net_type]);
-      }
+      // }
     }
   }
 
