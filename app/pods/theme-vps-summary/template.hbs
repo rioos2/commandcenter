@@ -68,10 +68,13 @@
     </div>
   </div>
   <div class="row ip-os">
-    <div class="description">
-      <p class="topic1">{{network}}</p>
+      {{#if networkExist}}
+    <span>  no network selected </span> {{fa-icon "exclamation-circle"}}
+      {{else}}
+      <div class="description">
+      <p class="topic1">{{network}}<span>{{Network}}</span></p>
       <p class="topic2">Networking</p>
-    </div>
+    </div>{{/if}}
     <img class="right-light p-r-30" src="images/second/summary/right_light.png">
     {{#if noImage}}
       <span> no image selected </span> {{fa-icon "exclamation-circle"}}

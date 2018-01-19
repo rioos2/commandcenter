@@ -19,28 +19,23 @@ export default Ember.Component.extend({
     this.sendAction('done', "step6");
   }),
 
-  selectionChecker: function() {
-    var cc = this.get("model.assemblyfactory.resources");
-    this.set("private_ipv4", "");
-    delete cc["private_ipv4"];
-    this.set("public_ipv4", "");
-    delete cc["public_ipv4"];
-    this.set("private_ipv6", "");
-    delete cc["private_ipv6"];
-    this.set("public_ipv6", "");
-    delete cc["public_ipv6"];
-    this.set("model.assemblyfactory.resources", cc);
-  },
 
   actions: {
     selected: function(net_type) {
       this.sendAction('done', "step6");
-      this.selectionChecker();
-      this.set(net_type, "selected");
+
       var cc = this.get("model.assemblyfactory.resources");
-      cc[net_type] = "true";
+      if(!cc[net_type]){
+        cc[net_type] = "true";
+        this.set(net_type, "selected");
+      }
+      else
+      {
+        this.set(net_type, "");
+        delete cc[net_type];
+      }
       this.set("model.assemblyfactory.resources", cc);
-      this.set("model.assemblyfactory.network", this.get("networks")[net_type]);
+        this.set("model.assemblyfactory.network", net_type);
     }
   }
 

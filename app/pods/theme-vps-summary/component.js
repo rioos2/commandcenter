@@ -9,8 +9,31 @@ export default Ember.Component.extend(DefaultHeaders, {
   noImage: true,
   validationWarning: '',
 
+
+  networks: {
+    "private_ipv4": "Private IPv4",
+    "public_ipv4": "Public IPv4",
+    "private_ipv6": "Private IPv6",
+    "public_ipv6": "Public IPv6"
+  },
+
   selectionChecker: function() {
-    this.set("network", this.get("model.assemblyfactory.network"));
+    var NetworkData =[];
+    const self =this;
+    Object.keys(this.get("model.assemblyfactory.resources")).filter(function(k){
+      Object.keys(self.get('networks')).filter(function(n){
+        if(k == n){
+        NetworkData.addObject(self.get("networks")[k]);
+          }
+        });
+    });
+    if(NetworkData.length > 0){
+      this.set("networkExist",false);
+      self.set("Network", NetworkData.toString());
+      self.set("network", NetworkData.objectAt(0));
+    }else{
+      this.set("networkExist",true);
+    }
   }.observes('model.assemblyfactory.network'),
 
   distroChecker: function() {
@@ -30,17 +53,15 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
   }.property('model.assemblyfactory.name'),
 
-  regionExisit: function() {
-    return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name'));
-  }.property('model.assemblyfactory.object_meta.cluster_name'),
-
-
   validation() {
     if(this.get('domainExisit')) {
       this.set('validationWarning', 'Please enter domain name on step 2');
       return true;
     } else if (this.get('regionExisit')) {
       this.set('validationWarning', 'Please select region on step 3');
+      return true;
+    } else if (this.get('networkExist')) {
+      this.set('validationWarning', 'Please select network on step 6');
       return true;
     } else if (Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
       this.set('validationWarning', 'Please select image on step 5');
