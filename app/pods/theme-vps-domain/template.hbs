@@ -3,7 +3,7 @@
   <p class="sub-description">You create own domain or uses configured domain name</p>
 
       {{input type="text" id="domain" name="field2" placeholder="Type your domain" style="color: #324fcc; font-size: 30px; text-align: center;" value=domain}}
-
+      <span>{{model.settings.domain}}</span>
   <div class="domain-edit">
       <img {{action "createDomain"}} src="images/second/edit.png">
     <hr>
