@@ -219,6 +219,12 @@ function renderBlueGaugeChart(params) {
         .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
         .attr("preserveAspectRatio", "xMidYMid meet")
 
+        var canvas = svg
+          .append('canvas')
+          .attr('width', 300)
+          .attr('height', 300)
+          .attr('id', 'pic')
+
       var chart = svg.append('g')
         .attr('width', calc.chartWidth)
         .attr('height', calc.chartHeight)
