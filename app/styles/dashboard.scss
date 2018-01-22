@@ -1,4 +1,4 @@
-.dashboard {    
+.dashboard {
     /* tab setting */
     $tab-count: 3;
     $indicator-height: 3px;
@@ -18,7 +18,7 @@
     $label-selector: $label-selector,
     $slider-selector: $slider-selector,
     $content-selector: $content-selector) {
-        
+
     @for $i from 1 through $tab-count {
         &:nth-of-type(#{$i}):checked {
         #{$label-selector}:nth-child(#{$i}) {
@@ -38,12 +38,12 @@
 
     .tabs {
         background: $bg-second-color;
-    
+
         min-width: #{$tab-count * 60px};
         input[name="tab-control"] {
             display: none;
         }
-    
+
         .dashboardNav {
             background-color: $rio-fifth-color;
             list-style-type: none;
@@ -54,13 +54,13 @@
             justify-content: space-between;
             align-items: flex-end;
             flex-wrap: wrap;
-            
+
             li {
             box-sizing: border-box;
             flex: 1;
             width: #{100%/$tab-count};
             padding: 0 10px;
-            
+
             label {
                 font-size: 26px;
                 font-weight: normal;
@@ -76,7 +76,7 @@
                 -webkit-touch-callout: none;
                 text-align: center;
                 @include user-select(none);
-                
+
                 br {
                     display: none;
                 }
@@ -101,7 +101,7 @@
             }
             }
         }
-        
+
         .slider {
             position: relative;
             box-shadow: 0px -3px 15px 0px $rio-second-color;
@@ -115,19 +115,19 @@
                 background: $rio-second-color;
             }
         }
-        
+
         .content {
             margin: 30px 26px 0 26px;
             @media (max-width: map-get($breakpoints, medium)) {
                 margin: 7px 0 7px 0;
                 padding: 0 7px;
             }
-            
+
             @media (max-width: map-get($breakpoints, small)) {
                 margin: 7px 0 7px 0;
                 padding: 0 7px;
-            }      
-            
+            }
+
             section {
                 display: none;
                 line-height: 1.4;
@@ -138,7 +138,7 @@
                     duration: 0.3s;
                     timing-function: ease-in-out;
                     iteration-count: 1;
-                }                
+                }
 
                 h2 {
                     color: $rio-second-color;
@@ -156,13 +156,13 @@
                 }
             }
         }
-        
+
         input[name="tab-control"] {
             @include tabs {
             > label {
                 cursor: default;
                 color: white;
-                
+
                 svg {
                     fill: $rio-second-color;
                 }
@@ -184,11 +184,11 @@
                 transform: translateY(0%);
             }
         }
-        
+
         @media (max-width: map-get($breakpoints, medium)) {
             .dashboardNav li label {
                 white-space: initial;
-                
+
                 br {
                     display: initial;
                 }
@@ -197,23 +197,23 @@
                 }
             }
         }
-        
+
         @media (max-width: map-get($breakpoints, small)) {
             .dashboardNav li label {
                 padding: 5px;
                 border-radius: 5px;
-                
+
                 span {
                     display: none;
                 }
             }
-            
+
             .slider {
                 display: none;
             }
-            
+
             .content {
-                margin-top: 20px; 
+                margin-top: 20px;
                 section h2 {
                     display: block;
                 }
@@ -225,13 +225,13 @@
         padding: 15px 0;
         display: flow-root;
         background-color: $bg-third-color;
-        box-shadow: 1px 6px 10px rgba(60, 119, 199, 0.1);        
+        box-shadow: 1px 6px 10px rgba(60, 119, 199, 0.1);
         border-radius: 6px;
 
         @media (min-width: 1200px) {
             .col-lg-2 {
                 padding-left: 5px;
-                padding-right: 5px;            
+                padding-right: 5px;
             }
 
             .col-lg-1 {
@@ -247,7 +247,7 @@
         }
 
         .p-r-15 {
-            padding-right: 15px;       
+            padding-right: 15px;
         }
 
         .cloud-count {
@@ -257,9 +257,9 @@
             filter: drop-shadow(0px 8px 6px rgba(42, 47, 68, 0.3));
             .cls-1 {
                 fill: #2a2f44;
-                
+
             }
-            
+
             .cls-2 {
                 fill: #ffd338;
             }
@@ -277,7 +277,12 @@
             margin: 5px 0;
             position: relative;
         }
-        
+
+        .spinnerButton {
+            padding-top: 11px;
+            font-size: 18px;
+        }
+
         .searchButton {
             font-size: 20px;
             cursor: pointer;
@@ -288,7 +293,7 @@
 
             &:hover {
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-            }            
+            }
         }
 
         .searchInput {
@@ -309,7 +314,7 @@
         padding: 30px 0;
         .list{
             margin-bottom: 30px;
-            display: flex;       
+            display: flex;
         }
     }
 }

@@ -25,7 +25,7 @@ export default Component.extend({
   }.property('model.content'),
   guageFour: function() {
     //gpu
-    if (this.contentData().length > 3) {
+    if (this.contentData().results.guages.counters.length > 3) {
       return this.shave(this.contentData().results.guages.counters[3]);
     }
     return this.emptyGpu();
@@ -62,7 +62,7 @@ export default Component.extend({
     this.set('guageOne', this.shave(content.results.guages.counters[0]));
     this.set('guageTwo', this.shave(content.results.guages.counters[1]));
     this.set('guageThree', this.shave(content.results.guages.counters[2]));
-    if (this.contentData().length > 3) {
+    if (this.contentData().results.guages.counters.length > 3) {
       this.set('guageFour', this.shave(content.results.guages.counters[3]));
     }
   }

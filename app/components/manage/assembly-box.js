@@ -44,6 +44,11 @@ export default Component.extend({
     this.set('assemblyState', this.assemblyStateFinder());
   }.observes('model.status.phase'),
 
+  ipUpdater: function() {
+    this.set('ip',this.ipFinder());
+    this.set('ipType',this.ipTypeFinder());
+  }.observes('assemblyEndpoint.subsets.addresses'),
+
   image: function() {
     return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
   }.property('model'),
@@ -79,18 +84,26 @@ export default Component.extend({
   },
 
   ip: function() {
+    return this.ipFinder();
+  }.property('model'),
+
+  ipType: function() {
+    return this.ipTypeFinder();
+  }.property('model'),
+
+  ipFinder: function() {
     if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].ip;
     }
     return "Not yet assigned";
-  }.property('model'),
+  },
 
-  ipType: function() {
+  ipTypeFinder: function() {
     if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
     }
     return C.ASSEMBLY.ASSEMBLYIPV4;
-  }.property('model'),
+  },
 
   metricsData: function() {
     if (!JSON.stringify(this.get('spec.metrics')) === JSON.stringify({})) {
