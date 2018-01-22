@@ -61,12 +61,19 @@ export default Component.extend({
   },
 
   resetFilterName: function() {
+    this.freeSelectedFilter();
     this.set('defaultfilters.a.name', this.get('defaultFiltersMachine.a.name'));
     this.set('defaultfilters.b.name', this.get('defaultFiltersMachine.b.name'));
     this.set('defaultfilters.c.name', this.get('defaultFiltersMachine.c.name'));
     this.set('defaultfilters.d.name', this.get('defaultFiltersMachine.d.name'));
     this.set('defaultfilters.e.name', this.get('defaultFiltersMachine.e.name'));
     return this.get('defaultfilters');
+  },
+
+  freeSelectedFilter: function() {
+    this.get('selectedFilter').forEach(item => {
+      item.value = "";
+    })
   },
 
   uniquefilteredAssembly: function() {

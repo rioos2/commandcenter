@@ -48,9 +48,13 @@ export default Ember.Controller.extend({
   }.observes('email'),
 
   emailValidation: function() {
-    this.validationEmail(this.get('email')) && this.get('email') != "" ? this.set('val_email', '') : this.set('val_email', 'has-error');
-    this.set('emailErrorMsg', 'Enter valid email-id');
-    this.set('emailExistence', false);
+    if (this.validationEmail(this.get('email')) && this.get('email') != "") {
+      this.set('val_email', '')
+    } else {
+      this.set('val_email', 'has-error');
+      this.set('emailErrorMsg', 'Enter valid email-id');
+      this.set('emailExistence', false);
+    }
   },
 
 
