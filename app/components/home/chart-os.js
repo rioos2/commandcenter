@@ -65,7 +65,7 @@ export default Ember.Component.extend({
           gradient = ["#4EE2FA", '#4EE2FA'];
           break;
         case 4:
-          gradient = ["#AA38E6", '#ffeb3b'];
+          gradient = ["#ffeb3b", '#ff9800'];
           break;
         default:
           gradient = ["#AA38E6", '#5322D9'];
