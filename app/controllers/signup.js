@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
     }).then((xhr) => {
       self.set('val_email', 'has-error')
       self.set('emailExistence', false);
-      self.set('emailErrorMsg', 'Not available');
+      self.set('emailErrorMsg', 'This email-id is already exist');
     }).catch((res) => {
       if (res.status === 401) {
         self.set('val_email', '')

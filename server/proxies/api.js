@@ -380,7 +380,7 @@ function osusages() {
       counter: getRandomInt(1, 100).toString(),
       alerts: "no"
     },
-    item: [{
+    items: [{
         id: "ubuntu",
         name: "ubuntu",
         values: [{
