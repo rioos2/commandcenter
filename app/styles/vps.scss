@@ -436,6 +436,7 @@
 
       .generate:hover {
         content: url("../images/second/generate_active.png") !important;
+        cursor: pointer;
       }
 
       .generated {
@@ -1072,6 +1073,7 @@
        margin-bottom: 0;
        padding: 1%;
        width: 150px;
+       padding-left: 13px;
       }
 
       .fa {
@@ -1083,6 +1085,7 @@
       .topic2 {
         color: #cbd0db;
         font-size: 20px;
+        padding-left: 12px;
       }
     }
 

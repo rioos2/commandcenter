@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
       }
     });
 
-    stat.results.osusages.item.forEach(function(os) {
+    stat.results.osusages.items.forEach(function(os) {
       if (self._hasAddOsFor(os)) {
         self.get('cacheOs').addObject(os);
       }
@@ -84,7 +84,7 @@ export default Ember.Controller.extend({
     var flag = true;
     const self = this;
     stat = self.get('model.content').objectAt(0);
-    stat.results.osusages.item.forEach(function(cache) {
+    stat.results.osusages.items.forEach(function(cache) {
       if (cache.id === os.id) {
         flag = false;
       }

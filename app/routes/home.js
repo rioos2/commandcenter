@@ -19,7 +19,7 @@ export default Ember.Route.extend(PolledModel,DefaultHeaders,{
 
     //this.set('access.admin', isAdmin);
     const self = this;
-    return this.get('store').findAll('reports', this.opts('mockapi')).then((reports) => {
+    return this.get('store').findAll('reports', this.opts('healthz/overall')).then((reports) => {
       return  reports;
     }).catch(function() {
       self.set('loading', false);
