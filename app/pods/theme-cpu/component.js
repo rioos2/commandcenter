@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var data1 = {
-      value: this.get('model.settings.cpuCore'),
+      value: parseInt(this.get('model.settings.cpuCore')),
       min: 1,
       max: 30,
       description: 'From 1 to 30',

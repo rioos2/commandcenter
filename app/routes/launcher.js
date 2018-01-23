@@ -8,6 +8,8 @@ import {
 } from 'nilavu/utils/platform';
 
 export default Ember.Route.extend(DefaultHeaders, Config, {
+  settings    : Ember.inject.service(),
+
 
   activate: function() {
     this.send('unfixedTop');
@@ -20,7 +22,8 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
   access: Ember.inject.service(),
 
   model() {
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let setting = this.get('settings').loadSettings();
+      let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
@@ -41,7 +44,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
         secret: this.loadSecret(),
         datacenters: hash.datacenters,
         plans: hash.plans,
-        settings: this.defaultVPS(),
+        settings: setting._result.content.objectAt(0).data,
       });
     }).catch((err) => {
       /*return this.loadingError(err, transition, Ember.Object.create({

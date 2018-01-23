@@ -31,8 +31,10 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set("networkExist",false);
       self.set("Network", NetworkData.toString());
       self.set("network", NetworkData.objectAt(0));
+      self.sendAction('done', "step6");
     }else{
       this.set("networkExist",true);
+      self.sendAction('done', "");
     }
   }.observes('model.assemblyfactory.network'),
 

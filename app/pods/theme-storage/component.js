@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var data3 = {
-      value: this.get('model.settings.storage'),
+      value: parseInt(this.get('model.settings.storage')),
       min: 0,
       max: 1000,
       suffix: ' Gb',

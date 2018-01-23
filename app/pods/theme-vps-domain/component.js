@@ -5,7 +5,6 @@ import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 
 export default Ember.Component.extend(DefaultHeaders, {
 
-      secretTypes: Ember.computed.alias('model.settings.secretTypes'),
       activate: false,
       bitsInKey: Ember.computed.alias('model.settings.bitsInKey'),
       session: Ember.inject.service(),
@@ -21,6 +20,14 @@ export default Ember.Component.extend(DefaultHeaders, {
           this.set("model.assemblyfactory.object_meta.name", '');
           }
         }.observes('domain'),
+
+        secretTypes:function(){
+          let secret=[];
+          this.get('model.settings.secretTypes').split(',').map(function(chr) {
+            secret.push(chr);
+          });
+          return secret;
+        }.property('model.settings.secretTypes'),
 
           checkDomain() {
             return Ember.isEmpty(this.get('domain'));

@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
     //chart
     var data2 = {
-      value: this.get('model.settings.ram'),
+      value: parseInt(this.get('model.settings.ram')),
       min: 0,
       max: 100,
       suffix: ' Gb',

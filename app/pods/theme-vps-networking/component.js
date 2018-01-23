@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   },
 
   initializeChart: Ember.on('didInsertElement', function() {
+
     this.set(this.get('model.settings.network'), "selected");
     var cc = this.get("model.assemblyfactory.resources");
     cc[this.get('model.settings.network')] = "true";
@@ -22,12 +23,13 @@ export default Ember.Component.extend({
 
   actions: {
     selected: function(net_type) {
-      this.sendAction('done', "step6");
+      //
 
       var cc = this.get("model.assemblyfactory.resources");
       if(!cc[net_type]){
         cc[net_type] = "true";
         this.set(net_type, "selected");
+        this.sendAction('done', "step6");
       }
       else
       {

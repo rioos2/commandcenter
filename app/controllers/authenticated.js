@@ -26,6 +26,7 @@ export default Ember.Controller.extend({
     });
   }.on('init'),
 
+
   hasCattleSystem: function() {
     var out = false;
     (this.get('model.stacks') || []).forEach((stack) => {
