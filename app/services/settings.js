@@ -17,8 +17,8 @@ export default Ember.Service.extend({
   promiseCount: 0,
 
 
-  loadSettings() {
-     return this.get('userStore').find('settingsMap', null, {url: 'origins/rioos_system/settingsmap/cluster_info'});
+  siteSettings() {
+  return this.get('userStore').all('settingsMap');
   },
 
 
@@ -92,17 +92,6 @@ findByName(name) {
       this.trigger('settingsPromisesResolved');
     }
   }.observes('promiseCount'),
-
-
-  // _plValue: function() {
-  //   return this.get(`cookies.${C.COOKIE.PL}`) || '';
-  // }.property(`cookies.${C.COOKIE.PL}`),
-  //
-  // isRancher: function() {
-  //   return this.get('_plValue').toUpperCase() === C.COOKIE.PL_RANCHER_VALUE.toUpperCase();
-  // }.property('_plValue'),
-
-
 
 
 });

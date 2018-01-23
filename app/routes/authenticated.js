@@ -11,8 +11,6 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
   storeReset: Ember.inject.service(),
   settings: Ember.inject.service(),
   userStore: Ember.inject.service('store'),
-  //projects  : Ember.inject.service(),
-  // modalService: Ember.inject.service('modal'),
 
   testTimer: null,
 
@@ -72,7 +70,6 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
 
   activate() {
     this._super();
-    // console.log('settings data:'+this.get('settings'));
   },
 
   deactivate() {
@@ -81,15 +78,14 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
   },
 
   loadingError(err, transition, ret) {
-    let isAuthEnabled = this.get('access.enabled');
+    // let isAuthEnabled = this.get('access.enabled');
 
     console.log('Loading Error:', err);
-    // if (err && (isAuthEnabled || [401, 403].indexOf(err.status) >= 0)) {
-    //   this.send('login', transition, (transition.targetName !== 'authenticated.index'));
-    //   return;
-    // }
+    /*if (err && (isAuthEnabled || [401, 403].indexOf(err.status) >= 0)) {
+      this.send('login', transition, (transition.targetName !== 'authenticated.index'));
+      return;
+    }*/
 
-    // this.replaceWith('settings.projects');
     return ret;
   },
 
