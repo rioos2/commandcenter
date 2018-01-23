@@ -20,106 +20,27 @@
                 top: 31px;
                 filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
 
-                .cls-1bootstrapped {
+                .cls-1warning {
                   fill: #FF9800;
                 }
 
-                .cls-1pending {
-                  fill: #FF9800;
-                }
-
-                .cls-1scheduled {
-                  fill: #FF9800;
-                }
-
-                .cls-1initializing {
-                  fill: #FF9800;
-                }
-
-                .cls-1initialized {
-                  fill: #FF9800;
-                }
-
-                .cls-1bootstraping {
-                  fill: #FF9800;
-                }
-
-
-                .cls-1booting {
-                  fill: #FF9800;
-                }
-
-                .cls-1rebooting {
-                  fill: #FF9800;
-                }
-
-                .cls-1starting {
-                  fill: #FF9800;
-                }
-                .cls-1stopping {
-                  fill: #FF9800;
-                }
-
-                .cls-2bootstrapped {
+                .cls-2warning {
                   fill: #FFCC80;
                 }
 
-                .cls-2pending {
-                  fill: #FFCC80;
-                }
-
-                .cls-2scheduled {
-                  fill: #FFCC80;
-                }
-
-                .cls-2initializing {
-                  fill: #FFCC80;
-                }
-
-                .cls-2initialized {
-                  fill: #FFCC80;
-                }
-
-                .cls-2bootstraping {
-                  fill: #FFCC80;
-                }
-
-                .cls-2booting {
-                  fill: #FFCC80;
-                }
-
-                .cls-2rebooting {
-                  fill: #FFCC80;
-                }
-
-                .cls-2starting {
-                  fill: #FFCC80;
-                }
-                .cls-2stopping {
-                  fill: #FFCC80;
-                }
-
-                .cls-1stopped {
+                .cls-1failure {
                   fill: #D84315;
                 }
 
-                .cls-1failed {
-                  fill: #D84315;
-                }
-
-                .cls-2stopped {
+                .cls-2failure {
                   fill: #FFAB91;
                 }
 
-                .cls-2failed {
-                  fill: #FFAB91;
-                }
-
-                .cls-1running {
+                .cls-1success {
                   fill: #2958cd;
                 }
 
-                .cls-2running {
+                .cls-2success {
                   fill: $rio-second-color;
                 }
 

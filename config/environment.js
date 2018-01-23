@@ -111,7 +111,7 @@ module.exports = function(environment) {
       computeType: "cpu",
       domain: ".svc.local",
       region: "chennai",
-      cpuCore: 4,
+      cpuCore: 1,
       ram: 1,
       storage: 20,
       storageType: "ssd",
