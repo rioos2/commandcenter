@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     return disableNetworks;
   },
 
-  disableNetworks: function(disableNetworks) {
+  disableNetworks: function(disableNetworks=[]) {
     this.set('disabledNetworks', disableNetworks);
     disableNetworks.forEach(function(disable) {
       this.set(disable, "disable-network");
