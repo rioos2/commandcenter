@@ -7,6 +7,7 @@ export default Component.extend({
   isSearchVisible: false,
   theFilter: "",
   defaultFilter: DefaultFilter.defaultFilter(),
+  defaultFiltersMachine: DefaultFilter.defaultFiltersMachine(),
 
   assemblyLength: function() {
     return this.get('assemblys').length;
@@ -59,6 +60,22 @@ export default Component.extend({
     return assemblys.filterBy(path, key);
   },
 
+  resetFilterName: function() {
+    this.freeSelectedFilter();
+    this.set('defaultfilters.a.name', this.get('defaultFiltersMachine.a.name'));
+    this.set('defaultfilters.b.name', this.get('defaultFiltersMachine.b.name'));
+    this.set('defaultfilters.c.name', this.get('defaultFiltersMachine.c.name'));
+    this.set('defaultfilters.d.name', this.get('defaultFiltersMachine.d.name'));
+    this.set('defaultfilters.e.name', this.get('defaultFiltersMachine.e.name'));
+    return this.get('defaultfilters');
+  },
+
+  freeSelectedFilter: function() {
+    this.get('selectedFilter').forEach(item => {
+      item.value = "";
+    })
+  },
+
   uniquefilteredAssembly: function() {
     var filterUpdatedAssemblysData;
 
@@ -109,6 +126,11 @@ export default Component.extend({
 
     search() {
       this.toggleProperty('isSearchVisible');
+    },
+
+    filterReset() {
+      this.get('filterProperties', this.resetFilterName());
+      this.set('filteredAssemblys', this.get('assemblys'));
     },
 
     filterProcess(selectedItem) {

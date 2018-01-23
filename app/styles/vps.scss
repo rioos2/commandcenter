@@ -394,6 +394,11 @@
       border-bottom: 2px solid #00f6ff;
     }
 
+    span {
+      color: #324fcc;
+      font-size: 30px;
+    }
+
     .domain-edit {
       position: relative;
 
@@ -431,6 +436,7 @@
 
       .generate:hover {
         content: url("../images/second/generate_active.png") !important;
+        cursor: pointer;
       }
 
       .generated {
@@ -603,7 +609,7 @@
     }
 
     .no-region {
-      color: #ea6161;
+      color: #ff9800;
     }
 
     .loc-country {
@@ -1019,7 +1025,7 @@
       }
 
       .topic3 {
-        color: #ff5722;
+        color: #ff9800;
         font-size: 20px;
         margin-bottom: 0;
         float: left;
@@ -1031,7 +1037,7 @@
       }
 
       .fa {
-        color: #ff5722;
+        color: #ff9800;
         padding-top: 8px;
       }
 
@@ -1062,15 +1068,16 @@
       }
 
       .no-country {
-       color: #ff5722;
+       color: #ff9800;
        font-size: 20px;
        margin-bottom: 0;
        padding: 1%;
        width: 150px;
+       padding-left: 13px;
       }
 
       .fa {
-        color: #ff5722;
+        color: #ff9800;
         padding-top: 8px;
         padding-left: 6px;
       }
@@ -1078,6 +1085,7 @@
       .topic2 {
         color: #cbd0db;
         font-size: 20px;
+        padding-left: 12px;
       }
     }
 
@@ -1201,12 +1209,19 @@
 
       span {
         font-size: 20px;
-        color: #ff5722;
+        color: #ff9800;
       }
 
       .fa {
-        color: #ff5722;
+        color: #ff9800;
         padding-left: 6px;
+      }
+
+      .fa-spin {
+        padding-left: 0px;
+        position: absolute;
+        margin: -24px;
+        left: 131px;
       }
 
       .btn-version {

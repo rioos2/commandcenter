@@ -13,7 +13,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
       updateName: function() {
         if (!this.checkDomain()) {
-          this.set("model.assemblyfactory.name", (this.get('domain') + "." + this.get('model.settings.domain')).replace(/\s/g, ''));
+          this.set("model.assemblyfactory.name", (this.get('domain') + this.get('model.settings.domain')).replace(/\s/g, ''));
           this.set("model.assemblyfactory.object_meta.name", this.get("model.assemblyfactory.name"));
         } else {
           this.set("model.assemblyfactory.name",'');
@@ -56,22 +56,25 @@ export default Ember.Component.extend(DefaultHeaders, {
                 this.get('model.secret').save(this.opts(url)).then((result) => {
                   this.set('doneCreate', true);
                   this.set("model.assemblyfactory.secret.id", result.id);
-                  this.get('notifications').success('Secret key generated successfully.', {
+                  this.get('notifications').info('Secret key generated successfully.', {
                     autoClear: true,
-                    clearDuration: 5200
+                    clearDuration: 4200,
+                    cssClasses:'notification-success'
                   });
                   this.set('showSpinner', false);
                 }).catch(err => {
-                  this.get('notifications').error('Secret key generated failed.', {
+                  this.get('notifications').warning('Secret key generated failed.', {
                     autoClear: true,
-                    clearDuration: 4200
+                    clearDuration: 4200,
+                    cssClasses:'notification-warning'
                   });
                   this.set('showSpinner', false);
                 });
               } else {
                 this.get('notifications').warning('Please enter domain name.', {
                   autoClear: true,
-                  clearDuration: 4200
+                  clearDuration: 4200,
+                  cssClasses:'notification-warning'
                 });
               }
             },

@@ -109,7 +109,7 @@ module.exports = function(environment) {
 
     VPS: {
       computeType: "cpu",
-      domain: "rioosbox.com",
+      domain: ".svc.local",
       region: "chennai",
       cpuCore: 4,
       ram: 1,

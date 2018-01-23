@@ -18,17 +18,17 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   selectionChecker: function() {
-    var NetworkData =[];
-    const self =this;
-    Object.keys(this.get("model.assemblyfactory.resources")).filter(function(k){
-      Object.keys(self.get('networks')).filter(function(n){
-        if(k == n){
-        NetworkData.addObject(self.get("networks")[k]);
-          }
-        });
+    var NetworkData = [];
+    const self = this;
+    Object.keys(this.get("model.assemblyfactory.resources")).filter(function(k) {
+      Object.keys(self.get('networks')).filter(function(n) {
+        if (k == n) {
+          NetworkData.addObject(self.get("networks")[k]);
+        }
+      });
     });
-    if(NetworkData.length > 0){
-      this.set("networkExist",false);
+    if (NetworkData.length > 0) {
+      this.set("networkExist", false);
       self.set("Network", NetworkData.toString());
       self.set("network", NetworkData.objectAt(0));
       self.sendAction('done', "step6");
@@ -43,7 +43,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.observes('model.assemblyfactory.os'),
 
   distroNameFromPlan: function() {
-    if(this.get("model.assemblyfactory.os") == undefined) {
+    if (this.get("model.assemblyfactory.os") == undefined) {
       this.set('noImage', true);
     } else {
       this.set('noImage', false);
@@ -55,8 +55,13 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
   }.property('model.assemblyfactory.name'),
 
+  regionExisit: function() {
+    return Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name'));
+  }.property('model.assemblyfactory.object_meta.cluster_name'),
+
+
   validation() {
-    if(this.get('domainExisit')) {
+    if (this.get('domainExisit')) {
       this.set('validationWarning', 'Please enter domain name on step 2');
       return true;
     } else if (this.get('regionExisit')) {
@@ -85,13 +90,18 @@ export default Ember.Component.extend(DefaultHeaders, {
         this.get('model.assemblyfactory').save(this.opts(url)).then(() => {
           location.reload();
         }).catch(err => {
-          this.get('notifications').error('Launch failed.', {});
+          this.get('notifications').warning('Launch failed.', {
+            autoClear: true,
+            clearDuration: 4200,
+            cssClasses: 'notification-warning'
+          });
           this.set('showSpinner', false);
         });
       } else {
         this.get('notifications').warning(this.get('validationWarning'), {
           autoClear: true,
-          clearDuration: 4200
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
         });
       }
     },

@@ -17,6 +17,9 @@
                                 {{manage/select-filters model=filterProperties filterProcess="filterProcess"}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                             <div class="search-content">
+                              {{#unless isSearchVisible}}
+                              {{fa-icon "refresh" click=(action "filterReset") class="spinnerButton"}}
+                              {{/unless}}
                                 {{#if isSearchVisible}}
                                     {{input class="searchInput" placeholder="Search" value=theFilter}}
                                 {{/if}}

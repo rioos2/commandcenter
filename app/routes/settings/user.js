@@ -1,8 +1,10 @@
 import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import {
+  xhrConcur
+} from 'nilavu/utils/platform';
 
 export default Ember.Route.extend(DefaultHeaders, {
-  session: Ember.inject.service(),
 
   activate: function() {
     this.send('unfixedTop');
@@ -12,34 +14,60 @@ export default Ember.Route.extend(DefaultHeaders, {
     this.send('unfixedTop');
     this.send('unfixedBottom');
   },
+  access: Ember.inject.service(),
+  session: Ember.inject.service(),
+
+
+  model() {
+    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+      let tasks = {
+        profile: this.cbFind('account','accounts/' + this.get('session').get("id")),
+        logData: this.cbFind('audit','accounts/' + this.get('session').get("id")+ '/audits'),
+      };
+      async.auto(tasks, xhrConcur, function(err, res) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(res);
+        }
+      });
+    }, 'Load all the things');
+    return promise.then((hash) => {
+      return Ember.Object.create({
+        profile: hash.profile,
+        logData: hash.logData,
+      });
+    }).catch((err) => {
+    });
+  },
 
   logData: function(){
     return {
-            certisficated_date: 'Oct 12, 2017',
             state: 'platinum',
-            image: '../images/user/paul.png',
             alert: {
                 type: 'warning',
                 message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
             },
-            data: [
-                {info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis', ipaddress: '10.192.168.0.105', date:'10 Oct, 2017 10:31:06', alert:true},
-                {info: 'Changing of email', ipaddress: '10.192.168.0.105', date:'10 Oct, 2017 10:31:06', alert:true},
-                {info: 'Login from Windows 10 in Chrome 61.0.3.3163', ipaddress: '10.192.168.0.105', date:'10 Oct, 2017 10:31:06', alert:true},
-                {info: 'Changing of email', ipaddress: '10.192.168.0.105', date:'10 Oct, 2017 10:31:06', alert:true},
-                {info: 'Login from Windows 10 in Chrome 61.0.3.3163', ipaddress: '10.192.168.0.105', date:'10 Oct, 2017 10:31:06', alert:true},
-              ]
         }
   },
 
-  model: function() {
-    const self = this;
-    const store = this.get('store');
-    return store.find('account', null,this.opts('accounts/' + self.get('session').get("id"))).then((account) => {
-      return $.extend(account, self.logData());
-    }).catch(function() {
-      self.set('loading', false);
-    });
+  afterModel(model) {
+    return $.extend(model, this.logData());
+  },
+
+  cbFind(type, url) {
+    return (results, cb) => {
+      if (typeof results === 'function') {
+        cb = results;
+        results = null;
+      }
+
+      return this.get('store').find(type, null,this.opts(url)).then(function(res) {
+        cb(null, res);
+      }).catch(function(err) {
+        cb(err, null);
+      });
+    };
   },
 
 });

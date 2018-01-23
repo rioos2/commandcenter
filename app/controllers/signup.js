@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
     }).then((xhr) => {
       self.set('val_email', 'has-error')
       self.set('emailExistence', false);
-      self.set('emailErrorMsg', 'Not available');
+      self.set('emailErrorMsg', 'This email-id is already exist');
     }).catch((res) => {
       if (res.status === 401) {
         self.set('val_email', '')
@@ -48,9 +48,13 @@ export default Ember.Controller.extend({
   }.observes('email'),
 
   emailValidation: function() {
-    this.validationEmail(this.get('email')) && this.get('email') != "" ? this.set('val_email', '') : this.set('val_email', 'has-error');
-    this.set('emailErrorMsg', 'Enter valid email-id');
-    this.set('emailExistence', false);
+    if (this.validationEmail(this.get('email')) && this.get('email') != "") {
+      this.set('val_email', '')
+    } else {
+      this.set('val_email', 'has-error');
+      this.set('emailErrorMsg', 'Enter valid email-id');
+      this.set('emailExistence', false);
+    }
   },
 
 
@@ -64,9 +68,10 @@ export default Ember.Controller.extend({
           }).catch((err) => {
 
               if (err.code === '500') {
-                this.get('notifications').error('Something went wrong', {
+                this.get('notifications').warning('Something went wrong', {
                   autoClear: true,
-                  clearDuration: 4200
+                  clearDuration: 4200,
+                  cssClasses:'notification-warning'
                 });
               }
           }).finally(() => {});

@@ -28,9 +28,10 @@ export default Ember.Controller.extend({
             this.send('finishLogin');
           }).catch((err) => {
             if (err.code === '401') {
-              this.get('notifications').error('Incorrect login details used', {
+              this.get('notifications').warning('Incorrect login details used', {
                 autoClear: true,
-                clearDuration: 4200
+                clearDuration: 4200,
+                cssClasses:'notification-warning'
               });
             }
           }).finally(() => {});

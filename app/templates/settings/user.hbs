@@ -5,7 +5,7 @@
                 {{fa-icon "cog" class="settings"}}
                 <img src={{img}}>
                 <div class="avata">
-                    <p class="name" style="text-transform: capitalize;">{{model.first_name}}</p>
+                    <p class="name" style="text-transform: capitalize;">{{model.profile.first_name}}</p>
                     <div class="state {{model.state}}">
                         {{fa-icon "circle"}}
                         <p>{{model.state}}</p>
@@ -20,6 +20,6 @@
         </div>
     </div>
     {{theme-alert alert=model.alert}}
-    {{theme-table model=model.data class="info-table"}}
+    {{theme-table model=tableData class="info-table"}}
 </div>
 {{theme-footer}}
