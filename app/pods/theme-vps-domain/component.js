@@ -1,19 +1,23 @@
 import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
+import Config from 'nilavu/mixins/config';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
 
-
-export default Ember.Component.extend(DefaultHeaders, {
+export default Ember.Component.extend(DefaultHeaders,Config, {
 
       activate: false,
-      bitsInKey: Ember.computed.alias('model.settings.bitsInKey'),
       session: Ember.inject.service(),
       notifications: Ember.inject.service('notification-messages'),
       doneCreate: false,
 
       updateName: function() {
+
         if (!this.checkDomain()) {
-          this.set("model.assemblyfactory.name", (this.get('domain') + this.get('model.settings.domain')).replace(/\s/g, ''));
+          this.set("model.assemblyfactory.name", (this.get('domain') + this.validateDomain()).replace(/\s/g, ''));
           this.set("model.assemblyfactory.object_meta.name", this.get("model.assemblyfactory.name"));
         } else {
           this.set("model.assemblyfactory.name",'');
@@ -21,13 +25,28 @@ export default Ember.Component.extend(DefaultHeaders, {
           }
         }.observes('domain'),
 
+        validateDomain: function () {
+          alert("domain");
+          return this.get('model.settings')[denormalizeName(`${C.SETTING.DOMAIN}`)] || this.defaultVPS().domain;
+        },
+
+        validateSecretTypes: function () {
+          return this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_TYPE_NAMES}`)] || this.defaultVPS().secretTypes;
+        },
+
+        bitsInKey: function () {
+          alert("bitinkey");
+          return this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_KEY_LENGTH}`)] || this.defaultVPS().bitsInKey;
+        },
+
         secretTypes:function(){
           let secret=[];
-          this.get('model.settings.secretTypes').split(',').map(function(chr) {
+          this.validateSecretTypes().split(',').map(function(chr) {
             secret.push(chr);
           });
           return secret;
         }.property('model.settings.secretTypes'),
+
 
           checkDomain() {
             return Ember.isEmpty(this.get('domain'));

@@ -70,6 +70,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
 
   activate() {
     this._super();
+    // console.log('settings data:'+this.get('settings'));
   },
 
   deactivate() {
@@ -86,6 +87,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, {
       return;
     }*/
 
+    // this.replaceWith('settings.projects');
     return ret;
   },
 

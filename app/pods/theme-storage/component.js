@@ -1,7 +1,11 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import Config from 'nilavu/mixins/config';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+export default Ember.Component.extend(Config,{
   tagName: '',
 
   storageData: 0,
@@ -9,7 +13,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var data3 = {
-      value: parseInt(this.get('model.settings.storage')),
+      value: parseInt(this.validateStorage()),
       min: 0,
       max: 1000,
       suffix: ' Gb',
@@ -23,6 +27,10 @@ export default Ember.Component.extend({
       .debug(true)
       .run();
   }),
+
+  validateStorage: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.DISK}`)] || this.defaultVPS().storage;
+  },
 
   storage: function() {
     var storage = this.get('storageData') + " GiB";

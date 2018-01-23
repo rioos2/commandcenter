@@ -20,7 +20,6 @@ export default Ember.Component.extend({
     this.sendAction('done', "step6");
   }),
 
-
   actions: {
     selected: function(net_type) {
       //

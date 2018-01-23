@@ -1,17 +1,21 @@
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import Config from 'nilavu/mixins/config';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+export default Ember.Component.extend(Config,{
 
   initializeChart: Ember.on('didInsertElement', function() {
     var self = this;
 
-    if (this.get('model.settings.computeType') == "cpu") {
+    if (self.validateComputeType() == "cpu") {
       self.set('cpuselect', 'cpu-checked');
     } else {
       self.set('gpuselect', 'gpu-checked');
     }
 
-    self.set("model.assemblyfactory.resources.compute_type", this.get('model.settings.computeType'));
+    self.set("model.assemblyfactory.resources.compute_type", this.validateComputeType());
     self.sendAction('done', "step1");
     self.$("#cg-close").click(function(e) {
       self.$(".opened-info").addClass("disabled");
@@ -24,6 +28,10 @@ export default Ember.Component.extend({
     });
 
   }),
+
+  validateComputeType: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || this.defaultVPS().computeType;
+  },
 
   actions: {
     gpu: function() {

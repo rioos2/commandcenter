@@ -1,16 +1,25 @@
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import Config from 'nilavu/mixins/config';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+export default Ember.Component.extend(Config,{
 
   tagName: '',
   active: '',
 
   initializeChart: Ember.on('didInsertElement', function() {
-    if (this.get('model.settings.destro') == this.get('vm.type')) {
+
+    if (this.validateOsName() == this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
       this.set("active", "active");
     }
   }),
+
+  validateOsName: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.OS_NAME}`)] || this.defaultVPS().destro;
+ },
 
   selectionChecker: function() {
     var check = this.get("model.assemblyfactory.current_os_tab") == this.get("vm.type");

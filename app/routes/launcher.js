@@ -73,8 +73,8 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
   loadSecret() {
     var secretData = {
       type: 'secrets',
-      // secret_type: 'rio.digital/ssh-auth',
-      secret_type: 'rio.digital/kryptonite',
+      secret_type: 'rio.digital/ssh-auth',
+      // secret_type: setting.content.objectAt(0).data.,
       data: {
         username: "",
         password: "",
