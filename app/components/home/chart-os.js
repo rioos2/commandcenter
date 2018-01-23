@@ -34,6 +34,11 @@ export default Ember.Component.extend({
   }),
   updateData: function() {
     const self = this;
+
+    if (self.get('model.content').objectAt(0).results.osusages.cumulative.counter == "NaN") {
+      self.get('model.content').objectAt(0).results.osusages.cumulative.counter = "0";
+    }
+
     self.get('overall').data({
       value: parseInt(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)
     });

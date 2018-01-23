@@ -40,7 +40,7 @@ export default Component.extend({
   }.property('model'),
 
   assemblyStatusUpdate: function() {
-    this.set('assemblyStatus', this.get('model.status.phase').toLowerCase());
+    this.set('assemblyStatus', this.assemblyStatusChecker());
     this.set('assemblyState', this.assemblyStateFinder());
   }.observes('model.status.phase'),
 
@@ -48,6 +48,10 @@ export default Component.extend({
     this.set('ip',this.ipFinder());
     this.set('ipType',this.ipTypeFinder());
   }.observes('assemblyEndpoint.subsets.addresses'),
+
+  metricsUpdater: function() {
+    this.set('model.spec.metrics', this.metricsDataFinder());
+  }.observes('model.spec.metrics'),
 
   image: function() {
     return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
@@ -66,8 +70,28 @@ export default Component.extend({
   }.property('model'),
 
   assemblyStatus: function() {
-    return this.get('model.status.phase').toLowerCase();
+    return this.assemblyStatusChecker();
   }.property('model'),
+
+  assemblyStatusChecker: function() {
+    var state = "";
+    C.MANAGEMENT.STATUS.WARNING.forEach(status => {
+      if(status === this.get('model.status.phase').toLowerCase()) {
+        state = C.MANAGEMENT.STATE.WARNING;
+      }
+    });
+    C.MANAGEMENT.STATUS.FAILURE.forEach(status => {
+      if(status === this.get('model.status.phase').toLowerCase()) {
+        state = C.MANAGEMENT.STATE.FAILURE;
+      }
+    });
+    C.MANAGEMENT.STATUS.SUCCESS.forEach(status => {
+      if(status === this.get('model.status.phase').toLowerCase()) {
+        state = C.MANAGEMENT.STATE.SUCCESS;
+      }
+    });
+    return state;
+  },
 
   assemblyState: function() {
     return this.assemblyStateFinder();
@@ -106,16 +130,20 @@ export default Component.extend({
   },
 
   metricsData: function() {
-    if (!JSON.stringify(this.get('spec.metrics')) === JSON.stringify({})) {
+    return this.metricsDataFinder();
+  }.property('model'),
+
+  metricsDataFinder: function() {
+    if (!(this.get('model.spec.metrics.' + this.get('model.id')) == undefined)) {
       this.set('spec.metrics.name', "gauge" + this.get('model.id'));
-      this.set('model.spec.metrics.counter', this.get('model.spec.metrics.' + this.get('model.id')));
+      this.set('model.spec.metrics.counter', parseInt(this.get('model.spec.metrics.' + this.get('model.id'))));
       return this.get('spec.metrics');
     }
     return {
       name: "gauge" + this.get('model.id'),
       counter: 0,
     }
-  }.property('model'),
+  },
 
 
   modelUpdated: function() {
