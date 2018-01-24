@@ -13,13 +13,8 @@ export default Ember.Route.extend(PolledModel,DefaultHeaders,{
   },
 
   model: function() {
-    //let type = this.get(`session.${C.SESSION.USER_TYPE}`);
-
-    //let isAdmin = (type === C.USER.TYPE_ADMIN) || !this.get('access.enabled');
-
-    //this.set('access.admin', isAdmin);
     const self = this;
-    return this.get('store').findAll('reports', this.opts('mockapi')).then((reports) => {
+    return this.get('store').findAll('reports', this.opts('healthz/overall')).then((reports) => {
       return  reports;
     }).catch(function() {
       self.set('loading', false);

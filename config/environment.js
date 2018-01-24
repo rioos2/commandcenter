@@ -121,6 +121,7 @@ module.exports = function(environment) {
       secret: "SSH-1(RSA)",
       secretTypes: "SSH-1(RSA),SSH-1(RSA2),SSH-1(RSA3)",
       bitsInKey: "2048",
+      trusted_key: "default"
     },
   };
 

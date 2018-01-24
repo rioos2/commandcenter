@@ -6,6 +6,10 @@ import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
 import {
   xhrConcur
 } from 'nilavu/utils/platform';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
 
 export default Ember.Route.extend(DefaultHeaders, Config, {
   settings    : Ember.inject.service(),
@@ -42,7 +46,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
     return promise.then((hash) => {
       return Ember.Object.create({
         assemblyfactory: this.loadAssemblyFactory(),
-        secret: this.loadSecret(),
+        secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
         settings: setting.all.content.objectAt(0).data,
@@ -72,11 +76,15 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
     };
   },
 
-  loadSecret() {
+  getSecretType: function (setting) {
+    return setting.all.content.objectAt(0).data[denormalizeName(`${C.SETTING.TRUSTED_KEY}`)] || this.defaultVPS().trusted_key;
+ },
+
+  loadSecret(setting) {
+    alert(this.getSecretType(setting));
     var secretData = {
       type: 'secrets',
-      secret_type: 'rio.digital/ssh-auth',
-      // secret_type: setting.content.objectAt(0).data.,
+      secret_type: this.getSecretType(setting),
       data: {
         username: "",
         password: "",
