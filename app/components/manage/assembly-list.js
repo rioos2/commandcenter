@@ -110,7 +110,7 @@ export default Component.extend({
     return this.fillDataForFilterProperties();
   }.property('defaultfilters'),
 
-  //Here these data has to be updated when ever assemblys get updated. And new assembly's comes.
+//Here these data has to be updated when ever assemblys get updated. And new assembly's comes.
   fillDataForFilterProperties: function() {
     this.set('defaultfilters.a.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.a')));
     this.set('defaultfilters.b.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.b')));
@@ -151,7 +151,7 @@ export default Component.extend({
         }
       });
       this.uniquefilteredAssembly();
-    },
+    }
   },
 
 });
