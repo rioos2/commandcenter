@@ -18,8 +18,6 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateOsName: function () {
-    alert("os");
-    alert("os"+this.get('model.settings')[denormalizeName(`${C.SETTING.OS_NAME}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.OS_NAME}`)] || this.defaultVPS().destro;
  },
 

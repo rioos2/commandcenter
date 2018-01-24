@@ -30,7 +30,6 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateRam: function () {
-    alert("ram"+this.get('model.settings')[denormalizeName(`${C.SETTING.RAM}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.RAM}`)] || this.defaultVPS().ram;
  },
 

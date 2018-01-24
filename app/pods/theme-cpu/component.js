@@ -29,7 +29,6 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateCpu: function () {
-    alert("cpu"+this.get('model.settings')[denormalizeName(`${C.SETTING.CPU_CORE}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.CPU_CORE}`)] || this.defaultVPS().cpuCore;
  },
 

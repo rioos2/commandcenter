@@ -629,12 +629,14 @@
       .city {
         font-size: 17px;
         color: #4e547a;
+        text-transform: capitalize;
       }
 
       .country {
         font-size: 17px;
         color: #1a1d31;
         font-weight: bold;
+        text-transform: capitalize;
       }
     }
 
@@ -944,6 +946,14 @@
       border-radius: 40px;
       color: #196af1;
       font-size: 16px;
+      cursor: pointer;
+    }
+
+    .disable-network {
+      -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+      filter: grayscale(100%);
+      cursor: default !important;
+      pointer-events: none;
     }
 
     .selected {

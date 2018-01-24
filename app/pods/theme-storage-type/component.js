@@ -19,7 +19,6 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateStorageType: function () {
-    alert("type"+this.get('model.settings')[denormalizeName(`${C.SETTING.DISK_TYPE}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || this.defaultVPS().storageType;
   },
 

@@ -29,7 +29,6 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateStorage: function () {
-    alert("stotrage"+this.get('model.settings')[denormalizeName(`${C.SETTING.DISK}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.DISK}`)] || this.defaultVPS().storage;
   },
 

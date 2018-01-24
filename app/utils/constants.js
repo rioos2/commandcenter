@@ -32,6 +32,20 @@ var C = {
     }
   },
 
+  MANAGEMENT: {
+    STATUS: {
+      WARNING:["bootstrapped","pending","scheduled","initializing","initialized","bootstraping","booting","rebooting","starting","stopping"],
+      SUCCESS:["running"],
+      FAILURE:["stopped","failed"],
+    },
+
+    STATE: {
+      WARNING:"warning",
+      SUCCESS:"success",
+      FAILURE:"failure",
+    },
+  },
+
   BULK_ACTIONS: [
     {
       "label": "action.start",

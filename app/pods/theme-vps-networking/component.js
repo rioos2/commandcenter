@@ -11,33 +11,58 @@ export default Ember.Component.extend({
   },
 
   initializeChart: Ember.on('didInsertElement', function() {
-
-    this.set(this.get('model.settings.network'), "selected");
-    alert("network"+this.get('model.settings.network'));
-    var cc = this.get("model.assemblyfactory.resources");
-    cc[this.get('model.settings.network')] = "true";
-    this.set("model.assemblyfactory.resources", cc);
-    this.set("model.assemblyfactory.network", this.get("networks")[this.get('model.settings.network')]);
-    this.sendAction('done', "step6");
+    this.disableNetworks(this.networksFilter(this.get('model.networks.content')));
   }),
+
+  networksFilter: function(networks) {
+    var disableNetworks = [];
+    for (var k in this.get('networks')) disableNetworks.push(k);
+
+    var filtered = [];
+    networks.forEach(function(network) {
+      filtered.pushObject(network.network_type);
+    }.bind(this));
+    filtered = [...new Set(filtered)];
+
+    disableNetworks = disableNetworks.filter(function(el) {
+      return filtered.indexOf(el) < 0;
+    }.bind(this));
+    return disableNetworks;
+  },
+
+
+  disableNetworks: function(disableNetworks=[]) {
+    this.set('disabledNetworks', disableNetworks);
+    disableNetworks.forEach(function(disable) {
+      this.set(disable, "disable-network");
+    }.bind(this));
+  },
+
+  checkActiveNetwork: function(network) {
+    var active = true;
+    this.get('disabledNetworks').forEach(function(n) {
+      if (n === network) {
+        active = false;
+      }
+    });
+    return active;
+  },
 
   actions: {
     selected: function(net_type) {
-      //
+      if (this.checkActiveNetwork(net_type)) {
 
-      var cc = this.get("model.assemblyfactory.resources");
-      if(!cc[net_type]){
-        cc[net_type] = "true";
-        this.set(net_type, "selected");
-        this.sendAction('done', "step6");
-      }
-      else
-      {
-        this.set(net_type, "");
-        delete cc[net_type];
-      }
-      this.set("model.assemblyfactory.resources", cc);
+        var cc = this.get("model.assemblyfactory.resources");
+        if (!cc[net_type]) {
+          cc[net_type] = "true";
+          this.set(net_type, "selected");
+        } else {
+          this.set(net_type, "");
+          delete cc[net_type];
+        }
+        this.set("model.assemblyfactory.resources", cc);
         this.set("model.assemblyfactory.network", net_type);
+      }
     }
   }
 

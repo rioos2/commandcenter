@@ -27,6 +27,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
+        networks: this.cbFind('network', 'networks'),
       };
 
       async.auto(tasks, xhrConcur, function(err, res) {
@@ -45,6 +46,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
         datacenters: hash.datacenters,
         plans: hash.plans,
         settings: setting.all.content.objectAt(0).data,
+        networks: hash.networks,
       });
     }).catch((err) => {
       /*return this.loadingError(err, transition, Ember.Object.create({
