@@ -629,12 +629,14 @@
       .city {
         font-size: 17px;
         color: #4e547a;
+        text-transform: capitalize;
       }
 
       .country {
         font-size: 17px;
         color: #1a1d31;
         font-weight: bold;
+        text-transform: capitalize;
       }
     }
 
