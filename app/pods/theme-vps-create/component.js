@@ -30,6 +30,7 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateComputeType: function () {
+    alert("compute type"+this.get('model.settings')[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || this.defaultVPS().computeType;
   },
 

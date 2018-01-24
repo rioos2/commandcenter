@@ -31,13 +31,14 @@ export default Ember.Component.extend(DefaultHeaders,Config, {
         },
 
         validateSecretTypes: function () {
+          alert("secret type:"+this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_TYPE_NAMES}`)]);
           return this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_TYPE_NAMES}`)] || this.defaultVPS().secretTypes;
         },
 
         bitsInKey: function () {
-          alert("bitinkey");
+          alert("bit int key"+this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_KEY_LENGTH}`)]);
           return this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_KEY_LENGTH}`)] || this.defaultVPS().bitsInKey;
-        },
+        }.property('model.settings'),
 
         secretTypes:function(){
           let secret=[];
@@ -45,7 +46,7 @@ export default Ember.Component.extend(DefaultHeaders,Config, {
             secret.push(chr);
           });
           return secret;
-        }.property('model.settings.secretTypes'),
+        }.property('model.settings'),
 
 
           checkDomain() {
@@ -65,6 +66,7 @@ export default Ember.Component.extend(DefaultHeaders,Config, {
                 this.sendAction('done', "step2");
                 this.set("model.secret.data.ssh-algorithm", this.get("secretType"));
                 this.set("model.secret.data.ssh_keypair_size", this.get("bitsInKey"));
+                alert(this.get('model.secret.data.ssh_keypair_size'));
                 this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
                 this.set("model.secret.object_meta.name", this.get("model.assemblyfactory.name"));
                 var session = this.get("session");

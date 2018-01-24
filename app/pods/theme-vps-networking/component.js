@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   initializeChart: Ember.on('didInsertElement', function() {
 
     this.set(this.get('model.settings.network'), "selected");
+    alert("network"+this.get('model.settings.network'));
     var cc = this.get("model.assemblyfactory.resources");
     cc[this.get('model.settings.network')] = "true";
     this.set("model.assemblyfactory.resources", cc);

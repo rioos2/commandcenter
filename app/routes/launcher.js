@@ -22,7 +22,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
   access: Ember.inject.service(),
 
   model() {
-    let setting = this.get('settings').siteSettings();
+    let setting = this.get('settings');
       let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
@@ -44,7 +44,7 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
         secret: this.loadSecret(),
         datacenters: hash.datacenters,
         plans: hash.plans,
-        settings: setting.content.objectAt(0).data,
+        settings: setting.all.content.objectAt(0).data,
       });
     }).catch((err) => {
       /*return this.loadingError(err, transition, Ember.Object.create({

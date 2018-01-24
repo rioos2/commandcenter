@@ -17,6 +17,7 @@ export default Ember.Component.extend(Config,{
   }),
 
   validateSecret: function () {
+    alert("secret"+this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_TYPE}`)]);
     return this.get('model.settings')[denormalizeName(`${C.SETTING.SECRET_TYPE}`)] || this.defaultVPS().secret;
  },
 

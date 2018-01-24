@@ -11,14 +11,12 @@ export function denormalizeName(str) {
 
 export default Ember.Service.extend({
   userStore: Ember.inject.service('store'),
-  cookies: Ember.inject.service(),
 
   all: null,
-  promiseCount: 0,
 
-
-  siteSettings() {
-  return this.get('userStore').all('settingsMap');
+  init() {
+    this._super();
+    this.set('all', this.get('userStore').all('settingsMap'));
   },
 
 
@@ -44,36 +42,6 @@ export default Ember.Service.extend({
   return null;
 },
 
-setUnknownProperty(key, value) {
-  var obj = this.findByName(key);
-
-  if ( value === undefined )
-  {
-    // Delete by set to undefined is not needed for settings
-    throw new Error('Deleting settings is not supported');
-  }
-
-  if ( !obj )
-  {
-    obj = this.get('userStore').createRecord({
-      type: 'setting',
-      name: denormalizeName(key),
-    });
-  }
-
-  this.incrementProperty('promiseCount');
-
-  obj.set('value', value+''); // Values are all strings in settings.
-  obj.save().then(() => {
-    this.notifyPropertyChange(normalizeName(key));
-  }).catch((err) => {
-    console.log('Error saving setting:', err);
-  }).finally(() => {
-    this.decrementProperty('promiseCount');
-  });
-
-  return value;
-},
 findByName(name) {
     return this.get('asMap')[normalizeName(name)];
   },
