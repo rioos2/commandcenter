@@ -30,7 +30,6 @@ export default Ember.Component.extend({
     return disableNetworks;
   },
 
-
   disableNetworks: function(disableNetworks=[]) {
     this.set('disabledNetworks', disableNetworks);
     disableNetworks.forEach(function(disable) {
@@ -51,17 +50,17 @@ export default Ember.Component.extend({
   actions: {
     selected: function(net_type) {
       if (this.checkActiveNetwork(net_type)) {
-
         var cc = this.get("model.assemblyfactory.resources");
         if (!cc[net_type]) {
           cc[net_type] = "true";
           this.set(net_type, "selected");
+          this.set('model.assemblyfactory.network', net_type);
         } else {
           this.set(net_type, "");
           delete cc[net_type];
+          this.set('model.assemblyfactory.network', "");
         }
         this.set("model.assemblyfactory.resources", cc);
-        this.set("model.assemblyfactory.network", net_type);
       }
     }
   }

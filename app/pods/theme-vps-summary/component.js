@@ -8,6 +8,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   notifications: Ember.inject.service('notification-messages'),
   noImage: true,
   validationWarning: '',
+  networkExist: true,
 
 
   networks: {
@@ -34,6 +35,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       self.sendAction('done', "step6");
     }else{
       this.set("networkExist",true);
+      self.sendAction('undone', "step6");
     }
   }.observes('model.assemblyfactory.network'),
 
