@@ -81,7 +81,6 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
  },
 
   loadSecret(setting) {
-    alert(this.getSecretType(setting));
     var secretData = {
       type: 'secrets',
       secret_type: this.getSecretType(setting),
