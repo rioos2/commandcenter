@@ -31,30 +31,39 @@ export default Component.extend({
     this.uniquefilteredAssembly();
   },
 
-  // checkFilterMatch: function(theObject, str) {
-  //   var field, match;
-  //   match = false;
-  //   for (field in theObject) {
-  //     if (!theObject[field] == null) {
-  //     if (JSON.stringify(theObject[field]).toString().slice(0, str.length) === str) {
-  //       match = true;
-  //     }
-  //   }
-  //   }
-  //   return match;
-  // },
-  //
-  // filterAssembly: (function() {
-  //   return this.get("assemblys").filter((function(_this) {
-  //     return function(theObject, index, enumerable) {
-  //       if (_this.get("theFilter")) {
-  //         return _this.checkFilterMatch(theObject, _this.get("theFilter"));
-  //       } else {
-  //         return true;
-  //       }
-  //     };
-  //   })(this));
-  // }).property("theFilter", "assemblys"),
+  checkFilterMatch: function(theObject, str) {
+
+    var field, match;
+    match = false;
+    for (field in theObject) {
+      if (!(theObject[field] == null)) {
+      if (theObject[field].toString().slice(0, str.length) == str) {
+        match = true;
+        break;
+      }
+     }
+    }
+    return match;
+  },
+
+  filterAssembly: (function() {
+    if (this.get("theFilter").length > 2) {
+      let filteredSearchAssemblys = this.get("assemblys").filter((function(_this) {
+        return function(theObject, index, enumerable) {
+          if (_this.get("theFilter")) {
+            return _this.checkFilterMatch(jsonFinder(theObject), _this.get("theFilter"));
+          } else {
+            return true;
+          }
+        };
+      })(this));
+      if (filteredSearchAssemblys.length > 0) {
+        this.set('filteredAssemblys',filteredSearchAssemblys);
+      }
+    } else {
+      this.uniquefilteredAssembly();
+    }
+  }).observes("theFilter"),
 
   filteredAssembly(assemblys, path, key) {
     return assemblys.filterBy(path, key);
@@ -101,7 +110,7 @@ export default Component.extend({
     return this.fillDataForFilterProperties();
   }.property('defaultfilters'),
 
- //Here these data has to be updated when ever assemblys get updated. And new assembly's comes.
+  //Here these data has to be updated when ever assemblys get updated. And new assembly's comes.
   fillDataForFilterProperties: function() {
     this.set('defaultfilters.a.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.a')));
     this.set('defaultfilters.b.data', this.filterUniqueDataFromAssembly(this.get('defaultfilters.b')));
@@ -126,6 +135,8 @@ export default Component.extend({
 
     search() {
       this.toggleProperty('isSearchVisible');
+      this.set('theFilter','');
+      this.send('filterReset');
     },
 
     filterReset() {
@@ -140,7 +151,7 @@ export default Component.extend({
         }
       });
       this.uniquefilteredAssembly();
-    }
+    },
   },
 
 });
