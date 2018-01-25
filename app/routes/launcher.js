@@ -6,8 +6,14 @@ import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
 import {
   xhrConcur
 } from 'nilavu/utils/platform';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
 
 export default Ember.Route.extend(DefaultHeaders, Config, {
+  settings    : Ember.inject.service(),
+
 
   activate: function() {
     this.send('unfixedTop');
@@ -20,7 +26,8 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
   access: Ember.inject.service(),
 
   model() {
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let setting = this.get('settings');
+      let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
@@ -39,10 +46,10 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
     return promise.then((hash) => {
       return Ember.Object.create({
         assemblyfactory: this.loadAssemblyFactory(),
-        secret: this.loadSecret(),
+        secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
-        settings: this.defaultVPS(),
+        settings: setting.all.content.objectAt(0).data,
         networks: hash.networks,
       });
     }).catch((err) => {
@@ -69,11 +76,14 @@ export default Ember.Route.extend(DefaultHeaders, Config, {
     };
   },
 
-  loadSecret() {
+  getSecretType: function (setting) {
+    return setting.all.content.objectAt(0).data[denormalizeName(`${C.SETTING.TRUSTED_KEY}`)] || this.defaultVPS().trusted_key;
+ },
+
+  loadSecret(setting) {
     var secretData = {
       type: 'secrets',
-      // secret_type: 'rio.digital/ssh-auth',
-      secret_type: 'rio.digital/kryptonite',
+      secret_type: this.getSecretType(setting),
       data: {
         username: "",
         password: "",

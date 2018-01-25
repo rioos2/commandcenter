@@ -35,6 +35,9 @@ export default Ember.Component.extend({
     done: function(step) {
       self.$("."+step).addClass("btn-success");
     },
+    undone: function(step){
+        self.$("."+step).removeClass("btn-success");
+    },
   }
 
 });

@@ -1,16 +1,21 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+import Config from 'nilavu/mixins/config';
+export default Ember.Component.extend(Config,{
   tagName: '',
 
   ramData: 0,
   self: this,
 
   initializeChart: Ember.on('didInsertElement', function() {
+
     //chart
     var data2 = {
-      value: this.get('model.settings.ram'),
+      value: parseInt(this.validateRam()),
       min: 0,
       max: 100,
       suffix: ' Gb',
@@ -23,6 +28,10 @@ export default Ember.Component.extend({
       .debug(true)
       .run();
   }),
+
+  validateRam: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.RAM}`)] || this.defaultVPS().ram;
+ },
 
   ram: function() {
     var ram = this.get('ramData') + " GiB";

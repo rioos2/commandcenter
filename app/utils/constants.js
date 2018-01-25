@@ -341,6 +341,18 @@ var C = {
     BALANCER_IMAGE:            'lb$instance$image',
     PROJECT_VERSION:           'account$version',
     FEEDBACK_FORM:             'ui$feedback$form',
+    COMPUTE_TYPE:              'ui$digicloud$compute_type',
+    DOMAIN:                    'ui$digicloud$domain',
+    CPU_CORE:                  'ui$digicloud$cpu',
+    RAM:                       'ui$digicloud$ram',
+    DISK:                      'ui$digicloud$disk',
+    DISK_TYPE:                 'ui$digicloud$disk_type',
+    OS_NAME:                   'ui$digicloud$os_name',
+    OS_VERSION:                'ui$digicloud$os_version',
+    SECRET_TYPE_NAMES:         'ui$digicloud$secret_type_names',
+    SECRET_TYPE:               'ui$digicloud$secret_type',
+    SECRET_KEY_LENGTH:         'ui$digicloud$secret_key_length',
+    TRUSTED_KEY:               'ui$digicloud$trusted_key',
   },
 
   USER: {

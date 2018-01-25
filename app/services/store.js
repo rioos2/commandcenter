@@ -168,6 +168,7 @@ var Store = Ember.Service.extend({
     if (opt.url) {
       return this._findWithUrl(opt.url, type, opt);
     } else {
+
       // Otherwise lookup the schema for the type and generate the URL based on it.
 
       /*return this.find('schema', type, {url: '/'+encodeURIComponent(type)}).then((schema) => {
@@ -393,7 +394,7 @@ var Store = Ember.Service.extend({
       queue[queueKey] = [];
     }
 
-    return later;
+      return later;
 
   },
 
@@ -598,7 +599,9 @@ var Store = Ember.Service.extend({
         applyDefaults: false
       };
     }
-
+    if(!Ember.get(input,'kind')){
+      input.kind = input.type_meta.kind;
+    }
     let type = Ember.get(input, 'kind');
 
     if (Ember.isArray(input)) {
@@ -647,7 +650,6 @@ var Store = Ember.Service.extend({
     if (baseType) {
       baseCacheEntry = this.getById(baseType, rec.id);
     }
-
 
     if (cacheEntry) {
       cacheEntry.replaceWith(rec);

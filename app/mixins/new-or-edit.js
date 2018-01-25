@@ -104,7 +104,6 @@ export default Ember.Mixin.create({
       if (newData.objects && newData.type === "Template") {
         let objects = newData.objects;
         async.eachSeries(objects, function(object, cb) {
-          alert(JSON.stringify(object));
           return self.get('userStore').rawRequest({
             url: self.generateUrl(object),
             method: 'POST',

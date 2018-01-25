@@ -1,7 +1,11 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-
-export default Ember.Component.extend({
+import Config from 'nilavu/mixins/config';
+import C from 'nilavu/utils/constants';
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+export default Ember.Component.extend(Config,{
   tagName: '',
 
   cpuData: 0,
@@ -9,7 +13,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var data1 = {
-      value: this.get('model.settings.cpuCore'),
+      value: parseInt(this.validateCpu()),
       min: 1,
       max: 30,
       description: 'From 1 to 30',
@@ -23,6 +27,10 @@ export default Ember.Component.extend({
       .debug(true)
       .run();
   }),
+
+  validateCpu: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.CPU_CORE}`)] || this.defaultVPS().cpuCore;
+ },
 
   cpu: function() {
     var cpu = this.get('cpuData') + "";

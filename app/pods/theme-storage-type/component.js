@@ -1,11 +1,15 @@
 import Ember from 'ember';
+import Config from 'nilavu/mixins/config';
 import C from 'nilavu/utils/constants';
-
-export default Ember.Component.extend({
+export function denormalizeName(str) {
+  return str.replace(new RegExp('['+C.SETTING.DOT_CHAR+']','g'),'.').toLowerCase();
+}
+export default Ember.Component.extend(Config,{
   tagName: '',
 
   initializeChart: Ember.on('didInsertElement', function() {
-    if (this.get('model.settings.storageType') === C.VPS.RESOURSE.HDD) {
+
+    if (this.validateStorageType() === C.VPS.RESOURSE.HDD) {
       this.set("model.assemblyfactory.resources.storage_type", C.VPS.RESOURSE.HDD);
       this.set('selectHdd', true);
     } else {
@@ -13,6 +17,10 @@ export default Ember.Component.extend({
       this.set('selectFlash', true);
     }
   }),
+
+  validateStorageType: function () {
+    return this.get('model.settings')[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || this.defaultVPS().storageType;
+  },
 
   actions: {
 

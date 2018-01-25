@@ -3,7 +3,6 @@ import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
 
-  region: Ember.computed.alias('model.settings.region'),
   showSpinner: false,
   isActive: false,
   addMoreActive: 'inactive',
