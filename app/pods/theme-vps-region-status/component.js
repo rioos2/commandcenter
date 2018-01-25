@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   }.property('model'),
 
   country: function() {
-    return this.get('model.object_meta.name');
+    return this.get('model.advanced_settings.country');
   }.property('model'),
 
 });

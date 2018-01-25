@@ -16,10 +16,11 @@ export default Ember.Route.extend(PolledModel, DefaultHeaders, {
   },
 
   model: function() {
+    var self = this;
     const store = this.get('store');
     return store.find('assemblylist', /*this.opts('mockapiassembly'), */ null,this.opts('accounts/' + this.get('session').get("id") +'/assemblys')).then((assemblys) => {
       return assemblys;
-    }).catch(function() {
+    }).catch(function(err) {
       self.set('loading', false);
     });
     return {};
