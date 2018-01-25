@@ -12,7 +12,9 @@ export default Component.extend({
   spec: Ember.computed.alias('model.spec'),
   metaData: Ember.computed.alias('model.metadata'),
 
-
+  initializeChart: Ember.on('didInsertElement', function() {
+    this.modelUpdated();
+  }),
 
   region: function() {
     return this.get('assemblyFactory.object_meta.cluster_name');
@@ -38,6 +40,10 @@ export default Component.extend({
     }
     return ""
   }.property('model'),
+
+  assemblyPhase: function() {
+    return this.get('model.status.phase');
+  }.property('model.status.phase'),
 
   assemblyStatusUpdate: function() {
     this.set('assemblyStatus', this.assemblyStatusChecker());
@@ -130,12 +136,12 @@ export default Component.extend({
   },
 
   metricsData: function() {
+    this.set('spec.metrics.name', "gauge" + this.get('model.id'));
     return this.metricsDataFinder();
   }.property('model'),
 
   metricsDataFinder: function() {
     if (!(this.get('model.spec.metrics.' + this.get('model.id')) == undefined)) {
-      this.set('spec.metrics.name', "gauge" + this.get('model.id'));
       this.set('model.spec.metrics.counter', parseInt(this.get('model.spec.metrics.' + this.get('model.id'))));
       return this.get('spec.metrics');
     }

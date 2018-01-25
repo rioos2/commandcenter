@@ -3,5 +3,7 @@
   <span class="city">{{model.object_meta.name}}</span><span class="country"> - {{country}}</span>
   {{#if statusNotOkay}}
     <img class="btn-location-cancel" src="images/second/location_x.png">
+  {{else}}
+    <img class="btn-location-okay" src="images/second/ip_dot_active.png">
   {{/if}}
 </div>

@@ -4,7 +4,7 @@
       {{svg/svg-status status=assemblyStatus}}
     </div>
     <p class="text1">{{name}}</p>
-    <p class="text2">{{model.status.phase}}</p>
+    <p class="text2">{{assemblyPhase}}</p>
   </div>
   <div class="ip">
     <div class="icon">
@@ -22,11 +22,11 @@
   </div>
 </div>
 <div class="right">
-  {{#link-to "vnc" (query-params vnchost=host vncport=port) target="_blank" }}
-    {{fa-icon "cog" class="settingIcon"}}
-    <!-- <i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i> -->
-  {{/link-to}}
-
+<!-- {{action-menu model=model}} -->
+{{#link-to "vnc" (query-params vnchost=host vncport=port) target="_blank" }}
+  {{fa-icon "cog" class="settingIcon"}}
+  <!-- <i class="fa fa-desktop" title="VNC" aria-hidden="true" style="color: #2196F3;font-size: 16px;"></i> -->
+{{/link-to}}
   <div class="gauge">
     {{home/chart-gauge model=metricsData showName=false showOS=true image=image version=version}}
   </div>
