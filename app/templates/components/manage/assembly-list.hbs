@@ -21,7 +21,7 @@
                               {{fa-icon "refresh" click=(action "filterReset") class="spinnerButton"}}
                               {{/unless}}
                                 {{#if isSearchVisible}}
-                                    {{input class="searchInput" placeholder="Search" value=theFilter}}
+                                    {{input class="searchInput" title="Search by name, status, ip, region." placeholder="Search" value=theFilter}}
                                 {{/if}}
                                 {{fa-icon "search" click=(action "search") class="searchButton"}}
                             </div>
