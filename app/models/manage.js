@@ -14,7 +14,6 @@ export default Resource.extend({
 
 
 availableActions: function() {
-  alert("dd");
   // let a = this.defaultActionLinks();
   var a = this.get('actionLinks');
 

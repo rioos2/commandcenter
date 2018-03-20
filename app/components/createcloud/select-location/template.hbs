@@ -1,0 +1,29 @@
+<div class="col-container">
+    <div class="first-col">
+        <p class="sub-title">{{t 'launcherPage.location.title'}}</p>
+        <p class="sub-description">{{t 'launcherPage.location.description'}}</p>
+        {{svg/svg-dots class="dots-ico"}}
+        {{svg/svg-locateme class="locateme"}}
+    </div>
+
+    <div class="second-col">
+        {{#if showField}}
+            <p class="closebtn" {{action "closeInputField" on="click"}}>×</p>
+            <div class="form-group">
+                {{input type="text" value=location}}
+                <label class="{{if location 'data-exist'}} control-label" for="input">Type your location</label><i class="bar"></i>
+                {{svg/svg-addlocation class="addlocation" click=(action 'addLocation')}}
+            </div>
+        {{/if}}
+    </div>
+
+    <div class="third-col">
+        <p class="title">Your Location(s)</p>
+        <ul class="rio-location-ul hex with-add">
+          {{#each model.datacenters.content as |data|}}
+            {{createcloud/select-location-list model=data}}
+          {{/each}}
+        </ul>
+        {{svg/svg-addmore class="addmore" click=(action 'showInputField')}}
+    </div>
+</div>

@@ -32,20 +32,31 @@
 		height: auto;
 		overflow: hidden;
 		z-index: 1;
+		margin-bottom: -43px;
+
+		.svgTwo {
+			position: absolute;
+			left: 0px;
+			z-index: 2;
+		}
 
 		canvas {
-			overflow: hidden;
-			display: inline-block;
-			background: #1A086F;
+			margin-left: -34px;
 			position: absolute;
-			z-index: -1;
-			background-attachment: fixed;
+      left: 0px;
+		}
+	}
+
+	.center-point {
+		.middle-text {
+			font-family: '24px verdana' !important;
 		}
 	}
 
 	.gauge-name {
 		color: #40403f;
 		font-size: 25px;
+    padding-top: 28px;
 	}
 
 	.gauge-power {
@@ -58,7 +69,7 @@
 	}
 
 	.showOS {
-		padding: 8px 0 0 25px;
+		padding: 50px 0 0 25px;
 
 		img {
 			width: 60px;
@@ -88,6 +99,9 @@
 				color: #6c6e78;
 				margin: 0;
 				padding-top: 6px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 		}
 	}

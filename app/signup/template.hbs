@@ -1,0 +1,57 @@
+<div class="signup-page signform">
+  {{#link-to "signup"}}<img class="logo-img" src="images/logo2.png">{{/link-to}}
+  <div class="container">
+    <!-- <img class="signup-icon" src="images/signup/signupicon.png"> -->
+    <form>
+      <h1>{{t 'signupPage.signup'}}</h1>
+
+      <div class="form-group {{val_company}}">
+        {{input type="text" value=company_name}}
+        <label class="{{if company_name 'data-exist'}} control-label" for="input">{{t 'signupPage.companyName'}}</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_firstName}}">
+        {{input type="text" value=first_name}}
+        <label class="{{if first_name 'data-exist'}} control-label" for="input">{{t 'signupPage.firstName'}}</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_lastName}}">
+        {{input type="text" value=last_name}}
+        <label class="{{if last_name 'data-exist'}} control-label" for="input">{{t 'signupPage.lastName'}}</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_phone}}">
+        {{input type="number" value=phone}}
+        <label class="{{if phone 'data-exist'}} control-label" for="input">{{t 'signupPage.phone'}}</label><i class="bar"></i>
+      </div>
+
+      <div class="form-group {{val_email}}">
+        {{input type="text" value=email}}
+        <label class="{{if email 'data-exist'}} control-label" for="input">{{t 'signupPage.email'}}</label>
+        <i class="bar"></i>
+        {{#unless emailExistence}}
+          {{fa-icon "exclamation-circle" class="wariningcolor"}} <span class='wariningcolor'>{{emailErrorMsg}}</span>
+        {{/unless}}
+      </div>
+
+      <div class="form-group {{val_code}}">
+        {{input type="password" value=password}}
+        <label class="{{if password 'data-exist'}} control-label" for="input">{{t 'signupPage.activateOnCode'}}</label><i class="bar"></i>
+      </div>
+
+    </form>
+
+    <div class="button-container">
+      <button class="button" {{action 'singUp'}}><span>{{t 'signupPage.createAccount'}}
+        {{fa-icon "long-arrow-right" class="right-arrow"}}
+
+      </span></button>
+    </div>
+
+    <div class="sub-description">
+      {{t 'signupPage.alredyAccount'}}
+      {{#link-to "login" class="signup-link" }}{{t 'signupPage.signin'}}{{/link-to}}
+    </div>
+
+  </div>
+</div>

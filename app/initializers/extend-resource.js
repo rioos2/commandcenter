@@ -1,4 +1,4 @@
-import Resource from 'nilavu/models/resource';
+import Resource from  'ember-api-store/models/resource';
 import CattleTransitioningResource from 'nilavu/mixins/cattle-transitioning-resource';
 
 export function initialize(application) {

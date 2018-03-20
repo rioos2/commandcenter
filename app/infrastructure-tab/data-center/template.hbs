@@ -1,0 +1,32 @@
+<div class="home">
+    {{!-- Main gauges --}}
+    <div id="maingauge" class="main-gauges p-t-50 p-b-50">
+        <p class="title p-l-50">
+            <span class="underline">{{t 'dashboard.maingaugesFirstSec'}}</span>{{t 'dashboard.maingaugesSecondSec'}}</p>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+                {{infra-health-metriclist model=model}}
+            </div>
+        </div>
+    </div>
+
+    {{!-- Statistics --}}
+    <div id="statistics" class="statistics p-t-50 p-b-50">
+        <p class="title p-l-50 p-b-20">
+            <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
+        <div class="row list-content">
+            {{#each cacheNodes as |sdata|}}
+            <div class="col-md-6 col-sm-12 list">
+                {{infra-node-statistics model=sdata}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+    {{!-- OS useage by time No horiz error. but not middle. --}}
+    <div id="osusage" class="os-useage-bytime p-t-50 p-b-50">
+        <p class="title p-l-50 p-b-30">
+            <span class="underline">{{t 'dashboard.osUsageFirstSec'}}</span>{{t 'dashboard.osUsageSecondSec'}}</p>
+        {{infra-deployedos-visualizelive model=model}}
+    </div>
+</div>

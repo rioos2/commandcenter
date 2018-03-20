@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Util from 'nilavu/utils/util';
-import Resource from 'nilavu/models/resource';
+import Resource from 'ember-api-store/models/resource';
 import { normalizeType } from '../utils/normalize';
 import C from 'nilavu/utils/constants';
 
@@ -121,7 +121,7 @@ export default Ember.Mixin.create({
     }
 
     return null;
-  }.property('availableActions.@each.enabled'),
+  }.property('availableActions.@each.enabled', 'model.availableActions.@each.class'),
 
   actions: {
     // promptDelete: function() {
@@ -165,7 +165,7 @@ export default Ember.Mixin.create({
 
   isTransitioning: Ember.computed.equal('transitioning','yes'),
   isError: Ember.computed.equal('transitioning','error'),
-  isRemoved: Ember.computed('state', () => { return !C.REMOVEDISH_STATES.includes(this.state); }),
+  isRemoved: Ember.computed('state', () => { return !C.MANAGEMENT.STATUS.TERMINATE.includes(this.state); }),
   isPurged: Ember.computed.equal('state','purged'),
   isActive: Ember.computed.equal('state','active'),
 
@@ -286,7 +286,7 @@ export default Ember.Mixin.create({
     function recurse(val, depth) {
       if ( depth > 10 )
       {
-        console.log(val);
+        console.log("---"+ val);
         return val;
       }
       else if ( typeof val === 'string' )

@@ -1,4 +1,4 @@
-import Resource from 'nilavu/models/resource';
+import Resource from 'ember-api-store/models/resource'; 
 
 var Reports = Resource.extend({
   type: 'reports',

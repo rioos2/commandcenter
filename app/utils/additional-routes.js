@@ -3,7 +3,7 @@ var list = {};
 
 /* Usage: In your Addon:
  *
- * import { addRoutes } from 'ui/utils/additional-routes';
+ * import { addRoutes } from 'nilavu/utils/additional-routes';
  *
  * addRoutes(function() {
  *   this.route('hello');

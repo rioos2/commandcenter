@@ -14,7 +14,6 @@ export default Ember.Service.extend({
 
   unknownProperty: function(key) {
     var value; // = undefined;
-
     var existing = this.findByName(key);
     if (existing) {
       try {

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 295.56 190">
+<defs>
+    <filter id="sofGlow" height="300%" width="300%" x="-75%" y="-75%">
+        <!-- Thicken out the original shape -->
+        <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken" />
+        <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+        <feGaussianBlur in="thicken" stdDeviation="5" result="blurred" />
+        <!-- Change the colour -->
+        <feFlood flood-color="rgba(45,99,255,0.1)" result="glowColor" />
+        <!-- Color in the glows -->
+        <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+        <!--	Layer the effects together -->
+        <feMerge>
+            <feMergeNode in="softGlow_colored"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+
+    <filter id="hoversofGlow" height="300%" width="300%" x="-75%" y="-75%">
+        <!-- Thicken out the original shape -->
+        <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken" />
+        <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+        <feGaussianBlur in="thicken" stdDeviation="15" result="blurred" />
+        <!-- Change the colour -->
+        <feFlood flood-color="rgba(46, 135, 255, 0.5)" result="glowColor" />
+        <!-- Color in the glows -->
+        <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+        <!--	Layer the effects together -->
+        <feMerge>
+            <feMergeNode in="softGlow_colored"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</defs>
+
+<g id="Layer_2" data-name="Layer 2">
+        <rect class="cls-1" x="0.5" y="0.5" width="294.56" height="189"/>
+        <path class="cls-2" d="M248.34,92.45,220,141.55H75.49L47.14,92.45,75.49,43.34H220Z" />
+        <path class="cls-3" d="M234,92.45l-21.92,38H83.39l-21.92-38,21.92-38h128.7Z"/>
+        <text class="cls-4" transform="translate(90.02 98.61)">GENERATE</text>
+</g>
+</svg>

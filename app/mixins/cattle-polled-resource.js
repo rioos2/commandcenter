@@ -123,7 +123,7 @@ export default Ember.Mixin.create({
 
   stateChanged: function() {
     // Get rid of things that are removed
-    if ( C.REMOVEDISH_STATES.includes(this.state) ) {
+    if ( C.MANAGEMENT.STATUS.TERMINATE.includes(this.state) ) {
       try {
         this.clearPoll();
         this.clearDelay();

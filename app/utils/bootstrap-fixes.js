@@ -10,7 +10,6 @@ export function positionDropdown(menu, trigger, right) {
   // https://github.com/twbs/bootstrap/issues/10756#issuecomment-41041800
   var direction = (right === true ? 'right' : 'left');
   var $menu = $(menu);
-
   // reset position
   menu.css({
     top: 0,
@@ -23,7 +22,7 @@ export function positionDropdown(menu, trigger, right) {
     target: trigger,
     itemAt: 'top ' + direction,
     itemOffset: {
-      y: 3,
+      y: 0,
       x: 0,
       mirror: true
     },

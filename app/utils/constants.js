@@ -1,14 +1,3 @@
-const KIND_USER = 'user';
-const KIND_CATALOG = 'catalog';
-const KIND_SYSTEM = 'system';
-const KIND_SYSTEM_CATALOG = 'system-catalog';
-const KIND_LEGACY_KUBERNETES = 'kubernetes';
-const KIND_KUBERNETES = 'k8s';
-const KIND_SWARM = 'swarm';
-const KIND_MESOS = 'mesos';
-const KIND_INFRA = 'infra';
-const KIND_NOT_ORCHESTRATION = 'cattle';
-
 var C = {
 
   ASSEMBLY: {
@@ -29,51 +18,27 @@ var C = {
     RESOURSE: {
       HDD: "hdd",
       SSD: "ssd",
+    },
+    RESOURSE_COMPUTE_TYPE: {
+      CPU: "cpu",
+      GPU: "gpu",
     }
   },
 
   MANAGEMENT: {
     STATUS: {
-      WARNING:["bootstrapped","pending","scheduled","initializing","initialized","bootstrapping","booting","rebooting","starting","stopping"],
-      SUCCESS:["running"],
-      FAILURE:["stopped","failed"],
+      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating"],
+      SUCCESS: ["running"],
+      FAILURE: ["stopped", "failed", "terminated"],
+      TERMINATE: ["terminated", "terminating"],
     },
 
     STATE: {
-      WARNING:"warning",
-      SUCCESS:"success",
-      FAILURE:"failure",
+      WARNING: "warning",
+      SUCCESS: "success",
+      FAILURE: "failure",
     },
   },
-
-  BULK_ACTIONS: [
-    {
-      "label": "action.start",
-      "icon": "icon icon-play",
-      "action": "start",
-      "bulkActionName": "Start",
-    },
-    {
-      "label": "action.stop",
-      "icon": "icon icon-stop",
-      "action": "promptStop",
-      "altAction": "stop",
-      "bulkActionName": "Stop",
-    },
-    {
-      "label": "action.restart",
-      "icon": "icon icon-refresh",
-      "action": "restart",
-      "bulkActionName": "Restart",
-    },
-    {
-      "label": "action.remove",
-      "icon": "icon icon-trash",
-      "action": "promptDelete",
-      "altAction": "delete",
-      "bulkActionName": "Delete",
-    },
-  ],
 
   CAPABILITY: {
     NETWORK_POLICIES: 'network-policy-manager',
@@ -83,50 +48,11 @@ var C = {
   COOKIE: {
     TOKEN: 'token',
     PL: 'PL',
-    PL_RANCHER_VALUE: 'rancher',
+    PL_RIOOS_VALUE: 'rioos',
     CSRF: 'CSRF',
     LANG: 'LANG',
   },
 
-  EXTERNAL_ID: {
-    KIND_SEPARATOR: '://',
-    GROUP_SEPARATOR: ':',
-    BASE_SEPARATOR: '*',
-    ID_SEPARATOR: ':',
-    KIND_ALL: 'all',
-    KIND_USER: KIND_USER,
-    KIND_CATALOG: KIND_CATALOG,
-    KIND_SYSTEM: KIND_SYSTEM,
-    KIND_SYSTEM_CATALOG: KIND_SYSTEM_CATALOG,
-    KIND_LEGACY_KUBERNETES: KIND_LEGACY_KUBERNETES,
-    KIND_KUBERNETES: KIND_KUBERNETES,
-    KIND_SWARM: KIND_SWARM,
-    KIND_MESOS: KIND_MESOS,
-    KIND_INFRA: KIND_INFRA,
-    KIND_NOT_ORCHESTRATION: KIND_NOT_ORCHESTRATION,
-    KIND_ORCHESTRATION: [
-      KIND_KUBERNETES,
-      KIND_SWARM,
-      KIND_MESOS,
-    ],
-    UPGRADEABLE: [
-      KIND_CATALOG,
-      KIND_SYSTEM_CATALOG
-    ],
-    SYSTEM_KINDS: [
-      KIND_SYSTEM,
-      KIND_SYSTEM_CATALOG,
-    ],
-    SHOW_AS_SYSTEM: [
-      KIND_SYSTEM,
-      KIND_INFRA,
-      KIND_NOT_ORCHESTRATION,
-    ],
-    SYSTEM_CATEGORIES: [
-      'Rancher services'
-    ],
-    CATALOG_DEFAULT_GROUP: 'library',
-  },
 
   CATALOG: {
     LIBRARY_KEY: 'library',
@@ -136,12 +62,6 @@ var C = {
     DEFAULT_BRANCH: 'master',
   },
 
-  GITHUB: {
-    DEFAULT_HOSTNAME: 'github.com',
-    AUTH_PATH: '/login/oauth/authorize',
-    PROXY_URL: '/github/',
-    SCOPE: 'read:org',
-  },
 
   HEADER: {
     ACCOUNT_ID: 'X-Api-Account-Id',
@@ -151,7 +71,7 @@ var C = {
     NO_CHALLENGE: 'X-Api-No-Challenge',
     NO_CHALLENGE_VALUE: 'true',
     PROJECT_ID: 'X-Api-Project-Id',
-    RANCHER_VERSION: 'X-Rancher-Version',
+    RIOOS_VERSION: 'X-RioOS-Version',
   },
 
   KEY: {
@@ -170,69 +90,18 @@ var C = {
     END: 36,
   },
 
-  LABEL: {
-    SYSTEM_PREFIX: 'io.rancher.',
-
-    // Container
-    DNS: 'io.rancher.container.dns',
-    HOSTNAME_OVERRIDE: 'io.rancher.container.hostname_override',
-    HOSTNAME_OVERRIDE_VALUE: 'container_name',
-    PULL_IMAGE: 'io.rancher.container.pull_image',
-    PULL_IMAGE_VALUE: 'always',
-    REQUESTED_IP: 'io.rancher.container.requested_ip',
-    SERVICE_NAME: 'io.rancher.stack_service.name',
-    START_ONCE: 'io.rancher.container.start_once',
-    STACK_NAME: 'io.rancher.stack.name',
-    STACK_UUID: 'io.rancher.stack.uuid',
-    SYSTEM_TYPE: 'io.rancher.container.system',
-
-    // Catalog
-    CERTIFIED: 'io.rancher.certified',
-    CERTIFIED_PARTNER: 'partner',
-    CERTIFIED_RANCHER: 'rancher',
-    ORCHESTRATION_SUPPORTED: 'io.rancher.orchestration.supported',
-
-    // Host
-    AGENT_IMAGE: 'io.rancher.host.agent_image',
-    DOCKER_VERSION: 'io.rancher.host.docker_version',
-    KERNEL_VERSION: 'io.rancher.host.linux_kernel_version',
-    KVM: 'io.rancher.host.kvm',
-    SCHED_IPS: 'io.rancher.scheduler.ips',
-    REQUIRE_ANY: 'io.rancher.scheduler.require_any',
-
-    // Kubernetes
-    K8S_DASHBOARD: 'io.rancher.k8s.kubernetes-dashboard',
-    K8S_KUBECTL: 'io.rancher.k8s.kubectld',
-    K8S_POD_NAME: 'io.kubernetes.pod.name',
-    K8S_POD_NAMESPACE: 'io.kubernetes.pod.namespace',
-
-    // Scheduling
-    AFFINITY_PREFIX: 'io.rancher.scheduler.affinity:',
-    SCHED_CONTAINER: 'io.rancher.scheduler.affinity:container',
-    SCHED_CONTAINER_LABEL: 'io.rancher.scheduler.affinity:container_label',
-    SCHED_GLOBAL: 'io.rancher.scheduler.global',
-    SCHED_HOST_LABEL: 'io.rancher.scheduler.affinity:host_label',
-
-    // Service
-    DEPLOYMENT_UNIT: 'io.rancher.service.deployment.unit',
-    HASH: 'io.rancher.service.hash',
-    LAUNCH_CONFIG: 'io.rancher.service.launch.config',
-    LAUNCH_CONFIG_PRIMARY: 'io.rancher.service.primary.launch.config',
-    SIDEKICK: 'io.rancher.sidekicks',
-  },
-
   PREFS: {
-    ACCESS_WARNING  : 'accessWarning',
-    BODY_BACKGROUND : 'bodyBackground',
-    PROJECT_DEFAULT : 'defaultProjectId',
-    EXPANDED_STACKS : 'expandedStacks',
-    SORT_STACKS_BY  : 'sortStacksBy',
-    THEME           : 'theme',
-    TABLE_COUNT     : 'tableCount',
-    LANGUAGE        : 'language',
-    I_HATE_SPINNERS : 'ihatespinners',
-    FEEDBACK        : 'feedback',
-    SHOW_SYSTEM     : 'showSystem',
+    ACCESS_WARNING: 'accessWarning',
+    BODY_BACKGROUND: 'bodyBackground',
+    PROJECT_DEFAULT: 'defaultProjectId',
+    EXPANDED_STACKS: 'expandedStacks',
+    SORT_STACKS_BY: 'sortStacksBy',
+    THEME: 'theme',
+    TABLE_COUNT: 'tableCount',
+    LANGUAGE: 'language',
+    I_HATE_SPINNERS: 'ihatespinners',
+    FEEDBACK: 'feedback',
+    SHOW_SYSTEM: 'showSystem',
   },
 
   LANGUAGE: {
@@ -246,33 +115,26 @@ var C = {
 
   },
 
-  THEME: {
-    AUTO_UPDATE_TIMER : 1800000,
-    START_HOUR        : 7,
-    END_HOUR          : 18,
-    DEFAULT           : 'ui-light',
-  },
-
   PROJECT: {
-    TYPE_RANCHER:         'rancher_id',
-    TYPE_AZURE_USER:      'azuread_user',
-    TYPE_AZURE_GROUP:     'azuread_group',
-    TYPE_GITHUB_USER:     'github_user',
-    TYPE_GITHUB_TEAM:     'github_team',
-    TYPE_GITHUB_ORG:      'github_org',
-    TYPE_LDAP_USER:       'ldap_user',
-    TYPE_LDAP_GROUP:      'ldap_group',
-    TYPE_OPENLDAP_USER:   'openldap_user',
-    TYPE_OPENLDAP_GROUP:  'openldap_group',
-    TYPE_SHIBBOLETH_USER:       'shibboleth_user',
-    TYPE_SHIBBOLETH_GROUP:      'shibboleth_group',
+    TYPE_RANCHER: 'rancher_id',
+    TYPE_AZURE_USER: 'azuread_user',
+    TYPE_AZURE_GROUP: 'azuread_group',
+    TYPE_GITHUB_USER: 'github_user',
+    TYPE_GITHUB_TEAM: 'github_team',
+    TYPE_GITHUB_ORG: 'github_org',
+    TYPE_LDAP_USER: 'ldap_user',
+    TYPE_LDAP_GROUP: 'ldap_group',
+    TYPE_OPENLDAP_USER: 'openldap_user',
+    TYPE_OPENLDAP_GROUP: 'openldap_group',
+    TYPE_SHIBBOLETH_USER: 'shibboleth_user',
+    TYPE_SHIBBOLETH_GROUP: 'shibboleth_group',
 
     PERSON: 'person',
     TEAM: 'team',
-    ORG:  'org',
+    ORG: 'org',
 
-    ROLE_MEMBER:  'member',
-    ROLE_OWNER:   'owner',
+    ROLE_MEMBER: 'member',
+    ROLE_OWNER: 'owner',
 
     SUPPORTS_NETWORK_POLICY: [
       'ipsec',
@@ -280,27 +142,19 @@ var C = {
     ]
   },
 
-  PROJECT_TEMPLATE: {
-    DEFAULT: 'cattle',
-  },
-
   // Ephemeral but same but across all browser tabs
   SESSION: {
-    BACK_TO        : 'backTo',
-    USER_ID        : 'user',
-    ACCOUNT_ID     : 'id',
-    TOKEN          : 'token',
-    EMAIL          : 'email',
-    USER_TYPE      : 'userType',
-    PROJECT        : 'projectId',
-    IDENTITY       : 'userIdentity',
-    IDENTITY_TYPE  : 'userType',
-    GITHUB_CACHE   : 'githubCache',
-    GITHUB_ORGS    : 'orgs',
-    GITHUB_TEAMS   : 'teams',
-    LANGUAGE       : 'language',
-    LOGIN_LANGUAGE : 'loginLanguage',
-    ORIGIN         : 'origin',
+    BACK_TO: 'backTo',
+    USER_ID: 'user',
+    ACCOUNT_ID: 'id',
+    TOKEN: 'token',
+    EMAIL: 'email',
+    USER_TYPE: 'userType',
+    PROJECT: 'projectId',
+    IDENTITY: 'userIdentity',
+    IDENTITY_TYPE: 'userType',
+    LANGUAGE: 'language',
+    LOGIN_LANGUAGE: 'loginLanguage',
   },
 
   // Ephemeral and unique for each browser tab
@@ -312,47 +166,47 @@ var C = {
 
   SETTING: {
     // Dots in key names do not mix well with Ember, so use $ in their place.
-    DOT_CHAR:                  '$',
-    IMAGE_RANCHER:             'rancher$server$image',
-    VERSION_RANCHER:           'rancher$server$version',
-    VERSION_COMPOSE:           'rancher$compose$version',
-    VERSION_CLI:               'rancher$cli$version',
-    VERSION_CATTLE:            'cattle$version',
-    VERSION_MACHINE:           'docker$machine$version',
-    VERSION_GMS:               'go$machine$service$version',
-    CLI_URL:                   {
-      DARWIN:                  'rancher$cli$darwin$url',
-      WINDOWS:                 'rancher$cli$windows$url',
-      LINUX:                   'rancher$cli$linux$url',
+    DOT_CHAR: '$',
+    IMAGE_RANCHER: 'rancher$server$image',
+    VERSION_RANCHER: 'rancher$server$version',
+    VERSION_COMPOSE: 'rancher$compose$version',
+    VERSION_CLI: 'rancher$cli$version',
+    VERSION_CATTLE: 'cattle$version',
+    VERSION_MACHINE: 'docker$machine$version',
+    VERSION_GMS: 'go$machine$service$version',
+    CLI_URL: {
+      DARWIN: 'rancher$cli$darwin$url',
+      WINDOWS: 'rancher$cli$windows$url',
+      LINUX: 'rancher$cli$linux$url',
     },
-    COMPOSE_URL:               {
-      DARWIN:                  'rancher$compose$darwin$url',
-      WINDOWS:                 'rancher$compose$windows$url',
-      LINUX:                   'rancher$compose$linux$url',
+    COMPOSE_URL: {
+      DARWIN: 'rancher$compose$darwin$url',
+      WINDOWS: 'rancher$compose$windows$url',
+      LINUX: 'rancher$compose$linux$url',
     },
-    API_HOST:                  'api$host',
-    CATALOG_URL:               'catalog$url',
-    SWARM_PORT:                'swarm$tls$port',
-    ENGINE_URL:                'engine$install$url',
-    SUPPORTED_DOCKER:          'supported$docker$range',
-    NEWEST_DOCKER:             'newest$docker$version',
-    TELEMETRY:                 'telemetry$opt',
-    AUTH_LOCAL_VALIDATE_DESC:  'api$auth$local$validate$description',
-    BALANCER_IMAGE:            'lb$instance$image',
-    PROJECT_VERSION:           'account$version',
-    FEEDBACK_FORM:             'ui$feedback$form',
-    COMPUTE_TYPE:              'ui$digicloud$compute_type',
-    DOMAIN:                    'ui$digicloud$domain',
-    CPU_CORE:                  'ui$digicloud$cpu',
-    RAM:                       'ui$digicloud$ram',
-    DISK:                      'ui$digicloud$disk',
-    DISK_TYPE:                 'ui$digicloud$disk_type',
-    OS_NAME:                   'ui$digicloud$os_name',
-    OS_VERSION:                'ui$digicloud$os_version',
-    SECRET_TYPE_NAMES:         'ui$digicloud$secret_type_names',
-    SECRET_TYPE:               'ui$digicloud$secret_type',
-    SECRET_KEY_LENGTH:         'ui$digicloud$secret_key_length',
-    TRUSTED_KEY:               'ui$digicloud$trusted_key',
+    API_HOST: 'api$host',
+    CATALOG_URL: 'catalog$url',
+    SWARM_PORT: 'swarm$tls$port',
+    ENGINE_URL: 'engine$install$url',
+    SUPPORTED_DOCKER: 'supported$docker$range',
+    NEWEST_DOCKER: 'newest$docker$version',
+    TELEMETRY: 'telemetry$opt',
+    AUTH_LOCAL_VALIDATE_DESC: 'api$auth$local$validate$description',
+    BALANCER_IMAGE: 'lb$instance$image',
+    PROJECT_VERSION: 'account$version',
+    FEEDBACK_FORM: 'ui$feedback$form',
+    COMPUTE_TYPE: 'ui$digicloud$compute_type',
+    DOMAIN: 'ui$digicloud$domain',
+    CPU_CORE: 'ui$digicloud$cpu',
+    RAM: 'ui$digicloud$ram',
+    DISK: 'ui$digicloud$disk',
+    DISK_TYPE: 'ui$digicloud$disk_type',
+    OS_NAME: 'ui$digicloud$os_name',
+    OS_VERSION: 'ui$digicloud$os_version',
+    SECRET_TYPE_NAMES: 'ui$digicloud$secret_type_names',
+    SECRET_TYPE: 'ui$digicloud$secret_type',
+    SECRET_KEY_LENGTH: 'ui$digicloud$secret_key_length',
+    TRUSTED_KEY: 'ui$digicloud$trusted_key',
   },
 
   USER: {
@@ -371,42 +225,69 @@ var C = {
   },
 
   EXT_REFERENCES: {
-    FORUM: 'https://forums.rancher.com',
-    COMPANY: 'http://rancher.com',
-    GITHUB: 'https://github.com/rancher/rancher',
-    DOCS: 'http://docs.rancher.com/rancher',
-    SLACK: 'https://slack.rancher.io',
+    FORUM: 'https://forums.rioos.xyz',
+    COMPANY: 'http://rio.digital',
+    GITHUB: 'https://github.com/riocorp',
+    DOCS: 'https://docs.rioos.xyz/rioos',
+    SLACK: 'https://riocorpteam.slack.com',
   },
 
-  K8S: {
-    BASE: 'api',
-    BASE_VERSION: 'api/v1',
+  CATEGORIES: {
+    MACHINE: 'machine',
+    CONTAINER: 'container',
+    BLOCKCHAIN: 'blockchain'
   },
 
-  MESOS: {
-    HEALTH: 'health',
-    FRAMEWORKS: 'frameworks',
-    MASTER_SERVICE: 'mesos-master',
-    MASTER_PORT: 5050,
+  FILTERS: {
+    UNDERSCORE_DEFAULT: "_default",
+    QUERY_PARAM_OS: "os",
+    QUERY_PARAM_LOCATION: "location",
+    QUERY_PARAM_DB: "db",
+    QUERY_PARAM_NETWORK: "network",
+    QUERY_PARAM_STATUS: "status",
+    QUERY_PARAM_SEARCH: "search",
+    SELECT_OS: "Select OS",
+    SELECT_LOCATION: "Location",
+    SELECT_DB: "Select DB",
+    SELECT_NETWORK: "Network",
+    SELECT_STATUS: "Status",
+    SELECT_OS_ACCESSOR: "spec.assembly_factory.spec.plan.object_meta.name",
+    SELECT_DB_ACCESSOR: "",
+    SELECT_LOCATION_ACCESSOR: "spec.assembly_factory.object_meta.cluster_name",
+    SELECT_NETWORK_ACCESSOR: "",
+    SELECT_STATUS_ACCESSOR: "status.phase",
   },
 
-  // CSS map to driver icons
-  MACHINE_DRIVER_IMAGES: {
-    AMAZONEC2: 'amazonec2',
-    AZURE: 'azure',
-    DIGITALOCEAN: 'digitalocean',
-    EXOSCALE: 'exoscale',
-    GENERIC: 'generic',
-    OPENSTACK: 'openstack',
-    PACKET: 'packet',
-    RACKSPACE: 'rackspace',
-    UBIQUITY: 'ubiquity',
-    VMWAREVSPHERE: 'vmwarevsphere',
-    OTHER: 'other',
-    CUSTOM: 'custom',
-    ALIYUNECS: 'aliyunecs',
-  }
+  ANALYTIC_EVENTS: {
+    LOGGED_IN: "Logged_In",
+    DEPLOY_DIGITAL_CLOUD: "[Deploy]_Digital_Cloud",
+    DELETE_DIGITAL_CLOUD: "[Delete]_Digital_Cloud",
+    DEPLOY_CONTAINER: "[Deploy]_Container",
+    DELETE_CONTAINER: "[Delete]_Container",
+  },
+
 };
+
+C.FILTER_QUERY_PARAMS_ALL = [C.FILTERS.QUERY_PARAM_OS, C.FILTERS.QUERY_PARAM_DB,
+C.FILTERS.QUERY_PARAM_LOCATION, C.FILTERS.QUERY_PARAM_NETWORK, C.FILTERS.QUERY_PARAM_STATUS];
+
+C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH = [
+  { selector: C.FILTERS.QUERY_PARAM_OS, accessor: C.FILTERS.SELECT_OS_ACCESSOR, _default: C.FILTERS.SELECT_OS },
+  { selector: C.FILTERS.QUERY_PARAM_LOCATION, accessor: C.FILTERS.SELECT_LOCATION_ACCESSOR, _default: C.FILTERS.SELECT_LOCATION },
+  { selector: C.FILTERS.QUERY_PARAM_DB, accessor: C.FILTERS.SELECT_DB_ACCESSOR, _default: C.FILTERS.SELECT_DB },
+  { selector: C.FILTERS.QUERY_PARAM_STATUS, accessor: C.FILTERS.SELECT_STATUS_ACCESSOR, _default: C.FILTERS.SELECT_STATUS },
+  { selector: C.FILTERS.QUERY_PARAM_NETWORK, accessor: C.FILTERS.SELECT_NETWORK_ACCESSOR, _default: C.FILTERS.SELECT_NETWORK },
+];
+
+C.CATEGORIES_ALL = [C.CATEGORIES.MACHINE, C.CATEGORIES.CONTAINER, C.CATEGORIES.BLOCKCHAIN];
+
+C.ANALYTIC_EVENTS_ALL = [
+  C.ANALYTIC_EVENTS.LOGGED_IN,
+  C.ANALYTIC_EVENTS.DEPLOY_DIGITAL_CLOUD,
+  C.ANALYTIC_EVENTS.DELETE_DIGITAL_CLOUD,
+  C.ANALYTIC_EVENTS.DEPLOY_CONTAINER,
+  C.ANALYTIC_EVENTS.DELETE_CONTAINER,
+];
 
 C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.ACCOUNT_ID,
@@ -414,83 +295,13 @@ C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.TOKEN,
   C.SESSION.USER_ID,
   C.SESSION.USER_TYPE,
-  C.SESSION.GITHUB_TEAMS,
-  C.SESSION.GITHUB_ORGS,
   C.SESSION.IDENTITY,
   C.SESSION.IDENTITY_TYPE
-];
-
-C.LABELS_TO_IGNORE = [
-  C.LABEL.HASH,
-];
-
-C.SYSTEM_LABELS_WITH_CONTROL = [
-  C.LABEL.SCHED_GLOBAL,
-  C.LABEL.HOSTNAME_OVERRIDE,
-  C.LABEL.DNS,
-  C.LABEL.START_ONCE,
-  C.LABEL.REQUESTED_IP,
-  C.LABEL.PULL_IMAGE,
-  C.LABEL.REQUIRE_ANY,
-  C.LABEL.SCHED_IPS,
-  C.LABEL.AGENT_IMAGE,
-  C.LABEL.DOCKER_VERSION,
-  C.LABEL.KERNEL_VERSION,
-  C.LABEL.KVM,
-];
-
-C.ACTIVEISH_STATES = [
-  'running',
-  'active',
-  'updating-active',
-  'updating-running',
-  'healthy',
-  'initializing',
-  'reinitializing',
-  'degraded',
-  'unhealthy',
-  'started-once',
-  'upgrading',
-  'upgraded',
-];
-
-C.READY_STATES = [
-  'healthy',
-  'started-once',
-];
-
-C.REMOVEDISH_STATES = [
-  'removed',
-  'purging',
-  'purged'
 ];
 
 C.INITIALIZING_STATES = [
   'initializing',
   'reinitializing'
 ];
-
-C.VM_CAPABLE_STORAGE_DRIVERS = [
-  'convoy-gluster',
-  'convoy-longhorn',
-  'longhorn',
-];
-
-// This is populated by each app/components/schema/*
-C.SUPPORTED_SCHEMA_INPUTS= [
-  'boolean',
-  'certificate',
-  'date',
-  'enum',
-  'float',
-  'int',
-  'multiline',
-  'password',
-  'service',
-  'string',
-  'masked',
-  'secret',
-];
-
 
 export default C;

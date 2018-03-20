@@ -1,0 +1,177 @@
+@import "createcloud/cloud-type";
+@import "createcloud/select-domain";
+@import "createcloud/select-location";
+@import "createcloud/cloud-performance";
+@import "createcloud/server-os";
+@import "createcloud/networking";
+@import "createcloud/summary";
+
+.create-cloud {
+    background-image: url(../images/signup/bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: $bg-fourth-color;
+    height: 100%;
+    user-select: none;
+    // height: 100vh;
+    // overflow-x: hidden;
+
+    .logo-img {
+        width: 200px;
+        margin: 60px 0 60px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .col-container {
+        display: table;
+        width: 100%;
+    }
+
+    .col-left,
+    .col-right {
+        display: table-cell;
+    }
+
+    .col-left {
+        width: 132px;
+        background: #2b2f50;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        text-align: center;
+    }
+
+    .col-right {
+        background: white;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        -webkit-box-shadow: 4px 5px 20px 0px rgba(29,34,47,0.1);
+        -moz-box-shadow: 4px 5px 20px 0px rgba(29,34,47,0.1);
+        box-shadow: 4px 5px 20px 0px rgba(29,34,47,0.1);
+    }
+
+    .sub-title {
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .sub-description {
+        font-size: 16px;
+        color: #bfc4d5;
+        text-align: center;
+    }
+
+    .cl-desktop-sticky{
+        position: sticky;
+        z-index: 2;
+        top: 30px;
+    }
+
+    .rio-slide-step {
+        margin: 15px auto 0;
+        cursor: pointer;
+
+        .check-btn {
+            width: 25px;
+        }
+
+        .unchecked {
+            .hexagon-icon {
+                stroke: #7f8697;
+                stroke-width: 2px;
+                fill: none;
+            }
+
+            .check-icon {
+                display: none;
+            }
+        }
+
+        .checked {
+            .hexagon-icon {
+                fill: #4de170;
+
+            }
+
+            .check-icon {
+                fill: white;
+            }
+        }
+
+        .bar-btn-vert,
+        .bar-btn-hori {
+            width: 45px;
+            .text{
+                fill: $rio-second-color;
+            }
+
+            .outbox{fill:#2342c8;}
+            .arrow-up{fill:#f9efef;}
+            .arrow-down{fill:#f9f9fa;}
+        }
+
+        .bar-btn-hori {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 1199px) {
+        .col-left {
+            width: 100px;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .col-container {
+            display: flex;
+            justify-content: space-around;
+            flex-direction: column;
+        }
+
+        .col-left,
+        .col-right {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .cl-mobile-sticky {
+            position: sticky;
+            bottom: -1px;
+            z-index: 1002;
+        }
+
+        .col-left {
+            order: 2;
+            padding: 10px 0;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 8px;
+        }
+
+        .col-right {
+            order: 1;
+        }
+
+        .rio-slide-step {
+            display: inline-block;
+
+            .bar-btn-vert {
+                display: none;
+            }
+
+            .bar-btn-hori {
+                display: block;
+                height: 25px;
+                width: auto;
+            }
+
+            .check-btn{
+                width: 18px;
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   session: Ember.inject.service(),
 
-  opts(url = '', forceReload = true) {
+  opts(url = '', forceReload = false) {
     var session = this.get('session');
     let rioos_headers = {
       headers: {
@@ -12,7 +12,9 @@ export default Ember.Mixin.create({
       },
       url: url,
       forceReload: forceReload,
-      removeAfterDelete: true
+      filter: false,
+      removeAfterDelete: true,
+      isForAll: true,
     };
     return rioos_headers;
   },

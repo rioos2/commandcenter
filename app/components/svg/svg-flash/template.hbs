@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 155.33 203.26">
+    <defs>
+        <filter id="sofGlowflash" height="300%" width="300%" x="-75%" y="-75%">
+            <!-- Thicken out the original shape -->
+            <feMorphology operator="dilate" radius=2 in="SourceAlpha" result="thicken" />
+
+            <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+            <feGaussianBlur in="thicken" stdDeviation="4" result="blurred" />
+
+            <!-- Change the colour -->
+            <feFlood flood-color="rgba(230, 135, 23, 0.5)" result="glowColor" />
+
+            <!-- Color in the glows -->
+            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+
+            <!--	Layer the effects together -->
+            <feMerge>
+                <feMergeNode in="softGlow_colored"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+
+        </filter>
+    </defs>
+    <g id="Layer_2" data-name="Layer 2">
+        <path class="cls-1" d="M138.05,74.1l-30.37,52.59H46.95L16.58,74.1,46.95,21.5h60.74Z"/>
+        <path class="cls-2" d="M90.27,63.95h-.72V46.67a1.58,1.58,0,0,0-1.44-1.44H65.8a1.58,1.58,0,0,0-1.44,1.44V63.95h-.72a4.92,4.92,0,0,0-5,4.8q0,.12,0,.24v32.38a4.92,4.92,0,0,0,4.8,5H91a4.92,4.92,0,0,0,5-4.8q0-.12,0-.24V69C95.31,66.1,93.15,63.95,90.27,63.95ZM68,48.12H86.67V63.23H68Zm24.47,53.25A1.58,1.58,0,0,1,91,102.81H63.64a1.58,1.58,0,0,1-1.44-1.44V85.53h2.88a1.44,1.44,0,0,0,0-2.88H62.2V79.78H68a1.44,1.44,0,0,0,0-2.88H62.2v-7.2a1.58,1.58,0,0,1,1.44-1.44H91a1.58,1.58,0,0,1,1.44,1.44Z"/>
+        <path class="cls-2" d="M73,51a1.58,1.58,0,0,0-1.44,1.44v6.49a1.44,1.44,0,0,0,2.88,0V52.43A1.58,1.58,0,0,0,73,51Z"/>
+        <path class="cls-2" d="M80.91,51a1.58,1.58,0,0,0-1.44,1.44v6.49a1.44,1.44,0,0,0,2.88,0V52.43C83.1,51.72,82.36,51,80.91,51Z"/>
+        <path class="cls-2" d="M83.1,94.9H70.84a1.44,1.44,0,0,0,0,2.88H83.1a1.58,1.58,0,0,0,1.44-1.44C85.23,95.61,84.52,94.9,83.1,94.9Z"/>
+        <text class="cls-3" transform="translate(40 170.28)">Flash</text>
+        <path class="cls-4" d="M69.43,180.68H85.19a.79.79,0,1,1,0,1.58H69.43a.79.79,0,1,1,0-1.58Z"/>        
+    </g>
+</svg>

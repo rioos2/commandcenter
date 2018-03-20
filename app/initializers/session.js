@@ -1,4 +1,4 @@
-import Serializable from '../mixins/serializable';
+import Serializable from 'ember-api-store/mixins/serializable';
 
 // Don't serialize the injected session
 Serializable.reopen({

@@ -1,0 +1,66 @@
+.networking {
+    padding: 60px 0 30px;
+
+    .rio-status-icon {
+        width: 24px;
+        display: inline-block;
+    }
+
+    .title {
+        display: inline-block;
+        font-size: 45px;
+        font-weight: normal;
+        padding-left: 12px;
+    }
+
+    .disable-network {
+      pointer-events: none;
+       label {
+          color: #a29a9a !important;
+       }
+    }
+
+    .rio-selectbtn {
+        margin-top: 20px;
+        label {
+            border-color: transparent;
+            color: black;
+            text-transform: none;
+            // box-shadow : 0px 6px 20px rgba(41, 49, 190, 0.05);
+
+            &:hover {
+                border-color:#2966d8;
+                box-shadow : 0px 6px 20px rgba(41, 49, 190, 0.3);
+            }
+        }
+
+        .option-input {
+            background: #dae1f5;
+            pointer-events: none;
+
+            &:checked::before {
+                color: #2966d8;
+            }
+        }
+    }
+
+    .row {
+        position: relative;
+    }
+
+    .vl {
+        border-left: 2px solid #f4f7fe;
+        height: 70%;
+        position: absolute;
+        left: 50%;
+        top: 15%;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .rio-selectbtn {
+            margin-top: 0;
+        }
+
+        .vl { display:none;}
+    }
+}
