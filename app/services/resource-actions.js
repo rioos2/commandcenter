@@ -52,7 +52,7 @@ export default Ember.Service.extend({
       this.set('open',true);
       // Delay ensure it works in firefox
       Ember.run.next(() => {
-        BootstrapFixes.positionDropdown($menu, trigger, true);
+        BootstrapFixes.positionDropdown($menu, trigger, false);
         $('#resource-actions-first')[0].focus();
         $menu.css('visibility','visible');
       });
@@ -76,7 +76,6 @@ export default Ember.Service.extend({
   },
 
   activeActions: function() {
-    alert("hey");
     let list = (this.get('model.availableActions')||[]).filter(function(act) {
       return Ember.get(act,'enabled') !== false || Ember.get(act,'divider');
     });
@@ -103,5 +102,5 @@ export default Ember.Service.extend({
     });
 
     return list;
-  }.property('model.availableActions.[]','model.availableActions.@each.enabled', 'model'),
+  }.property('model.availableActions.[]','model.availableActions.@each.enabled','model.availableActions.@each.class', 'model'),
 });

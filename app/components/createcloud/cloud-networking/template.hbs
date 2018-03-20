@@ -1,0 +1,48 @@
+<p class="sub-title">Networking</p>
+<div class="row m-t-50">
+
+<div class="vl"></div>
+
+    <div class="col-sm-6 text-center p-b-30">
+        {{svg/svg-status class="rio-status-icon"}}
+        <p class="title">IPv4</p>
+
+        <div class="rio-selectbtn">
+            <label>
+                {{!-- <input type="radio" class="option-input radio" name="example" checked /> --}}
+                {{!-- Private --}}
+                {{radio-button value="pri4" radioClass="option-input radio" groupValue=radioValue changed="radioChanged"}}Private
+            </label>
+        </div>
+
+        <div class="rio-selectbtn">
+            <label>
+                {{!-- <input type="radio" class="option-input radio" name="example" />
+                Public --}}
+                {{radio-button value="pub4" radioClass="option-input radio" groupValue=radioValue changed="radioChanged"}}Public
+            </label>
+        </div>
+
+    </div>
+
+    <div class="col-sm-6 text-center p-b-30">
+        {{svg/svg-status class="rio-status-icon"}}
+        <p class="title">IPv6</p>
+
+        <div class="rio-selectbtn">
+            <label>
+                {{!-- <input type="radio" class="option-input radio" name="example"/>
+                Private --}}
+                {{radio-button value="pri6" radioClass="option-input radio" groupValue=radioValue changed="radioChanged"}}Private
+            </label>
+        </div>
+
+        <div class="rio-selectbtn">
+            <label>
+                {{!-- <input type="radio" class="option-input radio" name="example" />
+                Public --}}
+                {{radio-button value="pub6" radioClass="option-input radio" groupValue=radioValue changed="radioChanged"}}Public
+            </label>
+        </div>
+    </div>
+</div>

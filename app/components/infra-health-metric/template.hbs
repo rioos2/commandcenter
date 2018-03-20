@@ -1,0 +1,17 @@
+<div id="g-{{model.name}}" class="blueGaugeDiv guage_chart">
+    <span style="position:relative;display:inline" class="b-{{model.name}}"></span>
+</div>
+{{#if showName}}
+    <p class="gauge-name">{{model.name}}</p>
+    <p class="gauge-power">{{t 'infraPage.metric.power'}}<span class="gauge-value">{{power}}{{t 'infraPage.metric.percent'}}</span></p>
+{{/if}}
+
+{{#if showOS}}
+    <div class="showOS">
+        <img style="float:left" src="../images/logos/{{image}}.png">
+        <div class="os-version" style="float:right">
+            {{svg/svg-version class="version-bg"}}
+            <p title={{version}}>v.{{version}}</p>
+        </div>
+    </div>
+{{/if}}

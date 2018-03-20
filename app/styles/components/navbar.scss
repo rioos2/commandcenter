@@ -1,0 +1,388 @@
+.theme-navbar {
+  //navbar----------------------------------------------------------------------------------------
+  position: relative;
+  z-index: 3;
+
+
+  .logo {
+    padding: 0px;
+    margin-left: 0px;
+    img {
+      width: auto;
+      height: 70px;
+      position: relative;
+      box-shadow: 0 0 30px $nav-shadow-color;
+    }
+  }
+
+  .mo-logo {
+    display: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 168px;
+    img {
+      height: 50px;
+      margin-top: 12px;
+      width: auto;
+      position: relative;
+    }
+  }
+
+  .mo-profile,
+  .nav-left-hex,
+  .nav-right-hex {
+    display: none;
+  }
+
+  .dropdown-menu {
+    background-color: #fff;
+    a {
+        color: $nav-primary-color;
+    }
+    a:hover {
+        color: $nav-second-color;
+    }
+  }
+
+  .dropdown .dropdown-menu {
+      transition: all 0.4s;
+      max-height: 0;
+      display: none;
+      overflow: hidden;
+      opacity: 0;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    border-radius: 0px;
+    background-clip: unset;
+    max-height: 600px;
+    opacity: 1;
+    display: block;
+}
+
+  .navbar-nav > .open > a,
+  .navbar-nav > .open > a:hover,
+  .navbar-nav > .open > a:focus {
+    background-color: transparent !important;
+  }
+
+  .left-menu {
+    padding-left: 16px;
+  }
+
+  .nav-profile {
+    top: 60px !important;
+    left: -92px !important;
+  }
+
+  .right-menu {
+    margin: 11px 12px 0px 12px;
+  }
+
+  .nav-menu>li>a {
+    padding: 28px 4px 20px 4px;
+    margin-right: 15px;
+    margin-left: 15px;
+    color:  $nav-primary-color;
+    border-bottom: 2px solid $bg-primary-color;
+
+    &:hover,
+    &:focus {
+      color:  $nav-second-color;
+      border-bottom: 2px solid $rio-second-color;
+    }
+  }
+
+  .navbar-default {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 30px $nav-shadow-color;
+    background-color: $bg-primary-color;
+    min-height: 70px;
+    margin-bottom: 0px;
+  }
+
+  //search input
+  .navbar-search {
+    border: none;
+    color: $nav-primary-color;
+    background-color: #eef2f9;
+    padding: 10px 30px 7px 15px;
+    margin-top: 8px;
+    width: 290px;
+    outline: none;
+  }
+
+  .riosearch {
+    margin: 10px 15px 10px;
+    position: relative;
+    .icon-search {
+      position: absolute;
+      right: 0px;
+      font-size: 18px;
+      padding: 18px 10px 0 0;
+      color: #8b8ba5;
+      cursor: pointer;
+    }
+  }
+
+  //vertical line
+  .vr {
+    border-left:1px solid $nav-vr-color;
+    height: 20px;
+    margin-top: 28px;
+  }
+
+  //news and stats
+  .svg-news {
+    width: 43px;
+    margin: 18px 13px 0 16px;
+    filter: drop-shadow(0px 4px 10px $nav-shadow-color);
+
+    svg {
+      cursor: pointer;
+
+      .cls-1 {
+        fill: $rio-fourth-color;
+      }
+
+      .cls-2 {
+        fill: $rio-second-color;
+      }
+
+      .cls-3 {
+        fill: #ffad2b;
+      }
+
+      &:active .cls-2{
+        fill: #5d90fa;
+      }
+
+      &:hover {
+        filter: drop-shadow(0px 4px 10px $nav-shadow-color);
+      }
+    }
+  }
+
+  .svg-stats {
+    width: 43px;
+    margin: 18px 13px 0 16px;
+    filter: drop-shadow(0px 4px 10px $nav-shadow-color);
+
+    svg {
+      cursor: pointer;
+
+      .cls-1 {
+        fill: #fefeff;
+      }
+
+      .cls-2 {
+        fill: #2c2c43;
+      }
+
+      &:active .cls-2{
+        fill: #5d90fa;
+      }
+
+      &:hover {
+        filter: drop-shadow(0px 4px 10px $nav-shadow-color);
+      }
+    }
+  }
+
+  //profile
+  .profilehex {
+      overflow: hidden;
+      visibility: hidden;
+      -webkit-transform: rotate(120deg);
+        -moz-transform: rotate(120deg);
+          -ms-transform: rotate(120deg);
+          -o-transform: rotate(120deg);
+              transform: rotate(120deg);
+      cursor: pointer;
+  }
+  .profilehex-in1 {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      -webkit-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+          -ms-transform: rotate(-60deg);
+          -o-transform: rotate(-60deg);
+              transform: rotate(-60deg);
+      }
+  .profilehex-in2 {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50%;
+      background-image: url('../images/user/default.png');
+      visibility: visible;
+      -webkit-transform: rotate(-60deg);
+        -moz-transform: rotate(-60deg);
+          -ms-transform: rotate(-60deg);
+          -o-transform: rotate(-60deg);
+              transform: rotate(-60deg);
+      }
+
+  .profilehex1 {
+    width: 44px;
+    height: 38px;
+  }
+
+  .profile>li>a {
+    padding: 7px 10px 9px 0;
+  }
+
+  .profile {
+    position: relative;
+    margin: 10px 0 0;
+  }
+
+  .profile .caret {
+    position: absolute;
+    right: -4px;
+    top: 26px;
+  }
+
+  //Responsive
+
+  @media (max-width: 1200px) {
+    .navbar-header {
+        height: 70px;
+        float: none;
+        background-color: $rio-fourth-color;
+
+        .nav-left-hex {
+          display: block;
+          position: absolute;
+          width: 27px;
+          top: 26px;
+          left: 0;
+        }
+
+        .nav-right-hex{
+          display: block;
+          position: absolute;
+          width: 40px;
+          top: 0;
+          right: 0;
+          z-index: 1;
+        }
+    }
+
+    .mo-profile {
+      display: block;
+      position: relative;
+      float: right;
+      margin: 20px 30px 0 0;
+      z-index: 2;
+
+      .dropdown-menu {
+        right: -30px;
+        left: unset;
+      }
+
+      .caret {
+        position: absolute;
+        right: -10px;
+        top: 18px;
+        color: white;
+      }
+      li {
+        float: left;
+        position: relative;
+        display: block;
+        padding-bottom: 10px;
+      }
+    }
+
+    .profile,
+    .logo {
+      display: none;
+    }
+
+    .mo-logo {
+      display: block;
+    }
+
+    .navbar-toggle {
+        display: block;
+        float: left;
+        width: 25px;
+        margin-top: 25px;
+        margin-left: 25px;
+        padding: 0;
+        border: none;
+
+        .mo-nav-icon {
+          .cls-1 {
+            fill: white;
+          }
+        }
+
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+
+    .navbar .profile,
+    .navbar .svg-news,
+    .navbar .svg-stats {
+      margin-left: 20px;
+    }
+
+    .navbar .svg-stats {
+      margin-top: 20px;
+    }
+
+    .navbar .riosearch{
+      margin: 0 20px 20px 20px !important;
+
+      .icon-search {
+        right: 20px;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    .vr {
+      display: none;
+    }
+  }
+}

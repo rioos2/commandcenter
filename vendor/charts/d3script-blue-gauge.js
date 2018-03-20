@@ -7,26 +7,26 @@ function renderBlueGaugeChart(params) {
   // exposed variables
   var attrs = {
     id: 'id' + Math.floor((Math.random() * 1000000)),
-    svgWidth: 400,
-    svgHeight: 400,
+    svgWidth: 420,
+    svgHeight: 420,
     marginTop: 25,
     marginBottom: 5,
     marginRight: 5,
     marginLeft: 5,
-    backgroundCircleColor: '#1A086F',
+    backgroundCircleColor: '#244ea3',
     middleBackgroundCircleColor: '#5249A1',
     outerBackgroundCircleColor: '#5753B6',
-    mainDonutColor: '#C8C9CC',
+    mainDonutColor: '#f5c821',
     fontFamily: 'Arial Unicode MS',
-    fontSize: 50,
+    fontSize: 55,
     backgroundFill: '#142da3',
     data: null
   };
 
-
   staticArcProperties = {
     outerTopHeadBackground: {
-      color: '#EDEFF9',
+      // Arc background color
+      color: '#d6daec',
       values: [{
         type: consts.TYPE_COLORED,
         value: 40
@@ -102,6 +102,7 @@ function renderBlueGaugeChart(params) {
           inner: calc.backgroundCircleRadius,
           outer: calc.middleBackgroundCircleRadius
         },
+
         middleBackground: {
           inner: calc.backgroundCircleRadius,
           outer: calc.middleBackgroundCircleRadius
@@ -191,8 +192,8 @@ function renderBlueGaugeChart(params) {
 
 
       arcs.greenDonut = d3.arc()
-        .innerRadius(calc.overallRadius - 11)
-        .outerRadius(calc.overallRadius - 4);
+        .innerRadius(calc.overallRadius - 12)
+        .outerRadius(calc.overallRadius + 5);
 
       arcs.backgroundDonut = d3.arc()
         .innerRadius(calc.middleBackgroundCircleRadius)
@@ -211,20 +212,23 @@ function renderBlueGaugeChart(params) {
 
       var container = d3.select(this);
 
-      var svg = container
+      //Base back ground svg. It's just render background only
+      var svgTwo = container
         .append('svg')
-        // .attr('width', attrs.svgWidth)
-        // .attr('height', attrs.svgHeight)
-        .attr('font-family', attrs.fontFamily)
         .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
         .attr("preserveAspectRatio", "xMidYMid meet")
 
-        var canvas = svg
-          .append('canvas')
-          .attr('width', 300)
-          .attr('height', 300)
-          .attr('id', 'pic')
+      var chartTwo = svgTwo.append('g')
+        .attr('width', calc.chartWidth)
+        .attr('height', calc.chartHeight)
+        .attr('transform', 'translate(' + (calc.chartLeftMargin) + ',' + calc.chartTopMargin + ')')
 
+      var svg = container
+        .append('svg')
+        .attr('font-family', attrs.fontFamily)
+        .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .attr('class', "svgTwo")
       var chart = svg.append('g')
         .attr('width', calc.chartWidth)
         .attr('height', calc.chartHeight)
@@ -237,8 +241,188 @@ function renderBlueGaugeChart(params) {
       })
       centerPoint.attr('transform', `translate(${calc.centerPointX},${calc.centerPointY})`)
 
+      var centerPointTwo = patternify({
+        container: chartTwo,
+        selector: 'center-point-two',
+        elementTag: 'g'
+      })
+      centerPointTwo.attr('transform', `translate(${calc.centerPointX},${calc.centerPointY})`)
+
 
       //########################################  FILTERS #################################
+
+      //Canvas bubbles area starts here.
+      var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
+      var point_count = Math.floor(Math.random() * 3) + 1;
+
+      var PI = Math.PI;
+      var PI2 = PI * 2;
+      var cx = 150;
+      var cy = 150;
+      var r = 100;
+
+      var min = PI * .25;
+      var max = PI - PI * .25;
+      var percent = 50;
+      var point_count = 3;
+
+      initHeader();
+      initAnimation();
+
+      function initHeader() {
+        width = 150;
+        height = 150;
+
+        //Canvas render base
+        var canvas = container
+          .append('canvas')
+          .attr('width', calc.chartWidth - 80)
+          .attr('height', calc.chartHeight - 190)
+          .attr('id', 'pic')
+
+        target = {
+          x: 150,
+          y: 150
+        };
+
+        ctx = canvas.node().getContext("2d");
+
+        // create points
+        points = [];
+        for (var x = 0; x < 10; x = x + 1) {
+          for (var y = 0; y < 10; y = y + 1) {
+            var px = 125 + Math.random() * 40;
+            var py = 90 + Math.random() * 40;
+            var p = {
+              x: px,
+              originX: px,
+              y: py,
+              originY: py
+            };
+            points.push(p);
+          }
+        }
+
+        // for each point find the 5 closest points
+        for (var i = 0; i < points.length; i++) {
+          var closest = [];
+          var p1 = points[i];
+          for (var j = 0; j < points.length; j++) {
+            var p2 = points[j]
+            if (!(p1 == p2)) {
+              var placed = false;
+              for (var k = 0; k < 5; k++) {
+                if (!placed) {
+                  if (closest[k] == undefined) {
+                    closest[k] = p2;
+                    placed = true;
+                  }
+                }
+              }
+
+              for (var k = 0; k < 5; k++) {
+                if (!placed) {
+                  if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                    closest[k] = p2;
+                    placed = true;
+                  }
+                }
+              }
+            }
+          }
+          p1.closest = closest;
+        }
+
+        // assign a circle to each point
+        for (var i in points) {
+          var c = new Circle(points[i], 0.6, 'rgba(0,0,255,1)');
+          points[i].circle = c;
+        }
+      }
+
+      // animation
+      function initAnimation() {
+        animate();
+        for (var i in points) {
+          if (points[i].x) {
+            shiftPoint(points[i]);
+          }
+        }
+      }
+
+      function animate() {
+        if (animateHeader) {
+          ctx.clearRect(0, 0, calc.chartWidth, calc.chartHeight);
+          for (var i = 0; i < points.length / point_count; i++) {
+            // detect points in range
+            if (Math.abs(getDistance(target, points[i])) < 4000) {
+              points[i].active = 0.05;
+              points[i].circle.active = 0.8;
+            } else if (Math.abs(getDistance(target, points[i])) < 20000) {
+              points[i].active = 0.01;
+              points[i].circle.active = 0.3;
+            } else if (Math.abs(getDistance(target, points[i])) < 40000) {
+              points[i].active = 0.01;
+              points[i].circle.active = 0.5;
+            } else {
+              points[i].active = 0;
+              points[i].circle.active = 0;
+            }
+
+            drawLines(points[i]);
+            points[i].circle.draw();
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+
+      // Size for bubble width and height. Position were taken from base svg itself.
+      function shiftPoint(p) {
+        TweenLite.to(p, 1 + 1 * Math.random(), {
+          x: p.originX - 40 + Math.random() * 80,
+          y: p.originY - 40 + Math.random() * 80,
+          ease: Circ.easeInOut,
+          onComplete: function() {
+            shiftPoint(p);
+          }
+        });
+      }
+
+      // Canvas manipulation
+      function drawLines(p) {
+        if (!p.active) return;
+        for (var i in p.closest) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.closest[i].x, p.closest[i].y);
+          ctx.strokeStyle = 'rgba(20,217,249,' + p.active + ')';
+          ctx.stroke();
+        }
+      }
+
+      function Circle(pos, rad, color) {
+        var _this = this;
+
+        // constructor
+        (function() {
+          _this.pos = pos || null;
+          _this.radius = rad || null;
+          _this.color = color || null;
+        })();
+
+        this.draw = function() {
+          if (!_this.active) return;
+          ctx.beginPath();
+          ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+          ctx.fillStyle = 'rgba(20,217,249,' + _this.active + ')';
+          ctx.fill();
+        };
+      }
+
+      // Util
+      function getDistance(p1, p2) {
+        return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+      }
 
 
       //-----------------  Drop Shadow Filters ------------------
@@ -293,6 +477,46 @@ function renderBlueGaugeChart(params) {
         .attr("in", "SourceGraphic");
 
 
+      //-------------------------- Background shadows ----------------------------------
+
+      // Background shadow for outer circle. It can be re usable if any circle wants shadows
+      var backdefs = svg.append("defs");
+      var backfilter = backdefs.append("filter")
+        .attr("id", "back-drop-shadow")
+        .attr('color-interpolation-filters', 'sRGB')
+        .attr("height", "170%")
+        .attr("width", "150%")
+
+      backfilter.append("feGaussianBlur")
+        .attr("in", "SourceAlpha")
+        .attr("stdDeviation", 12)
+        .attr("result", "blur");
+
+      backfilter.append("feOffset")
+        .attr("in", "blur")
+        .attr("dx", 0)
+        .attr("dy", 0)
+        .attr("result", "offsetBlur");
+
+      backfilter.append("feFlood")
+        .attr("in", "offsetBlur")
+        .attr("flood-color", '#061073')
+        .attr("flood-opacity", 5)
+        .attr("result", "offsetColor");
+
+      backfilter.append("feComposite")
+        .attr("in", "offsetColor")
+        .attr("in2", 'offsetBlur')
+        .attr("operator", 'in')
+        .attr("result", "offsetBlur");
+
+      var backfeMerge = backfilter.append("feMerge");
+
+      backfeMerge.append("feMergeNode")
+        .attr("in", "offsetBlur")
+      backfeMerge.append("feMergeNode")
+        .attr("in", "SourceGraphic");
+
 
       // ---------------------   Gradient Filters ------------------
 
@@ -307,15 +531,19 @@ function renderBlueGaugeChart(params) {
             color: "blue"
           },
           {
-            offset: "30%",
-            color: "#C8C9CC"
+            offset: "26%",
+            color: "#4672fc"
           },
           {
-            offset: "50%",
-            color: "#FFD338"
+            offset: "35%",
+            color: "#3ce1ec"
           },
           {
-            offset: "60%",
+            offset: "45%",
+            color: "#d6ec3c"
+          },
+          {
+            offset: "85%",
             color: "red"
           },
         ])
@@ -330,23 +558,31 @@ function renderBlueGaugeChart(params) {
       // ########################################### DRAWING ####################################
 
       // outer background circle
+      var outerBackgroundCircleTwo = patternify({
+        container: centerPointTwo,
+        selector: 'outer-background-circle-two',
+        elementTag: 'circle'
+      })
+      outerBackgroundCircleTwo.attr('r', 128)
+        .attr('stroke', '#3B58BE')
+        .attr('fill', '#244ea3')
+        .style("filter", "url(#back-drop-shadow)")
+
+
+      // outer background circle
       var outerBackgroundCircle = patternify({
         container: centerPoint,
         selector: 'outer-background-circle',
         elementTag: 'circle'
       })
       outerBackgroundCircle.attr('r', 128)
-        // .attr('cx', attrs.svgWidth)
-        // .attr('cy', attrs.svgHeight)
-        // .attr('r', calc.outerBackgroundCircleRadius)
         .attr('stroke', '#3B58BE')
         .attr('stroke-width', 30)
-        .attr('fill', '#142DA3')
-
-      // cx="150" cy="140" r="73" stroke="#3B58BE" stroke-width="20" fill="none"
-      // .attr('fill', attrs.outerBackgroundCircleColor)
-      // .attr('opacity', 0)
-      // .style("filter", "url(#drop-shadow)")
+        // .attr('fill', '#244ea3')
+        .attr('fill', '#044B94')
+        .attr('fill-opacity', '0.4')
+        //When outer circle needs to be more darker
+       // .style("filter", "url(#back-drop-shadow)")
 
       // middle background circle
       var middleBackgroundCircle = patternify({
@@ -356,6 +592,17 @@ function renderBlueGaugeChart(params) {
       })
       middleBackgroundCircle.attr('r', 105)
         .attr('stroke', '#3B58BE')
+        .attr('stroke-width', 5)
+        .attr('fill', 'none')
+
+      // middle Upper circle
+      var middleUpperCircle = patternify({
+        container: centerPoint,
+        selector: 'middle-upper-circle',
+        elementTag: 'circle'
+      })
+      middleUpperCircle.attr('r', 110)
+        .attr('stroke', '#2e47b1')
         .attr('stroke-width', 5)
         .attr('fill', 'none')
 
@@ -388,19 +635,11 @@ function renderBlueGaugeChart(params) {
         selector: 'outerthreestep-background-circle',
         elementTag: 'circle'
       })
-      outerStepThreeBackgroundCircle.attr('r', 153)
+      outerStepThreeBackgroundCircle.attr('r', 155)
         .attr('stroke', '#B5BACF')
         .attr('stroke-width', 5)
-        // .attr('fill', '#142DA3')
         .attr('fill', 'none')
-      // .attr('shadowColor', '#142DA3')
-      // .attr('color', '#142da3')
-      // ctx_back.fillStyle = "#142DA3";
-      // ctx_back.beginPath();
-      // ctx_back.shadowColor = "#142DA3";
-      // ctx_back.shadowBlur = 15;
-      // .attr('style', 'background-color: #e65525;border-radius:50%;box-shadow: 3px 3px 3px #e78267;')
-
+        .style("filter", "url(#back-drop-shadow)")
 
 
       // links and nodes background
@@ -531,22 +770,6 @@ function renderBlueGaugeChart(params) {
         .attr('fill', '#6EAAFA')
         .attr('opacity', (d, i) => Math.random())
 
-      // var links = wrapper.selectAll('.links')
-      //   .data(pointConfig.links)
-      //   .enter()
-      //   .append('line')
-      //   .attr('stroke', 'white')
-      //   .attr('stroke-width', 3)
-      //   .attr('x1', d => pointConfig.nodes[d.source].x / 100 * width)
-      //   .attr('x2', d => pointConfig.nodes[d.target].x / 100 * width)
-      //   .attr('y1', d => pointConfig.nodes[d.source].y / 100 * width)
-      //   .attr('y2', d => pointConfig.nodes[d.target].y / 100 * width)
-      //   .attr('fill', '#6EAAFA')
-      //   .attr('opacity', (d, i) => Math.random() / 4)
-
-
-
-
 
       //----------------------------------------------------------
       //static arcs
@@ -575,7 +798,7 @@ function renderBlueGaugeChart(params) {
         selector: 'white-circle-slider',
         elementTag: 'circle'
       })
-      whiteCircle.attr('r', 17)
+      whiteCircle.attr('r', 12)
         .attr('fill', 'white')
         .style("filter", "url(#drop-shadow)")
 
@@ -611,22 +834,10 @@ function renderBlueGaugeChart(params) {
             whiteCircle.attr('cx', pos[0]).attr('cy', pos[1]);
           }
         })
-      // <canvas id="back_loop" width="300" height="300"></canvas>
-      // var canvas = centerPoint.insert('circle')
-      // .attr('id', 'back_loop')
-      // .attr('width', 300)
-      //   .attr('height', 300)
-      //     .attr("fill", "steelblue")
 
-      // var context = canvas.node().getContext("2d");
-
-      // .attr('cx', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[0])
-      // .attr('cy', arcs.greenDonut.centroid({ startAngle: calc.sliderStartAngle, endAngle: calc.sliderStartAngle })[1])
-      // .attr('class', '.round-corner-gray-left')
-      // .attr('fill', '#EDEFF9')
-
+      // Arc left side circle
       centerPoint.insert('circle', '.top-paths')
-        .attr('r', 7)
+        .attr('r', 9.5)
         .attr('cx', arcs.greenDonut.centroid({
           startAngle: calc.sliderStartAngle,
           endAngle: calc.sliderStartAngle
@@ -636,34 +847,21 @@ function renderBlueGaugeChart(params) {
           endAngle: calc.sliderStartAngle
         })[1])
         .attr('class', '.round-corner-gray-left')
-        .attr('fill', '#EDEFF9')
+        .attr('fill', '#4672fc')
 
+      // Arc right side circle.
       centerPoint.insert('circle', '.top-paths')
-        .attr('r', 3.8)
-        .attr('cx', arcs.greenDonut.centroid({
-          startAngle: calc.sliderStartAngle,
-          endAngle: calc.sliderStartAngle
-        })[0])
-        .attr('cy', arcs.greenDonut.centroid({
-          startAngle: calc.sliderStartAngle,
-          endAngle: calc.sliderStartAngle
-        })[1])
-        .attr('class', '.round-corner-gray-blue')
-        // .attr('fill', '#1969F8')
-        .attr('fill', '#a5a6d4')
-
-      centerPoint.insert('circle', '.top-paths')
-        .attr('r', 7)
+        .attr('r', 8)
         .attr('cx', arcs.greenDonut.centroid({
           startAngle: calc.sliderEndAngle,
-          endAngle: calc.sliderEndAngle
+          endAngle: calc.sliderEndAngle - 0.08
         })[0])
         .attr('cy', arcs.greenDonut.centroid({
           startAngle: calc.sliderEndAngle,
           endAngle: calc.sliderEndAngle
         })[1])
         .attr('class', '.round-corner-gray-right')
-        .attr('fill', '#EDEFF9')
+        .attr('fill', '#d6daec')
 
 
 
@@ -675,7 +873,7 @@ function renderBlueGaugeChart(params) {
         value: (1 - calc.currentValue / 100) * 360 + calc.currentValue / 100 * 280
       }])
 
-
+      // Arc path starting and enging angles
       topHead
         .data(newData)
         .each(d => {
@@ -701,7 +899,7 @@ function renderBlueGaugeChart(params) {
         })
 
 
-      // inner text
+      // inner text ("shadow, width and alignment")
 
       var middleText = patternify({
         container: centerPoint,
@@ -716,15 +914,15 @@ function renderBlueGaugeChart(params) {
         .attr('stroke-width', 3)
         .attr('stroke-opacity', 0.1)
         .attr('stroke', 'black')
-        .style("text-shadow", "0px 0px 45px " + attrs.mainDonutColor)
-
-
-
+        .attr('shadowBlur', 20)
+        .attr('fillStyle', 'gray')
+        .style("text-shadow", "2px 2px 32px" + attrs.mainDonutColor)
 
 
       // smoothly handle data updating
       updateData = function() {
         calc.currentValue = attrs.data.value;
+
         middleText.text(calc.currentValue + '%')
         if (calc.currentValue < 60) {
           middleText.attr('fill', '#C8C9CC')
@@ -780,30 +978,8 @@ function renderBlueGaugeChart(params) {
         return selection;
       }
 
-      // setTimeout(setDimensitons, 0);
-      //
-      // d3.select(window).on('resize.' + attrs.id, function () {
-      //   setDimensitons();
-      // })
-      //
-      //
-      // function setDimensitons() {
-      //   var outerContainer = d3.select(container.node().parentNode)
-      //   var width = outerContainer.node().getBoundingClientRect().width;
-      //
-      //   outerContainer.select('canvas')
-      //     .style('top', (width / 4 + 3) + 'px')
-      //     .style('left', (width / 4 + 10) + 'px')
-      //     .style('width', width / 2 + 'px')
-      //     .style('height', width / 2 + 'px')
-      //
-      // }
-
     });
   };
-
-
-
 
 
   ['svgWidth', 'svgHeight', 'backgroundFill'].forEach(key => {
@@ -817,8 +993,6 @@ function renderBlueGaugeChart(params) {
       return main;
     };
   });
-
-
 
 
   //exposed update functions

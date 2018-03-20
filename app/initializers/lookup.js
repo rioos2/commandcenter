@@ -9,11 +9,13 @@ export function initialize( /*application*/ ) {
   };
 
   window.s = Nilavu.__container__.lookup('service:store');
-  //window.us = Nilavu.__container__.lookup('service:user-store');
+  window.us = Nilavu.__container__.lookup('service:user-store');
 }
 
 export default {
   name: 'lookup',
   initialize: initialize,
-  //  after: 'user-store',
+  after: 'user-store',
 };
+
+

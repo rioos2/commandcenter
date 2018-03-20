@@ -1,0 +1,12 @@
+<div class="col-sm-3">
+    {{svg/svg-os-center-logo class="centos-logo" selected=selected.type}}
+</div>
+<div class="col-sm-9 layer1 p-t-50">
+    <label class="centos">{{selected.type}}</label>
+    <div class="version-buttons">
+        {{#each selected.version as |versionDetail|}}
+          {{createcloud/cloud-iso-image-version model=model activate=activate done="done" versionDetail=versionDetail}}
+        {{/each}}
+    </div>
+    <p class="description">{{model.distro_description}}</p>
+</div>

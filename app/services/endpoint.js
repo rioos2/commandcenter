@@ -9,7 +9,6 @@ export default Service.extend({
   app: service(),
 
   absolute: computed(`settings.${C.SETTING.API_HOST}`, 'app.apiServer', function() {
-    alert();
     let setting = this.get(`settings.${C.SETTING.API_HOST}`);
     if ( setting && setting.indexOf('http') !== 0 ) {
       setting = 'http://' + setting;

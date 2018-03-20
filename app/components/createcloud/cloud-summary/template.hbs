@@ -1,0 +1,107 @@
+<p class="sub-title">{{t 'launcherPage.summary.title'}}</p>
+<p class="sub-description">{{t 'launcherPage.summary.subtitle'}}</p>
+<div class="row layer1">
+  <div class="col-md-5 cloud-content">
+    {{#if isSelectedCPU}}
+      {{svg/svg-cpu-ico class="icon"}}
+    {{else}}
+      {{svg/svg-gpu-ico class="icon"}}
+    {{/if}}
+    <div class="content">
+      <p class="title">{{if isSelectedCPU "CPU" "GPU"}}</p>
+      <p class="description">{{t 'launcherPage.summary.cloudType'}}</p>
+    </div>
+    {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
+  </div>
+  <div class="col-md-4 domain-content">
+    <div class="content">
+      <p class="title" title= {{model.assemblyfactory.object_meta.name}}>{{model.assemblyfactory.object_meta.name}}</p>
+      <p class="description">{{t 'launcherPage.summary.domain.name'}}</p>
+    </div>
+    {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
+  </div>
+  <div class="col-md-3 location-content">
+    {{#if regionExisit}}
+      <span>  {{t 'launcherPage.summary.region.empty'}} </span> {{fa-icon "exclamation-circle"}}
+    {{else}}
+      <ul class="rio-location-ul hex">
+        <li>
+          <label class="city">{{model.assemblyfactory.object_meta.cluster_name}}</label>
+          {{#unless countryExisit}}
+          <label class="dash"></label>
+          <label class="country">{{model.assemblyfactory.country}}</label>
+          {{/unless}}
+        </li>
+      </ul>
+    {{/if}}
+    <p class="description">{{t 'launcherPage.summary.region.name'}}</p>
+  </div>
+</div>
+<div class="row layer2">
+  <div class="col-md-6 p-0">
+    <div class="col-md-7 cores-content p-0">
+      {{svg/svg-hex-number class="hex-number" initValue=model.assemblyfactory.resources.cpu}}
+      <div class="content">
+        <p class="title">{{t 'launcherPage.summary.config.core'}}</p>
+        <p class="description">{{t 'launcherPage.summary.config.number'}}</p>
+      </div>
+      {{svg/svg-arrow-hexagon class="light-right" isLightColor=false isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=false isRightArrow=false}}
+    </div>
+    <div class="col-md-5 ram-content">
+      <div class="content">
+        <p class="title">{{ram}}</p>
+        <p class="description">{{t 'launcherPage.summary.config.ram'}}</p>
+      </div>
+      {{svg/svg-arrow-hexagon class="light-right" isLightColor=false isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=false isRightArrow=false}}
+    </div>
+  </div>
+  <div class="col-md-6 p-0">
+    <div class="col-md-8 flash-content p-0">
+      {{#if isSelectedFlash}}
+        {{svg/svg-flash class="rio-flash selected"}}
+      {{else}}
+        {{svg/svg-hdd class="rio-hdd selected"}}
+      {{/if}}
+      <div class="content">
+        <p class="title">{{if isSelectedFlash "FLASH" "HDD"}}</p>
+        <p class="description">{{t 'launcherPage.sysConfig.storageType.title'}}</p>
+      </div>
+      {{svg/svg-arrow-hexagon class="light-right" isLightColor=false isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=false isRightArrow=false}}
+    </div>
+    <div class="col-md-4 storage-content p-0">
+      <div class="content">
+        <p class="title">{{storage}}</p>
+        <p class="description">{{t 'launcherPage.sysConfig.storageCapacity.title'}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row layer3">
+  <div class="col-md-4 ip-content">
+    <div class="content">
+      {{#if networkExisit}}
+        <span>  {{t 'launcherPage.network.empty'}} </span> {{fa-icon "exclamation-circle"}}
+      {{else}}
+        <p class="title">{{if isIPv4 "IPv4" "IPv6"}} {{if isPrivate "Private" "Public"}}</p>
+      {{/if}}
+      <p class="description">{{t 'launcherPage.network.title'}}</p>
+    </div>
+    {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
+  </div>
+  <div class="col-md-4 logo-content">
+    <div class="content">
+      <img src="images/createcloud/cloud-logos/{{model.assemblyfactory.os}}.png">
+      <div class="rio-os-version">
+        {{svg/svg-version class="version-bg"}}
+        <p title={{model.assemblyfactory.resources.version}}>{{model.assemblyfactory.resources.version}}</p>
+      </div>
+    </div>
+    {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
+  </div>
+  <div class="col-md-4 last-btn">
+    <div id="id" class="flipper {{filpper}}">
+      <div class="front-face" data-icon="&#x27a3;" {{action 'createAssemblyFactory'}}><span data-hover="Clicked">{{t 'launcherPage.summary.launch'}}</span></div>
+      <div class="back-face" data-icon="&#10003;">{{t 'launcherPage.summary.launchThank'}}</div>
+    </div>
+  </div>
+</div>

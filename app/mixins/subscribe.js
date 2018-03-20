@@ -55,7 +55,7 @@ export default Ember.Mixin.create({
             this[key](d);
           }
 
-          if (resource && C.REMOVEDISH_STATES.includes(resource.state)) {
+          if (resource && C.MANAGEMENT.STATUS.TERMINATE.includes(resource.state)) {
             let type = get(resource, 'type');
             let baseType = get(resource, 'baseType');
 

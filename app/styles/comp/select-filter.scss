@@ -4,6 +4,11 @@
         width: 100%;
     }
 
+    &.disable {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
     .md-select {
         *, :after, :before {
             box-sizing: border-box;
@@ -78,7 +83,7 @@
         }
 
         &.active ul {
-        max-height: 200px;
+        max-height: 300px;
         overflow: auto;
         padding: 8px 0 3px 0px;
         z-index: 2;

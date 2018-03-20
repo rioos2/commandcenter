@@ -1,25 +1,32 @@
+@import "app/styles/base/colors.scss";
+@import "base/application";
 @import "bootstrap";
-@import "basic_variables";
-@import "basic_classes.scss";
-@import "settings.scss";
-@import 'signform.scss';
-@import 'navbar';
-@import 'home.scss';
-@import 'loading.scss';
-@import 'vps.scss';
-@import 'vnc.scss';
-@import 'notification.scss';
-@import 'dashboard.scss';
+@import "base/basic_variables";
+@import "base/basic_classes.scss";
+@import "pages/settings.scss";
+@import 'pages/signform.scss';
+@import 'components/navbar';
+@import 'pages/home.scss';
+@import 'components/loading.scss';
+@import 'pages/vnc.scss';
+@import 'components/resource-actions.scss';
+@import 'components/notification.scss';
+@import 'pages/dashboard.scss';
 @import 'comp/chart-os.scss';
 @import 'comp/two-chart.scss';
 @import 'comp/alert.scss';
-@import 'comp/table.scss';
 @import 'comp/footer.scss';
 @import 'comp/category-tab.scss';
 @import 'comp/select-filter.scss';
 @import 'comp/chart-gauge.scss';
 @import 'comp/assembly-box.scss';
 @import 'comp/data-tooltip.scss';
+@import 'pages/_fail-whale.scss';
+@import 'base/table.scss';
+@import 'components/createcloud';
+
+
+//TO-DO: Why is this hanging here ?
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 @font-face {
@@ -28,6 +35,9 @@
     font-weight: lighter;
     src:url('../fonts/FSElliot-Regular.otf') format("opentype");
 }
+
+
+//TO-DO: Why is this hanging here ?
 
 body,
 input,

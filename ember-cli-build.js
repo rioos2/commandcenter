@@ -54,31 +54,38 @@ module.exports = function(defaults) {
   app.import('vendor/charts/d3script-blue-gauge.js');
 
 
-  app.import('vendor/second/numberofcores.js');
-  app.import('vendor/second/ram.js');
-  app.import('vendor/second/storage.js');
+  app.import('vendor/charts/d3script-storage.js');
+  app.import('vendor/charts/d3script-ram.js');
+  app.import('vendor/charts/d3script-cores.js');
+  app.import('vendor/dropdown/position-calculator.js');
+
+  app.import('vendor/analytics/countly.js');
 
   app.import('vendor/novnc.js');
+  app.import('vendor/EasePack.min.js');
+  app.import('vendor/TweenLite.min.js');
+  app.import('vendor/moment.js');
 
-  app.import('vendor/particles.min.js');
-  app.import('bower_components/async/dist/async.js');
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {
+  app.import('node_modules/@bower_components/async/dist/async.js');
+
+  app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {
     destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', {
+  app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf', {
     destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {
+  app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.svg', {
     destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
+  app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
     destDir: 'fonts'
   });
-  app.import('bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
+  app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
     destDir: 'fonts'
   });
 
-  app.import('bower_components/bootstrap/dist/js/bootstrap.js');
+
+  app.import('node_modules/@bower_components/bootstrap/dist/js/bootstrap.js');
 
   return app.toTree();
 };

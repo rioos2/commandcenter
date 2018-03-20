@@ -1,0 +1,30 @@
+{{#if enableVnc}}
+<div class="container vnc-background">
+    <div class="row text-center vnc-top">
+      <div class="button-container ">
+        <div class="col-md-7">
+            <div class="cover-text vnc-title ">
+      			<h4><span class="title_underline ">{{t 'vnc.title'}}</span></h4>
+    		</div>
+        </div>
+        <div class="col-md-3 ">
+        <div class="col-md-9">
+          <button class="button btn pull-right vnc-delete" {{action 'ctrlAltDel'}}><span>{{t 'vnc.del'}}
+          </span></button>
+        </div>
+          <div class="col-md-2">
+          <button class="button btn vnc-close" title='close' {{action 'close'}}><span>{{fa-icon "remove"}}
+          </span></button>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            {{vm-console vnchost=vnchost sendCtrlAltDel=sendCtrlAltDel vncport=vncport}}
+        </div>
+    </div>
+</div>
+</div>
+{{else}}
+<h2> {{t 'notifications.novnc'}}</h2>
+{{/if}}

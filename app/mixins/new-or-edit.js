@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Resource from 'ember-api-store/models/resource';
+import Resource from  'ember-api-store/models/resource';
 import Errors from 'nilavu/utils/errors';
 
 export default Ember.Mixin.create({

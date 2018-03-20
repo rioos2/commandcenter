@@ -1,7 +1,9 @@
 /* jshint node: true */
 var pkg = require('../package.json');
 var fs = require('fs');
-//var YAML = require('yamljs');
+var path = require('path');
+var YAML = require('yamljs');
+var toml = require('toml-parser');
 
 // host can be an ip "1.2.3.4" -> http://1.2.3.4:8080
 // or a URL+port
@@ -21,10 +23,10 @@ function normalizeHost(host, defaultPort) {
 /* Parse the translations from the translations folder*/
 /* ember intl getLocalesByTranslations does not work if intl is not managing them (bundled) */
 /* This needs a little work to read the yaml files for the langugae name prop*/
-/*function readLocales(environment) {
+function readLocales(environment) {
   var files = fs.readdirSync('./translations');
   var translationsOut = {};
-  files.forEach(function(filename) {
+  files.forEach(function (filename) {
     if (!filename.match(/\.ya?ml$/) && !filename.match(/\.json$/)) {
       // Ignore non-YAML files
       return;
@@ -41,13 +43,34 @@ function normalizeHost(host, defaultPort) {
   });
   return translationsOut;
 }
-*/
+//
+//
+function readUIConfig(environment) {
+  if (!process.env.RIOOS_HOME) {
+    process.env.RIOOS_HOME = path.join(__dirname);
+  }
 
-module.exports = function(environment) {
+  const uiConfigPath = path.join(process.env.RIOOS_HOME, 'config', 'ui.toml');
+  console.info("✔ ui config path =" + uiConfigPath);
+
+  const tomlStr = fs.readFileSync(uiConfigPath, 'utf-8');
+
+  if (tomlStr) {
+    return toml(tomlStr);
+  }
+}
+
+module.exports = function (environment) {
+  const loaded = readUIConfig(environment);
+  if (loaded) {
+    console.log("✔ ui config loaded.");
+  } else {
+    console.error("✘ ui config load failed.\n" + loaded);
+  }
+
   var ENV = {
     modulePrefix: 'nilavu',
     environment: environment,
-    podModulePrefix: 'nilavu/pods',
     exportApplicationGlobal: true,
     baseURL: '/',
     locationType: 'auto',
@@ -72,13 +95,12 @@ module.exports = function(environment) {
     },
 
     contentSecurityPolicy: {
-      // Allow the occasional <elem style="blah">...
-      'style-src': "'self' releases.riocorp.com localhost:3000 'unsafe-inline'",
-      'font-src': "'self' releases.riocorp.com",
-      'script-src': "'self' releases.riocorp.com localhost:3000",
-      'object-src': "'self' releases.riocorp.com",
-      'img-src': "'self' releases.riocorp.com avatars.githubusercontent.com gravatar.com localhost:3000 data:",
-      'frame-src': "'self' releases.riocorp.com",
+      'style-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000 'unsafe-inline'",
+      'font-src': "'self' console.rioos.xyz ui.rioos.svc.local",
+      'script-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000",
+      'object-src': "'self' console.rioos.xyz ui.rioos.svc.local",
+      'img-src': "'self' console.rioos.xyz ui.rioos.svc.local avatars.githubusercontent.com gravatar.com localhost:3000 data:",
+      'frame-src': "'self' console.rioos.xyz ui.rioos.svc.local",
 
       // Allow connect to anywhere, for console and event stream socket
       'connect-src': '*'
@@ -88,40 +110,19 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       version: pkg.version,
-      appName: 'nilavu',
-      apiServer: process.env.RIOOS_API_SERVER,
-      legacyApiEndpoint: '/v1',
+      appName: 'Rio/OS - ' + pkg.version,
+      apiServer: loaded.http_api || "http://localhost:9636",
       apiEndpoint: '/api/v1',
-      oapiEndpoint: '/oapi/v1',
-      catalogServer: '',
-      catalogEndpoint: '/v1-catalog',
-      authServer: '',
-      authEndpoint: '/v1-auth',
-      telemetryEndpoint: '/v1-telemetry',
-      webhookEndpoint: '/v1-webhooks',
-      projectToken: '%PROJECTID%',
-      wsEndpoint: '/v2-beta/projects/%PROJECTID%/subscribe' +
-        '?eventNames=resource.change' +
-        '&limit=-1',
+      authServer: loaded.auth_server || "http://localhost:9636",
+      authEndpoint: '/api/v1',
+      wsServer: loaded.watch_server || "https://localhost:7000",
+      wsEndpoint: '/api/v1/%KIND%?watch=true',
+      vncServer: loaded.vnc_server || "wss://localhost:8005",
+      countlyServer: loaded.countly_server || "http://countly.rioos.xyz",
+      appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
+      sendAnalytics: loaded.send_analytics || false,
       baseAssets: '/',
-      //locales: readLocales(environment)
-    },
-
-    VPS: {
-      computeType: "cpu",
-      domain: "rioosbox.com",
-      region: "chennai",
-      cpuCore: 1,
-      ram: 1,
-      storage: 20,
-      storageType: "ssd",
-      network:"public_ipv4",
-      destro:"ubuntu",
-      destroVersion: "14.04",
-      secret: "SSH-1(RSA)",
-      secretTypes: "SSH-1(RSA),SSH-1(RSA2),SSH-1(RSA3)",
-      bitsInKey: "2048",
-      trusted_key: "default"
+      locales: readLocales(environment)
     },
   };
 
@@ -145,9 +146,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (process.env.RIOOS_VNC_SERVER) {
-    ENV.VNCSERVER = process.env.RIOOS_VNC_SERVER;
-  }
+
 
   if (process.env.BASE_URL) {
     ENV.baseURL = process.env.BASE_URL;
@@ -170,14 +169,6 @@ module.exports = function(environment) {
     ENV.APP.apiServer = normalizeHost(server, 8080);
   } else if (environment === 'production') {
     ENV.APP.apiServer = '';
-  }
-
-  // Override the Catalog server/endpoint with environment var
-  server = process.env.CATALOG;
-  if (server) {
-    ENV.APP.catalogServer = normalizeHost(server, 8088);
-  } else if (environment === 'production') {
-    ENV.APP.catalogServer = '';
   }
 
   var pl = process.env.PL;

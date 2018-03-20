@@ -1,0 +1,10 @@
+ {{#if alert.show}}
+<div class="theme-alert">
+    <div class="{{alert.type}}">
+        <div class="content">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{fa-icon "warning"}} {{alert.message}}
+        </div>
+    </div>
+</div>
+{{/if}}

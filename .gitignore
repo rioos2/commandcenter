@@ -18,6 +18,8 @@ testem.log
 .DS_Store
 .tern-port
 .tern-project
+yarn-error.log
+yarn.lock
 
 *.swp
 *~

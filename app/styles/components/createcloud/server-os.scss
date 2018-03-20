@@ -1,0 +1,183 @@
+.server-os {
+    background: url(../images/createcloud/serverosbg.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: rgb(249, 250, 254);
+    padding: 150px 30px 50px;
+    margin-top: -65px;
+
+    .no-select {
+      -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    }
+
+    .centos-logo {
+        width: 100%;
+        filter: drop-shadow(0px 20px 30px rgba(41, 88, 205, 0.43));
+
+        svg {
+            .cls-1{fill:#2958cd;}
+            .cls-2{fill:white;}
+        }
+    }
+
+    .layer1 {
+        .centos {
+            display: inline-block;
+            font-size: 26px;
+            font-weight: normal;
+            padding-right: 26px;
+            vertical-align: middle;
+            line-height: normal;
+            margin: 0;
+        }
+
+        .rio-os-version {
+            cursor: pointer;
+            width: 72px;
+            margin: 0 6px;
+            display: inline-block;
+
+            p {
+                font-size: 19px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            &.selected {
+                p {
+                    color: $rio-second-color;
+                    text-shadow: 0 0 10px #2a98ff;
+                }
+
+                .version-bg .cls-1 {
+                    fill: $rio-fourth-color;
+                }
+            }
+
+            &.selected,
+            &:hover {
+                filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.4));
+            }
+        }
+    }
+
+    .version-buttons {
+        display: inline-block;
+    }
+
+    .description {
+        margin-top: 45px;
+        color: #808397;
+    }
+
+    .slide-btn {
+        width: 80px;
+        margin: 5px auto;
+        cursor: pointer;
+
+        svg {
+            .cls-1 {stroke:#d0d6e6; stroke-width: 2px; fill:none;}
+            .cls-2 {fill: #b5bbca;}
+
+            &:hover {
+                .cls-1 {fill: white; stroke: none;}
+                .cls-2 {fill: black;}
+                filter: drop-shadow(0px 4px 6px rgba(41, 88, 205, 0.13));
+            }
+        }
+    }
+
+    .item-os {
+        width: 158px;
+        display: inline-block;
+        margin: 0 3px;
+
+        svg {
+            filter: drop-shadow(0px 14px 6px rgba(41, 88, 205, 0.05));
+
+            .cls-1 {
+                fill: white;
+            }
+        }
+
+        &.selected {
+            svg {
+                filter: drop-shadow(0px 16px 12px rgba(41, 88, 205, 0.23));
+            }
+        }
+    }
+
+    .slide-content {
+        padding-top: 46px;
+    }
+
+    .os-content {
+        padding: 0;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .item-os {
+            width: 130px;
+        }
+
+        .slide-content {
+            padding-top: 32px;
+        }
+
+        .slide-btn {
+            width: 65px;
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        .item-os {
+            width: 114px;
+        }
+
+        .slide-content {
+            padding-top: 35px;
+        }
+    }
+
+    @media only screen and (max-width: 767px) {
+
+        .centos-logo {
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .layer1 {
+            .version-buttons {
+                text-align: center;
+                margin: 20px 0 30px 0;
+                display: block;
+            }
+
+            .centos {
+                text-align: center;
+                display: block;
+                float: none;
+                padding: 0;
+            }
+        }
+
+        .os-content {
+            // padding: 30px 0;
+        }
+
+        .item-os {
+            width: 88px;
+        }
+    }
+}

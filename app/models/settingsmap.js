@@ -1,11 +1,8 @@
-import Resource from 'nilavu/models/resource';
+import Resource from 'ember-api-store/models/resource';
 
-var SettingsMap = Resource.extend({
-  type: 'settingsMap',
-  actions: {
-  },
-
-
+var Assembly = Resource.extend({
+    type: 'settings',
+    actions: {},
 });
 
-export default SettingsMap;
+export default Assembly;

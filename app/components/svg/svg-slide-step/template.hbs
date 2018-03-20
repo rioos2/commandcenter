@@ -1,0 +1,26 @@
+{{#if isCurrentStep}}    
+    <svg class="{{if step.isFirst "bar-btn-vert firstStep" "bar-btn-vert"}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.42 175.68">
+    <g id="Layer_2" data-name="Layer 2">
+        <path class="outbox" d="M16.21,175.68,0,166.32V9.36L16.21,0,32.42,9.36v157Z"/>
+        <path class="arrow-down" d="M16.21,10.69a.7.7,0,0,0-.29.1l-3.53,2.82a.47.47,0,0,0-.07.66.49.49,0,0,0,.66.07l2.76-2.21V24.32a.47.47,0,1,0,.94,0V12.13l2.76,2.21a.5.5,0,0,0,.66-.07.47.47,0,0,0-.07-.66l-3.53-2.82A.43.43,0,0,0,16.21,10.69Z"/>
+        <path class="arrow-up" d="M16.21,165.85a.69.69,0,0,1-.29-.1l-3.53-2.82a.47.47,0,0,1-.07-.66.49.49,0,0,1,.66-.07l2.76,2.21V152.21a.47.47,0,0,1,.94,0V164.4l2.76-2.21a.5.5,0,0,1,.66.07.47.47,0,0,1-.07.66l-3.53,2.82A.43.43,0,0,1,16.21,165.85Z"/>
+        <text class="text" transform="translate(19.73 115.28) rotate(-90)">
+            Cloud Type
+        </text>
+    </g></svg>
+
+    <svg class="bar-btn-hori" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175.68 32.42">
+    <g id="Layer_1-2-2" data-name="Layer 1-2">
+        <path class="outbox" d="M0,16.21,9.36,0h157l9.36,16.21-9.36,16.21H9.32Z"/>
+        <path class="arrow-down" d="M165,16.21a.7.7,0,0,0-.1-.29l-2.82-3.53a.47.47,0,0,0-.66-.07.49.49,0,0,0-.07.66l2.21,2.76H151.36a.47.47,0,0,0,0,.94h12.19l-2.21,2.76a.5.5,0,0,0,.07.66.47.47,0,0,0,.66-.07l2.82-3.53A.43.43,0,0,0,165,16.21Z"/>
+        <path class="arrow-up" d="M9.83,16.21a.69.69,0,0,1,.1-.29l2.82-3.53a.47.47,0,0,1,.66-.07.49.49,0,0,1,.07.66l-2.21,2.76h12.2a.47.47,0,1,1,0,.94H11.28l2.21,2.76a.5.5,0,0,1-.07.66.47.47,0,0,1-.66-.07L9.94,16.5A.43.43,0,0,1,9.83,16.21Z"/>
+        <text class="text" transform="translate(60.4 19.73)">Cloud Type</text>
+    </g></svg>
+{{else}}
+    <svg class="{{if isChecked "check-btn checked" "check-btn unchecked"}}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29.71 34">
+        <g id="Layer_1-2-2" data-name="Layer 1-2">
+            <path class="hexagon-icon" d="M15,3.25l12,6.94V24.06L15,31,3,24.06V10.19Z"/>
+            <path class="check-icon" d="M21.43,11.27,13.59,19.1,9.83,15.35,8.49,16.7l4.44,4.42.66.63.66-.63,8.52-8.52Z"/>
+        </g>
+    </svg>
+{{/if}}
