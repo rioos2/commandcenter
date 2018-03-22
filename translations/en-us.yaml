@@ -537,6 +537,7 @@ stackPage:
   machine: Digital Cloud
   container: Container
   blockchain: Blockchain
+  launchCloud: Launch
   applicationTab:
     feature: Features
     clouds: clouds

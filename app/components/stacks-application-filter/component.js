@@ -62,8 +62,7 @@ export default Ember.Component.extend({
   syncedData: function() {
     var selectionData = [];
     if (!Ember.isEmpty(this.get('accessor'))) {
-
-      let m = this.get('fullmodel.stacks.content');
+      let m = this.get('fullmodel');
       selectionData = m.map((f) => {
         if (!Ember.isEmpty(f)) {
           return f.get(this.get('accessor'))

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
-  showLoading: false,
   tagName: 'section',
   className: '',
   group: Ember.computed.alias('category'),
@@ -34,7 +33,7 @@ export default Ember.Component.extend({
   actions: {
 
     search() {
-      ////          
+      ////
       let parmsHash = this.searchParmsHash(this.get('searchFilter'));
       this.get('router').transitionTo(this.parentRoute, { queryParams: parmsHash });
       ////

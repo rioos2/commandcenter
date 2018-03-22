@@ -37,7 +37,6 @@ export default Ember.Controller.extend({
   /// [container]    -> [assembly1, assembly2, assembly3]
   /// [blockchain]   -> [assembly1, assembly2, assembly3]
   groupedStacks: function () {
-    this.set('showLoading', true);
     return this.groupBy(this.get('model.stacks.content'),
       "spec.assembly_factory.spec.plan.category");
   }.property('model.stacks.content[]'),
@@ -49,6 +48,8 @@ export default Ember.Controller.extend({
   //Returns - the filteredStacks  applying the filter (or)
   //        - everything if none matches.
   filteredStacks() {
+    var self = this;
+    this.spinnerCheck();
     let rules = this.extractedParms();
     let filteredStacks = [];
     this.get('categories').forEach(function (category) {
@@ -79,7 +80,10 @@ export default Ember.Controller.extend({
       this._maxLaunchedCategory(filteredStacks);
     });
 
-    this.set('showLoading', false);
+    Em.run.later(function(){
+      self.spinnerCheck();
+    }, 500);
+
     return filteredStacks;
   },
 
@@ -99,6 +103,10 @@ export default Ember.Controller.extend({
   allStacks: function () {
     return this.filteredStacks();
   }.property('groupedStacks'),
+
+  spinnerCheck: function () {
+   this.toggleProperty('showLoading');
+  },
 
   //Returns the grouped array based on the groupAccessor
   // eg: group by `plan.category`
