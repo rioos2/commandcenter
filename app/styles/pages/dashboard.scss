@@ -244,6 +244,8 @@
             span {
                 font-size: 18px;
             }
+            i {
+                color: #61eefc;            }
         }
 
         .p-r-15 {
@@ -313,9 +315,26 @@
 
     .cloud-lists {
         padding: 30px 0;
+        .spinner{
+          text-align: center;
+          height: 200px;
+        }
+
         .list{
             margin-bottom: 30px;
             display: flex;
+        }
+
+        .layout{
+          background-size: 100%;
+          width: 140px;
+          margin: 88px auto;
+          filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.3));
+          cursor: pointer;
+          padding-top: 19px;
+          .cls-1{fill:white;}
+          .cls-2{fill:#0b4af6;}
+          .cls-3{font-size:24px; fill:#0b4af6;}
         }
     }
 }

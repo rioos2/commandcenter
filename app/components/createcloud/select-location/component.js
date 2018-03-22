@@ -12,7 +12,7 @@ export default Component.extend({
         },
 
         addLocation: function() {
-          this.set("model.assemblyfactory.object_meta.cluster_name", this.get('location'));
+          this.set("model.assemblyfactory.object_meta.cluster_name", this.get('location').trim());
           let noCountry = true;
           this.get("model.datacenters.content").forEach((item) => {
             if (this.get('location') == item.object_meta.name) {

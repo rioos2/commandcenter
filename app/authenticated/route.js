@@ -19,29 +19,12 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
   beforeModel(transition) {
     this._super.apply(this, arguments);
     if (this.get('access.enabled')) {
-      if (this.get('access').isLoggedIn()) {
-        this.testAuthToken();
-      } else {
+      if (!this.get('access').isLoggedIn()) {
         transition.send('logout', transition, false);
         return Ember.RSVP.reject('Not logged in');
       }
     }
   },
-
-  testAuthToken: function () {
-    let timer = Ember.run.later(() => {
-      this.get('access').testAuth().then((/* res */) => {
-        this.testAuthToken(); //This will never happen.
-      }, (/* err */) => {
-        this.send('logout', null, true);
-      });
-    }, CHECK_AUTH_TIMER);
-
-    this.set('testTimer', timer);
-  },
-
-
-
 
   model(params, transition) {
     // Save whether the user is admin

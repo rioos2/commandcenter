@@ -32,12 +32,19 @@
 </div>
 <div class="cloud-lists row">
     {{#if stacksCount}}
-        {{#conditional-loading-spinner condition=showLoading}}
+    {{#if showLoading}}
+    <div class="spinner">
+    {{stack-launch-spinner size=25 showSpinner=showLoading}}
+    </div>
+    {{/if}}
+    {{#unless showLoading}}
             {{#each stacksDataContents as |stackDataContent|}}
                 <div class="list col-sm-6 col-md-4">
                     {{stack-box model=stackDataContent}}
                 </div>
             {{/each}}
-        {{/conditional-loading-spinner}}
+    {{/unless}}
+    {{else}}
+    {{stack-box-empty}}
     {{/if}}
 </div>
