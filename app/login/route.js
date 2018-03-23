@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   beforeModel(transition) {
     this._super.apply(this,arguments);
     return this.get('language').initUnauthed().then(() => {
-      if ( !this.get('access.enabled'))
+      if (this.get('access').isLoggedIn())
       {
         this.transitionTo('authenticated');
       }
