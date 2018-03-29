@@ -41,7 +41,7 @@ export default Component.extend({
   },
 
   contentData: function() {
-    if(this.get('model.content').length>0){
+    if(this.get('model')){
     return this.get('model.content').objectAt(0);
     }
     return {};
