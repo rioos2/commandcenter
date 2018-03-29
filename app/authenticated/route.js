@@ -80,14 +80,14 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
 
-    if (err && (isAuthEnabled || [401, 403].indexOf(err.status) >= 0)) {
+    if (err && ((isAuthEnabled && err.code !== "500")|| [401, 403].indexOf(err.status) >= 0)) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
       return;
     }
 
-    this.replaceWith('settings.projects');
+    this.replaceWith('infrastructure-tab.data-center');
 
     return ret;
   },
