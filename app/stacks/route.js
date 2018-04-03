@@ -1,8 +1,9 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(DefaultHeaders, {
 
     queryParams: {
         os: { refreshModel: true }, //Select by OS
@@ -29,9 +30,8 @@ export default Ember.Route.extend({
 
 
     model(params) {
-        console.log("params =>" + JSON.stringify(params));
         return Ember.RSVP.hash({
-            stacks: this.get('store').findAll('assembly'),
+            stacks: this.get('store').findAll('assembly',this.opts('accounts/' + this.get('session').get("id") + '/assemblys')),
         });
     },
 
