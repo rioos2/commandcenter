@@ -117,7 +117,7 @@ export default Ember.Controller.extend({
       return Ember.Object.create({
         sentKey: C.FILTERS.QUERY_PARAM_SEARCH,
         sentValue: this.get('search'),
-        accessedBy: C.SEARCH_ACCESSOR
+        accessedBy: C.FILTERS_SEARCH_ACCESSORS
       });
     }
     return FilterParmsExtractor.create({
