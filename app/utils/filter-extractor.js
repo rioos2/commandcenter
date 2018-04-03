@@ -15,8 +15,6 @@ export default Ember.Object.extend({
                     accessedBy: _filterValueAccessor
                 });
             }
-
-        }).filter((e) => !Ember.isEmpty(e.sentValue));
+       }).filter((e) => !Ember.isEmpty(e.sentValue) && !Ember.isEmpty(e.accessedBy));
     })
 });
-

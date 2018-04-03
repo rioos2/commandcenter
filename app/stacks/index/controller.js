@@ -21,22 +21,49 @@ export default Ember.Controller.extend({
 
   //Returns the queryparms value for the propertie set [os, location, db, status, name]
   //in stacksController
-  recvQueryParms: function () {
+  recvQueryParms: function() {
     let recevd = Ember.Object.create();
-
     const self = this;
-    C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH.forEach(function (f) {
+    C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH.forEach(function(f) {
       recevd.set(f.selector, self.get(`stacksController.${f.selector}`));
     });
-
     return recevd;
   },
+
+  findByFilter: function(rules, content) {
+    let valueSetMatch = true;
+    rules.forEach(function(ruleObj) {
+      if (`${content.get(ruleObj.accessedBy)}`.includes(ruleObj.sentValue) && valueSetMatch) {
+        valueSetMatch = true;
+      } else {
+        valueSetMatch = false;
+      }
+    });
+    return valueSetMatch;
+  },
+
+  findBySearch: function(rules, content) {
+    let valueSetMatch = false;
+    for (let ruleObj of rules.accessedBy) {
+      if (ruleObj) {
+        if (`${content.get(ruleObj)}`.includes(rules.sentValue)) {
+          valueSetMatch = true;
+          break;
+        }
+      }
+    }
+    return valueSetMatch;
+  },
+
+  search: function() {
+    return this.recvQueryParms()[C.FILTERS.QUERY_PARAM_SEARCH];
+  }.property('model'),
 
   ///Group the assemblys list into
   /// [machine]      -> [assembly1, assembly2, assembly3]
   /// [container]    -> [assembly1, assembly2, assembly3]
   /// [blockchain]   -> [assembly1, assembly2, assembly3]
-  groupedStacks: function () {
+  groupedStacks: function() {
     return this.groupBy(this.get('model.stacks.content'),
       "spec.assembly_factory.spec.plan.category");
   }.property('model.stacks.content[]'),
@@ -52,22 +79,18 @@ export default Ember.Controller.extend({
     this.spinnerCheck();
     let rules = this.extractedParms();
     let filteredStacks = [];
-    this.get('categories').forEach(function (category) {
+    this.get('categories').forEach(function(category) {
       let stacks = this.get('groupedStacks').findBy('type', category);
 
       if (!Ember.isEmpty(rules) && stacks) {
         const _stacks = stacks;
-        let _contents = _stacks.contents.filter(function (content) {
-          let valueSetMatch = true;
-          rules.forEach(function (ruleObj) {
-            if(`${content.get(ruleObj.accessedBy)}`.includes(ruleObj.sentValue) && valueSetMatch) {
-              valueSetMatch = true;
-            } else {
-              valueSetMatch = false;
-            }
-          });
-          return valueSetMatch;
-        });
+        let _contents = _stacks.contents.filter(function(content) {
+          if (!Ember.isEmpty(this.get('search'))) {
+            return this.findBySearch(rules, content);
+          } else {
+            return this.findByFilter(rules, content);
+          }
+        }.bind(this));
 
         const _grouped = this.groupBy(_contents, "spec.assembly_factory.spec.plan.category").findBy('type', category);
         filteredStacks.push(_grouped);
@@ -80,7 +103,7 @@ export default Ember.Controller.extend({
       this._maxLaunchedCategory(filteredStacks);
     });
 
-    Em.run.later(function(){
+    Em.run.later(function() {
       self.spinnerCheck();
     }, 500);
 
@@ -88,31 +111,34 @@ export default Ember.Controller.extend({
   },
 
   //Returns the extracted parms from the received query parms
-  extractedParms: function () {
-    // if (!Ember.isEmpty(this.get('search'))) {
-    //   return Ember.Object.create(
-    //     { C.FILTER_QUERY_PARAMS_SEARCH: [this.get('search').toUpperCase()] }
-    //   );
-    // }
+  extractedParms: function() {
+
+    if (!Ember.isEmpty(this.get('search'))) {
+      return Ember.Object.create({
+        sentKey: C.FILTERS.QUERY_PARAM_SEARCH,
+        sentValue: this.get('search'),
+        accessedBy: C.FILTERS_SEARCH_ACCESSORS
+      });
+    }
     return FilterParmsExtractor.create({
       availableParmsHash: C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH,
       sentQueryParms: this.recvQueryParms(),
     }).get('extract');
   },
 
-  allStacks: function () {
+  allStacks: function() {
     return this.filteredStacks();
   }.property('groupedStacks'),
 
-  spinnerCheck: function () {
-   this.toggleProperty('showLoading');
+  spinnerCheck: function() {
+    this.toggleProperty('showLoading');
   },
 
   //Returns the grouped array based on the groupAccessor
   // eg: group by `plan.category`
-  groupBy: function (contentArray, groupAccessor) {
+  groupBy: function(contentArray, groupAccessor) {
     var result = [];
-    contentArray.forEach(function (item) {
+    contentArray.forEach(function(item) {
       let category = `${item.get(groupAccessor)}`;
 
       var hasType = result.findBy('type', category);
@@ -131,11 +157,11 @@ export default Ember.Controller.extend({
 
   //Returns the tab that has to be selected. This is figured out by the
   //the maximum launched count of [machine, containers, blockchain]
-  _maxLaunchedCategory: function (fss) {
+  _maxLaunchedCategory: function(fss) {
     let maxLaunchedCategory = C.CATEGORIES.MACHINE;
     let maxLaunched = 0;
     if (!Ember.isEmpty(fss)) {
-      fss.forEach(function (stack) {
+      fss.forEach(function(stack) {
         if (!Ember.isEmpty(stack) && stack.length > maxLaunched) {
           maxLaunchedCategory = stack.type;
           maxLaunched = stack.length;

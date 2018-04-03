@@ -2776,9 +2776,9 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
-"ember-api-store@git+https://github.com/rioadvancement/ember-api-store.git":
+"ember-api-store@git+https://github.com/rioadvancement/ember-api-store.git#master":
   version "2.5.7"
-  resolved "git+https://github.com/rioadvancement/ember-api-store.git#68e397b510b6fb6e67ad6fc8966b8c3584d1a2b3"
+  resolved "git+https://github.com/rioadvancement/ember-api-store.git#188bb2c8a2c180cf6581d8b7dcce285fa241df2b"
   dependencies:
     broccoli-file-creator "^1.1.1"
     ember-cli-babel "^6.8.2"

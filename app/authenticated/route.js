@@ -86,8 +86,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
       return;
     }
-
-    this.replaceWith('infrastructure-tab.data-center');
+    this.replaceWith(transition.targetName);
 
     return ret;
   },
@@ -148,22 +147,18 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
     },
 
     switchProject(projectId, transition = true) {
-      console.log('Switch to ' + projectId);
       this.disconnectSubscribe(() => {
-        console.log('Switch is disconnected');
         this.send('finishSwitchProject', projectId, transition);
       });
     },
 
     finishSwitchProject(projectId, transition) {
-      console.log('Switch finishing');
       this.get('storeReset').reset();
       if (transition) {
         this.intermediateTransitionTo('authenticated');
       }
       this.set(`tab-session.${C.TABSESSION.PROJECT}`, projectId);
       this.refresh();
-      console.log('Switch finished');
     },
   },
 });
