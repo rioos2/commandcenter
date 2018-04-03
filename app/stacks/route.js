@@ -10,6 +10,7 @@ export default Ember.Route.extend({
         db: { refreshModel: true }, //Select by db
         status: { refreshModel: true }, //select by status
         network: { refreshModel: true }, //select by status
+        search: { refreshModel: true }, //search
     },
 
     actions: {

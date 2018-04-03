@@ -86,8 +86,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
       return;
     }
-
-    this.replaceWith('infrastructure-tab.data-center');
+    this.replaceWith(transition.targetName);
 
     return ret;
   },
