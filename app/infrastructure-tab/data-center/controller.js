@@ -12,6 +12,17 @@ export default Ember.Controller.extend({
     }
   }.observes('model'),
 
+  ConnectionLost: function() {
+    return this.get('model.code') == "502";
+  }.property('model'),
+
+  warningMessage: function() {
+    if (!Ember.isEmpty(this.get('model'))){
+      return {show:true, type: 'warning',message: (this.get('model.reason') + " => Metric data can't fetch")};
+    }
+    return {show:false};
+  }.property('model'),
+
   guageView: function(){
     return this.get('model.content').length>0;
   }.property('model.content'),

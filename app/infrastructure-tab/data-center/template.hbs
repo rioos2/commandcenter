@@ -1,4 +1,9 @@
 <div class="home">
+
+<div class="statistics">
+  {{page-alert alert=warningMessage}}
+</div>
+
     {{!-- Main gauges --}}
     <div id="maingauge" class="main-gauges p-t-50 p-b-50">
         <p class="title p-l-50">
@@ -29,4 +34,5 @@
             <span class="underline">{{t 'dashboard.osUsageFirstSec'}}</span>{{t 'dashboard.osUsageSecondSec'}}</p>
         {{infra-deployedos-visualizelive model=model}}
     </div>
+
 </div>
