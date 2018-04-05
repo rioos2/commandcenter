@@ -36,17 +36,6 @@ export default Component.extend({
       }];
   }),
 
-  ConnectionLost: function() {
-    return this.get('content.code') == "502";
-  }.property('content'),
-
-  warningMessage: function() {
-    if (!Ember.isEmpty(this.get('content'))){
-      return {show:true, type: 'warning',message: (this.get('content.reason') + " => Log data can't fetch")};
-    }
-    return {show:false};
-  }.property('content'),
-
   table: computed('model', function() {
       return new Table(this.get('columns'), this.get('model'));
   })

@@ -1,12 +1,8 @@
 {{#light-table table height='65vh' as |t|}}
-{{#if ConnectionLost}}
-  {{page-alert alert=warningMessage}}
-    {{else}}
     {{t.head
       fixed=true
     }}
   {{#t.body canSelect=true as |body| }}
   {{/t.body}}
-  {{/if}}
 
 {{/light-table}}
