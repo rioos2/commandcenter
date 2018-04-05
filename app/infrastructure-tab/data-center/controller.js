@@ -1,9 +1,14 @@
 import Ember from "ember";
-
+const {
+  get
+} = Ember;
 export default Ember.Controller.extend({
 
   cacheNodes: [],
   cacheOs: [],
+
+  intl: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   modelchanged: function() {
     if(this.get('model.content')) {
@@ -12,20 +17,15 @@ export default Ember.Controller.extend({
     }
   }.observes('model'),
 
-  ConnectionLost: function() {
-    return this.get('model.code') == "502";
-  }.property('model'),
-
-  warningMessage: function() {
-    if (!Ember.isEmpty(this.get('model'))){
-      return {show:true, type: 'warning',message: (this.get('model.reason') + " => Metric data can't fetch")};
+  alertMessage: function() {
+    if (this.get("model.code") == "502") {
+      this.get('notifications').warning(get(this, 'intl').t('dashboard.error'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
     }
-    return {show:false};
-  }.property('model'),
-
-  guageView: function(){
-    return this.get('model.content').length>0;
-  }.property('model.content'),
+  }.observes('model.code'),
 
   _removeCache: function() {
     const self = this;
@@ -64,6 +64,9 @@ export default Ember.Controller.extend({
   _hasAddRecordFor: function(node) {
     var flag = true;
     const self = this;
+      if (Ember.isEmpty(node.id)){
+      flag = false;
+    }
     self.get('cacheNodes').forEach(function(cache) {
       if (cache.id === node.id) {
         flag = false;

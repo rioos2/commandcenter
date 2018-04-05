@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   classNames: ["chart-os"],
   overall: '',
   ch3: '',
+
   osUsage: function() {
     this.updateData();
   }.observes('model'),
@@ -15,7 +16,7 @@ export default Ember.Component.extend({
     chart5.svgHeight(500)
       .svgWidth(500)
       .data({
-        value: 66
+        value: 0
       });
 
     chart3.svgHeight(200)
@@ -32,16 +33,16 @@ export default Ember.Component.extend({
     this.set('overall', chart5);
 
   }),
+
+
   updateData: function() {
     const self = this;
 
-    if (self.get('model.content').objectAt(0).results.osusages.cumulative.counter == "NaN") {
-      self.get('model.content').objectAt(0).results.osusages.cumulative.counter = "0";
+    if (Ember.isEmpty(self.get('model.content')) || Ember.isEmpty(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)) {
+      self.get('overall').data({
+        value: parseInt("0")
+      });
     }
-
-    self.get('overall').data({
-      value: parseInt(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)
-    });
 
     const chart3 = this.get('ch3');
     chart3.data({
@@ -50,9 +51,11 @@ export default Ember.Component.extend({
 
     d3.select("#areaGraph")
       .call(chart3);
-
   },
+
+
   OsUsageData: function() {
+    if(!Ember.isEmpty(this.get('model.content'))){
     const self = this;
     const data = self.get('model.content').objectAt(0).results.osusages.items.map(function(item, index) {
       var gradient = [];
@@ -85,6 +88,5 @@ export default Ember.Component.extend({
     });
     return data;
   }
-
-
+}
 });

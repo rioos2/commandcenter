@@ -13,16 +13,19 @@ export default Component.extend({
 
   guageOne: function() {
     //ram
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("ram") : this.shave(this.contentData().results.guages.counters[0]);
+    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("ram") : this.decide(this.contentData().results.guages.counters[0],"ram");
   }.property('model.content'),
+
   guageTwo: function() {
     //cpu
-    return Ember.isEmpty(Object.keys(this.contentData()))? this.emptyData("cpu") : this.shave(this.contentData().results.guages.counters[1]);
+    return Ember.isEmpty(Object.keys(this.contentData()))? this.emptyData("cpu") : this.decide(this.contentData().results.guages.counters[1],"cpu");
   }.property('model.content'),
+
   guageThree: function() {
     //disk
-    return Ember.isEmpty(Object.keys(this.contentData()))? this.emptyData("disk") : this.shave(this.contentData().results.guages.counters[2]);
+    return Ember.isEmpty(Object.keys(this.contentData()))? this.emptyData("disk") : this.decide(this.contentData().results.guages.counters[2],"disk");
   }.property('model.content'),
+
   guageFour: function() {
     //gpu
     if(!Ember.isEmpty(Object.keys(this.contentData()))){
@@ -45,6 +48,10 @@ export default Component.extend({
     return this.get('model.content').objectAt(0);
     }
     return {};
+  },
+
+  decide: function(guageValue,name){
+    return !Ember.isEmpty(guageValue.name) ? this.shave(guageValue): this.emptyData(name);
   },
 
   shave: function(guageValue) {

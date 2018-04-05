@@ -34,7 +34,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
     this.get('session').set(C.SESSION.BACK_TO, undefined);
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-       settingsmap: this.toCb('loadSettings'),
+        settingsmap: this.toCb('loadSettings'),
         datacenter: this.toCb('loadDataCenter'),
         stacks: this.toCb('loadStacks'),
         events: this.toCb('loadEvents'),
@@ -80,7 +80,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
 
-    if (err && ((isAuthEnabled && err.code !== "500")|| [401, 403].indexOf(err.status) >= 0)) {
+    if (err && ((isAuthEnabled && (err.code !== "502" && err.code !== "500"))|| [401, 403].indexOf(err.status) >= 0)) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
@@ -112,7 +112,6 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
 
 
   loadDataCenter() {
-    var tmp = this.opts('healthz/overall');
     return this.get('store').find('reports', null, this.opts('healthz/overall'));
   },
 
