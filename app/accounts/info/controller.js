@@ -1,6 +1,8 @@
 import Ember from "ember";
-
+const  {get} = Ember;
 export default Ember.Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
+  intl:       Ember.inject.service(),
 
   img: function() {
     if (this.get('model.profile.avatar') == null) {
@@ -8,6 +10,17 @@ export default Ember.Controller.extend({
     }
     return "data:image/png;base64," + this.get('model.profile.avatar');
   }.property('model'),
+
+  alertMessage: function() {
+    if (this.get("model.logData.code") == "502") {
+      this.get('notifications').warning(get(this, 'intl').t('auditLogsPage.connectionError'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
+    }
+  }.observes('model.logData.code'),
+
 
   createdAt: function() {
     if(this.get('model.profile.created_at')) {

@@ -145,6 +145,7 @@ auditLogsPage:
     authIp: "Auth & IP"
   first: First Page
   next: Next Page
+  connectionError: "Nothing to show in audits. Failed to pull data from blockchain. Refer (https://bit.ly/rioos_sh_admin_guide)"
 
 authPage:
   shibboleth:
@@ -861,6 +862,7 @@ dashboard:
   statisticsSecondSec: tatistics
   osUsageFirstSec: O
   osUsageSecondSec: s usage by time
+  error: Whew! Nothing to show in the command center. Failed to pull data about the Datacenter.  Refer [link](https://bit.ly/rioos_sh_admin_guide) to troubleshoot.
 vnc:
   title: CONSOLE
   view: viewer
