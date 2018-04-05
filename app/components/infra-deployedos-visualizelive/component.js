@@ -38,7 +38,7 @@ export default Ember.Component.extend({
   updateData: function() {
     const self = this;
 
-    if (Ember.isEmpty(self.get('model.content')) || Ember.isEmpty(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)) {
+    if (Ember.isEmpty(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)) {
       self.get('overall').data({
         value: parseInt("0")
       });

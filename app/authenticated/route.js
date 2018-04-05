@@ -79,8 +79,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
 
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
-
-    if (err && ((isAuthEnabled && (err.code !== "502" && err.code !== "500"))|| [401, 403].indexOf(err.status) >= 0)) {
+    if (err && ((isAuthEnabled && this.decideCode(err.code))|| [401, 403].indexOf(err.status) >= 0)) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
@@ -89,6 +88,12 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
     this.replaceWith(transition.targetName);
 
     return ret;
+  },
+
+  decideCode(code){
+    if(code === "502" || code === "500"){
+      return false;
+    }
   },
 
   cbFind(type, store = 'store', opt = null) {
