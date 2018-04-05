@@ -1,9 +1,14 @@
 import Ember from "ember";
-
+const {
+  get
+} = Ember;
 export default Ember.Controller.extend({
 
   cacheNodes: [],
   cacheOs: [],
+
+  intl: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
   modelchanged: function() {
     if(this.get('model.content')) {
@@ -12,9 +17,15 @@ export default Ember.Controller.extend({
     }
   }.observes('model'),
 
-  guageView: function(){
-    return this.get('model.content').length>0;
-  }.property('model.content'),
+  alertMessage: function() {
+    if (this.get("model.code") == "502") {
+      this.get('notifications').warning(get(this, 'intl').t('dashboard.error'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
+    }
+  }.observes('model.code'),
 
   _removeCache: function() {
     const self = this;
@@ -53,6 +64,9 @@ export default Ember.Controller.extend({
   _hasAddRecordFor: function(node) {
     var flag = true;
     const self = this;
+      if (Ember.isEmpty(node.id)){
+      flag = false;
+    }
     self.get('cacheNodes').forEach(function(cache) {
       if (cache.id === node.id) {
         flag = false;

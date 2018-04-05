@@ -32,6 +32,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         logData: hash.logData,
       });
     }).catch((err) => {
+      return;
     });
   },
 
@@ -58,7 +59,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       return this.get('store').find(type, null,this.opts(url)).then(function(res) {
         cb(null, res);
       }).catch(function(err) {
-        cb(err, null);
+        cb(null, err);
       });
     };
   },

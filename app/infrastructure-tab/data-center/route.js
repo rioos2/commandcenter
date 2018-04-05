@@ -6,10 +6,11 @@ export default Ember.Route.extend(DefaultHeaders,{
 
   model: function() {
     const self = this;
-    return this.get('store').findAll('reports', this.opts('healthz/overall')).then((reports) => {
+    return this.get('store').findAll('reports',this.opts('healthz/overall')).then((reports) => {
       return  reports;
-    }).catch(function() {
+    }).catch(function(err) {
       self.set('loading', false);
+      return err;
     });
   },
 
