@@ -46,7 +46,7 @@ export default Ember.Controller.extend({
     let valueSetMatch = false;
     for (let ruleObj of rules.accessedBy) {
       if (ruleObj) {
-        if (`${content.get(ruleObj)}`.includes(rules.sentValue)) {
+        if (`${content.get(ruleObj)}`.toLowerCase().includes(rules.sentValue.toLowerCase())) {
           valueSetMatch = true;
           break;
         }
@@ -66,7 +66,7 @@ export default Ember.Controller.extend({
   groupedStacks: function() {
     return this.groupBy(this.get('model.stacks.content'),
       "spec.assembly_factory.spec.plan.category");
-  }.property('model.stacks.content[]'),
+  }.property('model.stacks.content.[]'),
 
   //Gets call from the transition of applyRule action with the queryParms containing
   //the filter rules.
@@ -128,7 +128,7 @@ export default Ember.Controller.extend({
 
   allStacks: function() {
     return this.filteredStacks();
-  }.property('groupedStacks'),
+  }.property('groupedStacks', 'model.stacks.content.@each'),
 
   spinnerCheck: function() {
     this.toggleProperty('showLoading');
