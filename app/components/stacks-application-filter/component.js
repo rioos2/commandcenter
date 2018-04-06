@@ -77,7 +77,11 @@ export default Ember.Component.extend({
 
     this.set('model.data', selectionData);
     return this.get('model.data');
-  }.property('model', 'accessor'),
+  }.property('fullmodel.@each', 'accessor'),
+
+  test: function() {
+    return Ember.isEmpty(this.get('syncedData')) ? "disable": "";
+  }.property('model', 'syncedData'),
 
   disableFilter: function() {
     return Ember.isEmpty(this.get('syncedData')) ? "disable": "";

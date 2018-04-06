@@ -22,7 +22,9 @@ module.exports = function (app, options) {
       req.headers['X-Forwarded-Proto'] = 'https';
 
     }
-    proxy.ws(req, socket, head);
+    proxy.ws(req, socket, { target: config.wsServer,
+    ws: true,
+  });
   });
 
   let map = {

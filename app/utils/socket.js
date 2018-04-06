@@ -16,7 +16,7 @@ const RECONNECTING = 'reconnecting';
 export default Ember.Object.extend(Ember.Evented, {
   url: null,
   autoReconnect: true,
-  frameTimeout: 11000,
+  frameTimeout: 110000,
   metadata: null,
 
   _socket: null,
@@ -49,7 +49,7 @@ export default Ember.Object.extend(Ember.Evented, {
     var id = sockId++;
     console.log(`Socket connecting (id=${id}, url=${url.replace(/\?.*/,'')+'...'})`);
 
-    var socket = new WebSocket(Util.addQueryParam(url, 'sockId', id));
+    var socket = new WebSocket(url);
     socket.__sockId = id;
     socket.metadata = this.get('metadata');
     socket.onmessage = Ember.run.bind(this, this._message);
@@ -168,7 +168,6 @@ export default Ember.Object.extend(Ember.Evented, {
   },
 
   _closed() {
-    console.log(`Socket ${this.get('_closingId')} closed`);
 
     this.set('_closingId', null);
     this.set('_socket', null);

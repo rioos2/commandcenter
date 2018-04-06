@@ -2,6 +2,7 @@ import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
+
   tagName: '',
   className: '',
 
@@ -13,6 +14,6 @@ export default Ember.Component.extend({
         return false;
       }
     });
-  }.property('groupedModel'),
+  }.property('fullmodel.stacks.content.@each'),
 
 });
