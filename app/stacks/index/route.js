@@ -1,10 +1,10 @@
 import Ember from 'ember';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
-export default Ember.Route.extend({
-
+export default Ember.Route.extend(DefaultHeaders, {
     resetController: function (controller, isExiting, transition) {
         if (isExiting) {
-            controller.set('search', '');
+          this.transitionTo({queryParams: {os: "", location: "", db: "", status: "", network: "", search: "" }});
         }
     },
 });
