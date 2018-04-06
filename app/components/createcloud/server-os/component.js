@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   didInsertElement() {
-    if(this.get('groupedVms') && Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
+    if(!Ember.isEmpty(this.get('groupedVms')) && Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
       let plan = this.get('groupedVms')[0];
       let planFirstItem = plan.version[0];
       this.set('model.assemblyfactory.os', planFirstItem.type);
