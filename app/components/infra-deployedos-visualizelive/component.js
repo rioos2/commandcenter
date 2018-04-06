@@ -56,9 +56,8 @@ export default Ember.Component.extend({
   },
 
   OsUsageData: function() {
+  if(!this.get("model.code")){
     const self = this;
-    if(!this.get("model.code")){
-
     const data = self.get('model.content').objectAt(0).results.osusages.items.map(function(item, index) {
       var gradient = [];
       switch (index) {
