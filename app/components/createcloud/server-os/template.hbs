@@ -10,7 +10,7 @@
         {{svg/svg-slide-left class="slide-btn" click=(action "navigatorLeft")}}
         {{svg/svg-slide-right class="slide-btn" click=(action "navigatorRight")}}
     </div>
-    <div class="col-md-10 os-content text-center">
+    <div class="col-md-10 os-content">
         {{#each groupedVms as |vm|}}
         {{svg/svg-os model=model refreshAfterAction="refreshAfterSelect" activate=activate vm=vm}}
         {{/each}}

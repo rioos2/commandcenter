@@ -4,25 +4,16 @@ import C from 'nilavu/utils/constants';
 
 const { get } = Ember;
 
-/*const ORCHESTRATION_STACKS = [
-  'k8s',
-  'swarm',
-  'mesos'
-];*/
-
 export default Ember.Mixin.create({
-  //  k8s             : Ember.inject.service(),
-  //projects        : Ember.inject.service(),
   'tab-session': Ember.inject.service(),
+  session: Ember.inject.service(),
 
   subscribeSocket: null,
   reconnect: true,
   connected: false,
-  //  k8sUidBlacklist : null,
 
   init() {
     this._super();
-    //    this.set('k8sUidBlacklist', []);
 
     var store = this.get('store');
 
@@ -42,9 +33,9 @@ export default Ember.Mixin.create({
 
         var d = JSON.parse(event.data);
         let resource;
-        if (d.data && d.data.resource) {
-          resource = store._typeify(d.data.resource);
-          d.data.resource = resource;
+        if (d.data) {
+          resource = store._typeify(d.data);
+          d.data = resource;
         }
 
         //this._trySend('subscribeMessage',d);
@@ -77,6 +68,7 @@ export default Ember.Mixin.create({
     });
 
     socket.on('disconnected', () => {
+
       this.subscribeDisconnected(this.get('tries'));
     });
 
@@ -86,7 +78,7 @@ export default Ember.Mixin.create({
   connectSubscribe() {
     var socket = this.get('subscribeSocket');
     var projectId = this.get(`tab-session.${C.TABSESSION.PROJECT}`);
-    var url = ("ws://" + window.location.host + this.get('app.wsEndpoint')).replace(this.get('app.projectToken'), projectId);
+    var url = ("ws://" + window.location.host + this.get('app.wsEndpoint')+"account/"+this.get('session').get("id")+"/watch");
 
     this.set('reconnect', true);
 
@@ -151,16 +143,4 @@ export default Ember.Mixin.create({
     console.log('Subscribe ping ' + this.forStr());
   },
 
-  /*stackChanged: function(change) {
-    let stack = change.data.resource;
-    let info = stack.get('externalIdInfo');
-
-    if ( info && info.name && ORCHESTRATION_STACKS.includes(info.name) ) {
-      Ember.run.once(this, function() {
-        this.get('projects.current').reload().then(() => {
-          this.get('projects').updateOrchestrationState();
-        });
-      });
-    }
-  },*/
 });

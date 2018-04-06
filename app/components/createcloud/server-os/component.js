@@ -4,6 +4,17 @@ export default Ember.Component.extend({
   activate: false,
   store: Ember.inject.service(),
 
+  didInsertElement() {
+    if(this.get('groupedVms') && Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
+      let plan = this.get('groupedVms')[0];
+      let planFirstItem = plan.version[0];
+      this.set('model.assemblyfactory.os', planFirstItem.type);
+      this.set("model.assemblyfactory.plan", planFirstItem.id);
+      this.set("model.assemblyfactory.resources.version", planFirstItem.version);
+      this.send('refreshAfterSelect', plan);
+    }
+  },
+
   groupedVms: function() {
     return this.groupingVms();
   }.property('model.plans'),

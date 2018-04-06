@@ -12,13 +12,9 @@ export default Component.extend({
   spec: Ember.computed.alias('model.spec'),
   metaData: Ember.computed.alias('model.metadata'),
 
-  initializeChart: Ember.on('didInsertElement', function() {
-    this.modelUpdated();
-  }),
-
   region: function() {
     return this.get('assemblyFactory.object_meta.cluster_name');
-  }.property('model'),
+  }.property('assemblyFactory.object_meta.cluster_name'),
 
   name: function() {
     let nameCollection = this.get('model.object_meta.name').split(".");
@@ -31,19 +27,14 @@ export default Component.extend({
     return this.get('model.status.phase');
   }.property('model.status.phase'),
 
-  assemblyStatusUpdate: function() {
-    this.set('assemblyStatus', this.assemblyStatusChecker());
-    this.set('assemblyState', this.assemblyStateFinder());
-  }.observes('model.status.phase'),
-
   ipUpdater: function() {
     this.set('ip',this.ipFinder());
     this.set('ipType',this.ipTypeFinder());
-  }.observes('assemblyEndpoint.subsets.addresses'),
+  }.property('assemblyEndpoint.subsets.addresses'),
 
   metricsUpdater: function() {
     this.set('model.spec.metrics', this.metricsDataFinder());
-  }.observes('model.spec.metrics'),
+  }.property('model.spec.metrics'),
 
   image: function() {
     return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
@@ -51,11 +42,11 @@ export default Component.extend({
 
   version: function() {
     return this.get('assemblyFactory.spec.plan.version');
-  }.property('model'),
+  }.property('assemblyFactory.spec.plan.version'),
 
   addressesLength: function() {
     return this.get('assemblyEndpoint.subsets.addresses').length;
-  }.property('model'),
+  }.property('assemblyEndpoint.subsets.addresses'),
 
   country: function() {
     return "_";
@@ -65,7 +56,7 @@ export default Component.extend({
     return this.assemblyStatusChecker();
   }.property('model'),
 
-  assemblyStatusChecker: function() {
+  assemblyStatus: function() {
     var state = "";
     C.MANAGEMENT.STATUS.WARNING.forEach(status => {
       if(status === this.get('model.status.phase').toLowerCase()) {
@@ -83,13 +74,9 @@ export default Component.extend({
       }
     });
     return state;
-  },
+  }.property('model.status.phase'),
 
   assemblyState: function() {
-    return this.assemblyStateFinder();
-  }.property('model'),
-
-  assemblyStateFinder() {
     var state = C.ASSEMBLY.ASSEMBLYON;
     C.ASSEMBLY.ASSEMBLYOFFPHASES.forEach(phase => {
       if (this.get('model.status.phase') === phase) {
@@ -97,7 +84,7 @@ export default Component.extend({
       }
     });
     return state;
-  },
+  }.property('model.status.phase'),
 
   ip: function() {
     return this.ipFinder();
@@ -122,7 +109,9 @@ export default Component.extend({
   },
 
   metricsData: function() {
-    this.set('spec.metrics.name', "gauge" + this.get('model.id'));
+    if(this.get('spec.metrics')) {
+       this.set('spec.metrics.name', "gauge" + this.get('model.id'));
+     }
     return this.metricsDataFinder();
   }.property('model'),
 
@@ -135,23 +124,6 @@ export default Component.extend({
       name: "gauge" + this.get('model.id'),
       counter: 0,
     }
-  },
-
-
-  modelUpdated: function() {
-    const self = this;
-    var type = this.get('model').kind;
-    var id = this.get('model').id;
-    Ember.run.cancel(self.get('pollTimer'));
-    self.set('pollTimer', Ember.run.later(() => {
-      var ss = self.get('store').getById(type, id);
-      if (ss) {
-        self.set('model', ss);
-      }
-      if (self.get('pollTimer')) {
-        self.modelUpdated();
-      }
-    }, self.get('pollInterval')));
   },
 
 
