@@ -13,5 +13,4 @@ export default Ember.Route.extend(DefaultHeaders,{
       return err;
     });
   },
-
 });

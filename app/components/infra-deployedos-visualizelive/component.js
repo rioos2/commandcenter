@@ -11,12 +11,13 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     var chart3 = renderChartArea();
+
     var chart5 = renderChartGauge();
 
     chart5.svgHeight(500)
       .svgWidth(500)
       .data({
-        value: 0
+        value: this.counter()
       });
 
     chart3.svgHeight(200)
@@ -25,8 +26,10 @@ export default Ember.Component.extend({
         entities: this.OsUsageData()
       });
 
-    this.set('ch3', chart3);
+    d3.select("#areaGraph")
+        .call(chart3);
 
+    this.set('ch3', chart3);
 
     d3.select(".gauge5").call(chart5.hasLegs(false));
 
@@ -34,28 +37,26 @@ export default Ember.Component.extend({
 
   }),
 
-
   updateData: function() {
     const self = this;
 
-    if (Ember.isEmpty(self.get('model.content').objectAt(0).results.osusages.cumulative.counter)) {
-      self.get('overall').data({
-        value: parseInt("0")
-      });
-    }
+    self.get('overall').data({
+      value: this.counter()
+    });
 
     const chart3 = this.get('ch3');
+
     chart3.data({
       entities: this.OsUsageData()
     });
-
-    d3.select("#areaGraph")
-      .call(chart3);
   },
 
+  counter: function(){
+    return (this.get("model.code") || Ember.isEmpty(this.get('model.content').objectAt(0).results.osusages.cumulative.counter))? "0": this.get('model.content').objectAt(0).results.osusages.cumulative.counter;
+  },
 
   OsUsageData: function() {
-    if(!Ember.isEmpty(this.get('model.content'))){
+  if(!this.get("model.code")){
     const self = this;
     const data = self.get('model.content').objectAt(0).results.osusages.items.map(function(item, index) {
       var gradient = [];
@@ -88,5 +89,6 @@ export default Ember.Component.extend({
     });
     return data;
   }
-}
+  return [];
+  }
 });
