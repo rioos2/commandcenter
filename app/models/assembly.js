@@ -68,7 +68,7 @@ var Assembly = Resource.extend({
     },
 
     console() {
-      window.open(window.location.href + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
+      window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
     },
 
   },
