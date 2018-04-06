@@ -558,10 +558,10 @@ launcherPage:
       capTitle: GPU
   domain:
     title: Select a Domain Name
-    subtitle: You create own domain or uses configured domain name
+    subtitle: Edit subdomain or use the configured domain name
     selectDomain: Select a Domain
     domainPlaceHolder: Enter domain name
-    emptyDomain: Empty domain name
+    emptyDomain: You forgot to type a subdomain name
     domainName: Edit me
     buttonSet: Set
     keyGenerate:
@@ -569,7 +569,7 @@ launcherPage:
       subtitle: Generate a self signed certificate.
       bitkey: BITS IN KEY
       success: Secret key generated successfully.
-      failure: Secret key generated failed.
+      failure: Failed to generate secret key. You can't access to digital cloud upon launch.
       emptyDomain: Please enter domain name.
       emptySecretType: Please select secret type.
   location:
@@ -621,10 +621,10 @@ launcherPage:
     launch: Launch your cloud
     launchThank: Thank You
     domain:
-      empty: empty domain
+      empty: You forgot to type a domain
       name: Domain Name
     region:
-      empty: empty location
+      empty: You forgot to select a location
       name: Region
     config:
       core: Cores
@@ -887,7 +887,7 @@ notifications:
   plan: Please select image
   failedLaunch: Launch failed.
   logData: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  novnc: VNC not available
+  novnc: Deploying..Console isn't ready yet.
   noAction: No actions available
 
 machinePage:
