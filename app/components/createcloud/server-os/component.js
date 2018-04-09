@@ -1,11 +1,17 @@
 import Ember from 'ember';
+const {
+  get
+} = Ember;
 import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
+  intl: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
   activate: false,
   store: Ember.inject.service(),
 
   didInsertElement() {
+    this.waringMessage();
     if(!Ember.isEmpty(this.get('groupedVms')) && Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
       let plan = this.get('groupedVms')[0];
       let planFirstItem = plan.version[0];
@@ -13,6 +19,16 @@ export default Ember.Component.extend({
       this.set("model.assemblyfactory.plan", planFirstItem.id);
       this.set("model.assemblyfactory.resources.version", planFirstItem.version);
       this.send('refreshAfterSelect', plan);
+    }
+  },
+
+  waringMessage: function(){
+    if(Ember.isEmpty(this.get('groupedVms'))){
+      this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
+        autoClear: true,
+        clearDuration: 6000,
+        cssClasses:'notification-warning'
+      });
     }
   },
 

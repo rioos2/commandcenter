@@ -69,8 +69,7 @@ export default Ember.Controller.extend({
           this.get('access').signup(this.getform()).then(() => {
             this.send('finishLogin');
           }).catch((err) => {
-
-              if (err.code === '500') {
+              if (err.status == 500) {
                 this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
                   autoClear: true,
                   clearDuration: 4200,

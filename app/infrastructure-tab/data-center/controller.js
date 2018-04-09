@@ -20,8 +20,9 @@ export default Ember.Controller.extend({
   alertMessage: function() {
     if (this.get("model.code") == "502") {
       this.get('notifications').warning(get(this, 'intl').t('dashboard.error'), {
+        htmlContent: true,
         autoClear: true,
-        clearDuration: 4200,
+        clearDuration: 6000,
         cssClasses: 'notification-warning'
       });
     }
