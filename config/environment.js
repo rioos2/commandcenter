@@ -113,7 +113,6 @@ module.exports = function (environment) {
       appName: 'Rio/OS - ' + pkg.version,
       apiServer: loaded.http_api || "http://localhost:9636",
       apiEndpoint: '/api/v1',
-      authEndpoint: '/api/v1',
       wsServer: loaded.uwatch_server || "ws://localhost:9443",
       wsEndpoint: '/api/v1/',
       vncServer: loaded.vnc_server || "wss://localhost:8005",
