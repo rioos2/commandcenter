@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
   activate: false,
@@ -25,7 +26,7 @@ export default Ember.Component.extend({
     var groupVms = [];
     var planfactory = this.get("model.plans.content");
     planfactory.forEach(function(plan) {
-      if (plan.category == "machine" && plan.status.phase == "ready") {
+      if (plan.category.toLowerCase() === C.CATEGORIES.MACHINE && plan.status.phase.toLowerCase() === C.PHASE.READY) {
         planGroup.pushObject(plan.object_meta.name);
       }
       uniqueVmGroup = planGroup.filter(function(elem, index, self) {
