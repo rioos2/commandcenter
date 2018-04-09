@@ -70,6 +70,10 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('network'));
   }.property('network'),
 
+  imageExisit: function() {
+    return Ember.isEmpty(this.get('model.assemblyfactory.os'));
+  }.property('model.assemblyfactory.os'),
+
   validation() {
     if (Ember.isEmpty(this.get('model.assemblyfactory.secret.id'))) {
       this.set('validationWarning', get(this, 'intl').t('notifications.secret'));

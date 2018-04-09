@@ -626,6 +626,8 @@ launcherPage:
     region:
       empty: You forgot to select a location
       name: Region
+    image:
+      empty: no server OS selected
     config:
       core: Cores
       number: Number

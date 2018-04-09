@@ -90,11 +90,15 @@
   </div>
   <div class="col-md-4 logo-content">
     <div class="content">
+      {{#if imageExisit}}
+        <span>  {{t 'launcherPage.summary.image.empty'}} </span> {{fa-icon "exclamation-circle"}}
+      {{else}}
       <img src="images/createcloud/cloud-logos/{{model.assemblyfactory.os}}.png">
       <div class="rio-os-version">
         {{svg/svg-version class="version-bg"}}
         <p title={{model.assemblyfactory.resources.version}}>{{model.assemblyfactory.resources.version}}</p>
       </div>
+      {{/if}}
     </div>
     {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
   </div>
