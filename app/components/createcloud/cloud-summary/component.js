@@ -81,10 +81,10 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('validationWarning', get(this, 'intl').t('notifications.country'));
       return true;
     } else if (Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
-      this.set('validationWarning', get(this, 'intl').t('notifications.plan'));
+      this.set('validationWarning', get(this, 'intl').t('notifications.plan.noSelection'));
       return true;
     } else if (this.get('networkExisit')) {
-      this.set('validationWarning', get(this, 'intl').t('notifications.network'));
+      this.set('validationWarning', get(this, 'intl').t('notifications.network.noSelection'));
       return true;
     } else {
       return false;

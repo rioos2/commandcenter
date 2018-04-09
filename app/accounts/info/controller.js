@@ -14,8 +14,9 @@ export default Ember.Controller.extend({
   alertMessage: function() {
     if (this.get("model.logData.code") == "502") {
       this.get('notifications').warning(get(this, 'intl').t('auditLogsPage.connectionError'), {
+        htmlContent: true,
         autoClear: true,
-        clearDuration: 4200,
+        clearDuration: 6000,
         cssClasses: 'notification-warning'
       });
     }

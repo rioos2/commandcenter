@@ -145,7 +145,7 @@ auditLogsPage:
     authIp: "Auth & IP"
   first: First Page
   next: Next Page
-  connectionError: "Nothing to show in audits. Failed to pull data from blockchain. Refer (https://bit.ly/rioos_sh_admin_guide)"
+  connectionError: <p>"Nothing to show in audits. Failed to pull data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </p>"
 
 authPage:
   shibboleth:
@@ -862,7 +862,7 @@ dashboard:
   statisticsSecondSec: tatistics
   osUsageFirstSec: O
   osUsageSecondSec: s usage by time
-  error: Whew! Nothing to show in the command center. Failed to pull data about the Datacenter.  Refer [link](https://bit.ly/rioos_sh_admin_guide) to troubleshoot.
+  error: <p>Whew! Nothing to show in the command center. Failed to pull data about the Datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
 vnc:
   title: CONSOLE
   view: viewer
@@ -883,8 +883,12 @@ notifications:
   region: Please enter region
   country: Please enter valid region
   resource: Please select minimum resources to deploy
-  network: Please select network
-  plan: Please select image
+  network:
+    noSelection: Please select network
+    empty: No Network is available
+  plan:
+    noSelection: Please select image
+    empty: No ServerOs Configured.Contact Administrator.
   failedLaunch: Launch failed.
   logData: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   novnc: Deploying..Console isn't ready yet.

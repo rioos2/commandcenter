@@ -1,8 +1,11 @@
 /* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
 import Ember from 'ember';
-
+const {
+  get
+} = Ember;
 export default Ember.Component.extend({
-
+  intl: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
   networks: {
     "private_ipv4": "Private IPv4",
     "public_ipv4": "Public IPv4",
@@ -12,6 +15,7 @@ export default Ember.Component.extend({
 
   initializeChart: Ember.on('didInsertElement', function() {
     this.disableNetworks(this.networksFilter(this.get('model.networks.content')));
+    this.waringMessage();
   }),
 
   networksFilter: function(networks) {
@@ -35,6 +39,16 @@ export default Ember.Component.extend({
     disableNetworks.forEach(function(disable) {
       this.set(disable, "disable-network");
     }.bind(this));
+  },
+
+  waringMessage: function(){
+    if(Ember.isEmpty(this.get('model.networks.content'))){
+      this.get('notifications').warning(get(this, 'intl').t('notifications.network.empty'), {
+        autoClear: true,
+        clearDuration: 6000,
+        cssClasses:'notification-warning'
+      });
+    }
   },
 
   checkActiveNetwork: function(network) {
