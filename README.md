@@ -59,6 +59,23 @@ cd nilavu
 yarn install
 ```
 
+## Update ember-api-store
+
+```
+yarn remove ember-api-store
+
+```
+* Above command has been removed the ember-api-store record on package.json
+
+* Add "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master" on package.json under "devDependencies".
+
+* Install ember-api-store via yarn
+
+```
+yarn install
+
+```
+
 ## Running / Development
 
 * `yarn start`
