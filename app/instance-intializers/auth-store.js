@@ -7,13 +7,13 @@ export function initialize(instance) {
   store.reopen(StoreTweaks);
   store.reopen({
     removeAfterDelete: false,
-    baseUrl: application.authEndpoint,
+    baseUrl: application.apiEndpoint,
     skipTypeifyKeys: ['labels'],
   });
 }
 
 export default {
   name: 'auth-store',
-  initialize: initialize, 
+  initialize: initialize,
   after: 'store',
 };
