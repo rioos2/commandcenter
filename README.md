@@ -100,12 +100,9 @@ title = "UI Configuration for Rio/OS"
 ## api host that nilavu will connect to
 http_api = "localhost:9636"
 
-## auth_server that nilavu will connect to
-auth_server = "localhost:9636"
-
-## watch_server is a host that the nilavu will connect to for real time triggers on
+## uwatch_server is a host that the nilavu will connect to for real time triggers on
 ## update to resources.
-watch_server = "https://localhost:7000"
+uwatch_server = "ws://localhost:9443"
 
 ## vnc server that we connect to using insecure mode.
 ## replace it to wss if we wish to connect via secure mode.
