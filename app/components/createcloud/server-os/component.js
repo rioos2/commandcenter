@@ -11,18 +11,43 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   didInsertElement() {
-    this.waringMessage();
-    if(!Ember.isEmpty(this.get('groupedVms')) && Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
-      let plan = this.get('groupedVms')[0];
-      let planFirstItem = plan.version[0];
-      this.set('model.assemblyfactory.os', planFirstItem.type);
-      this.set("model.assemblyfactory.plan", planFirstItem.id);
-      this.set("model.assemblyfactory.resources.version", planFirstItem.version);
-      this.send('refreshAfterSelect', plan);
+    this.checkPlanEmpty();
+    if(!Ember.isEmpty(this.get('groupedVms'))) {
+      let item_found = false;
+      this.get('groupedVms').forEach(function(e){
+        if(e.type == this.get('model.assemblyfactory.os')) {
+          e.version.forEach(function(v){
+              if(v.version == this.get('model.assemblyfactory.resources.version')) {
+                  item_found = true;
+                  this.refreshPlan(e,v);
+              }
+          }.bind(this));
+        }
+      }.bind(this));
+      if(!item_found){
+        this.setFirstPlanFactory();
+      }
+    } else {
+      this.set('model.assemblyfactory.os', '');
+      this.set("model.assemblyfactory.plan", '');
+      this.set("model.assemblyfactory.resources.version", '');
     }
   },
 
-  waringMessage: function(){
+  setFirstPlanFactory: function() {
+    let plan = this.get('groupedVms')[0];
+    let planFirstItem = plan.version[0];
+    this.refreshPlan(plan, planFirstItem);
+  },
+
+  refreshPlan: function(plan , planFirstItem) {
+    this.set('model.assemblyfactory.os', planFirstItem.type);
+    this.set("model.assemblyfactory.plan", planFirstItem.id);
+    this.set("model.assemblyfactory.resources.version", planFirstItem.version);
+    this.send('refreshAfterSelect', plan);
+  },
+
+  checkPlanEmpty: function(){
     if(Ember.isEmpty(this.get('groupedVms'))){
       this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
         autoClear: true,
@@ -79,6 +104,13 @@ export default Ember.Component.extend({
     return types.indexOf(this.get('selected.type'));
   },
 
+  setPlan: function(plan) {
+    let planFirstItem = plan.version[0];
+    this.set('model.assemblyfactory.os', planFirstItem.type);
+    this.set("model.assemblyfactory.plan", planFirstItem.id);
+    this.set("model.assemblyfactory.resources.version", planFirstItem.version);
+  },
+
   setDescription: function(item) {
     let des = (item.version.get('firstObject')).description
     item.version.forEach(function(v) {
@@ -102,6 +134,7 @@ export default Ember.Component.extend({
       var index = this.indexReader();
       if (index < ((this.get('groupedVms')).length) - 1) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index + 1]);
+        this.setPlan(this.get('groupedVms')[index + 1]);
       }
     },
 
@@ -109,6 +142,7 @@ export default Ember.Component.extend({
       var index = this.indexReader();
       if (!index == 0) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
+        this.setPlan(this.get('groupedVms')[index - 1]);
       }
     },
 

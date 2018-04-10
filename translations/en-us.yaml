@@ -145,7 +145,7 @@ auditLogsPage:
     authIp: "Auth & IP"
   first: First Page
   next: Next Page
-  connectionError: <p>"Nothing to show in audits. Failed to pull data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </p>"
+  connectionError: <span>Failed to pull audits data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>
 
 authPage:
   shibboleth:
@@ -608,7 +608,7 @@ launcherPage:
 
   network:
     title: Networking
-    empty: no network selected
+    empty: No network selected
     type:
       private: Private
       public: Public
@@ -627,7 +627,7 @@ launcherPage:
       empty: You forgot to select a location
       name: Region
     image:
-      empty: no server OS selected
+      empty: No server OS selected
     config:
       core: Cores
       number: Number
@@ -864,7 +864,7 @@ dashboard:
   statisticsSecondSec: tatistics
   osUsageFirstSec: O
   osUsageSecondSec: s usage by time
-  error: <p>Whew! Nothing to show in the command center. Failed to pull data about the Datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
+  error: <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
 vnc:
   title: CONSOLE
   view: viewer
@@ -887,10 +887,10 @@ notifications:
   resource: Please select minimum resources to deploy
   network:
     noSelection: Please select network
-    empty: No Network is available
+    empty: No network  available
   plan:
-    noSelection: Please select image
-    empty: No ServerOs Configured.Contact Administrator.
+    noSelection: Please select server OS
+    empty: No Server OS configured
   failedLaunch: Launch failed.
   logData: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   novnc: Deploying..Console isn't ready yet.
