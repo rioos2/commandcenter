@@ -5,7 +5,7 @@
 title = "UI Configuration for Rio/OS"
 
 ## api host that nilavu will connect to
-http_api = "http://localhost:7443"
+http_api = "https://localhost:7443"
 
 ## uwatch_server is a host that the nilavu will connect to for real time triggers on
 ## update to resources.
