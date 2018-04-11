@@ -16,7 +16,7 @@ const RECONNECTING = 'reconnecting';
 export default Ember.Object.extend(Ember.Evented, {
   url: null,
   autoReconnect: true,
-  frameTimeout: 110000,
+  frameTimeout: 30000,
   metadata: null,
 
   _socket: null,
@@ -137,10 +137,12 @@ export default Ember.Object.extend(Ember.Evented, {
     });
 
     this.trigger('connected', this.get('_tries'), after);
+    this._resetWatchdog();
     Ember.run.cancel(this.get('_reconnectTimer'));
   },
 
   _message(event) {
+    this._resetWatchdog();
     this.set('_tries', 0);
     this.incrementProperty('_framesReceived');
     this.trigger('message', event);
