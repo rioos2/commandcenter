@@ -27,11 +27,6 @@ export default Component.extend({
     return this.get('model.status.phase');
   }.property('model.status.phase'),
 
-  ipUpdater: function() {
-    this.set('ip',this.ipFinder());
-    this.set('ipType',this.ipTypeFinder());
-  }.property('assemblyEndpoint.subsets.addresses'),
-
   metricsUpdater: function() {
     this.set('model.spec.metrics', this.metricsDataFinder());
   }.property('model.spec.metrics'),
@@ -50,10 +45,6 @@ export default Component.extend({
 
   country: function() {
     return "_";
-  }.property('model'),
-
-  assemblyStatus: function() {
-    return this.assemblyStatusChecker();
   }.property('model'),
 
   assemblyStatus: function() {
@@ -88,11 +79,11 @@ export default Component.extend({
 
   ip: function() {
     return this.ipFinder();
-  }.property('model'),
+  }.property('assemblyEndpoint.subsets.addresses.@each.{ip}'),
 
   ipType: function() {
     return this.ipTypeFinder();
-  }.property('model'),
+  }.property('assemblyEndpoint.subsets.addresses.@each.{protocol_version}'),
 
   ipFinder: function() {
     if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {

@@ -34,7 +34,9 @@ export default Ember.Controller.extend({
     let data = this.get('model.logData.content');
     if (!Ember.isEmpty(data)){
       data.forEach(function(e) {
-        e.date = this.auditedTimestamp(e.timestamp);
+        if(e.envelope.timestamp) {
+        e.envelope.timestamp = this.auditedTimestamp(e.envelope.timestamp);
+      }
       }.bind(this));
     }
     return data;
@@ -42,7 +44,7 @@ export default Ember.Controller.extend({
 
   tableLastData: function() {
     if (!Ember.isEmpty(this.get('tableData'))){
-      return {show:true, type: 'warning',message: (this.get('tableData').slice(-1)[0]).event.message};
+      return {show:true, type: 'warning',message: (this.get('tableData').slice(-1)[0]).envelope.event.message};
     }
     return {show:false};
   }.property('tableData'),
