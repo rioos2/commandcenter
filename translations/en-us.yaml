@@ -878,7 +878,7 @@ notifications:
     downloadFailed: Download failed try after some time
   emailExist: Sorry, that email is not available.
   validEmail: Please enter a valid email address
-  somethingWentWrong: Something went wrong
+  somethingWentWrong: Proxy error. Api server is not runnning
   invalidCredential: Incorrect email or password
   domainName: Please enter domain name
   secret: Please generate secret key
