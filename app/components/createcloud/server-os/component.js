@@ -81,7 +81,7 @@ export default Ember.Component.extend({
         "item": []
       }
       planfactory.forEach(function(plan) {
-        if (plan.object_meta.name == vm) {
+        if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.MACHINE) {
           createVmGroup.item.pushObject(plan);
           createVmGroup.version.pushObject({
             "version": plan.version,
