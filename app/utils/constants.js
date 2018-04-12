@@ -1,11 +1,23 @@
 var C = {
 
   ASSEMBLY: {
-    ASSEMBLYOFFPHASES: ["Stopped", "Failed"],
+    ASSEMBLYOFFPHASES: ["stopped", "failed"],
     ASSEMBLYOFF: "OFF",
     ASSEMBLYON: "ON",
     ASSEMBLYIPV4: "IPv4",
   },
+
+  ACCOUNT: {
+    MEMBERSHIP: {
+      MEMBERSHIPTRAIL: "Trail",
+      MEMBERSHIPSTANDARD: "Standard",
+    },
+    MEMBERSHIPSTATUS: {
+      MEMBERSHIPSTATUSUNCERTIFICATED: "Uncertificated",
+      MEMBERSHIPSTATUSCERTIFICATED: "Certificated",
+    },
+  },
+
 
   PHASE: {
     READY: "ready",

@@ -83,6 +83,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('rfbState') === 'normal') {
+      this.set("showVnc", true);
       var $body = this.$('.console-body');
       var width = $('CANVAS').width() + parseInt($body.css('padding-left'), 10) + parseInt($body.css('padding-right'), 10);
       $body.width(width);
@@ -94,6 +95,7 @@ export default Ember.Component.extend({
   }.observes('sendCtrlAltDel'),
 
   disconnect() {
+    this.set("showVnc", false);
     this.set('status', 'Closed');
     this.set('userClosed', true);
 

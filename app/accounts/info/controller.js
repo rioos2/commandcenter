@@ -1,5 +1,6 @@
 import Ember from "ember";
 const  {get} = Ember;
+import C from 'nilavu/utils/constants';
 export default Ember.Controller.extend({
   notifications: Ember.inject.service('notification-messages'),
   intl:       Ember.inject.service(),
@@ -29,6 +30,20 @@ export default Ember.Controller.extend({
     }
     return " ";
   }.property('model'),
+
+  memberShip: function() {
+    if(this.get('model.profile.object_meta.labels.rioos_sh_membership')) {
+      return this.get('model.profile.object_meta.labels.rioos_sh_membership');
+    }
+    return C.ACCOUNT.MEMBERSHIP.MEMBERSHIPTRAIL;
+  }.property('model.profile.object_meta.labels.rioos_sh_membership'),
+
+  memberShipStatus: function() {
+    if(this.get('model.profile.object_meta.labels.rioos_sh_membership_status')) {
+      return this.get('model.profile.object_meta.labels.rioos_sh_membership_status');
+    }
+    return C.ACCOUNT.MEMBERSHIPSTATUS.MEMBERSHIPSTATUSUNCERTIFICATED;
+  }.property('model.profile.object_meta.labels.rioos_sh_membership_status'),
 
   tableData: function() {
     let data = this.get('model.logData.content');
