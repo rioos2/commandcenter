@@ -625,7 +625,7 @@ launcherPage:
       name: Domain Name
     region:
       empty: You forgot to select a location
-      name: Region
+      name: Location
     image:
       empty: No server OS selected
     config:

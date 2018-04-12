@@ -70,7 +70,7 @@ export default Component.extend({
   assemblyState: function() {
     var state = C.ASSEMBLY.ASSEMBLYON;
     C.ASSEMBLY.ASSEMBLYOFFPHASES.forEach(phase => {
-      if (this.get('model.status.phase') === phase) {
+      if (this.get('model.status.phase').toLowerCase() === phase) {
         state = C.ASSEMBLY.ASSEMBLYOFF
       }
     });

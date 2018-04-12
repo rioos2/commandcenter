@@ -11,10 +11,6 @@ export default Ember.Controller.extend({
     return "VNC viewer  " + this.get('name');
   }.property('name'),
 
-  hideURL: function() {
-    history.replaceState({}, 'lineaged', '/vnc');
-  }.observes('lineaged', 'host'),
-
   vncPort: function() {
     this.set('vncport', this.get('model.port'));
   }.observes('model.port'),
@@ -22,10 +18,6 @@ export default Ember.Controller.extend({
   vncHost: function() {
     this.set('vnchost', this.get('model.host'));
   }.observes('model.host'),
-
-  enableVnc: function(){
-    return !(Ember.isEmpty(this.get('model.host')) || Ember.isEmpty(this.get('model.port')));
-  }.property('model.host','model.port'),
 
   actions: {
     close() {

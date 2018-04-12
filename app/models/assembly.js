@@ -25,10 +25,12 @@ var Assembly = Resource.extend({
         label: 'action.console',
         icon: 'fa fa-terminal',
         action: 'console',
-        enabled: true
+        enabled: true,
+        class: (this.get('enableConsole') || this.get('hasTerminated'))  ? 'disabled' : ' '
+
       },
     ];
-  }.property('id', 'actionLinks', 'hasTerminated', 'okay'),
+  }.property('id', 'actionLinks', 'hasTerminated', 'status.phase','enableConsole'),
 
   hasTerminated: function() {
     return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
@@ -42,6 +44,10 @@ var Assembly = Resource.extend({
   port: function() {
     return this.get('metadata.rioos_sh_vnc_port') ? this.get('metadata.rioos_sh_vnc_port') : "";
   }.property('metadata.rioos_sh_vnc_port'),
+
+  enableConsole: function(){
+    return Ember.isEmpty(this.get('host')) || Ember.isEmpty(this.get('port'));
+  }.property('host','port'),
 
   name: function() {
     return this.get('object_meta.name') ? this.get('object_meta.name') : "";
