@@ -32,18 +32,18 @@ export default Ember.Controller.extend({
   }.property('model'),
 
   memberShip: function() {
-    if(this.get('model.profile.object_meta.labels.rioos_membership')) {
-      return this.get('model.profile.object_meta.labels.rioos_membership');
+    if(this.get('model.profile.object_meta.labels.rioos_sh_membership')) {
+      return this.get('model.profile.object_meta.labels.rioos_sh_membership');
     }
     return C.ACCOUNT.MEMBERSHIP.MEMBERSHIPTRAIL;
-  }.property('model.profile.object_meta.labels.rioos_membership'),
+  }.property('model.profile.object_meta.labels.rioos_sh_membership'),
 
   memberShipStatus: function() {
-    if(this.get('model.profile.object_meta.labels.rioos_membership_status')) {
-      return this.get('model.profile.object_meta.labels.rioos_membership_status');
+    if(this.get('model.profile.object_meta.labels.rioos_sh_membership_status')) {
+      return this.get('model.profile.object_meta.labels.rioos_sh_membership_status');
     }
     return C.ACCOUNT.MEMBERSHIPSTATUS.MEMBERSHIPSTATUSUNCERTIFICATED;
-  }.property('model.profile.object_meta.labels.rioos_membership_status'),
+  }.property('model.profile.object_meta.labels.rioos_sh_membership_status'),
 
   tableData: function() {
     let data = this.get('model.logData.content');
