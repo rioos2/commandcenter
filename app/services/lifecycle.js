@@ -7,13 +7,14 @@ export default Ember.Service.extend(DefaultHeaders, {
 
   delete: function(assemblyId, data) {
     var session = this.get('session');
-    delete data.spec.metrics.counter;
+    //TODO: why delete this metrics value
+    //delete data.spec.metrics.counter;
     return this.get('userStore').rawRequest(this.rawRequestOpts({
       url: '/api/v1/assemblys/' + assemblyId,
       method: 'PUT',
       data: data,
     })).then((xhr) => {
-         return xhr;
+      return xhr;
     }).catch((res) => {
       let err;
       try {
