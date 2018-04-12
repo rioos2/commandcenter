@@ -36,17 +36,11 @@ export default Ember.Route.extend(DefaultHeaders, {
     });
   },
 
-  logData: function(){
-    return {
-            state: 'platinum',
-        }
-  },
-
   afterModel(model) {
    if(!(model.profile.content == undefined)) {
      model.profile = model.profile.content[0];
     }
-    return $.extend(model, this.logData());
+    return model;
   },
 
   cbFind(type, url) {

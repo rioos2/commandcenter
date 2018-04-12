@@ -52,7 +52,7 @@ export default Ember.Component.extend({
   },
 
   counter: function(){
-    return (this.get("model.code") || Ember.isEmpty(this.get('model.content').objectAt(0).results.osusages.cumulative.counter))? "0": this.get('model.content').objectAt(0).results.osusages.cumulative.counter;
+    return (this.get("model.code") || Ember.isEmpty(this.get('model.content').objectAt(0).results.osusages.cumulative.counter))? "0": Math.round(this.get('model.content').objectAt(0).results.osusages.cumulative.counter);
   },
 
   OsUsageData: function() {
@@ -62,10 +62,10 @@ export default Ember.Component.extend({
       var gradient = [];
       switch (index) {
         case 0:
-          gradient = ["#AA38E6", '#5322D9'];
+          gradient = ["#CC9008", '#F74479'];
           break;
         case 1:
-          gradient = ["#CC9008", '#F74479'];
+          gradient = ["#AA38E6", '#5322D9'];
           break;
         case 2:
           gradient = ["#00FFAF", '#00DC52'];
