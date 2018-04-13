@@ -68,44 +68,44 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return this.getSettings(setting)[denormalizeName(`${C.SETTING.TRUSTED_KEY}`)] || D.VPS.trusted_key;
  },
 
- loadSecret(setting) {
-   var secretData = {
-     type: 'secret',
-     secret_type: this.getSecretType(setting),
-     data: {},
-     object_meta: ObjectMetaBuilder.buildObjectMeta(),
-     metadata:{},
-   };
+  loadSecret(setting) {
+    var secretData = {
+      type: 'secret',
+      secret_type: this.getSecretType(setting),
+      data: {},
+      object_meta: ObjectMetaBuilder.buildObjectMeta(),
+      metadata:{},
+    };
 
-   return this.get('store').createRecord(secretData);
- },
+    return this.get('store').createRecord(secretData);
+  },
 
- loadAssemblyFactory(settings) {
-   var assemblyfactoryData;
-   assemblyfactoryData = {
-     object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-     type: 'assemblyfactorys',
-     replicas: 1,
-     resources: {
-       compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
-       storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
-       version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion,
-       cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
-       memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
-       storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
-     },
-     status: {
-       phase: "",
-     },
-     secret: {
-       id: ""
-     },
-     plan: "",
-     network: '',
-     os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
-   };
-   return this.get('store').createRecord(assemblyfactoryData);
- }
+  loadAssemblyFactory(settings) {
+    var assemblyfactoryData;
+    assemblyfactoryData = {
+      object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
+      type: 'assemblyfactorys',
+      replicas: 1,
+      resources: {
+        compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
+        storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
+        version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion,
+        cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
+        memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
+        storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
+      },
+      status: {
+        phase: "",
+      },
+      secret: {
+        id: ""
+      },
+      plan: "",
+      network: '',
+      os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
+    };
+    return this.get('store').createRecord(assemblyfactoryData);
+  }
 
 
 });

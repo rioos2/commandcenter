@@ -17,10 +17,10 @@
     </div>
     <div class="row m-0">
         <div class="col-md-6 ram-content">
-            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.assemblyfactory.memory}}
+            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.assemblyfactory.resources.memory}}
         </div>
         <div class="col-md-6 capacity-content">
-            {{createcloud/chart-storage class="chart-storage" model=model initValue=model.assemblyfactory.storage}}
+            {{createcloud/chart-storage class="chart-storage" model=model initValue=model.assemblyfactory.resources.storage}}
         </div>
     </div>
 </div>

@@ -16,7 +16,7 @@ const RECONNECTING = 'reconnecting';
 export default Ember.Object.extend(Ember.Evented, {
   url: null,
   autoReconnect: true,
-  frameTimeout: 30000,
+  frameTimeout: 300000,
   metadata: null,
 
   _socket: null,

@@ -54,6 +54,7 @@ Router.map(function () {
       this.route('stacks', { path: '/stacks', resetNamespace: true }, function () {
         this.route('index', { path: '/' });
         this.route('createcloud', { path: '/createcloud' });
+        this.route('createdocker', { path: '/createdocker' });
 
         // A single application (digital cloud, containers, blockchain)
         // Allows console based on the type of application

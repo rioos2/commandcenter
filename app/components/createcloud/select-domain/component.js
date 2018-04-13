@@ -94,7 +94,6 @@ export default Component.extend(DefaultHeaders, {
             this.set("model.secret.data.ssh_keypair_size", this.get("bitsInKey"));
             this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
             this.set("model.secret.object_meta.name", this.get("model.assemblyfactory.object_meta.name"));
-            this.set("model.secret.secret_type", "rioos_sh/kryptonite");// Has to remove
 
             var session = this.get("session");
             var id = this.get("session").get("id");

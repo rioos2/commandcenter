@@ -97,18 +97,21 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   resourceUpdate() {
     this.set("resources.cpu", this.get("resources.cpu").toString());
-    this.set("resources.storage", this.get("af.storage") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
-    this.set("resources.memory", this.get("af.memory") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set("resources.storage", this.get("resources.storage") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set("resources.memory", this.get("resources.memory") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
   },
 
   ram: function() {
-    return this.get("af.memory").toString() + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix');
-  }.property('af.memory'),
+    return this.gibFormater(this.get("resources.memory").toString()) + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix');
+  }.property('resources.memory'),
 
   storage: function() {
-    return this.get("af.storage").toString() + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix');
-  }.property('af.storage'),
+    return this.gibFormater(this.get("resources.storage").toString()) + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix');
+  }.property('resources.storage'),
 
+  gibFormater: function(data) {
+    return data.replace(get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'), '');
+  },
 
   actions: {
     createAssemblyFactory() {
