@@ -78,17 +78,8 @@ export default Ember.Route.extend(DefaultHeaders,  {
     var secretData = {
       type: 'secret',
       secret_type: this.getSecretType(setting),
-      data: {
-        username: "",
-        password: "",
-        rsa_key: "",
-        rsa_pub: "",
-        tls_key: "",
-        tls_pub: "",
-        anykey: "<anykey>"
-      },
+      data: {},
       object_meta: ObjectMetaBuilder.buildObjectMeta(),
-      type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1"),
       metadata:{},
     };
 
@@ -99,8 +90,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
     var assemblyfactoryData;
     assemblyfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
-      type: 'origins/rioos/assemblyfactorys',
+      type: 'assemblyfactorys',
       replicas: 1,
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
@@ -110,34 +100,11 @@ export default Ember.Route.extend(DefaultHeaders,  {
       },
       status: {
         phase: "pending",
-        message: "",
-        reason: "",
-        conditions: [{
-          message: "",
-          reason: "",
-          status: "",
-          last_transition_time: "",
-          last_probe_time: "",
-          condition_type: "",
-          last_update_time: ""
-        }]
       },
-      created_at: "",
       secret: {
         id: ""
       },
-      plan: "", //TODO: Need to get from api
-      metadata: {
-        "io:rioos:orginin::name": "rioos",
-        "io:rioos:team::name": "development"
-      },
-      spec: {
-        node_selector: {},
-        affinity: {
-          "assemblyfactory_affinity": "requiredDuringSchedulingIgnoredDuringExecution"
-        },
-        restart_policy: "Always"
-      },
+      plan: "",
       network: '',
       os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
       memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),

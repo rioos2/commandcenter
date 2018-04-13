@@ -74,77 +74,44 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return this.getSettings(setting)[denormalizeName(`${C.SETTING.TRUSTED_KEY}`)] || D.VPS.trusted_key;
  },
 
-  loadSecret(setting) {
-    var secretData = {
-      type: 'secret',
-      secret_type: this.getSecretType(setting),
-      data: {
-        username: "",
-        password: "",
-        rsa_key: "",
-        rsa_pub: "",
-        tls_key: "",
-        tls_pub: "",
-        anykey: "<anykey>"
-      },
-      object_meta: ObjectMetaBuilder.buildObjectMeta(),
-      type_meta: TypeMetaBuilder.buildTypeMeta("Secret", "v1"),
-      metadata:{},
-    };
+ loadSecret(setting) {
+   var secretData = {
+     type: 'secret',
+     secret_type: this.getSecretType(setting),
+     data: {},
+     object_meta: ObjectMetaBuilder.buildObjectMeta(),
+     metadata:{},
+   };
 
-    return this.get('store').createRecord(secretData);
-  },
+   return this.get('store').createRecord(secretData);
+ },
 
-  loadAssemblyFactory(settings) {
-    var assemblyfactoryData;
-    assemblyfactoryData = {
-      object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type_meta: TypeMetaBuilder.buildTypeMeta("Assembly", "v1"),
-      type: 'origins/rioos/assemblyfactorys',
-      replicas: 1,
-      resources: {
-        compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
-        storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
-        cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
-        version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion
-      },
-      status: {
-        phase: "pending",
-        message: "",
-        reason: "",
-        conditions: [{
-          message: "",
-          reason: "",
-          status: "",
-          last_transition_time: "",
-          last_probe_time: "",
-          condition_type: "",
-          last_update_time: ""
-        }]
-      },
-      created_at: "",
-      secret: {
-        id: ""
-      },
-      plan: "", //TODO: Need to get from api
-      metadata: {
-        "io:rioos:orginin::name": "rioos",
-        "io:rioos:team::name": "development"
-      },
-      spec: {
-        node_selector: {},
-        affinity: {
-          "assemblyfactory_affinity": "requiredDuringSchedulingIgnoredDuringExecution"
-        },
-        restart_policy: "Always"
-      },
-      network: '',
-      os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
-      memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
-      storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
-    };
-    return this.get('store').createRecord(assemblyfactoryData);
-  }
+ loadAssemblyFactory(settings) {
+   var assemblyfactoryData;
+   assemblyfactoryData = {
+     object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
+     type: 'assemblyfactorys',
+     replicas: 1,
+     resources: {
+       compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
+       storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
+       cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
+       version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion
+     },
+     status: {
+       phase: "pending",
+     },
+     secret: {
+       id: ""
+     },
+     plan: "",
+     network: '',
+     os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
+     memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
+     storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
+   };
+   return this.get('store').createRecord(assemblyfactoryData);
+ }
 
 
 });
