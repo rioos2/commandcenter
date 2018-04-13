@@ -13,9 +13,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav nav-menu left-menu">
-            <li>{{#link-to "infrastructure-tab.data-center"}}Dashboard{{/link-to}}</li>
-            <li>{{#link-to "stacks"}}Manage{{/link-to}}</li>
-            <li>{{#link-to "stacks.createcloud"}}Launcher{{/link-to}}</li>
+            <li>{{#link-to "infrastructure-tab.data-center"}}{{t 'nav.dashboard'}}{{/link-to}}</li>
+            <li>{{#link-to "stacks"}}{{t 'nav.manage'}}{{/link-to}}</li>
+            <li>{{#link-to "stacks.createcloud"}}{{t 'nav.digitalcloud'}}{{/link-to}}</li>
+            <li>{{#link-to "stacks.createdocker"}}{{t 'nav.docker'}}{{/link-to}}</li>
 
           </ul>
 
@@ -26,8 +27,8 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu nav-profile">
-                <li>{{#link-to "accounts.index"}}Settings{{/link-to}}</li>
-                <li {{action "logout"}}><a href="#">Logout</a></li>
+                <li>{{#link-to "accounts.index"}}{{t 'nav.user.settings'}}{{/link-to}}</li>
+                <li {{action "logout"}}><a href="#">{{t 'nav.user.logout'}}</a></li>
 
               </ul>
             </li>

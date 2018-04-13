@@ -3593,83 +3593,13 @@ allServices:
 # Navigation
 ##############################
 nav:
-  srToggleNav: Toggle Navigation
-  srToggleDropdown: Toggle Dropdown
-  environment:
-    label: Environment
-    all: All Environments
-    your: Your Environments
-    selected: Selected Environment
-    manage: Manage Environments
-    edit: 'Edit "{name}"'
-  namespace:
-    label: Namespace
-    manage: Manage Namespaces
-  notReady: Setting Up...
-  k8s:
-    tab: Kubernetes
-    cli: CLI
-    dashboard: Dashboard
-    system: Infrastructure Stacks
-  swarm:
-    tab: Swarm
-    cli: CLI
-    dashboard: Portainer
-    system: Infrastructure
-  mesos:
-    tab: Mesos
-    web: Overview
-    system: Infrastructure
-  cattle:
-    tab: Stacks
-    all: All
-    user: User
-    system: Infrastructure
-  catalog:
-    tab: Catalog
-    all: All
-    library: Library
-    community: Community
-  infra:
-    tab: Infrastructure
-    hosts: Hosts
-    containers: Containers
-    vms: Virtual Machines
-    storagePage: Storage
-    backupTarget: Backup Targets
-    certificates: Certificates
-    registries: Registries
-    secrets: Secrets
-  admin:
-    tab: Admin
-    audit: Audit Log
-    processes: Processes
-    accounts: Accounts
-    access: Access Control
-    machine: Machine Drivers
-    settings: Settings
-    ha: High Availability
-  api:
-    tab: API
-    keys: Keys
-    hooks: Webhooks
+  dashboard: Dashboard
+  manage: Manage
+  digitalcloud: Digital cloud
+  docker: Docker
   user:
-    label: "User Menu: {username}"
-    logout: Log Out
-    yourAccount: Your Account
-    changePassword: Change Password
-    theme: Theme
-    themeLight: Light
-    themeAuto: Auto
-    themeDark: Dark
-  noHosts:
-    prefix: "Before adding your first service or launching a container, you'll need to add a Linux host with a <a href=\"{docsBase}/hosts/#supported-docker-versions\" target=\"_blank\">supported version</a> of Docker.  "
-    link: "Add a host"
-    suffix: ""
-  noHostsWindows:
-    prefix: "Before adding your first service or launching a container, you'll need to add a Windows host.  "
-    link: "Add a host"
-    suffix: ""
+    settings: Settings
+    logout: Logout
 
 ##############################
 # Resource Actions
