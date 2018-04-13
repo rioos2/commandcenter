@@ -28,6 +28,10 @@ export default Ember.Controller.extend({
     }
   }.observes('model.code'),
 
+  checkEmptyNode: function() {
+    return Ember.isEmpty(this.get('cacheNodes'));
+  }.property('cacheNodes'),
+
   _removeCache: function() {
     const self = this;
     self.get('cacheNodes').forEach(function(node) {
