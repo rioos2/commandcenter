@@ -42,12 +42,6 @@ export default Ember.Route.extend(DefaultHeaders,  {
         settings: this.getSettings(setting),
         networks: hash.networks,
       });
-    }).catch((err) => {
-      /*return this.loadingError(err, transition, Ember.Object.create({
-  plans: [],
-  : null,
-}));
-*/
     });
   },
 
@@ -95,11 +89,13 @@ export default Ember.Route.extend(DefaultHeaders,  {
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
         storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
+        version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion,
         cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
-        version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion
+        memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
+        storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
       },
       status: {
-        phase: "pending",
+        phase: "",
       },
       secret: {
         id: ""
@@ -107,8 +103,6 @@ export default Ember.Route.extend(DefaultHeaders,  {
       plan: "",
       network: '',
       os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
-      memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
-      storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
     };
     return this.get('store').createRecord(assemblyfactoryData);
   }
