@@ -10,8 +10,9 @@ var D = {
       network:"public_ipv4",
       destro:"",
       destroVersion: "",
-      secret: "SSH-1(RSA)",
-      secretTypes: "SSH-1(RSA),SSH-1(RSA2),SSH-1(RSA3)",
+      disableSecretTypes: "ecdsa,ed25519",
+      defaultSecret: "rsa",
+      secretTypes: "rsa,ecdsa,ed25519",
       bitsInKey: "2048",
       trusted_key: "rioos_sh/kryptonite"
     },

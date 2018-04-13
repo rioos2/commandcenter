@@ -13,7 +13,7 @@ var C = {
       MEMBERSHIPSTANDARD: "Standard",
     },
     MEMBERSHIPSTATUS: {
-      MEMBERSHIPSTATUSUNCERTIFICATED: "Uncertificated",
+      MEMBERSHIPSTATUSREGISTERED: "Registered",
       MEMBERSHIPSTATUSCERTIFICATED: "Certificated",
     },
   },

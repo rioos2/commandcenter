@@ -862,6 +862,7 @@ dashboard:
   maingaugesSecondSec: ain gauges
   statisticsFirstSec: S
   statisticsSecondSec: tatistics
+  emptyNode: <p>You must connect nodes to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup nodes in Rio OS.</p>
   osUsageFirstSec: O
   osUsageSecondSec: s usage by time
   error: <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
@@ -3596,7 +3597,7 @@ nav:
   dashboard: Dashboard
   manage: Manage
   digitalcloud: Digital cloud
-  docker: Docker
+  docker: Container
   user:
     settings: Settings
     logout: Logout

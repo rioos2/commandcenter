@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
     if(this.get('model.profile.object_meta.labels.rioos_sh_membership_status')) {
       return this.get('model.profile.object_meta.labels.rioos_sh_membership_status');
     }
-    return C.ACCOUNT.MEMBERSHIPSTATUS.MEMBERSHIPSTATUSUNCERTIFICATED;
+    return C.ACCOUNT.MEMBERSHIPSTATUS.MEMBERSHIPSTATUSREGISTERED;
   }.property('model.profile.object_meta.labels.rioos_sh_membership_status'),
 
   tableData: function() {

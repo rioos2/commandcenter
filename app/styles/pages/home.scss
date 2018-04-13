@@ -6,7 +6,7 @@
         letter-spacing: 5px;
         margin-bottom: 0px;
         text-transform: uppercase;
-        
+
         span {
             border-bottom: 3px solid #2d9aff;
             letter-spacing: 0px;
@@ -21,14 +21,23 @@
     }
 
     .main-gauges {
-        background-image: url(../images/home/bg_gauge.png);        
+        background-image: url(../images/home/bg_gauge.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
         text-transform: uppercase;
     }
 
     .statistics {
-        background-color: #f0f4fa;        
+        background-color: #f0f4fa;
+         .empty-statis {
+           padding-top: 8%;
+           padding-bottom: 7%;
+           text-align: center;
+           color: #8790a1;
+           p {
+             font-size: 19px;
+           }
+         }
     }
 
     /* Clear floats after the columns */
@@ -49,7 +58,7 @@
     .os-useage-bytime{
         background-color: #e3e9f6;
     }
-    
+
     @media (max-width: 576px) {
         .list-content {
             margin: 0;
