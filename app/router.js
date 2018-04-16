@@ -60,6 +60,7 @@ Router.map(function () {
         // Allows console based on the type of application
         this.route('stack', { path: '/stack', resetNamespace: true }, function () {
           this.route('console', { path: '/console' });
+          this.route('container-console', { path: '/containerconsole' });
         });
       });
     });
