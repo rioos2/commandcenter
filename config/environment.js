@@ -116,6 +116,7 @@ module.exports = function (environment) {
       wsServer: loaded.uwatch_server || "ws://localhost:9443",
       wsEndpoint: '/api/v1/',
       vncServer: loaded.vnc_server || "wss://localhost:8005",
+      containerWsPort: loaded.container_console_port || "10250",
       countlyServer: loaded.countly_server || "http://countly.rioos.xyz",
       appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
       sendAnalytics: loaded.send_analytics || false,
