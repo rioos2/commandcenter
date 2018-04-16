@@ -15,6 +15,9 @@ uwatch_server = "ws://localhost:9443"
 ## replace it to wss if we wish to connect via secure mode.
 vnc_server = "wss://localhost:444"
 
+## Nodelet port for containers console
+nodelet_port = "10250"
+
 ## count.ly url that provided by count.ly
 countly_server = "http://countly.rioos.xyz"
 

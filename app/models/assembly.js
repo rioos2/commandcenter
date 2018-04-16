@@ -1,5 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
-const { get } = Ember;
+const {
+  get
+} = Ember;
 import C from 'nilavu/utils/constants';
 
 var Assembly = Resource.extend({
@@ -30,24 +32,33 @@ var Assembly = Resource.extend({
 
       },
     ];
-  }.property('id', 'actionLinks', 'hasTerminated', 'status.phase','enableConsole'),
+  }.property('id', 'actionLinks', 'hasTerminated', 'status.phase', 'enableConsole'),
 
   hasTerminated: function() {
     return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
   }.property('status.phase'),
 
+  categorieType: function() {
+    return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
+  }.property('spec.assembly_factory.spec.plan.category'),
 
   host: function() {
+    if(this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
+      return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].host_ip : "";
+    }
     return this.get('metadata.rioos_sh_vnc_host') ? this.get('metadata.rioos_sh_vnc_host') : "";
-  }.property('metadata.rioos_sh_vnc_host'),
+  }.property('metadata.rioos_sh_vnc_host', 'spec.assembly_factory.spec.plan.ports.@each.{host_ip}'),
 
   port: function() {
+    if(this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
+      return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].container_port : "";
+    }
     return this.get('metadata.rioos_sh_vnc_port') ? this.get('metadata.rioos_sh_vnc_port') : "";
-  }.property('metadata.rioos_sh_vnc_port'),
+  }.property('metadata.rioos_sh_vnc_port', 'spec.assembly_factory.spec.plan.ports.@each.{container_port}'),
 
-  enableConsole: function(){
+  enableConsole: function() {
     return Ember.isEmpty(this.get('host')) || Ember.isEmpty(this.get('port'));
-  }.property('host','port'),
+  }.property('host', 'port'),
 
   name: function() {
     return this.get('object_meta.name') ? this.get('object_meta.name') : "";
@@ -74,7 +85,16 @@ var Assembly = Resource.extend({
     },
 
     console() {
-      window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
+      let type = this.get('spec.assembly_factory.spec.plan.category');
+      switch (type) {
+        case type == C.CATEGORIES.MACHINE:
+          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
+          break;
+        case type == C.CATEGORIES.CONTAINER:
+          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/containerconsole?vnchost=" + this.get('host') + "&vncport=" + this.get('port') + "&id=" + this.get('id'), '_blank');
+          break;
+      }
+
     },
 
   },
