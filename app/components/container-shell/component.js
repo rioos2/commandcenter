@@ -4,8 +4,6 @@ import {
 } from 'nilavu/utils/platform';
 import Terminal from 'npm:xterm';
 
-const DEFAULT_COMMAND = ["/bin/sh", "-c", 'TERM=xterm-256color; export TERM; [ -x /bin/bash ] && ([ -x /usr/bin/script ] && /usr/bin/script -q -c "/bin/bash" /dev/null || exec /bin/bash) || exec /bin/sh'];
-
 export default Ember.Component.extend({
   instance: null,
   command: null,
