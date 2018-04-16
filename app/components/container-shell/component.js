@@ -53,7 +53,6 @@ export default Ember.Component.extend({
       this.set('term', term);
 
       term.on('data', function(data) {
-        //console.log('To Server:',data);
         socket.send(btoa(unescape(encodeURIComponent(data)))); // jshint ignore:line
       });
 
@@ -62,7 +61,6 @@ export default Ember.Component.extend({
       socket.onmessage = (message) => {
         this.set('status', 'connected');
         this.sendAction('connected');
-        //console.log('From Server:',message.data);
         term.write(decodeURIComponent(escape(atob(message.data)))); // jshint ignore:line
       };
 
