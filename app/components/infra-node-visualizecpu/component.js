@@ -35,17 +35,6 @@ export default Ember.Component.extend({
       });
   },
 
-
-  cancelTimer() {
-    Ember.run.cancel(this.get('pollTimer'));
-    // This prevents scheduleTimer from rescheduling if deactivate happened at just the wrong time.
-    this.set('pollTimer', null);
-  },
-
-  willDestroyElement() {
-    this.cancelTimer();
-  },
-
   initializeChart: Ember.on('didInsertElement', function() {
     var id = this.get('model').id;
     this.$(".gauge_box").append('<div class = "contant_bar"><canvas id = "canvas_back_' + id + '" width = "177" height = "138" class = "canvas_back"></canvas></div><div class="contant"><div class= "row_1"></div><div class= "row_2"></div><div class= "row_3"></div><div class= "row_4"></div><div class= "row_5"></div></div>');
