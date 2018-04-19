@@ -6,11 +6,10 @@
       <span class="underline">{{t 'dashboard.maingaugesFirstSec'}}</span>{{t 'dashboard.maingaugesSecondSec'}}</p>
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-        {{infra-health-metriclist model=model}}
+        {{infra-health-metriclist model=reportGauge}}
       </div>
     </div>
   </div>
-
   {{!-- Statistics --}}
   <div id="statistics" class="statistics p-t-50 p-b-50">
     <p class="title p-l-50 p-b-20">
@@ -19,9 +18,9 @@
       {{infra-empty-statistics model=model}}
     {{else}}
       <div class="row list-content">
-        {{#each cacheNodes as |sdata|}}
+        {{#each reportNodes as |sdata|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-node-statistics model=sdata}}
+            {{infra-node-statistics model=sdata counterModel=model}}
           </div>
         {{/each}}
       </div>

@@ -1,0 +1,25 @@
+<div class="filter">
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+  <div class="select-filter">
+    <div class='md-select {{showDropDown}}' {{action "selectFilter" on="click"}}>
+
+      <label for="ul-id">
+        <button type="button">
+          <span>{{selectBridge}}</span>
+        </button>
+      </label>
+      <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+        <li>etho-1</li>
+        <li>etho-2</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="btn-group">
+  <button>Throuput</button>
+  <button>Error</button>
+</div>
+
+<div id="id-{{model.id}}"></div>

@@ -4,18 +4,20 @@ import C from 'nilavu/utils/constants';
 
 const { get } = Ember;
 
-export default Ember.Mixin.create({
-  'tab-session': Ember.inject.service(),
-  session: Ember.inject.service(),
+
+export default Ember.Object.extend({
 
   subscribeSocket: null,
   reconnect: true,
   connected: false,
+  reportsUrl: false,
+  url: null,
 
   init() {
     this._super();
 
-    var store = this.get('store');
+    var store = Nilavu.__container__.lookup('service:store');
+    // this.container.lookup('thing:main');
 
     var socket = Socket.create();
 
@@ -27,14 +29,14 @@ export default Ember.Mixin.create({
         var socketProject = metadata.projectId;
         if (currentProject !== socketProject) {
           console.error(`Subscribe ignoring message, current=${currentProject} socket=${socketProject} ` + this.forStr());
-          this.connectSubscribe();
+          this.connectSubscribe(this.get('url'));
           return;
         }
 
         var d = JSON.parse(event.data);
         let resource;
-        if (d.data) {
-          resource = store._typeify(d.data);
+        if (d) {
+          resource = d.data ? store._typeify(d.data) : store._typeify(d) ;
           d.data = resource;
         }
 
@@ -75,12 +77,11 @@ export default Ember.Mixin.create({
     this.set('subscribeSocket', socket);
   },
 
-  connectSubscribe() {
+  connectSubscribe(url="") {
     var socket = this.get('subscribeSocket');
     var projectId = this.get(`tab-session.${C.TABSESSION.PROJECT}`);
-    var url = ("ws://" + window.location.host + this.get('app.wsEndpoint')+"account/"+this.get('session').get("id")+"/watch");
-
     this.set('reconnect', true);
+    this.set('url', url);
 
     socket.setProperties({
       url: url,
@@ -135,7 +136,7 @@ export default Ember.Mixin.create({
 
     console.log('Subscribe disconnected ' + this.forStr());
     if (this.get('reconnect')) {
-      this.connectSubscribe();
+      this.connectSubscribe(this.get('url'));
     }
   },
 
