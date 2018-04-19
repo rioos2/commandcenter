@@ -1,10 +1,10 @@
 <div class="servertab row m-0">
     <div class="col-md-12 col-lg-2 tab-left">
         <ul class="nav nav-pills brand-pills nav-stacked" role="tablist">
-            <li role="presentation" class="brand-nav active" data-tooltip="User"><a href="#tab{{model.id}}1" aria-controls="tab1" role="tab" data-toggle="tab" class="tabuser">{{svg/svg-user}}</a></li>
+            <li role="presentation" class="brand-nav active" data-tooltip="State"><a href="#tab{{model.id}}1" aria-controls="tab1" role="tab" data-toggle="tab" class="tabuser">{{svg/svg-user}}</a></li>
             <li role="presentation" class="brand-nav" data-tooltip="Speed"><a href="#tab{{model.id}}2" aria-controls="tab2" role="tab" data-toggle="tab" class="tabspeed">{{svg/svg-speed}}</a></li>
             <li role="presentation" class="brand-nav" data-tooltip="Security"><a href="#tab{{model.id}}3" aria-controls="tab3" role="tab" data-toggle="tab" class="tabsecur">{{svg/svg-secur}}</a></li>
-            <li role="presentation" class="brand-nav" data-tooltip="State"><a href="#tab{{model.id}}4" aria-controls="tab4" role="tab" data-toggle="tab" class="tabstats">{{svg/svg-stats}}</a></li>
+            <li role="presentation" class="brand-nav" data-tooltip="User"><a href="#tab{{model.id}}4" aria-controls="tab4" role="tab" data-toggle="tab" class="tabstats">{{svg/svg-stats}}</a></li>
             <li role="presentation" class="brand-nav ul-desc">
                 <div class="p-l-7">
                     <div class="choose-desc">CHOOSE</div>
@@ -19,7 +19,7 @@
                 {{infra-node-visualizecpu model=model}}
             </div>
             <div role="tabpanel" class="tab-pane" id="tab{{model.id}}2">
-                <p></p>
+                <!-- {{infra-node-network-chart model=model}} -->
             </div>
             <div role="tabpanel" class="tab-pane" id="tab{{model.id}}3">
                 <p></p>

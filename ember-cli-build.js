@@ -57,6 +57,7 @@ module.exports = function(defaults) {
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');
+  app.import('vendor/charts/loader.js');
   app.import('vendor/dropdown/position-calculator.js');
 
   app.import('vendor/analytics/countly.js');

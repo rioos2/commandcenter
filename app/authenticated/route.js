@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import Subscribe from 'nilavu/mixins/subscribe';
+import Subscribers from 'nilavu/mixins/subscribers';
 import { xhrConcur } from 'nilavu/utils/platform';
 import PromiseToCb from 'nilavu/mixins/promise-to-cb';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
@@ -8,7 +8,7 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 
 const CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
-export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
+export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   settings: Ember.inject.service(),
   access: Ember.inject.service(),
   language: Ember.inject.service('user-language'),
@@ -62,12 +62,12 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
   activate() {
     let app = this.controllerFor('application');
     this._super();
-    this.connectSubscribe();
+    this.connectSubscribers();
   },
 
   deactivate() {
     this._super();
-    this.disconnectSubscribe();
+    this.disconnectSubscribers();
     Ember.run.cancel(this.get('testTimer'));
 
     // Forget all the things
@@ -114,7 +114,7 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
 
 
   loadDataCenter() {
-    return this.get('store').find('reports', null, this.opts('healthz/overall'));
+    return this.get('store').find('reportsstatistics', null, this.opts('healthz/overall'));
   },
 
   loadStacks() {
