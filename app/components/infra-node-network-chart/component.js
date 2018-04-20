@@ -5,7 +5,6 @@ export default Ember.Component.extend({
 
   isActive: false,
   selected: C.NETWORK.PACKETMEASURETYPE.THROUGHPUT,
-  hAxisLimit: 4,
 
   didInsertElement() {
     this.drawNetworkStatistics();
@@ -36,7 +35,7 @@ export default Ember.Component.extend({
         },
         vAxis: {
           minValue: 0,
-          title: 'MB per second',
+          title: 'MB per seconds',
 
         },
         height: 320,
@@ -101,12 +100,9 @@ export default Ember.Component.extend({
   }.property('model.network'),
 
   networkBridge: function() {
-    if(!this.get('networkBridgeEmpty')) {
     return this.get('model.network').map((n) => {
       return n.name;
     });
-  }
-  return [];
   }.property('networkBridge'),
 
   selectBridge: function() {
