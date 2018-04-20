@@ -857,6 +857,8 @@ signupPage:
 dashboard:
   maingauges: Main Gauges
   statistics: Statistics
+  throughput: Throughput
+  errorSwitch: Error
   osUsage: OS usage by time
   maingaugesFirstSec: M
   maingaugesSecondSec: ain gauges
@@ -1508,8 +1510,8 @@ catalogSettings:
       placeholder: 'e.g. master'
 
 confirmDelete:
-  title: 'Are you sure you want to delete'
-  environmentNote: 'Note: All resources inside this Environment will be permanently removed, including any Hosts that were created through {appName}.'
+  title: 'Are you sure you want to delete ?'
+  deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
   protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
   confirmAction: Delete
   cancelAction: Cancel

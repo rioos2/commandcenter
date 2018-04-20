@@ -65,6 +65,11 @@ var C = {
     LANG: 'LANG',
   },
 
+  NETWORK: {
+      PACKETMEASURETYPE: {
+        THROUGHPUT: 'throughput'
+      },
+  },
 
   CATALOG: {
     LIBRARY_KEY: 'library',

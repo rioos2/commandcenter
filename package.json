@@ -60,6 +60,7 @@
     "haikunator": "^2.0.0",
     "http-proxy": "^1.16.2",
     "http2": "^3.3.7",
+    "lacsso": "0.0.59",
     "loader.js": "^4.6.0",
     "semver": "^5.5.0",
     "toml-parser": "0.0.7",
@@ -80,6 +81,7 @@
     "@bower_components/momentjs": "moment/moment#~2.10.6",
     "@bower_components/normalize.css": "necolas/normalize.css#3.0.3",
     "@bower_components/outlayer": "metafizzy/outlayer#^2.1.0",
-    "@bower_components/qunit-notifications": "dockyard/qunit-notifications#~0.1.0"
+    "@bower_components/qunit-notifications": "dockyard/qunit-notifications#~0.1.0",
+    "@bower_components/lacsso": "rancher/lacsso"
   }
 }
