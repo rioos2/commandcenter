@@ -340,10 +340,7 @@
 }
 
 .filter {
-    padding: 15px 0;
     display: flow-root;
-    background-color: $bg-third-color;
-    box-shadow: 1px 6px 10px rgba(60, 119, 199, 0.1);
     border-radius: 6px;
 
     @media (min-width: 1200px) {
@@ -355,6 +352,9 @@
         .col-lg-1 {
             padding: 0;
         }
+    }
+    .mv-top {
+      padding-top: 9px;
     }
     .filter-text {
         padding-top: 12px;
@@ -431,8 +431,8 @@
     }
 }
 
-.btn-group button {
-    background-color: #337ab7;
+.btn-network-group button {
+    background-color: #c3b4b4;
     border: 1px solid #0f5da0;
     color: white;
     padding: 5px 9px;
@@ -440,16 +440,22 @@
     float: left;
 }
 
-.btn-group:after {
+.btn-network-group.mv-top {
+    padding-top: 14px;
+}
+
+
+.btn-network-group button.active {
+  background-color: #2a53bd;
+  cursor: default;
+}
+
+.btn-network-group:after {
     content: "";
     clear: both;
     display: table;
 }
 
-.btn-group button:not(:last-child) {
+.btn-network-group button:not(:last-child) {
     border-right: none;
-}
-
-.btn-group button:hover {
-    background-color: #0f5da0;
 }

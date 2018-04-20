@@ -11,6 +11,7 @@ var Assembly = Resource.extend({
   router: Ember.inject.service(),
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
+  modalService: Ember.inject.service('modal'),
 
 
   availableActions: function() {
@@ -18,7 +19,7 @@ var Assembly = Resource.extend({
     return [{
         label: 'action.remove',
         icon: 'fa fa-trash-o',
-        action: 'delete',
+        action: 'deletePromt',
         enabled: true,
         altAction: 'delete',
         class: this.get('hasTerminated') ? 'disabled' : ' '
@@ -28,7 +29,7 @@ var Assembly = Resource.extend({
         icon: 'fa fa-terminal',
         action: 'console',
         enabled: true,
-        class: (this.get('enableConsole') || this.get('hasTerminated'))  ? 'disabled' : ' '
+        class: (this.get('enableConsole') || this.get('hasTerminated') || this.get('hasFailed')) ? 'disabled' : ' '
 
       },
     ];
@@ -38,19 +39,23 @@ var Assembly = Resource.extend({
     return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
   }.property('status.phase'),
 
+  hasFailed: function() {
+    return C.MANAGEMENT.STATUS.FAILURE.includes(this.get('status.phase').toLowerCase());
+  }.property('status.phase'),
+
   categorieType: function() {
     return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
   }.property('spec.assembly_factory.spec.plan.category'),
 
   host: function() {
-    if(this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
+    if (this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
       return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].host_ip : "";
     }
     return this.get('metadata.rioos_sh_vnc_host') ? this.get('metadata.rioos_sh_vnc_host') : "";
   }.property('metadata.rioos_sh_vnc_host', 'spec.assembly_factory.spec.plan.ports.@each.{host_ip}'),
 
   port: function() {
-    if(this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
+    if (this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
       return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].container_port : "";
     }
     return this.get('metadata.rioos_sh_vnc_port') ? this.get('metadata.rioos_sh_vnc_port') : "";
@@ -75,6 +80,7 @@ var Assembly = Resource.extend({
           cssClasses: 'notification-success'
         });
         this.set('hasTerminated', true);
+        this.get('modalService').toggleModal();
       }).catch((err) => {
         this.get('notifications').warning(get(this, 'intl').t('notifications.Stacks.DeleteFailed'), {
           autoClear: true,
@@ -95,6 +101,10 @@ var Assembly = Resource.extend({
           break;
       }
 
+    },
+
+    deletePromt: function() {
+      this.get('modalService').toggleModal('modal-confirm-delete', this);
     },
 
   },

@@ -84,7 +84,7 @@ module.exports = function(defaults) {
   app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
     destDir: 'fonts'
   });
-
+  app.import('node_modules/@bower_components/lacsso/lacsso.css');
 
   app.import('node_modules/@bower_components/bootstrap/dist/js/bootstrap.js');
 

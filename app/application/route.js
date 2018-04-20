@@ -9,6 +9,7 @@ export default Ember.Route.extend({
   cookies: Ember.inject.service(),
   language: Ember.inject.service('user-language'),
   settings: Ember.inject.service(),
+  modal: Ember.inject.service(),
   events: Ember.inject.service('es6-eventemitter'),
 
   previousParams: null,

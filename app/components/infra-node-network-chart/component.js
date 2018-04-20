@@ -1,8 +1,18 @@
 import Ember from 'ember';
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
+
   isActive: false,
+  selected: C.NETWORK.PACKETMEASURETYPE.THROUGHPUT,
+  hAxisLimit: 4,
+
   didInsertElement() {
+    this.drawNetworkStatistics();
+  },
+
+  drawNetworkStatistics() {
+    this.send('packetFliper', this.get('selected'));
     var self = this;
     google.charts.load('current', {
       'packages': ['corechart']
@@ -10,21 +20,29 @@ export default Ember.Component.extend({
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
+      if(self.get('networkBridgeEmpty')) {
+        self.set('chartData', self.setEmpty());
+      }
       var data = google.visualization.arrayToDataTable(self.get('chartData'));
 
       var options = {
-        title: 'Network Speed Performance',
+        title: 'Network Speed',
         hAxis: {
-          title: 'Year',
+          title: 'Time',
           titleTextStyle: {
             color: '#333'
-          }
+          },
+          girdlines: {color: '#333', count: 4},
         },
         vAxis: {
-          minValue: 0
+          minValue: 0,
+          title: 'MB per second',
+
         },
-        height: 352,
-        width: 400
+        height: 320,
+        width: 460,
+        colors: ['#CC9008', '#AA38E6']
+
       };
 
       var chart = new google.visualization.AreaChart(document.getElementById("id-" + self.get('model').id));
@@ -39,55 +57,91 @@ export default Ember.Component.extend({
 
 
   chartData: function() {
-    return [
-      ['Year', 'Down', 'Up'],
-      ['2013', 1000, 400],
-      ['2014', 1170, 460],
-      ['2015', 660, 1120],
-      ['2016', 1030, 540],
-      ['2017', 1030, 540],
-      ['2018', 1030, 540],
-      ['2019', 1030, 540],
-      ['2020', 1030, 540]
+    return this.filteredData();
+  }.property('selectBridge', 'selected'),
+
+  filteredData: function() {
+
+    if (this.get('selected') == C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
+      return this.networkThroughput();
+    } else {
+      return this.networkError();
+    }
+  },
+
+  networkThroughput: function() {
+    let throughput = [
+      ['Date', 'Download', 'Upload']
     ];
-  }.property('model'),
+    this.get('model.network').forEach((n) => {
+      if (n.name == this.get('selectBridge')) {
+        n.throughput.forEach((t,index) => {
+          throughput.push(t);
+        });
+      }
+    });
+    return throughput;
+  },
 
-  //TODO This is going to implement when network structure conformed from api
+  networkError: function() {
+    let error = [
+      ['Date', 'Download', 'Upload']
+    ];
+    this.get('model.network').forEach((n) => {
+      if (n.name == this.get('selectBridge'))
+        n.error.forEach((t) => {
+          error.push(t);
+        });
+    });
+    return error;
+  },
 
-  // networkThrouput: function() {
-  //   let throuput = [['Year', 'Down', 'Up']];
-  //   this.get('model.network').forEach((n) => {
-  //     if (n.name = this.get('selectBridge')) {
-  //       n.throuput.forEach((t) => {
-  //         throuput.push(t);
-  //       }.bind(this));
-  //     }
-  //   }.bind(this));
-  //   return throuput;
-  // }.property('model.network.@each'),
-  //
-  // networkError: function() {
-  //   let error = [];
-  //   this.get('model.network').forEach((n) => {
-  //     if (n.name = this.get('selectBridge'))
-  //       error = n.error;
-  //   });
-  //   return error;
-  // }.property('model.network.@each'),
-  //
-  // networkBridge: function() {
-  //   return this.get('model.network').map((n) => {
-  //     return n.name;
-  //   });
-  // }.property('model.network.@each'),
-  //
-  // selectBridge: function() {
-  //   return !Ember.isEmpty(this.get('networkBridge')) ? this.get('networkBridge')[0] : " ";
-  // }.property('model.network.@each', 'networkBridge')
+  networkBridgeEmpty: function() {
+    return Ember.isEmpty(this.get('networkBridge'));
+  }.property('model.network'),
+
+  networkBridge: function() {
+    if(!this.get('networkBridgeEmpty')) {
+    return this.get('model.network').map((n) => {
+      return n.name;
+    });
+  }
+  return [];
+  }.property('networkBridge'),
+
+  selectBridge: function() {
+    return !Ember.isEmpty(this.get('networkBridge')) ? this.get('networkBridge')[0] : " ";
+  }.property('networkBridge'),
+
+  changed: function() {
+    this.set('chartData', this.filteredData());
+    this.drawNetworkStatistics();
+  }.observes('selectBridge', 'selected'),
+
+  setEmpty: function() {
+    return [['Year', 'Download', 'Upload'],['0', 0, 0]];
+  },
 
   actions: {
+
     selectFilter: function(show) {
       this.toggleProperty('isActive');
     },
+
+    propagateFilter: function(opt) {
+      this.set('selectBridge', opt);
+    },
+
+    packetFliper: function(packetType) {
+      this.set('selected', packetType);
+      if (packetType == C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
+        this.set('throuput', 'active');
+        this.set('packetError', '');
+      } else {
+        this.set('packetError', 'active');
+        this.set('throuput', '');
+      }
+    },
+
   },
 });
