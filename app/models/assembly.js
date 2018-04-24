@@ -93,10 +93,10 @@ var Assembly = Resource.extend({
     console() {
       let type = this.get('spec.assembly_factory.spec.plan.category');
       switch (type) {
-        case type == C.CATEGORIES.MACHINE:
+        case C.CATEGORIES.MACHINE:
           window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
           break;
-        case type == C.CATEGORIES.CONTAINER:
+        case C.CATEGORIES.CONTAINER:
           window.open(location.protocol + '//' + location.host + location.pathname + "/stack/containerconsole?vnchost=" + this.get('host') + "&vncport=" + this.get('port') + "&id=" + this.get('id'), '_blank');
           break;
       }
