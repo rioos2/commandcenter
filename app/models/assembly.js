@@ -48,18 +48,12 @@ var Assembly = Resource.extend({
   }.property('spec.assembly_factory.spec.plan.category'),
 
   host: function() {
-    if (this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
-      return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].host_ip : "";
-    }
     return this.get('metadata.rioos_sh_vnc_host') ? this.get('metadata.rioos_sh_vnc_host') : "";
-  }.property('metadata.rioos_sh_vnc_host', 'spec.assembly_factory.spec.plan.ports.@each.{host_ip}'),
+  }.property('metadata.rioos_sh_vnc_host'),
 
   port: function() {
-    if (this.get('spec.assembly_factory.spec.plan.category') == C.CATEGORIES.CONTAINER) {
-      return this.get('spec.assembly_factory.spec.plan.ports') ? this.get('spec.assembly_factory.spec.plan.ports')[0].container_port : "";
-    }
     return this.get('metadata.rioos_sh_vnc_port') ? this.get('metadata.rioos_sh_vnc_port') : "";
-  }.property('metadata.rioos_sh_vnc_port', 'spec.assembly_factory.spec.plan.ports.@each.{container_port}'),
+  }.property('metadata.rioos_sh_vnc_port'),
 
   enableConsole: function() {
     return Ember.isEmpty(this.get('host')) || Ember.isEmpty(this.get('port'));
