@@ -547,6 +547,7 @@ launcherPage:
   compute:
     selectType: Pick Cloud Type
     createCloud: CREATING A DIGITAL CLOUD
+    createContainer: CREATING A CONTAINER
     cloudType: PICK YOUR CLOUD TYPE
     cpu:
       title: cpu

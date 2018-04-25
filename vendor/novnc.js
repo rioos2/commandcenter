@@ -4368,7 +4368,7 @@ NoVNC = (function(window) {
         //this._rfb_port = port;
         this._rfb_password = (options.password !== undefined) ? options.password : "";
         //this._rfb_path = (path !== undefined) ? path : "";
-        this._rfb_path = options.url + "/" + options.host + "/" + options.port;
+        this._rfb_path = options.url + "/" + options.host + "/" + options.port +"?type=machineconsole";
 
         if (!this._rfb_path) {
           return this._fail("Must set url");

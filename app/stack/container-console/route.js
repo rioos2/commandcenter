@@ -5,7 +5,7 @@ export default Ember.Route.extend({
   model(params) {
     return {
       host: params.vnchost,
-      port: params.vncport,
+      accid: params.account_id,
       id: params.id
     }
   },
