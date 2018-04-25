@@ -26,15 +26,15 @@ export default Ember.Component.extend({
     var instance = this.get('instance');
     var opt = {
       id: instance.id,
-      host: instance.host
+      host: instance.host,
+      accountid: instance.accid
     };
     this.connect(opt);
 
   },
 
   connect: function(exec) {
-    var url = ("ws://" + exec.host + ":"+this.get('app.containerWsPort')+"/exec/assemblys/" + exec.id);
-
+    var url = ("wss://" + window.location.host +"/exec/accounts/"+exec.accountid+"/assemblys/" + exec.id+"?type=containerconsole&tty=1&input=1&target="+ exec.host + ":"+this.get('app.containerConsolePort'));
     var socket = new WebSocket(url);
     this.set('socket', socket);
 

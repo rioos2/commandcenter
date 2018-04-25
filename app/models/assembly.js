@@ -12,6 +12,7 @@ var Assembly = Resource.extend({
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
   modalService: Ember.inject.service('modal'),
+  session: Ember.inject.service(),
 
 
   availableActions: function() {
@@ -91,7 +92,7 @@ var Assembly = Resource.extend({
           window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
           break;
         case C.CATEGORIES.CONTAINER:
-          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/containerconsole?vnchost=" + this.get('host') + "&vncport=" + this.get('port') + "&id=" + this.get('id'), '_blank');
+          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/containerconsole?vnchost=" + this.get('host') + "&account_id=" + this.get('session').get("id") + "&id=" + this.get('id'), '_blank');
           break;
       }
 
