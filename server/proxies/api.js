@@ -23,21 +23,22 @@ module.exports = function (app, options) {
   httpServer.on('upgrade', function proxyWsRequest(req, socket, head) {
     proxyLog('WS', req);
     var target = config.wsServer;
-    if (socket.ssl) {
-      req.headers['X-Forwarded-Proto'] = 'https';
-
-    }
-    var query = Url.parse(req.url, true).query;
-    if(query.type == CONTAINER_CONSOLE) {
-      //TODO Here we need to know weather the nodelet has running http or https. And we should find out and construct container target url before it's hit here.
-      target = "ws://" + query.target;
-      console.log('Proxy Container Console : ', target);
-    } else if(query.type == MACHINE_CONSOLE) {
-      target = config.vncServer;
-      console.log('Proxy Machine Console : ', target);
-    } else {
-      console.log('Proxy API [WebSocket]: ', target);
-    }
+    //TODO This has to revisit and open when docker console opened by API
+    // if (socket.ssl) {
+    //   req.headers['X-Forwarded-Proto'] = 'https';
+    //
+    // }
+    // var query = Url.parse(req.url, true).query;
+    // if(query.type == CONTAINER_CONSOLE) {
+    //   //TODO Here we need to know weather the nodelet has running http or https. And we should find out and construct container target url before it's hit here.
+    //   target = "ws://" + query.target;
+    //   console.log('Proxy Container Console : ', target);
+    // } else if(query.type == MACHINE_CONSOLE) {
+    //   target = config.vncServer;
+    //   console.log('Proxy Machine Console : ', target);
+    // } else {
+    //   console.log('Proxy API [WebSocket]: ', target);
+    // }
     proxy.ws(req, socket, { target: target,
     ws: true,
   });
