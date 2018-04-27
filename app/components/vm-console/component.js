@@ -69,7 +69,9 @@ export default Ember.Component.extend({
       host: this.get('vnchost'),
       port: this.get('vncport'),
       password: "",
-      url: "wss://" + window.location.host,
+      url: config.APP.vncServer,
+      //TODO Here this request has to survive via proxy server
+      // url: "wss://" + window.location.host,
     };
 
     rfb.connect(options);
