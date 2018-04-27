@@ -1,6 +1,6 @@
 <div class="left">
   <div class="domain">
-    <div class="icon" data-tooltip="{{assemblyState}}">
+    <div class="icon status" data-tooltip="{{assemblyState}}">
       {{svg/svg-status status=assemblyStatus}}
     </div>
     <p class="text1" title={{name}}>{{name}}</p>
@@ -23,7 +23,7 @@
 </div>
 <div class="right">
   <div class="stack-action">
-    {{action-menu model=model}}
+    {{action-menu model=model msg=assemblyConditionMessage id=id}}
   </div>
   <div class="gauge stack-box">
     {{infra-health-metric model=metricsData showName=false showOS=true image=image version=version}}

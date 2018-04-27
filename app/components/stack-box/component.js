@@ -27,12 +27,24 @@ export default Component.extend({
     return this.get('model.status.phase');
   }.property('model.status.phase'),
 
+  id: function() {
+    return this.get('model.id');
+  }.property('model.id'),
+
+  assemblyConditionMessage: function() {
+    if(!Ember.isEmpty(this.get('model.status.conditions'))) {
+      return this.get('model.status.conditions').get('lastObject').reason;
+    } else {
+      return "";
+    }
+  }.property('model.status.conditions', 'assemblyStatus'),
+
   metricsUpdater: function() {
     this.set('model.spec.metrics', this.metricsDataFinder());
   }.property('model.spec.metrics'),
 
   image: function() {
-    return 'ico_' + this.get('assemblyFactory.spec.plan.object_meta.name');
+    return this.get('assemblyFactory.spec.plan.object_meta.name');
   }.property('model'),
 
   version: function() {

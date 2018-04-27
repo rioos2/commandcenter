@@ -76,7 +76,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
 
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
-    if (err && ((isAuthEnabled && this.decideCode(err.code))|| [401, 403].indexOf(err.status) >= 0)) {
+    if (err && ((isAuthEnabled && this.decideCode(err.code))|| ["401", "403"].includes(err.code))) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
@@ -133,7 +133,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   actions: {
     error(err, transition) {
       // Unauthorized error, send back to login screen
-      if (err.status === 401) {
+      if (err.code === 401) {
         this.send('logout', transition, true);
         return false;
       }
