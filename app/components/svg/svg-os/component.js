@@ -8,14 +8,17 @@ export default Ember.Component.extend({
   tagName: '',
   active: 'item-os',
 
-  initializeChart: Ember.on('didInsertElement', function() {
-
+  initializeChart: Ember.on('didInsertElement', function() {    
     Ember.run.once('afterRender', this, this.imageData);
     if (this.validateOsName() == this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
       this.set("active", "item-os selected");
     }
   }),
+
+  icon: function() {   
+    return this.get('vm.icon');
+  }.property('vm'),
 
   validateOsName: function () {
     return this.get('model.settings')[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro;

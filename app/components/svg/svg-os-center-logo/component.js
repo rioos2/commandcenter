@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  seletedOs: function() {
+  seletedOs: function() {  
     if(this.get('selected')) {
       return this.get('selected');
     } else {
