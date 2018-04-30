@@ -14,6 +14,10 @@ export default Ember.Component.extend({
     }
   }.observes('selected'),
 
+  icon: function() { 
+    return this.get("selected.icon");
+  }.property('selected'),
+
   actions: {
     done(data) {
         this.toggleProperty("activate");

@@ -38,6 +38,7 @@ export default Ember.Component.extend({
     let plan = this.get('groupedVms')[0];
     let planFirstItem = plan.version[0];
     this.refreshPlan(plan, planFirstItem);
+    this.setIcon(plan);
   },
 
   refreshPlan: function(plan , planFirstItem) {
@@ -77,12 +78,14 @@ export default Ember.Component.extend({
     uniqueVmGroup.forEach(function(vm) {
       let createVmGroup = {
         "type": vm,
+        "icon": "",
         "version": [],
         "item": []
       }
       planfactory.forEach(function(plan) {
         if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.MACHINE) {
           createVmGroup.item.pushObject(plan);
+          createVmGroup.icon = plan.icon;
           createVmGroup.version.pushObject({
             "version": plan.version,
             "id": plan.id,
@@ -111,6 +114,11 @@ export default Ember.Component.extend({
     this.set("model.assemblyfactory.resources.version", planFirstItem.version);
   },
 
+  setIcon: function(plan) {
+    let planFirstItem = plan.version[0];
+    this.set('model.selected_icon', plan.icon);   
+  },
+
   setDescription: function(item) {
     let des = (item.version.get('firstObject')).description
     item.version.forEach(function(v) {
@@ -135,6 +143,7 @@ export default Ember.Component.extend({
       if (index < ((this.get('groupedVms')).length) - 1) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index + 1]);
         this.setPlan(this.get('groupedVms')[index + 1]);
+        this.setIcon(this.get('groupedVms')[index + 1]);
       }
     },
 
@@ -143,6 +152,7 @@ export default Ember.Component.extend({
       if (!index == 0) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
         this.setPlan(this.get('groupedVms')[index - 1]);
+        this.setIcon(this.get('groupedVms')[index - 1]);
       }
     },
 
