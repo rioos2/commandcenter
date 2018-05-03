@@ -24,35 +24,10 @@ export default Ember.Controller.extend({
     return unUsedFields;
   },
 
-  emailFinders: function() {
-    if(this.validationEmail(this.get('email'))) {
-    var self = this;
-    return this.get('userStore').rawRequest({
-      url: '/api/v1/accounts/name/' + this.get('email').toLowerCase(),
-      method: 'GET',
-      headers: {
-        'X-AUTH-RIOOS-EMAIL': this.get('email').toLowerCase(),
-        'Authorization': 'Bearer ' + this.get('email').toLowerCase(),
-      },
-    }).then((xhr) => {
-      self.set('val_email', 'has-error')
-      self.set('emailExistence', false);
-      self.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
-    }).catch((res) => {
-      if (res.status === 401) {
-        self.set('val_email', '')
-        self.set('emailExistence', true);
-      }
-    });
-  } else {
-    this.set('val_email', '')
-    this.set('emailExistence', true);
-  }
-  }.observes('email'),
-
   emailValidation: function() {
     if (this.validationEmail(this.get('email')) && this.get('email') != "") {
       this.set('val_email', '')
+      this.set('emailExistence', true);
     } else {
       this.set('val_email', 'has-error');
       this.set('emailErrorMsg', get(this, 'intl').t('notifications.validEmail'));
@@ -75,6 +50,11 @@ export default Ember.Controller.extend({
                   clearDuration: 4200,
                   cssClasses:'notification-warning'
                 });
+              }
+              if (err.code == '409') {
+                this.set('val_email', 'has-error');
+                this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
+                this.set('emailExistence', false);
               }
           }).finally(() => {});
         }, 10);

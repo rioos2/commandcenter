@@ -71,6 +71,10 @@ var C = {
       },
   },
 
+  PROCESS: {
+      TYPE: ['CPU', 'MEMORY']
+  },
+
   CATALOG: {
     LIBRARY_KEY: 'library',
     LIBRARY_VALUE: 'https://git.rancher.io/rancher-catalog.git',
