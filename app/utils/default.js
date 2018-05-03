@@ -5,7 +5,7 @@ var D = {
       region: "chennai",
       cpuCore: 1,
       ram: 1,
-      storage: 20,
+      storage: 10,
       storageType: "ssd",
       network:"public_ipv4",
       destro:"",
