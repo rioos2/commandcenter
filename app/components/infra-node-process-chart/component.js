@@ -25,6 +25,8 @@ export default Ember.Component.extend({
               is3D: true,
               height: 320,
               width: 460,
+              // Please open it if the colors wants as like as OS USAGE
+              // colors: ['#F74479', '#AA38E6', '#00FFAF', '#4EE2FA', '#ffeb3b']
             };
 
             var chart = new google.visualization.PieChart(document.getElementById("id-process-" + self.get('model').id));
