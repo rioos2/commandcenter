@@ -1,4 +1,7 @@
-const { get } = Ember;
+import C from 'nilavu/utils/constants';
+const {
+  get
+} = Ember;
 
 export default Ember.Component.extend({
   intl: Ember.inject.service(),
@@ -9,7 +12,16 @@ export default Ember.Component.extend({
 
   actions: {
     launchCloud: function() {
-      this.get('router').transitionTo('stacks.createcloud');
+      switch (this.get('group')) {
+        case C.CATEGORIES.MACHINE:
+          this.get('router').transitionTo('stacks.createcloud');
+          break;
+        case C.CATEGORIES.CONTAINER:
+          this.get('router').transitionTo('stacks.createcontainer');
+          break;
+        default:
+          this.get('router').transitionTo('stacks.createcloud');
+      }
     }
   }
 });

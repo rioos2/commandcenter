@@ -58,6 +58,10 @@ export default Component.extend(DefaultHeaders, {
       return checkSecrectType;
     },
 
+    nameSpliter(newDomainName) {
+      return (this.get('newDomainName') + "-" + this.get('model.assemblyfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+    },
+
     actions: {
         getSecretType: function (type) {
             this.set("secretType", type);
@@ -77,7 +81,7 @@ export default Component.extend(DefaultHeaders, {
                 cssClasses: 'notification-warning'
               });
             } else {
-              this.set("model.assemblyfactory.object_meta.name", (this.get('newDomainName') + this.get('validateDomain')).replace(/\s/g, ''));
+              this.set("model.assemblyfactory.object_meta.name", this.nameSpliter(newDomainName));
             }
         },
 
