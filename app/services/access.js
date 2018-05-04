@@ -141,6 +141,21 @@ export default Ember.Service.extend(DefaultHeaders, {
     }
   },
 
+  sessionClearRequest: function() {
+    return this.get('userStore').rawRequest(this.rawRequestOpts({
+      url: '/api/v1/logout',
+      method: 'POST',
+      data: {
+          email: this.get('session').get("email"),
+          token: this.get('session').get("token"),
+      },
+    })).then((xhr) => {
+      this.clearSessionKeys(true, true);
+    }).catch((res) => {
+      this.clearSessionKeys(true, true);
+    });
+  },
+
   isLoggedIn() {
     return !!this.get('cookies').get(C.COOKIE.TOKEN);
   },
