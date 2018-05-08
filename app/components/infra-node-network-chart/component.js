@@ -5,13 +5,14 @@ export default Ember.Component.extend({
 
   isActive: false,
   selected: C.NETWORK.PACKETMEASURETYPE.THROUGHPUT,
+  activate: false,
 
   didInsertElement() {
+    this.send('packetFliper', this.get('selected'));
     this.drawNetworkStatistics();
   },
 
   drawNetworkStatistics() {
-    this.send('packetFliper', this.get('selected'));
     var self = this;
     google.charts.load('current', {
       'packages': ['corechart']
@@ -35,12 +36,12 @@ export default Ember.Component.extend({
         },
         vAxis: {
           minValue: 0,
-          title: 'MB per seconds',
+          title: 'MB per second',
 
         },
         height: 320,
         width: 460,
-        colors: ['#CC9008', '#AA38E6']
+        colors: ['#CC9008', '#AA38E6'],
 
       };
 
@@ -58,6 +59,10 @@ export default Ember.Component.extend({
   chartData: function() {
     return this.filteredData();
   }.property('selectBridge', 'selected'),
+
+  types: function() {
+    return C.NETWORK.MEASURETYPES;
+  }.property('model'),
 
   filteredData: function() {
 
@@ -120,23 +125,17 @@ export default Ember.Component.extend({
 
   actions: {
 
+    packetFliper: function (type) {
+        this.set("selected", type);
+        this.toggleProperty('activate');
+    },
+
     selectFilter: function(show) {
       this.toggleProperty('isActive');
     },
 
     propagateFilter: function(opt) {
       this.set('selectBridge', opt);
-    },
-
-    packetFliper: function(packetType) {
-      this.set('selected', packetType);
-      if (packetType == C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
-        this.set('throuput', 'active');
-        this.set('packetError', '');
-      } else {
-        this.set('packetError', 'active');
-        this.set('throuput', '');
-      }
     },
 
   },

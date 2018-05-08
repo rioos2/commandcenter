@@ -1,32 +1,37 @@
 <div>
-<div class="col-xs-8">
-<div class="btn-network-group mv-top">
-  <button class="{{throuput}}" {{action "packetFliper" "throughput"}}>{{t 'dashboard.throughput'}}</button>
-  <button class="{{packetError}}" {{action "packetFliper" "packetError"}}>{{t 'dashboard.errorSwitch'}}</button>
-</div>
-</div>
+  <div class="col-xs-8">
+    <div class="rio-radio mov-top">
 
-<div class="filter">
-<div class="col-xs-6 mv-top">
-  <div class="select-filter">
-    <div class='md-select {{showDropDown}}' {{action "selectFilter" on="click"}}>
+      {{#each types as |key|}}
+        <div class="col-xs-6">
+          {{#node-statistics-radio name=key selected=selected packetFliper="packetFliper" activate=activate}}{{/node-statistics-radio}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
 
-      <label for="ul-id">
+  <div class="filter">
+    <div class="col-xs-4 mv-top">
+      <div class="select-filter">
+        <div class='md-select {{showDropDown}}' {{action "selectFilter" on="click"}}>
+
+          <label for="ul-id">
         <button type="button" class="drop-network">
           <span>{{selectBridge}}</span>
         </button>
       </label>
-      <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
-        {{#each networkBridge as |opt|}}
-            <li role="option" value="{{opt}}" tabindex="-1" {{action "propagateFilter" opt}}>
-              {{opt}}
-            </li>
-        {{/each}}
-      </ul>
+          <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+            {{#each networkBridge as |opt|}}
+              <li role="option" value="{{opt}}" tabindex="-1" {{action "propagateFilter" opt}}>
+                {{opt}}
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
+
 </div>
 
 <div id="id-{{model.id}}"></div>
