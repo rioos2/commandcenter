@@ -24,7 +24,7 @@ ObjectMetaBuilder.reopenClass({
       created_at: "",
       cluster_name: "",
       labels: {
-        rioos_category: "machine",
+        rioos_category: setting.cloudType,
         rioos_environment: "development"
       },
       annotations: {

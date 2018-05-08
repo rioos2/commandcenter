@@ -7,8 +7,10 @@ export default Ember.Service.extend(DefaultHeaders, {
 
   delete: function(assemblyId, data) {
     var session = this.get('session');
-    //Here metrics.counter value changes by component as integer but api only accept that field as string. 
-    delete data.spec.metrics.counter;
+    //Here metrics.counter value changes by component as integer but api only accept that field as string.
+    if(data.spec.metrics.counter) {
+      delete data.spec.metrics.counter;
+    }
     return this.get('userStore').rawRequest(this.rawRequestOpts({
       url: '/api/v1/assemblys/' + assemblyId,
       method: 'PUT',

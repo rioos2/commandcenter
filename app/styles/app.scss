@@ -28,6 +28,7 @@
 @import 'pages/_fail-whale.scss';
 @import 'base/table.scss';
 @import 'components/createcloud';
+@import 'components/radio';
 
 
 //TO-DO: Why is this hanging here ?
@@ -66,7 +67,8 @@ body *::before {
 
 body {
     margin: 0;
-    background-color: #132fa9;
+    // background-color: #132fa9;
+    background-color: #1d43a9;
 }
 
 .container {

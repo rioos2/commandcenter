@@ -67,8 +67,10 @@ var C = {
 
   NETWORK: {
       PACKETMEASURETYPE: {
-        THROUGHPUT: 'throughput'
+        THROUGHPUT: 'throughput',
+        ERROR: 'error',
       },
+      MEASURETYPES:["throughput", "error"]
   },
 
   PROCESS: {

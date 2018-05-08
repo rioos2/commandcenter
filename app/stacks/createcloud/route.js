@@ -82,6 +82,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
 
  loadAssemblyFactory(settings) {
    var assemblyfactoryData;
+   settings.cloudType = C.CATEGORIES.MACHINE;
    assemblyfactoryData = {
      object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
      type: 'assemblyfactorys',
