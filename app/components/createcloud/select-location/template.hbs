@@ -1,23 +1,16 @@
-<div class="col-container">
-    <div class="first-col">
+<div class="row">
+    <div class="col-md-4">
         <p class="sub-title">{{t 'launcherPage.location.title'}}</p>
         <p class="sub-description">{{t 'launcherPage.location.description'}}</p>
         {{svg/svg-dots class="dots-ico"}}
-        {{svg/svg-locateme class="locateme"}}
+        {{svg/svg-locateme class="locateme" click=(action "getLocation")}}
     </div>
 
-    <div class="second-col">
-        {{#if showField}}
-            <p class="closebtn" {{action "closeInputField" on="click"}}>×</p>
-            <div class="form-group">
-                {{input type="text" value=location}}
-                <label class="{{if location 'data-exist'}} control-label" for="input">Type your location</label><i class="bar"></i>
-                {{svg/svg-addlocation class="addlocation" click=(action 'addLocation')}}
-            </div>
-        {{/if}}
+    <div class="col-md-4">
+      <div id="rio-globe"></div>
     </div>
 
-    <div class="third-col">
+    <div class="col-md-4">
         <p class="title">Your Location(s)</p>
         <ul class="rio-location-ul hex with-add">
           {{#each model.datacenters.content as |data|}}

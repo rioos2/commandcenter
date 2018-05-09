@@ -65,7 +65,8 @@
     "semver": "^5.5.0",
     "toml-parser": "0.0.7",
     "xterm": "1.0.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "geo-tools": "0.1.2"
   },
   "dependencies": {
     "@bower_components/animate.css": "daneden/animate.css#~3.2.0",
