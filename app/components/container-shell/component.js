@@ -71,7 +71,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
        term.on('data', function(data) {
          // console.log('To Server:',data);
-         socket.send(btoa(unescape(encodeURIComponent(data)))); // jshint ignore:line
+         socket.send("0" + btoa(unescape(encodeURIComponent(data)))); // jshint ignore:line
        });
 
        term.open(this.$('.shell-body')[0]);
@@ -128,6 +128,12 @@ export default Ember.Component.extend(DefaultHeaders, {
    willDestroyElement: function() {
      this.disconnect();
      this._super();
+   },
+
+   actions: {
+     close() {
+       window.close();
+     },
    }
 
 });

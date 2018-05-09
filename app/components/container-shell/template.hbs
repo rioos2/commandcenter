@@ -1,20 +1,18 @@
-{{#if showProtip}}
-  <div class="protip">
-    {{t 'containerShell.protip' key=alternateLabel}}
-  </div>
-  <hr>
-{{/if}}
-<h2 class='r-mb10'><i class="icon icon-terminal"></i> {{t 'modalShell.title' instanceName=instance.displayName}}</h2>
+<div class="footer-actions-shell">
+  <span class="sell-txt">{{t 'modalShell.title' instanceName=instance.displayName}}</span>
+    <button class="button btn vnc-close" title='close' {{action 'close'}}><span>{{fa-icon "remove"}}
+    </span></button>
+</div>
+
+<div>
 <div class="shell-body">
 </div>
 {{#if socketError}}
   <div class="no-vnc">
     <img src="/images/logo2.png" />
   </div>
+  <div class="footer-actions">
+    <div class="console-status text-muted footer-actions-txt-cen">{{t (concat-str 'containerShell.status' status character='.') error=error}}</div>
+  </div>
 {{/if}}
-<div class="footer-actions">
-  {{#if socketError}}
-    <div class="console-status text-muted">{{t (concat-str 'containerShell.status' status character='.') error=error}}</div>
-  {{/if}}
-  {{yield}}
 </div>
