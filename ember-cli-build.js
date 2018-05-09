@@ -48,10 +48,11 @@ module.exports = function(defaults) {
   //     destDir: 'assets'
   // });
 
-  app.import('vendor/charts/d3.v4.min.js');
+  app.import('vendor/charts/d3.min.js');
   app.import('vendor/charts/d3script-area.js');
   app.import('vendor/charts/d3script-gauge.js');
   app.import('vendor/charts/d3script-blue-gauge.js');
+  app.import('vendor/charts/topojson.v0.min.js');
 
 
   app.import('vendor/charts/d3script-storage.js');
@@ -62,10 +63,13 @@ module.exports = function(defaults) {
 
   app.import('vendor/analytics/countly.js');
 
+  app.import('vendor/versor.js');
   app.import('vendor/novnc.js');
   app.import('vendor/EasePack.min.js');
   app.import('vendor/TweenLite.min.js');
   app.import('vendor/moment.js');
+
+  app.import('vendor/charts/d3script-globe.js');
 
   app.import('node_modules/@bower_components/async/dist/async.js');
 

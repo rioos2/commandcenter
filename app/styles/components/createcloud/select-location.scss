@@ -14,7 +14,6 @@
     .second-col,
     .third-col {
         display: table-cell;
-
         .title {
             font-size: 18px;
             color: #a0abd4;
@@ -26,138 +25,110 @@
     }
 
     .second-col {
-        background-image: url(../images/createcloud/earth.png);
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        width: 434px;
-        position: relative;
-        text-align: center;
-        left: -41px;
-
-        .closebtn {
-            position: absolute;
-            font-size: 24px;
-            color: white;
-            left: calc(50% - 18px);
-            top: 70px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            width: 34px;
-            cursor: pointer;
-
-            &:hover {
-                background: rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        .form-group {
-            position: absolute;
-            top: 147px;
-            width: 200px;
-            left: 120px;
-
-            input {
-                height: 31px;
-                display: block;
-                background: none;
-                padding: 2px 2px 1px;
-                font-size: 18px;
-                border-width: 0;
-                border-color: transparent;
-                line-height: 1.9;
-                width: 100%;
-                color: transparent;
-                -webkit-transition: all 0.28s ease;
-                transition: all 0.28s ease;
-                box-shadow: none;
-                text-align: center;
-            }
-
-            .control-label {
-                position: absolute;
-                top: 4px;
-                pointer-events: none;
-                padding-left: 2px;
-                z-index: 1;
-                color: white;
-                font-size: 16px;
-                font-weight: normal;
-                -webkit-transition: all 0.28s ease;
-                transition: all 0.28s ease;
-                text-align: center;
-                left: 32px;
-            }
-
-            .bar {
-                position: relative;
-                border-bottom: 2px solid #edf0f5;
-                display: block;
-
-                &:before {
-                    content: "";
-                    height: 2px;
-                    width: 0;
-                    left: 50%;
-                    bottom: -1px;
-                    position: absolute;
-                    background: white;
-                    -webkit-transition: left 0.28s ease, width 0.28s ease;
-                    transition: left 0.28s ease, width 0.28s ease;
-                    z-index: 2;
-                }
-            }
-
-            select,
-            input:focus,
-            input:valid,
-            input.form-file,
-            input.has-value {
-                color: white;
-            }
-            .data-exist,
-            select ~ .control-label,
-            input:focus ~ .control-label,
-            input.form-file ~ .control-label,
-            input.has-value ~ .control-label {
-                font-size: 13px;
-                color: white;
-                top: -16px;
-                left: 0;
-            }
-            select:focus,
-            input:focus {
-                outline: none;
-            }
-            select:focus ~ .control-label,
-            input:focus ~ .control-label {
-                color: #aaa;
-            }
-            select:focus ~ .bar::before,
-            input:focus ~ .bar::before {
-                width: 100%;
-                left: 0;
-            }
-        }
-    }
-
-    .addlocation {
-        position: absolute;
-        width: 45px;
-        top: 60px;
-        left: 72px;
-        cursor: pointer;
-        filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.3));
-
-        svg {
-            .cls-1 {fill:#0c6fe7;}
-            .cls-2 {fill:#24efff;}
-        }
-
-        &:hover svg {
-            .cls-1 {fill:#128eec;}
-            .cls-2 {fill:#85f6ff;}
-        }
-    }
+          background-repeat: no-repeat;
+          background-size: 100% auto;
+          width: 434px;
+          position: relative;
+          text-align: center;
+          left: -41px;
+          .closebtn {
+              position: absolute;
+              font-size: 24px;
+              color: white;
+              left: calc(50% - 18px);
+              top: 70px;
+              background: rgba(255, 255, 255, 0.1);
+              border-radius: 50%;
+              width: 34px;
+              cursor: pointer;
+              &:hover {
+                  background: rgba(255, 255, 255, 0.3);
+              }
+          }
+          .form-group {
+              position: absolute;
+              top: 147px;
+              width: 200px;
+              left: 120px;
+              input {
+                  height: 31px;
+                  display: block;
+                  background: none;
+                  padding: 2px 2px 1px;
+                  font-size: 18px;
+                  border-width: 0;
+                  border-color: transparent;
+                  line-height: 1.9;
+                  width: 100%;
+                  color: transparent;
+                  -webkit-transition: all 0.28s ease;
+                  transition: all 0.28s ease;
+                  box-shadow: none;
+                  text-align: center;
+              }
+              .control-label {
+                  position: absolute;
+                  top: 4px;
+                  pointer-events: none;
+                  padding-left: 2px;
+                  z-index: 1;
+                  color: white;
+                  font-size: 16px;
+                  font-weight: normal;
+                  -webkit-transition: all 0.28s ease;
+                  transition: all 0.28s ease;
+                  text-align: center;
+                  left: 32px;
+              }
+              .bar {
+                  position: relative;
+                  border-bottom: 2px solid #edf0f5;
+                  display: block;
+                  &:before {
+                      content: "";
+                      height: 2px;
+                      width: 0;
+                      left: 50%;
+                      bottom: -1px;
+                      position: absolute;
+                      background: white;
+                      -webkit-transition: left 0.28s ease, width 0.28s ease;
+                      transition: left 0.28s ease, width 0.28s ease;
+                      z-index: 2;
+                  }
+              }
+              select,
+              input:focus,
+              input:valid,
+              input.form-file,
+              input.has-value {
+                  color: white;
+              }
+              .data-exist,
+              select ~ .control-label,
+              input:focus ~ .control-label,
+              input.form-file ~ .control-label,
+              input.has-value ~ .control-label {
+                  font-size: 13px;
+                  color: white;
+                  top: -16px;
+                  left: 0;
+              }
+              select:focus,
+              input:focus {
+                  outline: none;
+              }
+              select:focus ~ .control-label,
+              input:focus ~ .control-label {
+                  color: #aaa;
+              }
+              select:focus ~ .bar::before,
+              input:focus ~ .bar::before {
+                  width: 100%;
+                  left: 0;
+              }
+          }
+      }
 
     .sub-title,
     .sub-description {
@@ -252,8 +223,6 @@
             height: 434px / 632px * 539px;
             margin: 50px auto 0;
         }
-
-        .sub-title,
         .sub-description {
             text-align: center !important;
         }
@@ -286,9 +255,45 @@
             }
         }
 
-        .addlocation {
-            top: 50px;
-            left: 55px;
-        }
     }
+}
+
+.world-outline {
+  fill: #003adb;
+  stroke: rgba(0, 0, 0, 0.1);
+  stroke-width: 1.0px;
+}
+
+.back-country {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 0.0px;
+  stroke-linejoin: round;
+}
+
+.back-line {
+  fill: none;
+  stroke: none;
+  stroke-opacity: .05;
+  stroke-width: .5px;
+}
+
+.country {
+  fill: url(#countrygrad);
+  stroke: #fff;
+  stroke-width: 0.0px;
+  stroke-linejoin: round;
+}
+
+.line {
+  fill: none;
+  stroke: none;
+  stroke-opacity: .08;
+  stroke-width: .5px;
+}
+
+path.cities {
+    /* Use -webkit- only if supporting: Chrome < 54, iOS < 9.3, Android < 4.4.4 */
+    /*-webkit-filter: drop-shadow( -5px -5px 5px #000 );
+            filter: drop-shadow( -5px -5px 5px #000 );*/
 }

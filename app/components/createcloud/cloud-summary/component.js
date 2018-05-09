@@ -41,11 +41,11 @@ export default Ember.Component.extend(DefaultHeaders, {
     return this.get('network').includes('private');
   }.property('network'),
 
-  _didInsert: function() {    
+  _didInsert: function() {
     this.set("summaryContent", this);
   }.on("didInsertElement"),
 
-  icon: function() {   
+  icon: function() {
     return this.get('model.selected_icon');
   }.property('model.selected_icon'),
 
@@ -53,7 +53,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     this.set("noImage", false);
   }.observes('model.assemblyfactory.os'),
 
-  distroNameFromPlan: function() {    
+  distroNameFromPlan: function() {
     if (this.get("model.assemblyfactory.os") == undefined) {
       this.set('noImage', true);
     } else {
