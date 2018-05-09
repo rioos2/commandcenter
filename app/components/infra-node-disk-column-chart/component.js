@@ -11,65 +11,69 @@ export default Ember.Component.extend({
 
   drawProcessStatistics() {
     var self = this;
-    google.charts.load("current", {packages:['corechart']});
-     google.charts.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
-         ["Types", "MB/s", { role: "style" } ],
-         ["reads MB/s", 8.94, "#3366cc"],
-         ["write MB/s", 10.49, "#329ac7"],
-         ["io MB/s (read + write)", 19.30, "#f69930"]
-       ]);
+    google.charts.load("current", {
+      packages: ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
 
-       var view = new google.visualization.DataView(data);
-       view.setColumns([0, 1,
-                        { calc: "stringify",
-                          sourceColumn: 1,
-                          type: "string",
-                          role: "annotation" },
-                        2]);
+    function drawChart() {
+      if (Ember.isEmpty(self.get('chartData'))) {
+        self.set('chartData', self.setEmpty());
+      }
+      var data = google.visualization.arrayToDataTable(self.get('chartData.data'));
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+        {
+          calc: "stringify",
+          sourceColumn: 1,
+          type: "string",
+          role: "annotation"
+        },
+        2
+      ]);
 
-       var options = {
-         title: "Disk IO statistics",
-         vAxis: {
-           minValue: 0,
-           title: 'The number of I/Os currently in progress',
-
-         },
-         width: 440,
-         height: 320,
-         bar: {groupWidth: "32%"},
-         legend: { position: "none" },
-       };
-       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-       chart.draw(view, options);
-   }
+      var options = {
+        title: "Disk IO statistics",
+        hAxis: {
+          title: 'The number of I/Os currently in progress  ' + self.get('chartData.total'),
+          titleTextStyle: {
+            color: '#333'
+          },
+        },
+        width: 440,
+        height: 320,
+        bar: {
+          groupWidth: "55%"
+        },
+        legend: {
+          position: "none"
+        },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("id-disk-column-" + self.get('model').id));
+      chart.draw(view, options);
+    }
   },
 
   diskTypeEmpty: function() {
     return Ember.isEmpty(this.get('diskTypes'));
-  }.property('model.network'),
+  }.property('model.disk'),
 
   diskTypes: function() {
-    return this.get('model.network').map((n) => {
+    return this.get('model.disk').map((n) => {
       return n.name;
     });
-  }.property('model.network'),
+  }.property('model.disk'),
 
   showDropDown: function() {
     return this.get('isActive') ? 'active' : '';
   }.property('isActive'),
 
-  filteredData: function(type) {
-      return this.diskData();
-  },
-
-  diskData: function() {
-    let value = "";
-    if (this.get('model.process')) {
-      this.get('model.process').forEach((p) => {
-        if (p.node_process_mem) {
-          value = this.compressChartData(p.node_process_mem)
+  diskData: function(type) {
+    let value = this.setEmpty();
+    if (!Ember.isEmpty(this.get('model.disk'))) {
+      this.get('model.disk').forEach((p) => {
+        if (p.name === type) {
+          value = this.compressChartData(p)
         }
       });
     }
@@ -77,29 +81,29 @@ export default Ember.Component.extend({
 
   },
 
-  compressChartData: function(data) {
-    let process = [
-      ['Task', 'Current data'],
-    ];
-    let processStacks = data.map((p) => p.command).filter((v, i, a) => a.indexOf(v) === i);
-    processStacks.forEach(function(k) {
-
-      var totalValue = 0;
-      data.forEach(function(p) {
-        if (k === p.command) {
-          totalValue += parseInt(p.value);
-        }
-      });
-      process.push([k, totalValue])
-    });
-    return process;
+  compressChartData: function(d) {
+    return {
+      data: [
+        ["Types", "MB/s", {
+          role: "style"
+        }],
+        ["reads MB/s", parseFloat(d.node_disk_mega_bytes_read), "#3366cc"],
+        ["write MB/s", parseFloat(d.node_disk_mega_bytes_written), "#329ac7"],
+        ["io MB/s (read + write)", parseFloat(d.node_disk_io_now), "#f69930"]
+      ],
+      total: d.node_disk_mega_bytes_io_total
+    };
   },
 
   setEmpty: function() {
     return [
-      ['Task', 'Current data'],
-      ['None', 100]
-    ];
+      ["Types", "MB/s", {
+        role: "style"
+      }],
+      ["reads MB/s", 0, "#3366cc"],
+      ["write MB/s", 0, "#329ac7"],
+      ["io MB/s (read + write)", 0, "#f69930"]
+    ], "0";
   },
 
   actions: {
@@ -109,7 +113,7 @@ export default Ember.Component.extend({
     },
 
     processFilter: function(type) {
-      this.set('chartData', this.filteredData(type));
+      this.set('chartData', this.diskData(type));
       this.drawProcessStatistics();
       this.set('selectType', type);
     },

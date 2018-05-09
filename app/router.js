@@ -70,6 +70,10 @@ Router.map(function () {
       this.route('info', { path: '/info' });
     });
 
+    this.route('admin', { resetNamespace: true }, function () {
+      this.route('infra', { path: '/infra' });
+    });
+
     // End: Authenticated
   });
 
