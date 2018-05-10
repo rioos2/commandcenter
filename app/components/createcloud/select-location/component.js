@@ -1,14 +1,13 @@
 import Component from '@ember/component';
 import GeoTools from 'npm:geo-tools';
-
 export default Component.extend({
   showField: false,
-
+  notifications: Ember.inject.service('notification-messages'),
   initializeChart: Ember.on('didInsertElement', function() {
     this.set("model.locationList", this.getCountry(this.get("model")));
+    this.set("model.warningMessage", this.get('notifications'));
     renderGlobeChart(this.get("model"));
   }),
-
 
   getCountry: function(model) {
     const self = this;
@@ -22,7 +21,6 @@ export default Component.extend({
         }
       }
     });
-
     let country = {
       "type": "FeatureCollection",
       "features": features,
