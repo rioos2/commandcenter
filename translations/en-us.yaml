@@ -543,6 +543,12 @@ stackPage:
     feature: Features
     clouds: clouds
     filterBy: "Filter by:"
+  admin:
+    node: Node
+    network: Network
+    storage: Storage
+    cluster: Cluster
+    networkCount: 'Connected Network ({count})'
 launcherPage:
   compute:
     selectType: Pick Cloud Type
