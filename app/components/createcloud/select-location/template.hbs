@@ -3,7 +3,7 @@
         <p class="sub-title">{{t 'launcherPage.location.title'}}</p>
         <p class="sub-description">{{t 'launcherPage.location.description'}}</p>
         {{svg/svg-dots class="dots-ico"}}
-        {{svg/svg-locateme class="locateme" click=(action "getLocation")}}
+        {{svg/svg-locateme class="locateme" click=(action "getLocation") disable=true}}
     </div>
 
     <div class="col-md-4 second-col">
