@@ -66,9 +66,9 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('clusterName'));
   }.property('clusterName'),
 
-  countryExisit: function() {
-    return Ember.isEmpty(this.get('model.assemblyfactory.country'));
-  }.property('model.assemblyfactory.country'),
+  // countryExisit: function() {
+  //   return Ember.isEmpty(this.get('model.assemblyfactory.country'));
+  // }.property('model.assemblyfactory.country'),
 
   networkExisit: function() {
     return Ember.isEmpty(this.get('network'));
@@ -84,9 +84,6 @@ export default Ember.Component.extend(DefaultHeaders, {
       return true;
     } else if (this.get('regionExisit')) {
       this.set('validationWarning', get(this, 'intl').t('notifications.region'));
-      return true;
-    } else if (this.get('countryExisit')) {
-      this.set('validationWarning', get(this, 'intl').t('notifications.country'));
       return true;
     } else if (Ember.isEmpty(this.get('model.assemblyfactory.os'))) {
       this.set('validationWarning', get(this, 'intl').t('notifications.plan.noSelection'));
