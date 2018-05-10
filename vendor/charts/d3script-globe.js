@@ -23,6 +23,7 @@ function renderGlobeChart(params) {
     for (x = 0; x < locationlist.length; x++) {
       var coord = locationlist[x].geometry.coordinates;
       if (Math.abs(currlong - coord[0]) < 2 && Math.abs(currlat - coord[1]) < 2) {
+        alert("Your nearest location is " + locationlist[x].City);
         step(coord);
         exists = true;
         svg.select("g").selectAll("path.cities").select("animate").remove();
@@ -33,21 +34,12 @@ function renderGlobeChart(params) {
           .attr("repeatCount", "indefinite")
           .attr("from", "5")
           .attr("to", "25");
-        return params.warningMessage.info("Your nearest region is " + locationlist[x].City, {
-          autoClear: true,
-          clearDuration: 6000,
-          cssClasses: 'notification-success'
-        });
+
       }
     }
     if (exists == false) {
-      params.warningMessage.info("We don't have a data center near your location", {
-        autoClear: true,
-        clearDuration: 6000,
-        cssClasses: 'notification-success'
-      });
+      alert("We don't have a data center near your location");
     }
-
   }
 
   var backCountry;
@@ -144,8 +136,6 @@ function renderGlobeChart(params) {
     }
 
   }
-
-
 
   function dragstarted() {
     v0 = versor.cartesian(projection.invert(d3.mouse(this)));
