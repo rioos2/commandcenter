@@ -40,8 +40,10 @@ export default Ember.Component.extend(DefaultHeaders, {
       url: "/api/v1/accounts/"+option.accountid+"/assemblys/" + option.id+"/exec",
       method: 'GET',
     })).then((xhr) => {
+      console.log('Socket Url => ',xhr.body.url);
       this.connect(xhr.body.url, xhr.body.target);
     }).catch((res) => {
+      console.log('Socket getUrl error => ',res);
       this.set('status', 'somethingWrong');
       this.set('socketError', true);
     });
@@ -59,7 +61,7 @@ export default Ember.Component.extend(DefaultHeaders, {
          rows: this.get('rows'),
          useStyle: true,
          screenKeys: true,
-         cursorBlink: false
+         cursorBlink: true
        });
        this.set('term', term);
 
