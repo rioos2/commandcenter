@@ -2,9 +2,10 @@ function renderGlobeChart(params) {
   var attrs = {
     width: 350,
     height: 350,
-    locationlist: [],
     container: '#rio-globe',
   };
+  var locationlist = params.locationList.features;
+  var currpoint = [];
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -18,14 +19,15 @@ function renderGlobeChart(params) {
     var currlat = position.coords.latitude;
     var currlong = position.coords.longitude;
     var exists = false;
-    for (x in attrs.locationlist) {
-      var coord = attrs.locationlist[x].geometry.coordinates;
+    var x;
+    for (x = 0; x < locationlist.length; x++) {
+      var coord = locationlist[x].geometry.coordinates;
       if (Math.abs(currlong - coord[0]) < 2 && Math.abs(currlat - coord[1]) < 2) {
-        alert("Your nearest region is " + attrs.locationlist[x].City);
+        alert("Your nearest location is " + locationlist[x].City);
         step(coord);
         exists = true;
         svg.select("g").selectAll("path.cities").select("animate").remove();
-        svg.select("g").select("path#" + attrs.locationlist[x].City).append("animate")
+        svg.select("g").select("path#" + locationlist[x].City).append("animate")
           .attr("attributeName", "stroke-width")
           .attr("begin", "0s")
           .attr("dur", "1s")
@@ -38,7 +40,6 @@ function renderGlobeChart(params) {
     if (exists == false) {
       alert("We don't have a data center near your location");
     }
-
   }
 
   var backCountry;
@@ -114,28 +115,31 @@ function renderGlobeChart(params) {
   }
 
   function step(point) {
+    if (!(point[0] == currpoint[0] && point[1] == currpoint[1])) {
+      d3.transition()
+        .delay(0)
+        .duration(1250)
+        .tween("rotate", function() {
+          console.log(point);
+          rotate.source(projection.rotate()).target([-point[0], -point[1]]).distance();
+          return function(t) {
+            svg.selectAll("path.cities").attr("d", path);
 
-    d3.transition()
-      .delay(250)
-      .duration(1250)
-      .tween("rotate", function() {
-        console.log(point);
-        rotate.source(projection.rotate()).target([-point[0], -point[1]]).distance();
-        return function(t) {
-          svg.selectAll("path.cities").attr("d", path);
+            projection.rotate(rotate(t)).clipAngle(180);
+            backCountry.attr("d", path);
+            backLine.attr("d", path);
 
-          projection.rotate(rotate(t)).clipAngle(180);
-          backCountry.attr("d", path);
-          backLine.attr("d", path);
+            projection.rotate(rotate(t)).clipAngle(90);
+            country.attr("d", path);
+            line.attr("d", path);
 
-          projection.rotate(rotate(t)).clipAngle(90);
-          country.attr("d", path);
-          line.attr("d", path);
-        };
-      })
-      .transition()
+            currpoint = point;
+          };
+        })
+        .transition()
+    }
+
   }
-
 
   function dragstarted() {
     v0 = versor.cartesian(projection.invert(d3.mouse(this)));
@@ -144,6 +148,7 @@ function renderGlobeChart(params) {
   }
 
   function dragged() {
+    currpoint = [];
     var v1 = versor.cartesian(projection.rotate(r0).invert(d3.mouse(this))),
       q1 = versor.multiply(q0, versor.delta(v0, v1)),
       r1 = versor.rotation(q1);
@@ -246,7 +251,6 @@ function renderGlobeChart(params) {
       .attr("x", attrs.width / 2)
       .attr("y", attrs.height * 3 / 5);
 
-    attrs.locationlist = params.locationList.features;
     path.pointRadius(function(d) {
       return 10;
     });
