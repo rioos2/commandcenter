@@ -1,7 +1,7 @@
 var C = {
 
   ASSEMBLY: {
-    ASSEMBLYOFFPHASES: ["stopped", "failed"],
+    ASSEMBLYOFFPHASES: ["stopped", "failed", "terminated"],
     ASSEMBLYOFF: "OFF",
     ASSEMBLYON: "ON",
     ASSEMBLYIPV4: "IPv4",
