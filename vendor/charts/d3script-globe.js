@@ -79,6 +79,10 @@ function renderGlobeChart(params) {
   var svg = d3.select(attrs.container).append("svg")
     .attr("width", attrs.width)
     .attr("height", attrs.height);
+ var shadow = d3.select(attrs.container).append("svg")
+    .attr("width", 200)
+    .attr("height", 0)
+    .attr("class", "globe-shadow");
 
   var countrybackground = svg.append("defs")
   var countrybackgroundgrad = countrybackground.append("linearGradient")
