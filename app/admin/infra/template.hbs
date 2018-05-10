@@ -1,5 +1,4 @@
 <div class="rio-admin">
-
 <div class="container-fluid main">
 			<div class="row">
 				<div class="col-sm-9 content-left">
@@ -16,194 +15,26 @@
 								</div>
 								<div class="collapse navbar-collapse" id="kv_third_nav">
 									<ul class="nav navbar-nav">
-										<li><a href="index.html">Storage</a></li>
-										<li><a href="#">Nodes</a></li>
-										<li><a href="network.html">Network </a></li>
-										<li class="active"><a href="cluster.html">Cluster</a></li>
+										{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="node"}}
+										{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="storage"}}
+										{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="network"}}
+										{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="cluster" }}
 									</ul>
-								</div>
-						</nav>
+
+					<div class="content">
+						{{#each panels as |tab|}}
+							{{component tab selectedTab=selectedTab model=model showLoading=showLoading}}
+						{{/each}}
 					</div>
-					<!-- Content Navigation :: End -->
-					<!-- Content Panel :: Start -->
-					<div class="panel panel-default kv-panel">
-						  <div class="panel-heading">
-							<div class="panel-header">
-								Connected Clusters (0)
-							</div>
-							<div class="pull-right kv-right-head-button">
-								<button type="button" data-toggle="modal" data-target="#addcluster_modal" class="btn">+ Add</button>
-							</div>
-						  </div>
-						  <div class="panel-body">
-							<!-- cluster box :: Start -->
-							<div class="cluster-container">
-								<div class="cluster-box-outer">
-									<div class="cluster-box active">
-										<div class="cluster-subbox-1">
-											<div class="pull-left st-name">
-											   Cluster Name
-											</div>
-											<div class="pull-right st-pin">
-											   <span data-detail="#sd_detail1" class="detail-magic" ><img src="./images/admin/storage-pin.png" alt="cluster-pin"></span>
-											</div>
-										</div>
-										<div class="cluster-subbox-2">
-											<span class="sub-title">IP</span>
-											<span class="sub-name">192.168.1.23</span>
-											<span class="sub-title">Type</span>
-											<span class="sub-name">NTFS</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- cluster box :: End -->
-						  </div>
-					</div>
-					<!-- Content Panel :: End -->
+
+				</div>
+				</nav>
+				</div>
+
 				</div>
 				<div class="col-sm-3 content-right">
-					<!-- cluster Detail :: Start -->
-					<div class="cluster-detail-container">
-						<div class="cluster-detail-box" id="sd_detail1">
-							<div class="cluster-active-detail-name">
-								Cluster Name
-								<span class="cluster-edit"><a href="">Edit</a></span>
-							</div>
-							<div class="cluster-active-detail-detail">
-								<div class="sd-subheader">DETAILS</div>
-								<div class="sd-storage-detail sd-table">
-									<div class="sd-title">Storage</div>
-									<div class="sd-value">192.168.1.23</div>
-								</div>
-								<div class="sd-currency-detail sd-table">
-									<div class="sd-title">Currency</div>
-									<div class="sd-value">255.255.1.1</div>
-								</div>
-								<div class="sd-datacenter-detail sd-table">
-									<div class="sd-title">Datacenter</div>
-									<div class="sd-value">
-										<img src="./images/admin/flags/flag1.png" class="img-flag">
-										<span>Newyork 01</span>
-									</div>
-									<div class="sd-value">
-										<img src="./images/admin/flags/flag1.png" class="img-flag">
-										<span>Newyork 02</span>
-									</div>
-								</div>
-								<div class="sd-node-detail sd-table">
-									<div class="sd-title">Node</div>
-									<div class="sd-value"><span>type1</span>
-									<span class="sd-more-cluster-nodes" data-toggle="modal" data-target="#more_nodes" >+20 more</span>
-									</div>
-								</div>
-								<div class="sd-network-detail sd-table">
-									<div class="sd-title">Network</div>
-									<div class="sd-value">type1
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- cluster Detail :: End -->
+				{{admin-infra/cluster-side}}
 				</div>
 			</div>
 		</div>
-
-    <!-- Cluster Add Modal :: Start -->
-<div class="modal fade" id="addcluster_modal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Add a Cluster</h4>
-    </div>
-    <div class="modal-body">
-      <form action="#">
-          <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="modal_cluster_name">Name</label>
-              <input type="text" class="form-control" id="modal_cluster_name" name="modal_cluster_name">
-            </div>
-            <div class="form-group">
-              <label for="modal_cluster_currency">Currency</label>
-              <input type="text" class="form-control" id="modal_cluster_currency" name="modal_cluster_currency">
-            </div>
-            <div class="form-group">
-              <label for="modal_cluster_node">Select Node (You can select multiple)</label>
-               <select class="form-control" id="modal_cluster_node" name="modal_cluster_node" multiple>
-                <option>Type 1</option>
-                <option>Type 2</option>
-                <option>Type 3</option>
-                <option>Type 4</option>
-                </select>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="modal_cluster_storage">Select Storage</label>
-               <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage">
-                <option>Type 1</option>
-                <option>Type 2</option>
-                <option>Type 3</option>
-                <option>Type 4</option>
-                </select>
-            </div>
-            <div class="form-group">
-              <label for="modal_cluster_data_center">Datacenter (You can select multiple)</label>
-               <select class="form-control" id="modal_cluster_data_center" name="modal_cluster_data_center" multiple>
-                <option>Alabama</option>
-                <option>Newjersy</option>
-                <option>Newyork(USA)</option>
-                </select>
-            </div>
-            <div class="form-group">
-              <label for="modal_cluster_network">Select Network (You can select multiple)</label>
-               <select class="form-control" id="modal_cluster_network" name="modal_cluster_network" multiple>
-                <option>Type 1</option>
-                <option>Type 2</option>
-                <option>Type 3</option>
-                <option>Type 4</option>
-                </select>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-default">Add</button>
-      </form>
-    </div>
-    </div>
-
-  </div>
-</div>
-<!-- Cluster Add Modal :: End -->
-<!-- More Node Modal :: Start -->
-<!-- Cluster Add Modal :: Start -->
-<div class="modal fade" id="more_nodes" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Nodes</h4>
-    </div>
-    <div class="modal-body">
-      <div class="cl-nodes-container">
-        <ul class="cl-nodes_ul">
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-          <li class="cl-nodes_l1">Type 1</li>
-        </ul>
-      </div>
-    </div>
-    </div>
-
-  </div>
-</div>
-</div>
-<!-- More Node Modal :: End -->
+	</div>

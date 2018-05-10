@@ -1,0 +1,66 @@
+<div class="modal fade" id="addcluster_modal" role="dialog">
+<div class="modal-dialog">
+  <!-- Modal content-->
+  <div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Add a Cluster</h4>
+  </div>
+  <div class="modal-body">
+    <form action="#">
+        <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="modal_cluster_name">Name</label>
+            <input type="text" class="form-control" id="modal_cluster_name" name="modal_cluster_name">
+          </div>
+          <div class="form-group">
+            <label for="modal_cluster_currency">Currency</label>
+            <input type="text" class="form-control" id="modal_cluster_currency" name="modal_cluster_currency">
+          </div>
+          <div class="form-group">
+            <label for="modal_cluster_node">Select Node (You can select multiple)</label>
+             <select class="form-control" id="modal_cluster_node" name="modal_cluster_node" multiple>
+              <option>Type 1</option>
+              <option>Type 2</option>
+              <option>Type 3</option>
+              <option>Type 4</option>
+              </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="modal_cluster_storage">Select Storage</label>
+             <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage">
+              <option>Type 1</option>
+              <option>Type 2</option>
+              <option>Type 3</option>
+              <option>Type 4</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="modal_cluster_data_center">Datacenter (You can select multiple)</label>
+             <select class="form-control" id="modal_cluster_data_center" name="modal_cluster_data_center" multiple>
+              <option>Alabama</option>
+              <option>Newjersy</option>
+              <option>Newyork(USA)</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="modal_cluster_network">Select Network (You can select multiple)</label>
+             <select class="form-control" id="modal_cluster_network" name="modal_cluster_network" multiple>
+              <option>Type 1</option>
+              <option>Type 2</option>
+              <option>Type 3</option>
+              <option>Type 4</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default">Add</button>
+    </form>
+  </div>
+  </div>
+
+</div>
+</div>

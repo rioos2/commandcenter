@@ -21,7 +21,6 @@
   "license": "License - https://rio.digital",
   "devDependencies": {
     "broccoli-asset-rev": "^2.6.0",
-    "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master",
     "downloadjs": "^1.4.7",
     "ember-browserify": "^1.2.1",
     "ember-cli": "~3.0.2",
@@ -65,7 +64,8 @@
     "semver": "^5.5.0",
     "toml-parser": "0.0.7",
     "xterm": "1.0.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master"
   },
   "dependencies": {
     "@bower_components/animate.css": "daneden/animate.css#~3.2.0",
@@ -78,10 +78,10 @@
     "@bower_components/get-size": "desandro/get-size#^2.0.2",
     "@bower_components/imagesloaded": "desandro/imagesloaded#^4.1.0",
     "@bower_components/jquery": "jquery/jquery-dist#^3.3.1",
+    "@bower_components/lacsso": "rancher/lacsso",
     "@bower_components/momentjs": "moment/moment#~2.10.6",
     "@bower_components/normalize.css": "necolas/normalize.css#3.0.3",
     "@bower_components/outlayer": "metafizzy/outlayer#^2.1.0",
-    "@bower_components/qunit-notifications": "dockyard/qunit-notifications#~0.1.0",
-    "@bower_components/lacsso": "rancher/lacsso"
+    "@bower_components/qunit-notifications": "dockyard/qunit-notifications#~0.1.0"
   }
 }

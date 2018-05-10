@@ -17,6 +17,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       let tasks = {
         storageConnectors: this.cbFind('storageconnectors','storageconnectors'),
         storagesPool: this.cbFind('storageconnectors','storagespool'),
+        datacenters: this.cbFind('datacenters','datacenters'),
         networks: this.cbFind('networks','networks'),
       };
       async.auto(tasks, xhrConcur, function(err, res) {
@@ -28,10 +29,12 @@ export default Ember.Route.extend(DefaultHeaders, {
       });
     }, 'Load all the things');
     return promise.then((hash) => {
+      alert(JSON.stringify(hash));
       console.log(JSON.stringify(hash));
       return Ember.Object.create({
         storageConnectors: hash.storageConnectors,
         storagesPool: hash.storagespool,
+        datacenters: hash.datacenters,
         networks: hash.networks,
       });
     }).catch((err) => {

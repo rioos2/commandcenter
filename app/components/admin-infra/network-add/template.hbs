@@ -1,0 +1,54 @@
+<div class="modal fade" id="addnetwork_modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Add a network</h4>
+    </div>
+    <div class="modal-body">
+      <form action="#">
+          <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="modal_network_name">Name</label>
+              <input type="text" class="form-control" id="modal_network_name" name="modal_network_name">
+            </div>
+            <div class="form-group">
+              <label for="modal_network_gt_ip">Gateway IP</label>
+              <input type="text" class="form-control" id="modal_network_gt_ip" name="modal_network_gt_ip">
+            </div>
+            <div class="form-group">
+              <label for="modal_network_bridge_type">Bridge Type</label>
+               <select class="form-control" id="modal_network_bridge_type" name="modal_network_bridge_type">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="modal_network_subnet_ip">Subnet IPs</label>
+              <input type="text" class="form-control" id="modal_network_subnet_ip" name="modal_network_subnet_ip">
+            </div>
+            <div class="form-group">
+              <label for="modal_network_network">Network</label>
+              <input type="text" class="form-control" id="modal_network_network" name="modal_network_network">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="modal_network_selected_node">Node select</label>
+            <span class="checkbox_label"><input name="modal_network_selected_node" type="checkbox" value="">dev/sdc1</span>
+            <span class="checkbox_label"><input name="modal_network_selected_node" type="checkbox" value="">dev/sdd</span>
+        </div>
+        <button type="submit" class="btn btn-default">Add</button>
+      </form>
+    </div>
+    </div>
+
+  </div>
+</div>
