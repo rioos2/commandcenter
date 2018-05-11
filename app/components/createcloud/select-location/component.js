@@ -5,7 +5,7 @@ export default Component.extend({
   notifications: Ember.inject.service('notification-messages'),
   initializeChart: Ember.on('didInsertElement', function() {
     this.set("model.locationList", this.getCountry(this.get("model")));
-    renderGlobeChart(this.get("model"));
+    renderGlobeChart(this.get("model"), this.get('notifications'));
   }),
 
   getCountry: function(model) {

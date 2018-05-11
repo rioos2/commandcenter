@@ -1,4 +1,4 @@
-function renderGlobeChart(params) {
+function renderGlobeChart(params, notifications) {
   var attrs = {
     width: 350,
     height: 350,
@@ -9,21 +9,30 @@ function renderGlobeChart(params) {
 
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(showPosition, errorHandler, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: Infinity
+      });
     } else {
       alert("Geolocation is not supported by this browser.");
     }
   }
 
+  function errorHandler(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
   function showPosition(position) {
     var currlat = position.coords.latitude;
     var currlong = position.coords.longitude;
+    var y = [];
     var exists = false;
     var x;
     for (x = 0; x < locationlist.length; x++) {
       var coord = locationlist[x].geometry.coordinates;
-      if (Math.abs(currlong - coord[0]) < 2 && Math.abs(currlat - coord[1]) < 2) {
-        alert("Your nearest location is " + locationlist[x].City);
+      if (Math.abs(currlong - coord[0]) < 10 && Math.abs(currlat - coord[1]) < 10) {
+        y.pushObject(locationlist[x].City);
         step(coord);
         exists = true;
         svg.select("g").selectAll("path.cities").select("animate").remove();
@@ -34,11 +43,22 @@ function renderGlobeChart(params) {
           .attr("repeatCount", "indefinite")
           .attr("from", "5")
           .attr("to", "25");
-
       }
     }
+    if (y.length != 0) {
+      notifications.warning("Your nearest location " + y, {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-success'
+      });
+    }
+
     if (exists == false) {
-      alert("We don't have a data center near your location");
+      notifications.warning("We don't have a data center near your location", {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-success'
+      });
     }
   }
 
@@ -80,7 +100,7 @@ function renderGlobeChart(params) {
   var svg = d3.select(attrs.container).append("svg")
     .attr("width", attrs.width)
     .attr("height", attrs.height);
- var shadow = d3.select(attrs.container).append("svg")
+  var shadow = d3.select(attrs.container).append("svg")
     .attr("width", 200)
     .attr("height", 0)
     .attr("class", "globe-shadow");
