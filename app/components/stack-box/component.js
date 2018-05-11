@@ -32,19 +32,15 @@ export default Component.extend({
   }.property('model.id'),
 
   assemblyConditionMessage: function() {
-    if(!Ember.isEmpty(this.get('model.status.conditions'))) {
-      return this.get('model.status.conditions').get('lastObject').reason;
-    } else {
-      return "";
-    }
-  }.property('model.status.conditions', 'assemblyStatus'),
+    return (!Ember.isEmpty(this.get('model.status.reason'))) ? this.get('model.status.reason') : "";
+  }.property('model.status.reason', 'assemblyStatus'),
 
   metricsUpdater: function() {
     this.set('model.spec.metrics', this.metricsDataFinder());
   }.property('model.spec.metrics'),
 
   image: function() {
-    return this.get('assemblyFactory.spec.plan.object_meta.name');
+    return this.get('assemblyFactory.spec.plan.icon');
   }.property('model'),
 
   version: function() {
