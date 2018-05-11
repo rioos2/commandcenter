@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: '',
+  tagName: 'section',
 
   count: function() {
     return this.get('model.storageConnectors.content').length;

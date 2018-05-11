@@ -1,7 +1,6 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  tagName: 'section',
+import {buildAdminInfraPanel} from '../admin-infra-panel/component';
+export default buildAdminInfraPanel('network', {
+  // tagName: 'tr' ,
 
   count: function(){
     return this.get('model.networks.content').length;

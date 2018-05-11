@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: '',
+  tagName: 'section',
   // NoCluster: function() {
   //   return this.get('model.networks.content').length < 0 ? true:false;
   // }.property('model'),

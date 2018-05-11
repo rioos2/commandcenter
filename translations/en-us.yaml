@@ -544,11 +544,18 @@ stackPage:
     clouds: clouds
     filterBy: "Filter by:"
   admin:
-    node: Node
-    network: Network
-    storage: Storage
-    cluster: Cluster
-    networkCount: 'Connected Network ({count})'
+    node:
+      title: Node
+    storage:
+      title: Storage
+      connected: 'Connected Storage'
+      noStorage: No storage added yet.
+      addStorage: '+Add Storage'
+    cluster:
+      title: Cluster
+    network:
+      title: Network
+      connected: 'Connected Network'
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -3613,7 +3620,7 @@ nav:
   user:
     settings: Settings
     logout: Logout
-    admin: Admin
+    admin: Infra
 
 ##############################
 # Resource Actions
