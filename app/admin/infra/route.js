@@ -29,10 +29,15 @@ export default Ember.Route.extend(DefaultHeaders, {
       });
     }, 'Load all the things');
     return promise.then((hash) => {
+      alert(JSON.stringify(hash));
       console.log(JSON.stringify(hash));
       return Ember.Object.create({
         storageConnectors: hash.storageConnectors,
+<<<<<<< HEAD
         storagesPool: hash.storagesPool,
+=======
+        storagesPool: hash.storagespool,
+>>>>>>> origin/infra
         datacenters: hash.datacenters,
         networks: hash.networks,
       });

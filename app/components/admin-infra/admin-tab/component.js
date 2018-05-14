@@ -2,7 +2,11 @@ import Ember from 'ember';
 export default Em.Component.extend({
   intl: Ember.inject.service(),
   tagName: 'li',
+<<<<<<< HEAD
   classNameBindings: ['active', 'tabClassName', ':tabDisabled'],
+=======
+  classNameBindings: ['active','tabClassName'],
+>>>>>>> origin/infra
 
   tabClassName: function() {
     return 'admin-infra/admin-' + this.get('tab');
