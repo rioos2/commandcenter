@@ -52,6 +52,12 @@ var C = {
     },
   },
 
+  STORAGE: {
+    LOCATION: {
+      NOTALLOW: ["[SWAP]", "/"],
+    },
+  },
+
   CAPABILITY: {
     NETWORK_POLICIES: 'network-policy-manager',
     SECRETS: 'secrets',

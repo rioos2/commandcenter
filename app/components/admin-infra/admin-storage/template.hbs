@@ -1,32 +1,38 @@
-						<div class="col-sm-9 content-left">
-							<div class="panel panel-default kv-panel">
-						  <div class="panel-heading">
-							<div class="panel-header">
-								{{t 'stackPage.admin.storage.connected'}} ({{count}})
-							</div>
-							<div class="pull-right kv-right-head-button">
-								<button type="button" data-toggle="modal" data-target="#addstorage_modal" class="btn">+ Add</button>
-							</div>
-						  </div>
-						  <div class="panel-body">
-								{{#if NoStorage}}
-								<div class="empty-network">
-									<div class="pin-img">
-										<img src="./images/3pin.png" class="img-responsive" alt="pin">
-									</div>
-									<div class="empty-network-add-link">
-										<span>{{t 'stackPage.admin.storage.noStorage'}}</span>
-										<a href="#">{{t 'stackPage.admin.storage.addStorage'}}</a>
-									</div>
-								</div>
-								{{else}}
-								{{#each storages as |storage|}}
-									{{admin-infra/storage-single model=storage storagespool=storagespool storageData=storageData click=(action "SideData" storage) }}
-								{{/each}}
-								{{/if}}
-						  </div>
+{{admin-infra/storage-pool-add pools=storagespool connector=storageData}}
+
+<div class="col-sm-9 content-left">
+	<div class="panel panel-default kv-panel">
+		<div class="panel-heading">
+			<div class="panel-header">
+				{{t 'stackPage.admin.storage.connected'}} ({{count}})
+			</div>
+			<div class="pull-right kv-right-head-button">
+				<button type="button" data-toggle="modal" data-target="#addstorage_modal" class="btn">+ Add</button>
+			</div>
+		</div>
+		<div class="panel-body">
+			{{#if NoStorage}}
+				<div class="empty-network">
+					<div class="pin-img">
+						<img src="./images/3pin.png" class="img-responsive" alt="pin">
+					</div>
+					<div class="empty-network-add-link">
+						<span>{{t 'stackPage.admin.storage.noStorage'}}</span>
+						<a href="#">{{t 'stackPage.admin.storage.addStorage'}}</a>
 					</div>
 				</div>
-					<div class="col-sm-3 content-right">
-							{{admin-infra/storage-side model=storageData storagespool=storagespool}}
-						</div>
+			{{else}}
+				<div class="storage-container">
+
+					{{#each storages as |storage|}}
+						{{admin-infra/storage-single model=storage storagespool=storagespool storageData=storageData click=(action "SideData" storage) }}
+					{{/each}}
+				</div>
+
+			{{/if}}
+		</div>
+	</div>
+</div>
+<div class="col-sm-3 content-right">
+	{{admin-infra/storage-side model=storageData storagespool=storagespool}}
+</div>

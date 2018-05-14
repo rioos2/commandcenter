@@ -560,7 +560,7 @@ stackPage:
       type: Type
       status: Status
       createdAt: Created At
-      addStorage: Add a storage
+      addStorageTwo: Add a storage
       select: Select Storage
       ipAddress: IP Address for Sorage location
       authPass: Auth Password
