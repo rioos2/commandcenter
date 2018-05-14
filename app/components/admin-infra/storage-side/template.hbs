@@ -1,139 +1,44 @@
-<div class="col-sm-3 content-right">
-  <!-- Storage Detail :: Start -->
-  <div class="storage-detail-container">
-      <div class="storage-detail-box" id="sd_detail1">
-        <div class="storage-active-detail-name">
-          Rio Storage Box 01
-        </div>
-        <div class="storage-active-detail-detail">
-          <div class="sd-subheader">DETAILS</div>
-          <div class="sd-ip-detail sd-table">
-            <div class="sd-title">IP</div>
-            <div class="sd-value">192.168.1.23</div>
-          </div>
-          <div class="sd-type-detail sd-table">
-            <div class="sd-title">Type</div>
-            <div class="sd-value">NTFS</div>
-          </div>
-          <div class="sd-status-detail sd-table">
-            <div class="sd-title">Status</div>
-            <div class="sd-value sd-green">Active</div>
-          </div>
-          <div class="sd-cdate-detail sd-table">
-            <div class="sd-title">Created At</div>
-            <div class="sd-value">20-04-2018</div>
-          </div>
-        </div>
-        <div class="storage-active-detail-disks">
-          <div class="sd-subheader">DISKS</div>
-          <div class="sd-disk-name sd-table">
-            <div class="sd-title">Name</div>
-            <div class="sd-value">/sda</div>
-          </div>
-          <div class="sd-disk-asize sd-table">
-            <div class="sd-title">AvailSize </div>
-            <div class="sd-value">500GB</div>
-          </div>
-          <div class="sd-disk-usize sd-table">
-            <div class="sd-title">UsedSize</div>
-            <div class="sd-value sd-green">50GB</div>
-          </div>
-          <div class="sd-disk-cdate sd-table">
-            <div class="sd-title">Created At</div>
-            <div class="sd-value">20-04-2018</div>
-          </div>
-        </div>
-        <div class="storage-active-detail-pools">
-          <div class="sd-subheader sd-poolhead">POOLS</div>
-          <div class="sd-link sdpool-link"><a href="#pooladd" data-toggle="modal" data-target="#pooladd">+ CreatePool</a></div>
-          <div class="sd-empty-pool">No pools created.</div>
-        </div>
+<div class="storage-detail-container">
+  <div class="storage-detail-box" id="sd_detail1">
+    <div class="storage-active-detail-name">
+      {{name}}
+    </div>
+    <div class="storage-active-detail-detail">
+      <div class="sd-subheader">{{t 'stackPage.admin.storage.detail'}}</div>
+      <div class="sd-ip-detail sd-table">
+        <div class="sd-title">{{t 'stackPage.admin.storage.ip'}}</div>
+        <div class="sd-value">{{ip}}</div>
       </div>
-
-      <div class="storage-detail-box" id="sd_detail2" style="display:none">
-        <div class="storage-active-detail-name">
-          Rio Storage Box 02
-        </div>
-        <div class="storage-active-detail-detail">
-          <div class="sd-subheader">DETAILS</div>
-          <div class="sd-ip-detail sd-table">
-            <div class="sd-title">IP</div>
-            <div class="sd-value">192.168.1.23</div>
-          </div>
-          <div class="sd-type-detail sd-table">
-            <div class="sd-title">Type</div>
-            <div class="sd-value">NTFS</div>
-          </div>
-          <div class="sd-status-detail sd-table">
-            <div class="sd-title">Status</div>
-            <div class="sd-value sd-green">Active</div>
-          </div>
-          <div class="sd-cdate-detail sd-table">
-            <div class="sd-title">Created At</div>
-            <div class="sd-value">20-04-2018</div>
-          </div>
-        </div>
-        <div class="storage-active-detail-disks">
-          <div class="sd-subheader">DISKS<span class="disk-count">(2)</span></div>
-          <div class="sd-disk-name sd-table">
-            <div class="sd-title">Name</div>
-            <div class="sd-value">/sda</div>
-          </div>
-          <div class="sd-disk-asize sd-table">
-            <div class="sd-title">AvailSize </div>
-            <div class="sd-value">500GB</div>
-          </div>
-          <div class="sd-disk-usize sd-table">
-            <div class="sd-title">UsedSize</div>
-            <div class="sd-value sd-green">50GB</div>
-          </div>
-          <div class="sd-disk-cdate sd-table">
-            <div class="sd-title">Created At</div>
-            <div class="sd-value">20-04-2018</div>
-          </div>
-          <div class="sd-more-disk">1 More disk</div>
-          <div class="sd-another-disk" style="display:none;">
-            <div class="sd-subheader">DISKS<span class="disk-count">(2)</span></div>
-            <div class="sd-disk-name sd-table">
-              <div class="sd-title">Name</div>
-              <div class="sd-value">/sda</div>
-            </div>
-            <div class="sd-disk-asize sd-table">
-              <div class="sd-title">AvailSize </div>
-              <div class="sd-value">500GB</div>
-            </div>
-            <div class="sd-disk-usize sd-table">
-              <div class="sd-title">UsedSize</div>
-              <div class="sd-value sd-green">50GB</div>
-            </div>
-            <div class="sd-disk-cdate sd-table">
-              <div class="sd-title">Created At</div>
-              <div class="sd-value">20-04-2018</div>
-            </div>
-          </div>
-          <div class="sd-less-disk" style="display:none;">Show Only one</div>
-        </div>
-        <div class="storage-active-detail-pools">
-          <div class="sd-subheader sd-poolhead">POOLS</div>
-          <div class="sd-link sdpool-link"><a href="#pooladd" data-toggle="modal" data-target="#pooladd">+ CreatePool</a></div>
-          <div class="sd-pool-name sd-table">
-            <div class="sd-title">Name </div>
-            <div class="sd-value">dev-1</div>
-          </div>
-          <div class="sd-pool-type sd-table">
-            <div class="sd-title">Type  </div>
-            <div class="sd-value">NFS</div>
-          </div>
-          <div class="sd-pool-cluster sd-table">
-            <div class="sd-title">Pool Cluster </div>
-            <div class="sd-value">var/liv/dev</div>
-          </div>
-          <div class="sd-pool-asize sd-table">
-            <div class="sd-title">AvailSize </div>
-            <div class="sd-value">500GB</div>
-          </div>
-        </div>
+      <div class="sd-type-detail sd-table">
+        <div class="sd-title">{{t 'stackPage.admin.storage.type'}}</div>
+        <div class="sd-value">{{type}}</div>
       </div>
+      <div class="sd-status-detail sd-table">
+        <div class="sd-title">{{t 'stackPage.admin.storage.status'}}</div>
+        <div class="sd-value sd-green">{{status}}</div>
+      </div>
+      <div class="sd-cdate-detail sd-table">
+        <div class="sd-title">{{t 'stackPage.admin.storage.createdAt'}}</div>
+        <div class="sd-value">{{created}}</div>
+      </div>
+    </div>
+    <div class="storage-active-detail-disks">
+      <div class="sd-subheader">{{t 'stackPage.admin.storage.disk.list'}}</div>
+      {{#each disks as |disk|}}
+        {{admin-infra/storage-disk disk=disk storageData=storageData }}
+      {{/each}}
+    </div>
+  <div class="storage-active-detail-pools">
+    <div class="sd-subheader sd-poolhead">{{t 'stackPage.admin.storage.pool.title'}}POOLS</div>
+    <div class="sd-link sdpool-link">
+      <a href="#pooladd" data-toggle="modal" data-target="#pooladd">{{t 'stackPage.admin.storage.pool.createPool}}</a></div>
+      {{#if count}}
+      <div class="sd-empty-pool">{{t 'stackPage.admin.storage.pool.noPool'}}</div>
+          {{else}}
+          {{#each storagespool as |pool|}}
+            {{admin-infra/storage-pool-list pool=pool }}
+          {{/each}}
+          {{/if}}
   </div>
-  <!-- Storage Detail :: End -->
+</div>
 </div>
