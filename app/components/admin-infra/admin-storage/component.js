@@ -2,9 +2,14 @@ import {
   buildAdminInfraPanel
 } from '../admin-infra-panel/component';
 export default buildAdminInfraPanel('storage', {
-      // tagName: 'tr' ,
       storageData: null,
       storagespool: null,
+
+      didInsertElement: function() {
+        if(!Ember.isEmpty(this.get('storages'))) {
+          this.send('SideData',this.get('storages').get('firstObject'));
+        }
+      },
 
       count: function() {
         return this.get('model.storageConnectors.content').length;

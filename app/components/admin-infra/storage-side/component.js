@@ -1,5 +1,6 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
+  tagName: "",
 
 pools:  Ember.computed.alias('storagespool'),
 
@@ -32,7 +33,7 @@ pools:  Ember.computed.alias('storagespool'),
   }.property('disks.disk'),
 
   count: function() {
-    return this.get('pools').length < 0 ? true : false;
-  }.property('model.storage_info.disks'),
+    return this.get('pools.length') > 0 ? false : true;
+  }.property('storagespool'),
 
 });
