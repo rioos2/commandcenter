@@ -164,6 +164,15 @@ header {
     }
   }
 }
+.modal-tab {
+    // position: absolute;
+    width: 100%;
+}
+
+.invisible {
+	  position: absolute;
+  visibility: hidden;
+}
 
 .kv-secondary-menu {
   max-height: 85px;

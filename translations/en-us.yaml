@@ -544,11 +544,45 @@ stackPage:
     clouds: clouds
     filterBy: "Filter by:"
   admin:
-    node: Node
-    network: Network
-    storage: Storage
-    cluster: Cluster
-    networkCount: 'Connected Network ({count})'
+    header:
+      toggle: Toggle navigation
+      add_btn: Add
+    node:
+      title: Node
+    storage:
+      title: Storage
+      connected: 'Connected Storage'
+      noStorage: No storage added yet.
+      addStorage: '+Add Storage'
+      detail: DETAILS
+      name: Name
+      ip: IP
+      type: Type
+      status: Status
+      createdAt: Created At
+      addStorage: Add a storage
+      select: Select Storage
+      ipAddress: IP Address for Sorage location
+      authPass: Auth Password
+      authuser: Auth Username
+      disk:
+        list: DISKS LIST
+        free: Free Disk
+      pool:
+        title: POOLS
+        createPool: '+ CreatePool'
+        noPool: No pools created.
+        poolCluster: Pool Cluster
+        availSize: AvailSize
+        usedSize: UsedSize
+        add: Add pool
+        name: Pool Name
+
+    cluster:
+      title: Cluster
+    network:
+      title: Network
+      connected: 'Connected Network'
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -3613,7 +3647,7 @@ nav:
   user:
     settings: Settings
     logout: Logout
-    admin: Admin
+    admin: Infra
 
 ##############################
 # Resource Actions
