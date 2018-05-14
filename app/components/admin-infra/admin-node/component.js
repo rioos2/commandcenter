@@ -1,5 +1,4 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  tagName: 'section',
+import {buildAdminInfraPanel} from '../admin-infra-panel/component';
+export default buildAdminInfraPanel('node', {
+  // tagName: 'tr' ,
 });

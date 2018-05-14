@@ -32,13 +32,13 @@
     <div class="sd-subheader sd-poolhead">POOLS</div>
     <div class="sd-link sdpool-link">
       <a href="#pooladd" data-toggle="modal" data-target="#pooladd">+ CreatePool</a></div>
-    {{#if poolCount}}
+      {{#if count}}
       <div class="sd-empty-pool">No pools created.</div>
-    {{else}}
-      {{#each pools as |pool|}}
-        {{admin-infra/storage-pool-list pool=pool }}
-      {{/each}}
-    {{/if}}
+          {{else}}
+          {{#each storagespool as |pool|}}
+            {{admin-infra/storage-pool-list pool=pool }}
+          {{/each}}
+          {{/if}}
   </div>
 </div>
 </div>

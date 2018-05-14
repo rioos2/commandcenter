@@ -32,7 +32,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       console.log(JSON.stringify(hash));
       return Ember.Object.create({
         storageConnectors: hash.storageConnectors,
-        storagesPool: hash.storagespool,
+        storagesPool: hash.storagesPool,
         datacenters: hash.datacenters,
         networks: hash.networks,
       });

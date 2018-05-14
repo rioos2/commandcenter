@@ -1,12 +1,5 @@
-import Ember from 'ember';
+import {buildAdminInfraPanel} from '../admin-infra-panel/component';
+export default buildAdminInfraPanel('cluster', {
+  // tagName: 'tr' ,
 
-export default Ember.Component.extend({
-  tagName: 'section',
-  // NoCluster: function() {
-  //   return this.get('model.networks.content').length < 0 ? true:false;
-  // }.property('model'),
-  //
-  // networks: function() {
-  //   return this.get('model.networks.content');
-  // }.property('model.networks.content'),
 });

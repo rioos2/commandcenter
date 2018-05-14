@@ -1,18 +1,39 @@
-import Ember from 'ember';
+import {
+  buildAdminInfraPanel
+} from '../admin-infra-panel/component';
+export default buildAdminInfraPanel('storage', {
+      // tagName: 'tr' ,
+      storageData: null,
+      storagespool: null,
 
-export default Ember.Component.extend({
-  tagName: 'section',
+      count: function() {
+        return this.get('model.storageConnectors.content').length;
+      }.property('model'),
 
-  count: function() {
-    return this.get('model.storageConnectors.content').length;
-  }.property('model'),
+      NoStorage: function() {
+        return this.get('model.storageConnectors.content').length < 0 ? true : false;
+      }.property('model'),
 
-  NoStorage: function() {
-    return this.get('model.storageConnectors.content').length < 0 ? true:false;
-  }.property('model'),
+      storages: function() {
+        return this.get('model.storageConnectors.content');
+      }.property('model'),
 
-  storages: function() {
-    return this.get('model.storageConnectors.content');
-  }.property('model'),
+      getStoargesPool: function(storageConnector) {
+        var pool_list = [];
+        this.get('model.storagesPool.content').forEach(function(strpool) {
+              if (storageConnector.id == strpool.connector_id) {
+                pool_list.push(strpool);
+              }
+            });
+            return pool_list;
+          },
 
-});
+          actions: {
+            SideData: function(storage) {
+              this.set('storageData', storage);
+              this.set('storagespool',this.getStoargesPool(storage) );
+            }
+          }
+
+
+      });

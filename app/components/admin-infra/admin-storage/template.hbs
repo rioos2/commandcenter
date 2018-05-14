@@ -1,4 +1,5 @@
-					<div class="panel panel-default kv-panel">
+						<div class="col-sm-9 content-left">
+							<div class="panel panel-default kv-panel">
 						  <div class="panel-heading">
 							<div class="panel-header">
 								{{t 'stackPage.admin.storage.connected'}} ({{count}})
@@ -20,8 +21,12 @@
 								</div>
 								{{else}}
 								{{#each storages as |storage|}}
-									{{admin-infra/storage-single model=storage}}
+									{{admin-infra/storage-single model=storage storagespool=storagespool storageData=storageData click=(action "SideData" storage) }}
 								{{/each}}
 								{{/if}}
 						  </div>
 					</div>
+				</div>
+					<div class="col-sm-3 content-right">
+							{{admin-infra/storage-side model=storageData storagespool=storagespool}}
+						</div>

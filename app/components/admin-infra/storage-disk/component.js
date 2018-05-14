@@ -2,7 +2,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
 diskName: function(){
-  alert(this.get('disk'));
   return this.get('disk.disk');
 }.property('disk.disk'),
 
