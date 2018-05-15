@@ -558,6 +558,7 @@ stackPage:
       name: Name
       ip: IP
       type: Type
+      path: Location
       status: Status
       createdAt: Created At
       addStorageTwo: Add a storage
@@ -571,18 +572,22 @@ stackPage:
       pool:
         title: POOLS
         createPool: '+ CreatePool'
-        noPool: No pools created.
+        noPool: 'No pools created.'
         poolCluster: Pool Cluster
-        availSize: AvailSize
+        availSize: Size
         usedSize: UsedSize
         add: Add pool
         name: Pool Name
+        diskCount: No.of Disks
+        status: Status
 
     cluster:
       title: Cluster
     network:
       title: Network
       connected: 'Connected Network'
+      filterBy: 'Filter by:'
+
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -3647,7 +3652,7 @@ nav:
   user:
     settings: Settings
     logout: Logout
-    admin: Infra
+    admin: Infrastructure
 
 ##############################
 # Resource Actions

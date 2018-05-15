@@ -21,16 +21,12 @@ pools:  Ember.computed.alias('storagespool'),
   }.property('model.status.phase'),
 
   created: function() {
-    return this.get('model.created_at');
+    return Ember.isEmpty(this.get('model.created_at'))? "": this.get('model.created_at').split('T')[0];
   }.property('model.created_at'),
 
   disks: function() {
     return this.get('model.storage_info.disks');
   }.property('model.storage_info.disks'),
-
-  diskName: function() {
-    return this.get('disks.disk');
-  }.property('disks.disk'),
 
   count: function() {
     return this.get('pools.length') > 0 ? false : true;

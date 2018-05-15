@@ -7,7 +7,7 @@ diskName: function(){
 
 diskType: function(){
   return this.get('disk.disk_type');
-}.property('disk.disk_tyee'),
+}.property('disk.disk_type'),
 
 availSize: function(){
   return this.get('disk.size');

@@ -2,15 +2,14 @@
   <div class="sd-title">{{t 'stackPage.admin.storage.name'}} </div>
   <div class="sd-value">{{name}}</div>
 </div>
+<div class="sd-pool-name sd-table">
+  <div class="sd-title">{{t 'stackPage.admin.storage.pool.status'}} </div>
+  <div class="sd-value">{{status}}</div>
+</div>
 <div class="sd-pool-type sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.type'}} </div>
-  <div class="sd-value">NFS</div>
+  <div class="sd-title">{{t 'stackPage.admin.storage.pool.diskCount'}} </div>
+  <div class="sd-value">{{diskCount}}</div>
 </div>
-<div class="sd-pool-cluster sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.pool.poolCluster'}} </div>
-  <div class="sd-value">var/liv/dev</div>
-</div>
-<div class="sd-pool-asize sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.pool.availSize'}} </div>
-  <div class="sd-value">500GB</div>
-</div>
+{{#each disks as |disk|}}
+  {{admin-infra/storage-disk disk=disk }}
+{{/each}}
