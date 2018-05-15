@@ -551,7 +551,7 @@ stackPage:
       title: Node
     storage:
       title: Storage
-      connected: 'Connected Storage'
+      connected: 'Connected Storages'
       noStorage: No storage added yet.
       addStorage: '+Add Storage'
       detail: DETAILS
@@ -567,7 +567,7 @@ stackPage:
       authPass: Auth Password
       authuser: Auth Username
       disk:
-        list: DISKS LIST
+        list: DISKS
         free: Free Disk
       pool:
         title: POOLS
@@ -580,6 +580,10 @@ stackPage:
         name: Pool Name
         diskCount: No.of Disks
         status: Status
+        nameError: Please enter pool name
+        diskError: Please select disk
+        disks: Disks
+        list: list
 
     cluster:
       title: Cluster

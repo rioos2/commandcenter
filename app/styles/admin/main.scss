@@ -336,6 +336,25 @@ header {
   }
 }
 
+.collapse-thm {
+  margin-bottom: 5px;
+  background-color: #f3f3f7;
+  background: #FFFFFF;
+  border: 1px solid #E2E6F2;
+}
+
+.collapse-boarder {
+  // border-style: none solid solid;
+}
+
+.sd-disk-collapse-icon {
+  display: table-cell;
+  text-align: right;
+  color: #62D176;
+  padding-right: 14px;
+  font-size: 18px;
+}
+
 .storage-box {
   width: 100%;
   float: left;
@@ -345,8 +364,10 @@ header {
   border: 1px solid #E2E6F2;
   border-radius: 3px;
   padding-right: 35px;
+  cursor: pointer;
   &.active {
-    border: 1px solid rgba(121, 121, 187, 0.5);
+    border: 2px solid rgba(121, 121, 187, 0.5);
+    cursor: default;
   }
   .storage-subbox-1, .storage-subbox-2 {
     width: 100%;
@@ -506,7 +527,7 @@ header {
     font-family: Avenir-Heavy;
     font-size: 18px;
     color: #58595E;
-    padding: 25px 15px;
+    padding: 21px 15px;
     border-bottom: 1px solid #DCE2EA;
   }
   .sd-subheader {
@@ -531,6 +552,11 @@ header {
     font-size: 18px;
     color: #9AA7BC;
   }
+
+  .sd-title.leader {
+      font-family: Avenir-Heavy;
+  }
+
   .sd-value {
     display: table-cell;
     text-align: right;
@@ -712,14 +738,22 @@ header {
       vertical-align: top;
     }
   }
-  .sd-more-cluster-nodes {
-    font-family: Avenir-Heavy;
-    font-size: 16px;
-    color: #5151BF;
-    text-align: right;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+  // .sd-more-cluster-nodes {
+  //   font-family: Avenir-Heavy;
+  //   font-size: 16px;
+  //   color: #5151BF;
+  //   text-align: right;
+  //   text-decoration: underline;
+  //   cursor: pointer;
+  // }
+}
+.sd-more-cluster-nodes {
+  font-family: Avenir-Heavy;
+  font-size: 16px;
+  color: #5151BF;
+  text-align: right;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .cluster-active-detail-detail, .network-active-detail-detail, .network-active-detail-nodes, .storage-active-detail-detail, .storage-active-detail-disks, .storage-active-detail-pools {
@@ -811,7 +845,7 @@ padding-bottom: 30px;
   }
 }
 
-#more_nodes .cl-nodes-container {
+.cl-nodes-container {
   width: 100%;
   float: left;
   .cl-nodes_ul {

@@ -1,0 +1,19 @@
+<div class="modal fade" id="storage_count" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Disks</h4>
+    </div>
+    <div class="modal-body">
+      <div class="cl-nodes-container">
+        <ul class="cl-nodes_ul">
+          {{#each disks as |disk|}}
+            <li class="cl-nodes_l1">{{disk.disk}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

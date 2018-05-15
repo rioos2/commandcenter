@@ -1,3 +1,4 @@
+{{admin-infra/storage-pool-count disks=disks}}
 <div class="sd-pool-name sd-table">
   <div class="sd-title">{{t 'stackPage.admin.storage.name'}} </div>
   <div class="sd-value">{{name}}</div>
@@ -10,6 +11,7 @@
   <div class="sd-title">{{t 'stackPage.admin.storage.pool.diskCount'}} </div>
   <div class="sd-value">{{diskCount}}</div>
 </div>
-{{#each disks as |disk|}}
-  {{admin-infra/storage-disk disk=disk }}
-{{/each}}
+<div class="sd-pool-detail sd-table">
+<div class="sd-title">{{t 'stackPage.admin.storage.pool.disks'}}</div>
+<span class="sd-value sd-more-cluster-nodes" data-toggle="modal" data-target="#storage_count" >{{t 'stackPage.admin.storage.pool.list'}}</span>
+</div>
