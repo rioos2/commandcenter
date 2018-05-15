@@ -553,7 +553,7 @@ stackPage:
       title: Storage
       connected: 'Connected Storage'
       noStorage: No storage added yet.
-      addStorage: '+Add Storage'
+      addStorage: '+ Add Storage'
       detail: DETAILS
       name: Name
       ip: IP
@@ -587,6 +587,18 @@ stackPage:
       title: Network
       connected: 'Connected Network'
       filterBy: 'Filter by:'
+      digitalcloud: Digitalcloud
+      container: Containers
+      noNetwork: 'No network added yet.'
+      addNetwork: '+ Add Network'
+      detail: DETAILS
+      type: Type
+      subnet: Subnet
+      gateway: Gateway
+      bridge: Bridge Type
+      status: Status
+      netmask: Netmask
+      nodes: NODES
 
 launcherPage:
   compute:
