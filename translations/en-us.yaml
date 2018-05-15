@@ -551,9 +551,9 @@ stackPage:
       title: Node
     storage:
       title: Storage
-      connected: 'Connected Storage'
+      connected: 'Connected Storages'
       noStorage: No storage added yet.
-      addStorage: '+ Add Storage'
+      addStorage: '+Add Storage'
       detail: DETAILS
       name: Name
       ip: IP
@@ -564,10 +564,10 @@ stackPage:
       addStorageTwo: Add a storage
       select: Select Storage
       ipAddress: IP Address for Sorage location
-      authPass: Auth Password
-      authuser: Auth Username
+      pass: Password
+      user: Username
       disk:
-        list: DISKS LIST
+        list: DISKS
         free: Free Disk
       pool:
         title: POOLS
@@ -584,13 +584,15 @@ stackPage:
     cluster:
       title: Cluster
     network:
-      title: Network
-      connected: 'Connected Network'
+      title: Virtual Network
+      ipRange: IP Range
+      range: Range
+      connected: 'Connected Virtual Networks'
       filterBy: 'Filter by:'
       digitalcloud: Digitalcloud
       container: Containers
       noNetwork: 'No network added yet.'
-      addNetwork: '+ Add Network'
+      addNetwork: '+Add Virtual Network'
       detail: DETAILS
       type: Type
       subnet: Subnet
