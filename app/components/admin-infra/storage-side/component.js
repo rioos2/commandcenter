@@ -7,28 +7,10 @@ export default Ember.Component.extend({
   ariaEexpanded_disk: true,
 
 didInsertElement: function(){
-//   this.set('ariaEexpanded_pool', false);
-//   this.set('collapsed_pool', 'collapsed');
-//   this.set('style_pool', 'height: 0px;');
-//   this.set('enabler_pool', 'collapse');
-//
-//
-//   this.set('ariaEexpanded_disk', false);
-//   this.set('collapsed_disk', 'collapsed');
-//   this.set('style_disk', 'height: 0px;');
-//   this.set('enabler_disk', 'collapse');
   this.send('collapse_pool');
   this.send('collapse_disk');
 },
 
-  // ariaEexpanded_pool: function() {
-  //   alert(this.get('disks.length'));
-  //   return this.get('disks.length') == 4;
-  // }.property('disks', 'storagespool', 'model'),
-  //
-  // ariaEexpanded_disk: function() {
-  //   return true;
-  // }.property('pools'),
 
   name: function() {
     return this.get('model.object_meta.name');
