@@ -16,7 +16,7 @@ export default buildAdminInfraPanel('storage', {
       }.property('model'),
 
       storageFound: function() {
-        return this.get('model.storageConnectors.content').length > 0 ? true : false;
+        return this.get('model.storageConnectors.content').length > 0 ;
       }.property('model'),
 
       storages: function() {

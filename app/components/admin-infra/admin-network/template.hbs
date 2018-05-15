@@ -1,62 +1,37 @@
-<div class="panel panel-default kv-panel">
-						  <div class="panel-heading">
-							<div class="panel-header">
-								{{t 'stackPage.admin.network.connected'}} ({{count}})
-							</div>
-							<div class="network_filter">
-								<form  class="form-inline" action="#" role="form">
-									<div class="form-group">
-										<label class="filter-col" for="filter_ip">{{t 'stackPage.admin.network.filterBy'}}</label>
-										<select class="form-control" id="filter_ip" name="filter_ip">
-											<option>IP</option>
-											<option>IP</option>
-											<option>IP</option>
-											<option>IP</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="filter_dg_cloud">Digitalcloud</label>
-										<select class="form-control" id="filter_dg_cloud" name="filter_dg_cloud">
-											<option>Digitalcloud</option>
-											<option>Digitalcloud</option>
-											<option>Digitalcloud</option>
-											<option>Digitalcloud</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="filter_containers">Containers</label>
-										<select class="form-control" id="filter_containers" name="filter_containers">
-											<option>Containers</option>
-											<option>Containers</option>
-											<option>Containers</option>
-											<option>Containers</option>
-										</select>
-									</div>
-								</form>
-							</div>
-							<div class="pull-right kv-right-head-button">
-								<button type="button" data-toggle="modal" data-target="#addnetwork_modal" class="btn">+ Add</button>
-							</div>
-						  </div>
-						  <div class="panel-body">
+<div class="col-sm-9 content-left">
+	<div class="panel panel-default kv-panel">
+		<div class="panel-heading">
+			<div class="panel-header">
+				{{t 'stackPage.admin.network.connected'}} ({{count}})
+			</div>
+			<div class="pull-right kv-right-head-button">
+				<button type="button" data-toggle="modal" data-target="#addnetwork_modal" class="btn">+ {{t 'stackPage.admin.header.add_btn'}}</button>
+			</div>
+		</div>
+		<div class="panel-body">
+			{{#if networkFound}}
+			<div class="network-container">
+				{{#each networks as |net|}}
+					{{admin-infra/network-single model=net nodes=nodes network=network click=(action "SideData" net)}}
+				{{/each}}
+				</div>
+			{{else}}
+			<div class="empty-network">
+				<div class="pin-img">
+					<img src="./images/admin/3pin.PNG" class="img-responsive" alt="pin">
+				</div>
+				<div class="empty-network-add-link">
+					<span>{{t 'stackPage.admin.network.noNetwork'}}</span>
+					<a href="#">{{t 'stackPage.admin.network.addNetwork'}}</a>
+				</div>
+			</div>
+			{{/if}}
 
-								{{#if NoNetwork}}
-								<div class="empty-network">
-									<div class="pin-img">
-										<img src="./images/3pin.png" class="img-responsive" alt="pin">
-									</div>
-
-
-									<div class="empty-network-add-link">
-										<span>No network added yet.</span>
-										<a href="#">+Add Network</a>
-									</div>
-								</div>
-								{{else}}
-								{{#each networks as |net|}}
-									{{admin-infra/network-single model=net}}
-								{{/each}}
-
-								{{/if}}
-						  </div>
-					</div>
+		</div>
+	</div>
+</div>
+<div class="col-sm-3 content-right">
+	{{#if networkFound}}
+		{{admin-infra/network-side model=network nodes=nodes}}
+	{{/if}}
+</div>

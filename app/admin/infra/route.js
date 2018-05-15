@@ -19,6 +19,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         storagesPool: this.cbFind('storageconnectors','storagespool'),
         datacenters: this.cbFind('datacenters','datacenters'),
         networks: this.cbFind('networks','networks'),
+        nodes: this.cbFind('nodes','nodes'),
       };
       async.auto(tasks, xhrConcur, function(err, res) {
         if (err) {
@@ -34,6 +35,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         storagesPool: hash.storagesPool,
         datacenters: hash.datacenters,
         networks: hash.networks,
+        nodes: hash.nodes,
       });
     }).catch((err) => {
       return;

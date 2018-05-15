@@ -564,8 +564,8 @@ stackPage:
       addStorageTwo: Add a storage
       select: Select Storage
       ipAddress: IP Address for Sorage location
-      authPass: Auth Password
-      authuser: Auth Username
+      pass: Password
+      user: Username
       disk:
         list: DISKS
         free: Free Disk
@@ -588,9 +588,23 @@ stackPage:
     cluster:
       title: Cluster
     network:
-      title: Network
-      connected: 'Connected Network'
+      title: Virtual Network
+      ipRange: IP Range
+      range: Range
+      connected: 'Connected Virtual Networks'
       filterBy: 'Filter by:'
+      digitalcloud: Digitalcloud
+      container: Containers
+      noNetwork: 'No network added yet.'
+      addNetwork: '+Add Virtual Network'
+      detail: DETAILS
+      type: Type
+      subnet: Subnet
+      gateway: Gateway
+      bridge: Bridge Type
+      status: Status
+      netmask: Netmask
+      nodes: NODES
 
 launcherPage:
   compute:
