@@ -571,7 +571,7 @@ stackPage:
         free: Free Disk / Partition
       pool:
         title: POOLS
-        createPool: '+ CreatePool'
+        createPool: '+Create Pool'
         noPool: 'No pools created.'
         poolCluster: Pool Cluster
         availSize: Size
@@ -581,10 +581,10 @@ stackPage:
         diskCount: No.of Disks
         status: Status
         nameError: Please enter pool name
-        diskError: Please select free disk or partition
+        diskError: Please select free disk/partition
         diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
         disks: Disks
-        list: list
+        list: View
 
     cluster:
       title: Cluster
