@@ -568,7 +568,7 @@ stackPage:
       user: Username
       disk:
         list: DISKS
-        free: Free Disk
+        free: Free Disk / Partition
       pool:
         title: POOLS
         createPool: '+ CreatePool'
@@ -581,7 +581,8 @@ stackPage:
         diskCount: No.of Disks
         status: Status
         nameError: Please enter pool name
-        diskError: Please select disk
+        diskError: Please select free disk or partition
+        diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
         disks: Disks
         list: list
 
