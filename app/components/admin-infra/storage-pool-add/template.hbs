@@ -16,9 +16,9 @@
             <label for="pooldisk">{{t 'stackPage.admin.storage.disk.free'}}</label>
             <div class="rio-radio mov-top">
 
-              {{#each unUsedPartitions as |key|}}
+              {{#each removeRootPartitions as |key|}}
                 <div class="col-xs-6">
-                  {{admin-infra/storage-checkbox name=key updatePoolData="updatePoolData"}}
+                  {{admin-infra/storage-checkbox name=key.disk point=key.point updatePoolData="updatePoolData"}}
                 </div>
               {{/each}}
             </div>
@@ -29,6 +29,5 @@
         </form>
       </div>
     </div>
-
   </div>
 </div>
