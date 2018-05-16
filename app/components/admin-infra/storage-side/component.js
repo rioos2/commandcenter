@@ -2,7 +2,15 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   tagName: "",
 
-pools:  Ember.computed.alias('storagespool'),
+  pools:  Ember.computed.alias('storagespool'),
+  ariaEexpanded_pool: true,
+  ariaEexpanded_disk: true,
+
+didInsertElement: function(){
+  this.send('collapse_pool');
+  this.send('collapse_disk');
+},
+
 
   name: function() {
     return this.get('model.object_meta.name');
@@ -31,5 +39,38 @@ pools:  Ember.computed.alias('storagespool'),
   count: function() {
     return this.get('pools.length') > 0 ? false : true;
   }.property('storagespool'),
+
+
+  actions: {
+
+    collapse_pool: function(){
+      if(this.get('ariaEexpanded_pool')) {
+        this.set('ariaEexpanded_pool', false);
+        this.set('collapsed_pool', 'collapsed');
+        this.set('style_pool', 'height: 0px;');
+        this.set('enabler_pool', 'collapse');
+      } else {
+        this.set('ariaEexpanded_pool', true);
+        this.set('collapsed_pool', '');
+        this.set('style_pool', '');
+        this.set('enabler_pool', 'collapse in');
+      }
+    },
+
+    collapse_disk: function(){
+      if(this.get('ariaEexpanded_disk')) {
+        this.set('ariaEexpanded_disk', false);
+        this.set('collapsed_disk', 'collapsed');
+        this.set('style_disk', 'height: 0px;');
+        this.set('enabler_disk', 'collapse');
+      } else {
+        this.set('ariaEexpanded_disk', true);
+        this.set('collapsed_disk', '');
+        this.set('style_disk', '');
+        this.set('enabler_disk', 'collapse in');
+      }
+    },
+
+  }
 
 });
