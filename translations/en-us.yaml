@@ -3668,7 +3668,7 @@ nav:
   digitalcloud: Digital cloud
   docker: Container
   user:
-    settings: Settings
+    profile: Profile
     logout: Logout
     admin: Infrastructure
 
