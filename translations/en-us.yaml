@@ -580,6 +580,10 @@ stackPage:
         name: Pool Name
         diskCount: No.of Disks
         status: Status
+        nameError: Please enter pool name
+        diskError: Please select disk
+        disks: Disks
+        list: list
 
     cluster:
       title: Cluster
@@ -3664,7 +3668,7 @@ nav:
   digitalcloud: Digital cloud
   docker: Container
   user:
-    settings: Settings
+    profile: Profile
     logout: Logout
     admin: Infrastructure
 

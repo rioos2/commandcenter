@@ -14,7 +14,7 @@
 			{{#if storageFound}}
 			<div class="storage-container">
 				{{#each storages as |storage|}}
-					{{admin-infra/storage-single model=storage storagespool=storagespool storageData=storageData click=(action "SideData" storage) }}
+					{{admin-infra/storage-single model=storage storagespool=storagespool selectedStorage=selectedStorage storageData=storageData click=(action "SideData" storage) }}
 				{{/each}}
 			</div>
 			{{else}}
@@ -33,7 +33,5 @@
 	</div>
 </div>
 <div class="col-sm-3 content-right">
-	{{#if storageFound}}
 		{{admin-infra/storage-side model=storageData storagespool=storagespool}}
-		{{/if}}
 </div>

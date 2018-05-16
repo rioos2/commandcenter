@@ -36,9 +36,8 @@ export default buildAdminInfraPanel('storage', {
           actions: {
             SideData: function(storage) {
               this.set('storageData', storage);
+              this.set('selectedStorage', storage.id);
               this.set('storagespool',this.getStoargesPool(storage) );
             }
           }
-
-
       });
