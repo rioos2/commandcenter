@@ -589,21 +589,21 @@ stackPage:
     cluster:
       title: Cluster
       add_title: Add a Location
-      add_name: Name
-      add_currency: Currency
-      add_select_storage: Select Storage
+      add_name: Enter a city name
+      add_currency: Enter a currency
+      add_select_storage: Select a storage
       add_select_storage_placeholder: Select
       add_select_node: Select Node
-      add_select_network: Select Network
+      add_select_network: Select networks
       add:
         nameError: Please enter location name
         storageError: Please select storage
         currencyError: Please enter currency
         nodesError: Please select nodes
         networksError: Please select network
-        storagesDisplayError: Please create storage before create loaction
-        nodesDisplayError: Please create node before create loaction
-        networksDisplayError: Please create network before create loaction
+        storagesDisplayError: Create storage before attempting add.
+        nodesDisplayError: Create nodes before attempting add.
+        networksDisplayError: Create networks before attempting add.
     network:
       title: Virtual Network
       ipRange: IP Range
