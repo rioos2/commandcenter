@@ -1,77 +1,82 @@
-<!-- Cluster Add Modal :: Start -->
-		<div class="modal fade" id="addcluster" role="dialog">
+		<div class="modal fade rio-default-btn-infra" id="addcluster" role="dialog">
 			<div class="modal-dialog">
-			  <!-- Modal content-->
 			  <div class="modal-content">
 				<div class="modal-header">
 				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Add a Cluster</h4>
+				  <h4 class="modal-title">{{t 'stackPage.admin.cluster.add_title'}}</h4>
 				</div>
 				<div class="modal-body">
 					<form action="#">
+						{{#if error}}
+						<div class="row">
+							<div class="col-sm-12">
+                  <span class="error-page-text"><i class="fa fa-exclamation-circle"></i> {{pageWarning}}</span>
+							</div>
+						</div>
+						{{else}}
 						  <div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="modal_cluster_name">Name</label>
-									<input type="text" class="form-control" id="modal_cluster_name" name="modal_cluster_name">
+									<label for="modal_cluster_name">{{t 'stackPage.admin.cluster.add_name'}}</label>
+									{{input type="text" class="form-control" id="location" value=name}}
 								</div>
 								<div class="form-group">
-									<label for="modal_cluster_currency">Currency</label>
-									<input type="text" class="form-control" id="modal_cluster_currency" name="modal_cluster_currency">
-								</div>
-								<div class="form-group">
-									<label for="modal_cluster_node">Select Node (You can select multiple)</label>
-									 <select class="form-control" id="modal_cluster_node" name="modal_cluster_node" multiple>
-										<option>Type 1</option>
-										<option>Type 2</option>
-										<option>Type 3</option>
-										<option>Type 4</option>
-									  </select>
+									<label for="modal_cluster_currency">{{t 'stackPage.admin.cluster.add_currency'}}</label>
+									{{input type="text" class="form-control" id="currency" value=currency}}
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="modal_cluster_storage">Select Storage</label>
-									 <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage">
-										<option>Type 1</option>
-										<option>Type 2</option>
-										<option>Type 3</option>
-										<option>Type 4</option>
+									<label for="modal_cluster_storage">{{t 'stackPage.admin.cluster.add_select_storage'}}</label>
+									 <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange={{action "selectStorage" value="target.value"}}>
+										 <option disabled selected>{{t 'stackPage.admin.cluster.add_select_storage_placeholder'}}</option>
+										{{#each storages as |storageName|}}
+										<option>{{storageName.name}}</option>
+										{{/each}}
 									  </select>
-								</div>
-								<div class="form-group">
-									<label for="modal_cluster_data_center">Datacenter (You can select multiple)</label>
-									 <select class="form-control" id="modal_cluster_data_center" name="modal_cluster_data_center" multiple>
-										<option>Alabama</option>
-										<option>Newjersy</option>
-										<option>Newyork(USA)</option>
-									  </select>
-								</div>
-								<div class="form-group">
-									<label for="modal_cluster_network">Select Network (You can select multiple)</label>
-									 <select class="form-control" id="modal_cluster_network" name="modal_cluster_network" multiple>
-										<option>Type 1</option>
-										<option>Type 2</option>
-										<option>Type 3</option>
-										<option>Type 4</option>
-									  </select>
-								</div>
-
-
-								<div>
-
-								{{#power-select options=names onchange=(action "foo") as |name|}}
-								  {{name}}
-								{{/power-select}}
-
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-default">Add</button>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="modal_cluster_node">{{t 'stackPage.admin.cluster.add_select_node'}}</label>
+									<div class="rio-radio mov-top">
+
+			              {{#each nodes as |node|}}
+			                <div class="col-xs-4">
+			                  {{admin-infra/cluster-checkbox name=node.name data=node updateData="updateNodeData"}}
+			                </div>
+			              {{/each}}
+			            </div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label for="modal_cluster_network">{{t 'stackPage.admin.cluster.add_select_network'}}</label>
+									<div class="rio-radio mov-top">
+			              {{#each networks as |network|}}
+			                <div class="col-xs-4">
+			                  {{admin-infra/cluster-checkbox name=network.name data=network updateData="updateNetworkData"}}
+			                </div>
+			              {{/each}}
+			            </div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12">
+							<button type="submit" {{action 'createLocation'}} class="btn btn-default">
+								{{t 'stackPage.admin.header.add_btn'}}
+								{{#if showSpinner}}
+								<i class="fa fa-circle-o-notch fa-spin"></i>
+								{{/if}}
+							</button>
+						</div>
+						{{/if}}
 					</form>
 				</div>
 			  </div>
-
 			</div>
 		</div>
-		<!-- Cluster Add Modal :: End -->
