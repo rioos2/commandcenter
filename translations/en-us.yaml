@@ -548,7 +548,7 @@ stackPage:
       toggle: Toggle navigation
       add_btn: Add
     node:
-      title: Node
+      title: Nodes
       connected: 'Connected Nodes'
       noNode: No node added yet.
       ip: IP
@@ -557,9 +557,9 @@ stackPage:
       noBridges: No bridges attached.
       status: Status
       metrics: Metrics
-      metricsShow: show
+      metricsShow: View
     storage:
-      title: Storage
+      title: Storages
       connected: 'Connected Storages'
       noStorage: No storage added yet.
       addStorage: '+Add Storage'
@@ -575,11 +575,11 @@ stackPage:
       ipAddress: IP Address for Storage location
       pass: Password
       user: Username
-      noStorageData: No storages created yet.
+      noStorageData: No storages added yet.
       disk:
         list: DISKS
         free: Free Disk / Partition
-        noDisk: 'No disks created yet.'
+        noDisk: 'No disks added yet.'
       pool:
         title: POOLS
         createPool: '+Create Pool'
@@ -598,9 +598,9 @@ stackPage:
         list: View
 
     locations:
-      title: Location
+      title: Locations
       connected: 'Connected Locations'
-      noCluster: No location created yet.
+      noCluster: No location added yet.
       addCluster:  '+Add Cluster'
       storage: Storage
       type: Type
@@ -608,7 +608,7 @@ stackPage:
       currency: Currency
       network: Networks
       status: Status
-      noClusterData: No location created yet.
+      noClusterData: No location added yet.
       noClusterNode: No nodes attached.
       noClusterNetwork: No virtual networks attached.
       add_title: Add a Location
@@ -627,16 +627,16 @@ stackPage:
         networksError: Select network
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
-        networksDisplayError: Create networks before attempting add.  
+        networksDisplayError: Create networks before attempting add.
     network:
-      title: Virtual Network
+      title: Virtual Networks
       ipRange: IP Range
       range: Range
       connected: 'Connected Virtual Networks'
       filterBy: 'Filter by:'
       digitalcloud: Digitalcloud
       container: Containers
-      noNetwork: 'No virtual network created yet.'
+      noNetwork: 'No virtual network added yet.'
       addNetwork: 'Add Virtual Network'
       detail: DETAILS
       type: Type
@@ -648,7 +648,7 @@ stackPage:
       nodes: NODES
       name: Name
       selectNode: Node select
-      noNetworkData: No virtual networks created yet.
+      noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
       nameError: 'Missing name (example: riopub001)'
       typeError: Missing type
