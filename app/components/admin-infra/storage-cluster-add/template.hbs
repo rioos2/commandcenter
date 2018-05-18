@@ -22,7 +22,9 @@
 								</div>
 								<div class="form-group">
 									<label for="modal_cluster_currency">{{t 'stackPage.admin.cluster.add_country'}}</label>
-									{{input type="text" class="form-control" id="country" value=country}}
+									<select class="form-control" name="country" onchange={{action "selectCountry" value="target.value"}}>
+										<option disabled selected>{{t 'stackPage.admin.cluster.add_select_country_placeholder'}}</option>
+									</select>
 								</div>
 							</div>
 							<div class="col-sm-6">

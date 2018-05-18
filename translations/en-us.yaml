@@ -593,12 +593,13 @@ stackPage:
       add_country: Enter a country
       add_select_storage: Select a storage
       add_select_storage_placeholder: Select
+      add_select_country_placeholder: Select country
       add_select_node: Select Node
       add_select_network: Select networks
       add:
         nameError: Enter location name
         storageError: Select storage
-        currencyError: Enter currency
+        currencyError: Select country
         nodesError: Select nodes
         networksError: Select network
         storagesDisplayError: Create storage before attempting add.

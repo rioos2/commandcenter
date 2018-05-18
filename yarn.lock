@@ -4149,6 +4149,10 @@ fizzy-ui-utils@^2.0.0:
   dependencies:
     desandro-matches-selector "^2.0.0"
 
+flag-icon-css@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/flag-icon-css/-/flag-icon-css-3.0.0.tgz#a67cb3913973e38a8117e738ebbe9081049d8127"
+
 flat@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/flat/-/flat-4.0.0.tgz#3abc7f3b588e64ce77dc42fd59aa35806622fea8"
@@ -5187,6 +5191,10 @@ isexe@^2.0.0:
 isnumeric@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/isnumeric/-/isnumeric-0.2.0.tgz#a2347ba360de19e33d0ffd590fddf7755cbf2e64"
+
+iso-country-currency@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/iso-country-currency/-/iso-country-currency-0.3.4.tgz#60c5e1d3e15d4f8c83c918c26c29dfe0aa1d01ca"
 
 isobject@^2.0.0:
   version "2.1.0"
