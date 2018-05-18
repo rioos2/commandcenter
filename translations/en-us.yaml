@@ -590,7 +590,7 @@ stackPage:
       title: Cluster
       add_title: Add a Location
       add_name: Enter a city name
-      add_country: Enter a country
+      add_country: Select a country
       add_select_storage: Select a storage
       add_select_storage_placeholder: Select
       add_select_country_placeholder: Select country
