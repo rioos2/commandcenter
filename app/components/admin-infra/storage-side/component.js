@@ -1,16 +1,16 @@
 import Ember from 'ember';
+import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
   tagName: "",
 
-  pools:  Ember.computed.alias('storagespool'),
+  pools: Ember.computed.alias('storagespool'),
   ariaEexpanded_pool: true,
   ariaEexpanded_disk: true,
 
-didInsertElement: function(){
-  this.send('collapse_pool');
-  this.send('collapse_disk');
-},
-
+  didInsertElement: function() {
+    this.send('collapse_pool');
+    this.send('collapse_disk');
+  },
 
   name: function() {
     return this.get('model.object_meta.name');
@@ -25,11 +25,19 @@ didInsertElement: function(){
   }.property('model.storage_type'),
 
   status: function() {
-    return this.get('model.status.phase');
+    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
-  created: function() {
-    return Ember.isEmpty(this.get('model.created_at'))? "": this.get('model.created_at').split('T')[0];
+  storageAvailable: function() {
+    return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('ip')) && Ember.isEmpty(this.get('type')));
+  }.property('status', 'name', 'type', 'ip'),
+
+  diskSize: function() {
+    return this.get('disks.length') < 0;
+  }.property('disks'),
+
+  createdAt: function() {
+    return Ember.isEmpty(this.get('model.created_at')) ? "" : this.get('model.created_at').split('T')[0];
   }.property('model.created_at'),
 
   disks: function() {
@@ -43,8 +51,8 @@ didInsertElement: function(){
 
   actions: {
 
-    collapse_pool: function(){
-      if(this.get('ariaEexpanded_pool')) {
+    collapse_pool: function() {
+      if (this.get('ariaEexpanded_pool')) {
         this.set('ariaEexpanded_pool', false);
         this.set('collapsed_pool', 'collapsed');
         this.set('style_pool', 'height: 0px;');
@@ -57,8 +65,8 @@ didInsertElement: function(){
       }
     },
 
-    collapse_disk: function(){
-      if(this.get('ariaEexpanded_disk')) {
+    collapse_disk: function() {
+      if (this.get('ariaEexpanded_disk')) {
         this.set('ariaEexpanded_disk', false);
         this.set('collapsed_disk', 'collapsed');
         this.set('style_disk', 'height: 0px;');

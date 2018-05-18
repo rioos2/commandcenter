@@ -1,0 +1,36 @@
+{{admin-infra/location-add nodes=nodes storages= storages networks=virtualNetworks}}
+<div class="col-sm-9 content-left">
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'stackPage.admin.locations.connected'}} ({{availableSize}})
+      </div>
+      <div class="pull-right kv-right-head-button">
+        <button type="button" data-toggle="modal" data-target="#addcluster_modal" class="btn">+ {{t 'stackPage.admin.header.add_btn'}}</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      {{#if locationAvailable}}
+        <div class="cluster-container">
+          {{#each locations as |location|}}
+            {{admin-infra/location-detail model=location virtualNetworks=virtualNetworks selectedCluster=selectedCluster storages=storages selectedLocations=selectedLocations click=(action "SideData" location)}}
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="empty-network">
+          <div class="pin-img">
+            <img src="./images/admin/3pin.PNG" class="img-responsive" alt="pin">
+          </div>
+          <div class="empty-network-add-link">
+            <span>{{t 'stackPage.admin.locations.noCluster'}}</span>
+            <a href="#addcluster_modal" data-toggle="modal" data-target="#addcluster_modal">{{t 'stackPage.admin.locations.addCluster'}}</a>
+          </div>
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+</div>
+<div class="col-sm-3 content-right">
+    {{admin-infra/location-side model=selectedLocations selectedNodes=selectedNodes selectedStorage=selectedStorage selectedVirtualNetworks=selectedVirtualNetworks }}
+</div>
