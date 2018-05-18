@@ -627,7 +627,7 @@ stackPage:
         networksError: Select network
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
-        networksDisplayError: Create networks before attempting add.  
+        networksDisplayError: Create networks before attempting add.
     network:
       title: Virtual Network
       ipRange: IP Range
