@@ -25,7 +25,6 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   nodes: function() {
     return this.nameGetter(this.get('model.nodes.content'));
-      // return [];
   }.property('model.nodes.content'),
 
   networks: function() {
@@ -95,7 +94,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       storage: this.storageId(this.get('selectedStorage')),
       currency: this.get('currency'),
       flag: this.get('name') +".png",
-      // enabled: true,
+      enabled: true,
       advanced_settings:{},
       object_meta: {
         name: this.get('name'),

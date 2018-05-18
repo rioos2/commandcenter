@@ -596,11 +596,11 @@ stackPage:
       add_select_node: Select Node
       add_select_network: Select networks
       add:
-        nameError: Please enter location name
-        storageError: Please select storage
-        currencyError: Please enter currency
-        nodesError: Please select nodes
-        networksError: Please select network
+        nameError: Enter location name
+        storageError: Select storage
+        currencyError: Enter currency
+        nodesError: Select nodes
+        networksError: Select network
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
         networksDisplayError: Create networks before attempting add.
