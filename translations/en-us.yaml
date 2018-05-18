@@ -550,7 +550,7 @@ stackPage:
     node:
       title: Nodes
       connected: 'Connected Nodes'
-      noNode: No node added yet.
+      noNode: No nodes added yet.
       ip: IP
       schedule: Scheduled
       bridges: Bridges
@@ -561,7 +561,7 @@ stackPage:
     storage:
       title: Storages
       connected: 'Connected Storages'
-      noStorage: No storage added yet.
+      noStorage: No storages added yet.
       addStorage: '+Add Storage'
       detail: DETAILS
       name: Name
@@ -600,7 +600,7 @@ stackPage:
     locations:
       title: Locations
       connected: 'Connected Locations'
-      noCluster: No location added yet.
+      noCluster: No locations added yet.
       addCluster:  '+Add Cluster'
       storage: Storage
       type: Type
@@ -608,7 +608,7 @@ stackPage:
       currency: Currency
       network: Networks
       status: Status
-      noClusterData: No location added yet.
+      noClusterData: No locations added yet.
       noClusterNode: No nodes attached.
       noClusterNetwork: No virtual networks attached.
       add_title: Add a Location
@@ -636,7 +636,7 @@ stackPage:
       filterBy: 'Filter by:'
       digitalcloud: Digitalcloud
       container: Containers
-      noNetwork: 'No virtual network added yet.'
+      noNetwork: 'No virtual networks added yet.'
       addNetwork: 'Add Virtual Network'
       detail: DETAILS
       type: Type
