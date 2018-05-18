@@ -549,6 +549,15 @@ stackPage:
       add_btn: Add
     node:
       title: Node
+      connected: 'Connected Nodes'
+      noNode: No node added yet.
+      ip: IP
+      schedule: Scheduled
+      bridges: Bridges
+      noBridges: No bridges attached.
+      status: Status
+      metrics: Metrics
+      metricsShow: show
     storage:
       title: Storage
       connected: 'Connected Storages'
@@ -563,12 +572,14 @@ stackPage:
       createdAt: Created At
       addStorageTwo: Add a storage
       select: Select Storage
-      ipAddress: IP Address for Sorage location
+      ipAddress: IP Address for Storage location
       pass: Password
       user: Username
+      noStorageData: No storages created yet.
       disk:
         list: DISKS
         free: Free Disk / Partition
+        noDisk: 'No disks created yet.'
       pool:
         title: POOLS
         createPool: '+Create Pool'
@@ -586,8 +597,20 @@ stackPage:
         disks: Disks
         list: View
 
-    cluster:
-      title: Cluster
+    locations:
+      title: Location
+      connected: 'Connected Locations'
+      noCluster: No location created yet.
+      addCluster:  '+Add Cluster'
+      storage: Storage
+      type: Type
+      detail: DETAILS
+      currency: Currency
+      network: Networks
+      status: Status
+      noClusterData: No location created yet.
+      noClusterNode: No nodes attached.
+      noClusterNetwork: No virtual networks attached.
     network:
       title: Virtual Network
       ipRange: IP Range
@@ -596,16 +619,27 @@ stackPage:
       filterBy: 'Filter by:'
       digitalcloud: Digitalcloud
       container: Containers
-      noNetwork: 'No network added yet.'
-      addNetwork: '+Add Virtual Network'
+      noNetwork: 'No virtual network created yet.'
+      addNetwork: 'Add Virtual Network'
       detail: DETAILS
       type: Type
-      subnet: Subnet
+      subnet: Subnet IP
       gateway: Gateway
       bridge: Bridge Type
       status: Status
       netmask: Netmask
       nodes: NODES
+      name: Name
+      selectNode: Node select
+      noNetworkData: No virtual networks created yet.
+      nodeData: No nodes attached.
+      nameError: 'Missing name (example: riopub001)'
+      typeError: Missing type
+      subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)'
+      gatewayError: 'Missing Gateway IP (example: 192.168.2.1)'
+      brigeHostError: Missing bridge
+      nodesError: Select node
+      netmaskError: 'Missing Netmask (example: 255.255.255.0)'
 
 launcherPage:
   compute:
