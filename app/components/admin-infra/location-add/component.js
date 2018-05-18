@@ -39,6 +39,8 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         templateResult: formatCountry,
         data: isoCountries
       });
+      $("[name='country']").val('US');
+      $("[name='country']").trigger('change');
     });
   },
 
@@ -121,7 +123,9 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       currency: this.get('currency'),
       flag: this.get('currency') + ".svg",
       enabled: true,
-      advanced_settings: {},
+      advanced_settings: {
+        country: this.get('country')
+      },
       object_meta: {
         name: this.get('name'),
       },
@@ -161,7 +165,9 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     },
 
     selectCountry: function(isoType) {
-      this.set('currency', isoCurreny.getAllInfoByISO(isoType).currency)
+      let info = isoCurreny.getAllInfoByISO(isoType)
+      this.set('currency', info.currency);
+      this.set('country', info.countryName);
     },
 
     updateNodeData: function(select, data) {
