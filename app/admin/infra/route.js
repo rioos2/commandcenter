@@ -48,7 +48,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         cb = results;
         results = null;
       }
-      return this.get('store').find(type, null,this.opts(url)).then(function(res) {
+      return this.get('store').find(type, null,this.opts(url, true)).then(function(res) {
         cb(null, res);
       }).catch(function(err) {
         cb(null, err);
