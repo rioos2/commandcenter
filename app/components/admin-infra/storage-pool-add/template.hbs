@@ -1,0 +1,36 @@
+<div class="modal fade rio-default-btn-infra" id="pooladd" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{t 'stackPage.admin.storage.pool.add'}}</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/action_page.php">
+          <div class="form-group">
+            <label for="poolname">{{t 'stackPage.admin.storage.name'}} </label> {{input type="text" class="form-control" id="poolname" value=name}}
+          </div>
+          <div class="form-group">
+            <label for="pooldisk">{{t 'stackPage.admin.storage.disk.free'}}</label>
+            <div class="rio-radio mov-top">
+
+              {{#each removeRootPartitions as |key|}}
+                <div class="col-xs-6">
+                  {{admin-infra/storage-checkbox name=key.disk point=key.point updatePoolData="updatePoolData"}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <button type="submit" {{action 'createPool'}} class="btn btn-default">
+              {{t 'stackPage.admin.header.add_btn'}}
+              {{#if showSpinner}}
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+              {{/if}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

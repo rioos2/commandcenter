@@ -68,8 +68,11 @@ module.exports = function(defaults) {
   app.import('vendor/EasePack.min.js');
   app.import('vendor/TweenLite.min.js');
   app.import('vendor/moment.js');
-
   app.import('vendor/charts/d3script-globe.js');
+  app.import('vendor/admin/jquery-scrollbar.js');
+  app.import('vendor/admin/jquery.js');
+  app.import('vendor/admin/select2-min.js');
+  app.import('vendor/admin/select2.js');
 
   app.import('node_modules/@bower_components/async/dist/async.js');
 

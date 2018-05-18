@@ -543,6 +543,121 @@ stackPage:
     feature: Features
     clouds: clouds
     filterBy: "Filter by:"
+  admin:
+    header:
+      toggle: Toggle navigation
+      add_btn: Add
+    node:
+      title: Node
+      connected: 'Connected Nodes'
+      noNode: No node added yet.
+      ip: IP
+      schedule: Scheduled
+      bridges: Bridges
+      noBridges: No bridges attached.
+      status: Status
+      metrics: Metrics
+      metricsShow: show
+    storage:
+      title: Storage
+      connected: 'Connected Storages'
+      noStorage: No storage added yet.
+      addStorage: '+Add Storage'
+      detail: DETAILS
+      name: Name
+      ip: IP
+      type: Type
+      path: Location
+      status: Status
+      createdAt: Created At
+      addStorageTwo: Add a storage
+      select: Select Storage
+      ipAddress: IP Address for Storage location
+      pass: Password
+      user: Username
+      noStorageData: No storages created yet.
+      disk:
+        list: DISKS
+        free: Free Disk / Partition
+        noDisk: 'No disks created yet.'
+      pool:
+        title: POOLS
+        createPool: '+Create Pool'
+        noPool: 'No pools created.'
+        poolCluster: Pool Cluster
+        availSize: Size
+        usedSize: UsedSize
+        add: Add pool
+        name: Pool Name
+        diskCount: No.of Disks
+        status: Status
+        nameError: Please enter pool name
+        diskError: Please select free disk/partition
+        diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
+        disks: Disks
+        list: View
+
+    locations:
+      title: Location
+      connected: 'Connected Locations'
+      noCluster: No location created yet.
+      addCluster:  '+Add Cluster'
+      storage: Storage
+      type: Type
+      detail: DETAILS
+      currency: Currency
+      network: Networks
+      status: Status
+      noClusterData: No location created yet.
+      noClusterNode: No nodes attached.
+      noClusterNetwork: No virtual networks attached.
+      add_title: Add a Location
+      add_name: Enter a city name
+      add_country: Select a country
+      add_select_storage: Select a storage
+      add_select_storage_placeholder: Select
+      add_select_country_placeholder: Select country
+      add_select_node: Select Node
+      add_select_network: Select networks
+      add:
+        nameError: Enter location name
+        storageError: Select storage
+        currencyError: Select country
+        nodesError: Select nodes
+        networksError: Select network
+        storagesDisplayError: Create storage before attempting add.
+        nodesDisplayError: Create nodes before attempting add.
+        networksDisplayError: Create networks before attempting add.  
+    network:
+      title: Virtual Network
+      ipRange: IP Range
+      range: Range
+      connected: 'Connected Virtual Networks'
+      filterBy: 'Filter by:'
+      digitalcloud: Digitalcloud
+      container: Containers
+      noNetwork: 'No virtual network created yet.'
+      addNetwork: 'Add Virtual Network'
+      detail: DETAILS
+      type: Type
+      subnet: Subnet IP
+      gateway: Gateway
+      bridge: Bridge Type
+      status: Status
+      netmask: Netmask
+      nodes: NODES
+      name: Name
+      selectNode: Node select
+      noNetworkData: No virtual networks created yet.
+      nodeData: No nodes attached.
+      nameError: 'Missing name (example: riopub001)'
+      typeError: Missing type
+      subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)'
+      gatewayError: 'Missing Gateway IP (example: 192.168.2.1)'
+      brigeHostError: Missing bridge
+      nodesError: Select node
+      netmaskError: 'Missing Netmask (example: 255.255.255.0)'
+
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -3605,8 +3720,9 @@ nav:
   digitalcloud: Digital cloud
   docker: Container
   user:
-    settings: Settings
+    profile: Profile
     logout: Logout
+    admin: Infrastructure
 
 ##############################
 # Resource Actions
