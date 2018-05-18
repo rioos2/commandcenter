@@ -1,0 +1,36 @@
+ <!-- {{admin-infra/network-add nodes=nodes}} -->
+<div class="col-sm-9 content-left">
+	<div class="panel panel-default kv-panel">
+		<div class="panel-heading">
+			<div class="panel-header">
+				{{t 'stackPage.admin.node.connected'}} ({{availableSize}})
+			</div>
+			<div class="pull-right kv-right-head-button">
+        <button type="button" data-toggle="modal" data-target="#addcluster_modal" class="btn disabled">+ {{t 'stackPage.admin.header.add_btn'}}</button>
+      </div>
+		</div>
+		<div class="panel-body">
+			{{#if nodeAvailable}}
+				<div class="network-container">
+					{{#each nodes as |node|}}
+						{{admin-infra/node-detail model=node selectedNode=selecedNode selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+					{{/each}}
+				</div>
+			{{else}}
+				<div class="empty-network">
+					<div class="pin-img">
+						<img src="./images/admin/3pin.PNG" class="img-responsive" alt="pin">
+					</div>
+					<div class="empty-network-add-link">
+						<span>{{t 'stackPage.admin.node.noNode'}}</span>
+						<a href="#addnetwork_modal" data-toggle="modal" data-target="#addnetwork_modal">+{{t 'stackPage.admin.network.addNetwork'}}</a>
+					</div>
+				</div>
+			{{/if}}
+
+		</div>
+	</div>
+</div>
+<div class="col-sm-3 content-right">
+	{{admin-infra/node-side model=selectedNode}}
+</div>

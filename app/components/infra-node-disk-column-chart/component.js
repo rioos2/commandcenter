@@ -89,9 +89,9 @@ export default Ember.Component.extend({
         }],
         ["reads MB/s", parseFloat(d.node_disk_mega_bytes_read), "#3366cc"],
         ["write MB/s", parseFloat(d.node_disk_mega_bytes_written), "#329ac7"],
-        ["io MB/s (read + write)", parseFloat(d.node_disk_mega_bytes_io_total), "#f69930"]
+        ["io MB/s (read + write)", parseFloat(d.node_disk_io_now), "#f69930"]
       ],
-      total: d.node_disk_io_now
+      total: d.node_disk_mega_bytes_io_total
     };
   },
 
