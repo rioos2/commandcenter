@@ -4,47 +4,34 @@ const {
 } = Ember;
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders,{
+export default Ember.Component.extend(DefaultHeaders, {
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
   selectedNodes: [],
-  bridgeNames: [],
-  selectedBriges: [],
-  bridgeHost: [],
+  selectedBridges: [],
 
-  networkList: function(){
+  networkList: function() {
     return C.AVAILABLE_NETWORK_TYPES;
   }.property(),
 
-  nodeNameList: function() {
-    var nodeNames = [];
+  nodeBridgeData: function() {
     if (!Ember.isEmpty(this.get('nodes'))) {
-      this.get('nodes').forEach(function(node) {
-        nodeNames.push(node.object_meta.name);
-      });
-    }
-    return nodeNames;
-  }.property('nodes'),
-
-  bridges: function() {
-    var self = this;
-    self.set('bridgeNames', []);
-    self.get('selectedNodes').forEach(function(node_id) {
-      if (!Ember.isEmpty(self.get('nodes'))) {
-        self.get('nodes').forEach(function(node) {
-          if ((node.id == node_id) && !Ember.isEmpty(node.status.node_info.bridges)) {
-            node.status.node_info.bridges.forEach(function(bridge) {
-              self.get('bridgeNames').addObject({
-                name: node_id,
-                value: bridge.bridge_name
-              });
-            });
-          }
+      return this.get('nodes').map(function(node) {
+        var data = {
+          name: node.object_meta.name,
+          node_id: node.id,
+          bridges: [],
+        };
+        node.status.node_info.bridges.forEach(function(name) {
+          data.bridges.addObject({
+            value: name.bridge_name,
+          });
         });
-      }
-    });
-  }.observes('selectedNodes.@each'),
-
+        return data;
+      });
+    };
+    return [];
+  }.property('nodes'),
 
   attachAndDetachNode: function(active, nodeName) {
     let data;
@@ -54,17 +41,6 @@ export default Ember.Component.extend(DefaultHeaders,{
       }
     });
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
-  },
-
-  attachAndDetachBridge: function(active, bridge) {
-    var self = this;
-    let data;
-    self.get('bridgeHost').forEach(function(bridgehost) {
-      if (bridgehost.name == bridge.name && bridgehost.value == birdge.value) {
-        data = bridge;
-      }
-    });
-    active ? self.get('bridgeHost').addObject(bridge) : self.get('bridgeHost').removeObject(bridge);
   },
 
   validation() {
@@ -87,7 +63,7 @@ export default Ember.Component.extend(DefaultHeaders,{
     if (Ember.isEmpty(this.get('subnet'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetError'));
       return true;
-    } else if (Ember.isEmpty(this.get('bridgeHost'))) {
+    } else if (Ember.isEmpty(this.get('selectedBridges'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
       return true;
     } else if (Ember.isEmpty(this.get('selectedNodes'))) {
@@ -98,21 +74,21 @@ export default Ember.Component.extend(DefaultHeaders,{
     }
   },
 
-  getBridge: function(data){
-    var bridge_hst= {};
-    data.forEach(function(ele){
-      bridge_hst[ele.name]=ele.value;
+  getBridge: function(data) {
+    var bridge_hst = {};
+    data.forEach(function(ele) {
+      bridge_hst[ele.name] = ele.value;
     });
     return bridge_hst;
   },
 
-  getData: function(){
+  getData: function() {
     return {
       network_type: this.get('type'),
       subnet_ip: this.get('subnet'),
       netmask: this.get('netmask'),
       gateway: this.get('gateway'),
-      bridge_hosts: this.getBridge(this.get('bridgeHost')),
+      bridge_hosts: this.getBridge(this.get('selectedBridges')),
       object_meta: {
         name: this.get('name'),
       },
@@ -126,12 +102,21 @@ export default Ember.Component.extend(DefaultHeaders,{
     updatePoolData: function(active, name) {
       this.attachAndDetachNode(active, name);
     },
-    showBridgesForNode: function(active, bridge) {
-      this.attachAndDetachBridge(active, bridge);
+
+    setNetwork: function(value) {
+      this.set('type', value);
     },
 
-    setNetwork: function(value){
-      this.set('type',value);
+    setBridge: function(active, value) {
+      var self = this;
+      self.get('selectedBridges').forEach(function(bridge) {
+        if (bridge.name == value.name) {
+          self.get('selectedBridges').removeObject(bridge);
+        }
+      });
+      if(active){
+        self.get('selectedBridges').addObject(value);
+      }
     },
 
     createNetwork: function() {

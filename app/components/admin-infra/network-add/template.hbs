@@ -46,35 +46,25 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
               <div class="form-group">
                 <label for="network_nodes">{{t 'stackPage.admin.network.selectNode'}}</label>
                 <div class="rio-radio mov-top">
-                  {{#each nodeNameList as |node|}}
-                    <div class="col-xs-6">
-                      {{admin-infra/node-checkbox name=node updatePoolData="updatePoolData" }}
+                  {{#each nodeBridgeData as |data|}}
+                    <div class="col-xs-12">
+                      {{admin-infra/node-checkbox name=data.name data=data updatePoolData="updatePoolData"  setBridge= "setBridge"}}
                     </div>
                   {{/each}}
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="network_bridge_type">{{t 'stackPage.admin.network.bridge'}}</label>
-                <div class="rio-radio mov-top">
-                  {{#each bridgeNames as |bridge|}}
-                    <div class="col-xs-3">
-                      {{admin-infra/bridge-checkbox bridge=bridge showBridgesForNode="showBridgesForNode" }}
-                    </div>
-                  {{/each}}
-                </div>
-              </div>
-            </div>
-          </div>
-          <button type="submit" {{action 'createNetwork'}} class="btn btn-default">{{t 'stackPage.admin.header.add_btn'}}</button>
+          <button type="submit" {{action 'createNetwork'}} class="btn btn-default">
+            {{t 'stackPage.admin.header.add_btn'}}
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
         </form>
       </div>
     </div>
