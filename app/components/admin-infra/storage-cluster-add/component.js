@@ -92,8 +92,8 @@ export default Ember.Component.extend(DefaultHeaders, {
       nodes: this.get('selectedNodes'),
       networks: this.get('selectedNetworks'),
       storage: this.storageId(this.get('selectedStorage')),
-      currency: this.get('currency'),
-      flag: this.get('name') +".png",
+      currency: this.get('country'),
+      flag: this.get('country') +".png",
       enabled: true,
       advanced_settings:{},
       object_meta: {
