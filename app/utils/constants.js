@@ -52,6 +52,16 @@ var C = {
     },
   },
 
+  ADMIN:{
+    STATUS:{
+      INITIAL: ["initialized","pending"],
+      READY: ["ready","running"],
+      NOTREADY: ["notready"],
+    },
+  },
+
+  AVAILABLE_NETWORK_TYPES:  ["private_ipv4", "private_ipv6", "public_ipv4", "public_ipv6"],
+
   STORAGE: {
     LOCATION: {
       NOTALLOW: ["[SWAP]", "/"],

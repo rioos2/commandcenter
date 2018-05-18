@@ -1,53 +1,82 @@
 <div class="modal fade" id="addnetwork_modal" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
     <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h4 class="modal-title">Add a network</h4>
-    </div>
-    <div class="modal-body">
-      <form action="#">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{t 'stackPage.admin.network.addNetwork'}}</h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
           <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="modal_network_name">Name</label>
-              <input type="text" class="form-control" id="modal_network_name" name="modal_network_name">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_name">{{t 'stackPage.admin.network.name'}}</label> {{input type="text" class="form-control" id="network_name" value=name}}
+              </div>
             </div>
-            <div class="form-group">
-              <label for="modal_network_gt_ip">Gateway IP</label>
-              <input type="text" class="form-control" id="modal_network_gt_ip" name="modal_network_gt_ip">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_type">{{t 'stackPage.admin.network.type'}}</label>
+                <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "setNetwork" value="target.value"}}>
+                                                         <option disabled selected>select</option>
+                                                        {{#each networkList as |network|}}
+                                                        <option>{{network}}</option>
+                                                        {{/each}}
+                                                      </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="modal_network_bridge_type">Bridge Type</label>
-               <select class="form-control" id="modal_network_bridge_type" name="modal_network_bridge_type">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                </select>
+
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_gateway">{{t 'stackPage.admin.network.gateway'}}</label> {{input type="text" class="form-control" id="network_gateway" value=gateway}}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_subnetip">{{t 'stackPage.admin.network.subnet'}}</label> {{input type="text" class="form-control" id="network_subnetip" value=subnet}}
+              </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="modal_network_subnet_ip">Subnet IPs</label>
-              <input type="text" class="form-control" id="modal_network_subnet_ip" name="modal_network_subnet_ip">
-            </div>
-            <div class="form-group">
-              <label for="modal_network_network">Network</label>
-              <input type="text" class="form-control" id="modal_network_network" name="modal_network_network">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_netmask">{{t 'stackPage.admin.network.netmask'}}</label> {{input type="text" class="form-control" id="network_netmask" value=netmask}}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-            <label for="modal_network_selected_node">Node select</label>
-            <span class="checkbox_label"><input name="modal_network_selected_node" type="checkbox" value="">dev/sdc1</span>
-            <span class="checkbox_label"><input name="modal_network_selected_node" type="checkbox" value="">dev/sdd</span>
-        </div>
-        <button type="submit" class="btn btn-default">Add</button>
-      </form>
-    </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="network_nodes">{{t 'stackPage.admin.network.selectNode'}}</label>
+                <div class="rio-radio mov-top">
+                  {{#each nodeNameList as |node|}}
+                    <div class="col-xs-6">
+                      {{admin-infra/node-checkbox name=node updatePoolData="updatePoolData" }}
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="network_bridge_type">{{t 'stackPage.admin.network.bridge'}}</label>
+                <div class="rio-radio mov-top">
+                  {{#each bridgeNames as |bridge|}}
+                    <div class="col-xs-3">
+                      {{admin-infra/bridge-checkbox bridge=bridge showBridgesForNode="showBridgesForNode" }}
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="submit" {{action 'createNetwork'}} class="btn btn-default">{{t 'stackPage.admin.header.add_btn'}}</button>
+        </form>
+      </div>
     </div>
 
   </div>

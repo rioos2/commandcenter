@@ -5,41 +5,45 @@
     </div>
     <div class="storage-active-detail-detail">
       <div class="sd-subheader">{{t 'stackPage.admin.storage.detail'}}</div>
-      <div class="sd-ip-detail sd-table">
-        <div class="sd-title">{{t 'stackPage.admin.storage.ip'}}</div>
-        <div class="sd-value">{{ip}}</div>
-      </div>
-      <div class="sd-type-detail sd-table">
-        <div class="sd-title">{{t 'stackPage.admin.storage.type'}}</div>
-        <div class="sd-value">{{type}}</div>
-      </div>
-      <div class="sd-status-detail sd-table">
-        <div class="sd-title">{{t 'stackPage.admin.storage.status'}}</div>
-        <div class="sd-value sd-green">{{status}}</div>
-      </div>
-      <div class="sd-cdate-detail sd-table">
-        <div class="sd-title">{{t 'stackPage.admin.storage.createdAt'}}</div>
-        <div class="sd-value">{{created}}</div>
-      </div>
-    </div>
-    </div>
+      {{#if storageAvailable}}
 
-    <div class="storage-active-detail-pools">
-      <div data-target="#pools" aria-expanded= {{ariaEexpanded_pool}} class= {{collapsed_pool}}>
-
-        <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_pool'}}>
-          <div class="sd-title leader">{{t 'stackPage.admin.storage.pool.title'}}</div>
-          {{#if ariaEexpanded_pool}}
-            <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
-          {{else}}
-            <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
-
-          {{/if}}
+        <div class="sd-ip-detail sd-table">
+          <div class="sd-title">{{t 'stackPage.admin.storage.ip'}}</div>
+          <div class="sd-value">{{ip}}</div>
         </div>
-      </div>
+        <div class="sd-type-detail sd-table">
+          <div class="sd-title">{{t 'stackPage.admin.storage.type'}}</div>
+          <div class="sd-value">{{type}}</div>
+        </div>
+        <div class="sd-status-detail sd-table">
+          <div class="sd-title">{{t 'stackPage.admin.storage.status'}}</div>
+          <div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
+        </div>
+        <div class="sd-cdate-detail sd-table">
+          <div class="sd-title">{{t 'stackPage.admin.storage.createdAt'}}</div>
+          <div class="sd-value">{{createdAt}}</div>
+        </div>
+      {{else}}
+        <div class="sd-empty-pool">{{t 'stackPage.admin.storage.noStorageData'}}</div>
+      {{/if}}
+    </div>
+  </div>
 
-      <div id="pools" class="collapse-boarder {{enabler_pool}}">
-      <!-- <div class="sd-subheader sd-poolhead">{{t 'stackPage.admin.storage.pool.title'}}</div> -->
+  <div class="storage-active-detail-pools">
+    <div data-target="#pools" aria-expanded= {{ariaEexpanded_pool}} class= {{collapsed_pool}}>
+
+      <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_pool'}}>
+        <div class="sd-title leader">{{t 'stackPage.admin.storage.pool.title'}}</div>
+        {{#if ariaEexpanded_pool}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
+        {{else}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
+
+        {{/if}}
+      </div>
+    </div>
+
+    <div id="pools" class="collapse-boarder {{enabler_pool}}">
       <div class="sd-link sdpool-link">
         <a href="#pooladd" data-toggle="modal" data-target="#pooladd">{{t 'stackPage.admin.storage.pool.createPool'}}</a></div>
       {{#if count}}
@@ -50,28 +54,31 @@
         {{/each}}
       {{/if}}
     </div>
-    </div>
+  </div>
 
-    <div class="storage-active-detail-disks">
-      <div data-target="#disks" aria-expanded= {{ariaEexpanded_disk}} class= {{collapsed_disk}}>
+  <div class="storage-active-detail-disks">
+    <div data-target="#disks" aria-expanded= {{ariaEexpanded_disk}} class= {{collapsed_disk}}>
 
-        <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_disk'}}>
-          <div class="sd-title leader">{{t 'stackPage.admin.storage.disk.list'}}</div>
-          {{#if ariaEexpanded_disk}}
-            <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
-          {{else}}
-            <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
+      <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_disk'}}>
+        <div class="sd-title leader">{{t 'stackPage.admin.storage.disk.list'}}</div>
+        {{#if ariaEexpanded_disk}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
+        {{else}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
 
-          {{/if}}
-        </div>
+        {{/if}}
       </div>
+    </div>
 
-      <div id="disks" class="collapse-boarder {{enabler_disk}}">
-      <!-- <div class="sd-subheader">{{t 'stackPage.admin.storage.disk.list'}}</div> -->
-      {{#each disks as |disk|}}
-        {{admin-infra/storage-disk disk=disk storageData=storageData }}
-      {{/each}}
+    <div id="disks" class="collapse-boarder {{enabler_disk}}">
+      {{#if diskSize}}
+        <div class="sd-empty-pool">{{t 'stackPage.admin.storage.disk.noDisk'}}</div>
+      {{else}}
+        {{#each disks as |disk|}}
+          {{admin-infra/storage-disk disk=disk storageData=storageData }}
+        {{/each}}
+      {{/if}}
     </div>
-    </div>
+  </div>
 
 </div>

@@ -409,7 +409,7 @@ header {
   cursor: pointer;
 
   &.active {
-    border: 2px solid rgba(121, 121, 187, 0.5);
+    border: 1px solid rgba(121, 121, 187, 0.5);
     cursor: default;
   }
 
@@ -500,7 +500,7 @@ header {
       font-size: 18px;
       color: #58595E;
       letter-spacing: 0;
-      padding-right: 40px;
+      padding-right: 10px;
     }
   }
 }
@@ -514,9 +514,11 @@ header {
   border: 1px solid #E2E6F2;
   border-radius: 3px;
   padding-right: 35px;
+  cursor: pointer;
 
   &.active {
     border: 1px solid rgba(121, 121, 187, 0.5);
+    cursor: default;
   }
 
   .network-subbox-1,
@@ -639,6 +641,14 @@ header {
     &.sd-green {
       color: #62D176;
     }
+
+    &.sd-red {
+      color: #e83039;
+    }
+
+    &.sd-yellow {
+      color: #ffb238;
+    }
   }
 
   .sd-empty-pool {
@@ -688,7 +698,7 @@ header {
     font-family: Avenir-Heavy;
     font-size: 18px;
     color: #58595E;
-    padding: 25px 15px;
+    padding: 21px 15px;
     border-bottom: 1px solid #DCE2EA;
   }
 
@@ -727,6 +737,14 @@ header {
     &.sd-green {
       color: #62D176;
     }
+
+    &.sd-red {
+      color: #e83039;
+    }
+
+    &.sd-yellow {
+      color: #ffb238;
+    }
   }
 }
 
@@ -735,7 +753,7 @@ header {
     font-family: Avenir-Heavy;
     font-size: 18px;
     color: #58595E;
-    padding: 25px 15px;
+    padding: 21px 15px;
     border-bottom: 1px solid #DCE2EA;
 
     .cluster-edit {
@@ -785,6 +803,14 @@ header {
 
     &.sd-green {
       color: #62D176;
+    }
+
+    &.sd-red {
+      color: #e83039;
+    }
+
+    &.sd-yellow {
+      color: #ffb238;
     }
   }
 
@@ -859,14 +885,14 @@ header {
   width: 100%;
   float: left;
   border-bottom: 1px solid #DCE2EA;
-  padding-bottom: 50px;
+  padding-bottom: 25px;
 }
 
 .pool-active {
   width: 100%;
   float: left;
   border-bottom: 1px solid #DCE2EA;
-  padding-bottom: 30px;
+  padding-bottom: 5px;
 }
 
 .modal-dialog {
