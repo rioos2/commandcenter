@@ -601,7 +601,7 @@ stackPage:
       title: Locations
       connected: 'Connected Locations'
       noCluster: No locations added yet.
-      addCluster:  '+Add Cluster'
+      addCluster:  '+Add Location'
       storage: Storage
       type: Type
       detail: DETAILS

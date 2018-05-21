@@ -20,7 +20,9 @@ export default buildAdminInfraPanel('network', {
   }.property('availableSize'),
 
   networks: function() {
-    return this.get('model.networks.content');
+    alert(JSON.stringify(this.get('model.networks.content')));
+
+    return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
   }.property('model.networks.content'),
 
   nodes: function(){

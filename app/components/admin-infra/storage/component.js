@@ -20,7 +20,7 @@ export default buildAdminInfraPanel('storage', {
       }.property('model'),
 
       storages: function() {
-        return this.get('model.storageConnectors.content');
+        return Ember.isEmpty(this.get('model.storageConnectors.content'))? [] : this.get('model.storageConnectors.content');
       }.property('model'),
 
       getStoargesPool: function(storageConnector) {

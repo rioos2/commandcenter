@@ -23,7 +23,7 @@ export default buildAdminInfraPanel('locations', {
   }.property('availableSize'),
 
   locations: function() {
-    return this.get('model.datacenters.content');
+    return Ember.isEmpty(this.get('model.datacenters.content'))? [] : this.get('model.datacenters.content');
   }.property('model.datacenters.content'),
 
   nodes: function() {
