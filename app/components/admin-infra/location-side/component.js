@@ -6,8 +6,8 @@ name: function(){
 return this.get('model.object_meta.name');
 }.property('model.object_meta.name'),
 
-currency: function(){
-  return this.get('model.currency');
+country: function(){
+  return !Ember.isEmpty(this.get('model.advanced_settings.country'))? this.get('model.advanced_settings.country') : "";
 }.property('model.currency'),
 
 status: function(){

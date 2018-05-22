@@ -605,7 +605,7 @@ stackPage:
       storage: Storage
       type: Type
       detail: DETAILS
-      currency: Currency
+      country: Country
       network: Networks
       status: Status
       noClusterData: No locations added yet.
