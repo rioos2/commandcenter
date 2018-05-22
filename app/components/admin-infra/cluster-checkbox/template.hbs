@@ -8,9 +8,9 @@
 </div>
 </div>
 <div class="col-xs-8">
-  {{#each NetworkFilterForNode as |network|}}
+  {{#each virtualNetworkFilterForNode as |virtualNetwork|}}
     <div class="col-xs-6">
-      {{admin-infra/network-checkbox name=network.name enable=active data=network updateNetData="updateNetworkData"}}
+      {{admin-infra/network-checkbox name=virtualNetwork.name enable=active data=virtualNetwork updateVirtualNetworkData="updateVirtualNetworkData"}}
     </div>
   {{/each}}
 </div>

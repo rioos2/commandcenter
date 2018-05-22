@@ -16,7 +16,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   notifications: Ember.inject.service('notification-messages'),
   tagName: '',
   selectedNodes: [],
-  selectedNetworks: [],
+  selectedVirtualNetworks: [],
   selectedStorage: '',
   error: false,
 
@@ -55,7 +55,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     return this.nameGetter(this.get('model.nodes.content'));
   }.property('model.nodes.content'),
 
-  networks: function() {
+  virtualNetworks: function() {
     return this.get('model.networks.content');
   }.property('model.networks.content'),
 
@@ -88,7 +88,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     } else if (Ember.isEmpty(this.get('nodes'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
       return true;
-    } else if (Ember.isEmpty(this.get('networks'))) {
+    } else if (Ember.isEmpty(this.get('virtualNetworks'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksDisplayError'));
       return true;
     } else {
@@ -110,29 +110,29 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     } else if (Ember.isEmpty(this.get('selectedNodes'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
       return true;
-    } else if (!this.filterNetworkForSelectedNetworks(this.uniqueSelected(this.get('selectedNetworks')))) {
+    } else if (!this.filteredForSelectedVirtualNetworks(this.uniqueSelected(this.get('selectedVirtualNetworks')))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
       return true;
-    } else if (Ember.isEmpty(this.get('selectedNetworks'))) {
+    } else if (Ember.isEmpty(this.get('selectedVirtualNetworks'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
       return true;
     } else {
       return false;
     }
   },
-  uniqueSelected: function(networks) {
-    var uniqueNetworks = networks.filter(function(item, index) {
-      return networks.indexOf(item) == index;
+  uniqueSelected: function(virtualNetworks) {
+    var uniqueVirtualNetworks = virtualNetworks.filter(function(item, index) {
+      return virtualNetworks.indexOf(item) == index;
     });
-    return uniqueNetworks;
+    return uniqueVirtualNetworks;
   },
 
-  filterNetworkForSelectedNetworks: function(uniqueNetworks) {
+  filteredForSelectedVirtualNetworks: function(uniqueVirtualNetworks) {
     var filteredNodes = [];
     var uniqueNetData = [];
     var self = this;
-    uniqueNetworks.map(function(network_id) {
-      return self.get('networks').filter(function(network) {
+    uniqueVirtualNetworks.map(function(network_id) {
+      return self.get('virtualNetworks').filter(function(network) {
         if (network_id == network.id) {
           uniqueNetData.push(network);
         }
@@ -156,7 +156,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   getData: function() {
     return {
       nodes: this.get('selectedNodes'),
-      networks: this.uniqueSelected(this.get('selectedNetworks')),
+      networks: this.uniqueSelected(this.get('selectedVirtualNetworks')),
       storage: this.storageId(this.get('selectedStorage')),
       currency: this.get('currency'),
       flag: this.get('currency') + ".svg",

@@ -4,14 +4,14 @@ export default Ember.Component.extend({
   tagName: 'rio-radio',
   active: false,
 
-  NetworkFilterForNode: function() {
+  virtualNetworkFilterForNode: function() {
     var self = this;
-    var selectedNetworkForNode = [];
-    if (!Ember.isEmpty(this.get('networks'))) {
-      self.get('networks').map(function(network) {
+    var selectedVirtualNetworkForNode = [];
+    if (!Ember.isEmpty(this.get('virtualNetworks'))) {
+      self.get('virtualNetworks').map(function(network) {
         Object.keys(network.bridge_hosts).filter(function(key) {
           if (Ember.isEqual(key, self.get('data.id'))) {
-            selectedNetworkForNode.addObject({
+            selectedVirtualNetworkForNode.addObject({
               name: network.object_meta.name,
               id: network.id
             });
@@ -19,8 +19,8 @@ export default Ember.Component.extend({
         });
       });
     }
-    return selectedNetworkForNode;
-  }.property('networks'),
+    return selectedVirtualNetworkForNode;
+  }.property('virtualNetworks'),
 
 
   actions: {
@@ -29,8 +29,8 @@ export default Ember.Component.extend({
       this.sendAction('updateData', this.get('active'), this.get('data.id'));
     },
 
-    updateNetworkData: function(select, data) {
-      select ? this.get('selectedNetworks').push(data) : this.get('selectedNetworks').removeObject(data);
+    updateVirtualNetworkData: function(select, data) {
+      select ? this.get('selectedVirtualNetworks').push(data) : this.get('selectedVirtualNetworks').removeObject(data);
     },
   }
 });
