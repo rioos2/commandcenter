@@ -8,10 +8,19 @@ export default Ember.Component.extend({
   active: false,
   intl: Ember.inject.service(),
 
+  enabler: function() {
+    if (this.get('enable')){
+      return "";
+  } else {
+    return "disabled";
+  }
+}.property('enable'),
+
+
     actions: {
       sendType() {
         this.toggleProperty('active');
-        this.sendAction('showBridgesForNode', this.get('active'), this.get('bridge'));
+        this.sendAction('updateNetData', this.get('active'), this.get('data.id'));
       },
     }
 });

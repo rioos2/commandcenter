@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import {
+  compare
+} from '@ember/utils';
 import C from 'nilavu/utils/constants';
 import isoCurreny from 'npm:iso-country-currency';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
@@ -39,6 +42,8 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         templateResult: formatCountry,
         data: isoCountries
       });
+      $("[name='country']").val('US');
+      $("[name='country']").trigger('change');
     });
   },
 
@@ -51,7 +56,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   }.property('model.nodes.content'),
 
   networks: function() {
-    return this.nameGetter(this.get('model.networks.content'));
+    return this.get('model.networks.content');
   }.property('model.networks.content'),
 
   storageId: function(name) {
@@ -105,6 +110,9 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     } else if (Ember.isEmpty(this.get('selectedNodes'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
       return true;
+    } else if (!this.filterNetworkForSelectedNetworks(this.uniqueSelected(this.get('selectedNetworks')))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
+      return true;
     } else if (Ember.isEmpty(this.get('selectedNetworks'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
       return true;
@@ -112,16 +120,50 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       return false;
     }
   },
+  uniqueSelected: function(networks) {
+    var uniqueNetworks = networks.filter(function(item, index) {
+      return networks.indexOf(item) == index;
+    });
+    return uniqueNetworks;
+  },
+
+  filterNetworkForSelectedNetworks: function(uniqueNetworks) {
+    var filteredNodes = [];
+    var uniqueNetData = [];
+    var self = this;
+    uniqueNetworks.map(function(network_id) {
+      return self.get('networks').filter(function(network) {
+        if (network_id == network.id) {
+          uniqueNetData.push(network);
+        }
+      });
+    });
+
+    this.get('selectedNodes').map(function(node_id) {
+      uniqueNetData.map(function(network) {
+        if (Object.keys(network.bridge_hosts).includes(node_id)) {
+          filteredNodes.push(node_id);
+        }
+      });
+    });
+    return this.areEqual(this.uniqueSelected(filteredNodes), this.get('selectedNodes'));
+  },
+
+  areEqual: function(filtedData, selectedData) {
+    return JSON.stringify(filtedData) == JSON.stringify(selectedData);
+  },
 
   getData: function() {
     return {
       nodes: this.get('selectedNodes'),
-      networks: this.get('selectedNetworks'),
+      networks: this.uniqueSelected(this.get('selectedNetworks')),
       storage: this.storageId(this.get('selectedStorage')),
       currency: this.get('currency'),
       flag: this.get('currency') + ".svg",
       enabled: true,
-      advanced_settings: {},
+      advanced_settings: {
+        country: this.get('country')
+      },
       object_meta: {
         name: this.get('name'),
       },
@@ -161,17 +203,16 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     },
 
     selectCountry: function(isoType) {
-      this.set('currency', isoCurreny.getAllInfoByISO(isoType).currency)
+      let info = isoCurreny.getAllInfoByISO(isoType)
+      this.set('currency', info.currency);
+      this.set('country', info.countryName);
     },
 
     updateNodeData: function(select, data) {
       select ? this.get('selectedNodes').push(data) : this.get('selectedNodes').removeObject(data);
     },
 
-    updateNetworkData: function(select, data) {
-      select ? this.get('selectedNetworks').push(data) : this.get('selectedNetworks').removeObject(data);
-    },
+  }
 
-  },
 
 });

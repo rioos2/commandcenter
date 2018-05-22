@@ -617,8 +617,8 @@ stackPage:
       add_select_storage: Select a storage
       add_select_storage_placeholder: Select
       add_select_country_placeholder: Select country
-      add_select_node: Select Node
-      add_select_network: Select networks
+      add_select_node: Select Nodes
+      add_select_network: Apply Virtual Networks
       add:
         nameError: Enter location name
         storageError: Select storage
@@ -628,6 +628,7 @@ stackPage:
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
         networksDisplayError: Create networks before attempting add.
+        networksSelectError: Select virtual network for selected nodes.
     network:
       title: Virtual Networks
       ipRange: IP Range
@@ -647,7 +648,7 @@ stackPage:
       netmask: Netmask
       nodes: NODES
       name: Name
-      selectNode: Node select
+      selectNode: Select Nodes
       noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
       nameError: 'Missing name (example: riopub001)'
