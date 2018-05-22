@@ -2,20 +2,12 @@ import Ember from 'ember';
 const {
   get
 } = Ember;
-
 export default Ember.Component.extend({
   tagName: 'rio-radio',
   active: false,
   intl: Ember.inject.service(),
 
-  enabler: function() {
-    if (this.get('enable')){
-      return "";
-  } else {
-    return "disabled";
-  }
-}.property('enable'),
-
+  classNameBindings: ['enable::disabled'],
 
     actions: {
       sendType() {

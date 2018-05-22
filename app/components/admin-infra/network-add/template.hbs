@@ -16,10 +16,10 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="network_type">{{t 'stackPage.admin.network.type'}}</label>
-                <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "setNetwork" value="target.value"}}>
+                <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "setVirtualNetwork" value="target.value"}}>
                                                          <option disabled selected>select</option>
-                                                        {{#each networkList as |network|}}
-                                                        <option>{{network}}</option>
+                                                        {{#each virtualNetworks as |virtualNetwork|}}
+                                                        <option>{{virtualNetwork}}</option>
                                                         {{/each}}
                                                       </select>
               </div>
@@ -59,7 +59,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" {{action 'createNetwork'}} class="btn btn-default">
+          <button type="submit" {{action 'createVirtualNetwork'}} class="btn btn-default">
             {{t 'stackPage.admin.header.add_btn'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 export default Ember.Component.extend({
 
-  networkName: function(){
+  virtualNetworkName: function(){
     return this.get('model.object_meta.name');
   }.property('model.object_meta.name'),
 
@@ -14,6 +14,6 @@ export default Ember.Component.extend({
   }.property('model.network_type'),
 
   active: function() {
-    return Ember.isEqual(this.get('selectedNetwork'),this.get('model.id'))? "active" :"";
-  }.property('selectedNetwork'),
+    return Ember.isEqual(this.get('selectedVirtualNetwork'),this.get('model.id'))? "active" :"";
+  }.property('selectedVirtualNetwork'),
 });
