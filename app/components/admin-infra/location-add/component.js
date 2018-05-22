@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import isoCurreny from 'npm:iso-country-currency';
+import Cities from 'npm:full-countries-cities';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
 const {
@@ -42,6 +43,45 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       $("[name='country']").val('US');
       $("[name='country']").trigger('change');
     });
+  },
+
+
+
+  citiesUpdate: function() {
+    var cities = this.citiesByCountry();
+    console.log(JSON.stringify(cities));
+    var self = this;
+    $(function() {
+      var citiesData = cities;
+
+      function formatCities(city) {
+        if (!city.id) {
+          return city.text;
+        }
+        var $city = $(
+          '<span class="flag-text" style="margin-left: 10px;">' + city.text + "</span>"
+        );
+        return $city;
+      };
+      $("#cities").select2().empty();
+      $("#cities").select2({
+        placeholder: "Select a city",
+        templateResult: formatCities,
+        data: citiesData,
+      });
+      if(citiesData) {
+        $("#cities").val(citiesData[0]);
+        $("#cities").trigger('change');
+      } else {
+        self.set('city', '');
+      }
+    });
+
+
+  },
+
+  citiesByCountry: function() {
+    return Cities.getCities(this.get('country'));
   },
 
   storages: function() {
@@ -95,8 +135,8 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
 
 
   validation() {
-    if (Ember.isEmpty(this.get('name'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.nameError'));
+    if (Ember.isEmpty(this.get('city'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.cityError'));
       return true;
     } else if (Ember.isEmpty(this.get('selectedStorage'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.storageError'));
@@ -127,7 +167,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         country: this.get('country')
       },
       object_meta: {
-        name: this.get('name'),
+        name: this.get('city'),
       },
       status: {
         phase: "ready"
@@ -164,10 +204,15 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       this.set('selectedStorage', storage);
     },
 
+    selectCity: function(city) {
+      this.set('city', city);
+    },
+
     selectCountry: function(isoType) {
       let info = isoCurreny.getAllInfoByISO(isoType)
       this.set('currency', info.currency);
       this.set('country', info.countryName);
+      this.citiesUpdate();
     },
 
     updateNodeData: function(select, data) {
