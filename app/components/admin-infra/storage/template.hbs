@@ -4,11 +4,11 @@
 	<div class="panel panel-default kv-panel">
 		<div class="panel-heading">
 			<div class="panel-header">
-				{{t 'stackPage.admin.storage.connected'}} ({{count}})
+				{{t 'stackPage.admin.storage.connected'}} ({{availableSize}})
 			</div>
 		</div>
 		<div class="panel-body">
-			{{#if storageFound}}
+			{{#if storageAvailable}}
 				<div class="storage-container">
 					{{#each storages as |storage|}}
 						{{admin-infra/storage-detail model=storage storagespool=storagespool selectedStorage=selectedStorage storageData=storageData click=(action "SideData" storage) }}

@@ -1,33 +1,30 @@
 <div class="rio-admin">
 	<div class="container-fluid main">
-				<div class="row">
-					<div class="kv-content-menu">
-							<nav class="navbar navbar-expand-lg navbar-light bg-light">
-								   <div class="navbar-header">
-										  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#kv_third_nav" aria-expanded="false">
+		<div class="row">
+			<div class="kv-content-menu">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#kv_third_nav" aria-expanded="false">
 										<span class="sr-only">{{t 'stackPage.admin.header.toggle'}}</span>
 										<span class="icon-bar"></span>
 										<span class="icon-bar"></span>
 										<span class="icon-bar"></span>
 									  </button>
-									</div>
-									<div class="collapse navbar-collapse" id="kv_third_nav" >
-										<div class="col-sm-9 content-left">
-      								<ul class="nav navbar-nav">
-											{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="storage"}}
-											{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="network"}}
-											{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="locations" }}
-											{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="node"}}
-											</ul>
-										</div>
-											<div class="vm-modal-body">
-										{{#each panels as |tab|}}
-											{{component tab selectedTab=selectedTab model=model }}
-										{{/each}}
-									</div>
-								</div>
-							</nav>
+					</div>
+					<div class="collapse navbar-collapse" id="kv_third_nav">
+						<div class="col-sm-9 content-left">
+							<ul class="nav navbar-nav">
+								{{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="node"}} {{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="storage"}} {{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="network"}} {{admin-infra/admin-tab panels=panels selectedTab=selectedTab tab="locations" }}
+							</ul>
 						</div>
+						<div class="vm-modal-body">
+							{{#each panels as |tab|}}
+								{{component tab selectedTab=selectedTab model=model }}
+							{{/each}}
+						</div>
+					</div>
+				</nav>
 			</div>
-			</div>
+		</div>
+	</div>
 </div>

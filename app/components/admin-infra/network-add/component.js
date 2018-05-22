@@ -10,7 +10,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   selectedNodes: [],
   selectedBridges: [],
 
-  networkList: function() {
+  virtualNetworks: function() {
     return C.AVAILABLE_NETWORK_TYPES;
   }.property(),
 
@@ -103,7 +103,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.attachAndDetachNode(active, name);
     },
 
-    setNetwork: function(value) {
+    setVirtualNetwork: function(value) {
       this.set('type', value);
     },
 
@@ -119,7 +119,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       }
     },
 
-    createNetwork: function() {
+    createVirtualNetwork: function() {
       this.set('showSpinner', true);
       if (!this.validation()) {
         this.get('userStore').rawRequest(this.rawRequestOpts({

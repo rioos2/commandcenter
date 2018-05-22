@@ -1,7 +1,7 @@
 <div class="network-detail-container">
 	<div class="network-detail-box" id="sd_detail1">
 		<div class="network-active-detail-name">
-			{{name}}
+			{{#if nodeAvailable}}{{name}} {{else}} &nbsp;{{/if}}
 		</div>
 		<div class="network-active-detail-detail">
 			<div class="sd-subheader">{{t 'stackPage.admin.network.detail'}}</div>

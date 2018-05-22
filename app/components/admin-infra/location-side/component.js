@@ -6,9 +6,9 @@ name: function(){
 return this.get('model.object_meta.name');
 }.property('model.object_meta.name'),
 
-currency: function(){
-  return this.get('model.currency');
-}.property('model.currency'),
+country: function(){
+  return !Ember.isEmpty(this.get('model.advanced_settings.country'))? this.get('model.advanced_settings.country') : "";
+}.property('model.advanced_settings.country'),
 
 status: function(){
   return Ember.isEmpty(this.get('model.status.phase')) ? "": this.get('model.status.phase').capitalize();

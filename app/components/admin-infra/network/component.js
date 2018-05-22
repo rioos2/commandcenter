@@ -2,34 +2,34 @@ import {
   buildAdminInfraPanel
 } from '../admin-infra-panel/component';
 export default buildAdminInfraPanel('network', {
-  network: null,
+  virtualNetwork: null,
   selectedNodes: null,
 
   didInsertElement: function() {
-    if (!Ember.isEmpty(this.get('networks'))) {
-      this.send('SideData', this.get('networks').get('firstObject'));
+    if (!Ember.isEmpty(this.get('virtualNetworks'))) {
+      this.send('SideData', this.get('virtualNetworks').get('firstObject'));
     }
   },
 
   availableSize: function() {
-    return this.get('networks').length;
-  }.property('networks'),
+    return this.get('virtualNetworks').length;
+  }.property('virtualNetworks'),
 
-  networkAvailable: function() {
+  virtualNetworkAvailable: function() {
     return this.get('availableSize') > 0 ;
   }.property('availableSize'),
 
-  networks: function() {
-    return this.get('model.networks.content');
+  virtualNetworks: function() {
+    return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
   }.property('model.networks.content'),
 
   nodes: function(){
     return this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
-  appliedNodesFor: function(network) {
+  appliedNodesFor: function(virtualNetwork) {
     return this.get('nodes').map(function(node) {
-      if (Object.keys(network.bridge_hosts).includes(node.id)){
+      if (Object.keys(virtualNetwork.bridge_hosts).includes(node.id)){
         return node;
       }
     }).filter(val => val !== undefined);
@@ -37,8 +37,8 @@ export default buildAdminInfraPanel('network', {
 
   actions: {
     SideData: function(net) {
-      this.set('network', net);
-      this.set('selectedNetwork', net.id);
+      this.set('virtualNetwork', net);
+      this.set('selectedVirtualNetwork', net.id);
       this.set('selectedNodes', this.appliedNodesFor(net));
     }
   }

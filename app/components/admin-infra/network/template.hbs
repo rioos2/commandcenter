@@ -10,10 +10,10 @@
 			</div>
 		</div>
 		<div class="panel-body">
-			{{#if networkAvailable}}
+			{{#if virtualNetworkAvailable}}
 			<div class="network-container">
-				{{#each networks as |net|}}
-					{{admin-infra/network-detail model=net nodes=selectedNodes network=network selectedNetwork=selectedNetwork click=(action "SideData" net)}}
+				{{#each virtualNetworks as |net|}}
+					{{admin-infra/network-detail model=net nodes=selectedNodes virtualNetwork=virtualNetwork selectedVirtualNetwork=selectedVirtualNetwork click=(action "SideData" net)}}
 				{{/each}}
 				</div>
 			{{else}}
@@ -32,5 +32,5 @@
 	</div>
 </div>
 <div class="col-sm-3 content-right">
-		{{admin-infra/network-side model=network nodes=nodes}}
+		{{admin-infra/network-side model=virtualNetwork nodes=selectedNodes}}
 </div>

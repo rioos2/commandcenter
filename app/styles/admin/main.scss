@@ -461,9 +461,10 @@ header {
   border: 1px solid #E2E6F2;
   border-radius: 3px;
   padding-right: 35px;
-
+  cursor: pointer;
   &.active {
     border: 1px solid rgba(121, 121, 187, 0.5);
+    cursor: default;
   }
 
   .cluster-subbox-1,
