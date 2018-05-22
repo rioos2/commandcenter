@@ -35,10 +35,6 @@ export default Component.extend({
     return (!Ember.isEmpty(this.get('model.status.reason'))) ? this.get('model.status.reason') : "";
   }.property('model.status.reason', 'assemblyStatus'),
 
-  metricsUpdater: function() {
-    this.set('model.spec.metrics', this.metricsDataFinder());
-  }.property('model.spec.metrics'),
-
   image: function() {
     return this.get('assemblyFactory.spec.plan.icon');
   }.property('model'),
@@ -112,7 +108,7 @@ export default Component.extend({
        this.set('spec.metrics.name', "gauge" + this.get('model.id'));
      }
     return this.metricsDataFinder();
-  }.property('model'),
+  }.property('model.spec.metrics.@each'),
 
   metricsDataFinder: function() {
     if (!(this.get('model.spec.metrics.' + this.get('model.id')) == undefined)) {
