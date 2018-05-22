@@ -8,7 +8,7 @@ return this.get('model.object_meta.name');
 
 country: function(){
   return !Ember.isEmpty(this.get('model.advanced_settings.country'))? this.get('model.advanced_settings.country') : "";
-}.property('model.currency'),
+}.property('model.advanced_settings.country'),
 
 status: function(){
   return Ember.isEmpty(this.get('model.status.phase')) ? "": this.get('model.status.phase').capitalize();
