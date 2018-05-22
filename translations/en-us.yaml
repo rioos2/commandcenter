@@ -611,16 +611,16 @@ stackPage:
       noClusterData: No locations added yet.
       noClusterNode: No nodes attached.
       noClusterNetwork: No virtual networks attached.
-      add_title: Add a Location
-      add_name: Enter a city name
-      add_country: Select a country
-      add_select_storage: Select a storage
+      add_title: Add Location
+      add_city: Select city
+      add_country: Select country
+      add_select_storage: Select storage
       add_select_storage_placeholder: Select
       add_select_country_placeholder: Select country
       add_select_node: Select Node
       add_select_network: Select networks
       add:
-        nameError: Enter location name
+        cityError: Select city
         storageError: Select storage
         currencyError: Select country
         nodesError: Select nodes
