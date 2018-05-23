@@ -10,8 +10,8 @@ export default Ember.Component.extend({
 
 
   enabler: function() {
-    return Ember.isEmpty(this.get('point')) ? "" : 'disabled';
-  }.property('point'),
+    return ((this.get('type') == 'rioos_sh/ceph') && (Ember.isEmpty(this.get('disk.point')) && this.get('disk.type') == "disk")) ? "" : ((Ember.isEmpty(this.get('disk.point')) && this.get('type') != 'rioos_sh/ceph') ? "" : 'disabled');
+  }.property('disk', 'type'),
 
   errorMsg: function() {
     return !this.get('enabler') ? "" : get(this, 'intl').t('stackPage.admin.storage.pool.diskChooseMsg');

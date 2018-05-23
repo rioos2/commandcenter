@@ -16,7 +16,7 @@
 
               {{#each removeRootPartitions as |key|}}
                 <div class="col-xs-6">
-                  {{admin-infra/storage-checkbox name=key.disk point=key.point updatePoolData="updatePoolData"}}
+                  {{admin-infra/storage-checkbox disk=key type=type updatePoolData="updatePoolData"}}
                 </div>
               {{/each}}
             </div>
