@@ -558,6 +558,7 @@ stackPage:
       status: Status
       metrics: Metrics
       metricsShow: View
+      addNode: 'Add Node'
     storage:
       title: Storages
       connected: 'Connected Storages'
@@ -596,6 +597,7 @@ stackPage:
         diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
         disks: Disks
         list: View
+        storagesDisplayError: Create storage before attempting create pool.
 
     locations:
       title: Locations

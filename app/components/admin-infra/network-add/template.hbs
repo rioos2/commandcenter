@@ -7,6 +7,13 @@
       </div>
       <div class="modal-body">
         <form action="#">
+          {{#if error}}
+						<div class="row">
+							<div class="col-sm-12">
+								<span class="error-page-text"><i class="fa fa-exclamation-circle"></i> {{pageWarning}}</span>
+							</div>
+						</div>
+					{{else}}
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
@@ -61,7 +68,7 @@
                 <div class="rio-radio mov-top">
                   {{#each nodeBridgeData as |data|}}
                     <div class="col-xs-12">
-                      {{admin-infra/node-checkbox name=data.name data=data updatePoolData="updatePoolData"  setBridge= "setBridge"}}
+                      {{admin-infra/node-checkbox name=data.name data=data updatePoolData="updatePoolData" type=type  setBridge= "setBridge"}}
                     </div>
                   {{/each}}
                 </div>
@@ -74,6 +81,7 @@
             <i class="fa fa-circle-o-notch fa-spin"></i>
             {{/if}}
           </button>
+          {{/if}}
         </form>
       </div>
     </div>

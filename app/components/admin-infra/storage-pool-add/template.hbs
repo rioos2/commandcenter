@@ -7,6 +7,13 @@
       </div>
       <div class="modal-body">
         <form action="/action_page.php">
+          {{#if error}}
+						<div class="row">
+							<div class="col-sm-12">
+								<span class="error-page-text"><i class="fa fa-exclamation-circle"></i> {{pageWarning}}</span>
+							</div>
+						</div>
+					{{else}}
           <div class="form-group">
             <label for="poolname">{{t 'stackPage.admin.storage.name'}} </label> {{input type="text" class="form-control" id="poolname" value=name}}
           </div>
@@ -16,7 +23,7 @@
 
               {{#each removeRootPartitions as |key|}}
                 <div class="col-xs-6">
-                  {{admin-infra/storage-checkbox name=key.disk point=key.point updatePoolData="updatePoolData"}}
+                  {{admin-infra/storage-checkbox disk=key type=type updatePoolData="updatePoolData"}}
                 </div>
               {{/each}}
             </div>
@@ -29,6 +36,7 @@
               {{/if}}
             </button>
           </div>
+          {{/if}}
         </form>
       </div>
     </div>

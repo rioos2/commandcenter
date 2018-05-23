@@ -10,7 +10,7 @@
 <label for="network_type"></label>
 <select class="form-control {{enabler}}" id="{{data.name}}" name="modal_cluster_storage" onchange= {{action "sendBridge" value="target.value"}}>
                                          <option disabled selected>select</option>
-                                        {{#each data.bridges as |bridge|}}
+                                        {{#each bridges as |bridge|}}
                                         <option>{{bridge.value}}</option>
                                         {{/each}}
                                       </select>

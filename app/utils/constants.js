@@ -71,6 +71,9 @@ var C = {
       READY: ["ready","running"],
       NOTREADY: ["notready"],
     },
+    STORAGE_TYPE:{
+      CEPH: "rioos_sh/ceph",
+    },
   },
 
   AVAILABLE_NETWORK_TYPES:  ["private_ipv4", "private_ipv6", "public_ipv4", "public_ipv6"],
