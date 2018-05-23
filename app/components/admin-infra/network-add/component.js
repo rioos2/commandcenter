@@ -9,6 +9,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   notifications: Ember.inject.service('notification-messages'),
   selectedNodes: [],
   selectedBridges: [],
+  type: null,
 
   virtualNetworks: function() {
     return C.AVAILABLE_NETWORK_TYPES;
@@ -25,6 +26,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         node.status.node_info.bridges.forEach(function(name) {
           data.bridges.addObject({
             value: name.bridge_name,
+            types: name.network_types,
           });
         });
         return data;
