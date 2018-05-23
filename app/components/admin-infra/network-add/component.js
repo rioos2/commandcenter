@@ -59,6 +59,26 @@ export default Ember.Component.extend(DefaultHeaders, {
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
   },
 
+  checkNetmaskFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.NETMASK) : !ip.match(C.REGEX.IPV6.NETMASK);
+  },
+
+  checkIpFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.IP) : !ip.match(C.REGEX.IPV6.IP);
+  },
+
+  checkSubnetFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.SUBNET) : !ip.match(C.REGEX.IPV6.SUBNET);
+  },
+
+  // checkIpType: function() {
+  //   return this.get('type').includes('ipv4');
+  // },
+
+  checkIpType: function() {
+    return !this.get('type').includes('ipv4') ? "ipv6" : "ipv4";
+  },
+
   validation() {
     if (Ember.isEmpty(this.get('name'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.nameError'));
@@ -72,12 +92,24 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.gatewayError'));
       return true;
     } else
-    if (Ember.isEmpty(this.get('netmask'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskError'));
+    if (this.checkIpFormate(this.get('gateway'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.gatewayError'+ this.checkIpType()));
       return true;
     } else
     if (Ember.isEmpty(this.get('subnet'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetError'));
+      return true;
+    } else
+    if (this.checkSubnetFormate(this.get('subnet'))) {
+      this.checkIpType() ? this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetIpv4RangeError')) : this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetIpv6RangeError'));
+      return true;
+    } else
+    if (Ember.isEmpty(this.get('netmask'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskError'));
+      return true;
+    }  else
+    if (this.checkNetmaskFormate(this.get('netmask'))) {
+      this.checkIpType() ? this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskIpv4Error')) : this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskIpv4Error'));
       return true;
     } else if (Ember.isEmpty(this.get('selectedBridges'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
