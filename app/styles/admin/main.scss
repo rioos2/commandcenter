@@ -2,40 +2,40 @@
 /*! variables.less | (c) 2018 kvzone */
 /*! mixins.less | (c) 2018 kvzone */
 /*! mixins.less | (c) 2018 kvzone */
-@font-face {
-  font-family: 'Avenir-Medium';
-  src: url("../fonts/Avenir-Medium.eot");
-  src: url("../fonts/Avenir-Medium.woff2") format("woff2"), url("../fonts/Avenir-Medium.woff") format("woff"), url("../fonts/Avenir-Medium.ttf") format("truetype"), url("../fonts/Avenir-Medium.svg#Avenir-Medium") format("svg"), url("../fonts/Avenir-Medium.eot?#iefix") format("embedded-opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'AvenirLTStd-Light';
-  src: url("../fonts/AvenirLTStd-Light.woff") format("woff"), url("../fonts/AvenirLTStd-Light.ttf") format("truetype"), url("../fonts/AvenirLTStd-Light.svg#AvenirLTStd-Light") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'avenir-light';
-  src: url("../fonts/avenir-light.eot");
-  src: url("../fonts/avenir-light.woff2") format("woff2"), url("../fonts/avenir-light.eot?#iefix") format("embedded-opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Avenir-Heavy';
-  src: url("../fonts/Avenir-Heavy.eot");
-  src: url("../fonts/Avenir-Heavy.woff2") format("woff2"), url("../fonts/Avenir-Heavy.woff") format("woff"), url("../fonts/Avenir-Heavy.ttf") format("truetype"), url("../fonts/Avenir-Heavy.svg#Avenir-Heavy") format("svg"), url("../fonts/Avenir-Heavy.eot?#iefix") format("embedded-opentype");
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Avenir-Book';
-  src: url("../fonts/Avenir-Book.eot");
-  src: url("../fonts/Avenir-Book.woff2") format("woff2"), url("../fonts/Avenir-Book.woff") format("woff"), url("../fonts/Avenir-Book.ttf") format("truetype"), url("../fonts/Avenir-Book.svg#Avenir-Book") format("svg"), url("../fonts/Avenir-Book.eot?#iefix") format("embedded-opentype");
-  font-weight: normal;
-  font-style: normal;
-}
+// @font-face {
+//   font-family: 'Avenir-Medium';
+//   src: url("../fonts/Avenir-Medium.eot");
+//   src: url("../fonts/Avenir-Medium.woff2") format("woff2"), url("../fonts/Avenir-Medium.woff") format("woff"), url("../fonts/Avenir-Medium.ttf") format("truetype"), url("../fonts/Avenir-Medium.svg#Avenir-Medium") format("svg"), url("../fonts/Avenir-Medium.eot?#iefix") format("embedded-opentype");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: 'AvenirLTStd-Light';
+//   src: url("../fonts/AvenirLTStd-Light.woff") format("woff"), url("../fonts/AvenirLTStd-Light.ttf") format("truetype"), url("../fonts/AvenirLTStd-Light.svg#AvenirLTStd-Light") format("svg");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: 'avenir-light';
+//   src: url("../fonts/avenir-light.eot");
+//   src: url("../fonts/avenir-light.woff2") format("woff2"), url("../fonts/avenir-light.eot?#iefix") format("embedded-opentype");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: 'fselliot';
+//   src: url("../fonts/fselliot.eot");
+//   src: url("../fonts/fselliot.woff2") format("woff2"), url("../fonts/fselliot.woff") format("woff"), url("../fonts/fselliot.ttf") format("truetype"), url("../fonts/fselliot.svg#fselliot") format("svg"), url("../fonts/fselliot.eot?#iefix") format("embedded-opentype");
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: 'Avenir-Book';
+//   src: url("../fonts/Avenir-Book.eot");
+//   src: url("../fonts/Avenir-Book.woff2") format("woff2"), url("../fonts/Avenir-Book.woff") format("woff"), url("../fonts/Avenir-Book.ttf") format("truetype"), url("../fonts/Avenir-Book.svg#Avenir-Book") format("svg"), url("../fonts/Avenir-Book.eot?#iefix") format("embedded-opentype");
+//   font-weight: normal;
+//   font-style: normal;
+// }
 /*! standalone.less | (c) 2018 kvzone */
 /*! root.less | (c) 2018 kvzone Inc. */
 /*! site.less | (c) 2018 kvzone  */
@@ -52,7 +52,7 @@ a:focus {
 }
 
 .checkbox_label {
-  font-family: Avenir-Heavy;
+  font-family: fselliot;
   font-size: 18px;
   color: #58595E;
   text-align: right;
@@ -146,7 +146,7 @@ header {
         > a {
           font-size: 16px;
           color: #9AA7BC;
-          font-family: Avenir-Heavy;
+          font-family: fselliot;
           text-transform: capitalize;
         }
 
@@ -177,7 +177,7 @@ header {
 .error-page-text {
   display: table-cell;
   text-align: left;
-  font-family: Avenir-Medium;
+  font-family: fselliot;
   font-size: 18px;
   color: #9AA7BC;
 }
@@ -210,13 +210,13 @@ header {
       > a {
         font-size: 14px;
         color: #818DB2;
-        font-family: Avenir-Heavy;
+        font-family: fselliot;
         text-transform: capitalize;
       }
 
       &.user_change_link {
         span {
-          font-family: Avenir-Heavy;
+          font-family: fselliot;
           font-size: 16px;
           color: #ADB6C2;
           letter-spacing: 0;
@@ -251,7 +251,7 @@ header {
     padding: 0;
 
     > li > a {
-      font-family: Avenir-Medium;
+      font-family: fselliot;
       font-size: 18px;
       color: #9AA7BC;
       text-transform: capitalize;
@@ -282,7 +282,7 @@ header {
 
     .panel-header {
       padding: 10px 0;
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
       width: auto;
@@ -296,7 +296,7 @@ header {
       .btn {
         background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
         border-radius: 3px;
-        font-family: Avenir-Heavy;
+        font-family: fselliot;
         font-size: 16px;
         color: #FFFFFF;
         width: 100%;
@@ -350,7 +350,7 @@ header {
     .empty-storage .empty-network-add-link a,
     .empty-storage .empty-storage-add-link a {
       color: #3333B3;
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 20px;
     }
   }
@@ -424,7 +424,7 @@ header {
     border-bottom: 1px solid rgba(151, 151, 151, 0.2);
 
     .st-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #5151BF;
       letter-spacing: 0;
@@ -435,7 +435,7 @@ header {
     padding: 28px 0 28px 25px;
 
     .sub-title {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #9AA7BC;
       letter-spacing: 0;
@@ -443,7 +443,7 @@ header {
     }
 
     .sub-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
       letter-spacing: 0;
@@ -477,7 +477,7 @@ header {
     border-bottom: 1px solid rgba(151, 151, 151, 0.2);
 
     .st-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #5151BF;
       letter-spacing: 0;
@@ -488,7 +488,7 @@ header {
     padding: 28px 0 28px 25px;
 
     .sub-title {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #9AA7BC;
       letter-spacing: 0;
@@ -496,7 +496,7 @@ header {
     }
 
     .sub-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
       letter-spacing: 0;
@@ -532,7 +532,7 @@ header {
     border-bottom: 1px solid rgba(151, 151, 151, 0.2);
 
     .st-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #5151BF;
       letter-spacing: 0;
@@ -543,7 +543,7 @@ header {
     padding: 28px 0 28px 25px;
 
     .sub-title {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #9AA7BC;
       letter-spacing: 0;
@@ -551,7 +551,7 @@ header {
     }
 
     .sub-name {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
       letter-spacing: 0;
@@ -595,7 +595,7 @@ header {
 
 .storage-detail-container {
   .storage-active-detail-name {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
     padding: 21px 15px;
@@ -603,7 +603,7 @@ header {
   }
 
   .sd-subheader {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #58595E;
     letter-spacing: 0;
@@ -622,19 +622,19 @@ header {
   .sd-title {
     display: table-cell;
     text-align: left;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
 
   .sd-title.leader {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
   }
 
   .sd-value {
     display: table-cell;
     text-align: right;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
 
@@ -656,7 +656,7 @@ header {
     float: left;
     padding-left: 15px;
     padding-bottom: 15px;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
@@ -666,7 +666,7 @@ header {
     padding: 26px 0;
 
     a {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 16px;
       color: #5151BF;
       text-align: right;
@@ -679,7 +679,7 @@ header {
 
   .sd-less-disk,
   .sd-more-disk {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #5151BF;
     text-align: center;
@@ -695,7 +695,7 @@ header {
 
 .network-detail-container {
   .network-active-detail-name {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
     padding: 21px 15px;
@@ -703,7 +703,7 @@ header {
   }
 
   .sd-subheader {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #58595E;
     letter-spacing: 0;
@@ -722,7 +722,7 @@ header {
   .sd-title {
     display: table-cell;
     text-align: left;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
@@ -730,7 +730,7 @@ header {
   .sd-value {
     display: table-cell;
     text-align: right;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
 
@@ -750,7 +750,7 @@ header {
 
 .cluster-detail-container {
   .cluster-active-detail-name {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
     padding: 21px 15px;
@@ -761,7 +761,7 @@ header {
       display: inline-block;
 
       a {
-        font-family: Avenir-Heavy;
+        font-family: fselliot;
         font-size: 16px;
         color: #5151BF;
         text-align: right;
@@ -770,7 +770,7 @@ header {
   }
 
   .sd-subheader {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #58595E;
     letter-spacing: 0;
@@ -789,7 +789,7 @@ header {
   .sd-title {
     display: table-cell;
     text-align: left;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
@@ -797,7 +797,7 @@ header {
   .sd-value {
     display: table-cell;
     text-align: right;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 18px;
     color: #58595E;
 
@@ -819,7 +819,7 @@ header {
     float: left;
     padding-left: 15px;
     padding-bottom: 15px;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
@@ -829,7 +829,7 @@ header {
     padding: 26px 0;
 
     a {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 16px;
       color: #5151BF;
       text-align: right;
@@ -842,7 +842,7 @@ header {
 
   .sd-less-disk,
   .sd-more-disk {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #5151BF;
     text-align: center;
@@ -868,7 +868,7 @@ header {
 }
 
 .sd-more-cluster-nodes {
-  font-family: Avenir-Heavy;
+  font-family: fselliot;
   font-size: 16px;
   color: #5151BF;
   text-align: right;
@@ -901,7 +901,7 @@ header {
     padding: 30px 30px 15px;
 
     .modal-title {
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
       line-height: 18px;
@@ -916,7 +916,7 @@ header {
   }
 
   label {
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 16px;
     color: #9AA7BC;
     letter-spacing: 0;
@@ -947,7 +947,7 @@ header {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
     border-radius: 3px;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 20px;
     color: #FFFFFF;
     height: 40px;
@@ -965,7 +965,7 @@ header {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
     border-radius: 3px;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 20px;
     color: #FFFFFF;
     height: 50px;
@@ -992,7 +992,7 @@ header {
       float: left;
       background: rgba(206, 214, 225, 0.5);
       border-radius: 3px;
-      font-family: Avenir-Heavy;
+      font-family: fselliot;
       font-size: 16px;
       color: #5151BF;
       margin: 5px;
@@ -1005,7 +1005,7 @@ header {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
     border-radius: 3px;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 20px;
     color: #FFFFFF;
     height: 50px;
@@ -1102,14 +1102,14 @@ header {
 
   .select2-selection__choice {
     background: rgba(206, 214, 225, 0.5) !important;
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #5151BF;
     padding: 4px 9px !important;
   }
 
   .select2-selection__choice__remove {
-    font-family: Avenir-Heavy;
+    font-family: fselliot;
     font-size: 16px;
     color: #D02F44 !important;
     float: right;
