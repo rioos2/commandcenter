@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import {
+  compare
+} from '@ember/utils';
 import C from 'nilavu/utils/constants';
 import isoCurreny from 'npm:iso-country-currency';
 import Cities from 'npm:full-countries-cities';
@@ -14,7 +17,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   notifications: Ember.inject.service('notification-messages'),
   tagName: '',
   selectedNodes: [],
-  selectedNetworks: [],
+  selectedVirtualNetworks: [],
   selectedStorage: '',
   error: false,
 
@@ -92,8 +95,8 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     return this.nameGetter(this.get('model.nodes.content'));
   }.property('model.nodes.content'),
 
-  networks: function() {
-    return this.nameGetter(this.get('model.networks.content'));
+  virtualNetworks: function() {
+    return this.get('model.networks.content');
   }.property('model.networks.content'),
 
   storageId: function(name) {
@@ -125,7 +128,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     } else if (Ember.isEmpty(this.get('nodes'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
       return true;
-    } else if (Ember.isEmpty(this.get('networks'))) {
+    } else if (Ember.isEmpty(this.get('virtualNetworks'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksDisplayError'));
       return true;
     } else {
@@ -147,18 +150,53 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     } else if (Ember.isEmpty(this.get('selectedNodes'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
       return true;
-    } else if (Ember.isEmpty(this.get('selectedNetworks'))) {
+    } else if (!this.filteredForSelectedVirtualNetworks(this.uniqueSelected(this.get('selectedVirtualNetworks')))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
+      return true;
+    } else if (Ember.isEmpty(this.get('selectedVirtualNetworks'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
       return true;
     } else {
       return false;
     }
   },
+  uniqueSelected: function(virtualNetworks) {
+    var uniqueVirtualNetworks = virtualNetworks.filter(function(item, index) {
+      return virtualNetworks.indexOf(item) == index;
+    });
+    return uniqueVirtualNetworks;
+  },
+
+  filteredForSelectedVirtualNetworks: function(uniqueVirtualNetworks) {
+    var filteredNodes = [];
+    var uniqueNetData = [];
+    var self = this;
+    uniqueVirtualNetworks.map(function(network_id) {
+      return self.get('virtualNetworks').filter(function(network) {
+        if (network_id == network.id) {
+          uniqueNetData.push(network);
+        }
+      });
+    });
+
+    this.get('selectedNodes').map(function(node_id) {
+      uniqueNetData.map(function(network) {
+        if (Object.keys(network.bridge_hosts).includes(node_id)) {
+          filteredNodes.push(node_id);
+        }
+      });
+    });
+    return this.areEqual(this.uniqueSelected(filteredNodes), this.get('selectedNodes'));
+  },
+
+  areEqual: function(filtedData, selectedData) {
+    return JSON.stringify(filtedData) == JSON.stringify(selectedData);
+  },
 
   getData: function() {
     return {
       nodes: this.get('selectedNodes'),
-      networks: this.get('selectedNetworks'),
+      networks: this.uniqueSelected(this.get('selectedVirtualNetworks')),
       storage: this.storageId(this.get('selectedStorage')),
       currency: this.get('currency'),
       flag: this.get('currency') + ".svg",
@@ -219,10 +257,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       select ? this.get('selectedNodes').push(data) : this.get('selectedNodes').removeObject(data);
     },
 
-    updateNetworkData: function(select, data) {
-      select ? this.get('selectedNetworks').push(data) : this.get('selectedNetworks').removeObject(data);
-    },
+  }
 
-  },
 
 });

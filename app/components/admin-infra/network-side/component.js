@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     return this.get('node');
   }.property('node'),
 
-  networkAvailable: function() {
+  virtualNetworkAvailable: function() {
     return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('subnet')) && Ember.isEmpty(this.get('type')) && Ember.isEmpty(this.get('gateway')));
   }.property('status','name','type','gateway','subnet'),
 

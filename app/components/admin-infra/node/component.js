@@ -20,7 +20,7 @@ export default buildAdminInfraPanel('node', {
   }.property('availableSize'),
 
   nodes: function(){
-    return this.get('model.nodes.content');
+    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
 
