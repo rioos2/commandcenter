@@ -11,6 +11,11 @@ export default Ember.Component.extend(DefaultHeaders, {
   tagName: '',
   selectedPools: [],
   activate: false,
+  error: false,
+
+  didInsertElement: function() {
+    this.set('error', this.displayMessage());
+  },
 
   //All partitions on particullar storage connector
   connectorPartitions: function() {
@@ -93,6 +98,21 @@ export default Ember.Component.extend(DefaultHeaders, {
       return false;
     }
   },
+  displayMessage() {
+    if (Ember.isEmpty(this.get('connector'))) {
+      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.storage.pool.storagesDisplayError'));
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  refresh() {
+  this.setProperties({
+   name: '',
+   selectedPools: '',
+  });
+ },
 
   actions: {
 
@@ -117,6 +137,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       })).then((xhr) => {
         this.set('showSpinner', false);
         location.reload();
+        this.refresh();
       }).catch((err) => {
         this.set('showSpinner', false);
       });
