@@ -2,6 +2,7 @@ import Ember from 'ember';
 const {
   get
 } = Ember;
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
   tagName: 'rio-radio',
@@ -10,7 +11,7 @@ export default Ember.Component.extend({
 
 
   enabler: function() {
-    return ((this.get('type') == 'rioos_sh/ceph') && (Ember.isEmpty(this.get('disk.point')) && this.get('disk.type') == "disk")) ? "" : ((Ember.isEmpty(this.get('disk.point')) && this.get('type') != 'rioos_sh/ceph') ? "" : 'disabled');
+    return ((this.get('type') == C.ADMIN.STORAGE_TYPE.CEPH) && (Ember.isEmpty(this.get('disk.point')) && this.get('disk.type') == "disk")) ? "" : ((Ember.isEmpty(this.get('disk.point')) && this.get('type') != C.ADMIN.STORAGE_TYPE.CEPH) ? "" : 'disabled');
   }.property('disk', 'type'),
 
   errorMsg: function() {
