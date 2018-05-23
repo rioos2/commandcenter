@@ -656,13 +656,16 @@ stackPage:
       nameError: 'Missing name (example: riopub001)'
       typeError: Missing type
       subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)'
-      subnetIpRangeError: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29)'
+      subnetIpv4RangeError: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29)'
+      subnetIpv6RangeError: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)'
       gatewayError: 'Missing Gateway IP (example: 192.168.2.1)'
-      gatewayIpError: 'Enter vaild Gateway IP (example: 192.168.2.1)'
+      gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)'
+      gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)'
       brigeHostError: Missing bridge
       nodesError: Select node
       netmaskError: 'Missing Netmask (example: 255.255.255.0)'
-      netmaskIpError: 'Enter vaild Netmask (example: 255.255.255.0)'
+      netmaskIpv4Error: 'Enter vaild Netmask (example: 255.255.255.0)'
+      netmaskIpv6Error: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)'
 launcherPage:
   compute:
     selectType: Pick Cloud Type
