@@ -2,6 +2,7 @@ import Ember from 'ember';
 const {
   get
 } = Ember;
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
   tagName: 'rio-radio',
@@ -10,8 +11,8 @@ export default Ember.Component.extend({
 
 
   enabler: function() {
-    return Ember.isEmpty(this.get('point')) ? "" : 'disabled';
-  }.property('point'),
+    return ((this.get('type') == C.ADMIN.STORAGE_TYPE.CEPH) && (Ember.isEmpty(this.get('disk.point')) && this.get('disk.type') == "disk")) ? "" : ((Ember.isEmpty(this.get('disk.point')) && this.get('type') != C.ADMIN.STORAGE_TYPE.CEPH) ? "" : 'disabled');
+  }.property('disk', 'type'),
 
   errorMsg: function() {
     return !this.get('enabler') ? "" : get(this, 'intl').t('stackPage.admin.storage.pool.diskChooseMsg');
@@ -20,7 +21,7 @@ export default Ember.Component.extend({
   actions: {
     sendType() {
       this.toggleProperty('active');
-      this.sendAction('updatePoolData', this.get('active'), this.get('name'));
+      this.sendAction('updatePoolData', this.get('active'), this.get('disk.disk'));
     },
   }
 });

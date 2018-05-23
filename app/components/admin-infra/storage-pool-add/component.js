@@ -16,7 +16,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   connectorPartitions: function() {
     if (!Ember.isEmpty(this.get('connector.storage_info.disks'))) {
       return this.get('connector.storage_info.disks').map(function(d) {
-          return {disk:d.disk, point:d.point};
+          return {disk:d.disk, point:d.point, type:d.disk_type};
       });
     }
     return [];
@@ -30,6 +30,10 @@ export default Ember.Component.extend(DefaultHeaders, {
     return [];
   }.property('pools'),
 
+  type: function(){
+      return !Ember.isEmpty(this.get('connector.storage_type')) ? this.get('connector.storage_type') : "" ;
+  }.property('connector.storage_type'),
+
   //Unique non-used partitions by comparing already used partitions on pool
   unUsedPartitions: function() {
     return this.get('connectorPartitions').filter(val => !this.get('usedPartitions').includes(val.disk)).filter(val => val.disk !== undefined);
@@ -38,7 +42,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   removeRootPartitions: function() {
     let allGroupedPartition = [];
     this.get('unUsedPartitions').forEach(function (val){
-            let groups ={disk: val.disk, point:val.point, group:[]};
+            let groups ={disk: val.disk, point:val.point, type:val.type, group:[]};
         this.get('unUsedPartitions').forEach(function (va){
                   if(!(val.disk == va.disk)) {
                     if(va.disk.includes(val.disk)) {
