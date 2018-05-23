@@ -630,7 +630,7 @@ stackPage:
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
         networksDisplayError: Create networks before attempting add.
-        networksSelectError: Select virtual network for selected nodes.
+        networksSelectError: Apply virtual networks for the selected nodes.
     network:
       title: Virtual Networks
       ipRange: IP Range
@@ -653,13 +653,14 @@ stackPage:
       selectNode: Select Nodes
       noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
-      nameError: 'Missing name (example: riopub001)'
+      nameError: Missing name (example- riopub001)&nbsp;<br>Missing name (example- riopub001)</br><br>Missing name (example- riopub001)</br><br>Missing name (example- riopub001)</br><br>Missing name (example- riopub001)</br><br>Missing name (example- riopub001)</br> 
       typeError: Missing type
       subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)'
       gatewayError: 'Missing Gateway IP (example: 192.168.2.1)'
       brigeHostError: Missing bridge
       nodesError: Select node
       netmaskError: 'Missing Netmask (example: 255.255.255.0)'
+      bridgeError: Select bridge for selected nodes.
 launcherPage:
   compute:
     selectType: Pick Cloud Type

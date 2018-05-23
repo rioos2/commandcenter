@@ -85,6 +85,9 @@ export default Ember.Component.extend(DefaultHeaders, {
     } else if (Ember.isEmpty(this.get('selectedNodes'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.nodesError'));
       return true;
+    } else if (this.get('selectedNodes').length != this.get('selectedBridges').length) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.bridgeError'));
+      return true;
     } else {
       return false;
     }

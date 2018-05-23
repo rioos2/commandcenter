@@ -168,6 +168,9 @@ header {
   // position: absolute;
   width: 100%;
 }
+.remove-capitalize {
+  text-transform: none !important;
+}
 
 .invisible {
   position: absolute;
