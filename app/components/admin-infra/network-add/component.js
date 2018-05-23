@@ -43,6 +43,18 @@ export default Ember.Component.extend(DefaultHeaders, {
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
   },
 
+  checkNetmaskFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.NETMASK) : !ip.match(C.REGEX.IPV6.NETMASK);
+  },
+
+  checkIpFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.IP) : !ip.match(C.REGEX.IPV6.IP);
+  },
+
+  checkSubnetFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.SUBNET) : !ip.match(C.REGEX.IPV6.SUBNET);
+  },
+
   validation() {
     if (Ember.isEmpty(this.get('name'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.nameError'));
@@ -56,12 +68,24 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.gatewayError'));
       return true;
     } else
-    if (Ember.isEmpty(this.get('netmask'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskError'));
+    if (this.checkIpFormate(this.get('gateway'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.gatewayIpError'));
       return true;
     } else
     if (Ember.isEmpty(this.get('subnet'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetError'));
+      return true;
+    } else
+    if (this.checkSubnetFormate(this.get('subnet'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetIpRangeError'));
+      return true;
+    } else
+    if (Ember.isEmpty(this.get('netmask'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskError'));
+      return true;
+    }  else
+    if (this.checkNetmaskFormate(this.get('netmask'))) {
+      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskIpError'));
       return true;
     } else if (Ember.isEmpty(this.get('selectedBridges'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
@@ -114,7 +138,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           self.get('selectedBridges').removeObject(bridge);
         }
       });
-      if(active){
+      if (active) {
         self.get('selectedBridges').addObject(value);
       }
     },
