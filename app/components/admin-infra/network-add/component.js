@@ -10,10 +10,24 @@ export default Ember.Component.extend(DefaultHeaders, {
   selectedNodes: [],
   selectedBridges: [],
   type: null,
+  error: false,
+
+  didInsertElement: function() {
+    this.set('error', this.displayMessage());
+  },
 
   virtualNetworks: function() {
     return C.AVAILABLE_NETWORK_TYPES;
   }.property(),
+
+  displayMessage() {
+    if (Ember.isEmpty(this.get('nodes'))) {
+      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
+      return true;
+    } else {
+      return false;
+    }
+  },
 
   nodeBridgeData: function() {
     if (!Ember.isEmpty(this.get('nodes'))) {
@@ -99,6 +113,17 @@ export default Ember.Component.extend(DefaultHeaders, {
       }
     };
   },
+  refresh() {
+  this.setProperties({
+   type: '',
+   subnet: '',
+   gateway: '',
+   netmask: '',
+   name: '',
+   selectedBridges:'',
+   selectedNodes:'',
+  });
+ },
 
   actions: {
     updatePoolData: function(active, name) {
@@ -116,7 +141,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           self.get('selectedBridges').removeObject(bridge);
         }
       });
-      if(active){
+      if (active) {
         self.get('selectedBridges').addObject(value);
       }
     },
@@ -131,6 +156,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         })).then((xhr) => {
           this.set('showSpinner', false);
           location.reload();
+          this.refresh();
         }).catch((err) => {
           this.set('showSpinner', false);
         });

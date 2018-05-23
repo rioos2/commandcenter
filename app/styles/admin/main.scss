@@ -319,6 +319,7 @@ header {
       text-align: center;
       left: 50%;
       transform: translate(-50%);
+      width: 100%;
     }
 
     .empty-network .pin-img img.img-responsive,
@@ -746,6 +747,15 @@ header {
     &.sd-yellow {
       color: #ffb238;
     }
+  }
+  .sd-empty-pool {
+    width: 100%;
+    float: left;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    font-family: Avenir-Medium;
+    font-size: 18px;
+    color: #9AA7BC;
   }
 }
 

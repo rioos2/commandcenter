@@ -212,6 +212,16 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
       }
     };
   },
+  refresh() {
+  this.setProperties({
+   selectedNodes: '',
+   selectedVirtualNetworks: '',
+   selectedStorage: '',
+   currency: '',
+   country: '',
+   city:'',
+  });
+ },
 
   actions: {
 
@@ -225,6 +235,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         })).then((xhr) => {
           this.set('showSpinner', false);
           location.reload();
+          this.refresh();
         }).catch((err) => {
           this.set('showSpinner', false);
         });
