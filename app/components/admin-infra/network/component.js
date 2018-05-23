@@ -24,7 +24,7 @@ export default buildAdminInfraPanel('network', {
   }.property('model.networks.content'),
 
   nodes: function(){
-    return this.get('model.nodes.content');
+    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
   appliedNodesFor: function(virtualNetwork) {

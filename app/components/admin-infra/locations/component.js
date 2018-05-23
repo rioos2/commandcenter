@@ -27,15 +27,15 @@ export default buildAdminInfraPanel('locations', {
   }.property('model.datacenters.content'),
 
   nodes: function() {
-    return this.get('model.nodes.content');
+    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
   storages: function() {
-    return this.get('model.storageConnectors.content');
+    return Ember.isEmpty(this.get('model.storageConnectors.content'))? [] : this.get('model.storageConnectors.content');
   }.property('model.storageConnectors.content'),
 
   virtualNetworks: function() {
-    return this.get('model.networks.content');
+    return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
   }.property('model.networks.content'),
 
   filterStoragesFor: function(location) {
