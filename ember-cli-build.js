@@ -55,6 +55,7 @@ module.exports = function(defaults) {
   app.import('vendor/charts/topojson.v0.min.js');
 
 
+  app.import('vendor/admin/jquery.js');
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');
@@ -70,7 +71,6 @@ module.exports = function(defaults) {
   app.import('vendor/moment.js');
   app.import('vendor/charts/d3script-globe.js');
   app.import('vendor/admin/jquery-scrollbar.js');
-  app.import('vendor/admin/jquery.js');
   app.import('vendor/admin/select2-min.js');
   app.import('vendor/admin/select2.js');
 

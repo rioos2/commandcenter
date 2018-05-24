@@ -71,10 +71,6 @@ export default Ember.Component.extend(DefaultHeaders, {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.SUBNET) : !ip.match(C.REGEX.IPV6.SUBNET);
   },
 
-  // checkIpType: function() {
-  //   return this.get('type').includes('ipv4');
-  // },
-
   checkIpType: function() {
     return !this.get('type').includes('ipv4') ? "ipv6" : "ipv4";
   },
