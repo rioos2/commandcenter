@@ -547,6 +547,7 @@ stackPage:
     header:
       toggle: Toggle navigation
       add_btn: Add
+      save_btn: Save
     node:
       title: Nodes
       connected: 'Connected Nodes'
@@ -577,6 +578,9 @@ stackPage:
       pass: Password
       user: Username
       noStorageData: No storages added yet.
+      edit_title: Edit Storage
+      nameError: Enter storage Name
+      edit: Edit
       disk:
         list: DISKS
         free: Free Disk / Partition
