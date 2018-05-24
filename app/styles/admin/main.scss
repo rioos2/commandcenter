@@ -82,7 +82,7 @@ header {
           &:-ms-input-placeholder,
           &::-moz-placeholder,
           &::-webkit-input-placeholder {
-            font-family: Avenir-Light;
+            font-family: fselliot;
             font-size: 20px;
             color: #9DA8B6;
           }
@@ -305,7 +305,7 @@ header {
     .empty-storage .empty-network-add-link span,
     .empty-storage .empty-storage-add-link span {
       line-height: 25px;
-      font-family: Avenir-Book;
+      font-family: fselliot;
       font-size: 18px;
       color: #A1A1A1;
       letter-spacing: 0;
@@ -333,7 +333,7 @@ header {
 
   .empty-view {
     opacity: 0.5;
-    font-family: Avenir-Book;
+    font-family: fselliot;
     font-size: 18px;
     color: #A1A1A1;
     text-align: center;
@@ -574,12 +574,12 @@ header {
     padding: 21px 15px;
     border-bottom: 1px solid #DCE2EA;
 
-    .cluster-edit {
+    .storage-edit {
       float: right;
       display: inline-block;
 
       a {
-        font-family: Avenir-Heavy;
+        font-family: fselliot;
         font-size: 16px;
         color: #5151BF;
         text-align: right;
@@ -686,6 +686,18 @@ header {
     color: #58595E;
     padding: 21px 15px;
     border-bottom: 1px solid #DCE2EA;
+
+    .network-edit {
+      float: right;
+      display: inline-block;
+
+      a {
+        font-family: fselliot;
+        font-size: 16px;
+        color: #5151BF;
+        text-align: right;
+      }
+    }
   }
 
   .sd-subheader {
@@ -738,7 +750,7 @@ header {
     float: left;
     padding-left: 15px;
     padding-bottom: 15px;
-    font-family: Avenir-Medium;
+    font-family: fselliot;
     font-size: 18px;
     color: #9AA7BC;
   }
@@ -1024,7 +1036,7 @@ header {
 
   .form-group {
     .filter-col {
-      font-family: Avenir-Book;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
     }
@@ -1033,7 +1045,7 @@ header {
       border: 1px solid #BCBCDD;
       border-radius: 3px;
       height: 40px;
-      font-family: Avenir-Book;
+      font-family: fselliot;
       font-size: 18px;
       color: #58595E;
     }
