@@ -46,7 +46,7 @@ function renderGlobeChart(params, notifications) {
       }
     }
     if (y.length != 0) {
-      notifications.warning("Your nearest location " + y, {
+      notifications.warning("Globe navigated to " + y + ". Select " + y + " to confirm ", {
         autoClear: true,
         clearDuration: 4200,
         cssClasses: 'notification-success'
