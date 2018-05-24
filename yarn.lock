@@ -13,7 +13,7 @@
     lodash "^4.14.0"
     lodash-es "^4.14.0"
 
-"@bower_components/bootstrap@twbs/bootstrap#^3.3.6":
+"@bower_components/bootstrap@twbs/bootstrap#^3.3.7":
   version "3.3.7"
   resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/0b9c4a4007c44201dce9a6cc1a38407005c26c86"
 
