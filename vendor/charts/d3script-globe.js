@@ -45,9 +45,7 @@ function renderGlobeChart(params, notifications) {
           .attr("to", "25");
       }
     }
-    alert(y);
     if (y.length != 0) {
-      alert(y);
       notifications.warning("Globe navigated to " + y + ". Select " + y + " to confirm ", {
         autoClear: true,
         clearDuration: 4200,

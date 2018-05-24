@@ -60,37 +60,33 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   validation() {
+    var validationString = "";
     if (Ember.isEmpty(this.get('name'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.nameError'));
-      return true;
-    } else
-    if (Ember.isEmpty(this.get('type'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.typeError'));
-      return true;
-    } else
-    if (Ember.isEmpty(this.get('gateway'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.gatewayError'));
-      return true;
-    } else
-    if (Ember.isEmpty(this.get('netmask'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.netmaskError'));
-      return true;
-    } else
-    if (Ember.isEmpty(this.get('subnet'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.subnetError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('selectedBridges'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('selectedNodes'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.nodesError'));
-      return true;
-    } else if (this.get('selectedNodes').length != this.get('selectedBridges').length) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.network.bridgeError'));
-      return true;
-    } else {
-      return false;
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.nameError'));
     }
+    if (Ember.isEmpty(this.get('type'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.typeError'));
+    }
+    if (Ember.isEmpty(this.get('gateway'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.gatewayError'));
+    }
+    if (Ember.isEmpty(this.get('netmask'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.netmaskError'));
+    }
+    if (Ember.isEmpty(this.get('subnet'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.subnetError'));
+    }
+    if (Ember.isEmpty(this.get('selectedBridges'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
+    }
+    if (Ember.isEmpty(this.get('selectedNodes'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.nodesError'));
+    }
+    if (this.get('selectedNodes').length != this.get('selectedBridges').length) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.bridgeError'));
+    }
+    this.set('validationWarning', validationString);
+    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   getBridge: function(data) {
@@ -117,16 +113,16 @@ export default Ember.Component.extend(DefaultHeaders, {
     };
   },
   refresh() {
-  this.setProperties({
-   type: '',
-   subnet: '',
-   gateway: '',
-   netmask: '',
-   name: '',
-   selectedBridges:'',
-   selectedNodes:'',
-  });
- },
+    this.setProperties({
+      type: '',
+      subnet: '',
+      gateway: '',
+      netmask: '',
+      name: '',
+      selectedBridges: '',
+      selectedNodes: '',
+    });
+  },
 
   actions: {
     updatePoolData: function(active, name) {
@@ -165,7 +161,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(this.get('validationWarning'), {
+        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
           autoClear: true,
           clearDuration: 4200,
           cssClasses: 'notification-warning'
