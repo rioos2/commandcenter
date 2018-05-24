@@ -20,6 +20,11 @@ export default Ember.Component.extend(DefaultHeaders, {
     return C.AVAILABLE_NETWORK_TYPES;
   }.property(),
 
+  active: function(){
+    return Ember.isEmpty(this.get('type'));
+  }.property('type'),
+
+
   displayMessage() {
     if (Ember.isEmpty(this.get('nodes'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
@@ -59,6 +64,22 @@ export default Ember.Component.extend(DefaultHeaders, {
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
   },
 
+  checkNetmaskFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.NETMASK) : !ip.match(C.REGEX.IPV6.NETMASK);
+  },
+
+  checkIpFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.IP) : !ip.match(C.REGEX.IPV6.IP);
+  },
+
+  checkSubnetFormate: function(ip) {
+    return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.SUBNET) : !ip.match(C.REGEX.IPV6.SUBNET);
+  },
+
+  checkIpType: function() {
+    return !this.get('type').includes('ipv4') ? "ipv6" : "ipv4";
+  },
+
   validation() {
     var validationString = "";
     if (Ember.isEmpty(this.get('name'))) {
@@ -66,9 +87,6 @@ export default Ember.Component.extend(DefaultHeaders, {
     }
     if (Ember.isEmpty(this.get('type'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.typeError'));
-    }
-    if (Ember.isEmpty(this.get('gateway'))) {
-      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.gatewayError'));
     }
     if (Ember.isEmpty(this.get('netmask'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.netmaskError'));
@@ -79,6 +97,26 @@ export default Ember.Component.extend(DefaultHeaders, {
     if (Ember.isEmpty(this.get('selectedBridges'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
     }
+    if (Ember.isEmpty(this.get('gateway'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.gatewayError'));
+    }
+
+    if (!Ember.isEmpty(this.get('gateway'))) {
+      if (this.checkIpFormate(this.get('gateway'))) {
+        validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.gatewayError' + this.checkIpType()));
+      }
+    }
+    if (!Ember.isEmpty(this.get('subnet'))) {
+      if (this.checkSubnetFormate(this.get('subnet'))) {
+        validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.subnetRangeError' + this.checkIpType()));
+      }
+    }
+    if (!Ember.isEmpty(this.get('netmask'))) {
+      if (this.checkNetmaskFormate(this.get('netmask'))) {
+        validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.netmaskError' + this.checkIpType()));
+      }
+    }
+
     if (Ember.isEmpty(this.get('selectedNodes'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.nodesError'));
     }

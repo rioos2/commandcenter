@@ -52,7 +52,6 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
 
   citiesUpdate: function() {
     var cities = this.citiesByCountry();
-    console.log(JSON.stringify(cities));
     var self = this;
     $(function() {
       var citiesData = cities;

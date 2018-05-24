@@ -36,19 +36,28 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="network_gateway">{{t 'stackPage.admin.network.gateway'}}</label> {{input type="text" class="form-control" id="network_gateway" value=gateway}}
+                <label for="network_gateway">
+                  {{t 'stackPage.admin.network.gateway'}}
+                </label>
+                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_gateway" value=gateway}}
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="network_subnetip">{{t 'stackPage.admin.network.subnet'}}</label> {{input type="text" class="form-control" id="network_subnetip" value=subnet}}
+                <label for="network_subnetip">
+                  {{t 'stackPage.admin.network.subnet'}}
+                </label>
+                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_subnetip" value=subnet}}
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-                <label for="network_netmask">{{t 'stackPage.admin.network.netmask'}}</label> {{input type="text" class="form-control" id="network_netmask" value=netmask}}
+                <label for="network_netmask">
+                  {{t 'stackPage.admin.network.netmask'}}
+                </label>
+                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_netmask" value=netmask}}
               </div>
             </div>
           </div>

@@ -657,6 +657,7 @@ stackPage:
       selectNode: Select Nodes
       noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
+
       nameError: 'Missing name (example: riopub001)</br>'
       typeError: Missing type</br>
       subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
@@ -665,6 +666,13 @@ stackPage:
       nodesError: Select node</br>
       netmaskError: 'Missing Netmask (example: 255.255.255.0)</br>'
       bridgeError: Select bridge for selected nodes.<br>
+      subnetRangeErroripv4: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
+      subnetRangeErroripv6: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)</br>'
+      gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)</br>'
+      gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)</br>'
+      netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
+      netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
+
 launcherPage:
   compute:
     selectType: Pick Cloud Type
