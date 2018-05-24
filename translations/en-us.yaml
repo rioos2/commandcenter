@@ -657,6 +657,8 @@ stackPage:
       selectNode: Select Nodes
       noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
+      edit: Edit
+      edit_title: Edit Virtual Network
 
       nameError: 'Missing name (example: riopub001)</br>'
       typeError: Missing type</br>
