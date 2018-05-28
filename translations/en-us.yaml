@@ -547,6 +547,7 @@ stackPage:
     header:
       toggle: Toggle navigation
       add_btn: Add
+      save_btn: Save
     node:
       title: Nodes
       connected: 'Connected Nodes'
@@ -577,6 +578,9 @@ stackPage:
       pass: Password
       user: Username
       noStorageData: No storages added yet.
+      edit_title: Edit Storage
+      nameError: Enter storage Name
+      edit: Edit
       disk:
         list: DISKS
         free: Free Disk / Partition
@@ -592,7 +596,7 @@ stackPage:
         name: Pool Name
         diskCount: No.of Disks
         status: Status
-        nameError: Please enter pool name
+        nameError: Please enter pool name </br>
         diskError: Please select free disk/partition
         diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
         disks: Disks
@@ -622,15 +626,15 @@ stackPage:
       add_select_node: Select Nodes
       add_select_network: Apply Virtual Networks
       add:
-        cityError: Select city
-        storageError: Select storage
-        currencyError: Select country
-        nodesError: Select nodes
-        networksError: Select network
+        cityError: Select city</br>
+        storageError: Select storage</br>
+        currencyError: Select country</br>
+        nodesError: Select nodes</br>
+        networksError: Select network</br>
         storagesDisplayError: Create storage before attempting add.
         nodesDisplayError: Create nodes before attempting add.
         networksDisplayError: Create networks before attempting add.
-        networksSelectError: Select virtual network for selected nodes.
+        networksSelectError: Apply virtual networks for the selected nodes.</br>
     network:
       title: Virtual Networks
       ipRange: IP Range
@@ -653,19 +657,24 @@ stackPage:
       selectNode: Select Nodes
       noNetworkData: No virtual networks added yet.
       nodeData: No nodes attached.
-      nameError: 'Missing name (example: riopub001)'
-      typeError: Missing type
-      subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)'
-      subnetIpv4RangeError: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29)'
-      subnetIpv6RangeError: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)'
-      gatewayError: 'Missing Gateway IP (example: 192.168.2.1)'
-      gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)'
-      gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)'
-      brigeHostError: Missing bridge
-      nodesError: Select node
-      netmaskError: 'Missing Netmask (example: 255.255.255.0)'
-      netmaskIpv4Error: 'Enter vaild Netmask (example: 255.255.255.0)'
-      netmaskIpv6Error: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)'
+      edit: Edit
+      edit_title: Edit Virtual Network
+
+      nameError: 'Missing name (example: riopub001)</br>'
+      typeError: Missing type</br>
+      subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
+      gatewayError: 'Missing Gateway IP (example: 192.168.2.1)</br>'
+      brigeHostError: Missing bridge</br>
+      nodesError: Select node</br>
+      netmaskError: 'Missing Netmask (example: 255.255.255.0)</br>'
+      bridgeError: Select bridge for selected nodes.<br>
+      subnetRangeErroripv4: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
+      subnetRangeErroripv6: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)</br>'
+      gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)</br>'
+      gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)</br>'
+      netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
+      netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
+
 launcherPage:
   compute:
     selectType: Pick Cloud Type

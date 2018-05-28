@@ -71,7 +71,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         templateResult: formatCities,
         data: citiesData,
       });
-      if(citiesData) {
+      if (citiesData) {
         $("#cities").val(citiesData[0]);
         $("#cities").trigger('change');
       } else {
@@ -137,27 +137,27 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
 
 
   validation() {
+    var validationString = "";
     if (Ember.isEmpty(this.get('city'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.cityError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('selectedStorage'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.storageError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('currency'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.currencyError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('selectedNodes'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
-      return true;
-    } else if (!this.filteredForSelectedVirtualNetworks(this.uniqueSelected(this.get('selectedVirtualNetworks')))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
-      return true;
-    } else if (Ember.isEmpty(this.get('selectedVirtualNetworks'))) {
-      this.set('validationWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
-      return true;
-    } else {
-      return false;
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.cityError'));
     }
+    if (Ember.isEmpty(this.get('selectedStorage'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.storageError'));
+    }
+    if (Ember.isEmpty(this.get('currency'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.currencyError'));
+    }
+    if (Ember.isEmpty(this.get('selectedNodes'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
+    }
+    if (!this.filteredForSelectedVirtualNetworks(this.uniqueSelected(this.get('selectedVirtualNetworks')))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
+    }
+    if (Ember.isEmpty(this.get('selectedVirtualNetworks'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
+    }
+    this.set('validationWarning', validationString);
+    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
   },
   uniqueSelected: function(virtualNetworks) {
     var uniqueVirtualNetworks = virtualNetworks.filter(function(item, index) {
@@ -212,15 +212,15 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     };
   },
   refresh() {
-  this.setProperties({
-   selectedNodes: '',
-   selectedVirtualNetworks: '',
-   selectedStorage: '',
-   currency: '',
-   country: '',
-   city:'',
-  });
- },
+    this.setProperties({
+      selectedNodes: '',
+      selectedVirtualNetworks: '',
+      selectedStorage: '',
+      currency: '',
+      country: '',
+      city: '',
+    });
+  },
 
   actions: {
 
@@ -242,7 +242,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(this.get('validationWarning'), {
+        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
           autoClear: true,
           clearDuration: 4200,
           cssClasses: 'notification-warning'
