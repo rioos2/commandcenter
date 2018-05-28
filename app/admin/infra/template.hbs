@@ -22,7 +22,7 @@
 						</div>
 						<div class="vm-modal-body">
 							{{#each panels as |tab|}}
-								{{component tab selectedTab=selectedTab model=model }}
+								{{component tab selectedTab=selectedTab model=model reload="reload" modelSpinner=modelSpinner}}
 							{{/each}}
 						</div>
 					</div>

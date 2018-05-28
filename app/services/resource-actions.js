@@ -9,9 +9,9 @@ export default Ember.Service.extend({
   actionMenu     : null,
 
   show: function(model,trigger,toggle) {
-    if (this.get('open') && this.get('actionMenu')) {
-      this.hide();
-    }
+    // if (this.get('open') && this.get('actionMenu')) {
+    //   this.hide();
+    // }
     let $parent = this.set('actionParent', $('#resource-actions-parent'));
     let $menu = this.set('actionMenu', $('#resource-actions'));
     let $toggle = this.set('actionToggle', $(toggle||trigger));
@@ -100,7 +100,6 @@ export default Ember.Service.extend({
       last = cur;
       return ok;
     });
-
     return list;
   }.property('model.availableActions.[]','model.availableActions.@each.enabled','model.availableActions.@each.class', 'model'),
 });

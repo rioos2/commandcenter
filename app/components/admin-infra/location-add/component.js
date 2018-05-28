@@ -232,11 +232,13 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
           method: 'POST',
           data: this.getData(),
         })).then((xhr) => {
+          this.set('modelSpinner', true);
           this.set('showSpinner', false);
-          location.reload();
+          this.sendAction('doReload');
           this.refresh();
         }).catch((err) => {
           this.set('showSpinner', false);
+          this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);

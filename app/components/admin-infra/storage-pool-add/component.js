@@ -99,7 +99,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     }
   },
   displayMessage() {
-    if (Ember.isEmpty(this.get('connector'))) {
+    if (Ember.isEmpty(this.get('storages'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.storage.pool.storagesDisplayError'));
       return true;
     } else {
@@ -135,11 +135,13 @@ export default Ember.Component.extend(DefaultHeaders, {
           }
         },
       })).then((xhr) => {
+        this.set('modelSpinner', true);
         this.set('showSpinner', false);
-        location.reload();
+        this.sendAction('doReload');
         this.refresh();
       }).catch((err) => {
         this.set('showSpinner', false);
+        this.set('modelSpinner', false);
       });
     } else {
       this.set('showSpinner', false);

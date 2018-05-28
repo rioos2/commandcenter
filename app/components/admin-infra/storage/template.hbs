@@ -1,4 +1,4 @@
-{{admin-infra/storage-pool-add pools=storagespool connector=storageData}}
+{{admin-infra/storage-pool-add pools=storagespool connector=storageData storages=storages modelSpinner=modelSpinner doReload="doReload"}}
 
 <div class="col-sm-9 content-left">
 	<div class="panel panel-default kv-panel">
@@ -8,6 +8,11 @@
 			</div>
 		</div>
 		<div class="panel-body">
+			{{#if modelSpinner}}
+			<div class="spinner infra-spinner">
+			{{stack-launch-spinner size=25 showSpinner=true}}
+			</div>
+			{{else}}
 			{{#if storageAvailable}}
 				<div class="storage-container">
 					{{#each storages as |storage|}}
@@ -23,6 +28,7 @@
 						<span>{{t 'stackPage.admin.storage.noStorage'}}</span>
 					</div>
 				</div>
+				{{/if}}
 			{{/if}}
 		</div>
 	</div>

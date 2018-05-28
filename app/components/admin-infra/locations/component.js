@@ -24,19 +24,19 @@ export default buildAdminInfraPanel('locations', {
 
   locations: function() {
     return Ember.isEmpty(this.get('model.datacenters.content'))? [] : this.get('model.datacenters.content');
-  }.property('model.datacenters.content'),
+  }.property('model.datacenters.content.@each'),
 
   nodes: function() {
     return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
-  }.property('model.nodes.content'),
+  }.property('model.nodes.content.@each'),
 
   storages: function() {
     return Ember.isEmpty(this.get('model.storageConnectors.content'))? [] : this.get('model.storageConnectors.content');
-  }.property('model.storageConnectors.content'),
+  }.property('model.storageConnectors.content.@each'),
 
   virtualNetworks: function() {
     return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
-  }.property('model.networks.content'),
+  }.property('model.networks.content.@each'),
 
   filterStoragesFor: function(location) {
     var self = this;
@@ -72,6 +72,15 @@ export default buildAdminInfraPanel('locations', {
       this.set('selectedStorage', this.filterStoragesFor(location));
       this.set('selectedVirtualNetworks', this.filterNetworksIn(location));
       this.set('selectedNodes', this.filterNodesIn(location));
+    },
+
+    doReload: function() {
+      $('#addcluster_modal').modal('hide');
+      this.sendAction('reload');
+    },
+
+    openModal: function() {
+      $('#addcluster_modal').modal('show');
     }
   }
 

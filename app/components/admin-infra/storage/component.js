@@ -21,7 +21,11 @@ export default buildAdminInfraPanel('storage', {
 
       storages: function() {
         return Ember.isEmpty(this.get('model.storageConnectors.content'))? [] : this.get('model.storageConnectors.content');
-      }.property('model'),
+      }.property('model.storageConnectors.content.@each'),
+
+      poolsUpdater: function() {
+        this.set('storagespool',this.getStoragesPool(this.get("storageData")));
+      }.observes('model.storageConnectors.content.@each'),
 
       getStoragesPool: function(storageConnector) {
         var pool_list = [];
@@ -38,6 +42,11 @@ export default buildAdminInfraPanel('storage', {
               this.set('storageData', storage);
               this.set('selectedStorage', storage.id);
               this.set('storagespool',this.getStoragesPool(storage) );
+            },
+
+            doReload: function() {
+              $('#pooladd').modal('hide');
+              this.sendAction('reload');
             }
           }
       });
