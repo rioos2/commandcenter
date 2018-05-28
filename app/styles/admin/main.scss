@@ -971,6 +971,7 @@ header {
 
 #addnetwork_modal,
 #storage_edit,
+#network_edit,
 #addstorage_modal {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
@@ -1072,6 +1073,7 @@ header {
 
   #addcluster_modal .modal-dialog,
   #storage_edit .modal-dialog,
+  #network_edit .modal-dialog,
   #addnetwork_modal .modal-dialog,
   #addstorage_modal .modal-dialog {
     width: 740px;

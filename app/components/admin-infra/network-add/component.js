@@ -157,8 +157,8 @@ export default Ember.Component.extend(DefaultHeaders, {
       gateway: '',
       netmask: '',
       name: '',
-      selectedBridges: '',
-      selectedNodes: '',
+      selectedBridges: [],
+      selectedNodes: [],
     });
   },
 
