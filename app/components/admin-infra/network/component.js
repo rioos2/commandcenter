@@ -21,11 +21,11 @@ export default buildAdminInfraPanel('network', {
 
   virtualNetworks: function() {
     return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
-  }.property('model.networks.content'),
+  }.property('model.networks.content.@each'),
 
   nodes: function(){
     return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
-  }.property('model.nodes.content'),
+  }.property('model.nodes.content.@each'),
 
   appliedNodesFor: function(virtualNetwork) {
     return this.get('nodes').map(function(node) {
@@ -40,6 +40,15 @@ export default buildAdminInfraPanel('network', {
       this.set('virtualNetwork', net);
       this.set('selectedVirtualNetwork', net.id);
       this.set('selectedNodes', this.appliedNodesFor(net));
+    },
+
+    doReload: function() {
+      $('#addnetwork_modal').modal('hide');
+      this.sendAction('reload');
+    },
+
+    openModal: function() {
+      $('#addnetwork_modal').modal('show');
     }
   }
 });

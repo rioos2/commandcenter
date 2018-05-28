@@ -143,21 +143,27 @@ export default Ember.Component.extend(DefaultHeaders, {
               phase: "Pending"
             }
           },
-        })).then((xhr) => {
-          this.set('showSpinner', false);
-          location.reload();
-          this.refresh();
-        }).catch((err) => {
-          this.set('showSpinner', false);
-        });
-      } else {
+          status: {
+            phase: "Pending"
+          }
+        },
+      })).then((xhr) => {
+        this.set('modelSpinner', true);
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
-          autoClear: true,
-          clearDuration: 4200,
-          cssClasses: 'notification-warning'
-        });
-      }
+        this.sendAction('doReload');
+        this.refresh();
+      }).catch((err) => {
+        this.set('showSpinner', false);
+        this.set('modelSpinner', false);
+      });
+    } else {
+      this.set('showSpinner', false);
+      this.get('notifications').warning(this.get('validationWarning'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
+    }
     },
 
     updatePoolData: function(select, data) {

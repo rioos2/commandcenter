@@ -151,16 +151,16 @@ export default Ember.Component.extend(DefaultHeaders, {
     };
   },
   refresh() {
-    this.setProperties({
-      type: '',
-      subnet: '',
-      gateway: '',
-      netmask: '',
-      name: '',
-      selectedBridges: '',
-      selectedNodes: '',
-    });
-  },
+  this.setProperties({
+   type: '',
+   subnet: '',
+   gateway: '',
+   netmask: '',
+   name: '',
+   selectedBridges:[],
+   selectedNodes:'',
+  });
+ },
 
   actions: {
     updatePoolData: function(active, name) {
@@ -191,11 +191,13 @@ export default Ember.Component.extend(DefaultHeaders, {
           method: 'POST',
           data: this.getData(),
         })).then((xhr) => {
+          this.set('modelSpinner', true);
           this.set('showSpinner', false);
-          location.reload();
+          this.sendAction('doReload');
           this.refresh();
         }).catch((err) => {
           this.set('showSpinner', false);
+          this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);

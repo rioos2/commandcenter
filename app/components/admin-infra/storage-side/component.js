@@ -78,6 +78,10 @@ export default Ember.Component.extend({
         this.set('enabler_disk', 'collapse in');
       }
     },
+    
+    openModal: function() {
+      $('#pooladd').modal('show');
+    }
 
   }
 
