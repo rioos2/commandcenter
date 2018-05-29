@@ -3,7 +3,7 @@
         <p class="sub-title">{{t 'launcherPage.location.title'}}</p>
         <p class="sub-description">{{t 'launcherPage.location.description'}}</p>
         {{svg/svg-dots class="dots-ico"}}
-        {{svg/svg-locateme class="locateme" click=(action "getLocation")}}
+        {{svg/svg-locateme class=(if locationAvailable "locateme" "locateme  disabled") click=(action "getLocation")}}
     </div>
 
     <div class="col-md-4 second-col">
@@ -11,11 +11,15 @@
     </div>
 
     <div class="col-md-4 third-col">
-        <p class="title">Your Location(s)</p>
+        <p class="title">{{t 'launcherPage.location.locations'}}</p>
         <ul class="rio-location-ul hex with-add">
+          {{#if locationAvailable}}
           {{#each model.datacenters.content as |data|}}
             {{createcloud/select-location-list model=data}}
           {{/each}}
+          {{else}}
+          <p class="sub-description">{{t 'launcherPage.location.noLocation'}}</p>
+          {{/if}}
         </ul>
         <div>
         {{#link-to "admin.infra"}}

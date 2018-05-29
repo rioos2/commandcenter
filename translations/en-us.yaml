@@ -710,6 +710,7 @@ launcherPage:
     description: Select a data center that is close to your location
     locations: Your location(s)
     empty: Nothing found
+    noLocation: No location available
   sysConfig:
     title: Cloud Performance
     subtitle: CLOUD PERFORMANCE
