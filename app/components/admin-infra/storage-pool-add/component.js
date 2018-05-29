@@ -143,10 +143,6 @@ export default Ember.Component.extend(DefaultHeaders, {
               phase: "Pending"
             }
           },
-          status: {
-            phase: "Pending"
-          }
-        },
       })).then((xhr) => {
         this.set('modelSpinner', true);
         this.set('showSpinner', false);
