@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   }),
 
   selectedVirtualNetworks: function() {
-    var location;
+    var networks = [];
     var virtualNetworks = [];
     var self = this;
     Object.keys(this.get('networks')).map(function(key) {
@@ -31,13 +31,13 @@ export default Ember.Component.extend({
     });
 
     if (!Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content'))) {
-      location = this.get('model.datacenters.content').filter(function(location) {
+      this.get('model.datacenters.content').filter(function(location) {
         if (Ember.isEqual(location.object_meta.name, self.get('model.assemblyfactory.object_meta.cluster_name'))) {
-          return location;
+          networks = location.networks;
         }
       });
-      if (!Ember.isEmpty(location) && !Ember.isEmpty(self.get('model.networks.content'))) {
-        location[0].networks.map(function(network_id) {
+      if (!Ember.isEmpty(networks) && !Ember.isEmpty(self.get('model.networks.content'))) {
+        networks.map(function(network_id) {
           self.get('model.networks.content').map(function(network) {
             if (Ember.isEqual(network.id, network_id)) {
               virtualNetworks.removeObject(network.network_type);
@@ -78,7 +78,7 @@ export default Ember.Component.extend({
 
   actions: {
     selected: function(net_type) {
-      var self=this;
+      var self = this;
       this.set('model.assemblyfactory.network', "");
       this.toggleProperty(net_type + '_check');
       if (this.checkActiveNetwork(net_type)) {
@@ -94,7 +94,7 @@ export default Ember.Component.extend({
       }
       Object.keys(this.get('networks')).map(function(key) {
         Object.keys(self.get('model.assemblyfactory.resources')).map(function(network_type) {
-          if(Ember.isEqual(key,network_type)){
+          if (Ember.isEqual(key, network_type)) {
             self.set('model.assemblyfactory.network', network_type);
           }
         });
