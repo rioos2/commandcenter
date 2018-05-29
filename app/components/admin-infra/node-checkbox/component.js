@@ -5,8 +5,11 @@ const {
 
 export default Ember.Component.extend({
   tagName: 'rio-radio',
-  active: false,
   intl: Ember.inject.service(),
+
+  active: function(){
+    return this.get('data.active');
+  }.property('data.active'),
 
   enabler: function() {
     if (this.get('active')) {

@@ -151,16 +151,16 @@ export default Ember.Component.extend(DefaultHeaders, {
     };
   },
   refresh() {
-  this.setProperties({
-   type: '',
-   subnet: '',
-   gateway: '',
-   netmask: '',
-   name: '',
-   selectedBridges:[],
-   selectedNodes:'',
-  });
- },
+    this.setProperties({
+      type: '',
+      subnet: '',
+      gateway: '',
+      netmask: '',
+      name: '',
+      selectedBridges: [],
+      selectedNodes: [],
+    });
+  },
 
   actions: {
     updatePoolData: function(active, name) {

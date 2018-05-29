@@ -35,6 +35,10 @@ export default Component.extend({
     return f;
   },
 
+  locationAvailable: function(){
+    return this.get('model.datacenters.content').length > 0;
+  }.property('model.datacenters.content'),
+
   actions: {
     showInputField: function() {
       this.set('showField', true);
