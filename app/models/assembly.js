@@ -3,8 +3,10 @@ const {
   get
 } = Ember;
 import C from 'nilavu/utils/constants';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Downloadjs from 'npm:downloadjs';
 
-var Assembly = Resource.extend({
+var Assembly = Resource.extend(DefaultHeaders, {
 
   type: 'assembly',
   lifecycle: Ember.inject.service('lifecycle'),
@@ -32,6 +34,12 @@ var Assembly = Resource.extend({
         enabled: true,
         class: (this.get('enableConsole') || this.get('hasTerminated') || this.get('hasFailed')) ? 'disabled' : ' '
 
+      },
+      {
+        label: 'action.downloadSecret',
+        icon: 'fa fa-download',
+        action: 'download',
+        enabled: true,
       },
     ];
   }.property('id', 'actionLinks', 'hasTerminated', 'status.phase', 'enableConsole'),
@@ -64,6 +72,31 @@ var Assembly = Resource.extend({
     return this.get('object_meta.name') ? this.get('object_meta.name') : "";
   }.property('object_meta.name'),
 
+  secretDownload: function(secrets, id) {
+    if (secrets.length != 0) {
+      Downloadjs(secrets, id + ".key", "text/plain");
+      return true;
+    }
+    return false;
+  },
+
+  downloadSecret: function(res) {
+    let key;
+    if (res.data) {
+      key = res.data.rsa_key || "";
+    } else {
+      key = res.content[0].data.rsa_key || "";
+    }
+    if (!this.secretDownload(key, this.get('id'))) {
+      this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
+    };
+  },
+
+
   actions: {
     delete() {
       let date = new Date();
@@ -78,6 +111,19 @@ var Assembly = Resource.extend({
         this.get('modalService').toggleModal();
       }).catch((err) => {
         this.get('notifications').warning(get(this, 'intl').t('notifications.Stacks.DeleteFailed'), {
+          autoClear: true,
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
+        });
+      });
+    },
+
+    download() {
+      var self = this;
+      return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'))).then(function(res) {
+        self.downloadSecret(res);
+      }).catch(function() {
+        self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear: true,
           clearDuration: 4200,
           cssClasses: 'notification-warning'
