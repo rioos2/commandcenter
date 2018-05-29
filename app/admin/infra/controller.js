@@ -4,5 +4,6 @@ import C from 'nilavu/utils/constants';
 export default Ember.Controller.extend({
   selectedTab: 'node',
   panels: [],
+  modelSpinner: false,
 
 });

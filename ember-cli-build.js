@@ -55,7 +55,7 @@ module.exports = function(defaults) {
   app.import('vendor/charts/topojson.v0.min.js');
 
 
-  app.import('vendor/admin/jquery.js');
+  app.import('node_modules/@bower_components/jquery/dist/jquery.js');
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');

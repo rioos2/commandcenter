@@ -1,4 +1,4 @@
-{{admin-infra/network-add nodes=nodes}}
+{{admin-infra/network-add nodes=nodes modelSpinner=modelSpinner doReload="doReload"}}
 <div class="col-sm-9 content-left">
 	<div class="panel panel-default kv-panel">
 		<div class="panel-heading">
@@ -6,10 +6,15 @@
 				{{t 'stackPage.admin.network.connected'}} ({{availableSize}})
 			</div>
 			<div class="pull-right kv-right-head-button">
-				<button type="button" data-toggle="modal" data-target="#addnetwork_modal" class="btn">+ {{t 'stackPage.admin.header.add_btn'}}</button>
+				<button type="button" {{action "openModal"}} class="btn">+ {{t 'stackPage.admin.header.add_btn'}}</button>
 			</div>
 		</div>
 		<div class="panel-body">
+			{{#if modelSpinner}}
+			<div class="spinner infra-spinner">
+			{{stack-launch-spinner size=25 showSpinner=true}}
+			</div>
+			{{else}}
 			{{#if virtualNetworkAvailable}}
 			<div class="network-container">
 				{{#each virtualNetworks as |net|}}
@@ -27,7 +32,7 @@
 				</div>
 			</div>
 			{{/if}}
-
+		{{/if}}
 		</div>
 	</div>
 </div>

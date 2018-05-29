@@ -56,4 +56,15 @@ export default Ember.Route.extend(DefaultHeaders, {
     };
   },
 
+  actions: {
+    reload: function() {
+      var self = this;
+      self.controller.set('modelSpinner', true);
+      this.model().then(function(res) {
+        self.controller.set('model', res);
+        self.controller.set('modelSpinner', false);
+      });
+    }
+  }
+
 });
