@@ -30,21 +30,18 @@ export default Ember.Component.extend({
       self.set(disable, "");
     });
 
-    if (!Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content'))) {
+    if (!Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content')) && !Ember.isEmpty(self.get('model.networks.content'))) {
       this.get('model.datacenters.content').filter(function(location) {
         if (Ember.isEqual(location.object_meta.name, self.get('model.assemblyfactory.object_meta.cluster_name'))) {
-          networks = location.networks;
+          location.networks.map(function(network_id) {
+            self.get('model.networks.content').map(function(network) {
+              if (Ember.isEqual(network.id, network_id)) {
+                virtualNetworks.removeObject(network.network_type);
+              }
+            });
+          });
         }
       });
-      if (!Ember.isEmpty(networks) && !Ember.isEmpty(self.get('model.networks.content'))) {
-        networks.map(function(network_id) {
-          self.get('model.networks.content').map(function(network) {
-            if (Ember.isEqual(network.id, network_id)) {
-              virtualNetworks.removeObject(network.network_type);
-            }
-          });
-        });
-      }
     }
     this.disableNetworks(virtualNetworks);
   }.property('model.assemblyfactory.object_meta.cluster_name'),
