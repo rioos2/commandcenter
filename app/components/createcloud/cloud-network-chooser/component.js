@@ -19,11 +19,9 @@ export default Ember.Component.extend({
   }),
 
   selectedVirtualNetworks: function() {
-    var networks = [];
-    var virtualNetworks = [];
     var self = this;
-    Object.keys(this.get('networks')).map(function(key) {
-      virtualNetworks.addObject(key);
+    var virtualNetworks = Object.keys(this.get('networks')).map(function(key) {
+      return key;
     });
 
     this.get('disabledNetworks').map(function(disable) {
