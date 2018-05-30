@@ -674,7 +674,7 @@ stackPage:
       netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
       netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
     dashboard:
-      title: Admin Dashboard
+      title: Infrastructure
     users:
       title: Users
     reports:
@@ -3748,7 +3748,7 @@ nav:
   user:
     profile: Profile
     logout: Logout
-    admin: Infrastructure
+    admin: Admin
 
 ##############################
 # Resource Actions

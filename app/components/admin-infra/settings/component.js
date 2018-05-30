@@ -1,5 +1,4 @@
-import {
-  buildAdminPanel
-} from '../admin-panel/component';
-export default buildAdminPanel('settings', {
+  export default Ember.Component.extend({
+  tagName: 'section',
+  className: '',
 });

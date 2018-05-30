@@ -1,28 +1,18 @@
-<div class="rio-admin">
-	<div class="kv-secondary-menu">
-		<nav class="navbar border-nopadding navbar-expand-lg navbar-light bg-light">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#kv_secondary_nav" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						  </button>
-				</div>
-				<div class="collapse navbar-collapse" id="kv_secondary_nav">
-					<ul class="nav navbar-nav">
-						{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="dashboard"}}
-						{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="users"}}
-						{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="reports"}}
-						{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="flavours" }}
-						{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="settings" }}
-						</ul>
-				</div>
-				<div class="vm-modal-body">
-					{{#each panels as |tab|}}
-						{{component tab selectedTab=selectedTab model=model reload="reload" }}
-					{{/each}}
-				</div>
-		</nav>
+<div class="dashboard">
+	<div class="tabs">
+		{{radio-button checked=(eq "dashboard" selectedTab) value=selectedTab selection=selectedTab id="dashboard" name="tab-control"}} {{radio-button checked=(eq "users" selectedTab) value=selectedTab selection=selectedTab id="users" name="tab-control"}} {{radio-button checked=(eq "settings" selectedTab) value=selectedTab selection=selectedTab id="settings" name="tab-control"}}
+		<ul class="dashboardNav">
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="dashboard"}}
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="users"}}
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="settings" }}
+		</ul>
+		<div class="slider">
+			<div class="indicator"></div>
+		</div>
+		<div class="content">
+			{{#each panels as |tab|}}
+				{{component tab selectedTab=selectedTab model=model reload="reload" }}
+			{{/each}}
+		</div>
 	</div>
 </div>

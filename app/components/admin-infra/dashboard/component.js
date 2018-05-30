@@ -1,7 +1,6 @@
-import {
-  buildAdminPanel
-} from '../admin-panel/component';
-export default buildAdminPanel('dashboard', {
+  export default Ember.Component.extend({
+  tagName: 'section',
+  className: '',
   selectedInfraTab: 'node',
   panels: [],
   modelSpinner: false,
