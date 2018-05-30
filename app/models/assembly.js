@@ -72,7 +72,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
     return this.get('object_meta.name') ? this.get('object_meta.name') : "";
   }.property('object_meta.name'),
 
-  secretDownload: function(secrets, id) {
+  hasDownloaded: function(secrets, id) {
     if (secrets.length != 0) {
       Downloadjs(secrets, id + ".key", "text/plain");
       return true;
@@ -80,18 +80,13 @@ var Assembly = Resource.extend(DefaultHeaders, {
     return false;
   },
 
-  downloadSecret: function(res) {
-    let key;
-    if (res.data) {
-      key = res.data.rsa_key || "";
-    } else {
-      key = res.content[0].data.rsa_key || "";
-    }
-    if (!this.secretDownload(key, this.get('id'))) {
-      this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
+  downloadAndWarnIfNone: function(res) {
+    let key = res.data['rioos_sh/ssh_pubkey'] || "";
+    if (!this.hasDownloaded(key, this.get('name'))) {
+      this.get('notifications').warning(Ember.String.htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
         autoClear: true,
         clearDuration: 4200,
-        cssClasses: 'notification-warning'
+        cssClasses: 'notification-success'
       });
     };
   },
@@ -120,8 +115,8 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
     download() {
       var self = this;
-      return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'))).then(function(res) {
-        self.downloadSecret(res);
+      return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'), true)).then(function(res) {
+        self.downloadAndWarnIfNone(res);
       }).catch(function() {
         self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear: true,
