@@ -46,7 +46,14 @@ export default buildAdminInfraPanel('storage', {
 
             doReload: function() {
               $('#pooladd').modal('hide');
-              this.sendAction('reload');
-            }
+              $('#storage_edit').modal('hide');
+              this.sendAction('triggerReload');
+            },
+
+            doStorageReload: function() {
+              $('#storage_edit').modal('hide');
+              this.sendAction('triggerReload');
+            },
+
           }
       });

@@ -602,7 +602,6 @@ stackPage:
         disks: Disks
         list: View
         storagesDisplayError: Create storage before attempting create pool.
-
     locations:
       title: Locations
       connected: 'Connected Locations'
@@ -674,7 +673,16 @@ stackPage:
       gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)</br>'
       netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
       netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
-
+    dashboard:
+      title: Infrastructure
+    users:
+      title: Users
+    reports:
+      title: Reports
+    flavours:
+      title: Flavours
+    settings:
+      title: Settings
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -3741,7 +3749,7 @@ nav:
   user:
     profile: Profile
     logout: Logout
-    admin: Infrastructure
+    admin: Admin
 
 ##############################
 # Resource Actions

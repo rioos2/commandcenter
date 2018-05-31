@@ -154,7 +154,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       });
     } else {
       this.set('showSpinner', false);
-      this.get('notifications').warning(this.get('validationWarning'), {
+      this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
         autoClear: true,
         clearDuration: 4200,
         cssClasses: 'notification-warning'
