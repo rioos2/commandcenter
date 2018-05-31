@@ -1,4 +1,4 @@
-/*  
+/*
 
 This code is based on following convention:
 
@@ -7,7 +7,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
 */
 
   function renderChartNumberOfCores(params) {
-      
+
       // exposed variables
       var attrs = {
         svgWidth: 456,
@@ -35,24 +35,24 @@ https://github.com/bumbeishvili/d3-coding-conventions
         lineWidth: 2,
         data: null
       };
-    
-    
+
+
       /*############### IF EXISTS OVERWRITE ATTRIBUTES FROM PASSED PARAM  #######  */
-    
+
       var attrKeys = Object.keys(attrs);
       attrKeys.forEach(function (key) {
         if (params && params[key]) {
           attrs[key] = params[key];
         }
       })
-    
+
       //innerFunctions which will update visuals
       var updateData;
-    
+
       //main chart object
       var main = function (selection) {
         selection.each(function scope() {
-    
+
           //calculated properties
           var calc = {}
           calc.chartLeftMargin = attrs.marginLeft;
@@ -79,20 +79,20 @@ https://github.com/bumbeishvili/d3-coding-conventions
           calc.halfHexHeight = calc.hexHeight / 2;
           // comes from pythagorean theorem
           calc.bottomLineWidth = calc.halfHexHeight / Math.sqrt(3)
-    
-    
+
+
           //drawing containers
           var container = d3.select(this);
-    
-    
-    
+
+
+
           //##################################  SCALES  ###########################
           var scales = {};
           scales.line = d3.scaleLinear()
             .domain([0, calc.lineCounts / 2])
             .range([0, calc.bottomLineWidth])
-    
-    
+
+
           //############################# RECALCULATION ###################
           //recalculate
           calc.lineArray = Array.from(Array(calc.lineCounts), (d, i) => {
@@ -106,9 +106,9 @@ https://github.com/bumbeishvili/d3-coding-conventions
               posX: pos,
             }
           });
-    
-    
-    
+
+
+
           //add svg
           var svg = patternify({ container: container, selector: 'svg-chart-container-number-of-cores', elementTag: 'svg' })
           svg.attr('width', attrs.svgWidth)
@@ -117,19 +117,19 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .style('background-color', attrs.backgroundColor)
           // .attr("viewBox", "0 0 " + attrs.svgWidth + " " + attrs.svgHeight)
           // .attr("preserveAspectRatio", "xMidYMid meet")
-    
+
           //add background image
           var image = patternify({ container: svg, selector: 'svg-background-image', elementTag: 'svg:image' })
           image.attr('x', 0)
             .attr('y', 5)
             .attr('width', attrs.svgWidth)
             .attr('height', attrs.svgHeight)
-            .attr("xlink:href", "images/createcloud/numberOfCores.png")
-    
+            .attr("xlink:href", "assets/images/createcloud/numberOfCores.png")
+
           //add container g element
           var chart = patternify({ container: svg, selector: 'chart', elementTag: 'g' })
           chart.attr('transform', 'translate(' + (calc.chartLeftMargin) + ',' + calc.chartTopMargin + ')');
-    
+
           //  ################################   DRAWING ELEMENTS   ###########################
           //description texts
           var descriptionText = patternify({ container: chart, selector: 'description-text', elementTag: 'text' })
@@ -140,7 +140,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .attr('text-anchor', 'middle')
             .style('text-transform', 'uppercase')
             .attr('font-size', attrs.descriptionTextFontSize)
-    
+
           //title texts
           var titleText = patternify({ container: chart, selector: 'title-text', elementTag: 'text' })
           titleText.text(attrs.data.title)
@@ -149,7 +149,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .attr('x', calc.titleTextX)
             .attr('text-anchor', 'middle')
             .attr('font-size', attrs.titleTextFontSize)
-    
+
           //value texts
           var valueText = patternify({ container: chart, selector: 'value-text', elementTag: 'text' })
           valueText.text(attrs.data.value)
@@ -160,7 +160,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .attr('alignment-baseline', 'middle')
             .attr('font-size', attrs.valueTextFontSize)
             .attr('font-weight', 200)
-    
+
           //minus text
           var minusText = patternify({ container: chart, selector: 'minus-text', elementTag: 'text' })
           minusText.text("-")
@@ -175,8 +175,8 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .each(function (d) {
               makeUnselectable(this);
             })
-    
-    
+
+
           //plus text
           var plusText = patternify({ container: chart, selector: 'plus-text', elementTag: 'text' })
           plusText.text("+")
@@ -191,7 +191,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .each(function (d) {
               makeUnselectable(this);
             })
-    
+
           //plus text click area
           var plusTextClickArea = patternify({ container: chart, selector: 'plus-text-click-area', elementTag: 'rect' })
           plusTextClickArea
@@ -206,7 +206,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
               attrs.data.value += 1;
               redraw();
             })
-    
+
           //minus text click area
           var minusTextClickArea = patternify({ container: chart, selector: 'minus-text-click-area', elementTag: 'rect' })
           minusTextClickArea
@@ -221,8 +221,8 @@ https://github.com/bumbeishvili/d3-coding-conventions
               attrs.data.value -= 1;
               redraw();
             })
-    
-    
+
+
           //right side lines array
           var rightLineArrays = patternify({ container: chart, selector: 'right-line-array', elementTag: 'rect', data: calc.lineArray })
           rightLineArrays
@@ -241,8 +241,8 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .attr('width', attrs.lineWidth)
             .attr('height', attrs.eachLineHeight)
             .style('cursor', 'pointer')
-    
-    
+
+
           //left side lines array
           var rightLineArrays = patternify({ container: chart, selector: 'left-line-array', elementTag: 'rect', data: calc.lineArray })
           rightLineArrays
@@ -261,18 +261,18 @@ https://github.com/bumbeishvili/d3-coding-conventions
             .attr('width', attrs.lineWidth)
             .attr('height', attrs.eachLineHeight)
             .style('cursor', 'pointer')
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
           // smoothly handle data updating
           updateData = function () {
-    
-    
+
+
           }
-    
+
           function redraw() {
             if (attrs.data.value > attrs.data.max) {
               attrs.data.value = attrs.data.max
@@ -281,18 +281,18 @@ https://github.com/bumbeishvili/d3-coding-conventions
               attrs.data.value = attrs.data.min
             }
             attrs.data.parentThis.set('initValue', attrs.data.value);
-            clearSelection();                      
+            clearSelection();
             main.run();
           }
           //#########################################  UTIL FUNCS ##################################
-    
+
           //enter exit update pattern principle
           function patternify(params) {
             var container = params.container;
             var selector = params.selector;
             var elementTag = params.elementTag;
             var data = params.data || [selector];
-    
+
             // pattern in action
             var selection = container.selectAll('.' + selector).data(data)
             selection.exit().remove();
@@ -300,9 +300,9 @@ https://github.com/bumbeishvili/d3-coding-conventions
             selection.attr('class', selector);
             return selection;
           }
-    
-    
-    
+
+
+
           //prevents text selection on minus and plus click
           function clearSelection() {
             if (document.selection && document.selection.empty) {
@@ -312,7 +312,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
               sel.removeAllRanges();
             }
           }
-    
+
           function makeUnselectable(elem) {
             if (typeof (elem) == 'string')
               elem = document.getElementById(elem);
@@ -323,13 +323,13 @@ https://github.com/bumbeishvili/d3-coding-conventions
               elem.unselectable = "on";
             }
           }
-    
-    
+
+
           function debug() {
             if (attrs.isDebug) {
               //stringify func
               var stringified = scope + "";
-    
+
               // parse variable names
               var groupVariables = stringified
                 //match var x-xx= {};
@@ -338,18 +338,18 @@ https://github.com/bumbeishvili/d3-coding-conventions
                 .map(d => d.match(/\s+\w*/gi).filter(s => s.trim()))
                 //get xxx
                 .map(v => v[0].trim())
-    
+
               //assign local variables to the scope
               groupVariables.forEach(v => {
                 main['P_' + v] = eval(v)
               })
             }
           }
-    
+
           debug();
         });
       };
-    
+
       //dinamic functions
       Object.keys(attrs).forEach(key => {
         // Attach variables to main function
@@ -360,10 +360,10 @@ https://github.com/bumbeishvili/d3-coding-conventions
           return main;
         };
       });
-    
+
       //set attrs as property
       main.attrs = attrs;
-    
+
       //debugging visuals
       main.debug = function (isDebug) {
         attrs.isDebug = isDebug;
@@ -373,7 +373,7 @@ https://github.com/bumbeishvili/d3-coding-conventions
         }
         return main;
       }
-    
+
       //exposed update functions
       main.data = function (value) {
         if (!arguments.length) return attrs.data;
@@ -383,12 +383,12 @@ https://github.com/bumbeishvili/d3-coding-conventions
         }
         return main;
       }
-    
+
       // run  visual
       main.run = function () {
         d3.selectAll(attrs.container).call(main);
         return main;
       }
-    
+
       return main;
   }
