@@ -87,7 +87,7 @@ export default Ember.Component.extend({
     },
 
     doReloaded: function() {
-      this.sendAction('doReload');
+      this.sendAction('doStorageReload');
     }
 
   }
