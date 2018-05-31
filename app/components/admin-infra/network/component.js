@@ -47,7 +47,7 @@ export default buildAdminInfraPanel('network', {
       this.sendAction('triggerReload');
     },
 
-    doVirtReload: function() {
+    virtualNetworkReload: function() {
       $('#network_edit').modal('hide');
       this.sendAction('triggerReload');
     },

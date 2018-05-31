@@ -36,7 +36,7 @@ actions: {
   },
 
   doReloaded: function() {
-    this.sendAction('doVirtReload');
+    this.sendAction('virtualNetworkReload');
   }
 
 }
