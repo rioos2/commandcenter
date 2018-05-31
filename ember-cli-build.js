@@ -4,29 +4,20 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // SRI: {
-    //   enabled: false
-    // },
-    // fingerprint: {
-    //   enabled: false
-    // },
-    // minifyJS: {
-    //   enabled: false
-    // },
-    // minifyCSS: {
-    //   enabled: true
-    // },
-    // Add options here
-    // lessOptions: {
-    //   paths: [
-    //     'bower_components/bootstrap/less'
-    //   ],
-    // },
-    // sassOptions: {
-    //   includePaths: [
-    //     'bower_components/SpinKit/scss',
-    //   ]
-    // }
+
+    fingerprint: {
+      exclude: [
+        // These can be bind-mounted in
+        'assets/images',
+      ],
+      extensions: (['js', 'css', 'png', 'jpg', 'gif', 'svg', 'map', 'woff', 'woff2', 'ttf']),
+    },
+    minifyJS: {
+      enabled: false
+    },
+    minifyCSS: {
+      enabled: true
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

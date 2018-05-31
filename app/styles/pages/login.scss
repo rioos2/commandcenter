@@ -2,10 +2,10 @@
 .login {
 
 
-    background-image: url("../images/login/sign_bg.png");
+    background-image: url("/assets/images/login/sign_bg.png");
     background-position: 49%;
     .sub-block {
-        background-image: url("../images/login/sub_bg.png");
+        background-image: url("/assets/images/login/sub_bg.png");
         background-repeat:no-repeat;
         background-size: 100% 100%;
         margin-top: 20%;
@@ -220,7 +220,7 @@
         position: relative;
         z-index: 0;
         overflow: hidden;
-        background: url(../images/login/backgrounds/bg.png) no-repeat #F7F7F7;
+        background: url(/assets/images/login/backgrounds/bg.png) no-repeat #F7F7F7;
     }
 
 
@@ -606,7 +606,7 @@
     }
 
     .tuna-yellow {
-        background: url(../images/login/backgrounds/yellow-bg.jpg);
+        background: url(/assets/images/login/backgrounds/yellow-bg.jpg);
     }
 
     .tuna-yellow .tuna-signup-right {
@@ -635,7 +635,7 @@
     }
 
     .tuna-darkblue {
-        background: url(../images/login/backgrounds/darkblue-bg.jpg);
+        background: url(/assets/images/login/backgrounds/darkblue-bg.jpg);
     }
 
     .tuna-darkblue .tuna-signup-right {
@@ -726,7 +726,7 @@
     }
 
     .body {
-        background-image: url('../images/login/sign_bg.png');
+        background-image: url('/assets/images/login/sign_bg.png');
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -739,7 +739,7 @@
     }
 
     .main-div {
-        background-image: url('../images/login/img1.png');
+        background-image: url('/assets/images/login/img1.png');
         /*background-position: center center;*/
         background-repeat: no-repeat;
         /*background-attachment: fixed;*/
@@ -891,7 +891,7 @@
     }
 
     .success {
-        background-image: url(../images/login/00.png)!important;
+        background-image: url(/assets/images/login/00.png)!important;
         color: #333!important;
         border: none;
         border-radius: 0px;
@@ -905,7 +905,7 @@
     }
 
     .success:focus {
-        background-image: url(../images/login/00.png);
+        background-image: url(/assets/images/login/00.png);
         color: #333!important;
         border: none;
         border-radius: 0px;
@@ -920,7 +920,7 @@
     }
 
     .select-btn {
-        background-image: url(../images/login/02.png);
+        background-image: url(/assets/images/login/02.png);
         border: none;
         border-radius: 0px;
         background-color: transparent!important;
@@ -933,7 +933,7 @@
     }
 
     .pending {
-        background-image: url(../images/login/01.png);
+        background-image: url(/assets/images/login/01.png);
         border: none;
         border-radius: 0px;
         background-color: transparent;
@@ -946,7 +946,7 @@
     }
 
     .pending:focus {
-        background-image: url(../images/login/01.png);
+        background-image: url(/assets/images/login/01.png);
         border: none;
         border-radius: 0px;
         background-color: transparent;
@@ -960,7 +960,7 @@
     }
 
     .select-btn:focus {
-        background-image: url(../images/login/02.png);
+        background-image: url(/assets/images/login/02.png);
         border: none;
         border-radius: 0px;
         background-color: transparent!important;
@@ -984,7 +984,7 @@
     }
 
     .verification-ico {
-        background-image: url(../images/login/verifi_icon.png);
+        background-image: url(/assets/images/login/verifi_icon.png);
         background-repeat: no-repeat;
         display: inline-block;
     }
@@ -1011,7 +1011,7 @@
     }
 
     .monBouton:before {
-        background-image: url(../images/login/verifi_icon.png);
+        background-image: url(/assets/images/login/verifi_icon.png);
         background-size: contain;
         background-size: 50px 44px;
         background-repeat: no-repeat;
@@ -1036,7 +1036,7 @@
     }
 
     .monBouton1:before {
-        background-image: url(../images/login/edit_icon.png);
+        background-image: url(/assets/images/login/edit_icon.png);
         background-size: contain;
         background-size: 19px 18px;
         background-repeat: no-repeat;

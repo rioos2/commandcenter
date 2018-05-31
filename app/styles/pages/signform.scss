@@ -220,7 +220,7 @@
 }
 // for only signup page
 .signup-page {
-  background-image: url("../images/signup/bg.png");
+  background-image: url("/assets/images/signup/bg.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-color: #e8effa;
@@ -286,7 +286,7 @@
     width: 100%;
     padding: 48px 80px;
     border-radius: 1px;
-    background-image: url("../images/signup/bg1.png");
+    background-image: url("/assets/images/signup/bg1.png");
     background-repeat: no-repeat;
     border-radius: 6px;
 
@@ -339,7 +339,7 @@
 }
 // for only signin page
 .signin {
-  background-image: url("../images/signin/bg.png");
+  background-image: url("/assets/images/signin/bg.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-color: #132fa9;
@@ -377,7 +377,7 @@
     width: 100%;
     padding: 20px 270px 164px;
     border-radius: 1px;
-    background-image: url("../images/signin/bg1.png");
+    background-image: url("/assets/images/signin/bg1.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 
