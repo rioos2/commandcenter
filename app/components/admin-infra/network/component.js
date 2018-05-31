@@ -44,7 +44,12 @@ export default buildAdminInfraPanel('network', {
 
     doReload: function() {
       $('#addnetwork_modal').modal('hide');
-      this.sendAction('reload');
+      this.sendAction('triggerReload');
+    },
+
+    virtualNetworkReload: function() {
+      $('#network_edit').modal('hide');
+      this.sendAction('triggerReload');
     },
 
     openModal: function() {

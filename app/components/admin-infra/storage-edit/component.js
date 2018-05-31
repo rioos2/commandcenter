@@ -10,7 +10,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   name: function() {
     return this.get('model.object_meta.name');
-  }.property('model.object_meta.name'),
+  }.property('model'),
 
   hostIp: function() {
     return this.get('model.host_ip');
@@ -36,7 +36,6 @@ export default Ember.Component.extend(DefaultHeaders, {
   return false;
 },
 
-
 actions: {
 
   editStorage: function() {
@@ -48,9 +47,11 @@ actions: {
         data: this.getData(),
       })).then((xhr) => {
         this.set('showSpinner', false);
-        location.reload();
+        this.set('modelSpinner', true);
+        this.sendAction('doReloaded');
       }).catch((err) => {
         this.set('showSpinner', false);
+        this.set('modelSpinner', false);
       });
     } else {
       this.set('showSpinner', false);

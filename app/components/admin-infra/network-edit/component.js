@@ -182,7 +182,6 @@ export default Ember.Component.extend(DefaultHeaders, {
       }
     });
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
-    alert("selectedNodes" + this.get('selectedNodes'));
   },
   actions: {
 
@@ -190,14 +189,16 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('showSpinner', true);
       if (!this.validation()) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
-          url: '/api/v1/networks/' + this.get('model.id'),
+          url: '/api/v1/networks/' + this.get('network.id'),
           method: 'PUT',
           data: this.getData(),
         })).then((xhr) => {
           this.set('showSpinner', false);
-          location.reload();
+          this.set('modelSpinner', true);
+          this.sendAction('doReloaded');
         }).catch((err) => {
           this.set('showSpinner', false);
+          this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);

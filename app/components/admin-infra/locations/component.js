@@ -76,7 +76,7 @@ export default buildAdminInfraPanel('locations', {
 
     doReload: function() {
       $('#addcluster_modal').modal('hide');
-      this.sendAction('reload');
+      this.sendAction('triggerReload');
     },
 
     openModal: function() {
