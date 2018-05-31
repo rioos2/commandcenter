@@ -1,6 +1,6 @@
 .cloud-performance {
     .performance-content {
-        background-image: url(../images/createcloud/cloudperformance.png);
+        background-image: url(/assets/images/createcloud/cloudperformance.png);
         background-repeat: no-repeat;
         background-size: 100% auto;
         padding-top: 100px;
@@ -79,7 +79,7 @@
 
     @media only screen and (max-width: 992px) {
         .performance-content {
-            background-image: url(../images/createcloud/cloudperformance1.png);
+            background-image: url(/assets/images/createcloud/cloudperformance1.png);
             background-color: #1c2032;
         }
 
