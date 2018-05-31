@@ -11,7 +11,7 @@
 		</div>
 		<div class="content">
 			{{#each panels as |tab|}}
-				{{component tab selectedTab=selectedTab model=model reload="reload" }}
+				{{component tab selectedTab=selectedTab model=model reload="reload" modelSpinner=modelSpinner}}
 			{{/each}}
 		</div>
 	</div>

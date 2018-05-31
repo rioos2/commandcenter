@@ -2,8 +2,8 @@ import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
 
-  name: function() {
-    return this.get('model.object_meta.name');
+  name: function(){
+      return this.get('model.object_meta.name');
   }.property('model'),
 
   type: function() {
@@ -30,5 +30,15 @@ export default Ember.Component.extend({
     return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('subnet')) && Ember.isEmpty(this.get('type')) && Ember.isEmpty(this.get('gateway')));
   }.property('status','name','type','gateway','subnet'),
 
+actions: {
+  openEditModal: function(){
+    $('#network_edit').modal('show');
+  },
+
+  doReloaded: function() {
+    this.sendAction('doReload');
+  }
+
+}
 
 });
