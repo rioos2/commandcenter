@@ -78,7 +78,7 @@ yarn install
 
 ## Running / Production mode
 
-* `ember build --environment=production`
+* `yarn build --environment=production`
 * `yarn start -prod`
 * Visit your app at [https://localhost:8000](https://localhost:8000).
 
