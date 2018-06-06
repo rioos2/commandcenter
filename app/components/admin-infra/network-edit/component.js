@@ -10,6 +10,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   error: false,
   selectedBridges: [],
   selectedNodes: [],
+  virtualNetworkType: '',
 
   setNodeAndBridge: function() {
     var self = this;
@@ -28,35 +29,59 @@ export default Ember.Component.extend(DefaultHeaders, {
     var self = this;
     this.set('selectedNodes', []);
     this.set('selectedBridges', []);
-    this.setNodeAndBridge();
+    if(Ember.isEqual(this.get('selectedType'), this.get('type'))){
+      this.setNodeAndBridge();
+    }
     if (!Ember.isEmpty(this.get('allnodes'))) {
-      var bridgeEnable = false;
+      var bridge_name = '';
       return this.get('allnodes').map(function(node) {
+        self.get('selectedBridges').map(function(bridge) {
+          bridge_name = Ember.isEqual(bridge.name, node.id)? bridge.value: '';
+        });
         var data = {
           name: node.object_meta.name,
           node_id: node.id,
-          active_bridge: self.get('network.bridge_hosts.' + `${node.id}`),
+          active_bridge: bridge_name,
           bridges: [],
-          active: false,
+          active: !Ember.isEmpty(bridge_name),
         };
-        if (!Ember.isEmpty(self.get('network.bridge_hosts'))) {
-          Object.keys(self.get('network.bridge_hosts')).filter(function(key) {
-            if (Ember.isEqual(key, node.id)) {
-              data.active = true;
-            }
-          });
           node.status.node_info.bridges.forEach(function(name) {
             data.bridges.addObject({
               value: name.bridge_name,
               types: name.network_types,
             });
           });
-        }
         return data;
       });
     };
     return [];
-  }.property('allnodes', 'network'),
+  }.property('allnodes', 'network', 'type'),
+
+
+  typeSelectionChanged: function() {
+    Ember.isEqual(this.get('selectedType'), this.get('type')) ? this.setDefaultValues() : this.refresh();
+  }.observes('type'),
+
+  refresh() {
+    this.setProperties({
+      subnet: '',
+      gateway: '',
+      netmask: '',
+    });
+  },
+
+  setDefaultValues() {
+    this.setProperties({
+      name: this.get('network.object_meta.name'),
+      subnet: this.get('network.subnet_ip'),
+      gateway: this.get('network.gateway'),
+      netmask: this.get('network.netmask'),
+    });
+  },
+
+  networkSelectionChanged: function(){
+    this.setDefaultValues();
+  }.observes('network'),
 
   virtualNetworks: function() {
     return !Ember.isEmpty(this.get('type')) ? C.AVAILABLE_NETWORK_TYPES : [];
@@ -66,29 +91,13 @@ export default Ember.Component.extend(DefaultHeaders, {
     return Ember.isEmpty(this.get('network.used_bits'));
   }.property('network.used_bits'),
 
-  name: function() {
-    return this.get('network.object_meta.name');
-  }.property('network.object_meta.name'),
-
-  subnet: function() {
-    return this.get('network.subnet_ip');
-  }.property('network.subnet_ip'),
-
-  type: function() {
-    return this.get('network.network_type');
-  }.property('network.network_type'),
+  typeSelect: function() {
+    this.set('type',this.get('network.network_type'));
+  }.observes('network.network_type'),
 
   status: function() {
     return this.get('network.status.phase');
   }.property('network.status.phase'),
-
-  netmask: function() {
-    return this.get('network.netmask');
-  }.property('network.netmask'),
-
-  gateway: function() {
-    return this.get('network.gateway');
-  }.property('network.gateway'),
 
   getBridge: function(data) {
     var bridge_hst = {};
@@ -162,6 +171,10 @@ export default Ember.Component.extend(DefaultHeaders, {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.NETMASK) : !ip.match(C.REGEX.IPV6.NETMASK);
   },
 
+  selectedType: function() {
+    return this.get('type');
+  }.property('network.network_type'),
+
   checkIpFormate: function(ip) {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.IP) : !ip.match(C.REGEX.IPV6.IP);
   },
@@ -211,7 +224,6 @@ export default Ember.Component.extend(DefaultHeaders, {
     },
     setVirtualNetwork: function(value) {
       this.set('type', value);
-
     },
     updatePoolData: function(active, name) {
       this.attachAndDetachNode(active, name);

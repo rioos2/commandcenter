@@ -8,9 +8,9 @@ export default Ember.Component.extend(DefaultHeaders, {
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
 
-  name: function() {
-    return this.get('model.object_meta.name');
-  }.property('model'),
+  nameSelect: function() {
+    this.set('name',this.get('model.object_meta.name'));
+  }.observes('model.object_meta.name'),
 
   hostIp: function() {
     return this.get('model.host_ip');
