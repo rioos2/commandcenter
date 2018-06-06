@@ -2,9 +2,9 @@ import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
 
-  name: function(){
-      return this.get('model.object_meta.name');
-  }.property('model'),
+  nameSelect: function(){
+      this.set('name',this.get('model.object_meta.name'));
+  }.observes('model'),
 
   type: function() {
     return this.get('model.network_type');
