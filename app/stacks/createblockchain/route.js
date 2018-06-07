@@ -36,7 +36,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return promise.then((hash) => {
       return Ember.Object.create({
         assemblyfactory: this.loadedBlockchainFactory(this.getSettings(setting)),
-        secret: this.loadSecret(setting),
+        // secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
         settings: this.getSettings(setting),
@@ -62,22 +62,6 @@ export default Ember.Route.extend(DefaultHeaders,  {
 
   getSettings: function(data){
     return Ember.isEmpty(data.all.content)? {} : data.all.content.objectAt(0).data;
-  },
-
-  getSecretType: function (setting) {
-    return this.getSettings(setting)[denormalizeName(`${C.SETTING.TRUSTED_KEY}`)] || D.VPS.trusted_key;
- },
-
-  loadSecret(setting) {
-    var secretData = {
-      type: 'secret',
-      secret_type: this.getSecretType(setting),
-      data: {},
-      object_meta: ObjectMetaBuilder.buildObjectMeta(),
-      metadata:{},
-    };
-
-    return this.get('store').createRecord(secretData);
   },
 
   loadedBlockchainFactory(settings) {

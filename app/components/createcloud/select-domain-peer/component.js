@@ -34,14 +34,6 @@ export default Component.extend(DefaultHeaders, {
       return checkDomain;
     },
 
-    checkSecrectType() {
-      let checkSecrectType =  Ember.isEmpty(this.get('secretType'));
-      if (checkSecrectType) {
-        this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptySecretType'));
-      }
-      return checkSecrectType;
-    },
-
     nameSpliter(newDomainName) {
       return (this.get('newDomainName') + "-" + this.get('model.assemblyfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
     },
