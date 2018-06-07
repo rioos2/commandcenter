@@ -1,0 +1,27 @@
+<div class="create-cloud">
+    <div class="container">
+        {{#link-to "infrastructure-tab.data-center"}}<img class="logo-img" src="images/logo2.png">{{/link-to}}
+        <div class="col-container">
+            <div class="col-right">
+                {{!-- select cloud type --}}
+                {{createcloud/cloud-blockchain-type class="cloud-type cblock" model=model}}
+                {{!-- select domain name --}}
+                {{createcloud/select-domain-peer class="select-domain cblock" model=model}}
+                {{!-- enter per count --}}
+                <!-- {{createcloud/select-peer class="select-domain cblock" model=model}} -->
+                {{!-- select locaation --}}
+                {{createcloud/select-location class="select-location cblock" model=model}}
+                {{!-- cloud performance --}}
+                {{createcloud/cloud-performance class="cloud-performance cblock" model=model}}
+                {{!-- cloud server os --}}
+                {{createcloud/server-blockchain class="server-os cblock" model=model}}
+                {{!-- networking --}}
+                {{createcloud/cloud-network-chooser class="networking cblock" model=model}}
+                {{!-- summary --}}
+                {{createcloud/cloud-summary class="summary cblock" model=model networking=model.networking}}
+                {{!-- footer --}}
+                {{page-footer}}
+            </div>
+        </div>
+    </div>
+</div>

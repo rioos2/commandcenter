@@ -689,6 +689,7 @@ launcherPage:
     createCloud: CREATING A DIGITAL CLOUD
     createContainer: CREATING A CONTAINER
     cloudType: PICK YOUR CLOUD TYPE
+    BlockchainType: CREATING BLOCKCHAIN NETWORK
     cpu:
       title: cpu
       description: CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.
@@ -736,6 +737,9 @@ launcherPage:
     cpuChooser:
       title: Select number of cores
       description: From 1 to 30
+    peerChooser:
+      title: Select number of peers
+      description: From 1
     ramChooser:
       title: ram
 
@@ -3745,6 +3749,7 @@ nav:
   manage: Manage
   digitalcloud: Digital cloud
   docker: Container
+  blockchain: Blockchain
   user:
     profile: Profile
     logout: Logout

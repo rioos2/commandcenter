@@ -1,0 +1,20 @@
+<p class="sub-title">{{t 'launcherPage.domain.title'}}</p>
+<p class="sub-description">{{t 'launcherPage.domain.subtitle'}}</p>
+<p class="domain-name">{{model.assemblyfactory.object_meta.name}}</p>
+
+<section class="webdesigntuts-workshop">
+  {{svg/svg-edit class=(if showIcon "edit-ico" "display-none") click=(action 'clickInputIcon')}}
+  <div class= {{if showIcon "display-none" "showform"}}>
+    {{input type="text" placeholder=domainPlaceHolder value=newDomainName}}
+    <button {{action "setNewDomain" newDomainName}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+  </div>
+</section>
+<div class="row generate ">
+  <div class="g-left row peer-show">
+    <div class="col-md-12">
+      <div class="rio-selectbtn row">
+        {{createcloud/chart-peers class="chart-cores" model=model initValue=model.assemblyfactory.replicas}}
+    </div>
+    </div>
+  </div>
+</div>

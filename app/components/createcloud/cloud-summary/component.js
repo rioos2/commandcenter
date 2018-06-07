@@ -79,7 +79,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.property('model.assemblyfactory.os'),
 
   validation() {
-    if (Ember.isEmpty(this.get('model.assemblyfactory.secret.id'))) {
+    if (Ember.isEmpty(this.get('model.assemblyfactory.secret.id')) && this.get('model.assemblyfactory.object_meta.labels.rioos_category') != C.CATEGORIES.BLOCKCHAIN) {
       this.set('validationWarning', get(this, 'intl').t('notifications.secret'));
       return true;
     } else if (this.get('regionExisit')) {
@@ -122,7 +122,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         var session = this.get("session");
         var id = this.get("session").get("id");
         this.set("model.assemblyfactory.object_meta.account", id);
-        var url = 'accounts/' + id + '/assemblyfactorys';
+        var url = 'accounts/' + id + '/' + this.get('model.assemblyfactory.type');
         this.resourceUpdate();
         this.get('model.assemblyfactory').save(this.opts(url)).then(() => {
           // this.get('router').transitionTo('/apps/stacks');
