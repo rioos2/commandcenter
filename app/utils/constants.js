@@ -19,15 +19,15 @@ var C = {
   },
 
   REGEX: {
-    IPV4:{
+    IPV4: {
       IP: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
       NETMASK: /^((128|192|224|240|248|252|254)\.0\.0\.0)|(255\.(((0|128|192|224|240|248|252|254)\.0\.0)|(255\.(((0|128|192|224|240|248|252|254)\.0)|255\.(0|128|192|224|240|248|252|254)))))$/,
       SUBNET: /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/\d+$/,
     },
-    IPV6:{
-      IP:/(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
-      NETMASK:/(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
-      SUBNET:/^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$/,
+    IPV6: {
+      IP: /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
+      NETMASK: /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
+      SUBNET: /^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$/,
     }
   },
 
@@ -64,18 +64,18 @@ var C = {
     },
   },
 
-  ADMIN:{
-    STATUS:{
-      INITIAL: ["initialized","pending"],
-      READY: ["ready","running"],
+  ADMIN: {
+    STATUS: {
+      INITIAL: ["initialized", "pending"],
+      READY: ["ready", "running"],
       NOTREADY: ["notready"],
     },
-    STORAGE_TYPE:{
+    STORAGE_TYPE: {
       CEPH: "rioos_sh/ceph",
     },
   },
 
-  AVAILABLE_NETWORK_TYPES:  ["private_ipv4", "private_ipv6", "public_ipv4", "public_ipv6"],
+  AVAILABLE_NETWORK_TYPES: ["private_ipv4", "private_ipv6", "public_ipv4", "public_ipv6"],
 
   STORAGE: {
     LOCATION: {
@@ -97,15 +97,15 @@ var C = {
   },
 
   NETWORK: {
-      PACKETMEASURETYPE: {
-        THROUGHPUT: 'throughput',
-        ERROR: 'error',
-      },
-      MEASURETYPES:["throughput", "error"]
+    PACKETMEASURETYPE: {
+      THROUGHPUT: 'throughput',
+      ERROR: 'error',
+    },
+    MEASURETYPES: ["throughput", "error"]
   },
 
   PROCESS: {
-      TYPE: ['CPU', 'MEMORY']
+    TYPE: ['CPU', 'MEMORY']
   },
 
   CATALOG: {
@@ -292,6 +292,10 @@ var C = {
     BLOCKCHAIN: 'blockchain'
   },
 
+  BLOCKCHAIN: {
+    BLO_FILTER: 'rioos_sh_blockchain_network'
+  },
+
   FILTERS: {
     UNDERSCORE_DEFAULT: "_default",
     QUERY_PARAM_OS: "os",
@@ -324,18 +328,41 @@ var C = {
 };
 
 C.FILTER_QUERY_PARAMS_ALL = [C.FILTERS.QUERY_PARAM_OS, C.FILTERS.QUERY_PARAM_DB,
-C.FILTERS.QUERY_PARAM_LOCATION, C.FILTERS.QUERY_PARAM_NETWORK, C.FILTERS.QUERY_PARAM_STATUS];
+  C.FILTERS.QUERY_PARAM_LOCATION, C.FILTERS.QUERY_PARAM_NETWORK, C.FILTERS.QUERY_PARAM_STATUS
+];
 
 C.FILTERS_SEARCH_ACCESSORS = [C.FILTERS.SELECT_OS_ACCESSOR, C.FILTERS.SELECT_LOCATION_ACCESSOR, C.FILTERS.SELECT_DB_ACCESSOR, C.FILTERS.SELECT_STATUS_ACCESSOR, C.FILTERS.SELECT_NETWORK_ACCESSOR, C.FILTERS.SELECT_NAME_ACCESSOR],
 
-C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH = [
-  { selector: C.FILTERS.QUERY_PARAM_OS, accessor: C.FILTERS.SELECT_OS_ACCESSOR, _default: C.FILTERS.SELECT_OS },
-  { selector: C.FILTERS.QUERY_PARAM_LOCATION, accessor: C.FILTERS.SELECT_LOCATION_ACCESSOR, _default: C.FILTERS.SELECT_LOCATION },
-  { selector: C.FILTERS.QUERY_PARAM_DB, accessor: C.FILTERS.SELECT_DB_ACCESSOR, _default: C.FILTERS.SELECT_DB },
-  { selector: C.FILTERS.QUERY_PARAM_STATUS, accessor: C.FILTERS.SELECT_STATUS_ACCESSOR, _default: C.FILTERS.SELECT_STATUS },
-  { selector: C.FILTERS.QUERY_PARAM_NETWORK, accessor: C.FILTERS.SELECT_NETWORK_ACCESSOR, _default: C.FILTERS.SELECT_NETWORK },
-  { selector: C.FILTERS.QUERY_PARAM_SEARCH, accessor: C.FILTERS_SEARCH_ACCESSORS},
-];
+  C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH = [{
+      selector: C.FILTERS.QUERY_PARAM_OS,
+      accessor: C.FILTERS.SELECT_OS_ACCESSOR,
+      _default: C.FILTERS.SELECT_OS
+    },
+    {
+      selector: C.FILTERS.QUERY_PARAM_LOCATION,
+      accessor: C.FILTERS.SELECT_LOCATION_ACCESSOR,
+      _default: C.FILTERS.SELECT_LOCATION
+    },
+    {
+      selector: C.FILTERS.QUERY_PARAM_DB,
+      accessor: C.FILTERS.SELECT_DB_ACCESSOR,
+      _default: C.FILTERS.SELECT_DB
+    },
+    {
+      selector: C.FILTERS.QUERY_PARAM_STATUS,
+      accessor: C.FILTERS.SELECT_STATUS_ACCESSOR,
+      _default: C.FILTERS.SELECT_STATUS
+    },
+    {
+      selector: C.FILTERS.QUERY_PARAM_NETWORK,
+      accessor: C.FILTERS.SELECT_NETWORK_ACCESSOR,
+      _default: C.FILTERS.SELECT_NETWORK
+    },
+    {
+      selector: C.FILTERS.QUERY_PARAM_SEARCH,
+      accessor: C.FILTERS_SEARCH_ACCESSORS
+    },
+  ];
 
 C.CATEGORIES_ALL = [C.CATEGORIES.MACHINE, C.CATEGORIES.CONTAINER, C.CATEGORIES.BLOCKCHAIN];
 
