@@ -4,15 +4,15 @@
         <div class="col-container">
             <div class="col-right">
                 {{!-- select cloud type --}}
-                {{createcloud/cloud-blockchain-type class="cloud-type cblock" model=model}}
+                {{createblockchain-network/select-compute-for-network class="cloud-type cblock" model=model}}
                 {{!-- select domain name --}}
-                {{createcloud/select-domain-peer class="select-domain cblock" model=model}}
+                {{createblockchain-network/select-blockchain-network-peers class="select-domain cblock" model=model}}
                 {{!-- select locaation --}}
                 {{createcloud/select-location class="select-location cblock" model=model}}
                 {{!-- cloud performance --}}
                 {{createcloud/cloud-performance class="cloud-performance cblock" model=model}}
                 {{!-- cloud server os --}}
-                {{createcloud/server-blockchain class="server-os cblock" model=model}}
+                {{createblockchain-network/select-network-install-type class="server-os cblock" model=model}}
                 {{!-- networking --}}
                 {{createcloud/cloud-network-chooser class="networking cblock" model=model}}
                 {{!-- summary --}}
