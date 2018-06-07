@@ -1,136 +1,138 @@
 .cloud-performance {
-  .performance-content {
-    background-image: url("../images/createcloud/cloudperformance.png");
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    padding-top: 100px;
-    // background-color: #f9fafe;
-  }
-
-  .sub-title {
-    color: white;
-    text-transform: uppercase;
-  }
-
-  .chart-cores {
-    text-align: center;
-  }
-
-  .chart-peers {
-    text-align: center;
-    }
-
-  .storage-content {
-    padding-bottom: 77px;
-
-    .title {
-      font-size: 25px;
-      color: #bcbdce;
-      text-align: center;
-      padding-top: 60px;
-      margin-bottom: 20px;
-    }
-
-    .content {
-      position: relative;
-      margin: 0 auto;
-      width: 380px;
-    }
-  }
-
-  .text-or {
-    position: absolute;
-    left: 180px;
-    top: 56px;
-    font-size: 24px;
-    color: #64687c;
-  }
-
-  .ram-content {
-    text-align: right;
-    padding: 0;
-  }
-
-  .capacity-content {
-    text-align: left;
-    padding: 0;
-  }
-
-  .chart-ram svg,
-  .chart-storage svg {
-    box-shadow: 0 14px 20px -10px rgba(41, 49, 190, 0.3);
-  }
-
-  .rio-hdd {
-    margin-left: 75px;
-  }
-  @media only screen and (max-width: 1200px) {
-    .storage-content .content {
-      width: 320px;
-    }
-
-    .rio-hdd {
-      margin-left: 16px;
-    }
-
-    .text-or {
-      left: 150px;
-    }
-  }
-  @media only screen and (max-width: 992px) {
     .performance-content {
-      background-image: url("../images/createcloud/cloudperformance1.png");
-      background-color: #1c2032;
+        background-image: url(/assets/images/createcloud/cloudperformance.png);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        padding-top: 100px;
+        // background-color: #f9fafe;
+    }
+
+    .sub-title {
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .chart-cores {
+        text-align: center;
     }
 
     .storage-content {
-      background: #1a1d2d;
-      margin: 0 15px;
-      padding-bottom: 76px;
+        padding-bottom: 77px;
+
+        .title {
+            font-size: 25px;
+            color: #bcbdce;
+            text-align: center;
+            padding-top: 60px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            position: relative;
+            margin: 0 auto;
+            width: 380px;
+        }
     }
 
+    .text-or {
+        position: absolute;
+        left: 180px;
+        top: 56px;
+        font-size: 24px;
+        color: #64687c;
+    }
+
+
+
     .ram-content {
-      text-align: center;
-      background: #1f2335;
+        text-align: right;
+        padding: 0;
     }
 
     .capacity-content {
-      text-align: center;
-      background: #24273b;
+        text-align: left;
+        padding: 0;
     }
 
     .chart-ram svg,
-    .chart-storage svg {
-      box-shadow: none;
-    }
-  }
-  @media only screen and (max-width: 425px) {
-    .cores-content {
-      margin-left: -15px;
-    }
-  }
-  @media only screen and (max-width: 375px) {
-    .cores-content {
-      margin-left: -40px;
+    .chart-storage svg{
+        box-shadow:0px 14px 20px -10px rgba(41, 49, 190, 0.3);
     }
 
-    .capacity-content,
-    .ram-content {
-      margin-left: -15px;
-    }
-  }
-  @media only screen and (max-width: 320px) {
-    .capacity-content,
-    .ram-content {
-      margin-left: -40px;
+    .rio-hdd {
+        margin-left: 75px;
     }
 
-    .storage-content .content {
-      margin-left: -15px;
+    @media only screen and (max-width: 1200px) {
+        .storage-content .content {
+            width: 320px;
+        }
+
+        .rio-hdd {
+            margin-left: 16px;
+        }
+
+        .text-or {
+            left: 150px;
+        }
     }
 
-    .cores-content {
-      margin-left: -70px;
+    @media only screen and (max-width: 992px) {
+        .performance-content {
+            background-image: url(/assets/images/createcloud/cloudperformance1.png);
+            background-color: #1c2032;
+        }
+
+        .storage-content {
+            background: #1a1d2d;
+            margin:0 15px;
+            padding-bottom: 76px;
+        }
+
+        .ram-content {
+            text-align: center;
+            background: #1f2335;
+        }
+        .capacity-content {
+            text-align: center;
+            background: #24273b;
+        }
+
+        .chart-ram svg,
+        .chart-storage svg{
+            box-shadow: none;
+        }
     }
-  }
+
+    @media only screen and (max-width: 425px) {
+        .cores-content {
+            margin-left: -15px;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        .cores-content {
+            margin-left: -40px;
+        }
+
+        .ram-content,
+        .capacity-content {
+            margin-left: -15px;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .ram-content,
+        .capacity-content {
+            margin-left: -40px;
+        }
+
+        .storage-content .content {
+            margin-left: -15px;
+        }
+
+        .cores-content {
+            margin-left: -70px;
+        }
+    }
 }

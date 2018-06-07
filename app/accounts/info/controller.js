@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
 
   img: function() {
     if (this.get('model.profile.avatar') == null) {
-      return "../images/user/default.png";
+      return "assets/images/user/default.png";
     }
     return "data:image/png;base64," + this.get('model.profile.avatar');
   }.property('model'),

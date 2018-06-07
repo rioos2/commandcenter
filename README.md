@@ -76,7 +76,13 @@ yarn install
 
 ```
 
-## Running / Development
+## Running / Production mode
+
+* `yarn build --environment=production`
+* `yarn start -prod`
+* Visit your app at [https://localhost:8000](https://localhost:8000).
+
+## Running / Development mode
 
 * `yarn start`
 * Visit your app at [https://localhost:8000](https://localhost:8000).
