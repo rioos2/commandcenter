@@ -56,6 +56,7 @@ Router.map(function () {
         this.route('createcloud', { path: '/createcloud' });
         this.route('createcontainer', { path: '/createcontainer' });
         this.route('createblockchain', { path: '/createblockchain' });
+        this.route('createapplication', { path: '/createapplication' });
 
         // A single application (digital cloud, containers, blockchain)
         // Allows console based on the type of application
