@@ -298,6 +298,10 @@ var C = {
     BLO_FILTER: 'rioos_sh_blockchain_network'
   },
 
+  BLOCKCHAIN: {
+    BLO_FILTER: 'rioos_sh_blockchain_network'
+  },
+
   FILTERS: {
     UNDERSCORE_DEFAULT: "_default",
     QUERY_PARAM_OS: "os",
