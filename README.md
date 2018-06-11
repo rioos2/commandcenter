@@ -8,10 +8,10 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 
-* Download [Node.js 8.9.4](https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz)
+* Download [Node.js 10.4.0](https://nodejs.org/dist/v10.4.0/node-v10.4.0-linux-x64.tar.xz)
 
 ```
-wget https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
+wget https://nodejs.org/dist/v10.4.0/node-v10.4.0-linux-x64.tar.xz
 ```
 * Unzip downloaded tar to ~/software
 
@@ -51,67 +51,48 @@ sudo apt-get update && sudo apt-get install yarn
 
 ## Installation
 
-* `git clone <forked-nilavu-repository-url>` this repository
+* `git clone <forked-nilavu-repository-url> -b 2-0-stable ui` this repository
 * change into the new directory
 
 ```
-cd nilavu
-yarn install
-```
 
-## Update ember-api-store
+cd ui
 
-```
-yarn remove ember-api-store
-
-```
-* Above command has been removed the ember-api-store record on package.json
-
-* Add "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master" on package.json under "devDependencies".
-
-* Install ember-api-store via yarn
-
-```
 yarn install
 
 ```
-
-## Running / Production mode
-
-* `yarn build --environment=production`
-* `yarn start -prod`
-* Visit your app at [https://localhost:8000](https://localhost:8000).
 
 ## Running / Development mode
 
-* `yarn start`
-* Visit your app at [https://localhost:8000](https://localhost:8000).
+```
 
-## How does SSL work  
-
-The ssl certificated are automatically pulled by `ember serve` from the `nilavu/ssl/`  directory.
-
-This is due t the property `ssl: true` being turned on.in `.ember-cli` file.
+yarn start
 
 ```
-{
-  /**
-    Ember CLI sends analytics information by default. The data is completely
-    anonymous, but there are times when you might want to disable this behavior.
 
-    Setting `disableAnalytics` to true will prevent any data from being sent.
-  */
-  "disableAnalytics" : true,
-  "port"             : 8000,
-  "host"             : "0.0.0.0",
-  "usePods"          : true,
-  "ssl"              : true
-}
+Visit your app at [https://localhost:8000](https://localhost:8000).
+
+This runs in headless mode. Needs an api to start chugging.
+
+## Edit configuration config/config/ui.toml
+
+The file needs to be in $RIOOS_HOME/config (or) <projectdir>/config.
 
 ```
-## Configuration config/ui.toml
 
-The file needs to be in $RIOOS_HOME/config (or) projectdir/config
+cd ui/config/config
+
+ls 
+
+# You'll see ui.toml
+
+nano ui.toml
+
+# Change the http_api to 
+
+http_api="https://console.rioos.xyz"
+
+```
 
 ```
 ##############################################
@@ -138,14 +119,66 @@ vnc_server = "ws://localhost:9000"
 * `ember test`
 * `ember test --server`
 
-### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+## Running / Production mode
 
-### Deploying
+```
 
-Specify what it takes to deploy your app.
+yarn build --environment=production
+
+yarn start -prod
+
+```
+
+* Visit your app at [https://localhost:8000](https://localhost:8000).
+
+
+## For development: If you wish to update ember-api-store
+
+When you wish to upgrade `ember-api-store` from git, 
+
+*optional
+
+
+```
+yarn remove ember-api-store
+
+```
+
+* Above command removes the ember-api-store record in package.json
+
+* Add "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
+
+* Install ember-api-store via yarn
+
+```
+yarn install
+
+```
+
+## How does SSL work  
+
+The ssl certificated are automatically pulled by `ember serve` from the `nilavu/ssl/`  directory.
+
+This is due t the property `ssl: true` being turned on.in `.ember-cli` file.
+
+```
+{
+  /**
+    Ember CLI sends analytics information by default. The data is completely
+    anonymous, but there are times when you might want to disable this behavior.
+
+    Setting `disableAnalytics` to true will prevent any data from being sent.
+  */
+  "disableAnalytics" : true,
+  "port"             : 8000,
+  "host"             : "0.0.0.0",
+  "usePods"          : true,
+  "ssl"              : true
+}
+
+```
+
 
 ### Troubleshooting (dev)
 
