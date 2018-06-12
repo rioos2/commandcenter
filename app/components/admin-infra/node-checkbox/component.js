@@ -15,7 +15,6 @@ export default Ember.Component.extend({
     if (this.get('active')) {
       return "";
     } else {
-      this.send('sendBridge', "");
       return "disabled";
     }
   }.property('active'),

@@ -20,7 +20,7 @@
         <ul class="nav navbar-nav nav-menu">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              Deploy
+              {{t 'nav.deploy'}}
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -29,11 +29,8 @@
               <li>
                 {{#link-to "stacks.createcontainer"}}{{t 'nav.docker'}}{{/link-to}}
               </li>
-              <li>
-                {{#link-to "stacks.createcontainer"}}Custom application{{/link-to}}
-              </li>
-              <li>
-                {{#link-to "stacks.createcontainer"}}{{t 'nav.docker'}}{{/link-to}}
+              <li class="disabled">
+                {{#link-to "stacks.createcontainer"}}{{t 'nav.customApp'}}{{/link-to}}
               </li>
             </ul>
           </li>
@@ -42,14 +39,14 @@
         <ul class="nav navbar-nav nav-menu">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-               Blockchain
+               {{t 'nav.blockchain'}}
             </a>
             <ul class="dropdown-menu">
               <li>
-                {{#link-to "stacks.createcloud"}}{{t 'nav.digitalcloud'}}{{/link-to}}
+                {{#link-to "stacks.createcloud"}}{{t 'nav.infrastructureNetwork'}}{{/link-to}}
               </li>
               <li>
-                {{#link-to "stacks.createcontainer"}}{{t 'nav.docker'}}{{/link-to}}
+                {{#link-to "stacks.createcontainer"}}{{t 'nav.deployApplication'}}{{/link-to}}
               </li>
             </ul>
           </li>

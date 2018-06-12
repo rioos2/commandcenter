@@ -12,19 +12,19 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.checkPlanEmpty();
-    if(!Ember.isEmpty(this.get('groupedVms'))) {
+    if (!Ember.isEmpty(this.get('groupedVms'))) {
       let item_found = false;
-      this.get('groupedVms').forEach(function(e){
-        if(e.type == this.get('model.assemblyfactory.os')) {
-          e.version.forEach(function(v){
-              if(v.version == this.get('model.assemblyfactory.resources.version')) {
-                  item_found = true;
-                  this.refreshPlan(e,v);
-              }
+      this.get('groupedVms').forEach(function(e) {
+        if (e.type == this.get('model.assemblyfactory.os')) {
+          e.version.forEach(function(v) {
+            if (v.version == this.get('model.assemblyfactory.resources.version')) {
+              item_found = true;
+              this.refreshPlan(e, v);
+            }
           }.bind(this));
         }
       }.bind(this));
-      if(!item_found){
+      if (!item_found) {
         this.setFirstPlanFactory();
       }
     } else {
@@ -41,19 +41,19 @@ export default Ember.Component.extend({
     this.setIcon(plan);
   },
 
-  refreshPlan: function(plan , planFirstItem) {
+  refreshPlan: function(plan, planFirstItem) {
     this.set('model.assemblyfactory.os', planFirstItem.type);
     this.set("model.assemblyfactory.plan", planFirstItem.id);
     this.set("model.assemblyfactory.resources.version", planFirstItem.version);
     this.send('refreshAfterSelect', plan);
   },
 
-  checkPlanEmpty: function(){
-    if(Ember.isEmpty(this.get('groupedVms'))){
+  checkPlanEmpty: function() {
+    if (Ember.isEmpty(this.get('groupedVms'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
         autoClear: true,
         clearDuration: 6000,
-        cssClasses:'notification-warning'
+        cssClasses: 'notification-warning'
       });
     }
   },
@@ -68,8 +68,10 @@ export default Ember.Component.extend({
     var groupVms = [];
     var planfactory = this.get("model.plans.content");
     planfactory.forEach(function(plan) {
-      if (plan.category.toLowerCase() === C.CATEGORIES.MACHINE && plan.status.phase.toLowerCase() === C.PHASE.READY) {
-        planGroup.pushObject(plan.object_meta.name);
+      if (!Ember.isEmpty(plan.metadata)) {
+        if (plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && plan.status.phase.toLowerCase() === C.PHASE.READY && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+          planGroup.pushObject(plan.object_meta.name);
+        }
       }
       uniqueVmGroup = planGroup.filter(function(elem, index, self) {
         return index == self.indexOf(elem);
@@ -83,15 +85,17 @@ export default Ember.Component.extend({
         "item": []
       }
       planfactory.forEach(function(plan) {
-        if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.MACHINE) {
-          createVmGroup.item.pushObject(plan);
-          createVmGroup.icon = plan.icon;
-          createVmGroup.version.pushObject({
-            "version": plan.version,
-            "id": plan.id,
-            "type": plan.object_meta.name,
-            "description": plan.description
-          });
+        if (!Ember.isEmpty(plan.metadata)) {
+          if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+            createVmGroup.item.pushObject(plan);
+            createVmGroup.icon = plan.icon;
+            createVmGroup.version.pushObject({
+              "version": plan.version,
+              "id": plan.id,
+              "type": plan.object_meta.name,
+              "description": plan.description
+            });
+          }
         }
       })
       groupVms.pushObject(createVmGroup);
@@ -156,7 +160,7 @@ export default Ember.Component.extend({
       }
     },
 
-    stepDone(){
+    stepDone() {
       this.sendAction('done', "step5");
     },
   }

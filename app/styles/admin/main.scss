@@ -127,6 +127,7 @@ header {
   // position: absolute;
   width: 100%;
 }
+
 .remove-capitalize {
   text-transform: none !important;
 }
@@ -218,7 +219,6 @@ header {
       color: #b0b5d0;
       font-weight: bold;
       font-size: 16px;
-
     }
 
     &:after,
@@ -432,6 +432,7 @@ header {
   cursor: pointer;
   box-shadow: 4px 5px 26px rgba(41, 83, 189, 0.4);
   background-color: #f8f9fd;
+
   &.active {
     border: 1px solid #6464e0;
     cursor: default;
@@ -745,6 +746,7 @@ header {
       color: #ffb238;
     }
   }
+
   .sd-empty-pool {
     width: 100%;
     float: left;
@@ -970,9 +972,9 @@ header {
 }
 
 #addnetwork_modal,
-#storage_edit,
+#addstorage_modal,
 #network_edit,
-#addstorage_modal {
+#storage_edit {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
     border-radius: 3px;
@@ -1072,10 +1074,10 @@ header {
   }
 
   #addcluster_modal .modal-dialog,
-  #storage_edit .modal-dialog,
-  #network_edit .modal-dialog,
   #addnetwork_modal .modal-dialog,
-  #addstorage_modal .modal-dialog {
+  #addstorage_modal .modal-dialog,
+  #network_edit .modal-dialog,
+  #storage_edit .modal-dialog {
     width: 740px;
   }
 }
@@ -1134,12 +1136,14 @@ header {
   border: 1px solid #CED6E1 !important;
   border-radius: 3px !important;
   height: 56px !important;
+
   span {
     padding-top: 14px;
     box-sizing: border-box;
     font-family: 'fselliot';
     padding-left: 16px !important;
   }
+
   .select2-selection__arrow {
     padding-top: 55px;
   }
@@ -1481,15 +1485,21 @@ header {
   }
 }
 /*! media_query_lg.less | (c) 2018 kvzone */
-
 /* Rio infra spinner */
-
 .infra-spinner {
   text-align: center;
   padding-top: 104px;
 }
+
 .avail {
   margin: 88px auto;
   width: 140px;
   height: 250px;
+}
+
+.peer-show {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-align: center;
+  text-transform: uppercase !important;
 }
