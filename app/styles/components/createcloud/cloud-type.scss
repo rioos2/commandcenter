@@ -38,6 +38,21 @@
         }
     }
 
+    .layout2 {
+        background-image: url(/assets/images/createcloud/serverosbg.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        overflow-x: hidden;
+
+        p {
+            margin-top: 36px;
+            text-transform: none;
+            letter-spacing: normal;
+            margin-top: 10px;
+        }
+    }
+
+
     .row {
         padding: 90px 0;
         background: #f8faff;

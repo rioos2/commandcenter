@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   tagName: '',
   active: 'item-os',
 
-  initializeChart: Ember.on('didInsertElement', function() {    
+  initializeChart: Ember.on('didInsertElement', function() {
     Ember.run.once('afterRender', this, this.imageData);
     if (this.validateOsName() == this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  icon: function() {   
+  icon: function() {
     return this.get('vm.icon');
   }.property('vm'),
 
