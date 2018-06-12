@@ -282,6 +282,7 @@ launcherPage:
     createContainer: CREATING A CONTAINER
     cloudType: PICK YOUR CLOUD TYPE
     BlockchainType: CREATING BLOCKCHAIN NETWORK
+    ApplicationType: CREATING BLOCKCHAIN
     cpu:
       title: cpu
       description: CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.
@@ -334,7 +335,16 @@ launcherPage:
       description: From 1
     ramChooser:
       title: ram
-
+  repo:
+    title: Select Repository
+    subtitle: 'Edit repository, eg: https://github.com/rioadvancement/build-blockchain-insurance-app.git'
+    urlPlaceHolder: Enter repository
+    emptyUrl: You forgot to type a url
+    invalidFormat: Enter vaild url
+  blockchainApp:
+    title: Select a Blockchain Network
+    subtitle: Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
+    emptynetwork: No blockchain network available
   serverOs:
     title: Server OS
     subtitle: Select preferred system
@@ -343,7 +353,8 @@ launcherPage:
     description: Troublesome aspect of the slider. Proper use of the settings required a secret knowledge of the underlying codebase, and did not allow for intuitive configuration. Plainly put - the carousel config was poopy.No longer! In version 4.1 the carousel
       functionality and settings have been re-worked to function in a straight forward, intuitive manner.
     empty: no image selected
-
+  buildconfig:
+    success: Build Config created successfully.
   network:
     title: Networking
     empty: No network selected
@@ -441,10 +452,14 @@ notifications:
   plan:
     noSelection: Please select server OS
     empty: No Server OS configured
+  blockchainNetwork:
+    empty: No Blockchian Network configured
   failedLaunch: Launch failed.
+  failedBuildConfig: BuildConfig creation failed.
   logData: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
   novnc: Deploying..Console isn't ready yet.
   noAction: No actions available
+  blockchainnetwork: Select blockchain network
 
 audits:
   tableHeader:
