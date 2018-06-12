@@ -55,9 +55,10 @@ Router.map(function () {
         this.route('index', { path: '/' });
         this.route('createcloud', { path: '/createcloud' });
         this.route('createcontainer', { path: '/createcontainer' });
-        this.route('createblockchainnetwork', { path: '/createblockchainnetwork' });
-        this.route('createblockchainapplication', { path: '/createblockchainapplication' });
-
+        this.route('blockchain', { path: '/blockchain' }, function () {
+          this.route('createnetwork', { path: '/createnetwork' });
+          this.route('createapplication', { path: '/createapplication' });
+        });
         // A single application (digital cloud, containers, blockchain)
         // Allows console based on the type of application
         this.route('stack', { path: '/stack', resetNamespace: true }, function () {
