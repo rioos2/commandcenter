@@ -3,7 +3,7 @@ import C from 'nilavu/utils/constants';
 
 export default Component.extend({
 
-    compute: Ember.computed.alias('model.assemblyfactory.resources.compute_type'),
+    compute: Ember.computed.alias('model.stacksfactory.resources.compute_type'),
     showInfo: false,
 
     isSelectedCPU: function() {

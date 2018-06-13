@@ -6,7 +6,7 @@ export default Component.extend({
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
 
-    compute: Ember.computed.alias('model.assemblyfactory.resources.compute_type'),
+    compute: Ember.computed.alias('model.stacksfactory.resources.compute_type'),
     showInfo: false,
     activate: false,
 
@@ -32,14 +32,25 @@ export default Component.extend({
     },
 
     blockchianNetwork: function(){
-      return Ember.isEmpty(this.get('model.blockchainfactorys.content'))? [] : this.get('model.blockchainfactorys.content');
+      if(!Ember.isEmpty(this.get('model.blockchainnetworks.content'))){
+        return this.get('model.model.blockchainnetworks.content').map(function(blockchianNetwork){
+          if(!Ember.isEmpty(blockchianNetwork.spec.plan.plans)){
+            return blockchianNetwork.spec.plan.plans.map(function(plan){
+              if(Ember.isEqual(plan.category, C.CATEGORIES.BLOCKCHAIN)){
+                return blockchianNetwork;
+              }
+            });
+          }
+        })
+      }
+      return [];
     }.property('model'),
 
     actions: {
 
       refreshAfterSelect(item) {
         this.set("selected", item);
-        this.set("model.assemblyfactory.metadata.rioos_sh_blockchain_network_id", item.id);
+        this.set("model.stacksfactory.metadata.rioos_sh_blockchain_network_id", item.id);
         this.toggleProperty('activate');
       },
 

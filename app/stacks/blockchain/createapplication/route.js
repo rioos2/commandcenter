@@ -26,7 +26,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
         networks: this.cbFind('network', 'networks'),
-        blockchainfactorys: this.cbFind('blockchainfactory', 'accounts/' + this.get('session').get("id") + '/blockchainfactorys'),
+        stacksfactory: this.cbFind('stacksfactory', 'accounts/' + this.get('session').get("id") + '/stacksfactorys'),
       };
 
       async.auto(tasks, xhrConcur, function(err, res) {
@@ -40,13 +40,13 @@ export default Ember.Route.extend(DefaultHeaders, {
 
     return promise.then((hash) => {
       return Ember.Object.create({
-        assemblyfactory: this.loadAssemblyFactory(this.getSettings(setting)),
+        stacksfactory: this.loadStacksFactory(this.getSettings(setting)),
         secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
         settings: this.getSettings(setting),
         networks: hash.networks,
-        blockchainfactorys: hash.blockchainfactorys,
+        blockchainnetworks: hash.stacksfactory,
         buildconfig: this.loadBuildConfig(),
       });
     });
@@ -138,12 +138,12 @@ export default Ember.Route.extend(DefaultHeaders, {
     return this.get('store').createRecord(buildconfigData);
   },
 
-  loadAssemblyFactory(settings) {
-    var assemblyfactoryData;
+  loadStacksFactory(settings) {
+    var stacksfactoryData;
     settings.cloudType = C.CATEGORIES.BLOCKCHAIN_TEMPLATE;
-    assemblyfactoryData = {
+    stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type: 'assemblyfactorys',
+      type: 'stacksfactory',
       replicas: 1,
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
@@ -166,7 +166,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       network: '',
       os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
     };
-    return this.get('store').createRecord(assemblyfactoryData);
+    return this.get('store').createRecord(stacksfactoryData);
   }
 
 

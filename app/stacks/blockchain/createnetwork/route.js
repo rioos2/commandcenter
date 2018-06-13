@@ -35,7 +35,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
 
     return promise.then((hash) => {
       return Ember.Object.create({
-        assemblyfactory: this.loadedBlockchainFactory(this.getSettings(setting)),
+        stacksfactory: this.loadedStacksFactory(this.getSettings(setting)),
         // secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
@@ -64,12 +64,12 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return Ember.isEmpty(data.all.content)? {} : data.all.content.objectAt(0).data;
   },
 
-  loadedBlockchainFactory(settings) {
-    var blockchainfactoryData;
+  loadedStacksFactory(settings) {
+    var stacksfactoryData;
     settings.cloudType = C.CATEGORIES.BLOCKCHAIN;
-    blockchainfactoryData = {
+    stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type: 'blockchainfactorys',
+      type: 'stacksfactorys',
       replicas: 1,
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
@@ -89,7 +89,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
       network: '',
       os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
     };
-    return this.get('store').createRecord(blockchainfactoryData);
+    return this.get('store').createRecord(stacksfactoryData);
   }
 
 

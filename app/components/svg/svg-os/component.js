@@ -25,7 +25,7 @@ export default Ember.Component.extend({
  },
 
   selectionChecker: function() {
-    var check = this.get("model.assemblyfactory.current_os_tab") == this.get("vm.type");
+    var check = this.get("model.stacksfactory.current_os_tab") == this.get("vm.type");
     if (check) {
       this.set("active", "item-os selected");
     } else {

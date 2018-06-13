@@ -35,7 +35,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
 
     return promise.then((hash) => {
       return Ember.Object.create({
-        assemblyfactory: this.loadAssemblyFactory(this.getSettings(setting)),
+        stacksfactory: this.loadStacksFactory(this.getSettings(setting)),
         secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
@@ -80,12 +80,12 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return this.get('store').createRecord(secretData);
   },
 
-  loadAssemblyFactory(settings) {
-    var assemblyfactoryData;
+  loadStacksFactory(settings) {
+    var stacksfactoryData;
     settings.cloudType = C.CATEGORIES.CONTAINER;
-    assemblyfactoryData = {
+    stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type: 'assemblyfactorys',
+      type: 'stacksfactorys',
       replicas: 1,
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
@@ -105,7 +105,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
       network: '',
       os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
     };
-    return this.get('store').createRecord(assemblyfactoryData);
+    return this.get('store').createRecord(stacksfactoryData);
   }
 
 

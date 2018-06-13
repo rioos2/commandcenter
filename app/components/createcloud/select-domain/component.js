@@ -43,7 +43,7 @@ export default Component.extend(DefaultHeaders, {
     }.property('model.settings'),
 
     checkDomain() {
-      let checkDomain =  Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
+      let checkDomain =  Ember.isEmpty(this.get('model.stacksfactory.object_meta.name'));
       if (checkDomain) {
         this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));
       }
@@ -59,7 +59,7 @@ export default Component.extend(DefaultHeaders, {
     },
 
     nameSpliter(newDomainName) {
-      return (this.get('newDomainName') + "-" + this.get('model.assemblyfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+      return (this.get('newDomainName') + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
     },
 
     actions: {
@@ -81,7 +81,7 @@ export default Component.extend(DefaultHeaders, {
                 cssClasses: 'notification-warning'
               });
             } else {
-              this.set("model.assemblyfactory.object_meta.name", this.nameSpliter(newDomainName));
+              this.set("model.stacksfactory.object_meta.name", this.nameSpliter(newDomainName));
             }
         },
 
@@ -97,7 +97,7 @@ export default Component.extend(DefaultHeaders, {
             this.set("model.secret.data.ssh-algorithm", this.get("secretType"));
             this.set("model.secret.data.ssh_keypair_size", this.get("bitsInKey"));
             this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
-            this.set("model.secret.object_meta.name", this.get("model.assemblyfactory.object_meta.name"));
+            this.set("model.secret.object_meta.name", this.get("model.stacksfactory.object_meta.name"));
 
             var session = this.get("session");
             var id = this.get("session").get("id");
@@ -106,7 +106,7 @@ export default Component.extend(DefaultHeaders, {
             // var url = 'secrets';
             this.get('model.secret').save(this.opts(url)).then((result) => {
               this.set('doneCreate', true);
-              this.set("model.assemblyfactory.secret.id", result.id);
+              this.set("model.stacksfactory.secret.id", result.id);
               this.get('notifications').info(get(this, 'intl').t('launcherPage.domain.keyGenerate.success'), {
                 autoClear: true,
                 clearDuration: 4200,
