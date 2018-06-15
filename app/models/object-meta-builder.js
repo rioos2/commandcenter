@@ -32,9 +32,9 @@ ObjectMetaBuilder.reopenClass({
         key2: "value2"
       },
       owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "abc",
+        kind: "",
+        api_version: "",
+        name: "",
         uid: "",
         block_owner_deletion: true
       }],

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   activate: false,
 
   selectionChecker: function() {
-    var check = this.get("model.assemblyfactory.os") == this.get("selected.type");
+    var check = this.get("model.stacksfactory.os") == this.get("selected.type");
     if (check) {
       this.set("meSelected", true);
     } else {

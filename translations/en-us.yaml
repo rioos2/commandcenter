@@ -345,6 +345,7 @@ launcherPage:
     title: Select a Blockchain Network
     subtitle: Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
     emptynetwork: No blockchain network available
+    network: Blockchain Networks
   serverOs:
     title: Server OS
     subtitle: Select preferred system

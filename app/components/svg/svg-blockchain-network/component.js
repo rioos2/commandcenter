@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   active: 'cpu-ico blknetwork',
 
   selectionChecker: function() {
-    var check = this.get("model.assemblyfactory.metadata.rioos_sh_blockchain_network_id") == this.get("network.id");
+    var check = this.get("model.stacksfactory.metadata.rioos_sh_blockchain_network_id") == this.get("network.id");
     if (check) {
       this.set("active", "cpu-ico blknetwork selected");
     } else {

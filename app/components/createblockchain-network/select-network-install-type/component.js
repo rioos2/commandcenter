@@ -15,9 +15,9 @@ export default Ember.Component.extend({
     if (!Ember.isEmpty(this.get('groupedVms'))) {
       let item_found = false;
       this.get('groupedVms').forEach(function(e) {
-        if (e.type == this.get('model.assemblyfactory.os')) {
+        if (e.type == this.get('model.stacksfactory.os')) {
           e.version.forEach(function(v) {
-            if (v.version == this.get('model.assemblyfactory.resources.version')) {
+            if (v.version == this.get('model.stacksfactory.resources.version')) {
               item_found = true;
               this.refreshPlan(e, v);
             }
@@ -28,9 +28,9 @@ export default Ember.Component.extend({
         this.setFirstPlanFactory();
       }
     } else {
-      this.set('model.assemblyfactory.os', '');
-      this.set("model.assemblyfactory.plan", '');
-      this.set("model.assemblyfactory.resources.version", '');
+      this.set('model.stacksfactory.os', '');
+      this.set("model.stacksfactory.plan", '');
+      this.set("model.stacksfactory.resources.version", '');
     }
   },
 
@@ -42,9 +42,9 @@ export default Ember.Component.extend({
   },
 
   refreshPlan: function(plan, planFirstItem) {
-    this.set('model.assemblyfactory.os', planFirstItem.type);
-    this.set("model.assemblyfactory.plan", planFirstItem.id);
-    this.set("model.assemblyfactory.resources.version", planFirstItem.version);
+    this.set('model.stacksfactory.os', planFirstItem.type);
+    this.set("model.stacksfactory.plan", planFirstItem.id);
+    this.set("model.stacksfactory.resources.version", planFirstItem.version);
     this.send('refreshAfterSelect', plan);
   },
 
@@ -68,10 +68,8 @@ export default Ember.Component.extend({
     var groupVms = [];
     var planfactory = this.get("model.plans.content");
     planfactory.forEach(function(plan) {
-      if (!Ember.isEmpty(plan.metadata)) {
-        if (plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && plan.status.phase.toLowerCase() === C.PHASE.READY && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+        if (plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && plan.status.phase.toLowerCase() === C.PHASE.READY ) {
           planGroup.pushObject(plan.object_meta.name);
-        }
       }
       uniqueVmGroup = planGroup.filter(function(elem, index, self) {
         return index == self.indexOf(elem);
@@ -85,8 +83,7 @@ export default Ember.Component.extend({
         "item": []
       }
       planfactory.forEach(function(plan) {
-        if (!Ember.isEmpty(plan.metadata)) {
-          if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+          if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN ) {
             createVmGroup.item.pushObject(plan);
             createVmGroup.icon = plan.icon;
             createVmGroup.version.pushObject({
@@ -96,11 +93,11 @@ export default Ember.Component.extend({
               "description": plan.description
             });
           }
-        }
       })
       groupVms.pushObject(createVmGroup);
       createVmGroup = {};
     })
+
     return groupVms;
   },
 
@@ -113,9 +110,9 @@ export default Ember.Component.extend({
 
   setPlan: function(plan) {
     let planFirstItem = plan.version[0];
-    this.set('model.assemblyfactory.os', planFirstItem.type);
-    this.set("model.assemblyfactory.plan", planFirstItem.id);
-    this.set("model.assemblyfactory.resources.version", planFirstItem.version);
+    this.set('model.stacksfactory.os', planFirstItem.type);
+    this.set("model.stacksfactory.plan", planFirstItem.id);
+    this.set("model.stacksfactory.resources.version", planFirstItem.version);
   },
 
   setIcon: function(plan) {
@@ -126,7 +123,7 @@ export default Ember.Component.extend({
   setDescription: function(item) {
     let des = (item.version.get('firstObject')).description
     item.version.forEach(function(v) {
-      if (v.id === this.get('model.assemblyfactory.plan')) {
+      if (v.id === this.get('model.stacksfactory.plan')) {
         des = v.description;
       }
     }.bind(this));
@@ -138,7 +135,7 @@ export default Ember.Component.extend({
     refreshAfterSelect(item) {
       this.set("selected", item);
       this.setDescription(item);
-      this.set("model.assemblyfactory.current_os_tab", item.type);
+      this.set("model.stacksfactory.current_os_tab", item.type);
       this.toggleProperty('activate');
     },
 
