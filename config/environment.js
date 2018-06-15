@@ -161,7 +161,6 @@ module.exports = function (environment) {
     ENV.APP.baseAssets = process.env.BASE_ASSETS;
   }
 
-  // Override the Rancher server/endpoint with environment var
   var server = process.env.NILAVU;
 
   if (server) {
