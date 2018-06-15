@@ -19,7 +19,7 @@ module.exports = function (app, options) {
 
   proxy.on('error', onProxyError);
 
-  // WebSocket for Rancher
+  // WebSocket for Rio-api
   httpServer.on('upgrade', function proxyWsRequest(req, socket, head) {
     proxyLog('WS', req);
     var target = config.wsServer;
