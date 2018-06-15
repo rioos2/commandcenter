@@ -162,8 +162,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
             this.createBuildConfig(result);
-            this.get('model.buildconfig').save(this.opts(build_url)).then((res) => {
-              console.log(JSON.stringify(res));
+            this.get('model.buildconfig').save(this.opts(build_url)).then(() => {
               this.get('notifications').info(get(this, 'intl').t('launcherPage.buildconfig.success'), {
                 autoClear: true,
                 clearDuration: 4200,
@@ -171,6 +170,7 @@ export default Ember.Component.extend(DefaultHeaders, {
               });
               this.set('showSpinner', false);
             }).catch(err => {
+              alert("errr");
               this.get('notifications').warning(get(this, 'intl').t('notifications.failedBuildConfig'), {
                 autoClear: true,
                 clearDuration: 4200,
