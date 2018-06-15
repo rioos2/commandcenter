@@ -1,8 +1,8 @@
 import Resource from 'ember-api-store/models/resource';
 
-var Stacksfactory = Resource.extend({
+var StacksFactory = Resource.extend({
   type: 'stacksfactory',
   actions: {},
 });
 
-export default Stacksfactory;
+export default StacksFactory;

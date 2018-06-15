@@ -107,6 +107,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     this.set("resources.cpu", this.get("resources.cpu").toString());
     this.set("resources.storage", this.get("resources.storage") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
     this.set("resources.memory", this.get("resources.memory") + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+
   },
 
   ram: function() {
@@ -122,11 +123,23 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   createBuildConfig: function(result) {
+    var self=this;
     this.set('model.buildconfig.object_meta.cluster_name', result.object_meta.cluster_name);
-    this.get('model.buildconfig.object_meta.owner_references').map(function(owner) {
-      owner.name = result.object_meta.name;
-      owner.uid = result.id;
-    });
+    if(!Ember.isEmpty(result.spec.plan.meta_data.rioos_sh_blockchain_network)){
+      this.set('model.buildconfig.spec.strategy.build_type', result.spec.plan.metadata.rioos_sh_blockchain_network);
+    }
+      if(!Ember.isEmpty(result.spec.assembly_factory)){
+        result.spec.assembly_factory.map(function(assemblyfactory){
+          if(!Ember.isEmpty(assemblyfactory.spec.plan) && !Ember.isEmpty(result.spec.plan)){
+            if(Ember.isEqual(assemblyfactory.spec.plan.category, result.spec.plan.category)){
+              self.get('model.buildconfig.object_meta.owner_references').map(function(owner) {
+              owner.name = result.object_meta.name;
+              owner.uid = result.id;
+            });
+            }
+          }
+        })
+      }
     if (!Ember.isEmpty(this.get('model.buildconfig.spec.build_trigger_policys'))) {
       this.get('model.buildconfig.spec.build_trigger_policys').map(function(build) {
         build.webhook.secret = result.secret.id;
@@ -143,13 +156,14 @@ export default Ember.Component.extend(DefaultHeaders, {
         var session = this.get("session");
         var id = this.get("session").get("id");
         this.set("model.stacksfactory.object_meta.account", id);
-        var url = 'accounts/' + id + '/' + this.get('model.stacksfactory.type');
+        var url = 'accounts/' + id + '/stacksfactorys';
         var build_url = 'buildconfigs';
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
             this.createBuildConfig(result);
-            this.get('model.buildconfig').save(this.opts(build_url)).then(() => {
+            this.get('model.buildconfig').save(this.opts(build_url)).then((res) => {
+              console.log(JSON.stringify(res));
               this.get('notifications').info(get(this, 'intl').t('launcherPage.buildconfig.success'), {
                 autoClear: true,
                 clearDuration: 4200,

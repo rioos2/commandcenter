@@ -113,7 +113,8 @@ export default Ember.Route.extend(DefaultHeaders, {
             }
           }],
         },
-        source_strategy: {
+        strategy: {
+          build_type: "",
           from: {
             kind: "ImageMarks",
             name: "builder-image:latest"

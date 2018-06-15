@@ -68,10 +68,8 @@ export default Ember.Component.extend({
     var groupVms = [];
     var planfactory = this.get("model.plans.content");
     planfactory.forEach(function(plan) {
-      if (!Ember.isEmpty(plan.metadata)) {
-        if (plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && plan.status.phase.toLowerCase() === C.PHASE.READY && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+        if (plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && plan.status.phase.toLowerCase() === C.PHASE.READY ) {
           planGroup.pushObject(plan.object_meta.name);
-        }
       }
       uniqueVmGroup = planGroup.filter(function(elem, index, self) {
         return index == self.indexOf(elem);
@@ -85,8 +83,7 @@ export default Ember.Component.extend({
         "item": []
       }
       planfactory.forEach(function(plan) {
-        if (!Ember.isEmpty(plan.metadata)) {
-          if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN && Object.keys(plan.metadata).includes(C.BLOCKCHAIN.BLO_FILTER)) {
+          if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.BLOCKCHAIN ) {
             createVmGroup.item.pushObject(plan);
             createVmGroup.icon = plan.icon;
             createVmGroup.version.pushObject({
@@ -96,11 +93,11 @@ export default Ember.Component.extend({
               "description": plan.description
             });
           }
-        }
       })
       groupVms.pushObject(createVmGroup);
       createVmGroup = {};
     })
+
     return groupVms;
   },
 

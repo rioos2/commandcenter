@@ -69,7 +69,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
     settings.cloudType = C.CATEGORIES.BLOCKCHAIN;
     stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type: 'stacksfactorys',
+      type: 'stacksfactory',
       replicas: 1,
       resources: {
         compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
