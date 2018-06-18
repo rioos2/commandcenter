@@ -28,9 +28,9 @@ export default Ember.Component.extend({
       self.set(disable, "");
     });
 
-    if (!Ember.isEmpty(this.get('model.assemblyfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content')) && !Ember.isEmpty(self.get('model.networks.content'))) {
+    if (!Ember.isEmpty(this.get('model.stacksfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content')) && !Ember.isEmpty(self.get('model.networks.content'))) {
       this.get('model.datacenters.content').filter(function(location) {
-        if (Ember.isEqual(location.object_meta.name, self.get('model.assemblyfactory.object_meta.cluster_name'))) {
+        if (Ember.isEqual(location.object_meta.name, self.get('model.stacksfactory.object_meta.cluster_name'))) {
           location.networks.map(function(network_id) {
             self.get('model.networks.content').map(function(network) {
               if (Ember.isEqual(network.id, network_id)) {
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
       });
     }
     this.disableNetworks(virtualNetworks);
-  }.property('model.assemblyfactory.object_meta.cluster_name'),
+  }.property('model.stacksfactory.object_meta.cluster_name'),
 
   disableNetworks: function(disableNetworks = []) {
     this.set('disabledNetworks', disableNetworks);
@@ -74,10 +74,10 @@ export default Ember.Component.extend({
   actions: {
     selected: function(net_type) {
       var self = this;
-      this.set('model.assemblyfactory.network', "");
+      this.set('model.stacksfactory.network', "");
       this.toggleProperty(net_type + '_check');
       if (this.checkActiveNetwork(net_type)) {
-        var cc = this.get("model.assemblyfactory.resources");
+        var cc = this.get("model.stacksfactory.resources");
         if (!cc[net_type]) {
           cc[net_type] = "true";
           this.set(net_type, "selected");
@@ -85,12 +85,12 @@ export default Ember.Component.extend({
           this.set(net_type, "");
           delete cc[net_type];
         }
-        this.set("model.assemblyfactory.resources", cc);
+        this.set("model.stacksfactory.resources", cc);
       }
       Object.keys(this.get('networks')).map(function(key) {
-        Object.keys(self.get('model.assemblyfactory.resources')).map(function(network_type) {
+        Object.keys(self.get('model.stacksfactory.resources')).map(function(network_type) {
           if (Ember.isEqual(key, network_type)) {
-            self.set('model.assemblyfactory.network', network_type);
+            self.set('model.stacksfactory.network', network_type);
           }
         });
       });

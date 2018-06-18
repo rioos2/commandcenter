@@ -27,7 +27,7 @@ export default Component.extend(DefaultHeaders, {
 
 
     checkDomain() {
-      let checkDomain =  Ember.isEmpty(this.get('model.assemblyfactory.object_meta.name'));
+      let checkDomain =  Ember.isEmpty(this.get('model.stacksfactory.object_meta.name'));
       if (checkDomain) {
         this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));
       }
@@ -35,7 +35,7 @@ export default Component.extend(DefaultHeaders, {
     },
 
     nameSpliter(newDomainName) {
-      return (this.get('newDomainName') + "-" + this.get('model.assemblyfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+      return (this.get('newDomainName') + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
     },
 
     actions: {
@@ -53,7 +53,7 @@ export default Component.extend(DefaultHeaders, {
                 cssClasses: 'notification-warning'
               });
             } else {
-              this.set("model.assemblyfactory.object_meta.name", this.nameSpliter(newDomainName));
+              this.set("model.stacksfactory.object_meta.name", this.nameSpliter(newDomainName));
             }
         },
 

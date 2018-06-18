@@ -15,7 +15,7 @@
   </div>
   <div class="col-md-4 domain-content">
     <div class="content">
-      <p class="title" title= {{model.assemblyfactory.object_meta.name}}>{{model.assemblyfactory.object_meta.name}}</p>
+      <p class="title" title= {{model.stacksfactory.object_meta.name}}>{{model.stacksfactory.object_meta.name}}</p>
       <p class="description">{{t 'launcherPage.summary.domain.name'}}</p>
     </div>
     {{svg/svg-arrow-hexagon class="light-right" isLightColor=true isRightArrow=true}} {{svg/svg-arrow-hexagon class="light-down" isLightColor=true isRightArrow=false}}
@@ -26,7 +26,7 @@
     {{else}}
       <ul class="rio-location-ul hex">
         <li>
-          <label class="city">{{model.assemblyfactory.object_meta.cluster_name}}</label>
+          <label class="city">{{model.stacksfactory.object_meta.cluster_name}}</label>
         </li>
       </ul>
     {{/if}}
@@ -36,7 +36,7 @@
 <div class="row layer2">
   <div class="col-md-6 p-0">
     <div class="col-md-7 cores-content p-0">
-      {{svg/svg-hex-number class="hex-number" initValue=model.assemblyfactory.resources.cpu}}
+      {{svg/svg-hex-number class="hex-number" initValue=model.stacksfactory.resources.cpu}}
       <div class="content">
         <p class="title">{{t 'launcherPage.summary.config.core'}}</p>
         <p class="description">{{t 'launcherPage.summary.config.number'}}</p>
@@ -92,7 +92,7 @@
       <img src="assets/images/createcloud/cloud-logos/{{icon}}">
       <div class="rio-os-version">
         {{svg/svg-version class="version-bg"}}
-        <p title={{model.assemblyfactory.resources.version}}>{{model.assemblyfactory.resources.version}}</p>
+        <p title={{model.stacksfactory.resources.version}}>{{model.stacksfactory.resources.version}}</p>
       </div>
       {{/if}}
     </div>
@@ -100,7 +100,7 @@
   </div>
   <div class="col-md-4 last-btn">
     <div id="id" class="flipper {{filpper}}">
-      <div class="front-face" data-icon="&#x27a3;" {{action 'createAssemblyFactory'}}><span data-hover="Clicked">{{t 'launcherPage.summary.launch'}}</span></div>
+      <div class="front-face" data-icon="&#x27a3;" {{action 'createStacksFactory'}}><span data-hover="Clicked">{{t 'launcherPage.summary.launch'}}</span></div>
       <div class="back-face" data-icon="&#10003;">{{t 'launcherPage.summary.launchThank'}}</div>
     </div>
   </div>

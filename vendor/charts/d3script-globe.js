@@ -302,7 +302,7 @@ function renderGlobeChart(params, notifications) {
           .attr("to", "25");
         //console.log(d);
         step(d.geometry.coordinates);
-        params.set("assemblyfactory.object_meta.cluster_name", d.City);
+        params.set("stacksfactory.object_meta.cluster_name", d.City);
       });
 
   });

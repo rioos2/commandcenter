@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 
 export default Component.extend({
-  storageType: Ember.computed.alias('model.assemblyfactory.resources.storage_type'),
+  storageType: Ember.computed.alias('model.stacksfactory.resources.storage_type'),
 
   isSelectedFlash: function() {
     return this.get('storageType') === C.VPS.RESOURSE.SSD;
