@@ -311,6 +311,8 @@ var C = {
     BLO_FILTER: 'rioos_sh_blockchain_network'
   },
 
+  RESOURCES: ['cpu','memory','disk'],
+
   FILTERS: {
     UNDERSCORE_DEFAULT: "_default",
     QUERY_PARAM_OS: "os",

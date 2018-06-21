@@ -82,6 +82,37 @@ export default Ember.Component.extend(DefaultHeaders, {
     return (Ember.isEmpty(this.get('model.stacksfactory.metadata.rioos_sh_blockchain_network_id')) && Ember.isEqual(this.get('model.stacksfactory.object_meta.labels.rioos_category'), C.CATEGORIES.BLOCKCHAIN_TEMPLATE)) ? true : false;
   }.property('model.stacksfactory.metadata.rioos_sh_blockchain_network_id'),
 
+  setResource: function(resource) {
+    if (!Ember.isEmpty(this.get('model.hscaling.target_value.max_target_value_' + `${resource}`)) || !Ember.isEmpty(this.get('model.hscaling.target_value.min_target_value_' + `${resource}`))) {
+      this.get('model.hscaling.spec.metrics').pushObject({
+        metric_type: "Resource",
+        "resource": {
+          "name": resource,
+          "min_target_value": this.get('model.hscaling.target_value.max_target_value_' + `${resource}`).toString(),
+          "max_target_value": this.get('model.hscaling.target_value.min_target_value_' + `${resource}`).toString(),
+          "metric_time_spec": {
+            "scale_up_by": "1",
+            "scale_down_by": "1"
+          }
+        }
+      });
+    }
+  },
+  scalingReplicaExist: function() {
+    return this.get('model.hscaling.spec.min_replicas') > 0
+  }.property('model.hscaling.spec.min_replicas'),
+
+  scalingResourceExist: function() {
+    var self = this;
+    this.set('model.hscaling.spec.metrics', []);
+    if (Ember.isEqual(this.get('model.object_meta.labels.rioos_category')), C.CATEGORIES.CONTAINER) {
+      C.RESOURCES.map(function(resource) {
+        self.setResource(resource);
+      });
+    }
+    return Ember.isEmpty(this.get('model.hscaling.spec.metrics'));
+  }.property('model.hscaling.spec.metrics'),
+
   validation() {
     if (Ember.isEmpty(this.get('model.stacksfactory.secret.id')) && this.get('model.stacksfactory.object_meta.labels.rioos_category') != C.CATEGORIES.BLOCKCHAIN) {
       this.set('validationWarning', get(this, 'intl').t('notifications.secret'));
@@ -97,6 +128,9 @@ export default Ember.Component.extend(DefaultHeaders, {
       return true;
     } else if (this.get('networkExisit')) {
       this.set('validationWarning', get(this, 'intl').t('notifications.network.noSelection'));
+      return true;
+    } else if (this.get('scalingResourceExist') || !this.get('scalingReplicaExist')) {
+      this.set('validationWarning', get(this, 'intl').t('notifications.scaling.noSelection'));
       return true;
     } else {
       return false;
@@ -123,29 +157,59 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   createBuildConfig: function(result) {
-    var self=this;
+
+    var self = this;
     this.set('model.buildconfig.object_meta.cluster_name', result.object_meta.cluster_name);
-    if(!Ember.isEmpty(result.spec.plan.meta_data.rioos_sh_blockchain_network)){
+    if (!Ember.isEmpty(result.spec.plan.meta_data.rioos_sh_blockchain_network)) {
       this.set('model.buildconfig.spec.strategy.build_type', result.spec.plan.metadata.rioos_sh_blockchain_network);
     }
-      if(!Ember.isEmpty(result.spec.assembly_factory)){
-        result.spec.assembly_factory.map(function(assemblyfactory){
-          if(!Ember.isEmpty(assemblyfactory.spec.plan) && !Ember.isEmpty(result.spec.plan)){
-            if(Ember.isEqual(assemblyfactory.spec.plan.category, result.spec.plan.category)){
-              self.get('model.buildconfig.object_meta.owner_references').map(function(owner) {
+    if (!Ember.isEmpty(result.spec.assembly_factory)) {
+      result.spec.assembly_factory.map(function(assemblyfactory) {
+        if (!Ember.isEmpty(assemblyfactory.spec.plan) && !Ember.isEmpty(result.spec.plan)) {
+          if (Ember.isEqual(assemblyfactory.spec.plan.category, result.spec.plan.category)) {
+            self.get('model.buildconfig.object_meta.owner_references').map(function(owner) {
               owner.name = result.object_meta.name;
               owner.uid = result.id;
             });
-            }
           }
-        })
-      }
+        }
+      })
+    }
     if (!Ember.isEmpty(this.get('model.buildconfig.spec.build_trigger_policys'))) {
       this.get('model.buildconfig.spec.build_trigger_policys').map(function(build) {
         build.webhook.secret = result.secret.id;
       });
     }
     this.set('model.buildconfig.spec.source.source_secret', result.secret.id);
+  },
+
+  createHorizontalScaling: function(stacksfactory) {
+    var self = this;
+    if (!Ember.isEmpty(stacksfactory.spec.assembly_factory)) {
+      var hs_url = 'horizontalscaling';
+      stacksfactory.spec.assembly_factory.map(function(assemblyfactory) {
+        self.get('model.hscaling.object_meta.owner_references').map(function(owner) {
+          owner.kind = "AssemblyFactory";
+          owner.api_version = "v1";
+          owner.name = assemblyfactory.object_meta.name;
+          owner.uid = assemblyfactory.id;
+        });
+        self.get('model.hscaling').save(self.opts(hs_url)).then(() => {
+          self.get('notifications').info(get(this, 'intl').t('launcherPage.hscaling.success'), {
+            autoClear: true,
+            clearDuration: 4200,
+            cssClasses: 'notification-success'
+          });
+          self.set('showSpinner', false);
+        }).catch(err => {
+          self.get('notifications').warning(get(this, 'intl').t('notifications.failedHScaling'), {
+            autoClear: true,
+            clearDuration: 4200,
+            cssClasses: 'notification-warning'
+          });
+        });
+      });
+    }
   },
 
   actions: {
@@ -156,10 +220,14 @@ export default Ember.Component.extend(DefaultHeaders, {
         var session = this.get("session");
         var id = this.get("session").get("id");
         this.set("model.stacksfactory.object_meta.account", id);
+        this.set("model.hscaling.object_meta.account", id);
         var url = 'accounts/' + id + '/stacksfactorys';
         var build_url = 'buildconfigs';
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
+          if (result.object_meta.labels.rioos_category == C.CATEGORIES.CONTAINER ) {
+            this.createHorizontalScaling(result);
+          }
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
             this.createBuildConfig(result);
             this.get('model.buildconfig').save(this.opts(build_url)).then(() => {
@@ -170,7 +238,6 @@ export default Ember.Component.extend(DefaultHeaders, {
               });
               this.set('showSpinner', false);
             }).catch(err => {
-              alert("errr");
               this.get('notifications').warning(get(this, 'intl').t('notifications.failedBuildConfig'), {
                 autoClear: true,
                 clearDuration: 4200,
