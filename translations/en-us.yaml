@@ -382,6 +382,44 @@ launcherPage:
       core: Cores
       number: Number
       ram: Ram
+  scaling:
+    horizontal:
+      title: HORIZONTAL SCALING
+      description: Select horizontal scaling configuration
+      minReplivas: Lower limit for the number of replicas set by Rio/OS
+      maxReplivas: Upper limit for the number of replicas set by Rio/OS
+      scaleUpwaitTime: Select minutes to wait before another upscale operation
+      scaleDownwaitTime: Select minutes to wait before another downscale operation
+      scalingRuleTitle:  Select Scaling Rules
+      scalingReplicaWaitTimeTitle: Select Scaling Replicas and Wait time
+      emptyScaling:  You forgot to type a resource
+      invalidFormat: Enter vaild data
+      scaleup:
+        description: ' %'
+        cpu:
+          title:  'Start scale up when CPU is'
+        memory:
+          title: 'Start scale up when MEMORY is'
+        disk:
+          title: 'Start scale up when DISK is'
+      scaledown:
+        description: ' %'
+        cpu:
+          title:  'Start scale down when CPU is'
+        memory:
+          title: 'Start scale down when MEMORY is'
+        disk:
+          title: 'Start scale down when DISK is'
+      when: when
+      percentage: Percentage
+      target: Target Value
+      cpu:
+        title: CPU
+      memory:
+        title: Memory
+      disk:
+        title: Disk
+
 
 failWhalePage:
   header: Error
@@ -453,6 +491,10 @@ notifications:
   plan:
     noSelection: Please select server OS
     empty: No Server OS configured
+  scaling:
+    noSelection: Please select scaling resource
+    emptyScaling:  You forgot to type a resource
+    invalidFormat: Enter vaild data
   blockchainNetwork:
     empty: No Blockchian Network configured
   failedLaunch: Launch failed.

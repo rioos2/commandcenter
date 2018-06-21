@@ -36,6 +36,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
     return promise.then((hash) => {
       return Ember.Object.create({
         stacksfactory: this.loadStacksFactory(this.getSettings(setting)),
+        hscaling: this.loadHorizontalScaling(this.getSettings(setting)),
         secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
@@ -79,6 +80,40 @@ export default Ember.Route.extend(DefaultHeaders,  {
 
     return this.get('store').createRecord(secretData);
   },
+
+  loadHorizontalScaling(settings) {
+    var horizontalScalingData;
+    settings.cloudType = C.CATEGORIES.CONTAINER;
+
+    horizontalScalingData = {
+      object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
+      type: 'horizontalscaling',
+      scale_type: 'AUTOHS',
+      state: 'ABLETOSCALE',
+      spec: {
+      min_replicas: 1,
+      max_replicas: 0,
+      scale_up_wait_time: 5,
+      scale_down_wait_time: 5,
+      metrics: []
+    },
+    status: {
+      last_scale_time: "",
+      current_replicas: 1,
+      desired_replicas: 0
+    },
+    target_value: {
+      min_target_value_cpu: 0,
+      max_target_value_cpu: 0,
+      min_target_value_memory: 0,
+      max_target_value_memory: 0,
+      min_target_value_disk: 0,
+      max_target_value_disk: 0
+    }
+    };
+    return this.get('store').createRecord(horizontalScalingData);
+  },
+
 
   loadStacksFactory(settings) {
     var stacksfactoryData;

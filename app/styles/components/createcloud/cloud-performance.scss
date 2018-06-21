@@ -53,6 +53,16 @@
         text-align: left;
         padding: 0;
     }
+    .scaling-content {
+        padding-bottom: 10px;
+        .title {
+            font-size: 25px;
+            color: #bcbdce;
+            text-align: center;
+            padding-top: 10px;
+            margin-bottom: 20px;
+      }
+    }
 
     .chart-ram svg,
     .chart-storage svg{
@@ -131,8 +141,16 @@
             margin-left: -15px;
         }
 
+
         .cores-content {
             margin-left: -70px;
         }
+
+    }
+    .scaling-count{
+      background-image: url(/assets/images/createcloud/cloudperformance.png) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% auto !important;
+      padding-top: 100px !important;
     }
 }
