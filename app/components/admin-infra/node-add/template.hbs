@@ -1,0 +1,85 @@
+<div class="modal fade node_discovery node_modal" id="node_add_modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Node Discovery</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="node_discovery_types">Select search type</label>
+              <select class="form-control" id="node_discovery_types" name="node_discovery_types" onchange= {{action "selectStorage" value="target.value"}}>
+                {{#each types as |type|}}
+                <option>{{type}}</option>
+                {{/each}}
+                </select>
+            </div>
+          </div>
+        </div>
+
+        {{#if (eq searchType "Default")}}
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="msg">
+                <span class="note">NOTE: </span>This search will gets node by default subnets
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq searchType "Subnet")}}
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="subnetAdvanceValue">Search node by subnet</label> {{input type="text" class="form-control" id="subnet" value=subnetAdvanceValue}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="default">
+                <span class="note">NOTE: </span>This search will gets node by default subnets
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq searchType "Subnet Range")}}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="from">From subnet</label> {{input type="text" class="form-control" id="from" value=subnetRangeFrom}}
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="to">To subnet</label> {{input type="text" class="form-control" id="to" value=subnetRangeTo}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="msg">
+                <span class="note">NOTE: </span>This search will gets node by default subnets
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        <button type="submit" {{action 'nodeDiscovery'}} class="btn btn-default">
+            Search
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
+      </div>
+    </div>
+
+  </div>
+</div>

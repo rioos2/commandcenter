@@ -11,49 +11,16 @@ export default Ember.Route.extend(DefaultHeaders, {
   access: Ember.inject.service(),
   session: Ember.inject.service(),
   intl:       Ember.inject.service(),
+  userStore: Ember.inject.service('user-store'),
 
-  model() {
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
-      let tasks = {
-        storageConnectors: this.cbFind('storageconnectors','storageconnectors'),
-        storagesPool: this.cbFind('storageconnectors','storagespool'),
-        datacenters: this.cbFind('datacenters','datacenters'),
-        networks: this.cbFind('networks','networks'),
-        nodes: this.cbFind('nodes','nodes'),
-      };
-      async.auto(tasks, xhrConcur, function(err, res) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(res);
-        }
+  model(params) {
+      return Ember.RSVP.hash({
+        storageConnectors: this.get('store').findAll('storageconnectors',this.opts('storageconnectors')),
+        storagesPool: this.get('store').findAll('storagespools',this.opts('storagespool')),
+        datacenters: this.get('store').findAll('datacenters',this.opts('datacenters')),
+        networks: this.get('store').findAll('networks',this.opts('networks')),
+        nodes: this.get('store').findAll('node',this.opts('nodes')),
       });
-    }, 'Load all the things');
-    return promise.then((hash) => {
-      return Ember.Object.create({
-        storageConnectors: hash.storageConnectors,
-        storagesPool: hash.storagesPool,
-        datacenters: hash.datacenters,
-        networks: hash.networks,
-        nodes: hash.nodes,
-      });
-    }).catch((err) => {
-      return;
-    });
-  },
-
-  cbFind(type, url) {
-    return (results, cb) => {
-      if (typeof results === 'function') {
-        cb = results;
-        results = null;
-      }
-      return this.get('store').find(type, null,this.opts(url, true)).then(function(res) {
-        cb(null, res);
-      }).catch(function(err) {
-        cb(null, err);
-      });
-    };
   },
 
   actions: {

@@ -139,10 +139,13 @@ stackPage:
       toggle: Toggle navigation
       add_btn: Add
       save_btn: Save
+      search_discovery_btn: Discover
     node:
       title: Nodes
       connected: 'Connected Nodes'
+      discoverNodes: 'Discovered nodes'
       noNode: No nodes added yet.
+      noNodeDiscovered: No nodes descovered yet.
       ip: IP
       schedule: Scheduled
       bridges: Bridges
@@ -151,6 +154,20 @@ stackPage:
       metrics: Metrics
       metricsShow: View
       addNode: 'Add Node'
+      discoverNode: 'Discover Node'
+      nodeCreate: 'Node creation successfully'
+      nodeSecretCreate: 'Node secret create successfully'
+      nodeFailed: 'Node creation failed'
+      select_auth_placeholder: 'Select authentication type'
+      emptySubnetAdvanceValue: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
+      subnetRangeError: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
+      emptySubnetRangeFrom: 'Missing From IP in CIDR (example: 192.168.1.1)</br>'
+      subnetRangeValidFromError: 'Enter vaild From IP in CIDR (example: 192.168.1.1)</br>'
+      emptySubnetRangeTo: 'Missing To IP in CIDR (example: 192.168.1.1)</br>'
+      subnetRangeValidToError: 'Enter vaild To IP in CIDR (example: 192.168.1.1)</br>'
+      enterUsername: 'Enter username</br>'
+      enterPassword: 'Enter password</br>'
+      enterSshKey: 'Enter SSH public key</br>'
     storage:
       title: Storages
       connected: 'Connected Storages'
@@ -822,6 +839,9 @@ action:
   viewInApi: View in API
   viewInstance: View Instance
   downloadSecret: Download secret
+  nodeEdit: Edit node
+  nodeInstall: Install node
+  createSecret: Create Secret
 
 ##############################
 # Resource Actions

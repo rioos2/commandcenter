@@ -1,0 +1,77 @@
+<div class="modal fade node_discovery node_modal" id="node_auth_modal_{{id}}" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Node Authentication</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="node_auth_types">Select auth type</label>
+              <select class="form-control" id="node_auth_{{id}}" name="node_auth_{{id}}" onchange= {{action "selectAuthType" value="target.value"}}>
+                <option disabled selected>{{t 'stackPage.admin.node.select_auth_placeholder'}}</option>
+                {{#each types as |type|}}
+                <option>{{type}}</option>
+                {{/each}}
+                </select>
+            </div>
+          </div>
+        </div>
+
+        {{#if (eq authType "Password")}}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="nodeusername">User name</label>
+              {{input type="text" class="form-control" id="nodeusername" value=nodeusername}}
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="nodepwd">Password</label>
+              {{input type="text" class="form-control" id="nodepwd" value=nodepwd}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="default">
+                <span class="note">NOTE: </span>Using node user name and password to authenticate
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq authType "SSH")}}
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="ssh">SSH key</label> {{input type="text" class="form-control" id="ssh" value=sshvalue}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="default">
+                <span class="note">NOTE: </span>Using node ssh key to authenticate
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        <button type="submit" {{action 'createSecret'}} class="btn btn-default">
+            Create
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
+      </div>
+    </div>
+
+  </div>
+</div>

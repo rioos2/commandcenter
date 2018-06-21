@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
       forceReload: forceReload,
       filter: false,
       removeAfterDelete: true,
-      isForAll: true,
+      isForAll: false,
     };
     return rioos_headers;
   },

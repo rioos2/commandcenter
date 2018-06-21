@@ -7,6 +7,19 @@ var C = {
     ASSEMBLYIPV4: "IPv4",
   },
 
+  NODE: {
+    NINJANODES: "ninja_nodes",
+    CALMNODES: "calm_nodes",
+    NINJANODESCONDITIONS: ["MemoryPressure", "DiskPressure", "NetworkUnavailable", "OutOfDisk"],
+    SUBNETSSEARCH: ["Default", "Subnet", "Subnet Range"],
+    NODEAUTHTYPE: ["Password", "SSH"]
+  },
+
+  IPTYPE: {
+    IPV4: "IPV4",
+    IPV6: "IPV6"
+  },
+
   ACCOUNT: {
     MEMBERSHIP: {
       MEMBERSHIPTRAIL: "Trail",
