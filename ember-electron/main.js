@@ -29,10 +29,14 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-  });
+ // mainWindow = new BrowserWindow({
+ //   width: 800,
+ //   height: 600,
+ // });
+    const electron = require ('electron');
+    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+    mainWindow = new BrowserWindow({width, height});
+
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
