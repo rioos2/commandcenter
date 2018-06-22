@@ -383,6 +383,8 @@ launcherPage:
       number: Number
       ram: Ram
   scaling:
+    emptyScaling:  You forgot to type a resource
+    invalidFormat: Enter vaild data
     horizontal:
       title: HORIZONTAL SCALING
       description: Select horizontal scaling configuration
@@ -392,8 +394,6 @@ launcherPage:
       scaleDownwaitTime: Select minutes to wait before another downscale operation
       scalingRuleTitle:  Select Scaling Rules
       scalingReplicaWaitTimeTitle: Select Scaling Replicas and Wait time
-      emptyScaling:  You forgot to type a resource
-      invalidFormat: Enter vaild data
       scaleup:
         description: ' %'
         cpu:
