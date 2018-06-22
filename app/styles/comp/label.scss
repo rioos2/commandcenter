@@ -1,10 +1,40 @@
 .riolabel.label {
-    color: white;
-    padding: 8px;
+	color: white;
+	padding: 8px;
 }
 
-.success {background-color: #4CAF50;}
-.info {background-color: #2196F3;}
-.warning {background-color: #ff9800;}
-.danger {background-color: #f44336;}
-.other {background-color: #e7e7e7; color: black;}
+.ptop-5 {
+	padding-top: 5px;
+}
+
+.pleft-26 {
+	padding-left: 26px;
+}
+
+.node-compute {
+	background-color: #4CAF50;
+}
+
+.node-storage {
+	background-color: #2196F3;
+}
+
+.node-gpu {
+	background-color: #ff9800;
+}
+
+.node-cpu {
+	background-color: #6881c3;
+}
+
+.node-container {
+	background-color: #efc887;
+}
+
+.node-new {
+	background-color: #4CAF50;
+}
+
+.node-NinjaNotReady {
+	background-color: #4CAF50;
+}

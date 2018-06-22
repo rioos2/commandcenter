@@ -22,26 +22,36 @@ var Node = Resource.extend(DefaultHeaders, {
 
   availableActions: function() {
     var a = this.get('actionLinks');
-    return [{
-        label: 'action.nodeInstall',
+    return [
+      {
+        label: 'action.installNode',
         icon: 'fa fa-plus',
-        action: 'installnode',
-        enabled: this.nodeCreationOption(),
-        // enabled: true,
+        action: 'installNode',
+        enabled: this.nodeInstallOption(),
       },
       {
-        label: 'action.createSecret',
+        label: 'action.retryInstallNode',
         icon: 'fa fa-plus',
-        action: 'secretCreate',
-        enabled: true,
+        action: 'retryInstallNode',
+        enabled: this.nodeRetryInstallOption(),
       }
     ];
   }.property('id', 'actionLinks'),
 
-  nodeCreationOption: function() {
+  nodeInstallOption: function() {
     let add = true;
     this.get('status.conditions').forEach((condition) => {
-      if (C.NODE.NINJANODESCONDITIONS.includes(condition.condition_type)) {
+      if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
+        add = false;
+      };
+    });
+    return add;
+  },
+
+  nodeRetryInstallOption: function() {
+    let add = true;
+    this.get('status.conditions').forEach((condition) => {
+      if (C.NODE.NINJA_NODES_RETRY_INSTALL_CONDITIONS.includes(condition.condition_type)) {
         add = false;
       };
     });
@@ -51,27 +61,13 @@ var Node = Resource.extend(DefaultHeaders, {
 
   actions: {
 
-    installnode() {
-      var self = this;
-      this.get('userStore').rawRequest(this.rawRequestOpts({
-        url: '/api/v1/nodes',
-        method: 'POST',
-        data: this,
-      })).then((result) => {
-        this.get('notifications').info(get(this, 'intl').t('stackPage.admin.node.nodeCreate'), {
-          autoClear: true,
-          clearDuration: 4200,
-          cssClasses: 'notification-success'
-        });
-      }).catch(err => {
-        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeFailed'), {
-          autoClear: true,
-          clearDuration: 4200,
-          cssClasses: 'notification-warning'
-        });
-      });
+    installNode() {
+      this.set('nodeOperation', 'install');
+      $('#node_auth_modal_' + this.get('id')).modal('show');
     },
-    secretCreate() {
+
+    retryInstallNode() {
+      this.set('nodeOperation', 'retry');
       $('#node_auth_modal_' + this.get('id')).modal('show');
     }
 

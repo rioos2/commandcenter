@@ -3,15 +3,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Node Authentication</h4>
+        <h4 class="modal-title">{{t 'stackPage.admin.node.securityVerification'}}</h4>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="node_auth_types">Select auth type</label>
               <select class="form-control" id="node_auth_{{id}}" name="node_auth_{{id}}" onchange= {{action "selectAuthType" value="target.value"}}>
-                <option disabled selected>{{t 'stackPage.admin.node.select_auth_placeholder'}}</option>
+                <option disabled selected>{{t 'stackPage.admin.node.selectAuthenticationMethod'}}</option>
                 {{#each types as |type|}}
                 <option>{{type}}</option>
                 {{/each}}
@@ -20,18 +19,18 @@
           </div>
         </div>
 
-        {{#if (eq authType "Password")}}
+        {{#if (eq authType "Login Credentials")}}
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="nodeusername">User name</label>
+              <label for="nodeusername">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
               {{input type="text" class="form-control" id="nodeusername" value=nodeusername}}
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="nodepwd">Password</label>
-              {{input type="text" class="form-control" id="nodepwd" value=nodepwd}}
+              <label for="nodepwd">{{t 'stackPage.admin.node.nodeAuthPassword'}}</label>
+              {{input type="password" class="form-control" id="nodepwd" value=nodepwd}}
             </div>
           </div>
         </div>
@@ -39,17 +38,18 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="default">
-                <span class="note">NOTE: </span>Using node user name and password to authenticate
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>{{t 'stackPage.admin.node.nodeAuthNote'}}
               </label>
             </div>
           </div>
         </div>
         {{/if}}
-        {{#if (eq authType "SSH")}}
+        {{#if (eq authType "SSH Key Verification")}}
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="ssh">SSH key</label> {{input type="text" class="form-control" id="ssh" value=sshvalue}}
+              <label for="ssh">{{t 'stackPage.admin.node.nodeSshKey'}}</label>
+              {{textarea class="form-control" placeholder=sshplaceholder value=sshvalue cols="80" rows="8"}}
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="default">
-                <span class="note">NOTE: </span>Using node ssh key to authenticate
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>{{t 'stackPage.admin.node.nodeAuthNote'}}
               </label>
             </div>
           </div>
@@ -65,7 +65,7 @@
         {{/if}}
 
         <button type="submit" {{action 'createSecret'}} class="btn btn-default">
-            Create
+            {{t 'stackPage.admin.node.nodeCreateBtn'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>
             {{/if}}

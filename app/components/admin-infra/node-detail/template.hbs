@@ -18,5 +18,14 @@
       <span class="sub-title">{{t 'stackPage.admin.node.schedule'}}</span>
       <span class="sub-name">{{schedule}}</span>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group riolabel pleft-26">
+          {{#each nodeLabels as |label|}}
+          <span class="label ptop-5 node-{{label}}">{{label}}</span>
+          {{/each}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>

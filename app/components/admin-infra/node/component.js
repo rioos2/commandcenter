@@ -20,41 +20,40 @@ export default buildAdminInfraPanel('node', {
   }.property('ninjaNodes'),
 
   nodeAvailable: function() {
-    return this.get('availableSize') > 0 ;
+    return this.get('availableSize') > 0;
   }.property('availableSize'),
 
   availableCalmNodeSize: function() {
     return this.get('calmNodes').length;
   }.property('calmNodes'),
 
-  nodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
+  nodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
-  ninjaNodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content').filter((node) => {
+  ninjaNodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = false;
       node.status.conditions.forEach((condition) => {
-         if(C.NODE.NINJANODESCONDITIONS.includes(condition.condition_type)){
-           add = true;
-         };
+        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
+          add = true;
+        };
       });
       return add;
     });
-}.property('model.nodes'),
+  }.property('model.nodes'),
 
-  calmNodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content').filter((node) => {
+  calmNodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = true;
       node.status.conditions.forEach((condition) => {
-         if(C.NODE.NINJANODESCONDITIONS.includes(condition.condition_type)){
-           add = false;
-         };
+        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
+          add = false;
+        };
       });
-
       return add;
     });
-}.property('model.nodes.content.[]'),
+  }.property('model.nodes.content.[]', 'ninjaNodes'),
 
 
   actions: {

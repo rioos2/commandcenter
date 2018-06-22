@@ -15,15 +15,17 @@ export default Ember.Route.extend(DefaultHeaders, {
 
   model(params) {
       return Ember.RSVP.hash({
-        storageConnectors: this.get('store').findAll('storageconnectors',this.opts('storageconnectors')),
-        storagesPool: this.get('store').findAll('storagespools',this.opts('storagespool')),
-        datacenters: this.get('store').findAll('datacenters',this.opts('datacenters')),
-        networks: this.get('store').findAll('networks',this.opts('networks')),
+        storageConnectors: this.get('store').findAll('storage',this.opts('storageconnectors')),
+        storagesPool: this.get('store').findAll('storagepool',this.opts('storagespool')),
+        datacenters: this.get('store').findAll('datacenter',this.opts('datacenters')),
+        networks: this.get('store').findAll('network',this.opts('networks')),
         nodes: this.get('store').findAll('node',this.opts('nodes')),
       });
   },
 
+
   actions: {
+    //This will reload after edit processed by component
     reload: function() {
       var self = this;
       self.controller.set('modelSpinner', true);

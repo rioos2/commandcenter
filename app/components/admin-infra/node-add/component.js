@@ -9,9 +9,21 @@ export default Ember.Component.extend(DefaultHeaders, {
   notifications: Ember.inject.service('notification-messages'),
 
   didInsertElement: function() {
-    $("[name='node_discovery_types']").val('Default');
+    $("[name='node_discovery_types']").val('Subnet');
     $("[name='node_discovery_types']").trigger('change');
   },
+
+  noteForRangeSubnet: function() {
+    return Ember.String.htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForRangeSubnet'));
+  }.property('model'),
+
+  noteForAdvanceSubnet: function() {
+    return Ember.String.htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForAdvanceSubnet'));
+  }.property('model'),
+
+  subnetAdvancePlaceHolder: function() {
+    return get(this, 'intl').t('stackPage.admin.node.searchNodeBySubnetPlaceholder');
+  }.property('model'),
 
   types: function() {
     return C.NODE.SUBNETSSEARCH;
@@ -19,9 +31,10 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   checkSubnetFormate: function(ip) {
     if (ip.match(C.REGEX.IPV4.SUBNET)) {
+      this.set('ipType', C.IPTYPE.IPV4);
       return true;
     } else if (ip.match(C.REGEX.IPV6.SUBNET)) {
-      this.set('ipType', C.IPTYPE.IPV4);
+      this.set('ipType', C.IPTYPE.IPV6);
       return true;
     } else {
       return false;
@@ -30,9 +43,10 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   checkIpFormate: function(ip) {
     if (ip.match(C.REGEX.IPV4.IP)) {
+      this.set('ipType', C.IPTYPE.IPV4);
       return true;
     } else if (ip.match(C.REGEX.IPV6.IP)) {
-      this.set('ipType', C.IPTYPE.IPV4);
+      this.set('ipType', C.IPTYPE.IPV6);
       return true;
     } else {
       return false;
@@ -50,6 +64,8 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.get('subnetAdvanceValue').replace(/\s/g, '').split(',').forEach((s) => {
         if (!this.checkSubnetFormate(s)) {
           validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.subnetRangeError'));
+        } else if ((s.split('/')[0]).slice(-1) !== "0") {
+          validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.subnetRangeZeroError'));
         }
       });
     }
@@ -86,7 +102,10 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   cidrsFormate(cidrs) {
-    return cidrs.map((s) => ({"ip": s.split("/")[0],"range": parseInt(s.split("/")[1])}));
+    return cidrs.map((s) => ({
+      "ip": s.split("/")[0],
+      "range": parseInt(s.split("/")[1])
+    }));
   },
 
   filterNodes(type) {
@@ -156,6 +175,11 @@ export default Ember.Component.extend(DefaultHeaders, {
           this.set('showSpinner', false);
           this.refresh();
         }).catch((err) => {
+          this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.somethingWrong'), {
+            autoClear: true,
+            clearDuration: 4200,
+            cssClasses: 'notification-warning'
+          });
           this.set('showSpinner', false);
           this.set('modelSpinner', false);
         });
