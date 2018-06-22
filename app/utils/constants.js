@@ -52,7 +52,7 @@ var C = {
 
   MANAGEMENT: {
     STATUS: {
-      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating"],
+      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating","awaitpending","standstill"],
       SUCCESS: ["running"],
       FAILURE: ["stopped", "failed", "terminated"],
       TERMINATE: ["terminated", "terminating"],

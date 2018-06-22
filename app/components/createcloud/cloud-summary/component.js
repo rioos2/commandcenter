@@ -102,10 +102,14 @@ export default Ember.Component.extend(DefaultHeaders, {
     return this.get('model.hscaling.spec.min_replicas') > 0
   }.property('model.hscaling.spec.min_replicas'),
 
+scalingExist: function(){
+return  Ember.isEmpty(this.get('model.hscaling')) ? false : (this.get('scalingResourceExist') || !this.get('scalingReplicaExist'));
+}.property('model.scaling'),
+
   scalingResourceExist: function() {
     var self = this;
-    this.set('model.hscaling.spec.metrics', []);
     if (Ember.isEqual(this.get('model.object_meta.labels.rioos_category')), C.CATEGORIES.CONTAINER) {
+	this.set('model.hscaling.spec.metrics', []);
       C.RESOURCES.map(function(resource) {
         self.setResource(resource);
       });
@@ -129,7 +133,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     } else if (this.get('networkExisit')) {
       this.set('validationWarning', get(this, 'intl').t('notifications.network.noSelection'));
       return true;
-    } else if (this.get('scalingResourceExist') || !this.get('scalingReplicaExist')) {
+    } else if (this.get('scalingExist')) {
       this.set('validationWarning', get(this, 'intl').t('notifications.scaling.noSelection'));
       return true;
     } else {
@@ -220,12 +224,12 @@ export default Ember.Component.extend(DefaultHeaders, {
         var session = this.get("session");
         var id = this.get("session").get("id");
         this.set("model.stacksfactory.object_meta.account", id);
-        this.set("model.hscaling.object_meta.account", id);
         var url = 'accounts/' + id + '/stacksfactorys';
         var build_url = 'buildconfigs';
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
-          if (result.object_meta.labels.rioos_category == C.CATEGORIES.CONTAINER ) {
+          if (result.object_meta.labels.rioos_category == C.CATEGORIES.CONTAINER) {
+	    this.set("model.hscaling.object_meta.account", id);
             this.createHorizontalScaling(result);
           }
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
