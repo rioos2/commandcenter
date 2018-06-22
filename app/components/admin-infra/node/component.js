@@ -1,9 +1,13 @@
 import {
   buildAdminInfraPanel
 } from '../admin-infra-panel/component';
+import C from 'nilavu/utils/constants';
 export default buildAdminInfraPanel('node', {
   network: null,
   selectedNodes: null,
+  ninjaNodes: [],
+  userStore: Ember.inject.service('user-store'),
+
 
   didInsertElement: function() {
     if (!Ember.isEmpty(this.get('nodes'))) {
@@ -12,22 +16,59 @@ export default buildAdminInfraPanel('node', {
   },
 
   availableSize: function() {
-    return this.get('nodes').length;
-  }.property('nodes'),
+    return this.get('ninjaNodes').length;
+  }.property('ninjaNodes'),
 
   nodeAvailable: function() {
-    return this.get('availableSize') > 0 ;
+    return this.get('availableSize') > 0;
   }.property('availableSize'),
 
-  nodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
+  availableCalmNodeSize: function() {
+    return this.get('calmNodes').length;
+  }.property('calmNodes'),
+
+  nodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
+
+  ninjaNodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
+      let add = false;
+      node.status.conditions.forEach((condition) => {
+        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
+          add = true;
+        };
+      });
+      return add;
+    });
+  }.property('model.nodes'),
+
+  calmNodes: function() {
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
+      let add = true;
+      node.status.conditions.forEach((condition) => {
+        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
+          add = false;
+        };
+      });
+      return add;
+    });
+  }.property('model.nodes.content.[]', 'ninjaNodes'),
 
 
   actions: {
     SideData: function(node) {
       this.set('selectedNode', node);
       this.set('selectedNodeTab', node.id);
-    }
+    },
+
+    doReload: function() {
+      $('#node_add_modal').modal('hide');
+      this.sendAction('triggerReload');
+    },
+
+    openModal: function() {
+      $('#node_add_modal').modal('show');
+    },
   }
 });

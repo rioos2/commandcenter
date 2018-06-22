@@ -7,6 +7,21 @@ var C = {
     ASSEMBLYIPV4: "IPv4",
   },
 
+  NODE: {
+    NINJANODES: "ninja_nodes",
+    CALMNODES: "calm_nodes",
+    NINJA_NODES_UNINSTALL_CONDITIONS: ["MemoryPressure", "DiskPressure", "NetworkUnavailable", "OutOfDisk"],
+    NINJA_NODES_RETRY_INSTALL_CONDITIONS: ["InstallComplete"],
+    SUBNETSSEARCH: [{"value":'Subnet', "text":"Discover the active IP addresses in an IP block (eg: 192.168.2.0/24)"}, {"value":'Subnet Range', "text":"Discover the active IP addresses in an given range (eg: 192.168.2.10 - 192.168.2.15)"}],
+    NODEAUTHTYPE: ["Login Credentials", "SSH Key Verification"],
+    INSTALLFAILURE:["NinjaNotReady"]
+  },
+
+  IPTYPE: {
+    IPV4: "IPV4",
+    IPV6: "IPV6"
+  },
+
   ACCOUNT: {
     MEMBERSHIP: {
       MEMBERSHIPTRAIL: "Trail",
@@ -68,8 +83,8 @@ var C = {
   ADMIN: {
     STATUS: {
       INITIAL: ["initialized", "pending"],
-      READY: ["ready", "running"],
-      NOTREADY: ["notready"],
+      READY: ["ready", "running", "ninjaready"],
+      NOTREADY: ["notready","ninjanotready"],
     },
     STORAGE_TYPE: {
       CEPH: "rioos_sh/ceph",

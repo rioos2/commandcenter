@@ -1,9 +1,9 @@
 {{admin-infra/node-add-authenticate id=model.id model=model}}
 <div class="network-box-outer">
-  <div class="network-box {{active}}">
+  <div class="network-box">
     <div class="network-subbox-1">
       <div class="pull-left st-name">
-        {{nodeName}}
+        {{model.id}}
       </div>
       <div class="pull-right st-pin">
         <div class="stack-action">
@@ -13,17 +13,15 @@
     </div>
     <div class="network-subbox-2">
       <span class="sub-title">{{t 'stackPage.admin.node.ip'}}</span>
-      <span class="sub-name">{{ip}}</span>
+      <span class="sub-name">{{model.node_ip}}</span>
       <br>
-      <span class="sub-title">{{t 'stackPage.admin.node.schedule'}}</span>
-      <span class="sub-name">{{schedule}}</span>
+      <span class="sub-title">{{t 'stackPage.admin.node.nodeStatus'}}</span>
+      <span class="sub-name">{{t 'stackPage.admin.node.nodeNewReady'}}</span>
     </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group riolabel pleft-26">
-          {{#each nodeLabels as |label|}}
-          <span class="label ptop-5 node-{{label}}">{{label}}</span>
-          {{/each}}
+          <span class="label ptop-5 node-new">{{t 'stackPage.admin.node.labelNew'}}</span>
         </div>
       </div>
     </div>
