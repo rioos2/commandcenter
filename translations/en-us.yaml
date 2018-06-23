@@ -394,6 +394,7 @@ launcherPage:
       scaleDownwaitTime: Select minutes to wait before another downscale operation
       scalingRuleTitle:  Select Scaling Rules
       scalingReplicaWaitTimeTitle: Select Scaling Replicas and Wait time
+      applyScaling: Apply Horizontal Scaling
       scaleup:
         description: ' %'
         cpu:

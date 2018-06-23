@@ -89,6 +89,10 @@ export default Component.extend({
     focusOut() {
       this.set('showIcon', true);
     },
+
+    sendType() {
+      this.toggleProperty('model.hscaling.scaling_rule_apply');
+    },
   }
 
 });
