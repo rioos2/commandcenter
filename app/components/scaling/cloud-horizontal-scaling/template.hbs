@@ -3,79 +3,90 @@
   <p class="sub-description">{{t 'launcherPage.scaling.horizontal.description'}}</p>
 
   <div class="select-domain">
-    <div class="scaling-content">
-    <p class="title">{{t 'launcherPage.scaling.horizontal.scalingReplicaWaitTimeTitle'}}</p>
-  </div>
-  <div class="row">
-    <div class="col-md-6 ">
-      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.minReplivas'}}</p>
-      <p class="sub-description text-center ">{{model.hscaling.spec.min_replicas}}</p>
-
-      <section class="webdesigntuts-workshop">
-        {{svg/svg-edit class=(if showMinReplicas "edit-ico" "display-none") click=(action 'clickMinReplicas')}}
-        <div class= {{if showMinReplicas "display-none" "showform"}}>
-          {{input type="text" placeholder=domainPlaceHolder value=newMinReplicas}}
-          <button {{action "setMinReplicas" newMinReplicas}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="rio-selectbtn text-center">
+          <label {{action 'sendType'}}>
+        <input type="checkbox" class="option-input radio" checked={{model.hscaling.scaling_rule_apply}} name="example"/>
+        <span>{{t 'launcherPage.scaling.horizontal.applyScaling'}}</span>
+      </label>
         </div>
-      </section>
+      </div>
     </div>
-    <div class="col-md-6">
-      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.maxReplivas'}} </p>
+    <div class="row">
+      <div class="scaling-content">
+        <p class="title">{{t 'launcherPage.scaling.horizontal.scalingReplicaWaitTimeTitle'}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ">
+        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.minReplivas'}}</p>
+        <p class="sub-description text-center ">{{model.hscaling.spec.min_replicas}}</p>
+
+        <section class="webdesigntuts-workshop">
+          {{svg/svg-edit class=(if showMinReplicas "edit-ico" "display-none") click=(action 'clickMinReplicas')}}
+          <div class= {{if showMinReplicas "display-none" "showform"}}>
+            {{input type="text" placeholder=domainPlaceHolder value=newMinReplicas}}
+            <button {{action "setMinReplicas" newMinReplicas}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6">
+        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.maxReplivas'}} </p>
         <p class="sub-description text-center">{{model.hscaling.spec.max_replicas}}</p>
 
-      <section class="webdesigntuts-workshop">
-        {{svg/svg-edit class=(if showMaxReplicas "edit-ico" "display-none") click=(action 'clickMaxReplicas')}}
-        <div class= {{if showMaxReplicas "display-none" "showform"}}>
-          {{input type="text" placeholder=domainPlaceHolder value=newMaxReplicas}}
-          <button {{action "setMaxReplicas" newMaxReplicas}}>{{t 'launcherPage.domain.buttonSet'}}</button>
-        </div>
-      </section>
+        <section class="webdesigntuts-workshop">
+          {{svg/svg-edit class=(if showMaxReplicas "edit-ico" "display-none") click=(action 'clickMaxReplicas')}}
+          <div class= {{if showMaxReplicas "display-none" "showform"}}>
+            {{input type="text" placeholder=domainPlaceHolder value=newMaxReplicas}}
+            <button {{action "setMaxReplicas" newMaxReplicas}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 p-b-30">
+        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleUpwaitTime'}}</p>
+        <p class="sub-description text-center">{{model.hscaling.spec.scale_up_wait_time}}</p>
+        <section class="webdesigntuts-workshop">
+          {{svg/svg-edit class=(if showScaleUpTime "edit-ico" "display-none") click=(action 'clickUpTime')}}
+          <div class= {{if showScaleUpTime "display-none" "showform"}}>
+            {{input type="text" placeholder=domainPlaceHolder value=newUpTime}}
+            <button {{action "setScaleUpTime" newUpTime}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6 p-b-30">
+        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleDownwaitTime'}}</p>
+        <p class="sub-description text-center">{{model.hscaling.spec.scale_down_wait_time}}</p>
+        <section class="webdesigntuts-workshop">
+          {{svg/svg-edit class=(if showScaleDownTime "edit-ico" "display-none") click=(action 'clickDownTime')}}
+          <div class= {{if showScaleDownTime "display-none" "showform"}}>
+            {{input type="text" placeholder=domainPlaceHolder value=newDownTime}}
+            <button {{action "setScaleDownTime" newDownTime}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6 p-b-30">
-      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleUpwaitTime'}}</p>
-      <p class="sub-description text-center">{{model.hscaling.spec.scale_up_wait_time}}</p>
-      <section class="webdesigntuts-workshop">
-        {{svg/svg-edit class=(if showScaleUpTime "edit-ico" "display-none") click=(action 'clickUpTime')}}
-        <div class= {{if showScaleUpTime "display-none" "showform"}}>
-          {{input type="text" placeholder=domainPlaceHolder value=newUpTime}}
-          <button {{action "setScaleUpTime" newUpTime}}>{{t 'launcherPage.domain.buttonSet'}}</button>
-        </div>
-      </section>
-    </div>
-    <div class="col-md-6 p-b-30">
-      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleDownwaitTime'}}</p>
-      <p class="sub-description text-center">{{model.hscaling.spec.scale_down_wait_time}}</p>
-      <section class="webdesigntuts-workshop">
-        {{svg/svg-edit class=(if showScaleDownTime "edit-ico" "display-none") click=(action 'clickDownTime')}}
-        <div class= {{if showScaleDownTime "display-none" "showform"}}>
-          {{input type="text" placeholder=domainPlaceHolder value=newDownTime}}
-          <button {{action "setScaleDownTime" newDownTime}}>{{t 'launcherPage.domain.buttonSet'}}</button>
-        </div>
-      </section>
+  <div class="select-domain">
+    <div class="scaling-content">
+      <p class="title">{{t 'launcherPage.scaling.horizontal.scalingRuleTitle'}}</p>
     </div>
   </div>
-</div>
-<div class="select-domain">
-  <div class="scaling-content">
-<p class="title">{{t 'launcherPage.scaling.horizontal.scalingRuleTitle'}}</p>
-</div>
-</div>  <div class="dashboard">
+  <div class="dashboard">
     <div class="tabs">
-      {{radio-button checked=(eq "cpu" selectedTab) value=selectedTab selection=selectedTab id="cpu" name="tab-control"}} {{radio-button checked=(eq "memory" selectedTab) value=selectedTab selection=selectedTab id="memory" name="tab-control"}}
-      {{radio-button checked=(eq "disk" selectedTab) value=selectedTab selection=selectedTab id="disk" name="tab-control"}}
+      {{radio-button checked=(eq "cpu" selectedTab) value=selectedTab selection=selectedTab id="cpu" name="tab-control"}} {{radio-button checked=(eq "memory" selectedTab) value=selectedTab selection=selectedTab id="memory" name="tab-control"}} {{radio-button checked=(eq "disk" selectedTab) value=selectedTab selection=selectedTab id="disk" name="tab-control"}}
       <ul class="dashboardNav">
-        {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="cpu"}} {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="memory"}}
-        {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="disk" }}
+        {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="cpu"}} {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="memory"}} {{scaling/scaling-horizontal-tab panels=panels selectedTab=selectedTab tab="disk" }}
       </ul>
       <div class="slider">
         <div class="indicator"></div>
       </div>
       <div class="content">
-            {{#each panels as |tab|}}
-              {{component tab selectedTab=selectedTab model=model modelSpinner=modelSpinner}}
-            {{/each}}
+        {{#each panels as |tab|}}
+          {{component tab selectedTab=selectedTab model=model modelSpinner=modelSpinner}}
+        {{/each}}
       </div>
     </div>
   </div>
