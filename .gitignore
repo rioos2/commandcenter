@@ -27,3 +27,5 @@ yarn.lock
 .python-version
 \#*
 .\#*
+
+electron-out/
