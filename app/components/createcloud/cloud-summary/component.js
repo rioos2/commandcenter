@@ -100,7 +100,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
   scalingApplied: function() {
     return this.get('model.hscaling.scaling_rule_apply');
-  }.property('model.hscaling.scaling_rule_apply'),
+  },
 
   scalingExist: function() {
     return (!Ember.isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') >0 && this.get('model.hscaling.target_value.max_target_value_cpu')> 0 ||
