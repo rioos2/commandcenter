@@ -99,14 +99,14 @@ var Assembly = Resource.extend(DefaultHeaders, {
   },
 
   applicationUrlData: function() {
-    let ip = !Ember.isEmpty(this.get('spec.assembly_factory.spec.endpoints.subsets.addresses')) ? this.get('spec.assembly_factory.spec.endpoints.subsets.addresses')[0].ip : "";
+    let ip = !Ember.isEmpty(this.get('spec.endpoints.subsets.addresses')) ? this.get('spec.endpoints.subsets.addresses')[0].ip : "";
     if (ip) {
       let planId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
       let port = "";
       let protocol = "";
       this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
         if (p.object_meta.name == planId) {
-          port = p.metadata.usedPort;
+          port = p.metadata.used_port;
           p.ports.forEach((po) => {
             if (po.container_port == port) {
               this.set('enableLink', true);
@@ -178,7 +178,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
     },
 
     applicationUrl: function() {
-      alert(this.get('url'));
+      window.open(this.get('url'));
     },
 
   },
