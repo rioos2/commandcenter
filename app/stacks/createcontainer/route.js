@@ -92,7 +92,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
       state: 'ABLETOSCALE',
       spec: {
       min_replicas: 1,
-      max_replicas: 0,
+      max_replicas: 1,
       scale_up_wait_time: 5,
       scale_down_wait_time: 5,
       metrics: []
@@ -109,7 +109,8 @@ export default Ember.Route.extend(DefaultHeaders,  {
       max_target_value_memory: 0,
       min_target_value_disk: 0,
       max_target_value_disk: 0
-    }
+    },
+    scaling_rule_apply: false
     };
     return this.get('store').createRecord(horizontalScalingData);
   },
