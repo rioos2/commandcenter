@@ -6,7 +6,7 @@ export function initialize(instance) {
 
   store.reopen();
   store.baseUrl = application.apiEndpoint;
-
+  
   let timeout = cookies.get('timeout');
   if ( timeout ) {
     store.defaultTimeout = timeout;
