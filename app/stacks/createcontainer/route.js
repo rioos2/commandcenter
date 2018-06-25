@@ -103,12 +103,12 @@ export default Ember.Route.extend(DefaultHeaders,  {
       desired_replicas: 0
     },
     target_value: {
-      min_target_value_cpu: 0,
-      max_target_value_cpu: 0,
-      min_target_value_memory: 0,
-      max_target_value_memory: 0,
-      min_target_value_disk: 0,
-      max_target_value_disk: 0
+      min_target_value_cpu: 20,
+      max_target_value_cpu: 80,
+      min_target_value_memory: 20,
+      max_target_value_memory: 80,
+      min_target_value_disk: 20,
+      max_target_value_disk: 80
     },
     scaling_rule_apply: false
     };
