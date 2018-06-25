@@ -907,6 +907,7 @@ action:
   viewInApi: View in API
   viewInstance: View Instance
   downloadSecret: Download secret
+  externalUrl: Open UI
   nodeEdit: Edit node
   nodeInstall: Install node
   createSecret: Create Secret
