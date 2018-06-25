@@ -98,24 +98,26 @@ export default Ember.Component.extend(DefaultHeaders, {
       });
     }
   },
-  scalingReplicaExist: function() {
-    return this.get('model.hscaling.spec.min_replicas') > 0
-  }.property('model.hscaling.spec.min_replicas'),
+  scalingApplied: function() {
+    return this.get('model.hscaling.scaling_rule_apply');
+  },
 
-scalingExist: function(){
-return  Ember.isEmpty(this.get('model.hscaling')) ? false : (this.get('scalingResourceExist') || !this.get('scalingReplicaExist'));
-}.property('model.scaling'),
+  scalingExist: function() {
+    return (!Ember.isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') >0 && this.get('model.hscaling.target_value.max_target_value_cpu')> 0 ||
+        this.get('model.hscaling.target_value.min_target_value_memory') >0 && this.get('model.hscaling.target_value.max_target_value_memory')> 0 ||
+        this.get('model.hscaling.target_value.min_target_value_disk') >0 && this.get('model.hscaling.target_value.max_target_value_disk')> 0 ) : false ) : false;
+  }.property('model.scaling','model.hscaling.scaling_rule_apply','model.hscaling.target_value.min_target_value_cpu','model.hscaling.target_value.max_target_value_cpu','model.hscaling.target_value.min_target_value_memory','model.hscaling.target_value.max_target_value_memory','model.hscaling.target_value.min_target_value_disk','model.hscaling.target_value.max_target_value_disk'),
 
   scalingResourceExist: function() {
     var self = this;
     if (Ember.isEqual(this.get('model.object_meta.labels.rioos_category')), C.CATEGORIES.CONTAINER) {
-	this.set('model.hscaling.spec.metrics', []);
+      this.set('model.hscaling.spec.metrics', []);
       C.RESOURCES.map(function(resource) {
         self.setResource(resource);
       });
     }
     return Ember.isEmpty(this.get('model.hscaling.spec.metrics'));
-  }.property('model.hscaling.spec.metrics'),
+  }.property('model.hscaling.spec.metrics','model.object_meta.labels.rioos_category'),
 
   validation() {
     if (Ember.isEmpty(this.get('model.stacksfactory.secret.id')) && this.get('model.stacksfactory.object_meta.labels.rioos_category') != C.CATEGORIES.BLOCKCHAIN) {
@@ -189,6 +191,7 @@ return  Ember.isEmpty(this.get('model.hscaling')) ? false : (this.get('scalingRe
 
   createHorizontalScaling: function(stacksfactory) {
     var self = this;
+    this.scalingResourceExist();
     if (!Ember.isEmpty(stacksfactory.spec.assembly_factory)) {
       var hs_url = 'horizontalscaling';
       stacksfactory.spec.assembly_factory.map(function(assemblyfactory) {
@@ -229,8 +232,10 @@ return  Ember.isEmpty(this.get('model.hscaling')) ? false : (this.get('scalingRe
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.CONTAINER) {
-	    this.set("model.hscaling.object_meta.account", id);
-            this.createHorizontalScaling(result);
+            if (this.scalingApplied()) {
+              this.set("model.hscaling.object_meta.account", id);
+              this.createHorizontalScaling(result);
+            }
           }
           if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
             this.createBuildConfig(result);

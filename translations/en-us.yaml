@@ -434,24 +434,25 @@ launcherPage:
       maxReplivas: Upper limit for the number of replicas set by Rio/OS
       scaleUpwaitTime: Select minutes to wait before another upscale operation
       scaleDownwaitTime: Select minutes to wait before another downscale operation
-      scalingRuleTitle:  Select Scaling Rules
-      scalingReplicaWaitTimeTitle: Select Scaling Replicas and Wait time
+      scalingRuleTitle:  Select Autoscale Policies
+      scalingReplicaWaitTimeTitle: Select Autoscale Replicas
+      applyScaling: Enable Horizontal Scaling
       scaleup:
         description: ' %'
         cpu:
-          title:  'Start scale up when CPU is'
+          title:  'Scale up when CPU is'
         memory:
-          title: 'Start scale up when MEMORY is'
+          title: 'Scale up when MEMORY is'
         disk:
-          title: 'Start scale up when DISK is'
+          title: 'Scale up when DISK is'
       scaledown:
         description: ' %'
         cpu:
-          title:  'Start scale down when CPU is'
+          title:  'Scale down when CPU is'
         memory:
-          title: 'Start scale down when MEMORY is'
+          title: 'Scale down when MEMORY'
         disk:
-          title: 'Start scale down when DISK is'
+          title: 'Scale down when DISK is'
       when: when
       percentage: Percentage
       target: Target Value
@@ -854,9 +855,9 @@ nav:
   digitalcloud: Digital cloud
   docker: Container
   blockchain: Blockchain
-  customApp: Custom application
+  customApp: Application from Git
   deploy: Deploy
-  infrastructureNetwork: Infrastructure network
+  infrastructureNetwork: Deploy network
   deployApplication: Deploy application
   user:
     profile: Profile
@@ -906,6 +907,7 @@ action:
   viewInApi: View in API
   viewInstance: View Instance
   downloadSecret: Download secret
+  externalUrl: Open UI
   nodeEdit: Edit node
   nodeInstall: Install node
   createSecret: Create Secret

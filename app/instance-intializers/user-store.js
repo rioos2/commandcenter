@@ -1,11 +1,10 @@
-import StoreTweaks from 'nilavu/mixins/store-tweaks';
 
 export function initialize(instance) {
   var application = instance.lookup('application:main');
   var store = instance.lookup('service:user-store');
   var cookies = instance.lookup('service:cookies');
-  
-  store.reopen(StoreTweaks);
+
+  store.reopen();
   store.baseUrl = application.apiEndpoint;
 
   let timeout = cookies.get('timeout');
