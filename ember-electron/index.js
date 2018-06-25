@@ -34,7 +34,6 @@ const CONTAINER_CONSOLE = "containerconsole";
 const MACHINE_CONSOLE = "machineconsole";
 
 proxy.on('error', onProxyError);
-
 // WebSocket for Rio-api
 /*httpServer.on('upgrade', function proxyWsRequest(req, socket, head) {
     proxyLog('WS', req);
