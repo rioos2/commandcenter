@@ -4,7 +4,7 @@ export function initialize(instance) {
   var application = instance.lookup('application:main');
   var store = instance.lookup('service:user-store');
   var cookies = instance.lookup('service:cookies');
-
+  
   store.reopen(StoreTweaks);
   store.baseUrl = application.apiEndpoint;
 

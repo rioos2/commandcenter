@@ -10,6 +10,8 @@ export function initialize(instance) {
   store.reopen({
     removeAfterDelete: true,
     baseUrl: application.webhookEndpoint,
+    desktop: application.desktop,
+    apiServerUrl: application.apiServer,
 
     normalizeUrl() {
       let out = this._super(...arguments);

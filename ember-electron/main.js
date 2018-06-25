@@ -1,5 +1,5 @@
 /* eslint-env node */
-const { app, BrowserWindow, protocol } = require('electron');
+const { app, BrowserWindow, protocol, ipcMain } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 
@@ -21,22 +21,24 @@ protocolServe({
 //     submitURL: 'https://your-domain.com/url-to-submit',
 //     autoSubmit: true
 // });
-
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
-
 app.on('ready', () => {
  // mainWindow = new BrowserWindow({
  //   width: 800,
  //   height: 600,
- // });
+ // });   
     const electron = require ('electron');
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({width, height});
+    mainWindow = new BrowserWindow({width, height,webPreferences: {
+      webSecurity: false,
+      allowRunningInsecureContent: false,
+  }});
 
+    require("./index");
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
@@ -68,6 +70,8 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+
 });
 
 // Handle an unhandled error in the main thread

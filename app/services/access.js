@@ -56,21 +56,21 @@ export default Ember.Service.extend(DefaultHeaders, {
         email: username,
         password: password,
       },
-    }).then((xhr) => {
+    }).then((xhr) => {     
       var auth = xhr.body;
       var interesting = {};
       var origin;
-
+     
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
         }
       });
-
       this.get('cookies').setWithOptions(C.COOKIE.TOKEN, auth.token, {
         path: '/',
         secure: window.location.protocol === 'http:'
       });
+     
       session.setProperties(interesting);
       return xhr;
     }).catch((res) => {
