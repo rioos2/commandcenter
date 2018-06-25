@@ -15,6 +15,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   notifications: Ember.inject.service('notification-messages'),
   modalService: Ember.inject.service('modal'),
   session: Ember.inject.service(),
+  enableLink: false,
 
 
   availableActions: function() {
@@ -40,6 +41,12 @@ var Assembly = Resource.extend(DefaultHeaders, {
         icon: 'fa fa-download',
         action: 'download',
         enabled: true,
+      },
+      {
+        label: 'action.externalUrl',
+        icon: 'fa fa-external-link',
+        action: 'applicationUrl',
+        enabled: this.linkEnabler(),
       },
     ];
   }.property('id', 'actionLinks', 'hasTerminated', 'status.phase', 'enableConsole'),
@@ -89,6 +96,33 @@ var Assembly = Resource.extend(DefaultHeaders, {
         cssClasses: 'notification-success'
       });
     };
+  },
+
+  applicationUrlData: function() {
+    let ip = !Ember.isEmpty(this.get('spec.assembly_factory.spec.endpoints.subsets.addresses')) ? this.get('spec.assembly_factory.spec.endpoints.subsets.addresses')[0].ip : "";
+    if (ip) {
+      let planId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
+      let port = "";
+      let protocol = "";
+      this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
+        if (p.object_meta.name == planId) {
+          port = p.metadata.usedPort;
+          p.ports.forEach((po) => {
+            if (po.container_port == port) {
+              this.set('enableLink', true);
+              protocol = po.protocol;
+            }
+          });
+        }
+      });
+      let url = protocol + "://" + ip + ":" + port;
+      this.set('url', url);
+    }
+  },
+
+  linkEnabler: function() {
+    this.applicationUrlData();
+    return this.get('enableLink');
   },
 
 
@@ -141,6 +175,10 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
     deletePromt: function() {
       this.get('modalService').toggleModal('modal-confirm-delete', this);
+    },
+
+    applicationUrl: function() {
+      alert(this.get('url'));
     },
 
   },
