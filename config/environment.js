@@ -67,13 +67,13 @@ module.exports = function (environment) {
   } else {
     console.error("✘ ui config load failed.\n" + loaded);
   }
-
+ 
   var ENV = {
     modulePrefix: 'nilavu',
     environment: environment,
     exportApplicationGlobal: true,
-    baseURL: '/',
-    locationType: 'auto',
+    baseURL: '/',    
+    locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -111,6 +111,9 @@ module.exports = function (environment) {
       // when it is created
       version: pkg.version,
       appName: 'Rio/OS - ' + pkg.version,
+      desktop: process.env.EMBER_CLI_ELECTRON,
+      proxyPort: loaded.proxy_port || "8000",
+      proxyHost: loaded.proxy_host || "http://localhost",
       apiServer: loaded.http_api || "http://localhost:9636",
       apiEndpoint: '/api/v1',
       wsServer: loaded.uwatch_server || "ws://localhost:9443",

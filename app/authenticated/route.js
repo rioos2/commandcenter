@@ -18,6 +18,12 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
 
   beforeModel(transition) {
     this._super.apply(this, arguments);
+
+    // Load application is desktop or web
+    // If it is desktop application, then add the proxy server url
+    // otherwise ember manage it.
+    this.get('storeReset').set();
+    
     if (this.get('access.enabled')) {
       if (!this.get('access').isLoggedIn()) {
         transition.send('logout', transition, false);
@@ -62,7 +68,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   activate() {
     let app = this.controllerFor('application');
     this._super();
-    this.connectSubscribers();
+    this.connectSubscribers();    
   },
 
   deactivate() {
