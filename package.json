@@ -28,7 +28,6 @@
     "downloadjs": "^1.4.7",
     "electron-forge": "^5.2.2",
     "electron-prebuilt-compile": "2.0.3",
-    "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master",
     "ember-browserify": "^1.2.1",
     "ember-cli": "~3.1.4",
     "ember-cli-animate-css": "0.0.1",
@@ -58,9 +57,11 @@
     "ember-radio-button": "^1.2.1",
     "ember-resolver": "^4.0.0",
     "ember-responsive": "^2.0.5",
+    "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master",
     "ember-source": "~3.0.0",
     "ember-truth-helpers": "^2.0.0",
     "es6-eventemitter": "~0.8.4",
+    "express": "4.16.3",
     "flag-icon-css": "^3.0.0",
     "flat": "^4.0.0",
     "forever-agent": "^0.6.1",
@@ -75,10 +76,7 @@
     "semver": "^5.5.0",
     "toml-parser": "0.0.7",
     "xterm": "1.0.0",
-    "yamljs": "^0.3.0",
-    "express": "4.16.3",
-    "uniqid": "^4.0.0",
-    "hoxy": "^3.2.0"
+    "yamljs": "^0.3.0"
   },
   "dependencies": {
     "@bower_components/animate.css": "daneden/animate.css#~3.2.0",

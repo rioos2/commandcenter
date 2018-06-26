@@ -7,10 +7,6 @@ title = "UI Configuration for Rio/OS"
 ## api host that nilavu will connect to
 http_api = "https://localhost:7443"
 
-## proxy host that nilavu frontend application connect to
-proxy_host = "http://192.168.2.7"
-proxy_port = "8000"
-
 ## uwatch_server is a host that the nilavu will connect to for real time triggers on
 ## update to resources.
 uwatch_server = "ws://localhost:9443"
