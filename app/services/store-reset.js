@@ -20,7 +20,8 @@ export default Ember.Service.extend({
   // If it is desktop application, then add the proxy server url
   // otherwise ember manage it.
   set: function() {    
-    this.get('userStore').setApplication(config.APP.desktop, config.APP.proxyHost, config.APP.proxyPort);
-    this.get('store').setApplication(config.APP.desktop, config.APP.proxyHost, config.APP.proxyPort);
+    var host = "http://" + config.APP.proxyHost
+    this.get('userStore').setApplication(config.APP.desktop, host, config.APP.proxyPort);
+    this.get('store').setApplication(config.APP.desktop, host, config.APP.proxyPort);
   },
 });

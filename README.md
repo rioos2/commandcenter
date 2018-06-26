@@ -133,6 +133,15 @@ yarn start -prod
 * Visit your app at [https://localhost:8000](https://localhost:8000).
 
 
+## Running / Desktop Application mode
+
+```
+
+ember electron
+
+```
+
+
 ## For development: If you wish to update ember-api-store
 
 When you wish to upgrade `ember-api-store` from git, 
