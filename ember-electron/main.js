@@ -54,6 +54,17 @@ app.on('ready', () => {
     mainWindow.loadURL(emberAppLocation);
   });
 
+  mainWindow.webContents.executeJavaScript(`
+    var path = require('path');
+    module.paths.push(path.resolve('node_modules'));
+    module.paths.push(path.resolve('../../node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'electron.asar', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app', 'node_modules'));
+    module.paths.push(path.resolve(__dirname, '..', '..', 'app.asar', 'node_modules'));
+    path = undefined;
+  `);
+
   mainWindow.webContents.on('crashed', () => {
     console.log('Your Ember app (or other code) in the main window has crashed.');
     console.log('This is a serious issue that needs to be handled and/or debugged.');
@@ -70,7 +81,6 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
 
 });
 
