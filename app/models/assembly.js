@@ -106,13 +106,11 @@ var Assembly = Resource.extend(DefaultHeaders, {
       let protocol = "";
       this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
         if (p.object_meta.name == planId) {
-          port = p.metadata.used_port;
-          p.ports.forEach((po) => {
-            if (po.container_port == port) {
-              this.set('enableLink', true);
-              protocol = po.protocol;
-            }
-          });
+          if (p.metadata.rioos_sh_web_access_port && p.metadata.rioos_sh_web_access_protocal) {
+            port = p.metadata.rioos_sh_web_access_port;
+            protocol = p.metadata.rioos_sh_web_access_protocal;
+            this.set('enableLink', true);
+          }
         }
       });
       let url = protocol + "://" + ip + ":" + port;

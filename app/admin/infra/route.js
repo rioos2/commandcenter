@@ -15,10 +15,10 @@ export default Ember.Route.extend(DefaultHeaders, {
 
   model(params) {
       return Ember.RSVP.hash({
-        storageConnectors: this.get('store').findAll('storage',this.opts('storageconnectors')),
-        storagesPool: this.get('store').findAll('storagepool',this.opts('storagespool')),
-        datacenters: this.get('store').findAll('datacenter',this.opts('datacenters')),
-        networks: this.get('store').findAll('network',this.opts('networks')),
+        storageConnectors: this.get('store').findAll('storage',this.opts('storageconnectors', true)),
+        storagesPool: this.get('store').findAll('storagepool',this.opts('storagespool', true)),
+        datacenters: this.get('store').findAll('datacenter',this.opts('datacenters', true)),
+        networks: this.get('store').findAll('network',this.opts('networks', true)),
         nodes: this.get('store').findAll('node',this.opts('nodes')),
       });
   },

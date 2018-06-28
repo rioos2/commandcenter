@@ -27,4 +27,12 @@ export default Ember.Component.extend({
   active: function() {
     return Ember.isEqual(this.get('selectedNodeTab'),this.get('model.id'))? "active" :"";
   }.property('selectedNodeTab'),
+
+  actions: {
+
+    doReloaded: function() {
+      this.sendAction('nodeReload');
+    }
+
+  }
 });

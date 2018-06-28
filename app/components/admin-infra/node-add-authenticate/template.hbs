@@ -1,4 +1,4 @@
-<div class="modal fade node_discovery node_modal" id="node_auth_modal_{{id}}" role="dialog">
+<div class="modal fade node_discovery node_modal" id="node_auth_modal_{{model.id}}" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <select class="form-control" id="node_auth_{{id}}" name="node_auth_{{id}}" onchange= {{action "selectAuthType" value="target.value"}}>
+              <select class="form-control" id="node_auth_{{model.id}}" name="node_auth_{{nodeId}}" onchange= {{action "selectAuthType" value="target.value"}}>
                 <option disabled selected>{{t 'stackPage.admin.node.selectAuthenticationMethod'}}</option>
                 {{#each types as |type|}}
                 <option>{{type}}</option>
@@ -45,6 +45,14 @@
         </div>
         {{/if}}
         {{#if (eq authType "SSH Key Verification")}}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="nodeusername">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
+              {{input type="text" class="form-control" id="nodesshusername" value=nodesshusername}}
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">

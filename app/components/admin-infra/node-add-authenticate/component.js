@@ -18,7 +18,6 @@ export default Ember.Component.extend(DefaultHeaders, {
     return get(this, 'intl').t('stackPage.admin.node.sshPlaceholder');
   }.property('model'),
 
-
   loadSecret(type) {
     var secretData = {
       type: 'secret',
@@ -49,12 +48,26 @@ export default Ember.Component.extend(DefaultHeaders, {
   validationSsh() {
     this.set('validationWarning', "");
     var validationString = "";
+
+    if (Ember.isEmpty(this.get('nodesshusername'))) {
+      validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterUsername'));
+    }
+
     if (Ember.isEmpty(this.get('sshvalue'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterSshKey'));
     }
 
     this.set('validationWarning', validationString);
     return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+  },
+
+  refresh() {
+    this.setProperties({
+      nodeusername: '',
+      nodepwd: '',
+      nodesshusername: '',
+      sshvalue: '',
+    });
   },
 
   actions: {
@@ -116,6 +129,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           cssClasses: 'notification-success'
         });
         this.set('showSpinner', false);
+        this.sendAction('doReloaded');
         $('#node_auth_modal_'+this.get('model.id')).modal('hide');
       }).catch(err => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeFailed'), {
@@ -132,7 +146,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       let node = this.get('model');
       node.metadata.rioos_sh_node_secret_id = secretId;
       this.get('userStore').rawRequest(this.rawRequestOpts({
-        url: '/api/v1/nodes',
+        url: '/api/v1/nodes/' + this.get('model.id'),
         method: 'PUT',
         data: node,
       })).then((result) => {
@@ -142,6 +156,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           cssClasses: 'notification-success'
         });
         this.set('showSpinner', false);
+        this.sendAction('doReloaded');
         $('#node_auth_modal_'+this.get('model.id')).modal('hide');
       }).catch(err => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeRetryFailed'), {
@@ -158,7 +173,8 @@ export default Ember.Component.extend(DefaultHeaders, {
       switch (this.get('authType')) {
         case 'SSH Key Verification':
           if (!this.validationSsh()) {
-            secret.data['rioos_sh/ssh_pubkey'] = this.get('sshvalue');
+            secret.data[C.SECRETS.KEYS.PRIVATE] = this.get('sshvalue');
+            secret.data.rioos_sh_node_sudo_user = this.get('nodesshusername');
             this.send('requestSecret', secret, false);
           } else {
             this.send('requestSecret', secret, true);
