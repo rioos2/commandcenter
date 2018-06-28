@@ -66,12 +66,12 @@ var Node = Resource.extend(DefaultHeaders, {
 
     installNode() {
       this.set('nodeOperation', 'install');
-      $('#node_auth_modal_' + this.get('id').split('.').join("")).modal('show');
+      $('#node_auth_modal_' + this.get('id')).modal('show');
     },
 
     retryInstallNode() {
       this.set('nodeOperation', 'retry');
-      $('#node_auth_modal_' + this.get('id').split('.').join("")).modal('show');
+      $('#node_auth_modal_' + this.get('id')).modal('show');
     }
 
   },
