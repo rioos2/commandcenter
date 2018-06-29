@@ -295,7 +295,7 @@ ul {
     width: 2px;
     height: 50px;
     background: #FFF;
-    margin: 30px 0px 0px 3px;
+    margin: 30px 0 0 31px;
     top: 35px;
   }
 }
@@ -316,7 +316,7 @@ ul {
     width: 2px;
     height: 50px;
     background: #FFF;
-    margin: 23px 10px 0px 0px;
+    margin: 23px 16px 14px 24px;
     top: 27px;
   }
 }
@@ -486,7 +486,7 @@ ul {
   width: 15px;
   height: 20px;
   float: right;
-  bottom: 3px;
+  bottom: -7px;
   position: absolute;
   right: 35px;
   &:after {
@@ -509,7 +509,7 @@ ul {
   -moz-transform: scaleY(-1);
   -o-transform: scaleY(-1);
   transform: scaleY(-1);
-  bottom: 35px;
+  bottom: 28px;
   height: 16px;
   width: 14px;
 }
@@ -518,7 +518,7 @@ ul {
   background: #F6D160;
   width: 16px;
   height: 23px;
-  bottom: 35px;
+  bottom: 28px;
   &:after {
     position: absolute;
     content: '';
