@@ -6,7 +6,6 @@
 
     actions: {
       triggerReload: function() {
-        alert("dashboard");
         this.sendAction('reloadModel');
       }
     }
