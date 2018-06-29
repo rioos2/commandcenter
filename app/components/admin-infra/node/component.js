@@ -34,23 +34,19 @@ export default buildAdminInfraPanel('node', {
   ninjaNodes: function() {
     return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = false;
-      node.status.conditions.forEach((condition) => {
-        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
-          add = true;
-        };
-      });
+      if(!Ember.isEmpty(node.status.phase)) {
+        add = true;
+      }
       return add;
     });
-  }.property('model.nodes'),
+  }.property('model.nodes.content.[]'),
 
   calmNodes: function() {
     return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = true;
-      node.status.conditions.forEach((condition) => {
-        if (C.NODE.NINJA_NODES_UNINSTALL_CONDITIONS.includes(condition.condition_type)) {
-          add = false;
-        };
-      });
+      if (this.get('ninjaNodes').map((n) => n.node_ip).includes(node.node_ip) || !Ember.isEmpty(node.status.phase)) {
+        add = false;
+      };
       return add;
     });
   }.property('model.nodes.content.[]', 'ninjaNodes'),
@@ -62,8 +58,7 @@ export default buildAdminInfraPanel('node', {
       this.set('selectedNodeTab', node.id);
     },
 
-    doReload: function() {
-      $('#node_add_modal').modal('hide');
+    reload: function() {
       this.sendAction('triggerReload');
     },
 

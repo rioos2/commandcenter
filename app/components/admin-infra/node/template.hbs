@@ -1,69 +1,75 @@
  {{admin-infra/node-add nodes=nodes modelSpinner=modelSpinner}}
 <div class="col-sm-9 content-left">
-	<div class="panel panel-default kv-panel">
-		<div class="panel-heading">
-			<div class="panel-header">
-				{{t 'stackPage.admin.node.connected'}} ({{availableSize}})
-			</div>
-			<div class="pull-right kv-right-head-button">
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'stackPage.admin.node.connected'}} ({{availableSize}})
+      </div>
+      <div class="pull-right kv-right-head-button">
         <button type="button" {{action "openModal"}} class="btn">+ {{t 'stackPage.admin.header.search_discovery_btn'}}</button>
       </div>
-		</div>
-		<div class="panel-body">
-			{{#if ninjaNodes}}
-				<div class="network-container">
-					{{#each ninjaNodes as |node|}}
-						{{admin-infra/node-detail model=node selectedNode=selecedNode selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
-					{{/each}}
-				</div>
-			{{else}}
-				<div class="empty-network">
-					<div class="pin-img">
-						<img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
-					</div>
-					<div class="empty-network-add-link">
-						<span>{{t 'stackPage.admin.node.noNode'}}</span>
-					</div>
-				</div>
+    </div>
+    <div class="panel-body">
+      {{#if modelSpinner}}
+        <div class="spinner infra-spinner">
+          {{stack-launch-spinner size=25 showSpinner=true}}
+        </div>
+      {{else}}
+        {{#if ninjaNodes}}
+          <div class="network-container">
+            {{#each ninjaNodes as |node|}}
+              {{admin-infra/node-detail model=node selectedNode=selecedNode reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="empty-network">
+            <div class="pin-img">
+              <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+            </div>
+            <div class="empty-network-add-link">
+              <span>{{t 'stackPage.admin.node.noNode'}}</span>
+            </div>
+          </div>
         {{/if}}
-		</div>
-	</div>
+      {{/if}}
+    </div>
+  </div>
 </div>
 <div class="col-sm-3 content-right">
-	{{admin-infra/node-side model=selectedNode}}
+  {{admin-infra/node-side model=selectedNode}}
 </div>
 
 <div class="col-sm-9 content-left">
-	<div class="panel panel-default kv-panel">
-		<div class="panel-heading">
-			<div class="panel-header">
-				{{t 'stackPage.admin.node.discoverNodes'}} ({{availableCalmNodeSize}})
-			</div>
-		</div>
-		<div class="panel-body">
-      {{#if modelSpinner}}
-      <div class="spinner infra-spinner">
-      {{stack-launch-spinner size=25 showSpinner=true}}
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'stackPage.admin.node.discoverNodes'}} ({{availableCalmNodeSize}})
       </div>
+    </div>
+    <div class="panel-body">
+      {{#if modelSpinner}}
+        <div class="spinner infra-spinner">
+          {{stack-launch-spinner size=25 showSpinner=true}}
+        </div>
       {{else}}
-			{{#if calmNodes}}
-				<div class="network-container">
-					{{#each calmNodes as |node|}}
-						{{admin-infra/node-search-detail model=node}}
-					{{/each}}
-				</div>
-			{{else}}
-				<div class="empty-network">
-					<div class="pin-img">
-						<img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
-					</div>
-					<div class="empty-network-add-link">
-						<span>{{t 'stackPage.admin.node.noNodeDiscovered'}}</span>
-						<a href="#" data-toggle="modal" data-target="#node_add_modal">+{{t 'stackPage.admin.node.discoverNode'}}</a>
-					</div>
-				</div>
+        {{#if calmNodes}}
+          <div class="network-container">
+            {{#each calmNodes as |node|}}
+              {{admin-infra/node-search-detail model=node reload="reload"}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="empty-network">
+            <div class="pin-img">
+              <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+            </div>
+            <div class="empty-network-add-link">
+              <span>{{t 'stackPage.admin.node.noNodeDiscovered'}}</span>
+              <a href="#" data-toggle="modal" data-target="#node_add_modal">+{{t 'stackPage.admin.node.discoverNode'}}</a>
+            </div>
+          </div>
         {{/if}}
-			{{/if}}
-		</div>
-	</div>
+      {{/if}}
+    </div>
+  </div>
 </div>

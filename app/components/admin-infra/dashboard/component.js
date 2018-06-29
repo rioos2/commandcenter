@@ -6,9 +6,8 @@
 
     actions: {
       triggerReload: function() {
-        this.sendAction('reload');
+        this.sendAction('reloadModel');
       }
     }
-
 
   });

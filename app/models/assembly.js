@@ -101,20 +101,20 @@ var Assembly = Resource.extend(DefaultHeaders, {
   applicationUrlData: function() {
     let ip = !Ember.isEmpty(this.get('spec.endpoints.subsets.addresses')) ? this.get('spec.endpoints.subsets.addresses')[0].ip : "";
     if (ip) {
-      let planId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
+      let planBlueprintId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
       let port = "";
       let protocol = "";
+      if(planBlueprintId) {
       this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
-        if (p.object_meta.name == planId) {
-          port = p.metadata.used_port;
-          p.ports.forEach((po) => {
-            if (po.container_port == port) {
-              this.set('enableLink', true);
-              protocol = po.protocol;
-            }
-          });
+        if (p.object_meta.name == planBlueprintId) {
+          port = p.metadata.rioos_sh_web_access_port;
+          protocol = p.metadata.rioos_sh_web_access_protocal;
+          if (protocol && port) {
+            this.set('enableLink', true);
+          }
         }
       });
+    };
       let url = protocol + "://" + ip + ":" + port;
       this.set('url', url);
     }
