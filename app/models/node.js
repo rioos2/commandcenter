@@ -1,6 +1,6 @@
 import Resource from 'ember-api-store/models/resource';
 import Ember from 'ember';
-
+import FilterCondition from 'nilavu/utils/filter-conditions';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
@@ -46,12 +46,7 @@ var Node = Resource.extend(DefaultHeaders, {
   },
 
   nodeRetryInstallOption: function() {
-    let add = true;
-    this.get('status.conditions').forEach((condition) => {
-      if (C.NODE.NINJA_NODES_RETRY_INSTALL_CONDITIONS.includes(condition.condition_type)) {
-        add = false;
-      };
-    });
+    let add = FilterCondition.nodeRetryInstallCondition(this.get('status.conditions'));
     if (C.NODE.INSTALLFAILURE.includes(this.get("status.phase"))) {
       add = true;
     };

@@ -30,8 +30,8 @@ export default Ember.Component.extend({
 
   actions: {
 
-    doReloaded: function() {
-      this.sendAction('nodeReload');
+    doReload: function() {
+      this.sendAction('reload');
     }
 
   }

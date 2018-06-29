@@ -58,7 +58,7 @@ export default buildAdminInfraPanel('node', {
       this.set('selectedNodeTab', node.id);
     },
 
-    nodeReload: function() {
+    reload: function() {
       this.sendAction('triggerReload');
     },
 

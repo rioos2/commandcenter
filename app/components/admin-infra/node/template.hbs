@@ -18,7 +18,7 @@
         {{#if ninjaNodes}}
           <div class="network-container">
             {{#each ninjaNodes as |node|}}
-              {{admin-infra/node-detail model=node selectedNode=selecedNode nodeReload="nodeReload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+              {{admin-infra/node-detail model=node selectedNode=selecedNode reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
             {{/each}}
           </div>
         {{else}}
@@ -55,7 +55,7 @@
         {{#if calmNodes}}
           <div class="network-container">
             {{#each calmNodes as |node|}}
-              {{admin-infra/node-search-detail model=node nodeReload="nodeReload"}}
+              {{admin-infra/node-search-detail model=node reload="reload"}}
             {{/each}}
           </div>
         {{else}}

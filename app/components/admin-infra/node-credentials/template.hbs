@@ -23,14 +23,14 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="nodeusername">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
-              {{input type="text" class="form-control" id="nodeusername" value=nodeusername}}
+              <label for="userName">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
+              {{input type="text" class="form-control" id="userName" value=userName}}
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="nodepwd">{{t 'stackPage.admin.node.nodeAuthPassword'}}</label>
-              {{input type="password" class="form-control" id="nodepwd" value=nodepwd}}
+              <label for="password">{{t 'stackPage.admin.node.nodeAuthPassword'}}</label>
+              {{input type="password" class="form-control" id="password" value=password}}
             </div>
           </div>
         </div>
@@ -48,8 +48,8 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="nodeusername">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
-              {{input type="text" class="form-control" id="nodesshusername" value=nodesshusername}}
+              <label for="userName">{{t 'stackPage.admin.node.nodeAuthUsername'}}</label>
+              {{input type="text" class="form-control" id="sshUserName" value=sshUserName}}
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="ssh">{{t 'stackPage.admin.node.nodeSshKey'}}</label>
-              {{textarea class="form-control" placeholder=sshplaceholder value=sshvalue cols="80" rows="8"}}
+              {{textarea class="form-control" placeholder=sshplaceholder value=sshPrivateKey cols="80" rows="8"}}
             </div>
           </div>
         </div>
