@@ -131,7 +131,6 @@ export default Ember.Component.extend(DefaultHeaders, {
         });
         this.set('showSpinner', false);
         this.sendAction('doReload');
-        alert(this.get('model.id'));
         $('#node_auth_modal_'+this.get('model.id')).modal('hide');
       }).catch(err => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeFailed'), {
