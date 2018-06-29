@@ -114,6 +114,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       let node = this.get('model');
       node.metadata = {};
       node.metadata.rioos_sh_node_secret_id = secretId;
+      node.metadata.rioos_sh_ninja_rioconfig_name = "ninja";
       node.status.phase = "Pending";
       delete node.id;
       node.object_meta.labels.available_resource = "compute ninja"
@@ -129,7 +130,8 @@ export default Ember.Component.extend(DefaultHeaders, {
           cssClasses: 'notification-success'
         });
         this.set('showSpinner', false);
-        this.sendAction('doReloaded');
+        this.sendAction('doReload');
+        alert(this.get('model.id'));
         $('#node_auth_modal_'+this.get('model.id')).modal('hide');
       }).catch(err => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeFailed'), {

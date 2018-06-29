@@ -27,9 +27,12 @@ export default Ember.Route.extend(DefaultHeaders, {
   actions: {
     //This will reload after edit processed by component
     reloadModel: function() {
+      alert("route ");
       var self = this;
       self.controller.set('modelSpinner', true);
       this.model().then(function(res) {
+        alert(JSON.stringify(res));
+        console.log(JSON.stringify(res));
         self.controller.set('model', res);
         self.controller.set('modelSpinner', false);
       });
