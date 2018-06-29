@@ -13,6 +13,5 @@ import C from 'nilavu/utils/constants';
         };
       });
     };
-    alert(add);
     return add;
   }
