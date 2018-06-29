@@ -92,7 +92,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
       state: 'ABLETOSCALE',
       spec: {
       min_replicas: 1,
-      max_replicas: 1,
+      max_replicas: 2,
       scale_up_wait_time: 5,
       scale_down_wait_time: 5,
       metrics: []

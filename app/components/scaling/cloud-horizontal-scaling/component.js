@@ -62,27 +62,27 @@ export default Component.extend({
     setMinReplicas(newMinReplicas) {
       this.set('showMinReplicas', true);
       if (this.validate(newMinReplicas)) {
-        this.set("model.hscaling.spec.min_replicas", newMinReplicas);
+        this.set("model.hscaling.spec.min_replicas", parseInt(newMinReplicas));
       }
 
     },
     setMaxReplicas(newMaxReplicas) {
       this.set('showMaxReplicas', true);
       if (this.validate(newMaxReplicas)) {
-        this.set("model.hscaling.spec.max_replicas", newMaxReplicas);
+        this.set("model.hscaling.spec.max_replicas", parseInt(newMaxReplicas));
       }
     },
     setScaleDownTime(newDownTime) {
       this.set('showScaleDownTime', true);
       if (this.validate(newDownTime)) {
-        this.set("model.hscaling.spec.scale_down_wait_time", newDownTime);
+        this.set("model.hscaling.spec.scale_down_wait_time", parseInt(newDownTime));
       }
     },
 
     setScaleUpTime(newUpTime) {
       this.set('showScaleUpTime', true);
       if (this.validate(newUpTime)) {
-        this.set("model.hscaling.spec.scale_up_wait_time", newUpTime);
+        this.set("model.hscaling.spec.scale_up_wait_time", parseInt(newUpTime));
       }
     },
 

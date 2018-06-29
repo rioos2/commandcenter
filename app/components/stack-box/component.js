@@ -47,24 +47,37 @@ export default Component.extend({
     return this.get('assemblyEndpoint.subsets.addresses').length;
   }.property('assemblyEndpoint.subsets.addresses'),
 
-  country: function() {
-    return "_";
-  }.property('model'),
+  appliedBluePrintName: function() {
+    var icon = "";
+    var self = this;
+    if (!Ember.isEmpty(this.get('assemblyFactory.spec.plan'))) {
+      this.get('assemblyFactory.spec.plan.plans').filter(function(plan) {
+        var planIcon = "";
+        if (Ember.isEqual(plan.object_meta.name, self.get('assemblyFactory.metadata.rioos_sh_blueprint_applied'))) {
+          plan.icon.split(".")[0].split("_").forEach((s) => {
+            planIcon = planIcon + s.capitalize() + " ";
+          });
+          icon = planIcon;
+        }
+      });
+    }
+    return icon;
+  }.property('assemblyFactory'),
 
   assemblyStatus: function() {
     var state = "";
     C.MANAGEMENT.STATUS.WARNING.forEach(status => {
-      if(status === this.get('model.status.phase').toLowerCase()) {
+      if (status === this.get('model.status.phase').toLowerCase()) {
         state = C.MANAGEMENT.STATE.WARNING;
       }
     });
     C.MANAGEMENT.STATUS.FAILURE.forEach(status => {
-      if(status === this.get('model.status.phase').toLowerCase()) {
+      if (status === this.get('model.status.phase').toLowerCase()) {
         state = C.MANAGEMENT.STATE.FAILURE;
       }
     });
     C.MANAGEMENT.STATUS.SUCCESS.forEach(status => {
-      if(status === this.get('model.status.phase').toLowerCase()) {
+      if (status === this.get('model.status.phase').toLowerCase()) {
         state = C.MANAGEMENT.STATE.SUCCESS;
       }
     });
@@ -104,9 +117,9 @@ export default Component.extend({
   },
 
   metricsData: function() {
-    if(this.get('spec.metrics')) {
-       this.set('spec.metrics.name', "gauge" + this.get('model.id'));
-     }
+    if (this.get('spec.metrics')) {
+      this.set('spec.metrics.name', "gauge" + this.get('model.id'));
+    }
     return this.metricsDataFinder();
   }.property('model.spec.metrics.@each'),
 

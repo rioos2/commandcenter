@@ -88,8 +88,8 @@ export default Ember.Component.extend(DefaultHeaders, {
         metric_type: "Resource",
         "resource": {
           "name": resource,
-          "min_target_value": this.get('model.hscaling.target_value.max_target_value_' + `${resource}`).toString(),
-          "max_target_value": this.get('model.hscaling.target_value.min_target_value_' + `${resource}`).toString(),
+          "max_target_value": this.get('model.hscaling.target_value.max_target_value_' + `${resource}`).toString(),
+          "min_target_value": this.get('model.hscaling.target_value.min_target_value_' + `${resource}`).toString(),
           "metric_time_spec": {
             "scale_up_by": "1",
             "scale_down_by": "1"
@@ -116,8 +116,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         self.setResource(resource);
       });
     }
-    return Ember.isEmpty(this.get('model.hscaling.spec.metrics'));
-  }.property('model.hscaling.spec.metrics','model.object_meta.labels.rioos_category'),
+  },
 
   validation() {
     if (Ember.isEmpty(this.get('model.stacksfactory.secret.id')) && this.get('model.stacksfactory.object_meta.labels.rioos_category') != C.CATEGORIES.BLOCKCHAIN) {
