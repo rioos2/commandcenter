@@ -6,6 +6,6 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let d = document.getElementById('empty-message');
-    d.insertAdjacentHTML('afterend', get(this, 'intl').t('dashboard.emptyNode'));
+    d.insertAdjacentHTML('afterend', get(this, 'intl').t('dashboard.emptyNode.'+this.get('type')));
   },
 });

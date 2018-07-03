@@ -1,5 +1,6 @@
 /* global renderChartGauge, d3 */
 import Ember from "ember";
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
   classNames: ["two_chart"],
@@ -21,6 +22,16 @@ export default Ember.Component.extend({
     this._updateGaugeBox();
     this._updateGaugeSvg();
   }.observes('model', 'model.counter'),
+
+  nodeStatus: function() {
+    var state = C.NODE.NODEOFF;
+    this.set('nodeStyle', C.MANAGEMENT.STATE.WARNING);
+      if (this.get('model.health').toLowerCase() === C.NODE.NODEHEALTH) {
+        state = C.NODE.NODEON;
+        this.set('nodeStyle', C.MANAGEMENT.STATE.SUCCESS);
+      }
+    return state;
+  }.property('model.health'),
 
   _updateGaugeBox: function() {
     this.draw();

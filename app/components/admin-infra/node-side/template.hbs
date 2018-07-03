@@ -19,7 +19,7 @@
 					<div class="sd-value">{{#link-to "infrastructure-tab.data-center"}}{{t 'stackPage.admin.node.metricsShow'}}{{/link-to}}</div>
 				</div>
 				{{else}}
-				<div class="sd-empty-pool">{{t 'stackPage.admin.node.noNode'}}</div>
+				<div class="sd-empty-pool">{{emptyError}}</div>
 			{{/if}}
 		</div>
 		<div class="network-active-detail-nodes">
