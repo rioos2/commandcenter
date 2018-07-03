@@ -7,6 +7,7 @@ export default buildAdminInfraPanel('node', {
   selectedNodes: null,
   ninjaNodes: [],
   userStore: Ember.inject.service('user-store'),
+  nodeType: "node",
 
 
   didInsertElement: function() {

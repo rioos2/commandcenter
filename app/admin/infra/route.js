@@ -20,6 +20,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         datacenters: this.get('store').findAll('datacenter',this.opts('datacenters', true)),
         networks: this.get('store').findAll('network',this.opts('networks', true)),
         nodes: this.get('store').findAll('node',this.opts('nodes')),
+        senseis: this.get('store').findAll('sensei',this.opts('sensei')),
       });
   },
 
