@@ -8,11 +8,11 @@ export default Ember.Controller.extend({
   notifications: Ember.inject.service('notification-messages'),
 
   reportSensei: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.sensei : [];
+      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.senseis : [];
   }.property('model'),
 
   reportNinja: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.nodes : [];
+      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.ninjas : [];
   }.property('model'),
 
   reportGauge: function() {

@@ -1,7 +1,7 @@
   export default Ember.Component.extend({
     tagName: 'section',
     className: '',
-    selectedInfraTab: 'node',
+    selectedInfraTab: 'sensei',
     panels: [],
 
     actions: {

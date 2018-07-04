@@ -45,7 +45,7 @@ export default Ember.Component.extend({
 
       };
 
-      var chart = new google.visualization.AreaChart(document.getElementById("id-" + self.get('model').id));
+      var chart = new google.visualization.AreaChart(document.getElementById("id-" + self.get('model').id + self.get('nodeType')));
       chart.draw(data, options);
     }
   },
