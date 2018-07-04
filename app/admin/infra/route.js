@@ -20,8 +20,28 @@ export default Ember.Route.extend(DefaultHeaders, {
         datacenters: this.get('store').findAll('datacenter',this.opts('datacenters', true)),
         networks: this.get('store').findAll('network',this.opts('networks', true)),
         nodes: this.get('store').findAll('node',this.opts('nodes')),
+        license: this.loadLicense(),
       });
   },
+
+  loadLicense() {
+    var licenseData = {
+          id: "876545676543456",
+          type: 'license',
+          name: 'SoftwareKey',
+          product: 'Rioos',
+          activation_code: "",
+          trial: true,
+          status: "Expired",
+          type_meta: {
+            kind: "License",
+            version: "v1"
+          }
+    };
+
+    return this.get('store').createRecord(licenseData);
+  },
+
 
 
   actions: {

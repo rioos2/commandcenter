@@ -138,6 +138,7 @@ stackPage:
     header:
       toggle: Toggle navigation
       add_btn: Add
+      active_btn: Activate
       save_btn: Save
       search_discovery_btn: Search & Discover
     node:
@@ -316,6 +317,13 @@ stackPage:
       title: Flavours
     settings:
       title: Settings
+      entitlement:
+        title: License
+        product: Product
+        placeHolder: Enter your software access key
+        trial: Trial
+        activeCodeError: Enter activation code
+        emptyActiveCode:  You forgot to type activation code
 
 launcherPage:
   compute:

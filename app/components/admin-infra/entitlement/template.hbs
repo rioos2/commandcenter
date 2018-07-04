@@ -1,0 +1,23 @@
+<div class="col-sm-12 content-left">
+	<div class="panel panel-default kv-panel">
+<div class="select-domain"  >
+
+<p class="sub-title">{{t 'stackPage.admin.settings.entitlement.product'}} - {{model.product}}</p>
+<p class="sub-description">{{status}}</p>
+<p class="domain-name">{{model.activation_code}}</p>
+
+<div class="webdesigntuts-workshop">
+  {{svg/svg-edit class=(if showIcon "edit-ico" "display-none") click=(action 'clickInputIcon')}}
+  <div class= {{if showIcon "display-none" "showform"}}>
+    {{input type="text" placeholder=placeHolder value=licenseToken}}
+    <button {{action "setLicenseToken" licenseToken}}>{{t 'launcherPage.domain.buttonSet'}}</button>
+  </div>
+</div>
+</div>
+<div class="panel-heading">
+<div class="pull-right kv-right-head-button">
+	<button type="button" {{action "activate"}} class="btn"> {{t 'stackPage.admin.header.active_btn'}}</button>
+</div>
+</div>
+</div>
+</div>
