@@ -49,7 +49,7 @@ export default Ember.Component.extend({
           position: "none"
         },
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("id-disk-column-" + self.get('model').id));
+      var chart = new google.visualization.ColumnChart(document.getElementById("id-disk-column-" + self.get('model').id+self.get('nodeType')));
       chart.draw(view, options);
     }
   },

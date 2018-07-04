@@ -10,7 +10,7 @@
        {{#if senseiNodes}}
          <div class="network-container">
            {{#each senseiNodes as |node|}}
-             {{admin-infra/node-detail model=node selectedNode=selecedNode reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+             {{admin-infra/node-detail model=node selectedNode=selecedNode showSchedule=false reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
            {{/each}}
          </div>
        {{else}}

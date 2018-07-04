@@ -5,7 +5,7 @@ import C from 'nilavu/utils/constants';
 export default buildAdminInfraPanel('sensei', {
   network: null,
   selectedNodes: null,
-  ninjaNodes: [],
+  senseiNodes: [],
   userStore: Ember.inject.service('user-store'),
   nodeType: "sensei",
 
@@ -17,14 +17,14 @@ export default buildAdminInfraPanel('sensei', {
   },
 
   availableSize: function() {
-    return this.get('ninjaNodes').length;
-  }.property('ninjaNodes'),
+    return this.get('senseiNodes').length;
+  }.property('senseiNodes'),
 
   senseis: function() {
     return Ember.isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content');
   }.property('model.senseis.content'),
 
-  ninjaNodes: function() {
+  senseiNodes: function() {
     return Ember.isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content').filter((sensei) => {
       let add = false;
       if(!Ember.isEmpty(sensei.status.phase)) {
