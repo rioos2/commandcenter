@@ -39,14 +39,14 @@
         <label class="{{if password 'data-exist'}} control-label" for="input">{{t 'signupPage.activateOnCode'}}</label><i class="bar"></i>
       </div>
 
-    </form>
 
     <div class="button-container">
-      <button class="button" {{action 'singUp'}}><span>{{t 'signupPage.createAccount'}}
+      <button class="button" autofocus {{action 'singUp'}}><span>{{t 'signupPage.createAccount'}}
         {{fa-icon "long-arrow-right" class="right-arrow"}}
 
       </span></button>
     </div>
+  </form>
 
     <div class="sub-description">
       {{t 'signupPage.alredyAccount'}}
