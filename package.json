@@ -1,5 +1,5 @@
 {
-  "name": "nilavu",
+  "name": "RioOS",
   "version": "2.0-beta2",
   "description": "Nilavu is a Ember.js browser based user interface for Rio/OS.",
   "private": true,
@@ -12,7 +12,7 @@
     "build": "./node_modules/.bin/ember build",
     "test": "./node_modules/.bin/ember test"
   },
-  "repository": "https://gitlab.com/rioos/nilavu",
+  "repository": "https://gitlab.com/rioos/commandcenter_v2.git",
   "engines": {
     "node": ">= 8.9.4",
     "yarn": ">= 1.0.0"

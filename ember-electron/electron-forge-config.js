@@ -8,14 +8,16 @@ module.exports = {
     ],
     "linux": [
       "deb",
-      "rpm"
+     // "rpm"
     ]
   },
   "electronPackagerConfig": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "icon": 'icons/logo'
   },
   "electronWinstallerConfig": {
-    "name": "nilavu"
+    "name": "RioOS",
+    "icon": 'icons/logo'
   },
   "electronInstallerDebian": {},
   "electronInstallerRedhat": {},
@@ -25,6 +27,7 @@ module.exports = {
   },
   "windowsStoreConfig": {
     "packageName": "",
-    "name": "nilavu"
+    "name": "RioOS",
+    "icon": 'public/icons/logo'
   }
 };
