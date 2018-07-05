@@ -15,7 +15,7 @@ var C = {
     SUBNETSSEARCH: [{"value":'Subnet', "text":"Discover the active IP addresses in an IP block (eg: 192.168.2.0/24)"}, {"value":'Subnet Range', "text":"Discover the active IP addresses in an given range (eg: 192.168.2.10 - 192.168.2.15)"}],
     NODEAUTHTYPE: ["Login Credentials", "SSH Key Verification"],
     INSTALLFAILURE:["NinjaNotReady"],
-    NODEHEALTH:["up"],
+    NODEUNHEALTHY:["down"],
     NODEOFF: "OFF",
     NODEON: "ON",
   },

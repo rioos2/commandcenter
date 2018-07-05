@@ -199,6 +199,8 @@ stackPage:
       nodeNewReady: Ready
       pricePerMonth: Price per month
       usd: USD
+      category: CATEGORY
+      choose: CHOOSE
     storage:
       title: Storages
       connected: 'Connected Storages'

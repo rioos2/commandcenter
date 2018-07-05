@@ -32,7 +32,7 @@ export default Ember.Component.extend({
         // colors: ['#F74479', '#AA38E6', '#00FFAF', '#4EE2FA', '#ffeb3b']
       };
 
-      var chart = new google.visualization.PieChart(document.getElementById("id-process-" + self.get('model').id));
+      var chart = new google.visualization.PieChart(document.getElementById("id-process-" + self.get('model').id+self.get('nodeType')));
       chart.draw(data, options);
     }
   },
