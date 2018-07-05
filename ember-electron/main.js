@@ -33,10 +33,15 @@ app.on('ready', () => {
  // });   
     const electron = require ('electron');
     const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({width, height,webPreferences: {
-      webSecurity: false,
-      allowRunningInsecureContent: false,
-  }});
+    mainWindow = new BrowserWindow({
+      width, 
+      height,
+      webPreferences: {
+          webSecurity: false,
+          allowRunningInsecureContent: false,
+      },
+      title: "RioOS",
+  });    
 
     require("./index");
 
@@ -57,7 +62,7 @@ app.on('ready', () => {
   mainWindow.webContents.executeJavaScript(`
     var path = require('path');
     module.paths.push(path.resolve('node_modules'));
-    module.paths.push(path.resolve('../../node_modules'));
+    module.paths.push(path.resolve('./../node_modules'));
     module.paths.push(path.resolve(__dirname, '..', '..', 'electron', 'node_modules'));
     module.paths.push(path.resolve(__dirname, '..', '..', 'electron.asar', 'node_modules'));
     module.paths.push(path.resolve(__dirname, '..', '..', 'app', 'node_modules'));
