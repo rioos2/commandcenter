@@ -8,7 +8,7 @@ module.exports = {
     ],
     "linux": [
       "deb",
-     // "rpm"
+      "rpm"
     ]
   },
   "electronPackagerConfig": {
