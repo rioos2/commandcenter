@@ -18,7 +18,7 @@
           </div>
           <div class="vm-modal-body">
             {{#each panels as |tab|}}
-              {{component tab selectedTab=selectedSettingTab model=license triggerReload="triggerReload" modelSpinner=modelSpinner}}
+              {{component tab selectedTab=selectedSettingTab licenses=licenses triggerReload="triggerReload" modelSpinner=modelSpinner}}
             {{/each}}
           </div>
         </div>

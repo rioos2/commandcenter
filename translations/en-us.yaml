@@ -319,11 +319,14 @@ stackPage:
       title: Settings
       entitlement:
         title: License
+        description: Edit activation code
         product: Product
-        placeHolder: Enter your software access key
         trial: Trial
-        activeCodeError: Enter activation code
+        activeCode: Enter activation code
         emptyActiveCode:  You forgot to type activation code
+        activation:
+          success: License activated successfully.
+
 
 launcherPage:
   compute:

@@ -4,8 +4,8 @@ export default Ember.Component.extend({
   selectedSettingTab: 'entitlement',
   panels: [],
 
-  license: function(){
-    return this.get('model.license');
+  licenses: function(){
+    return Ember.isEmpty(this.get('model.license.content'))? [] : this.get('model.license.content');
   }.property('model.license'),
 
   actions: {
