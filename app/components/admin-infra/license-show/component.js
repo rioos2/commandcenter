@@ -19,8 +19,8 @@ export default Component.extend(DefaultHeaders, {
   }.property('model.status'),
 
   expired: function(){
-    return Ember.isEqual(this.get('model.status').capitalize(),"Expired")? "": " -  Expires in "+this.get('model.expired')+ " days";
-  }.property('model.status','model.expired'),
+    return Ember.isEqual(this.get('model.status').capitalize(),"Expired")? "": " -  Expires in "+this.get('model.expired_at')+ " days";
+  }.property('model.status','model.expired_at'),
 
   activate: function() {
     this.set('showSpinner', true);
