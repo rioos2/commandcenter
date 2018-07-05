@@ -13,11 +13,12 @@ module.exports = {
   },
   "electronPackagerConfig": {
     "packageManager": "yarn",
-    "icon": 'icons/logo'
+    "icon": 'assets/img/logo.ico'
   },
   "electronWinstallerConfig": {
     "name": "RioOS",
-    "icon": 'icons/logo'
+    "icon": 'assets/img/logo.ico',
+    "setupIcon": "assets/img/logo.ico"
   },
   "electronInstallerDebian": {},
   "electronInstallerRedhat": {},
@@ -28,6 +29,6 @@ module.exports = {
   "windowsStoreConfig": {
     "packageName": "",
     "name": "RioOS",
-    "icon": 'public/icons/logo'
+    "icon": 'assets/img/logo.ico'
   }
 };
