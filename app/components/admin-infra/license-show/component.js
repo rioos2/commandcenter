@@ -39,6 +39,11 @@ export default Component.extend(DefaultHeaders, {
         this.set('showSpinner', false);
         this.sendAction('doReload');
       }).catch((err) => {
+        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
+          autoClear: true,
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
+        });
         this.set('showSpinner', false);
         this.set('modelSpinner', false);
       });
