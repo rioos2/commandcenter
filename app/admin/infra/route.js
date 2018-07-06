@@ -23,6 +23,7 @@ export default Ember.Route.extend(DefaultHeaders, {
       networks: this.get('store').findAll('network', this.opts('networks', true)),
       nodes: this.get('store').findAll('node', this.opts('nodes')),
       license: this.get('store').findAll('license', this.opts('license',true)),
+      senseis: this.get('store').findAll('sensei',this.opts('senseis')),
     });
   },
   actions: {

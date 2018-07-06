@@ -141,12 +141,16 @@ stackPage:
       active_btn: Activate
       save_btn: Save
       search_discovery_btn: Search & Discover
+    sensei:
+      title: Senseis
+      connected: 'Connected Senseis'
+      noNode: No senseis added yet.
     node:
-      title: Nodes
-      connected: 'Connected Nodes'
-      discoverNodes: 'Discovered Nodes'
-      noNode: No nodes added yet.
-      noNodeDiscovered: No nodes descovered yet.
+      title: Ninjas
+      connected: 'Connected Ninjas'
+      discoverNodes: 'Discovered Ninjas'
+      noNode: No Ninjas added yet.
+      noNodeDiscovered: No ninjas descovered yet.
       ip: IP
       schedule: Scheduled
       bridges: Bridges
@@ -155,7 +159,7 @@ stackPage:
       metrics: Metrics
       metricsShow: View
       addNode: 'Add Node'
-      discoverNode: 'Discover Nodes'
+      discoverNode: 'Discover Ninjas'
       nodeCreate: 'Ninja install started successfully'
       nodeRetry: 'Ninja retried started successfully'
       nodeSecretCreate: 'Node secret create successfully'
@@ -194,6 +198,10 @@ stackPage:
       nodeStatus: Status
       labelNew: New
       nodeNewReady: Ready
+      pricePerMonth: Price per month
+      usd: USD
+      category: CATEGORY
+      choose: CHOOSE
     storage:
       title: Storages
       connected: 'Connected Storages'
@@ -512,7 +520,13 @@ dashboard:
   maingaugesSecondSec: ain gauges
   statisticsFirstSec: S
   statisticsSecondSec: tatistics
-  emptyNode: <p>You must connect nodes to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup nodes in Rio OS.</p>
+  statisticsFirstSecNinja: N
+  statisticsSecondSecNinja: inja
+  statisticsFirstSecSensei: S
+  statisticsSecondSecSensei: ensei
+  emptyNode:
+    ninja: <p>You must connect ninjas to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup ninjas in Rio OS.</p>
+    sensei: <p>You must connect senseis to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup senseis in Rio OS.</p>
   osUsageFirstSec: O
   osUsageSecondSec: s usage by time
   error: <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>

@@ -7,8 +7,12 @@ export default Ember.Controller.extend({
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
 
-  reportNodes: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.nodes : [];
+  reportSensei: function() {
+      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.senseis : [];
+  }.property('model'),
+
+  reportNinja: function() {
+      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.ninjas : [];
   }.property('model'),
 
   reportGauge: function() {
@@ -26,8 +30,12 @@ export default Ember.Controller.extend({
     }
   }.observes('model.code'),
 
-  checkEmptyNode: function() {
-    return Ember.isEmpty(this.get('reportNodes'));
-  }.property('reportNodes'),
+  checkEmptyNinja: function() {
+    return Ember.isEmpty(this.get('reportNinja'));
+  }.property('reportNinja'),
+
+  checkEmptySensei: function() {
+    return Ember.isEmpty(this.get('reportSensei'));
+  }.property('reportSensei'),
 
 });

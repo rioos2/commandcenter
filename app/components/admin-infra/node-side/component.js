@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
+  intl: Ember.inject.service(),
 
   name: function() {
     return this.get('model.object_meta.name');
@@ -13,6 +14,10 @@ export default Ember.Component.extend({
   status: function() {
     return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
+
+  emptyError: function () {
+      return this.get('intl').t('stackPage.admin.' + this.get('type') + '.noNode');
+  }.property('type'),
 
   bridges: function() {
     return Ember.isEmpty(this.get('model.status.node_info.bridges'))? "":this.get('model.status.node_info.bridges') ;

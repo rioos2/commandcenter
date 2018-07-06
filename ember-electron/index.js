@@ -1,6 +1,5 @@
 var path = require('path');
 var Url = require('url');
-var ForeverAgent = require('forever-agent');
 var HttpProxy = require('http-proxy');
 var fs = require('fs');
 var toml = require('toml-parser');

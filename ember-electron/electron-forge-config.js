@@ -12,10 +12,13 @@ module.exports = {
     ]
   },
   "electronPackagerConfig": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "icon": 'assets/img/logo.ico'
   },
   "electronWinstallerConfig": {
-    "name": "nilavu"
+    "name": "RioOS",
+    "icon": 'assets/img/logo.ico',
+    "setupIcon": "assets/img/logo.ico"
   },
   "electronInstallerDebian": {},
   "electronInstallerRedhat": {},
@@ -25,6 +28,7 @@ module.exports = {
   },
   "windowsStoreConfig": {
     "packageName": "",
-    "name": "nilavu"
+    "name": "RioOS",
+    "icon": 'assets/img/logo.ico'
   }
 };

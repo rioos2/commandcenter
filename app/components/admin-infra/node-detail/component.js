@@ -2,6 +2,8 @@ import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
 
+  showSchedule: true,
+
   nodeName: function(){
     return this.get('model.object_meta.name');
   }.property('model.object_meta.name'),

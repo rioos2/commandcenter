@@ -1,5 +1,6 @@
 /* global renderChartGauge, d3 */
 import Ember from "ember";
+import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
   classNames: ["two_chart"],
@@ -22,12 +23,22 @@ export default Ember.Component.extend({
     this._updateGaugeSvg();
   }.observes('model', 'model.counter'),
 
+  nodeStatus: function() {
+    var state = C.NODE.NODEON;
+    this.set('nodeStyle', C.MANAGEMENT.STATE.SUCCESS);
+      if (this.get('model.health').toLowerCase() === C.NODE.NODEUNHEALTHY) {
+        state = C.NODE.NODEOFF;
+        this.set('nodeStyle', C.MANAGEMENT.STATE.WARNING);
+      }
+    return state;
+  }.property('model.health'),
+
   _updateGaugeBox: function() {
     this.draw();
   },
 
   _updateGaugeSvg: function() {
-    var id = this.get('model').id;
+    var id = this.get('model').id + this.get('nodeType');
     this.get('chart')[id].svgHeight(500)
       .svgWidth(500)
       .data({
@@ -36,7 +47,7 @@ export default Ember.Component.extend({
   },
 
   initializeChart: Ember.on('didInsertElement', function() {
-    var id = this.get('model').id;
+    var id = this.get('model').id + this.get('nodeType');
     this.$(".gauge_box").append('<div class = "contant_bar"><canvas id = "canvas_back_' + id + '" width = "177" height = "138" class = "canvas_back"></canvas></div><div class="contant"><div class= "row_1"></div><div class= "row_2"></div><div class= "row_3"></div><div class= "row_4"></div><div class= "row_5"></div></div>');
 
     //initial render of chart gauge

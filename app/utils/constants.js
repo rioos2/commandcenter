@@ -14,7 +14,10 @@ var C = {
     NINJA_NODES_RETRY_INSTALL_CONDITIONS: ["InstallComplete", "Ready"],
     SUBNETSSEARCH: [{"value":'Subnet', "text":"Discover the active IP addresses in an IP block (eg: 192.168.2.0/24)"}, {"value":'Subnet Range', "text":"Discover the active IP addresses in an given range (eg: 192.168.2.10 - 192.168.2.15)"}],
     NODEAUTHTYPE: ["Login Credentials", "SSH Key Verification"],
-    INSTALLFAILURE:["NinjaNotReady"]
+    INSTALLFAILURE:["NinjaNotReady"],
+    NODEUNHEALTHY:["down"],
+    NODEOFF: "OFF",
+    NODEON: "ON",
   },
 
   IPTYPE: {

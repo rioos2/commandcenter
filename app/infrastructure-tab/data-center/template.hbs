@@ -11,16 +11,34 @@
     </div>
   </div>
   {{!-- Statistics --}}
-  <div id="statistics" class="statistics p-t-50 p-b-50">
+  <div class="statistics p-t-50 p-b-50">
     <p class="title p-l-50 p-b-20">
+      <span class="underline">{{t 'dashboard.statisticsFirstSecNinja'}}</span>{{t 'dashboard.statisticsSecondSecNinja'}}
       <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
-    {{#if checkEmptyNode}}
-      {{infra-empty-statistics model=model}}
+    {{#if checkEmptyNinja}}
+      {{infra-empty-statistics type="ninja" model=model}}
     {{else}}
       <div class="row list-content">
-        {{#each reportNodes as |sdata|}}
+        {{#each reportNinja as |sdata|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-node-statistics model=sdata counterModel=model}}
+            {{infra-node-statistics model=sdata type="ninja" counterModel=model}}
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="statistics p-t-50 p-b-50">
+    <p class="title p-l-50 p-b-20">
+      <span class="underline">{{t 'dashboard.statisticsFirstSecSensei'}}</span>{{t 'dashboard.statisticsSecondSecSensei'}}
+      <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
+    {{#if checkEmptySensei}}
+      {{infra-empty-statistics type="sensei" model=model}}
+    {{else}}
+      <div class="row list-content">
+        {{#each reportSensei as |sdata|}}
+          <div class="col-md-6 col-sm-12 list">
+            {{infra-sensei-statistics model=sdata type="sensei" counterModel=model}}
           </div>
         {{/each}}
       </div>
