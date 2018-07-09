@@ -24,29 +24,26 @@ export default Component.extend(DefaultHeaders, {
 
   activate: function() {
     this.set('showSpinner', true);
-      this.get('userStore').rawRequest(this.rawRequestOpts({
-        url: '/api/v1/license/activate',
-        method: 'POST',
-        data: this.get('model'),
-      })).then((xhr) => {
-        this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
-          autoClear: true,
-          clearDuration: 4200,
-          cssClasses: 'notification-success'
-        });
+      var url = 'license/activate';
+    this.get('model').save(this.opts(url)).then(() => {
+      this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-success'
+      });
         this.set('showIcon', true);
         this.set('modelSpinner', true);
         this.set('showSpinner', false);
         this.sendAction('doReload');
-      }).catch((err) => {
-        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
-          autoClear: true,
-          clearDuration: 4200,
-          cssClasses: 'notification-warning'
-        });
-        this.set('showSpinner', false);
-        this.set('modelSpinner', false);
+    }).catch(err => {
+      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
       });
+      this.set('showSpinner', false);
+      this.set('modelSpinner', false);
+    });
   },
 
   actions: {
