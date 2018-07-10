@@ -1546,7 +1546,10 @@ font-size: 16px !important;
 color: #bfc4d5 !important;
 }
 .activate{
-  padding-bottom: 40px;
+  padding-bottom: 30px;
+}
+.pad-top{
+  padding-top: 60px !important;
 }
 .sub-title {
     font-size: 28px;
@@ -1558,4 +1561,13 @@ color: #bfc4d5 !important;
     font-size: 16px;
     color: #bfc4d5;
     text-align: center;
+}
+
+.dots-ico {
+  width: 6px;
+  margin: 30px auto;
+
+  svg .cls-1 {
+    fill: #d9dfeb;
+  }
 }

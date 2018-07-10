@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 const { get} = Ember;
+import C from 'nilavu/utils/constants';
 
 export default Component.extend(DefaultHeaders, {
   intl: Ember.inject.service(),
@@ -19,7 +20,7 @@ export default Component.extend(DefaultHeaders, {
   }.property('model.status'),
 
   expired: function(){
-    return Ember.isEqual(this.get('model.status').capitalize(),"Expired")? "": " -  Expires in "+this.get('model.expired_at')+ " days";
+    return Ember.isEqual(this.get('model.status').capitalize(), C.ADMIN.LICENSE_STATUS.EXPIRED )? "": get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
   }.property('model.status','model.expired_at'),
 
   activate: function() {
@@ -58,9 +59,10 @@ export default Component.extend(DefaultHeaders, {
           clearDuration: 4200,
           cssClasses: 'notification-warning'
         });
+        this.set('showIcon', true);
       } else {
         this.set("model.activation_code", licenseToken);
-        this.set("model.product", "Rio/OS");
+        this.set("model.product", get(this, 'intl').t('stackPage.admin.settings.entitlement.rioProduct'));
         this.activate();
       }
     },

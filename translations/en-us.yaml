@@ -328,8 +328,12 @@ stackPage:
       entitlement:
         title: License
         description: Edit activation code
-        product: Product
+        ninjaCount: "Ninja : Activated by 3/5"
+        senseiCount: "Sensei : Activated by 4/5"
+        expired: " -  Expires in "
+        days: " days"
         trial: Trial
+        rioProduct: Rio/OS
         activeCode: Enter activation code
         emptyActiveCode:  You forgot to type activation code
         activation:

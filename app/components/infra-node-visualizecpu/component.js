@@ -24,7 +24,7 @@ export default Ember.Component.extend({
   }.observes('model', 'model.counter'),
 
   nodeRunStatus: function(){
-    return Ember.isEqual(this.get('model.health'),'up')?"Running":"stopped";
+    return Ember.isEqual(this.get('model.health'),'up')? C.NODE.STATUS.RUNNING : C.NODE.STATUS.STOPPED;
   }.property('model.health'),
 
   nodeStatus: function() {
