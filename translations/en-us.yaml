@@ -138,6 +138,7 @@ stackPage:
     header:
       toggle: Toggle navigation
       add_btn: Add
+      active_btn: Activate
       save_btn: Save
       search_discovery_btn: Search & Discover
     sensei:
@@ -324,6 +325,21 @@ stackPage:
       title: Flavours
     settings:
       title: Settings
+      entitlement:
+        title: License
+        description: Edit activation code
+        ninjas: 'Ninjas: Activated  {ninjaActivated}/{ninjaAllowed}'
+        senseis: 'Senseis: Activated  {senseiActivated}/{senseiAllowed}'
+        expired: " -  Expires in "
+        days: " days"
+        trial: Trial
+        rioProduct: Rio/OS
+        activeCode: Enter activation code
+        emptyActiveCode:  You forgot to type activation code
+        activation:
+          success: License activated successfully.
+          failure: Failed to activate license.
+
 
 launcherPage:
   compute:

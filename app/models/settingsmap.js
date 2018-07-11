@@ -1,8 +1,8 @@
 import Resource from 'ember-api-store/models/resource';
 
-var Assembly = Resource.extend({
-    type: 'settings',
+var SettingsMap = Resource.extend({
+    type: 'settingsmap',
     actions: {},
 });
 
-export default Assembly;
+export default SettingsMap;

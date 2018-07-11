@@ -18,6 +18,10 @@ var C = {
     NODEUNHEALTHY:["down"],
     NODEOFF: "OFF",
     NODEON: "ON",
+    STATUS: {
+      RUNNING: "Running",
+      STOPPED: "Stopped",
+    }
   },
 
   IPTYPE: {
@@ -99,6 +103,9 @@ var C = {
     STORAGE_TYPE: {
       CEPH: "rioos_sh/ceph",
     },
+    LICENSE_STATUS: {
+      EXPIRED: "Expired",
+    }
   },
 
   AVAILABLE_NETWORK_TYPES: ["private_ipv4", "private_ipv6", "public_ipv4", "public_ipv6"],
