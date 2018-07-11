@@ -11,10 +11,10 @@ export default Component.extend({
   selectedTab: 'cpu',
   panels: [],
   modelSpinner: false,
-  showScaleUpTime: true,
-  showMaxReplicas: true,
-  showMinReplicas: true,
-  showScaleDownTime: true,
+  showScaleUpTimeEditBox: true,
+  showMaxReplicasEditBox: true,
+  showMinReplicasEditBox: true,
+  showScaleDownTimeEditBox: true,
 
   didInsertElement() {
     this.set('newMinReplicas', this.get('model.hscaling.spec.min_replicas'));
@@ -51,27 +51,27 @@ export default Component.extend({
   actions: {
 
     setMinReplicas(newMinReplicas) {
-      this.set('showMinReplicas', true);
+      this.set('showMinReplicasEditBox', true);
       if (this.validate(newMinReplicas)) {
         this.set("model.hscaling.spec.min_replicas", parseInt(newMinReplicas));
       }
 
     },
     setMaxReplicas(newMaxReplicas) {
-      this.set('showMaxReplicas', true);
+      this.set('showMaxReplicasEditBox', true);
       if (this.validate(newMaxReplicas)) {
         this.set("model.hscaling.spec.max_replicas", parseInt(newMaxReplicas));
       }
     },
     setScaleDownTime(newDownTime) {
-      this.set('showScaleDownTime', true);
+      this.set('showScaleDownTimeEditBox', true);
       if (this.validate(newDownTime)) {
         this.set("model.hscaling.spec.scale_down_wait_time", parseInt(newDownTime));
       }
     },
 
     setScaleUpTime(newUpTime) {
-      this.set('showScaleUpTime', true);
+      this.set('showScaleUpTimeEditBox', true);
       if (this.validate(newUpTime)) {
         this.set("model.hscaling.spec.scale_up_wait_time", parseInt(newUpTime));
       }

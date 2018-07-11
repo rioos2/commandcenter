@@ -12,7 +12,7 @@ export default Component.extend(DefaultHeaders, {
     intl: Ember.inject.service(),
     session: Ember.inject.service(),
     notifications: Ember.inject.service('notification-messages'),
-    showIcon: true,
+    showPeerEditBox: true,
     repoUrl:  '',
 
     didInsertElement() {
@@ -29,7 +29,7 @@ export default Component.extend(DefaultHeaders, {
 
     actions: {
         setRepoUrl(repoUrl) {
-            this.set('showIcon', true);
+            this.set('showPeerEditBox', true);
             if(Ember.isEmpty(repoUrl.trim())) {
               this.get('notifications').warning(get(this, 'intl').t('launcherPage.repo.emptyUrl'), {
                 autoClear: true,

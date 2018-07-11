@@ -7,7 +7,7 @@ export default Component.extend(DefaultHeaders, {
   intl: Ember.inject.service(),
   session: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
-  showIcon: true,
+  showActivationEditBox: true,
   showSpinner: false,
 
   ninjaActivated: function(){
@@ -51,7 +51,7 @@ export default Component.extend(DefaultHeaders, {
         clearDuration: 4200,
         cssClasses: 'notification-success'
       });
-        this.set('showIcon', true);
+        this.set('showActivationEditBox', true);
         this.set('modelSpinner', true);
         this.set('showSpinner', false);
         this.sendAction('doReload');
@@ -79,7 +79,7 @@ export default Component.extend(DefaultHeaders, {
           clearDuration: 4200,
           cssClasses: 'notification-warning'
         });
-        this.set('showIcon', true);
+        this.set('showActivationEditBox', true);
       } else {
         this.set("model.activation_code", activationCode);
         this.activate();

@@ -11,7 +11,7 @@ export default Component.extend(DefaultHeaders, {
     intl: Ember.inject.service(),
     session: Ember.inject.service(),
     notifications: Ember.inject.service('notification-messages'),
-    showIcon: true,
+    showDomainEditBox: true,
     activate: false,
     showSpinner: false,
 
@@ -43,7 +43,7 @@ export default Component.extend(DefaultHeaders, {
 
     actions: {
         setNewDomain(newDomainName) {
-            this.set('showIcon', true);
+            this.set('showDomainEditBox', true);
             if(Ember.isEmpty(newDomainName.trim())) {
               this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.emptyDomain'), {
                 autoClear: true,
