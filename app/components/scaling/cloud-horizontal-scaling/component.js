@@ -17,16 +17,20 @@ export default Component.extend({
   showScaleDownTime: true,
 
   didInsertElement() {
-    this.set('newMinReplicas',this.get('model.hscaling.spec.min_replicas'));
-    this.set('newMaxReplicas',this.get('model.hscaling.spec.max_replicas'));
-    this.set('newUpTime',this.get('model.hscaling.spec.scale_up_wait_time'));
-    this.set('newDownTime',this.get('model.hscaling.spec.scale_down_wait_time'));
+    this.set('newMinReplicas', this.get('model.hscaling.spec.min_replicas'));
+    this.set('newMaxReplicas', this.get('model.hscaling.spec.max_replicas'));
+    this.set('newUpTime', this.get('model.hscaling.spec.scale_up_wait_time'));
+    this.set('newDownTime', this.get('model.hscaling.spec.scale_down_wait_time'));
   },
 
+  btnName: function() {
+    return get(this, 'intl').t('stackPage.admin.header.active_btn');
+  }.property(),
+
   validate: function(scaleData) {
-    this.set('flag',true);
+    this.set('flag', true);
     if (Ember.isEmpty(scaleData.trim())) {
-      this.set('flag',false);
+      this.set('flag', false);
       this.get('notifications').warning(get(this, 'intl').t('launcherPage.scaling.emptyScaling'), {
         autoClear: true,
         clearDuration: 4200,
@@ -34,7 +38,7 @@ export default Component.extend({
       });
     } else
     if (parseInt(scaleData.trim()) != scaleData.trim()) {
-      this.set('flag',false);
+      this.set('flag', false);
       this.get('notifications').warning(get(this, 'intl').t('launcherPage.scaling.invalidFormat'), {
         autoClear: true,
         clearDuration: 4200,
@@ -45,19 +49,6 @@ export default Component.extend({
   },
 
   actions: {
-    clickDownTime() {
-      this.set('showScaleDownTime', false);
-    },
-    clickUpTime() {
-      this.set('showScaleUpTime', false);
-    },
-    clickMinReplicas() {
-      this.set('showMinReplicas', false);
-    },
-    clickMaxReplicas() {
-      this.set('showMaxReplicas', false);
-    },
-
 
     setMinReplicas(newMinReplicas) {
       this.set('showMinReplicas', true);
@@ -84,10 +75,6 @@ export default Component.extend({
       if (this.validate(newUpTime)) {
         this.set("model.hscaling.spec.scale_up_wait_time", parseInt(newUpTime));
       }
-    },
-
-    focusOut() {
-      this.set('showIcon', true);
     },
 
     sendType() {

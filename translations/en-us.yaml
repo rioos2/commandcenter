@@ -328,8 +328,8 @@ stackPage:
       entitlement:
         title: License
         description: Edit activation code
-        ninjaCount: "Ninja : Activated by 3/5"
-        senseiCount: "Sensei : Activated by 4/5"
+        ninjas: 'Ninjas: Activated  {ninjaActivated}/{ninjaAllowed}'
+        senseis: 'Senseis: Activated  {senseiActivated}/{senseiAllowed}'
         expired: " -  Expires in "
         days: " days"
         trial: Trial
@@ -338,7 +338,7 @@ stackPage:
         emptyActiveCode:  You forgot to type activation code
         activation:
           success: License activated successfully.
-          failure: Failed to license activation.
+          failure: Failed to activate license.
 
 
 launcherPage:

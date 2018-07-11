@@ -8,8 +8,27 @@ export default Component.extend(DefaultHeaders, {
   session: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
   showIcon: true,
-  licenseToken: "",
   showSpinner: false,
+
+  ninjaActivated: function(){
+    return this.get('model.product_options.ninja.current');
+  }.property('model.product_options.ninja.current'),
+
+  ninjaAllowed: function(){
+    return this.get('model.product_options.ninja.maximum');
+  }.property('model.product_options.ninja.maximum'),
+
+  senseiActivated: function(){
+    return this.get('model.product_options.sensei.current');
+  }.property('model.product_options.sensei.current'),
+
+  senseiAllowed: function(){
+    return this.get('model.product_options.sensei.maximum');
+  }.property('model.product_options.sensei.maximum'),
+
+  product: function(){
+    return this.get('model.product');
+  }.property('model.product'),
 
   placeHolder: function() {
     return get(this, 'intl').t('stackPage.admin.settings.entitlement.activeCode');
@@ -47,13 +66,14 @@ export default Component.extend(DefaultHeaders, {
     });
   },
 
-  actions: {
-    clickInputIcon() {
-      this.set('showIcon', false);
-    },
+  btnName: function(){
+    return get(this, 'intl').t('stackPage.admin.header.active_btn');
+  }.property(),
 
-    setLicenseToken(licenseToken) {
-      if (Ember.isEmpty(this.get('licenseToken').trim())) {
+  actions: {
+
+    performActivation: function(activationCode) {
+      if (Ember.isEmpty(activationCode.trim())) {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
           autoClear: true,
           clearDuration: 4200,
@@ -61,14 +81,9 @@ export default Component.extend(DefaultHeaders, {
         });
         this.set('showIcon', true);
       } else {
-        this.set("model.activation_code", licenseToken);
-        this.set("model.product", get(this, 'intl').t('stackPage.admin.settings.entitlement.rioProduct'));
+        this.set("model.activation_code", activationCode);
         this.activate();
       }
-    },
-
-    focusOut() {
-      this.set('showIcon', true);
     },
 
   }

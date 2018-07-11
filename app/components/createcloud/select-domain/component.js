@@ -12,7 +12,6 @@ export default Component.extend(DefaultHeaders, {
     session: Ember.inject.service(),
     notifications: Ember.inject.service('notification-messages'),
     showIcon: true,
-    newDomainName: "",
     activate: false,
     showSpinner: false,
 
@@ -20,6 +19,9 @@ export default Component.extend(DefaultHeaders, {
       return get(this, 'intl').t('launcherPage.domain.domainPlaceHolder');
     }.property('domainPlaceHolder'),
 
+    btnName: function(){
+      return get(this, 'intl').t('launcherPage.domain.buttonSet');
+    }.property(),
 
     validateDomain: function () {
       return this.get('model.settings')[denormalizeName(`${C.SETTING.DOMAIN}`)] || D.VPS.domain;
@@ -59,7 +61,7 @@ export default Component.extend(DefaultHeaders, {
     },
 
     nameSpliter(newDomainName) {
-      return (this.get('newDomainName') + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+      return (newDomainName + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
     },
 
     actions: {
@@ -68,13 +70,9 @@ export default Component.extend(DefaultHeaders, {
             this.toggleProperty('activate');
         },
 
-        clickInputIcon() {
-            this.set('showIcon', false);
-        },
-
         setNewDomain(newDomainName) {
             this.set('showIcon', true);
-            if(Ember.isEmpty(this.get('newDomainName').trim())) {
+            if(Ember.isEmpty(newDomainName.trim())) {
               this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.emptyDomain'), {
                 autoClear: true,
                 clearDuration: 4200,
@@ -83,10 +81,6 @@ export default Component.extend(DefaultHeaders, {
             } else {
               this.set("model.stacksfactory.object_meta.name", this.nameSpliter(newDomainName));
             }
-        },
-
-        focusOut() {
-            this.set('showIcon', true);
         },
 
         createSecret() {

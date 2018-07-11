@@ -1,0 +1,11 @@
+<div class="editable-popup activate">
+  {{svg/svg-edit class=(if showIcon "edit-ico" "display-none") click=(action 'clickInputIcon')}}
+  <div class= {{if showIcon "display-none" "showform"}}>
+    {{input type="text" placeholder=placeholder value=editedText}}
+    <button {{action "setPopupData" editedText }}>{{btnName}}
+    {{#if showSpinner}}
+    <i class="fa fa-circle-o-notch fa-spin"></i>
+    {{/if}}
+  </button>
+  </div>
+</div>
