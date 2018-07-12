@@ -220,12 +220,15 @@
 }
 // for only signup page
 .signup-page {
-  background-image: url("/assets/images/signup/bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-color: #e8effa;
+
+  &.signup-pg {
+    background-image: url("/assets/images/signup/bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: #e8effa;
+    padding-top: 13px;
+  }
   height: 150vh;
-  padding-top: 13px;
   // overflow-x: hidden;
   h1 {
     font-size: 26px;

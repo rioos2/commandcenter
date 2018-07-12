@@ -2,14 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   access: Ember.inject.service(),
-  beforeModel(transition) {
+
+  beforeModel: function() {
     this.get('access').wizardPageRedirect().then((config) => {
-      if (!config) {
-          this.transitionTo('wizard');
+      if (config) {
+          this.transitionTo('authenticated');
       }
-    }).catch((err) => {
-      return Ember.RSVP.reject(err);
     });
-  },
+    this.transitionTo('wizard.steps.step', 'step1');
+  }
 
 });

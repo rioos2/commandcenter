@@ -5979,6 +5979,10 @@ fs-extra@^5.0.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-js@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/fs-js/-/fs-js-1.0.6.tgz#ff71521028781393c67dea891a883abe04a100ac"
+
 fs-readdir-recursive@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/fs-readdir-recursive/-/fs-readdir-recursive-0.1.2.tgz#315b4fb8c1ca5b8c47defef319d073dad3568059"

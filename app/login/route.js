@@ -11,6 +11,13 @@ export default Ember.Route.extend({
       {
         this.transitionTo('authenticated');
       }
+      this.get('access').wizardPageRedirect().then((config) => {
+        if (!config) {
+            this.transitionTo('wizard');
+        }
+      }).catch((err) => {
+        return Ember.RSVP.reject(err);
+      });
     });
   },
 });
