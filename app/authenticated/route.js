@@ -25,10 +25,6 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     // If it is desktop application, then add the proxy server url
     // otherwise ember manage it.
     this.get('storeReset').set();
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/2-0-stable
     if (this.get('access.enabled')) {
       if (!this.get('access').isLoggedIn()) {
         transition.send('logout', transition, false);
