@@ -7,8 +7,6 @@ export function normalizeName(str) {
 }
 import { denormalizeName } from 'nilavu/utils/denormalize';
 
-
-
 export default Ember.Service.extend(Ember.Evented, {
   intl: Ember.inject.service(),
   userStore: Ember.inject.service('user-store'),
@@ -18,7 +16,7 @@ export default Ember.Service.extend(Ember.Evented, {
 
   init() {
     this._super();
-    this.set('all', this.get('userStore').all('settingsMap'));
+    this.set('all', this.get('userStore').all('settingsmap'));
   },
 
 

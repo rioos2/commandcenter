@@ -1,1 +1,28 @@
-<div class="avail"></div>
+<div class="rio-admin">
+  <div class="row">
+    <div class="kv-content-menu">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#kv_third_nav" aria-expanded="false">
+                  <span class="sr-only">{{t 'stackPage.admin.header.toggle'}}</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+        </div>
+        <div class="collapse navbar-collapse" id="kv_third_nav">
+          <div class="col-sm-9 content-left">
+            <ul class="nav navbar-nav">
+              {{admin-infra/admin-setting-tab panels=panels selectedTab=selectedSettingTab tab="entitlement"}}
+            </ul>
+          </div>
+          <div class="vm-modal-body">
+            {{#each panels as |tab|}}
+              {{component tab selectedTab=selectedSettingTab licenses=licenses triggerReload="triggerReload" modelSpinner=modelSpinner}}
+            {{/each}}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

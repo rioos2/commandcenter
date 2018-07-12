@@ -25,6 +25,10 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     // If it is desktop application, then add the proxy server url
     // otherwise ember manage it.
     this.get('storeReset').set();
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/2-0-stable
     if (this.get('access.enabled')) {
       if (!this.get('access').isLoggedIn()) {
         transition.send('logout', transition, false);
@@ -116,11 +120,8 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   },
 
   loadSettings() {
-    return this.get('userStore').find('settingsmap', null, {
-      url: 'origins/rioos_system/settingsmap/cluster_info'
-    });
+    return this.get('userStore').find('settingsmap', null, this.opts('origins/rioos_system/settingsmap/cluster_info'));
   },
-
 
   loadDataCenter() {
     return this.get('store').find('reportsstatistics', null, this.opts('healthz/overall'));

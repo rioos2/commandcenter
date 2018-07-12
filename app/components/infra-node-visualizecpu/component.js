@@ -23,6 +23,10 @@ export default Ember.Component.extend({
     this._updateGaugeSvg();
   }.observes('model', 'model.counter'),
 
+  nodeRunStatus: function(){
+    return Ember.isEqual(this.get('model.health'),'up')? C.NODE.STATUS.RUNNING : C.NODE.STATUS.STOPPED;
+  }.property('model.health'),
+
   nodeStatus: function() {
     var state = C.NODE.NODEON;
     this.set('nodeStyle', C.MANAGEMENT.STATE.SUCCESS);
