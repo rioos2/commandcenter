@@ -73,6 +73,7 @@
     "loader.js": "^4.6.0",
     "semver": "^5.5.0",
     "xterm": "1.0.0",
+    "ember-steps": "6.0.0",
     "yamljs": "^0.3.0"
   },
   "dependencies": {

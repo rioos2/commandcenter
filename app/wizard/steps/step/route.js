@@ -4,13 +4,13 @@ export default Ember.Route.extend({
   beforeModel: function() {
     $('BODY').addClass('wizard-page');
   },
-  
+
   model: function(params) {
-    console.log(JSON.stringify(params));
     return params;
   },
+
   setupController(controller, model) {
-    controller.set('selectedStep', model.step);
+    controller.set('selectedStep', model.id);
     this._super(...arguments);
   }
 });

@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-// import fs from 'npm:fs';
-import FS from 'npm:fs-js';
 
 export default Ember.Service.extend(DefaultHeaders, {
   cookies: Ember.inject.service(),
@@ -89,7 +87,7 @@ export default Ember.Service.extend(DefaultHeaders, {
     });
   },
 
-  wizardPageRedirect: function() {
+  activate: function() {
     return this.get('userStore').rawRequest({
       url: '/setupcheck',
       method: 'GET',
@@ -104,7 +102,7 @@ export default Ember.Service.extend(DefaultHeaders, {
     });
   },
 
-  createConfigFile: function() {
+  activationComplete: function() {
     return this.get('userStore').rawRequest({
       url: '/config',
       method: 'GET',

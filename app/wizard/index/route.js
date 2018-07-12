@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 
     $('BODY').addClass('wizard-page');
 
-    this.get('access').wizardPageRedirect().then((config) => {
+    this.get('access').activate().then((config) => {
       if (config) {
           this.transitionTo('authenticated');
       }

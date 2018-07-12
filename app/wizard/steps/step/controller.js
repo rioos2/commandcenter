@@ -7,13 +7,13 @@ export default Ember.Controller.extend({
 
   step: function() {
     switch (this.get('selectedStep')) {
-      case 'step1':
+      case '1':
         this.send('stepOne');
         break;
-      case 'step2':
+      case '2':
         this.send('stepTwo');
         break;
-      case 'step3':
+      case '3':
         this.send('stepThree');
         break;
     }
@@ -25,26 +25,25 @@ export default Ember.Controller.extend({
       this.set('stepthree', false);
       this.set('steptwo', false);
       this.set('stepone', true);
-      this.transitionToRoute('wizard.steps.step', 'step1');
+      this.transitionToRoute('wizard.steps.step', '1');
     },
 
     stepTwo() {
-      console.log(this.get('app'));
       this.set('stepone', false);
       this.set('stepthree', false);
       this.set('steptwo', true);
-      this.transitionToRoute('wizard.steps.step', 'step2');
+      this.transitionToRoute('wizard.steps.step', '2');
     },
 
     stepThree() {
       this.set('stepone', false);
       this.set('steptwo', false);
       this.set('stepthree', true);
-      this.transitionToRoute('wizard.steps.step', 'step3');
+      this.transitionToRoute('wizard.steps.step', '3');
     },
 
     processTrail() {
-      this.get('access').createConfigFile().then((xhr) => {
+      this.get('access').activationComplete().then((xhr) => {
         location.reload();
       });
     },

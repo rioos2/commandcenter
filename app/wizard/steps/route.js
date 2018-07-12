@@ -4,12 +4,12 @@ export default Ember.Route.extend({
   access: Ember.inject.service(),
 
   beforeModel: function() {
-    this.get('access').wizardPageRedirect().then((config) => {
+    this.get('access').activate().then((config) => {
       if (config) {
           this.transitionTo('authenticated');
       }
     });
-    this.transitionTo('wizard.steps.step', 'step1');
+    this.transitionTo('wizard.steps.step', '1');
   }
 
 });

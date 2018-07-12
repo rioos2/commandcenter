@@ -24,7 +24,7 @@ Router.map(function () {
   this.route('wizard', { path: '/wizard', resetNamespace: true }, function () {
     this.route('index', { path: '/' });
     this.route('steps', { path: '/steps'}, function () {
-      this.route('step', { path: '/:step' });
+      this.route('step', { path: '/:id' });
     });
   });
 

@@ -11,7 +11,7 @@ export default Ember.Component.extend({
   name: Em.computed.alias('first_name'),
   emailExistence: true,
 
-  getform() {
+  getFormInput() {
     this.set('email',this.get('email').toLowerCase());
     let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'password', 'phone');
     var externalFields = this.externalAccountFields();
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
       this.check();
       if (this.shouldProceed()) {
         Ember.run.later(() => {
-          this.get('access').signup(this.getform()).then(() => {
+          this.get('access').signup(this.getFormInput()).then(() => {
             this.sendAction('nextStep');
           }).catch((err) => {
               if (err.status == 500) {
