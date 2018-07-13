@@ -1,0 +1,24 @@
+<div class="wizard-page">
+  <div class="modal-dialog modal-dialog-wizard-step">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{t 'wizard.congratulationText'}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="welcome-wizard-img">
+          <img class="logo-img" src="assets/images/logo2.png">
+        </div>
+        <div class="row together-img">
+          <img class="logo-img" src="assets/images/wizard/handshake.png">
+        </div>
+            {{welcomeMsg}}
+        <div class="col-md-12 last-btn">
+          <div id="id" class="flipper">
+            <div class="front-face" data-icon="&#x27a3;" {{action 'nextStep'}}><span data-hover="Clicked">{{t 'wizard.register'}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

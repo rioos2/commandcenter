@@ -44,6 +44,9 @@ function readLocales(environment) {
   return translationsOut;
 }
 //
+function checkComplition(environment) {
+  return Math.random();
+}
 //
 function readUIConfig(environment) {
   if (!process.env.RIOOS_HOME) {
@@ -67,12 +70,12 @@ module.exports = function (environment) {
   } else {
     console.error("✘ ui config load failed.\n" + loaded);
   }
- 
+
   var ENV = {
     modulePrefix: 'nilavu',
     environment: environment,
     exportApplicationGlobal: true,
-    baseURL: '/',    
+    baseURL: '/',
     locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
@@ -124,7 +127,9 @@ module.exports = function (environment) {
       appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
       sendAnalytics: loaded.send_analytics || false,
       baseAssets: '/',
-      locales: readLocales(environment)
+      configPath: process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
+      locales: readLocales(environment),
+      activationComplete: checkComplition()
     },
   };
 

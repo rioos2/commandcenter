@@ -37,51 +37,53 @@
 @import 'admin/sweetalert';
 @import 'admin/settings';
 @import 'flag/flags';
-
-
-
+@import 'wizard/wizard';
 //TO-DO: Why is this hanging here ?
 @import url(https://fonts.googleapis.com/css?family=Roboto);
-
 @font-face {
-    font-family: 'fselliot';
-    font-style: normal;
-    font-weight: lighter;
-    src:url('../fonts/FSElliot-Regular.otf') format("opentype");
+  font-family: 'fselliot';
+  font-style: normal;
+  font-weight: lighter;
+  src: url("../fonts/FSElliot-Regular.otf") format("opentype");
 }
-
-
 //TO-DO: Why is this hanging here ?
-
 body,
+body *,
 input,
 select,
-textarea,
-body * {
+textarea {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   font-family: 'fselliot';
 }
-body::after, body::before,
+
+body *::after,
+body *::before,
+body::after,
+body::before,
 input::after,
 input::before,
 select::after,
 select::before,
 textarea::after,
-textarea::before,
-body *::after,
-body *::before {
+textarea::before {
   box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    // background-color: #132fa9;
-    background-color: #1d43a9;
+  margin: 0;
+  background-color: #1d43a9;
+}
+
+body.wizard-page {
+  background-image: url('/assets/images/wizard/wizard-bg.jpg');
+  background-size: cover;
+  background-position: top center;
+  position: relative;
 }
 
 .container {
-  padding: 0px;
+  padding: 0;
 }
 
 .rio-admin {
@@ -89,5 +91,5 @@ body {
 }
 
 .no-touch {
-  padding-right: 0px !important;
+  padding-right: 0 !important;
 }

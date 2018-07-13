@@ -38,6 +38,9 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED: "Registered",
       MEMBERSHIPSTATUSCERTIFICATED: "Certificated",
     },
+    ROLES: {
+      SUPERUSER: "RIOOS:SUPERUSER",
+    },
   },
 
   SECRETS: {

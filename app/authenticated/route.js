@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import Subscribers from 'nilavu/mixins/subscribers';
-import { xhrConcur } from 'nilavu/utils/platform';
+import {
+  xhrConcur
+} from 'nilavu/utils/platform';
 import PromiseToCb from 'nilavu/mixins/promise-to-cb';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 
@@ -23,7 +25,6 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     // If it is desktop application, then add the proxy server url
     // otherwise ember manage it.
     this.get('storeReset').set();
-
     if (this.get('access.enabled')) {
       if (!this.get('access').isLoggedIn()) {
         transition.send('logout', transition, false);
@@ -46,7 +47,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
         events: this.toCb('loadEvents'),
       };
 
-      async.auto(tasks, xhrConcur, function (err, res) {
+      async.auto(tasks, xhrConcur, function(err, res) {
         if (err) {
           reject(err);
         } else {
@@ -82,7 +83,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
 
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
-    if (err && ((isAuthEnabled && this.decideCode(err.code))|| ["401", "403"].includes(err.code))) {
+    if (err && ((isAuthEnabled && this.decideCode(err.code)) || ["401", "403"].includes(err.code))) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
@@ -93,8 +94,8 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     return ret;
   },
 
-  decideCode(code){
-    if(code === "502" || code === "500"){
+  decideCode(code) {
+    if (code === "502" || code === "500") {
       return false;
     }
   },
@@ -106,9 +107,9 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
         results = null;
       }
 
-      return this.get(store).find(type, null, opt).then(function (res) {
+      return this.get(store).find(type, null, opt).then(function(res) {
         cb(null, res);
-      }).catch(function (err) {
+      }).catch(function(err) {
         cb(err, null);
       });
     };
@@ -132,7 +133,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   },
 
   loadEvents() {
-    return this.get('store').find('event', null, this.opts('accounts/' + this.get('session').get("id")+ '/audits'));
+    return this.get('store').find('event', null, this.opts('accounts/' + this.get('session').get("id") + '/audits'));
   },
 
   actions: {
@@ -141,8 +142,7 @@ export default Ember.Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
       if (err.code === 401) {
         this.send('logout', transition, true);
         return false;
-      }
-      else {
+      } else {
         // Bubble up
         return true;
       }
