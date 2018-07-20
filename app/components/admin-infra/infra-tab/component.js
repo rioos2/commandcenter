@@ -5,7 +5,6 @@ export default Em.Component.extend({
   classNameBindings: ['active', 'tabClassName'],
 
   tabClassName: function() {
-    alert(JSON.stringify(this.get('tab')));
     return 'admin-infra/' + this.get('tab');
   }.property('tab'),
 

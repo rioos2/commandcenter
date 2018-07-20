@@ -61,16 +61,9 @@ export default Component.extend(DefaultHeaders, {
     },
 
     nameSpliter(newDomainName) {
-      var count=0;
-          if (!newDomainName.match(/^[a-zA-Z0-9-]+$/i))
-          {
-            count++;
-          }
-      if(count != 1){
+      if (newDomainName.match(/^[a-zA-Z0-9-]+$/i)) {
         return (newDomainName + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
-      }
-      else {
-      //  alert("Enter the alphanumeric values only");
+      } else {
       this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.domainWithoutSymbol'), {
         autoClear: true,
         clearDuration: 4200,
