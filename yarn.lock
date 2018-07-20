@@ -81,15 +81,9 @@
   version "0.1.1"
   resolved "https://codeload.github.com/dockyard/qunit-notifications/tar.gz/7a13f6dba5a340e1cb9e0b64c1c711e4d7edaca1"
 
-<<<<<<< HEAD
-"@ember/test-helpers@^0.7.9":
-  version "0.7.14"
-  resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.14.tgz#e53b0a66f144a0a85579c4432e56960971a3f739"
-=======
 "@ember/test-helpers@^0.7.18":
   version "0.7.25"
   resolved "https://registry.yarnpkg.com/@ember/test-helpers/-/test-helpers-0.7.25.tgz#b4014c108b40ffaf74f3c4d5918800917541541d"
->>>>>>> origin/2-0-stable
   dependencies:
     broccoli-funnel "^2.0.1"
     ember-cli-babel "^6.12.0"
