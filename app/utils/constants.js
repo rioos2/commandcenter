@@ -1,5 +1,19 @@
 var C = {
 
+  WIZARD: {
+    STEPS: {
+      START: 'start',
+      REGISTER: 'register',
+      ACTIVATE: 'activate',
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS: {
+        ACTIVATING: 'activating',
+      }
+    },
+  },
+
   ASSEMBLY: {
     ASSEMBLYOFFPHASES: ["stopped", "failed", "terminated"],
     ASSEMBLYOFF: "OFF",

@@ -142,17 +142,26 @@ module.exports = function (environment) {
   }
 
   if (environment === 'test') {
-    // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
+      // Testem prefers this...
+      ENV.locationType = 'none';
 
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+      // keep test console output quieter
+      ENV.APP.LOG_ACTIVE_GENERATION = false;
+      ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+      ENV.APP.rootElement = '#ember-testing';
+
+      // This is needed so that browserify dependencies in tests work correctly
+      // See https://github.com/ef4/ember-browserify/issues/14
+      ENV.browserify = {
+          tests: true
+      };
+
+      // Withuot manually setting this, pretender won't track requests
+      ENV['ember-cli-mirage'] = {
+          trackRequests: true
+      };
   }
-
 
 
   if (process.env.BASE_URL) {

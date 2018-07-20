@@ -12,12 +12,6 @@
     text-align: center;
   }
 
-  .modal-dialog-wizard-step {
-    width: 598px;
-    margin: 142px auto;
-    padding-left: 46px;
-  }
-
   .modal-dialog-wizard-step-licence {
     width: 637px;
     margin: 142px auto;
@@ -185,4 +179,39 @@
       padding-top: 20px;
     }
   }
+}
+
+.wizard-bg {
+  margin: 0;
+  background: #edf4f9 !important;
+  background-image: url("/assets/images/second/bg.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% auto !important;
+  background-color: #e9eff9 !important;
+  color: #1a1d31 !important;
+  padding-bottom: 25px;
+}
+
+.wizard-logo-img {
+  width: 200px;
+  margin: 60px auto;
+  display: block;
+}
+
+.wizard-complete-check {
+  color: #27ad17;
+  align-items: left;
+  padding-right: -24px;
+}
+
+.wizard-tab-title {
+  text-transform: capitalize;
+}
+
+.wizard-btn {
+  background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
+}
+
+.wizard-activation-width {
+  width: 692px;
 }

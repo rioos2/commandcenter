@@ -1,7 +1,4 @@
-<div class="licence-logo">
-  <img class="logo-img" src="assets/images/wizard/logo-white.png">
-</div>
-<div class="modal-dialog modal-dialog-wizard-step-licence">
+<div class="modal-dialog wizard-activation-width">
   <div class="modal-content">
     <div class="modal-header">
     </div>
@@ -17,9 +14,9 @@
           </div>
         </div>
         <div class="col-sm-3">
-          <button type="submit" {{action 'processTrail'}} class="btn btn-info">
+          <button type="submit" {{action 'processTrail'}} class="btn btn-info wizard-btn">
             {{t 'wizard.useTrail'}}
-              {{#if showSpinner}}
+              {{#if showSpinnerTrail}}
               <i class="fa fa-circle-o-notch fa-spin"></i>
               {{/if}}
             </button>
@@ -37,16 +34,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-4">
           <div class="form-group">
-            {{input type="text" class="form-control" id="userName" placeholder=licencePlaceholder value=userName}}
+            {{input type="text" class="form-control" id="licenceId" placeholder=licenceIdPlaceholder value=licenceId}}
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            {{input type="password" class="form-control" id="licencePwd" placeholder=licencePwdPlaceholder value=licencePwd}}
           </div>
         </div>
         <div class="col-sm-3">
 
-          <button type="submit" {{action 'updateLicence'}} class="btn btn-info">
+          <button type="submit" {{action 'updateLicence'}} class="btn btn-info wizard-btn">
                         {{t 'wizard.usePurcashedLicenceBtn'}}
-                        {{#if showSpinner}}
+                        {{#if showSpinnerLicense}}
                         <i class="fa fa-circle-o-notch fa-spin"></i>
                         {{/if}}
                       </button>
