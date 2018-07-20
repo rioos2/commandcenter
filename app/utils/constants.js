@@ -1,5 +1,19 @@
 var C = {
 
+  WIZARD: {
+    STEPS: {
+      WELCOME: 'welcome',
+      REGISTERADMIN: 'register-admin',
+      ACTIVATE: 'activate-license',
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS: {
+        ACTIVATING: 'activating',
+      }
+    },
+  },
+
   ASSEMBLY: {
     ASSEMBLYOFFPHASES: ["stopped", "failed", "terminated"],
     ASSEMBLYOFF: "OFF",
@@ -84,7 +98,7 @@ var C = {
 
   MANAGEMENT: {
     STATUS: {
-      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating","awaitpending","standstill"],
+      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating","awaitpending","standstill", "unreachable"],
       SUCCESS: ["running"],
       FAILURE: ["stopped", "failed", "terminated"],
       TERMINATE: ["terminated", "terminating"],
@@ -403,7 +417,7 @@ C.FILTERS_SEARCH_ACCESSORS = [C.FILTERS.SELECT_OS_ACCESSOR, C.FILTERS.SELECT_LOC
     },
   ];
 
-C.CATEGORIES_ALL = [C.CATEGORIES.MACHINE, C.CATEGORIES.CONTAINER, C.CATEGORIES.BLOCKCHAIN];
+C.CATEGORIES_ALL = [C.CATEGORIES.MACHINE, C.CATEGORIES.CONTAINER];
 
 C.ANALYTIC_EVENTS_ALL = [
   C.ANALYTIC_EVENTS.LOGGED_IN,

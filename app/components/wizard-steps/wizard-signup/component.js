@@ -3,7 +3,10 @@ const { computed, get} = Ember;
 import C from 'nilavu/utils/constants';
 
 export default Ember.Component.extend({
+  tagName: '',
+  className: '',
 
+  notifications: Ember.inject.service('notification-messages'),
   access: Ember.inject.service(),
   store: Ember.inject.service(),
   intl:       Ember.inject.service(),
@@ -44,7 +47,8 @@ export default Ember.Component.extend({
       if (this.shouldProceed()) {
         Ember.run.later(() => {
           this.get('access').signup(this.getFormInput()).then(() => {
-            this.sendAction('nextStep');
+            this.get('completedSteps').pushObject(this.get('category'));
+            this.sendAction('proceedNextStep');
           }).catch((err) => {
               if (err.status == 500) {
                 this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {

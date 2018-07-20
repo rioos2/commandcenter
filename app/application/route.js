@@ -20,47 +20,8 @@ export default Ember.Route.extend({
   previousLang: null,
 
   actions: {
-    loading(transition) {
-      this.incrementProperty('loadingId');
-      let id = this.get('loadingId');
 
-      Ember.run.cancel(this.get('hideTimer'));
-
-      if (!this.get('loadingShown')) {
-        this.set('loadingShown', true);
-
-        $('#loading-underlay').stop().show().fadeIn({
-          duration: 100, queue: false, easing: 'linear', complete: function () {
-            $('#loading-overlay').stop().show().fadeIn({ duration: 200, queue: false, easing: 'linear' });
-          }
-        });
-      }
-
-      transition.finally(() => {
-        var self = this;
-        function hide() {
-          self.set('loadingShown', false);
-          $('#loading-overlay').stop().fadeOut({
-            duration: 200, queue: false, easing: 'linear', complete: function () {
-              $('#loading-underlay').stop().fadeOut({ duration: 100, queue: false, easing: 'linear' });
-            }
-          });
-        }
-
-        if (this.get('loadingId') === id) {
-          if (transition.isAborted) {
-            this.set('hideTimer', Ember.run.next(hide));
-          } else {
-            hide();
-          }
-        }
-      });
-
-      return true;
-    },
-
-
-      loading(transition, originRoute) {
+      loading(transition) {
         let controller = this.controllerFor('application');
         controller.set('pageLoader', true);
         setTimeout(function() {

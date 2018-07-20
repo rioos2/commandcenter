@@ -106,6 +106,9 @@
             position: relative;
             box-shadow: 0px -3px 15px 0px $rio-second-color;
             width: #{100%/$tab-count};
+            &.slider-two {
+              width: 50%;
+            }
             transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
             .indicator {
                 position: relative;
