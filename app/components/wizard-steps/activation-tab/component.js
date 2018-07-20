@@ -7,13 +7,13 @@ export default Ember.Component.extend({
   classNameBindings: ['active', 'tabClassName'],
 
   tabClassName: function() {
-    return 'wizard-steps/wizard-' + this.get('tab');
+    return 'wizard-steps/' + this.get('tab');
   }.property('tab'),
 
   active: Ember.computed.equal('selectedTab', 'tab'),
 
   title: function() {
-    return this.get('tab');
+    return this.get('intl').t('wizard.' + this.get('tab') + '.title');
   }.property('tab'),
 
   isComplete: function() {

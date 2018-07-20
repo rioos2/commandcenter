@@ -3,7 +3,7 @@ import C from 'nilavu/utils/constants';
 
 export default Ember.Controller.extend({
 
-  categories: [C.WIZARD.STEPS.START, C.WIZARD.STEPS.REGISTER, C.WIZARD.STEPS.ACTIVATE],
+  categories: [C.WIZARD.STEPS.WELCOME, C.WIZARD.STEPS.REGISTERADMIN, C.WIZARD.STEPS.ACTIVATE],
 
   completedSteps: [],
 
@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
 
   //This has be evaluated based on data. So we show the tab that has max
   //number of launches.
-  selectedTab: C.WIZARD.STEPS.START,
+  selectedTab: C.WIZARD.STEPS.WELCOME,
 
   actions: {
     nextStep(step) {

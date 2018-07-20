@@ -16,8 +16,8 @@ export default Ember.Component.extend(DefaultHeaders, {
   access: Ember.inject.service(),
 
 
-  useTrailVersionNote: function() {
-    return Ember.String.htmlSafe(get(this, 'intl').t('wizard.useTrailVersionNote'));
+  useTrialVersionNote: function() {
+    return Ember.String.htmlSafe(get(this, 'intl').t('wizard.useTrialVersionNote'));
   }.property('model'),
 
   licenceIdPlaceholder: function() {
@@ -43,8 +43,6 @@ export default Ember.Component.extend(DefaultHeaders, {
   checkLicenseStatus() {
     let self = this;
     Em.run.later(function() {
-      console.log(JSON.stringify(self.get('model')));
-      console.log(JSON.stringify(self.get('model.license.license.content').get('firstObject')));
       let license = self.get('model.license.license.content').get('firstObject');
       if(license.status === 'active') {
         self.set('showSpinnerLicense', false);

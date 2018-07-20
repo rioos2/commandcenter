@@ -127,9 +127,9 @@ consolePage:
 
 wizard:
   licenseTitle: Licence
-  useTrailVersionHeader: NEW USERS
-  useTrailVersionNote: You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.
-  useTrail: ACTIVATE TRAIL
+  useTrialVersionHeader: NEW USERS
+  useTrialVersionNote: You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.
+  useTrial: ACTIVATE TRIAL
   usePurcashedLicenceHeader: ALREADY HAVE A LICENSE?
   usePurcashedVersionNote: If you already have a license key, use the form and button below to get started now.
   usePurcashedLicenceBtn: ACTIVATE KEY
@@ -143,6 +143,12 @@ wizard:
   licenseSuccessMsg: License updated successfully
   licenseFailedMsg: License update failed
   loginWithRegisteredAccount: Account already created
+  welcome:
+    title: Welcome
+  register-admin:
+    title: Register
+  activate-license:
+    title: Activate
 stackPage:
   machine: Digital Cloud
   container: Container

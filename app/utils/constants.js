@@ -2,9 +2,9 @@ var C = {
 
   WIZARD: {
     STEPS: {
-      START: 'start',
-      REGISTER: 'register',
-      ACTIVATE: 'activate',
+      WELCOME: 'welcome',
+      REGISTERADMIN: 'register-admin',
+      ACTIVATE: 'activate-license',
     },
     ACTIVATION: {
       PRODUCT: 'RioOS',
