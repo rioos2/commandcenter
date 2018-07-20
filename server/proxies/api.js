@@ -1,7 +1,6 @@
 module.exports = function(app, options) {
   var path = require('path');
   var Url = require('url');
-  var fs = require('fs');
   var ForeverAgent = require('forever-agent');
   var HttpProxy = require('http-proxy');
   var httpServer = options.httpServer;
@@ -91,24 +90,6 @@ module.exports = function(app, options) {
 
     proxyLog('r4sVers', req);
     proxy.web(req, res);
-  });
-
-  app.use('/setupcheck', function(req, res, next) {
-    var check = {
-      verified: fs.existsSync(path.join(config.configPath, '.rioos_commandcenter_setup_complete'))
-    }
-    res.end(JSON.stringify(check));
-  });
-
-  app.use('/config', function(req, res, next) {
-
-    fs.appendFile(path.join(config.configPath, '.rioos_commandcenter_setup_complete'), 'Rio/Os', function(err) {
-      if (err) {
-        res.end(JSON.stringify(err));
-      }
-    });
-    res.end(JSON.stringify({created: "success"}));
-
   });
 
 }

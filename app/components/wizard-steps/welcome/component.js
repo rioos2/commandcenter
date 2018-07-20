@@ -4,6 +4,8 @@ const {
 } = Ember;
 
 export default Ember.Component.extend({
+  tagName: 'section',
+  className: '',
 
   intl: Ember.inject.service(),
 
@@ -13,7 +15,7 @@ export default Ember.Component.extend({
 
   actions: {
     nextStep: function() {
-      this.sendAction('nextStep');
+      this.sendAction('nextStep', this.get('category'));
     },
   },
 });

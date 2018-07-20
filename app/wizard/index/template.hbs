@@ -1,0 +1,21 @@
+<div class="dashboard">
+  <div class="tabs wizard-bg">
+    {{#each categories as |category|}}
+      {{radio-button checked=(eq category selectedTab) value=selectedTab selection=selectedTab id=category name="tab-control"}}
+    {{/each}}
+    <ul class="dashboardNav">
+      {{#each categories as |category|}}
+       {{wizard-steps/activation-tab panels=panels completedSteps=completedSteps model=model selectedTab=selectedTab tab=category}}
+      {{/each}}
+    </ul>
+    <div class="slider">
+      <div class="indicator"></div>
+    </div>
+    <img class="wizard-logo-img" src="assets/images/logo2.png">
+    <div class="content">
+      {{#each panels as |tab|}}
+        {{component tab selectedTab=selectedTab model=model reloadModel="reloadModel"  completedSteps=completedSteps  nextStep='nextStep' category=(str-replace tab match="wizard-steps/" with="") selectedItem=selectedItem showLoading=showLoading}}
+      {{/each}}
+    </div>
+  </div>
+</div>

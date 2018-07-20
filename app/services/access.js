@@ -89,30 +89,15 @@ export default Ember.Service.extend(DefaultHeaders, {
 
   activate: function() {
     return this.get('userStore').rawRequest({
-      url: '/setupcheck',
+      url: '/api/v1/wizards',
       method: 'GET',
     }).then((xhr) => {
       var res;
       if (xhr.body) {
-        res = JSON.parse(xhr.body).verified
+        res = xhr.body.registered && xhr.body.licensed
       }
       return res;
     }).catch((err) => {
-      return Ember.RSVP.reject(err);
-    });
-  },
-
-  activationComplete: function() {
-    return this.get('userStore').rawRequest({
-      url: '/config',
-      method: 'GET',
-    }).then((xhr) => {
-      var res;
-      if (xhr.body) {
-        res = JSON.parse(xhr.body)
-      }
-      return res;
-    }).catch((res) => {
       return Ember.RSVP.reject(err);
     });
   },
