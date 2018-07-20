@@ -1,6 +1,8 @@
 export function validateHostname(hostname){
+    alert(hostname);
     //hostname can not start with a dot
     if (hostname.slice(0,1) ==='.'){
+      console.log(this.get(hostname));
         return false;
     }
     //hostname can not be empty string

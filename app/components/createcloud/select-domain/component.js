@@ -61,7 +61,23 @@ export default Component.extend(DefaultHeaders, {
     },
 
     nameSpliter(newDomainName) {
-      return (newDomainName + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+      var count=0;
+          if (!newDomainName.match(/^[a-zA-Z0-9-]+$/i))
+          {
+            count++;
+          }
+      if(count != 1){
+        return (newDomainName + "-" + this.get('model.stacksfactory.object_meta.name').split("-").get('lastObject')).replace(/\s/g, '')
+      }
+      else {
+      //  alert("Enter the alphanumeric values only");
+      this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.domainWithoutSymbol'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
+      });
+       return this.get('model.stacksfactory.object_meta.name');
+      }
     },
 
     actions: {

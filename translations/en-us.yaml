@@ -375,6 +375,7 @@ launcherPage:
     selectDomain: Select a Domain
     domainPlaceHolder: Enter domain name
     emptyDomain: You forgot to type a subdomain name
+    domainWithoutSymbol: subdomain should be alphanumeric
     domainName: Edit me
     buttonSet: Set
     keyGenerate:
