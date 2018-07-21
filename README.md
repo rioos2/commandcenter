@@ -1,4 +1,4 @@
-# Rio/OS UI - Nilavu
+# Rio/OS UI - CommandCenter
 
 This README outlines the details of collaborating on this Ember application.
 
@@ -8,17 +8,20 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 
-* Download [Node.js 10.4.0](https://nodejs.org/dist/v10.4.0/node-v10.4.0-linux-x64.tar.xz)
+* Download [Node.js 10.6+](https:
+* //nodejs.org/dist/v10.6.0/node-v10.6.0-linux-x64.tar.xz)
 
 ```
-wget https://nodejs.org/dist/v10.4.0/node-v10.4.0-linux-x64.tar.xz
+wget https://nodejs.org/dist/v10.6.0/node-v10.6.0-linux-x64.tar.xz
+
 ```
 * Unzip downloaded tar to ~/software
 
 ```
-tar -xvf node-*.tar.xz
-```
 
+tar -xvf node-*.tar.xz
+
+```
 
 * Export PATH and NODE_HOME on ~/.bashrc
 
@@ -51,16 +54,24 @@ sudo apt-get update && sudo apt-get install yarn
 
 ## Installation
 
-* `git clone <forked-nilavu-repository-url> -b 2-0-stable ui` this repository
+* `git clone <forked-commandcenter-repository-url> -b 2-0-stable` this repository
 * change into the new directory
 
 ```
 
-cd ui
+cd commandcenter_v2
 
 yarn install
 
 ```
+
+
+## WEB: Running /Development 
+
+### Running Tests
+
+* `ember test`
+* `ember test --server`
 
 ## Running / Development mode
 
@@ -72,55 +83,36 @@ yarn start
 
 Visit your app at [https://localhost:8000](https://localhost:8000).
 
-This runs in headless mode. Needs an api to start chugging.
+This runs in headless mode. Needs an api to start chugging. 
 
-## Edit configuration config/config/ui.toml
+Refer section `Edit configuration`
 
-The file needs to be in $RIOOS_HOME/config (or) <projectdir>/config.
+### Upgrade ember-api-store.  - optional
+
+When you wish to upgrade `ember-api-store` from git, 
+
+*optional
+
+
+```
+yarn remove ember-api-store
 
 ```
 
-cd ui/config/config
+* Above command removes the ember-api-store record in package.json
 
-ls 
+* Add "ember-api-store": "git+https://gitlab.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
 
-# You'll see ui.toml
-
-nano ui.toml
-
-# Change the http_api to 
-
-http_api="https://console.rioos.xyz"
+* Install ember-api-store via yarn
 
 ```
+yarn install
 
 ```
-##############################################
-# This is a TOML UI Configuration for Rio/OS.
-# Boom.
-##############################################
-title = "UI Configuration for Rio/OS"
-
-## api host that nilavu will connect to
-http_api = "localhost:9636"
-
-## uwatch_server is a host that the nilavu will connect to for real time triggers on
-## update to resources.
-uwatch_server = "ws://localhost:9443"
-
-## vnc server that we connect to using insecure mode.
-## replace it to wss if we wish to connect via secure mode.
-vnc_server = "ws://localhost:9000"
-
-```
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
 
 ## Running / Production mode
+
+TO-DO: The recommended way is to use nginx in reverse proxy mode to serve in prod. This is ongoing with a nice Makefile
 
 ```
 
@@ -144,30 +136,57 @@ ember electron
 
 ## For development: If you wish to update ember-api-store
 
-When you wish to upgrade `ember-api-store` from git, 
-
-*optional
-
-
-```
-yarn remove ember-api-store
+The file needs to be in $RIOOS_HOME/config (or) <projectdir>/config.
 
 ```
 
-* Above command removes the ember-api-store record in package.json
+cd commandcenter_v2/config/config
 
-* Add "ember-api-store": "git+https://github.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
+ls 
 
-* Install ember-api-store via yarn
+# You'll see ui.toml
+
+nano ui.toml
+
+# Change the http_api to 
+
+http_api="https://console.rioos.xyz:7443"
 
 ```
-yarn install
+
+```
+##############################################
+# This is a TOML UI Configuration for Rio/OS
+# Command Center
+##############################################
+title = "CommandCenter Configuration for Rio/OS"
+
+## API server endpoint that the commandcenter will connect to
+http_api = "https://console.rioos.xyz:7443"
+
+## uwatch_server is a host that the commandcenter will connect to for 
+## real time triggers on updating resources.
+uwatch_server = "ws://localhost:9443"
+
+## vnc server that we connect to using insecure mode.
+## replace it to wss if we wish to connect via secure mode.
+vnc_server = "wss://localhost:444"
+
+## Ninja port for connecting to console of containers
+container_console_port = "10250"
+
+## The analytics server for marketing. count.ly is used. 
+## The url of the  count.ly server.
+countly_server = "http://countly.rioos.xyz"
+
+## The api key to connect to the count.ly
+app_key = "9653325d8d0f5fe63c3491c93259bf4ff77821ca"
 
 ```
 
 ## How does SSL work  
 
-The ssl certificated are automatically pulled by `ember serve` from the `nilavu/ssl/`  directory.
+The ssl certificated are automatically pulled by `ember serve` from the `commandcenter/ssl/`  directory.
 
 This is due t the property `ssl: true` being turned on.in `.ember-cli` file.
 
