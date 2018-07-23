@@ -162,7 +162,7 @@ stackPage:
     header:
       toggle: Toggle navigation
       add_btn: Add
-      active_btn: Activate
+      active_btn: Set
       save_btn: Save
       search_discovery_btn: Search & Discover
     sensei:
