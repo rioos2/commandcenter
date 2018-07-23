@@ -1,5 +1,5 @@
 {{#if signupStep}}
-{{wizard-steps/wizard-signup proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
+  {{wizard-steps/signup-admin proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
 {{else}}
-{{wizard-steps/wizard-login proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
+  {{wizard-steps/login-admin proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
 {{/if}}
