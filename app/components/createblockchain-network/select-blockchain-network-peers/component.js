@@ -23,6 +23,14 @@ export default Component.extend(DefaultHeaders, {
       return get(this, 'intl').t('launcherPage.domain.domainPlaceHolder');
     }.property('domainPlaceHolder'),
 
+    resource: function(){
+      return {
+        name: "peer",
+        title: get(this, 'intl').t('launcherPage.sysConfig.peerChooser.title'),
+        description: get(this, 'intl').t('launcherPage.sysConfig.peerChooser.description'),
+      };
+    }.property(),
+
 
     validateDomain: function () {
       return this.get('model.settings')[denormalizeName(`${C.SETTING.DOMAIN}`)] || D.VPS.domain;

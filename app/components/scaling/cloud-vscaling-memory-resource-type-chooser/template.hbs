@@ -1,0 +1,35 @@
+<div class="scaling-count">
+  <div class="row generate ">
+    <div class="g-left row peer-show ">
+      <div class="col-md-12">
+        <div class="rio-selectbtn row">
+          <div class="col-md-6">
+            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.max_resource.ram resource=maxMemoryResource}}
+          </div>
+          <div class="col-md-6">
+            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.min_resource.ram resource=minMemoryResource}}
+          </div>
+        </div>
+        <div class="rio-selectbtn row">
+          <div class="col-md-6">
+            {{scaling/scale-percentage-chooser class="chart-cores" model=model initValue=model.vscaling.target_value.max_target_value_memory resource=resources.maximum scaleType=scaleType}}
+          </div>
+          <div class="col-md-6">
+            {{scaling/scale-percentage-chooser class="chart-cores" model=model initValue=model.vscaling.target_value.min_target_value_memory resource=resources.minimum scaleType=scaleType}}
+          </div>
+        </div>
+
+
+
+        <!-- <div class="rio-selectbtn row">
+          <div class="col-md-6">
+          {{scaling/scale-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.max_target_value_disk resource=maxCpuResource}}
+        </div>
+        <div class="col-md-6">
+          {{scaling/scaledown-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.min_target_value_disk resource="disk"}}
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

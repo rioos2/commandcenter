@@ -451,6 +451,37 @@ launcherPage:
   scaling:
     emptyScaling:  You forgot to type a resource
     invalidFormat: Enter vaild data
+    title: SCALING
+    scale:
+      description: ' %'
+    scaleup:
+      cpu:
+        title:  'Scale up when CPU is'
+      cpuChooser:
+        title: Select maximum number of cores
+        description: From 1 to 30
+      storageCapacity:
+        title: Min Storage Capacity
+      ramChooser:
+        title: max ram
+      memory:
+        title: 'Scale up when MEMORY is'
+      disk:
+        title: 'Scale up when DISK is'
+    scaledown:
+      cpu:
+        title:  'Scale down when CPU is'
+      cpuChooser:
+        title: Select minimum number of cores
+        description: From 1 to 30
+      storageCapacity:
+        title: Max Storage Capacity
+      ramChooser:
+        title: min ram
+      memory:
+        title: 'Scale down when MEMORY'
+      disk:
+        title: 'Scale down when DISK is'
     horizontal:
       title: HORIZONTAL SCALING
       description: Select horizontal scaling configuration
@@ -461,22 +492,6 @@ launcherPage:
       scalingRuleTitle:  Select Autoscale Policies
       scalingReplicaWaitTimeTitle: Select Autoscale Replicas
       applyScaling: Enable Horizontal Scaling
-      scaleup:
-        description: ' %'
-        cpu:
-          title:  'Scale up when CPU is'
-        memory:
-          title: 'Scale up when MEMORY is'
-        disk:
-          title: 'Scale up when DISK is'
-      scaledown:
-        description: ' %'
-        cpu:
-          title:  'Scale down when CPU is'
-        memory:
-          title: 'Scale down when MEMORY'
-        disk:
-          title: 'Scale down when DISK is'
       when: when
       percentage: Percentage
       target: Target Value
@@ -486,6 +501,8 @@ launcherPage:
         title: Memory
       disk:
         title: Disk
+    vertical:
+      applyScaling: Enable vertical scaling
 
 
 failWhalePage:
