@@ -1,5 +1,19 @@
 var C = {
 
+  WIZARD: {
+    STEPS: {
+      WELCOME: 'welcome',
+      REGISTERADMIN: 'register-admin',
+      ACTIVATE: 'activate-license',
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS: {
+        ACTIVATING: 'activating',
+      }
+    },
+  },
+
   ASSEMBLY: {
     ASSEMBLYOFFPHASES: ["stopped", "failed", "terminated"],
     ASSEMBLYOFF: "OFF",
@@ -37,6 +51,9 @@ var C = {
     MEMBERSHIPSTATUS: {
       MEMBERSHIPSTATUSREGISTERED: "Registered",
       MEMBERSHIPSTATUSCERTIFICATED: "Certificated",
+    },
+    ROLES: {
+      SUPERUSER: "RIOOS:SUPERUSER",
     },
   },
 
@@ -81,7 +98,7 @@ var C = {
 
   MANAGEMENT: {
     STATUS: {
-      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating","awaitpending","standstill"],
+      WARNING: ["bootstrapped", "pending", "scheduled", "initializing", "initialized", "bootstrapping", "booting", "rebooting", "starting", "stopping", "terminating","awaitpending","standstill", "unreachable"],
       SUCCESS: ["running"],
       FAILURE: ["stopped", "failed", "terminated"],
       TERMINATE: ["terminated", "terminating"],

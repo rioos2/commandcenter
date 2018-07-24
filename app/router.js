@@ -21,6 +21,10 @@ Router.map(function () {
     this.route('index', { path: '/' });
   });
 
+  this.route('wizard', { path: '/wizard', resetNamespace: true }, function () {
+    this.route('index', { path: '/' });
+  });
+
   this.route('logout');
 
   this.route('authenticated', { path: '/' }, function () {

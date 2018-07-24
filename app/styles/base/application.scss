@@ -4,4 +4,9 @@
     cursor: not-allowed;
     opacity: 0.6;
   }
+
+  .smooth-disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 }

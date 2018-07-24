@@ -11,6 +11,13 @@ export default Ember.Route.extend({
       {
         this.transitionTo('authenticated');
       }
+      this.get('access').activate().then((config) => {
+        if (!config) {
+            this.transitionTo('wizard');
+        }
+      }).catch((err) => {
+        return Ember.RSVP.reject(err);
+      });
     });
   },
 });

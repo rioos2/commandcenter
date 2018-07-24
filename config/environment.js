@@ -44,6 +44,9 @@ function readLocales(environment) {
   return translationsOut;
 }
 //
+function checkComplition(environment) {
+  return Math.random();
+}
 //
 function readUIConfig(environment) {
   if (!process.env.RIOOS_HOME) {
@@ -67,12 +70,12 @@ module.exports = function (environment) {
   } else {
     console.error("✘ ui config load failed.\n" + loaded);
   }
- 
+
   var ENV = {
     modulePrefix: 'nilavu',
     environment: environment,
     exportApplicationGlobal: true,
-    baseURL: '/',    
+    baseURL: '/',
     locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
@@ -124,7 +127,9 @@ module.exports = function (environment) {
       appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
       sendAnalytics: loaded.send_analytics || false,
       baseAssets: '/',
-      locales: readLocales(environment)
+      configPath: process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
+      locales: readLocales(environment),
+      activationComplete: checkComplition()
     },
   };
 
@@ -137,17 +142,26 @@ module.exports = function (environment) {
   }
 
   if (environment === 'test') {
-    // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
+      // Testem prefers this...
+      ENV.locationType = 'none';
 
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+      // keep test console output quieter
+      ENV.APP.LOG_ACTIVE_GENERATION = false;
+      ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+      ENV.APP.rootElement = '#ember-testing';
+
+      // This is needed so that browserify dependencies in tests work correctly
+      // See https://github.com/ef4/ember-browserify/issues/14
+      ENV.browserify = {
+          tests: true
+      };
+
+      // Withuot manually setting this, pretender won't track requests
+      ENV['ember-cli-mirage'] = {
+          trackRequests: true
+      };
   }
-
 
 
   if (process.env.BASE_URL) {

@@ -6,11 +6,10 @@
 </div>
 {{/if}}
 <div class={{bassContainerCss}}>
-  {{outlet "overlay"}} {{outlet "error"}}
 
   <div class="application">
     {{#unless pageLoader}}
-    {{#if shownavbar}} {{page-navbar}} {{/if}} {{outlet}} {{notification-container position="bottom-right"}}
+    {{outlet}}
     <div class="dropdown" id="resource-actions-parent">
       <ul role="menu" id="resource-actions" class="hide resource-actions global-actions dropdown-menu dropdown-menu-right">
         <li class="resource-actions-tabbable"><a tabindex="-1" id="resource-actions-first" aria-label="Select an Action below"></a></li>

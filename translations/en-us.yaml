@@ -125,6 +125,30 @@ consolePage:
   header: 'Shell:'
   closeButton: Close
 
+wizard:
+  licenseTitle: Licence
+  useTrialVersionHeader: NEW USERS
+  useTrialVersionNote: You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.
+  useTrial: ACTIVATE TRIAL
+  usePurcashedLicenceHeader: ALREADY HAVE A LICENSE?
+  usePurcashedVersionNote: If you already have a license key, use the form and button below to get started now.
+  usePurcashedLicenceBtn: ACTIVATE KEY
+  congratulationText: Congratulations, you installed Rio OS Version 2.0
+  register: Register
+  licenceIdPlaceholder: Enter licence Id
+  licencePwdPlaceholder: Enter licence password
+  welcomeMessage: "<p>The world's first and only enterprise cloud operating system.</p> <p>Finally, The Power Of The Cloud With The Privacy Of Ownership.</p> <p>Launch & Scale Your Own Cloud In Seconds</p> <p>Register a new account to get started.</p>"
+  licenseIDError: Enter licence Id </br>
+  licensePwdError: Enter licence password </br>
+  licenseSuccessMsg: License updated successfully
+  licenseFailedMsg: License update failed
+  loginWithRegisteredAccount: Account already created
+  welcome:
+    title: Welcome
+  register-admin:
+    title: Register
+  activate-license:
+    title: Activate
 stackPage:
   machine: Digital Cloud
   container: Container

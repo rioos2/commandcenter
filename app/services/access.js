@@ -30,13 +30,13 @@ export default Ember.Service.extend(DefaultHeaders, {
     }).then((xhr) => {
       // Auth server can be reached
       return Ember.RSVP.reject('Auth Succeeded');
-    }, (/* err */) => {
+    }, ( /* err */ ) => {
       // Auth server can be reached
       return Ember.RSVP.reject('Auth Failed');
     });
   },
 
-  detect: function () {
+  detect: function() {
     if (this.get('enabled') !== null) {
       return Ember.RSVP.resolve();
     }
@@ -47,7 +47,7 @@ export default Ember.Service.extend(DefaultHeaders, {
     });
   },
 
-  login: function (username, password) {
+  login: function(username, password) {
     var session = this.get('session');
     return this.get('userStore').rawRequest({
       url: '/api/v1/authenticate',
@@ -56,11 +56,11 @@ export default Ember.Service.extend(DefaultHeaders, {
         email: username,
         password: password,
       },
-    }).then((xhr) => {     
+    }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
       var origin;
-     
+
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
@@ -70,7 +70,7 @@ export default Ember.Service.extend(DefaultHeaders, {
         path: '/',
         secure: window.location.protocol === 'http:'
       });
-     
+
       session.setProperties(interesting);
       return xhr;
     }).catch((res) => {
@@ -87,7 +87,22 @@ export default Ember.Service.extend(DefaultHeaders, {
     });
   },
 
-  signup: function (form) {
+  activate: function() {
+    return this.get('userStore').rawRequest({
+      url: '/api/v1/wizards',
+      method: 'GET',
+    }).then((xhr) => {
+      var res;
+      if (xhr.body) {
+        res = xhr.body.registered && xhr.body.licensed
+      }
+      return res;
+    }).catch((err) => {
+      return Ember.RSVP.reject(err);
+    });
+  },
+
+  signup: function(form) {
     var session = this.get('session');
     return this.get('userStore').rawRequest({
       url: '/api/v1/accounts',
@@ -124,7 +139,7 @@ export default Ember.Service.extend(DefaultHeaders, {
     });
   },
 
-  clearSessionKeys: function (all, out = false) {
+  clearSessionKeys: function(all, out = false) {
     if (all === true) {
       this.get('session').clear();
     } else {
@@ -146,8 +161,8 @@ export default Ember.Service.extend(DefaultHeaders, {
       url: '/api/v1/logout',
       method: 'POST',
       data: {
-          email: this.get('session').get("email"),
-          token: this.get('session').get("token"),
+        email: this.get('session').get("email"),
+        token: this.get('session').get("token"),
       },
     })).then((xhr) => {
       this.clearSessionKeys(true, true);

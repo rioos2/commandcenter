@@ -1,4 +1,4 @@
-module.exports = function (app, options) {
+module.exports = function(app, options) {
   var path = require('path');
   var Url = require('url');
   var ForeverAgent = require('forever-agent');
@@ -28,13 +28,14 @@ module.exports = function (app, options) {
 
     }
     var query = Url.parse(req.url, true).query;
-    if(query.target) {
+    if (query.target) {
       target = "ws://" + query.target;
       console.log('Proxy Container Console : ', target);
     }
-    proxy.ws(req, socket, { target: target,
-    ws: true,
-  });
+    proxy.ws(req, socket, {
+      target: target,
+      ws: true,
+    });
   });
 
   let map = {
@@ -60,9 +61,9 @@ module.exports = function (app, options) {
 
   // Rio/OS API
   console.log('Proxying API to', config.apiServer);
-  Object.keys(map).forEach(function (label) {
+  Object.keys(map).forEach(function(label) {
     let base = map[label];
-    app.use(base, function (req, res, next) {
+    app.use(base, function(req, res, next) {
       // include root path in proxied request
       req.url = path.join(base, req.url);
       req.headers['X-Forwarded-Proto'] = req.protocol;
@@ -73,7 +74,7 @@ module.exports = function (app, options) {
   });
 
   // Rio/OS swaggerhub API
-  app.use('/swaggerapi', function (req, res, next) {
+  app.use('/swaggerapi', function(req, res, next) {
     // include root path in proxied request
     req.url = path.join('/swaggerapi', req.url);
     req.headers['X-Forwarded-Proto'] = req.protocol;
@@ -82,7 +83,7 @@ module.exports = function (app, options) {
     proxy.web(req, res);
   });
 
-  app.use('/version', function (req, res, next) {
+  app.use('/version', function(req, res, next) {
     // include root path in proxied request
     req.url = '/version';
     req.headers['X-Forwarded-Proto'] = req.protocol;
@@ -90,7 +91,6 @@ module.exports = function (app, options) {
     proxyLog('r4sVers', req);
     proxy.web(req, res);
   });
-
 
 }
 
@@ -124,7 +124,7 @@ function proxyLog(label, req) {
 }
 
 
-var mockjson = function () {
+var mockjson = function() {
   return {
     kind: "ReportsStatistics",
     apiVersion: "v1",
@@ -161,34 +161,34 @@ function guages() {
   return {
     title: "Cumulative operations counter",
     counters: [{
-      name: "cpu",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString()
-    },
-    {
-      name: "ram",
-      description: "RAM ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString()
-    },
-    {
-      name: "disk",
-      description: "DISK ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString()
-    },
-    {
-      name: "gpu",
-      description: "GPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString()
-    }
+        name: "cpu",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString()
+      },
+      {
+        name: "ram",
+        description: "RAM ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString()
+      },
+      {
+        name: "disk",
+        description: "DISK ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString()
+      },
+      {
+        name: "gpu",
+        description: "GPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString()
+      }
     ]
   };
 };
 
-var findStatistics = function (which) {
+var findStatistics = function(which) {
   switch (which) {
     case 1:
       return statistics();
@@ -207,95 +207,95 @@ function statistics() {
   return {
     title: "Statistics of the nodes",
     nodes: [{
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "325"
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "325"
+        },
+        id: "34567",
+        name: "192.168.1.100",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: 1,
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "34567",
-      name: "192.168.1.100",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: 1,
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "325"
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "325"
+        },
+        id: "67895",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "67895",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "326"
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "326"
+        },
+        id: "67896",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "67896",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "327"
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "327"
+        },
+        id: "67897",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "67897",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "328"
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "328"
+        },
+        id: "67898",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "67898",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "329"
-      },
-      id: "67899",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    }
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "329"
+        },
+        id: "67899",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
+      }
     ]
   };
 };
@@ -304,35 +304,35 @@ function statisticsTwo() {
   return {
     title: "Statistics of the nodes",
     nodes: [{
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "325"
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "325"
+        },
+        id: "34567",
+        name: "192.168.1.100",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
       },
-      id: "34567",
-      name: "192.168.1.100",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    },
-    {
-      kind: "Node",
-      apiVersion: "v1",
-      metadata: {
-        selfLink: "/api/v1/node",
-        resourceVersion: "325"
-      },
-      id: "67895",
-      name: "192.168.1.101",
-      description: "CPU ..Throttled",
-      cpu: "percentage",
-      counter: getRandomInt(1, 100).toString(),
-      cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
-      health: "green/red/yellow"
-    }
+      {
+        kind: "Node",
+        apiVersion: "v1",
+        metadata: {
+          selfLink: "/api/v1/node",
+          resourceVersion: "325"
+        },
+        id: "67895",
+        name: "192.168.1.101",
+        description: "CPU ..Throttled",
+        cpu: "percentage",
+        counter: getRandomInt(1, 100).toString(),
+        cost_of_consumption: getRandomInt(1000, 2000).toString() + " USD",
+        health: "green/red/yellow"
+      }
     ]
   };
 };
@@ -349,38 +349,38 @@ function osusages() {
       alerts: "no"
     },
     items: [{
-      id: "ubuntu",
-      name: "ubuntu",
-      values: [{
-        date: 'Fri Jan 01 2017 00:00:00 GMT+0400',
-        value: getRandomInt(10, 100)
-      }, {
-        date: 'Fri Jan 02 2017 00:00:00 GMT+0400 ',
-        value: getRandomInt(10, 100)
-      }, {
-        date: 'Fri Jan 03 2017 00:00:00 GMT+0400 ',
-        value: getRandomInt(10, 100)
-      }]
-    },
-    {
-      id: "apple",
-      name: "apple",
-      values: [{
-        date: 'Fri Jan 01 2017 00:00:00 GMT+0400',
-        value: getRandomInt(10, 100)
-      }, {
-        date: 'Fri Jan 02 2017 00:00:00 GMT+0400 ',
-        value: getRandomInt(10, 100)
-      }, {
-        date: 'Fri Jan 03 2017 00:00:00 GMT+0400 ',
-        value: getRandomInt(10, 100)
-      }]
-    },
+        id: "ubuntu",
+        name: "ubuntu",
+        values: [{
+          date: 'Fri Jan 01 2017 00:00:00 GMT+0400',
+          value: getRandomInt(10, 100)
+        }, {
+          date: 'Fri Jan 02 2017 00:00:00 GMT+0400 ',
+          value: getRandomInt(10, 100)
+        }, {
+          date: 'Fri Jan 03 2017 00:00:00 GMT+0400 ',
+          value: getRandomInt(10, 100)
+        }]
+      },
+      {
+        id: "apple",
+        name: "apple",
+        values: [{
+          date: 'Fri Jan 01 2017 00:00:00 GMT+0400',
+          value: getRandomInt(10, 100)
+        }, {
+          date: 'Fri Jan 02 2017 00:00:00 GMT+0400 ',
+          value: getRandomInt(10, 100)
+        }, {
+          date: 'Fri Jan 03 2017 00:00:00 GMT+0400 ',
+          value: getRandomInt(10, 100)
+        }]
+      },
     ]
   };
 }
 
-var mockjsonAssembly = function () {
+var mockjsonAssembly = function() {
   return {
     kind: "AssemblyList",
     apiVersion: "v1",
@@ -394,7 +394,7 @@ var mockjsonAssembly = function () {
   };
 };
 
-var findAssembly = function (which) {
+var findAssembly = function(which) {
   switch (which) {
     case 1:
       return assemblys();
@@ -413,7 +413,7 @@ var findAssembly = function (which) {
   }
 }
 
-var findAssemblyStatus = function (which) {
+var findAssemblyStatus = function(which) {
   switch (which) {
     case 1:
       return "Running";
@@ -426,763 +426,764 @@ var findAssemblyStatus = function (which) {
       return "Pending";
 
       break;
-    // case 4:
-    //   return "Test";
-    //
-    //   break;
+      // case 4:
+      //   return "Test";
+      //
+      //   break;
     default:
       return "Running";
 
   }
 }
 
-var assemblys = function () {
+var assemblys = function() {
 
   return [{
-    id: "878113037117038592",
-    type_meta: {
+      id: "878113037117038592",
+      type_meta: {
+        kind: "Assembly",
+        api_version: "v1"
+      },
       kind: "Assembly",
-      api_version: "v1"
-    },
-    kind: "Assembly",
-    type: "Assembly",
-    object_meta: {
-      name: "levi1",
-      // name:Math.random(),
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: findAssemblyStatus(Math.floor(Math.random() * 3) + 1)
-    },
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+      type: "Assembly",
+      object_meta: {
+        name: "levi1",
+        // name:Math.random(),
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: findAssemblyStatus(Math.floor(Math.random() * 3) + 1)
+      },
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "14.0"
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge3",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "14.0"
-      },
-      metrics: {
-        name: "gauge3",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-
-  //second
-  {
-    id: "878113037117038593",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
     },
-    object_meta: {
-      name: "leviTwo",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
+
+    //second
+    {
+      id: "878113037117038593",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
         name: "leviTwo",
-      }],
-    },
-    status: {
-      phase: "Running"
-    },
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
+          name: "leviTwo",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
-          name: "levi.megam.io",
-          account: "870109412813971456",
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "NewYork",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "NewYork",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "fedora",
+          },
+          category: "os",
+          version: "5.0.2"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge4",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "fedora",
-        },
-        category: "os",
-        version: "5.0.2"
-
-
-      },
-      metrics: {
-        name: "gauge4",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-
-  //third
-
-  {
-    id: "878113037117038594",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
-    },
-    object_meta: {
-      name: "leviThree",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: "Pending"
     },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+    //third
+
+    {
+      id: "878113037117038594",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
+        name: "leviThree",
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: "Pending"
+      },
+
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "1.1"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge5",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "1.1"
-
-
-      },
-      metrics: {
-        name: "gauge5",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-
-  //four
-
-  {
-    id: "878113037117038595",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
-    },
-    object_meta: {
-      name: "leviFour",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: "Running"
     },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+    //four
+
+    {
+      id: "878113037117038595",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
+        name: "leviFour",
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
+
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "1.2"
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge6",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "1.2"
-
-      },
-      metrics: {
-        name: "gauge6",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-  {
-    id: "878113037117038596",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
     },
-    object_meta: {
-      name: "leviFive",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "leviTwo",
-      }],
-    },
-    status: {
-      phase: "Running"
-    },
+    {
+      id: "878113037117038596",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
+        name: "leviFive",
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
+          name: "leviTwo",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
-          name: "levi.megam.io",
-          account: "870109412813971456",
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "NewYork",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "NewYork",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "debian",
+          },
+          category: "os",
+          version: "0.0.7"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge7",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "debian",
-        },
-        category: "os",
-        version: "0.0.7"
-
-
-      },
-      metrics: {
-        name: "gauge7",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-  {
-    id: "878113037117038597",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
     },
-    object_meta: {
-      name: "leviSix",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "leviTwo",
-      }],
-    },
-    status: {
-      phase: "Running"
-    },
+    {
+      id: "878113037117038597",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
+        name: "leviSix",
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
+          name: "leviTwo",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
-          name: "levi.megam.io",
-          account: "870109412813971456",
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "debian",
+          },
+          category: "os",
+          version: "0.0.8"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge8",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "debian",
-        },
-        category: "os",
-        version: "0.0.8"
-
-
-      },
-      metrics: {
-        name: "gauge8",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
     }
-  }
   ]
 
 };
 
-var assemblysTwo = function () {
+var assemblysTwo = function() {
 
   return [{
-    id: "878113037117038592",
-    type_meta: {
+      id: "878113037117038592",
+      type_meta: {
+        kind: "Assembly",
+        api_version: "v1"
+      },
       kind: "Assembly",
-      api_version: "v1"
-    },
-    kind: "Assembly",
-    type: "Assembly",
-    object_meta: {
-      name: "levi1",
-      // name:Math.random(),
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: findAssemblyStatus(Math.floor(Math.random() * 3) + 1)
-    },
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+      type: "Assembly",
+      object_meta: {
+        name: "levi1",
+        // name:Math.random(),
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: findAssemblyStatus(Math.floor(Math.random() * 3) + 1)
+      },
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "14.0"
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge3",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "14.0"
-      },
-      metrics: {
-        name: "gauge3",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-
-  //second
-  {
-    id: "878113037117038593",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
     },
-    object_meta: {
-      name: "leviTwo",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
+
+    //second
+    {
+      id: "878113037117038593",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
         name: "leviTwo",
-      }],
-    },
-    status: {
-      phase: "Running"
-    },
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
+          name: "leviTwo",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
-          name: "levi.megam.io",
-          account: "870109412813971456",
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "NewYork",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "NewYork",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "fedora",
+          },
+          category: "os",
+          version: "5.0.2"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge4",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "fedora",
-        },
-        category: "os",
-        version: "5.0.2"
-
-
-      },
-      metrics: {
-        name: "gauge4",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },]
+    },
+  ]
 
 };
 
-var assemblysThree = function () {
+var assemblysThree = function() {
 
   return [{
-    id: "878113037117038592",
-    type_meta: {
+      id: "878113037117038592",
+      type_meta: {
+        kind: "Assembly",
+        api_version: "v1"
+      },
       kind: "Assembly",
-      api_version: "v1"
-    },
-    kind: "Assembly",
-    type: "Assembly",
-    object_meta: {
-      name: "levi1",
-      // name:Math.random(),
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: "Running"
-    },
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+      type: "Assembly",
+      object_meta: {
+        name: "levi1",
+        // name:Math.random(),
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: "Running"
+      },
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Ooty",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "machine"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Ooty",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "machine"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "14.0"
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge3",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "14.0"
-      },
-      metrics: {
-        name: "gauge3",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
-
-  {
-    id: "878113037117038594",
-    type_meta: {
-      kind: "Assemblys",
-      api_version: "v1"
-    },
-    object_meta: {
-      name: "leviThree",
-      account: "876624987807555584",
-      created_at: "2017-12-22T12:23:42.244646102+00:00",
-      owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "levi.megam.io",
-      }],
-    },
-    status: {
-      phase: "Pending"
     },
 
-    kind: "Assembly",
-    type: "Assembly",
-    spec: {
-      assembly_factory: {
-        id: "87543211234567876",
-        created_at: "2017-12-11T11:29:50.547529+00:00",
-        object_meta: {
+    {
+      id: "878113037117038594",
+      type_meta: {
+        kind: "Assemblys",
+        api_version: "v1"
+      },
+      object_meta: {
+        name: "leviThree",
+        account: "876624987807555584",
+        created_at: "2017-12-22T12:23:42.244646102+00:00",
+        owner_references: [{
+          kind: "AssemblyFactory",
+          api_version: "v1",
           name: "levi.megam.io",
-          account: "870109412813971456",
+        }],
+      },
+      status: {
+        phase: "Pending"
+      },
+
+      kind: "Assembly",
+      type: "Assembly",
+      spec: {
+        assembly_factory: {
+          id: "87543211234567876",
           created_at: "2017-12-11T11:29:50.547529+00:00",
-          cluster_name: "Chennai",
-          labels: {
-            rioos_environment: "development",
-            rioos_category: "container"
+          object_meta: {
+            name: "levi.megam.io",
+            account: "870109412813971456",
+            created_at: "2017-12-11T11:29:50.547529+00:00",
+            cluster_name: "Chennai",
+            labels: {
+              rioos_environment: "development",
+              rioos_category: "container"
+            }
+          },
+          replicas: 5,
+          resources: {
+            compute_type: "cpu",
+            storage_type: "hdd"
+          },
+          secret: {
+            id: "87665544332234"
+          },
+          plan: "8989876543344556",
+          status: {
+            phase: "ready"
           }
         },
-        replicas: 5,
-        resources: {
-          compute_type: "cpu",
-          storage_type: "hdd"
+        plan_data: {
+          object_meta: {
+            name: "ubuntu",
+          },
+          category: "os",
+          version: "1.1"
+
+
         },
-        secret: {
-          id: "87665544332234"
+        metrics: {
+          name: "gauge5",
+          counter: getRandomInt(10, 100),
         },
-        plan: "8989876543344556",
-        status: {
-          phase: "ready"
+        endpoints: {
+          subsets: {
+            addresses: [{
+              name: "private",
+              ip: "192.168.1.11",
+              protocol_version: "ipv4"
+            }],
+          },
         }
-      },
-      plan_data: {
-        object_meta: {
-          name: "ubuntu",
-        },
-        category: "os",
-        version: "1.1"
-
-
-      },
-      metrics: {
-        name: "gauge5",
-        counter: getRandomInt(10, 100),
-      },
-      endpoints: {
-        subsets: {
-          addresses: [{
-            name: "private",
-            ip: "192.168.1.11",
-            protocol_version: "ipv4"
-          }],
-        },
       }
-    }
-  },
+    },
   ]
 
 };
