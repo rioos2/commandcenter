@@ -475,6 +475,7 @@ launcherPage:
       ram: Ram
   scaling:
     emptyScaling:  You forgot to type a resource
+    description: Select scaling configuration ( Horizontal / vertical )
     invalidFormat: Enter vaild data
     title: SCALING
     scale:
@@ -483,12 +484,12 @@ launcherPage:
       cpu:
         title:  'Scale up when CPU is'
       cpuChooser:
-        title: Select maximum number of cores
+        title: Upper limit for the number of cores
         description: From 1 to 30
       storageCapacity:
-        title: Min Storage Capacity
+        title: Upper limit - Storage Capacity
       ramChooser:
-        title: max ram
+        title: Upper limit - Ram
       memory:
         title: 'Scale up when MEMORY is'
       disk:
@@ -497,19 +498,18 @@ launcherPage:
       cpu:
         title:  'Scale down when CPU is'
       cpuChooser:
-        title: Select minimum number of cores
+        title: Lower limit for the number of cores
         description: From 1 to 30
       storageCapacity:
-        title: Max Storage Capacity
+        title: Lower limit - Storage Capacity
       ramChooser:
-        title: min ram
+        title: Lower limit - Ram
       memory:
         title: 'Scale down when MEMORY'
       disk:
         title: 'Scale down when DISK is'
     horizontal:
       title: HORIZONTAL SCALING
-      description: Select horizontal scaling configuration
       minReplivas: Lower limit for the number of replicas set by Rio/OS
       maxReplivas: Upper limit for the number of replicas set by Rio/OS
       scaleUpwaitTime: Select minutes to wait before another upscale operation
@@ -528,6 +528,7 @@ launcherPage:
         title: Disk
     vertical:
       applyScaling: Enable vertical scaling
+      scalingWaitTimeTitle: Select Autoscale Wait Time
 
 
 failWhalePage:
