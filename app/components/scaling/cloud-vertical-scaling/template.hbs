@@ -1,19 +1,7 @@
   <div class="select-domain">
     <div class="row">
       <div class="scaling-content">
-        <p class="title">{{t 'launcherPage.scaling.horizontal.scalingReplicaWaitTimeTitle'}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 ">
-        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.minReplivas'}}</p>
-        <p class="sub-description text-center ">{{model.hscaling.spec.min_replicas}}</p>
-        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setMinReplicas" showEditBox=showMinReplicasEditBox btnName=btnName}}
-      </div>
-      <div class="col-md-6">
-        <p class="sub-description">{{t 'launcherPage.scaling.horizontal.maxReplivas'}} </p>
-        <p class="sub-description text-center">{{model.hscaling.spec.max_replicas}}</p>
-        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setMaxReplicas" showEditBox=showMaxReplicasEditBox btnName=btnName}}
+        <p class="title">{{t 'launcherPage.scaling.vertical.scalingWaitTimeTitle'}}</p>
       </div>
     </div>
     <div class="row">
@@ -39,7 +27,7 @@
       {{radio-button checked=(eq "cpu" selectedTab) value=selectedTab selection=selectedTab id="cpu" name="tab-control"}} {{radio-button checked=(eq "memory" selectedTab) value=selectedTab selection=selectedTab id="memory" name="tab-control"}} {{radio-button checked=(eq "disk" selectedTab) value=selectedTab selection=selectedTab id="disk" name="tab-control"}}
       <ul class="dashboardNav">
         {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="cpu"}}
-         {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="memory"}}
+        {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="memory"}}
          {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="disk" }}
       </ul>
       <div class="slider">

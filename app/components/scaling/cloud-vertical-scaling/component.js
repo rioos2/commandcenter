@@ -11,15 +11,11 @@ export default Component.extend({
   selectedTab: 'cpu',
   panels: [],
   showScaleUpTimeEditBox: true,
-  showMaxReplicasEditBox: true,
-  showMinReplicasEditBox: true,
   showScaleDownTimeEditBox: true,
 
   didInsertElement() {
-    this.set('newMinReplicas', this.get('model.hscaling.spec.min_replicas'));
-    this.set('newMaxReplicas', this.get('model.hscaling.spec.max_replicas'));
-    this.set('newUpTime', this.get('model.hscaling.spec.scale_up_wait_time'));
-    this.set('newDownTime', this.get('model.hscaling.spec.scale_down_wait_time'));
+    this.set('newUpTime', this.get('model.vscaling.spec.scale_up_wait_time'));
+    this.set('newDownTime', this.get('model.vscaling.spec.scale_down_wait_time'));
   },
 
   btnName: function() {
@@ -49,19 +45,6 @@ export default Component.extend({
 
   actions: {
 
-    setMinReplicas(newMinReplicas) {
-      this.set('showMinReplicasEditBox', true);
-      if (this.validate(newMinReplicas)) {
-        this.set("model.hscaling.spec.min_replicas", parseInt(newMinReplicas));
-      }
-
-    },
-    setMaxReplicas(newMaxReplicas) {
-      this.set('showMaxReplicasEditBox', true);
-      if (this.validate(newMaxReplicas)) {
-        this.set("model.hscaling.spec.max_replicas", parseInt(newMaxReplicas));
-      }
-    },
     setScaleDownTime(newDownTime) {
       this.set('showScaleDownTimeEditBox', true);
       if (this.validate(newDownTime)) {

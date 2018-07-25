@@ -1,1 +1,5 @@
-{{scaling/cloud-memory-resource-type-chooser name=tab category=category model=model selectedTab=selectedTab showLoading=showLoading}}
+{{#if scalingRuleApplied}}
+{{scaling/cloud-hscaling-memory-resource-type-chooser name=name category=category model=model selectedTab=selectedTab showLoading=showLoading resources=resources scaleType=scaleType}}
+{{else}}
+{{scaling/cloud-vscaling-memory-resource-type-chooser name=name category=category model=model selectedTab=selectedTab showLoading=showLoading resources=resources scaleType=scaleType}}
+{{/if}}

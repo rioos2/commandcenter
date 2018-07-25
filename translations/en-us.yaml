@@ -475,10 +475,41 @@ launcherPage:
       ram: Ram
   scaling:
     emptyScaling:  You forgot to type a resource
+    description: Select scaling configuration ( Horizontal / vertical )
     invalidFormat: Enter vaild data
+    title: SCALING
+    scale:
+      description: ' %'
+    scaleup:
+      cpu:
+        title:  'Scale up when CPU is'
+      cpuChooser:
+        title: Upper limit for the number of cores
+        description: From 1 to 30
+      storageCapacity:
+        title: Upper limit - Storage Capacity
+      ramChooser:
+        title: Upper limit - Ram
+      memory:
+        title: 'Scale up when MEMORY is'
+      disk:
+        title: 'Scale up when DISK is'
+    scaledown:
+      cpu:
+        title:  'Scale down when CPU is'
+      cpuChooser:
+        title: Lower limit for the number of cores
+        description: From 1 to 30
+      storageCapacity:
+        title: Lower limit - Storage Capacity
+      ramChooser:
+        title: Lower limit - Ram
+      memory:
+        title: 'Scale down when MEMORY'
+      disk:
+        title: 'Scale down when DISK is'
     horizontal:
       title: HORIZONTAL SCALING
-      description: Select horizontal scaling configuration
       minReplivas: Lower limit for the number of replicas set by Rio/OS
       maxReplivas: Upper limit for the number of replicas set by Rio/OS
       scaleUpwaitTime: Select minutes to wait before another upscale operation
@@ -486,22 +517,6 @@ launcherPage:
       scalingRuleTitle:  Select Autoscale Policies
       scalingReplicaWaitTimeTitle: Select Autoscale Replicas
       applyScaling: Enable Horizontal Scaling
-      scaleup:
-        description: ' %'
-        cpu:
-          title:  'Scale up when CPU is'
-        memory:
-          title: 'Scale up when MEMORY is'
-        disk:
-          title: 'Scale up when DISK is'
-      scaledown:
-        description: ' %'
-        cpu:
-          title:  'Scale down when CPU is'
-        memory:
-          title: 'Scale down when MEMORY'
-        disk:
-          title: 'Scale down when DISK is'
       when: when
       percentage: Percentage
       target: Target Value
@@ -511,6 +526,9 @@ launcherPage:
         title: Memory
       disk:
         title: Disk
+    vertical:
+      applyScaling: Enable vertical scaling
+      scalingWaitTimeTitle: Select Autoscale Wait Time
 
 
 failWhalePage:
