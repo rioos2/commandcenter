@@ -1,24 +1,25 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  application : Ember.inject.controller(),
-  settings    : Ember.inject.service(),
-  currentPath : Ember.computed.alias('application.currentPath'),
-  error       : null,
+  application: Ember.inject.controller(),
+  settings:    Ember.inject.service(),
+  error:       null,
 
-  isPopup: Ember.computed.alias('application.isPopup'),
+  //Tells us current path of ember application
+  currentPath: Ember.computed.alias('application.currentPath'),
 
   bootstrap: function() {
     Ember.run.schedule('afterRender', this, () => {
       this.get('application').setProperties({
-        error: null,
+        error:             null,
         error_description: null,
-        state: null,
+        state:             null,
       });
 
-      let bg = this.get(`prefs.${C.PREFS.BODY_BACKGROUND}`);
-      if ( bg ) {
+      let bg = this.get(`prefs.${ C.PREFS.BODY_BACKGROUND }`);
+
+      if (bg) {
         $('BODY').css('background', bg);
       }
     });
@@ -31,7 +32,7 @@ export default Ember.Controller.extend({
 
   isReady: function() {
     return this.get('projects.isReady') && this.get('hasHosts');
-  }.property('projects.isReady','hasHosts'),
+  }.property('projects.isReady', 'hasHosts'),
 
   forceUpgrade: function() {
     return this.get('currentPath').indexOf('authenticated.settings.projects') !== 0 &&

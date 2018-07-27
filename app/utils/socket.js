@@ -1,6 +1,5 @@
-import Ember from "ember";
 import { isSafari } from 'nilavu/utils/platform';
-import Util from 'nilavu/utils/util';
+import Ember from 'ember';
 
 var INSECURE = 'ws://';
 var SECURE = 'wss://';
@@ -14,24 +13,25 @@ const CLOSING = 'closing';
 const RECONNECTING = 'reconnecting';
 
 export default Ember.Object.extend(Ember.Evented, {
-  url: null,
+  url:           null,
   autoReconnect: true,
-  frameTimeout: 300000,
-  metadata: null,
+  frameTimeout:  300000,
+  metadata:      null,
 
-  _socket: null,
-  _state: DISCONNECTED,
+  _socket:         null,
+  _state:          DISCONNECTED,
   _framesReceived: 0,
-  _frameTimer: null,
+  _frameTimer:     null,
   _reconnectTimer: null,
-  _tries: 0,
-  _disconnectCbs: null,
+  _tries:          0,
+  _disconnectCbs:  null,
   _disconnectedAt: null,
-  _closingId: null,
+  _closingId:      null,
 
   connect(metadata) {
     if (this.get('_socket')) {
       console.error('Socket refusing to connect while another socket exists');
+
       return;
     }
 
@@ -47,9 +47,11 @@ export default Ember.Object.extend(Ember.Evented, {
     }
 
     var id = sockId++;
-    console.log(`Socket connecting (id=${id}, url=${url.replace(/\?.*/,'')+'...'})`);
+
+    console.log(`Socket connecting (id=${ id }, url=${ `${ url.replace(/\?.*/, '')  }...` })`);
 
     var socket = new WebSocket(url);
+
     socket.__sockId = id;
     socket.metadata = this.get('metadata');
     socket.onmessage = Ember.run.bind(this, this._message);
@@ -59,7 +61,7 @@ export default Ember.Object.extend(Ember.Evented, {
 
     this.setProperties({
       _socket: socket,
-      _state: CONNECTING,
+      _state:  CONNECTING,
     });
   },
 
@@ -83,6 +85,7 @@ export default Ember.Object.extend(Ember.Evented, {
 
   getMetadata() {
     let socket = this.get('_socket');
+
     if (socket) {
       return socket.metadata;
     } else {
@@ -92,6 +95,7 @@ export default Ember.Object.extend(Ember.Evented, {
 
   getId() {
     let socket = this.get('_socket');
+
     if (socket) {
       return socket.__sockId;
     } else {
@@ -101,6 +105,7 @@ export default Ember.Object.extend(Ember.Evented, {
 
   _close() {
     var socket = this.get('_socket');
+
     if (socket) {
       try {
         this._log('closing');
@@ -114,9 +119,7 @@ export default Ember.Object.extend(Ember.Evented, {
         // Meh..
       }
 
-      this.setProperties({
-        _state: CLOSING,
-      });
+      this.setProperties({ _state: CLOSING, });
     }
   },
 
@@ -126,12 +129,13 @@ export default Ember.Object.extend(Ember.Evented, {
 
     var at = this.get('_disconnectedAt');
     var after = null;
+
     if (at) {
       after = now - at;
     }
 
     this.setProperties({
-      _state: CONNECTED,
+      _state:          CONNECTED,
       _framesReceived: 0,
       _disconnectedAt: null,
     });
@@ -154,6 +158,7 @@ export default Ember.Object.extend(Ember.Evented, {
     }
 
     let timeout = this.get('frameTimeout');
+
     if (timeout && this.get('_state') === CONNECTED) {
       this.set('_frameTimer', Ember.run.later(this, function() {
         this._log('Socket watchdog expired after', timeout, 'closing');
@@ -168,19 +173,21 @@ export default Ember.Object.extend(Ember.Evented, {
   },
 
   _closed() {
-
     this.set('_closingId', null);
     this.set('_socket', null);
     Ember.run.cancel(this.get('_reconnectTimer'));
     Ember.run.cancel(this.get('_frameTimer'));
 
     let cbs = this.get('_disconnectCbs') || [];
+
     while (cbs.get('length')) {
       let cb = cbs.popObject();
+
       cb.apply(this);
     }
 
     let wasConnected = false;
+
     if ([CONNECTED, CLOSING].indexOf(this.get('_state')) >= 0) {
       this.trigger('disconnected');
       wasConnected = true;
@@ -201,20 +208,22 @@ export default Ember.Object.extend(Ember.Evented, {
       this.set('_state', RECONNECTING);
       this.incrementProperty('_tries');
       let delay = Math.max(1000, Math.min(1000 * this.get('_tries'), 30000));
+
       this.set('_reconnectTimer', Ember.run.later(this, this.connect, delay));
     } else {
       this.set('_state', DISCONNECTED);
     }
   },
 
-  _log( /*arguments*/ ) {
+  _log(/* arguments*/) {
     var args = ['Socket'];
+
     for (var i = 0; i < arguments.length; i++) {
       args.push(arguments[i]);
     }
 
-    args.push(`(state=${this.get('_state')}, id=${this.get('_socket.__sockId')})`);
+    args.push(`(state=${ this.get('_state') }, id=${ this.get('_socket.__sockId') })`);
 
-    console.log(args.join(" "));
+    console.log(args.join(' '));
   },
 });

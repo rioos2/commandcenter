@@ -4,13 +4,13 @@
   <div class="container">
     <h1>{{t 'loginPage.greeting'}}</h1>
     <form>
-      <div class="form-group {{val_username}}">
+      <div class="form-group {{userNameValidate}}">
         {{input type="text" class="login-user" value=username}}
         <label class="{{if username 'data-exist'}} control-label" for="input">{{t 'loginPage.usernameLabel'}}</label>
         <i class="bar"></i>
       </div>
 
-      <div class="form-group {{val_password}}">
+      <div class="form-group {{passwordValidate}}">
         {{input type=(if showPassword "text" "password") class="login-password" value=password}}
         <label class="{{if password 'data-exist'}} control-label" for="input">
           {{t 'loginPage.passwordLabel'}}

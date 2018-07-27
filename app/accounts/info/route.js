@@ -1,24 +1,23 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import {
-  xhrConcur
-} from 'nilavu/utils/platform';
-const { get} = Ember;
+import { xhrConcur } from 'nilavu/utils/platform';
+import Ember from 'ember';
+const { get } = Ember;
 
 
 export default Ember.Route.extend(DefaultHeaders, {
 
-  access: Ember.inject.service(),
+  access:  Ember.inject.service(),
   session: Ember.inject.service(),
-  intl:       Ember.inject.service(),
+  intl:    Ember.inject.service(),
 
   model() {
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-        profile: this.cbFind('account','accounts/' + this.get('session').get("id")),
-        logData: this.cbFind('audit','accounts/' + this.get('session').get("id")+ '/audits'),
+        profile: this.cbFind('account', `accounts/${  this.get('session').get('id') }`),
+        logData: this.cbFind('audit', `accounts/${  this.get('session').get('id')  }/audits`),
       };
-      async.auto(tasks, xhrConcur, function(err, res) {
+
+      async.auto(tasks, xhrConcur, (err, res) => {
         if (err) {
           reject(err);
         } else {
@@ -26,6 +25,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         }
       });
     }, 'Load all the things');
+
     return promise.then((hash) => {
       return Ember.Object.create({
         profile: hash.profile,
@@ -37,9 +37,10 @@ export default Ember.Route.extend(DefaultHeaders, {
   },
 
   afterModel(model) {
-   if(!(model.profile.content == undefined)) {
-     model.profile = model.profile.content[0];
+    if (!(model.profile.content == undefined)) {
+      model.profile = model.profile.content[0];
     }
+
     return model;
   },
 
@@ -50,9 +51,9 @@ export default Ember.Route.extend(DefaultHeaders, {
         results = null;
       }
 
-      return this.get('store').find(type, null,this.opts(url)).then(function(res) {
+      return this.get('store').find(type, null, this.opts(url)).then((res) => {
         cb(null, res);
-      }).catch(function(err) {
+      }).catch((err) => {
         cb(null, err);
       });
     };

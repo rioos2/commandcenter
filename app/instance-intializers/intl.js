@@ -1,5 +1,5 @@
-import Ember from 'ember';
 import missingMessage from 'nilavu/utils/intl/missing-message';
+import Ember from 'ember';
 const { get, makeArray } = Ember;
 
 export function initialize(instance) {
@@ -13,23 +13,24 @@ export function initialize(instance) {
 
       if (locales[0] === 'none') {
         return missingMessage(key, locales);
-      } else if ( key ) {
+      } else if (key) {
         return this._findTranslationByKey(...arguments);
-      }else {
+      } else {
         return this._findTranslationByKey('generic.missing', locales);
       }
     },
 
     tHtml(key, ...args) {
-      const [ options ] = args;
+      const [options] = args;
       const translation = this.findTranslationByKey(key, options && options.locale);
+
       return this.formatHtmlMessage(translation, ...args);
     }
   });
 }
 
 export default {
-  name: 'intl',
-  after: 'ember-intl',
-  initialize: initialize
+  name:       'intl',
+  after:      'ember-intl',
+  initialize
 };

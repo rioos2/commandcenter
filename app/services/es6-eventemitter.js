@@ -1,11 +1,11 @@
 
-import Ember from 'ember';
+import Service from '@ember/service';
 import C from '../utils/constants';
 import EventEmitter from 'npm:es6-eventemitter';
 
 const emitter = new EventEmitter();
 
-export default Ember.Service.extend({
+export default Service.extend({
 
   init() {
     this._super();
@@ -16,7 +16,7 @@ export default Ember.Service.extend({
     });
   },
 
-  emit: function (events, key) {
+  emit(events, key) {
     emitter.emit(events, key);
   },
 });

@@ -1,6 +1,6 @@
-import Ember from 'ember';
-import Socket from 'nilavu/utils/socket';
 import C from 'nilavu/utils/constants';
+import Socket from 'nilavu/utils/socket';
+import Ember from 'ember';
 
 const { get } = Ember;
 
@@ -8,10 +8,10 @@ const { get } = Ember;
 export default Ember.Object.extend({
 
   subscribeSocket: null,
-  reconnect: true,
-  connected: false,
-  reportsUrl: false,
-  url: null,
+  reconnect:       true,
+  connected:       false,
+  reportsUrl:      false,
+  url:             null,
 
   init() {
     this._super();
@@ -24,26 +24,30 @@ export default Ember.Object.extend({
     socket.on('message', (event) => {
       Ember.run.schedule('actions', this, function() {
         // Fail-safe: make sure the message is for this project
-        var currentProject = this.get(`tab-session.${C.TABSESSION.PROJECT}`);
+        var currentProject = this.get(`tab-session.${ C.TABSESSION.PROJECT }`);
         var metadata = socket.getMetadata();
         var socketProject = metadata.projectId;
+
         if (currentProject !== socketProject) {
-          console.error(`Subscribe ignoring message, current=${currentProject} socket=${socketProject} ` + this.forStr());
+          console.error(`Subscribe ignoring message, current=${ currentProject } socket=${ socketProject } ${  this.forStr() }`);
           this.connectSubscribe(this.get('url'));
+
           return;
         }
 
         var d = JSON.parse(event.data);
         let resource;
+
         if (d) {
-          resource = d.data ? store._typeify(d.data) : store._typeify(d) ;
+          resource = d.data ? store._typeify(d.data) : store._typeify(d);
           d.data = resource;
         }
 
-        //this._trySend('subscribeMessage',d);
+        // this._trySend('subscribeMessage',d);
 
         if (d.name === 'resource.change') {
-          let key = d.resourceType + 'Changed';
+          let key = `${ d.resourceType  }Changed`;
+
           if (this[key]) {
             this[key](d);
           }
@@ -58,7 +62,6 @@ export default Ember.Object.extend({
               store._remove(baseType, resource);
             }
           }
-
         } else if (d.name === 'ping') {
           this.subscribePing(d);
         }
@@ -70,31 +73,32 @@ export default Ember.Object.extend({
     });
 
     socket.on('disconnected', () => {
-
       this.subscribeDisconnected(this.get('tries'));
     });
 
     this.set('subscribeSocket', socket);
   },
 
-  connectSubscribe(url="") {
+  connectSubscribe(url = '') {
     var socket = this.get('subscribeSocket');
-    var projectId = this.get(`tab-session.${C.TABSESSION.PROJECT}`);
+    var projectId = this.get(`tab-session.${ C.TABSESSION.PROJECT }`);
+
     this.set('reconnect', true);
     this.set('url', url);
 
     socket.setProperties({
-      url: url,
+      url,
       autoReconnect: true,
     });
-    socket.reconnect({ projectId: projectId });
+    socket.reconnect({ projectId });
   },
 
   disconnectSubscribe(cb) {
     this.set('reconnect', false);
     var socket = this.get('subscribeSocket');
+
     if (socket && socket._state !== 'disconnected') {
-      console.log('Subscribe disconnect ' + this.forStr());
+      console.log(`Subscribe disconnect ${  this.forStr() }`);
       socket.disconnect(cb);
     } else if (cb) {
       cb();
@@ -105,23 +109,25 @@ export default Ember.Object.extend({
   forStr() {
     let out = '';
     let socket = this.get('subscribeSocket');
-    var projectId = this.get(`tab-session.${C.TABSESSION.PROJECT}`);
+    var projectId = this.get(`tab-session.${ C.TABSESSION.PROJECT }`);
+
     if (socket) {
-      out = '(projectId=' + projectId + ', sockId=' + socket.getId() + ')';
+      out = `(projectId=${  projectId  }, sockId=${  socket.getId()  })`;
     }
 
     return out;
   },
 
   // WebSocket connected
-  subscribeConnected: function(tries, msec) {
+  subscribeConnected(tries, msec) {
     this.set('connected', true);
 
-    let msg = 'Subscribe connected ' + this.forStr();
+    let msg = `Subscribe connected ${  this.forStr() }`;
+
     if (tries > 0) {
-      msg += ' (after ' + tries + ' ' + (tries === 1 ? 'try' : 'tries');
+      msg += ` (after ${  tries  } ${  tries === 1 ? 'try' : 'tries' }`;
       if (msec) {
-        msg += ', ' + (msec / 1000) + ' sec';
+        msg += `, ${  msec / 1000  } sec`;
       }
 
       msg += ')';
@@ -131,17 +137,17 @@ export default Ember.Object.extend({
   },
 
   // WebSocket disconnected (unexpectedly)
-  subscribeDisconnected: function() {
+  subscribeDisconnected() {
     this.set('connected', false);
 
-    console.log('Subscribe disconnected ' + this.forStr());
+    console.log(`Subscribe disconnected ${  this.forStr() }`);
     if (this.get('reconnect')) {
       this.connectSubscribe(this.get('url'));
     }
   },
 
-  subscribePing: function() {
-    console.log('Subscribe ping ' + this.forStr());
+  subscribePing() {
+    console.log(`Subscribe ping ${  this.forStr() }`);
   },
 
 });

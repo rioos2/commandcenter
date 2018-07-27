@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
       this.set('val_email', '')
       this.set('emailExistence', true);
     } else {
-      this.set('val_email', 'has-error');
+      this.set('val_email', 'credential-empty');
       this.set('emailErrorMsg', get(this, 'intl').t('notifications.validEmail'));
       this.set('emailExistence', false);
     }
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
                 });
               }
               if (err.code == '409') {
-                this.set('val_email', 'has-error');
+                this.set('val_email', 'credential-empty');
                 this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
                 this.set('emailExistence', false);
               }
@@ -64,11 +64,11 @@ export default Ember.Controller.extend({
   },
 
   check() {
-    this.get('company_name') != null && this.get('company_name') != "" ? this.set('val_company', '') : this.set('val_company', 'has-error');
-    this.get('first_name') != null && this.get('first_name') != "" ? this.set('val_firstName', '') : this.set('val_firstName', 'has-error');
-    this.get('last_name') != null && this.get('last_name') != "" ? this.set('val_lastName', '') : this.set('val_lastName', 'has-error');
-    this.get('phone') != null && this.get('phone') != "" ? this.set('val_phone', '') : this.set('val_phone', 'has-error');
-    this.get('password') != null && this.get('password') != "" ? this.set('val_code', '') : this.set('val_code', 'has-error');
+    this.get('company_name') != null && this.get('company_name') != "" ? this.set('val_company', '') : this.set('val_company', 'credential-empty');
+    this.get('first_name') != null && this.get('first_name') != "" ? this.set('val_firstName', '') : this.set('val_firstName', 'credential-empty');
+    this.get('last_name') != null && this.get('last_name') != "" ? this.set('val_lastName', '') : this.set('val_lastName', 'credential-empty');
+    this.get('phone') != null && this.get('phone') != "" ? this.set('val_phone', '') : this.set('val_phone', 'credential-empty');
+    this.get('password') != null && this.get('password') != "" ? this.set('val_code', '') : this.set('val_code', 'credential-empty');
     this.emailValidation();
   },
 
