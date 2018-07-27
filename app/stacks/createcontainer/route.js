@@ -37,6 +37,7 @@ export default Ember.Route.extend(DefaultHeaders,  {
       return Ember.Object.create({
         stacksfactory: this.loadStacksFactory(this.getSettings(setting)),
         hscaling: this.loadHorizontalScaling(this.getSettings(setting)),
+        vscaling: this.loadVerticalScaling(this.getSettings(setting)),
         secret: this.loadSecret(setting),
         datacenters: hash.datacenters,
         plans: hash.plans,
@@ -110,9 +111,61 @@ export default Ember.Route.extend(DefaultHeaders,  {
       min_target_value_disk: 20,
       max_target_value_disk: 80
     },
-    scaling_rule_apply: false
+    horizontal_scaling_rule_apply: false,
     };
     return this.get('store').createRecord(horizontalScalingData);
+  },
+
+  loadVerticalScaling(settings) {
+    var verticalScalingData;
+    settings.cloudType = C.CATEGORIES.CONTAINER;
+    verticalScalingData = {
+      object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
+      type: 'verticalscaling',
+      scale_type: 'AUTOVS',
+      state: 'ABLETOSCALE',
+      update_policy: {
+        mode:"auto",
+      },
+      spec: {
+      scale_up_wait_time: 5,
+      scale_down_wait_time: 5,
+      min_resource:{
+        cpu:"1",
+        ram: "1",
+        disk: "1",
+      },
+      max_resource:{
+        cpu:"2",
+        ram: "2",
+        disk: "10",
+      },
+      metrics: []
+    },
+    status: {
+      last_scale_time: "",
+      current_resource:{
+        cpu:"1",
+        ram: "1 GiB",
+        disk: "1 GiB",
+      },
+      desired_resource:{
+        cpu:"1",
+        ram: "1 GiB",
+        disk: "1 GiB",
+      },
+    },
+    target_value: {
+      min_target_value_cpu: 40,
+      max_target_value_cpu: 80,
+      min_target_value_memory: 20,
+      max_target_value_memory: 80,
+      min_target_value_disk: 20,
+      max_target_value_disk: 80,
+    },
+    vertical_scaling_rule_apply: false,
+    };
+    return this.get('store').createRecord(verticalScalingData);
   },
 
 

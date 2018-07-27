@@ -1,0 +1,31 @@
+<div class="performance-content">
+  <p class="sub-title">{{t 'launcherPage.scaling.title'}}</p>
+  <p class="sub-description">{{t 'launcherPage.scaling.description'}}</p>
+
+  <div class="select-domain">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="rio-selectbtn text-right">
+          <label {{action 'sendHorizontal'}}>
+        <input type="checkbox" class="option-input radio" checked={{model.hscaling.horizontal_scaling_rule_apply}} name="hexample"/>
+        <span>{{t 'launcherPage.scaling.horizontal.applyScaling'}}</span>
+      </label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="rio-selectbtn text-left">
+          <label {{action 'sendVertical'}}>
+        <input type="checkbox" class="option-input radio" checked={{model.vscaling.vertical_scaling_rule_apply}} name="vexample"/>
+        <span>{{t 'launcherPage.scaling.vertical.applyScaling'}}</span>
+      </label>
+        </div>
+      </div>
+    </div>
+    {{#if enableHorizontal}}
+    {{scaling/cloud-horizontal-scaling model=model modelSpinner=modelSpinner scaleType="horizontal"}}
+    {{/if}}
+    {{#if enableVertical}}
+    {{scaling/cloud-vertical-scaling model=model modelSpinner=modelSpinner scaleType="vertical"}}
+    {{/if}}
+  </div>
+</div>
