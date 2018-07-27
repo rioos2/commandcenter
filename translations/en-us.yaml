@@ -125,6 +125,19 @@ consolePage:
   header: 'Shell:'
   closeButton: Close
 
+validate:
+  user:
+    password:
+      empty_password: Enter password
+      too_short: 'Password too short must be {character_length} character'
+      common_password: One of the 10000 most common passwords. Please use a more secure password
+      same_as_username: Password is the same as your username. Please use a more secure password
+      same_as_email: Password is the same as your email. Please use a more secure password
+    name:
+      empty_name: Enter user name
+      empty_first_name: Enter first name
+      empty_last_name: Enter last name
+
 wizard:
   licenseTitle: Licence
   useTrialVersionHeader: NEW USERS
@@ -149,6 +162,7 @@ wizard:
     title: Register
   activate-license:
     title: Activate
+
 stackPage:
   machine: Digital Cloud
   container: Container
@@ -364,7 +378,6 @@ stackPage:
           success: License activated successfully.
           failure: Failed to activate license.
 
-
 launcherPage:
   compute:
     selectType: Pick Cloud Type
@@ -530,7 +543,6 @@ launcherPage:
       applyScaling: Enable vertical scaling
       scalingWaitTimeTitle: Select Autoscale Wait Time
 
-
 failWhalePage:
   header: Error
   reloadButton: |
@@ -547,6 +559,7 @@ loginPage:
     generic: "There was an error ({errorCode}) while trying to log you in. Please try again."
     authFailed: Username or Password incorrect.
     timedOut: Your session has timed out.  Log in again to continue.
+
 signupPage:
   signup: SIGN UP
   companyName: Company name
@@ -558,6 +571,7 @@ signupPage:
   createAccount: Create account
   alredyAccount: Already have an account?
   signin: Sign in
+
 dashboard:
   maingauges: Main Gauges
   statistics: Statistics
@@ -580,6 +594,7 @@ dashboard:
   error: <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
   nodeStatistics:
     errorAliceName: Tx/Rx errors
+
 vnc:
   title: CONSOLE
   view: viewer

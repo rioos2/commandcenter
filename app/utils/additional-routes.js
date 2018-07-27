@@ -1,6 +1,12 @@
 import Ember from 'ember';
 var list = {};
 
+/*
+Usecase: 3rd party can write their own ember-addon which for instance can monitor their
+downstream system. If we provide a extendable dashboard where the 3rd party api's can be monitored,
+then the addRoutes is helpful.
+*/
+
 /* Usage: In your Addon:
  *
  * import { addRoutes } from 'nilavu/utils/additional-routes';
@@ -21,20 +27,17 @@ var list = {};
  * @param callback:  Standard Ember Routing DSL function, see Ember.Router.map
  * @param parentRouteName: link-to-style name of the existing route to add these routes to.
  */
-export function addRoutes(callback, parentRouteName='application' ) {
-  //console.log('addRoutes', callback, parentRouteName);
-  if ( !callback )
-  {
+export function addRoutes(callback, parentRouteName = 'application') {
+  // console.log('addRoutes', callback, parentRouteName);
+  if (!callback) {
     return;
   }
 
-  if ( !list )
-  {
+  if (!list) {
     throw new Error('Cannot addRoutes after Router.map() has already been called');
   }
 
-  if ( !list[parentRouteName] )
-  {
+  if (!list[parentRouteName]) {
     list[parentRouteName] = [];
   }
 
@@ -43,14 +46,12 @@ export function addRoutes(callback, parentRouteName='application' ) {
 
 
 export function applyRoutes(name) {
-  //console.log('applyRoutes', name);
-  if ( !list )
-  {
+  // console.log('applyRoutes', name);
+  if (!list) {
     throw new Error('Cannot applyRoutes after Router.map() has already been called');
   }
 
-  if( list[name] )
-  {
+  if (list[name]) {
     return function() {
       list[name].forEach(function(fn) {
         fn.apply(this);
@@ -64,22 +65,21 @@ export function applyRoutes(name) {
 // Clear the route list once it's no longer needed, and prevent future calls to try to
 // add more routes (which won't work anwyay, because Router.map() has already run.
 export function clearRoutes() {
-  //console.log('clearRoutes()');
+  // console.log('clearRoutes()');
   list = null;
 }
 
 // Monkey patch route() so that additional routes can be added by an addon
 Ember.RouterDSL.prototype._route = Ember.RouterDSL.prototype.route;
-Ember.RouterDSL.prototype.route = function( name, options, callback ) {
+Ember.RouterDSL.prototype.route = function(name, options, callback) {
   if (arguments.length === 1) {
     options = {};
-  }
-  else if (arguments.length === 2 && typeof options === 'function') {
+  } else if (arguments.length === 2 && typeof options === 'function') {
     callback = options;
     options = {};
   }
 
-  var key = `${this.parent}.${name}`;
+  var key = `${ this.parent }.${ name }`;
 
   // Add all the standard routes to the aditional routes table
   addRoutes(callback, key);
@@ -91,4 +91,3 @@ Ember.RouterDSL.prototype.route = function( name, options, callback ) {
   this._route(name, options, newCallback);
 };
 // End: Monkey patch
-

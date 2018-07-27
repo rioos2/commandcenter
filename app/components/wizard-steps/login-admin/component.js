@@ -18,8 +18,8 @@ export default Ember.Component.extend({
   },
 
   check() {
-    this.get('username') != null && this.get('username') != "" ? this.set('val_username', '') : this.set('val_username', 'has-error');
-    this.get('password') != null && this.get('password') != "" ? this.set('val_password', '') : this.set('val_password', 'has-error');
+    this.get('username') != null && this.get('username') != "" ? this.set('val_username', '') : this.set('val_username', 'credential-empty');
+    this.get('password') != null && this.get('password') != "" ? this.set('val_password', '') : this.set('val_password', 'credential-empty');
   },
 
   shouldProceed() {

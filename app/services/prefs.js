@@ -1,26 +1,28 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
+
+export default Service.extend({
   userStore: Ember.inject.service('user-store'),
 
   unremoved: function() {
     return this.get('userStore').all('userpreference');
   }.property('userStore.generation'),
 
-  findByName: function(key) {
+  findByName(key) {
     return this.get('unremoved').filterBy('name', key)[0];
   },
 
-  unknownProperty: function(key) {
+  unknownProperty(key) {
     var value; // = undefined;
     var existing = this.findByName(key);
+
     if (existing) {
       try {
         value = JSON.parse(existing.get('value'));
       } catch (e) {
-        console.log("Error parsing storage ['" + key + "']");
-        //this.notifyPropertyChange(key);
+        console.log(`Error parsing storage ['${  key  }']`);
+        // this.notifyPropertyChange(key);
       }
     }
 
@@ -64,7 +66,7 @@ export default Ember.Service.extend({
   //   return value;
   // },
 
-  clear: function() {
+  clear() {
     this.beginPropertyChanges();
 
     this.get('unremoved').forEach((obj) => {
@@ -74,8 +76,9 @@ export default Ember.Service.extend({
     this.endPropertyChanges();
   },
 
-  tablePerPage: Ember.computed(`${C.PREFS.TABLE_COUNT}`, function() {
-    let out = this.get(`${C.PREFS.TABLE_COUNT}`);
+  tablePerPage: Ember.computed(`${ C.PREFS.TABLE_COUNT }`, function() {
+    let out = this.get(`${ C.PREFS.TABLE_COUNT }`);
+
     if (!out) {
       out = C.TABLES.DEFAULT_COUNT;
     }

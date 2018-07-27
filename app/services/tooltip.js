@@ -3,9 +3,9 @@ import Ember from 'ember';
 const DELAY = 250;
 
 export default Ember.Service.extend({
-  mouseLeaveTimer: null,
-  requireClick: false,
-  tooltipOpts: null,
+  mouseLeaveTimer:       null,
+  requireClick:          false,
+  tooltipOpts:           null,
   openedViaContextClick: false,
 
   startTimer() {
@@ -23,8 +23,7 @@ export default Ember.Service.extend({
   },
 
   leave() {
-    if ( !this.get('requireClick') )
-    {
+    if (!this.get('requireClick')) {
       this.startTimer();
     }
   },

@@ -1,9 +1,7 @@
 import Serializable from 'ember-api-store/mixins/serializable';
 
 // Don't serialize the injected session
-Serializable.reopen({
-  reservedKeys: ['session'],
-});
+Serializable.reopen({ reservedKeys: ['session'], });
 
 export function initialize(application) {
   application.inject('controller',  'session', 'service:session');
@@ -17,6 +15,6 @@ export function initialize(application) {
 }
 
 export default {
-  name: 'session',
-  initialize: initialize
+  name:       'session',
+  initialize
 };

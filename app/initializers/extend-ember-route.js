@@ -1,88 +1,92 @@
-import Ember from "ember";
+import Ember from 'ember';
 
 const { getOwner } = Ember;
 
-export function initialize(/*application */) {
-    Ember.Route.reopen({
+export function initialize(/* application */) {
+  Ember.Route.reopen({
 
-        // Remember the current route (into the application route's previousRoute/Params properties)
-        beforeModel: function () {
-            this._super.apply(this, arguments);
-            this.rememberPrevious();
-        },
+    // Remember the current route (into the application route's previousRoute/Params properties)
+    beforeModel() {
+      this._super.apply(this, arguments);
+      this.rememberPrevious();
+    },
 
-        rememberPrevious: function () {
-            var appRoute = getOwner(this).lookup('route:application');
-            var infos = this.router._routerMicrolib.currentHandlerInfos;
-            if (infos && infos.length) {
-                var params = [];
-                var info;
-                for (var i = 0; i < infos.length; i++) {
-                    info = infos[i];
-                    if (info._names && info._names.length) {
-                        for (var j = 0; j < info._names.length; j++) {
-                            params.push(info.params[info._names[j]]);
-                        }
-                    }
-                }
+    rememberPrevious() {
+      var appRoute = getOwner(this).lookup('route:application');
+      var infos = this.router._routerMicrolib.currentHandlerInfos;
 
-                if (!info || !info.name.match(/\.?loading$/)) {
-                    appRoute.set('previousRoute', info.name);
-                    appRoute.set('previousParams', params);
-                    console.log('Set previous route to', info.name, params);
-                }
+      if (infos && infos.length) {
+        var params = [];
+        var info;
+
+        for (var i = 0; i < infos.length; i++) {
+          info = infos[i];
+          if (info._names && info._names.length) {
+            for (var j = 0; j < info._names.length; j++) {
+              params.push(info.params[info._names[j]]);
             }
-        },
+          }
+        }
 
-        goToPrevious: function (def) {
-            var appRoute = getOwner(this).lookup('route:application');
-            var route = appRoute.get('previousRoute');
-            if (!route || route === 'loading') {
-                if (def) {
-                    this.transitionTo(def);
-                }
-                else {
-                    return this.goToParent();
-                }
-            }
+        if (!info || !info.name.match(/\.?loading$/)) {
+          appRoute.set('previousRoute', info.name);
+          appRoute.set('previousParams', params);
+          console.log('Set previous route to', info.name, params);
+        }
+      }
+    },
 
-            var args = (appRoute.get('previousParams') || []).slice();
-            args.unshift(route);
+    goToPrevious(def) {
+      var appRoute = getOwner(this).lookup('route:application');
+      var route = appRoute.get('previousRoute');
 
-            this.transitionTo.apply(this, args).catch(() => {
-                this.transitionTo('authenticated');
-            });
-        },
+      if (!route || route === 'loading') {
+        if (def) {
+          this.transitionTo(def);
+        } else {
+          return this.goToParent();
+        }
+      }
 
-        goToParent: function () {
-            var infos = this.router.router.currentHandlerInfos;
+      var args = (appRoute.get('previousParams') || []).slice();
 
-            var args = [];
-            var info;
-            var max = infos.length - 1;
-            if (infos[infos.length - 1].name === infos[infos.length - 2].name + '.index') {
-                max--;
-            }
+      args.unshift(route);
 
-            for (var i = 0; i < max; i++) {
-                info = infos[i];
+      this.transitionTo.apply(this, args).catch(() => {
+        this.transitionTo('authenticated');
+      });
+    },
 
-                if (info._names && info._names.length) {
-                    for (var j = 0; j < info._names.length; j++) {
-                        args.push(info.params[info._names[j]]);
-                    }
-                }
-            }
+    goToParent() {
+      var infos = this.router.router.currentHandlerInfos;
 
-            args.unshift(info.name);
-            this.transitionTo.apply(this, args).catch(() => {
-                this.transitionTo('authenticated');
-            });
-        },
-    });
+      var args = [];
+      var info;
+      var max = infos.length - 1;
+
+      if (infos[infos.length - 1].name === `${ infos[infos.length - 2].name  }.index`) {
+        max--;
+      }
+
+      for (var i = 0; i < max; i++) {
+        info = infos[i];
+
+        if (info._names && info._names.length) {
+          for (var j = 0; j < info._names.length; j++) {
+            args.push(info.params[info._names[j]]);
+          }
+        }
+      }
+
+      args.unshift(info.name);
+      this.transitionTo.apply(this, args).catch(() => {
+        this.transitionTo('authenticated');
+      });
+    },
+  });
 }
 
 export default {
-    name: 'extend-ember-route',
-    initialize: initialize
+  name:       'extend-ember-route',
+  initialize
 };

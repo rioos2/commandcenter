@@ -1,17 +1,16 @@
-import Resource from  'ember-api-store/models/resource';
-import CattleTransitioningResource from 'nilavu/mixins/cattle-transitioning-resource';
+import DolphinTransitioningResource from 'nilavu/mixins/dolphin-transitioning-resource';
+import Resource from 'ember-api-store/models/resource';
 
 export function initialize(application) {
-  // alert(CattleTransitioningResource);
-  Resource.reopen(CattleTransitioningResource);
+  Resource.reopen(DolphinTransitioningResource);
   Resource.reopenClass({
-    defaultStateIcon: 'icon icon-help',
+    defaultStateIcon:  'icon icon-help',
     defaultStateColor: 'text-primary',
-    defaultSortBy: 'name',
+    defaultSortBy:     'name',
   });
 }
 
 export default {
-  name: 'extend-resource',
-  initialize: initialize
+  name:       'extend-resource',
+  initialize
 };
