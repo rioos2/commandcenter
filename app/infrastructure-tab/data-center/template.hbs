@@ -6,7 +6,7 @@
       <span class="underline">{{t 'dashboard.maingaugesFirstSec'}}</span>{{t 'dashboard.maingaugesSecondSec'}}</p>
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-        {{infra-health-metriclist model=reportGauge}}
+        {{infra-health-metriclist model=datacenterUsage}}
       </div>
     </div>
   </div>
@@ -15,13 +15,13 @@
     <p class="title p-l-50 p-b-20">
       <span class="underline">{{t 'dashboard.statisticsFirstSecNinja'}}</span>{{t 'dashboard.statisticsSecondSecNinja'}}
       <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
-    {{#if checkEmptyNinja}}
-      {{infra-empty-statistics type="ninja" model=model}}
+    {{#if hasNinjaStatistics}}
+      {{infra-empty-statistics type="ninja" model=healthzModel}}
     {{else}}
       <div class="row list-content">
-        {{#each reportNinja as |sdata|}}
+        {{#each ninjaStatistics as |ninja|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-node-statistics model=sdata type="ninja" counterModel=model}}
+            {{infra-node-statistics model=ninja type="ninja" counterModel=healthzModel}}
           </div>
         {{/each}}
       </div>
@@ -32,13 +32,13 @@
     <p class="title p-l-50 p-b-20">
       <span class="underline">{{t 'dashboard.statisticsFirstSecSensei'}}</span>{{t 'dashboard.statisticsSecondSecSensei'}}
       <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
-    {{#if checkEmptySensei}}
-      {{infra-empty-statistics type="sensei" model=model}}
+    {{#if hasSenseiStatistics}}
+      {{infra-empty-statistics type="sensei" model=healthzModel}}
     {{else}}
       <div class="row list-content">
-        {{#each reportSensei as |sdata|}}
+        {{#each senseiStatistics as |sensei|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-sensei-statistics model=sdata type="sensei" counterModel=model}}
+            {{infra-sensei-statistics model=sensei type="sensei" counterModel=healthzModel}}
           </div>
         {{/each}}
       </div>
@@ -49,7 +49,7 @@
   <div id="osusage" class="os-useage-bytime p-t-50 p-b-50">
     <p class="title p-l-50 p-b-30">
       <span class="underline">{{t 'dashboard.osUsageFirstSec'}}</span>{{t 'dashboard.osUsageSecondSec'}}</p>
-    {{infra-deployedos-visualizelive model=model}}
+    {{infra-deployedos-visualizelive model=model.healthzDashboard}}
   </div>
 
 </div>

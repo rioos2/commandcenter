@@ -1,41 +1,59 @@
 import Ember from "ember";
-const {
-  get
-} = Ember;
+import { get, computed } from "@ember/object";
+
 export default Ember.Controller.extend({
 
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
 
-  reportSensei: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.senseis : [];
-  }.property('model'),
+  //Contains the HTTP code to say if the telemetry system pull is active or not
+  telemetryAvailabilityStatus: Ember.computed.alias('model.healthzDashboard.code'),
 
-  reportNinja: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.statistics.ninjas : [];
-  }.property('model'),
+  //The route loads the model in healthzDashboard key, the actual data is inside
+  //model.healthzDashboard.content
+  healthzModel: computed('model.healthzDashboard', function(){
+      const content =  get(this, 'model.healthzDashboard.content');
+      return !Ember.isEmpty(content) ? content.get('firstObject') : [];
+  }),
 
-  reportGauge: function() {
-      return !Ember.isEmpty(this.get('model.content')) ? this.get('model.content').objectAt(0).results.guages : [];
-  }.property('model.content.@each.results.guages.counters.@each.counter'),
+  //Datacenter overall usage using gauges.
+  //the gauges shown are CPU, MEMORY, DISK and GPU.
+  //section main gauges
+  datacenterUsage: function() {
+      return !Ember.isEmpty(this.get('healthzModel')) ? this.get('healthzModel').results.guages : [];
+  }.property('healthzModel.@each.results.guages.counters.@each.counter'),
 
-  alertMessage: function() {
-    if (this.get("model.code") == "502") {
-      this.get('notifications').warning(get(this, 'intl').t('dashboard.error'), {
+  ///// The section where we formulate the data to show in the statistics
+  //section
+  senseiStatistics: computed('healthzModel',function() {
+    const content = get(this, 'healthzModel');
+     return !Ember.isEmpty(content) ? content.results.statistics.senseis : [];
+  }),
+
+  ninjaStatistics: computed('healthzModel',function() {
+    const content = get(this, 'healthzModel');
+     return !Ember.isEmpty(content) ? content.results.statistics.ninjas : [];
+  }),
+
+
+  telemetryUnavailable: function() {
+    if (get(this, "telemetryAvailabilityStatus") === "502") {
+     get(this, 'notifications').warning(get(this, 'intl').t('dashboard.error'), {
         htmlContent: true,
         autoClear: true,
         clearDuration: 6000,
         cssClasses: 'notification-warning'
       });
     }
-  }.observes('model.code'),
+  }.observes('telemetryAvailabilityStatus'),
 
-  checkEmptyNinja: function() {
-    return Ember.isEmpty(this.get('reportNinja'));
-  }.property('reportNinja'),
+  //Decider to show the statistis of ninja/sensei or not.
+  hasNinjaStatistics: function() {
+    return Ember.isEmpty(get(this, 'ninjaStatistics'));
+  }.property('ninjaStatistics'),
 
-  checkEmptySensei: function() {
-    return Ember.isEmpty(this.get('reportSensei'));
-  }.property('reportSensei'),
+  hasSenseiStatistics: function() {
+    return Ember.isEmpty(get(this, 'senseiStatistics'));
+  }.property('senseiStatistics'),
 
 });
