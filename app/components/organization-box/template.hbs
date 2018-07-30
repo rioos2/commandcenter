@@ -1,0 +1,31 @@
+<div class="left">
+  <div class="domain">
+    <div class="icon status" data-tooltip="{{assemblyState}}">
+      {{svg/svg-status status=assemblyStatus}}
+    </div>
+    <p class="text1" title={{name}}>{{name}}</p>
+    <p class="text2">{{assemblyPhase}}</p>
+  </div>
+  <div class="ip">
+    <div class="icon">
+      {{fa-icon "tasks"}}
+    </div>
+    <p class="text1">{{ipType}}</p>
+    <p class="text2">{{ip}}</p>
+  </div>
+  <div class="location">
+    <div class="icon">
+      {{fa-icon "tag"}}
+    </div>
+    <p class="text1">{{region}}</p>
+    <p class="text2">{{appliedBluePrintName}}</p>
+  </div>
+</div>
+<div class="right">
+  <div class="stack-action">
+    {{action-menu model=model msg=assemblyConditionMessage id=id}}
+  </div>
+  <div class="gauge stack-box">
+    {{infra-health-metric model=metricsData showName=false showOS=true image=image version=version}}
+  </div>
+</div>
