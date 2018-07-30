@@ -143,17 +143,17 @@
     }
   }
 
-  .has-error .legend.legend,
-  .has-error.form-group .control-label.control-label {
+  .credential-empty .legend.legend,
+  .credential-empty.form-group .control-label.control-label {
     color: #d9534f;
   }
 
-  .has-error.form-group .form-help,
-  .has-error.form-group .helper {
+  .credential-empty.form-group .form-help,
+  .credential-empty.form-group .helper {
     color: #d9534f;
   }
 
-  .has-error .bar::before {
+  .credential-empty .bar::before {
     background: #d9534f;
     left: 0;
     width: 100%;

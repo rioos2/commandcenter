@@ -7,14 +7,11 @@ export function debouncedObserver(...args) {
 
   if (typeof args[argsLength - 1] === 'function') {
     funcIndex = argsLength - 1;
-  }
-  else if (typeof args[argsLength - 2] === 'function') {
+  } else if (typeof args[argsLength - 2] === 'function') {
     funcIndex = argsLength - 2;
-  }
-  else if (typeof args[argsLength - 3] === 'function') {
+  } else if (typeof args[argsLength - 3] === 'function') {
     funcIndex = argsLength - 3;
-  }
-  else {
+  } else {
     throw Error('Invalid arguments');
   }
 
@@ -22,7 +19,7 @@ export function debouncedObserver(...args) {
   keys = args.slice(0, funcIndex);
 
   var fn = function() {
-    if ( this.isDestroyed || this.isDestroying ) {
+    if (this.isDestroyed || this.isDestroying) {
       return;
     }
 
@@ -40,14 +37,11 @@ export function throttledObserver(...args) {
 
   if (typeof args[argsLength - 1] === 'function') {
     funcIndex = argsLength - 1;
-  }
-  else if (typeof args[argsLength - 2] === 'function') {
+  } else if (typeof args[argsLength - 2] === 'function') {
     funcIndex = argsLength - 2;
-  }
-  else if (typeof args[argsLength - 3] === 'function') {
+  } else if (typeof args[argsLength - 3] === 'function') {
     funcIndex = argsLength - 3;
-  }
-  else {
+  } else {
     throw Error('Invalid arguments');
   }
 

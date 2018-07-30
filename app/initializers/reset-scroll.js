@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
+// When transation to a new route scroll to the page top
 export function initialize(/* application */) {
   Ember.Route.reopen({
-    activate: function() {
-        this._super();
-        window.scrollTo(0,0);
+    activate() {
+      this._super();
+      window.scrollTo(0, 0);
     }
   });
 }
