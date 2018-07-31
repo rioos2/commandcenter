@@ -16,6 +16,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   modalService: Ember.inject.service('modal'),
   session: Ember.inject.service(),
   enableLink: false,
+  SecretData: '',
 
 
   availableActions: function() {
@@ -41,6 +42,14 @@ var Assembly = Resource.extend(DefaultHeaders, {
         icon: 'fa fa-download',
         action: 'download',
         enabled: true,
+        class: this.get('enableQRcode') ? 'disabled' : ' '
+      },
+      {
+        label: 'action.showQRcode',
+        icon: 'fa fa-qrcode',
+        action: 'showQRcode',
+        enabled: true,
+        class: this.get('enableQRcode') ? ' ' : 'disabled'
       },
       {
         label: 'action.externalUrl',
@@ -87,6 +96,17 @@ var Assembly = Resource.extend(DefaultHeaders, {
     return false;
   },
 
+  enableQRcode: function() {
+    var self = this;
+    return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'), true)).then(function(res) {
+      self.set('SecretData', res);
+      if (self.get('SecretData.secret_type') == 'rioos_sh/kryptonite') {
+        return true;
+      }
+    });
+    return false;
+  }.property(),
+
   downloadAndWarnIfNone: function(res) {
     let key = res.data['rioos_sh/ssh_pubkey'] || "";
     if (!this.hasDownloaded(key, this.get('name'))) {
@@ -104,17 +124,17 @@ var Assembly = Resource.extend(DefaultHeaders, {
       let planBlueprintId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
       let port = "";
       let protocol = "";
-      if(planBlueprintId) {
-      this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
-        if (p.object_meta.name == planBlueprintId) {
-          port = p.metadata.rioos_sh_web_access_port;
-          protocol = p.metadata.rioos_sh_web_access_protocal;
-          if (protocol && port) {
-            this.set('enableLink', true);
+      if (planBlueprintId) {
+        this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
+          if (p.object_meta.name == planBlueprintId) {
+            port = p.metadata.rioos_sh_web_access_port;
+            protocol = p.metadata.rioos_sh_web_access_protocal;
+            if (protocol && port) {
+              this.set('enableLink', true);
+            }
           }
-        }
-      });
-    };
+        });
+      };
       let url = protocol + "://" + ip + ":" + port;
       this.set('url', url);
     }
@@ -147,17 +167,32 @@ var Assembly = Resource.extend(DefaultHeaders, {
       });
     },
 
+    showQRcode() {
+      var self = this;
+      if (!Ember.isEmpty(this.get('SecretData'))) {
+        let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || "";
+        this.set('rioos_sh_kryptonite_qrcode', key);
+        this.get('modalService').toggleModal('modal-show-qrcode', this);
+      } else {
+        self.get('notifications').warning(get(self, 'intl').t('notifications.QRcode.downloadFailed'), {
+          autoClear: true,
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
+        });
+      }
+    },
+
     download() {
       var self = this;
-      return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'), true)).then(function(res) {
-        self.downloadAndWarnIfNone(res);
-      }).catch(function() {
+      if (!Ember.isEmpty(self.get('SecretData'))) {
+        self.downloadAndWarnIfNone(self.get('SecretData'));
+      } else {
         self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear: true,
           clearDuration: 4200,
           cssClasses: 'notification-warning'
         });
-      });
+      }
     },
 
     console() {

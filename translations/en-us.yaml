@@ -589,6 +589,8 @@ notifications:
   Stacks:
     DeleteFailed: Delete failed try after some time
     DeleteSuccess: deleted successful
+  QRcode:
+    downloadFailed: Failed to show! try after some time.
   secrets:
     downloadFailed: Download failed try after some time
     manageDownloadFailed: <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
@@ -638,6 +640,11 @@ confirmDelete:
   confirmAction: Delete
   cancelAction: Cancel
   largeDeleteText: '{key} and {othersCount} others'
+QRCode:
+  title: QR code
+  qrNote: 'Note: show the QR code to Access'
+  cancelAction: Cancel
+
 
 containerShell:
   protip: "ProTip: Hold the {key} key when opening shell access to launch a new window."
@@ -980,6 +987,7 @@ action:
   viewInApi: View in API
   viewInstance: View Instance
   downloadSecret: Download secret
+  showQRcode: Show QR code
   externalUrl: Open UI
   nodeEdit: Edit node
   nodeInstall: Install node
