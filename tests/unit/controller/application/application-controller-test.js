@@ -2,10 +2,9 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-describe('application', () => {
+describe('application-controller', () => {
   setupTest();
 
-  // Replace this with your real tests.
   it('exists', function() {
     let controller = this.owner.lookup('controller:application');
 
