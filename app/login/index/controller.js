@@ -6,7 +6,7 @@ const { computed, get } = Ember;
 export default Ember.Controller.extend({
   access: Ember.inject.service(),
   intl: Ember.inject.service(),
-  // notifications: Ember.inject.service('notification-messages'),
+  notifications: Ember.inject.service('notification-messages'),
 
   showPassword: false,
 
