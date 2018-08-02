@@ -1,59 +1,59 @@
-languageName: "English"
-languageContribute: "Help Translate Rio/OS"
-rioosXYZ: "Rio/OS"
+languageName:                         "English"
+languageContribute:                   "Help Translate Rio/OS"
+rioosXYZ:                             "Rio/OS"
 
 ##############################
 # Really generic things used in multiple places (use sparingly)
 ##############################
 generic:
-  actions: Actions
-  activate: Activate
-  any: Any
-  as: As
-  cancel: Cancel
-  closeModal: Close
-  created: Created
-  default: Default
-  description: Description
-  disable: Disable
-  disabled: Disabled
-  domainName: Domain Name
-  edit: Edit
-  emptyString: ""
-  enable: Enable
-  enabled: Enabled
-  environment: Environment
-  expires: Expires
-  healthy: Healthy
-  id: ID
-  image: Image
-  internal: Internal
-  ipAddress: IP Address
-  limit: Limit
-  loading: "Loading..."
-  missing: "*%MISSING%*"
-  moreActions: More Actions
-  na: 'n/a'
-  name: Name
-  none: None
-  ports: Ports
-  remove: Remove
-  role: Role
-  save: Save
-  saved: Saved
-  saving: Saving
-  search: Search
-  state: State
-  test: Test
-  testing: Testing
-  to: To
-  total: Total
-  type: Type
-  unknown: Unknown
-  uuid: UUID
+  actions:                            Actions
+  activate:                           Activate
+  any:                                Any
+  as:                                 As
+  cancel:                             Cancel
+  closeModal:                         Close
+  created:                            Created
+  default:                            Default
+  description:                        Description
+  disable:                            Disable
+  disabled:                           Disabled
+  domainName:                         Domain Name
+  edit:                               Edit
+  emptyString:                        ""
+  enable:                             Enable
+  enabled:                            Enabled
+  environment:                        Environment
+  expires:                            Expires
+  healthy:                            Healthy
+  id:                                 ID
+  image:                              Image
+  internal:                           Internal
+  ipAddress:                          IP Address
+  limit:                              Limit
+  loading:                            "Loading..."
+  missing:                            "*%MISSING%*"
+  moreActions:                        More Actions
+  na:                                 'n/a'
+  name:                               Name
+  none:                               None
+  ports:                              Ports
+  remove:                             Remove
+  role:                               Role
+  save:                               Save
+  saved:                              Saved
+  saving:                             Saving
+  search:                             Search
+  state:                              State
+  test:                               Test
+  testing:                            Testing
+  to:                                 To
+  total:                              Total
+  type:                               Type
+  unknown:                            Unknown
+  uuid:                               UUID
   # These are not "yes" and "no" to avoid being parsed as bools by yaml parser.
-  noo: No
-  yess: Yes
+  noo:                                No
+  yess:                               Yes
 
 
 ##############################
@@ -61,156 +61,163 @@ generic:
 ##############################
 accountsPage:
   index:
-    header: Accounts
-    localLink: Add Account
+    header:                           Accounts
+    localLink:                        Add Account
     table:
-      state: State
-      id: ID
-      kind: Kind
-      username: Username
-      name: Name
-      identity: Identity
-      noData: There are no accounts yet
-      noName: None
+      state:                          State
+      id:                             ID
+      kind:                           Kind
+      username:                       Username
+      name:                           Name
+      identity:                       Identity
+      noData:                         There are no accounts yet
+      noName:                         None
   new:
-    header: Add Account
+    header:                           Add Account
     form:
       username:
-        labelText: Login Username
-        placeholder: "e.g. jsmith"
+        labelText:                    Login Username
+        placeholder:                  "e.g. jsmith"
       password:
-        labelText: Password
+        labelText:                    Password
       name:
-        labelText: Name
-        placeholder: "e.g. John Smith"
+        labelText:                    Name
+        placeholder:                  "e.g. John Smith"
       type:
-        labelText: Account Type
+        labelText:                    Account Type
         dropdownList:
       description:
-        labelText: Description
-        placeholder: "e.g. This account is for John Smith"
+        labelText:                    Description
+        placeholder:                  "e.g. This account is for John Smith"
 
 auditLogsPage:
-  header: Audit Logs
+  header:                             Audit Logs
   form:
     eventType:
-      placeholder: Event Type
+      placeholder:                    Event Type
     resourceType:
-      placeholder: "Resource Type:"
-      dropdownPlaceholder: 'Select a Resource Type:'
+      placeholder:                    "Resource Type:"
+      dropdownPlaceholder:            'Select a Resource Type:'
       dropdownList:
     resourceId:
-      placeholder: Resource ID
+      placeholder:                    Resource ID
     requestIp:
-      placeholder: Request IP
+      placeholder:                    Request IP
     authType:
-      placeholder: "Auth Type:"
-      dropdownPlaceholder: 'Select an Auth Type:'
+      placeholder:                    "Auth Type:"
+      dropdownPlaceholder:            'Select an Auth Type:'
       dropdownList:
-    clearButtonText: Clear Filters
-    searchButtonText: Search
+    clearButtonText:                  Clear Filters
+    searchButtonText:                 Search
   table:
-    time: Time
-    eventType: Event Type
-    description: Description
-    environment: Environment
-    resourceTypeId: "Resource Type:ID"
-    identity: Identity
-    authIp: "Auth & IP"
-  first: First Page
-  next: Next Page
-  connectionError: <span>Failed to pull audits data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>
+    time:                             Time
+    eventType:                        Event Type
+    description:                      Description
+    environment:                      Environment
+    resourceTypeId:                   "Resource Type:ID"
+    identity:                         Identity
+    authIp:                           "Auth & IP"
+  first:                              First Page
+  next:                               Next Page
+  connectionError:                    <span>Failed to pull audits data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>
 
 consolePage:
-  header: 'Shell:'
-  closeButton: Close
+  header:                             'Shell:'
+  closeButton:                        Close
 
 validate:
   user:
     password:
-      empty_password: Enter password
-      too_short: 'Password too short must be {character_length} character'
-      common_password: One of the 10000 most common passwords. Please use a more secure password
-      same_as_username: Password is the same as your username. Please use a more secure password
-      same_as_email: Password is the same as your email. Please use a more secure password
+      empty_password:                 Enter password
+      too_short:                      'Password too short must be {character_length} character'
+      common_password:                One of the 10000 most common passwords. Please use a more secure password
+      same_as_username:               Password is the same as your username. Please use a more secure password
+      same_as_email:                  Password is the same as your email. Please use a more secure password
     name:
-      empty_name: Enter user name
-      empty_first_name: Enter first name
-      empty_last_name: Enter last name
+      empty_name:                     Enter user name
+      empty_first_name:               Enter first name
+      empty_last_name:                Enter last name
+      empty_company_name:             Enter company name
+      empty_email_id:                 Enter email id
+      valid_email_id:                 Enter valid email id
+      empty_phone_number:             Enter phone number
 
 wizard:
-  licenseTitle: Licence
-  useTrialVersionHeader: NEW USERS
-  useTrialVersionNote: You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.
-  useTrial: ACTIVATE TRIAL
-  usePurcashedLicenceHeader: ALREADY HAVE A LICENSE?
-  usePurcashedVersionNote: If you already have a license key, use the form and button below to get started now.
-  usePurcashedLicenceBtn: ACTIVATE KEY
-  congratulationText: Congratulations, you installed Rio OS Version 2.0
-  register: Register
-  licenceIdPlaceholder: Enter licence Id
-  licencePwdPlaceholder: Enter licence password
-  welcomeMessage: "<p>The world's first and only enterprise cloud operating system.</p> <p>Finally, The Power Of The Cloud With The Privacy Of Ownership.</p> <p>Launch & Scale Your Own Cloud In Seconds</p> <p>Register a new account to get started.</p>"
-  licenseIDError: Enter licence Id </br>
-  licensePwdError: Enter licence password </br>
-  licenseSuccessMsg: License updated successfully
-  licenseFailedMsg: License update failed
-  loginWithRegisteredAccount: Account already created
+  licenseTitle:                       Licence
+  useTrialVersionHeader:              NEW USERS
+  useTrialVersionNote:                You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.
+  useTrial:                           ACTIVATE TRIAL
+  usePurcashedLicenceHeader:          ALREADY HAVE A LICENSE?
+  usePurcashedVersionNote:            If you already have a license key, use the form and button below to get started now.
+  usePurcashedLicenceBtn:             ACTIVATE KEY
+  congratulationText:                 Congratulations, you installed Rio OS Version 2.0
+  register:                           Register
+  licenceIdPlaceholder:               Enter licence Id
+  licencePwdPlaceholder:              Enter licence password
+  welcomeMessage:                     "<p>The world's first and only enterprise cloud operating system.</p> <p>Finally, The Power Of The Cloud With The Privacy Of Ownership.</p> <p>Launch & Scale Your Own Cloud In Seconds</p> <p>Register a new account to get started.</p>"
+  licenseIDError:                     Enter licence Id </br>
+  licensePwdError:                    Enter licence password </br>
+  licenseSuccessMsg:                  License updated successfully
+  licenseFailedMsg:                   License update failed
+  loginWithRegisteredAccount:         Account already created
   welcome:
-    title: Welcome
+    title:                            Welcome
   register-admin:
-    title: Register
+    title:                            Register
   activate-license:
-    title: Activate
+    title:                            Activate
 
 stackPage:
-  machine: Digital Cloud
-  container: Container
-  blockchain: Blockchain
-  launchCloud: Launch
+  machine:                            Digital Cloud
+  container:                          Container
+  blockchain:                         Blockchain
+  launchCloud:                        Launch
   applicationTab:
-    feature: Features
-    clouds: clouds
-    filterBy: "Filter by:"
+    organization_manage:              Organization Management
+    feature:                          Features
+    clouds:                           clouds
+    filterBy:                         "Filter by:"
   admin:
     header:
-      toggle: Toggle navigation
-      add_btn: Add
-      active_btn: Set
-      save_btn: Save
-      search_discovery_btn: Search & Discover
+      toggle:                         Toggle navigation
+      add_btn:                        Add
+      active_btn:                     Set
+      save_btn:                       Save
+      search_discovery_btn:           Search & Discover
+      for_organ1:                     create team
     sensei:
-      title: Senseis
-      connected: 'Connected Senseis'
-      noNode: No senseis added yet.
+      title:                          Senseis
+      connected:                      'Connected Senseis'
+      noNode:                         No senseis added yet.
     node:
-      title: Ninjas
-      connected: 'Connected Ninjas'
-      discoverNodes: 'Discovered Ninjas'
-      noNode: No Ninjas added yet.
-      noNodeDiscovered: No ninjas descovered yet.
-      ip: IP
-      schedule: Scheduled
-      bridges: Bridges
-      noBridges: No bridges attached.
-      status: Status
-      metrics: Metrics
-      metricsShow: View
-      addNode: 'Add Node'
-      discoverNode: 'Discover Ninjas'
-      nodeCreate: 'Ninja install started successfully'
-      nodeRetry: 'Ninja retried started successfully'
-      nodeSecretCreate: 'Node secret create successfully'
-      nodeFailed: 'Ninja install failed'
-      nodeRetryFailed: 'Ninja retry failed'
-      select_auth_placeholder: 'Select authentication type'
-      nodeSearchDiscovery: 'Search & Discover'
-      selectDiscoveryMode: 'Select discovery mode'
-      nodeNote: 'NOTE: '
-      searchNodeBySubnet: 'Enter an IP Block in CIDR notation'
+      title:                          Ninjas
+      connected:                      'Connected Ninjas'
+      for_organ2:                     Organization Management
+      discoverNodes:                  'Discovered Ninjas'
+      noNode:                         No Ninjas added yet.
+      noNodeDiscovered:               No ninjas descovered yet.
+      ip:                             IP
+      schedule:                       Scheduled
+      bridges:                        Bridges
+      noBridges:                      No bridges attached.
+      status:                         Status
+      metrics:                        Metrics
+      metricsShow:                    View
+      addNode:                        'Add Node'
+      discoverNode:                   'Discover Ninjas'
+      nodeCreate:                     'Ninja install started successfully'
+      nodeRetry:                      'Ninja retried started successfully'
+      nodeSecretCreate:               'Node secret create successfully'
+      nodeFailed:                     'Ninja install failed'
+      nodeRetryFailed:                'Ninja retry failed'
+      select_auth_placeholder:        'Select authentication type'
+      nodeSearchDiscovery:            'Search & Discover'
+      selectDiscoveryMode:            'Select discovery mode'
+      nodeNote: 'NOTE:                '
+      searchNodeBySubnet:             'Enter an IP Block in CIDR notation'
       searchNodeBySubnetPlaceholder: 'eg: 192.168.2.0/24'
-      fromSubnet: 'From IP address'
-      toSubnet: 'To IP address'
+      fromSubnet:                     'From IP address'
+      toSubnet:                       'To IP address'
       noteForAdvanceSubnet: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0/24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
       noteForRangeSubnet: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0 - 192.168.2.24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
       emptySubnetAdvanceValue: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
@@ -220,133 +227,133 @@ stackPage:
       subnetRangeValidFromError: 'Enter vaild From IP in CIDR (example: 192.168.1.1)</br>'
       emptySubnetRangeTo: 'Missing To IP in CIDR (example: 192.168.1.1)</br>'
       subnetRangeValidToError: 'Enter vaild To IP in CIDR (example: 192.168.1.1)</br>'
-      enterUsername: 'Enter username</br>'
-      enterPassword: 'Enter password</br>'
-      enterSshKey: 'Enter SSH public key</br>'
-      searchButtonText: Search
-      securityVerification: Security Verification
-      selectAuthenticationMethod: Select authentication method
-      nodeAuthUsername: User name
-      nodeAuthPassword: Password
-      nodeCreateBtn: Create
-      nodeSshKey: SSH key
-      nodeAuthNote: This security verification is used to connect to the node
-      somethingWrong: Something went wrong
+      enterUsername:                  'Enter username</br>'
+      enterPassword:                  'Enter password</br>'
+      enterSshKey:                    'Enter SSH public key</br>'
+      searchButtonText:               Search
+      securityVerification:           Security Verification
+      selectAuthenticationMethod:     Select authentication method
+      nodeAuthUsername:               User name
+      nodeAuthPassword:               Password
+      nodeCreateBtn:                  Create
+      nodeSshKey:                     SSH key
+      nodeAuthNote:                   This security verification is used to connect to the node
+      somethingWrong:                 Something went wrong
       sshPlaceholder: 'Copy & Paste the SSH Private Key: eg: id_rsa.key'
-      nodeStatus: Status
-      labelNew: New
-      nodeNewReady: Ready
-      pricePerMonth: Price per month
-      usd: USD
-      category: CATEGORY
-      choose: CHOOSE
+      nodeStatus:                     Status
+      labelNew:                       New
+      nodeNewReady:                   Ready
+      pricePerMonth:                  Price per month
+      usd:                            USD
+      category:                       CATEGORY
+      choose:                         CHOOSE
     storage:
-      title: Storages
-      connected: 'Connected Storages'
-      noStorage: No storages added yet.
-      addStorage: '+Add Storage'
-      detail: DETAILS
-      name: Name
-      ip: IP
-      type: Type
-      path: Location
-      status: Status
-      createdAt: Created At
-      addStorageTwo: Add a storage
-      select: Select Storage
-      ipAddress: IP Address for Storage location
-      pass: Password
-      user: Username
-      noStorageData: No storages added yet.
-      edit_title: Edit Storage
-      nameError: Enter storage Name
-      edit: Edit
+      title:                          Storages
+      connected:                      'Connected Storages'
+      noStorage:                      No storages added yet.
+      addStorage:                     '+Add Storage'
+      detail:                         DETAILS
+      name:                           Name
+      ip:                             IP
+      type:                           Type
+      path:                           Location
+      status:                         Status
+      createdAt:                      Created At
+      addStorageTwo:                  Add a storage
+      select:                         Select Storage
+      ipAddress:                      IP Address for Storage location
+      pass:                           Password
+      user:                           Username
+      noStorageData:                  No storages added yet.
+      edit_title:                     Edit Storage
+      nameError:                      Enter storage Name
+      edit:                           Edit
       disk:
-        list: DISKS
-        free: Free Disk / Partition
-        noDisk: 'No disks added yet.'
+        list:                         DISKS
+        free:                         Free Disk / Partition
+        noDisk:                       'No disks added yet.'
       pool:
-        title: POOLS
-        createPool: '+Create Pool'
-        noPool: 'No pools created.'
-        poolCluster: Pool Cluster
-        availSize: Size
-        usedSize: UsedSize
-        add: Add pool
-        name: Pool Name
-        diskCount: No.of Disks
-        status: Status
-        nameError: Please enter pool name </br>
-        diskError: Please select free disk/partition
-        diskChooseMsg: Using an existing disk/partion that is mounted will result in data loss.
-        disks: Disks
-        list: View
-        storagesDisplayError: Create storage before attempting create pool.
+        title:                        POOLS
+        createPool:                   '+Create Pool'
+        noPool:                       'No pools created.'
+        poolCluster:                  Pool Cluster
+        availSize:                    Size
+        usedSize:                     UsedSize
+        add:                          Add pool
+        name:                         Pool Name
+        diskCount:                    No.of Disks
+        status:                       Status
+        nameError:                    Please enter pool name </br>
+        diskError:                    Please select free disk/partition
+        diskChooseMsg:                Using an existing disk/partion that is mounted will result in data loss.
+        disks:                        Disks
+        list:                         View
+        storagesDisplayError:         Create storage before attempting create pool.
     locations:
-      title: Locations
-      connected: 'Connected Locations'
-      noCluster: No locations added yet.
-      addCluster:  '+Add Location'
-      storage: Storage
-      type: Type
-      detail: DETAILS
-      country: Country
-      network: Networks
-      status: Status
-      noClusterData: No locations added yet.
-      noClusterNode: No nodes attached.
-      noClusterNetwork: No virtual networks attached.
-      add_title: Add Location
-      add_city: Select city
-      add_country: Select country
-      add_select_storage: Select storage
+      title:                          Locations
+      connected:                      'Connected Locations'
+      noCluster:                      No locations added yet.
+      addCluster:                     '+Add Location'
+      storage:                        Storage
+      type:                           Type
+      detail:                         DETAILS
+      country:                        Country
+      network:                        Networks
+      status:                         Status
+      noClusterData:                  No locations added yet.
+      noClusterNode:                  No nodes attached.
+      noClusterNetwork:               No virtual networks attached.
+      add_title:                      Add Location
+      add_city:                       Select city
+      add_country:                    Select country
+      add_select_storage:             Select storage
       add_select_storage_placeholder: Select
       add_select_country_placeholder: Select country
-      add_select_node: Select Nodes
-      add_select_network: Apply Virtual Networks
+      add_select_node:                Select Nodes
+      add_select_network:             Apply Virtual Networks
       add:
-        cityError: Select city</br>
-        storageError: Select storage</br>
-        currencyError: Select country</br>
-        nodesError: Select nodes</br>
-        networksError: Select network</br>
-        storagesDisplayError: Create storage before attempting add.
-        nodesDisplayError: Create nodes before attempting add.
-        networksDisplayError: Create networks before attempting add.
-        networksSelectError: Apply virtual networks for the selected nodes.</br>
+        cityError:                    Select city</br>
+        storageError:                 Select storage</br>
+        currencyError:                Select country</br>
+        nodesError:                   Select nodes</br>
+        networksError:                Select network</br>
+        storagesDisplayError:         Create storage before attempting add.
+        nodesDisplayError:            Create nodes before attempting add.
+        networksDisplayError:         Create networks before attempting add.
+        networksSelectError:          Apply virtual networks for the selected nodes.</br>
     network:
-      title: Virtual Networks
-      ipRange: IP Range
-      range: Range
-      connected: 'Connected Virtual Networks'
-      filterBy: 'Filter by:'
-      digitalcloud: Digitalcloud
-      container: Containers
-      noNetwork: 'No virtual networks added yet.'
-      addNetwork: 'Add Virtual Network'
-      detail: DETAILS
-      type: Type
-      subnet: Subnet IP
-      gateway: Gateway
-      bridge: Bridge Type
-      status: Status
-      netmask: Netmask
-      nodes: NODES
-      name: Name
-      selectNode: Select Nodes
-      noNetworkData: No virtual networks added yet.
-      nodeData: No nodes attached.
-      edit: Edit
-      edit_title: Edit Virtual Network
+      title:                          Virtual Networks
+      ipRange:                        IP Range
+      range:                          Range
+      connected:                      'Connected Virtual Networks'
+      filterBy:                       'Filter by:'
+      digitalcloud:                   Digitalcloud
+      container:                      Containers
+      noNetwork:                      'No virtual networks added yet.'
+      addNetwork:                     'Add Virtual Network'
+      detail:                         DETAILS
+      type:                           Type
+      subnet:                         Subnet IP
+      gateway:                        Gateway
+      bridge:                         Bridge Type
+      status:                         Status
+      netmask:                        Netmask
+      nodes:                          NODES
+      name:                           Name
+      selectNode:                     Select Nodes
+      noNetworkData:                  No virtual networks added yet.
+      nodeData:                       No nodes attached.
+      edit:                           Edit
+      edit_title:                     Edit Virtual Network
 
       nameError: 'Missing name (example: riopub001)</br>'
-      typeError: Missing type</br>
+      typeError:                      Missing type</br>
       subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
       gatewayError: 'Missing Gateway IP (example: 192.168.2.1)</br>'
-      brigeHostError: Missing bridge</br>
-      nodesError: Select node</br>
+      brigeHostError:                 Missing bridge</br>
+      nodesError:                     Select node</br>
       netmaskError: 'Missing Netmask (example: 255.255.255.0)</br>'
-      bridgeError: Select bridge for selected nodes.<br>
+      bridgeError:                    Select bridge for selected nodes.<br>
       subnetRangeErroripv4: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.0/29)</br>'
       subnetRangeErroripv6: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)</br>'
       gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)</br>'
@@ -354,674 +361,674 @@ stackPage:
       netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
       netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
     dashboard:
-      title: Infrastructure
+      title:                          Infrastructure
     users:
-      title: Users
+      title:                          Users
     reports:
-      title: Reports
+      title:                          Reports
     flavours:
-      title: Flavours
+      title:                          Flavours
     settings:
-      title: Settings
+      title:                          Settings
       entitlement:
-        title: License
-        description: Edit activation code
-        ninjas: 'Ninjas: Activated  {ninjaActivated}/{ninjaAllowed}'
-        senseis: 'Senseis: Activated  {senseiActivated}/{senseiAllowed}'
-        expired: " -  Expires in "
-        days: " days"
-        trial: Trial
-        rioProduct: Rio/OS
-        activeCode: Enter activation code
-        emptyActiveCode:  You forgot to type activation code
+        title:                        License
+        description:                  Edit activation code
+        ninjas: 'Ninjas:              Activated  {ninjaActivated}/{ninjaAllowed}'
+        senseis: 'Senseis:            Activated  {senseiActivated}/{senseiAllowed}'
+        expired:                      " -  Expires in "
+        days:                         " days"
+        trial:                        Trial
+        rioProduct:                   Rio/OS
+        activeCode:                   Enter activation code
+        emptyActiveCode:              You forgot to type activation code
         activation:
-          success: License activated successfully.
-          failure: Failed to activate license.
+          success:                    License activated successfully.
+          failure:                    Failed to activate license.
 
 launcherPage:
   compute:
-    selectType: Pick Cloud Type
-    createCloud: CREATING A DIGITAL CLOUD
-    createContainer: CREATING A CONTAINER
-    cloudType: PICK YOUR CLOUD TYPE
-    BlockchainType: CREATING BLOCKCHAIN NETWORK
-    ApplicationType: CREATING BLOCKCHAIN
+    selectType:                       Pick Cloud Type
+    createCloud:                      CREATING A DIGITAL CLOUD
+    createContainer:                  CREATING A CONTAINER
+    cloudType:                        PICK YOUR CLOUD TYPE
+    BlockchainType:                   CREATING BLOCKCHAIN NETWORK
+    ApplicationType:                  CREATING BLOCKCHAIN
     cpu:
-      title: cpu
-      description: CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.
-      capTitle: CPU
+      title:                          cpu
+      description:                    CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.
+      capTitle:                       CPU
     gpu:
-      title: gpu
-      description: The GPU software is installed at the virtualization layer along with the hypervisor. The GPU software creates virtual GPUs enabling every virtual machine (VM) to share the physical GPU installed on the server. The  virtualization software includes a graphics driver for every VM. Because work that was typically done by the CPU is offloaded to the GPU, the user has a much better experience, and demanding engineering and creative applications can now be supported in a virtualized and cloud environment.
-      capTitle: GPU
+      title:                          gpu
+      description:                    The GPU software is installed at the virtualization layer along with the hypervisor. The GPU software creates virtual GPUs enabling every virtual machine (VM) to share the physical GPU installed on the server. The  virtualization software includes a graphics driver for every VM. Because work that was typically done by the CPU is offloaded to the GPU, the user has a much better experience, and demanding engineering and creative applications can now be supported in a virtualized and cloud environment.
+      capTitle:                       GPU
   domain:
-    title: Select a Domain Name
-    subtitle: Edit subdomain or use the configured domain name
-    selectDomain: Select a Domain
-    domainPlaceHolder: Enter domain name
-    emptyDomain: You forgot to type a subdomain name
-    domainWithoutSymbol: subdomain should be alphanumeric
-    domainName: Edit me
-    buttonSet: Set
+    title:                            Select a Domain Name
+    subtitle:                         Edit subdomain or use the configured domain name
+    selectDomain:                     Select a Domain
+    domainPlaceHolder:                Enter domain name
+    emptyDomain:                      You forgot to type a subdomain name
+    domainWithoutSymbol:              subdomain should be alphanumeric
+    domainName:                       Edit me
+    buttonSet:                        Set
     keyGenerate:
-      title:  TYPE OF KEY TO GENERATE
-      subtitle: Generate a self signed certificate.
-      bitkey: BITS IN KEY
-      success: Secret key generated successfully.
-      failure: Failed to generate secret key. You can't access to digital cloud upon launch.
-      emptyDomain: Please enter domain name.
-      emptySecretType: Please select secret type.
+      title:                          TYPE OF KEY TO GENERATE
+      subtitle:                       Generate a self signed certificate.
+      bitkey:                         BITS IN KEY
+      success:                        Secret key generated successfully.
+      failure:                        Failed to generate secret key. You can't access to digital cloud upon launch.
+      emptyDomain:                    Please enter domain name.
+      emptySecretType:                Please select secret type.
   location:
-    title: Select Location
-    description: Select a data center that is close to your location
-    locations: Your location(s)
-    empty: Nothing found
-    noLocation: No location available
+    title:                            Select Location
+    description:                      Select a data center that is close to your location
+    locations:                        Your location(s)
+    empty:                            Nothing found
+    noLocation:                       No location available
   sysConfig:
-    title: Cloud Performance
-    subtitle: CLOUD PERFORMANCE
-    description: Select system configuration
+    title:                            Cloud Performance
+    subtitle:                         CLOUD PERFORMANCE
+    description:                      Select system configuration
     storageType:
-      title: Storage type
-      flash: Flash
-      or: or
-      hdd: HDD
+      title:                          Storage type
+      flash:                          Flash
+      or:                             or
+      hdd:                            HDD
     storageCapacity:
-      title: Storage Capacity
-      description: you can set any capacity
-      suffix: ' GB'
-      suffix-i: ' GiB'
+      title:                          Storage Capacity
+      description:                    you can set any capacity
+      suffix:                         ' GB'
+      suffix-i:                       ' GiB'
     cpuChooser:
-      title: Select number of cores
-      description: From 1 to 30
+      title:                          Select number of cores
+      description:                    From 1 to 30
     peerChooser:
-      title: Select number of peers
-      description: From 1
+      title:                          Select number of peers
+      description:                    From 1
     ramChooser:
-      title: ram
+      title:                          ram
   repo:
-    title: Select Repository
-    subtitle: 'Edit repository, eg: https://github.com/rioadvancement/build-blockchain-insurance-app.git'
-    urlPlaceHolder: Enter repository
-    emptyUrl: You forgot to type a url
-    invalidFormat: Enter vaild url
+    title:                            Select Repository
+    subtitle: 'Edit repository, eg:   https://github.com/rioadvancement/build-blockchain-insurance-app.git'
+    urlPlaceHolder:                   Enter repository
+    emptyUrl:                         You forgot to type a url
+    invalidFormat:                    Enter vaild url
   blockchainApp:
-    title: Select a Blockchain Network
-    subtitle: Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
-    emptynetwork: No blockchain network available
-    network: Blockchain Networks
+    title:                            Select a Blockchain Network
+    subtitle:                         Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
+    emptynetwork:                     No blockchain network available
+    network:                          Blockchain Networks
   serverOs:
-    title: Server OS
-    subtitle: Select preferred system
-    select: select
-    selected: selected
-    description: Troublesome aspect of the slider. Proper use of the settings required a secret knowledge of the underlying codebase, and did not allow for intuitive configuration. Plainly put - the carousel config was poopy.No longer! In version 4.1 the carousel
+    title:                            Server OS
+    subtitle:                         Select preferred system
+    select:                           select
+    selected:                         selected
+    description:                      Troublesome aspect of the slider. Proper use of the settings required a secret knowledge of the underlying codebase, and did not allow for intuitive configuration. Plainly put - the carousel config was poopy.No longer! In version 4.1 the carousel
       functionality and settings have been re-worked to function in a straight forward, intuitive manner.
-    empty: no image selected
+    empty:                            no image selected
   buildconfig:
-    success: Build Config created successfully.
+    success:                          Build Config created successfully.
   network:
-    title: Networking
-    empty: No network selected
+    title:                            Networking
+    empty:                            No network selected
     type:
-      private: Private
-      public: Public
-      ipv4: IPv4
-      ipv6: IPv6
+      private:                        Private
+      public:                         Public
+      ipv4:                           IPv4
+      ipv6:                           IPv6
   summary:
-    title: Summary
-    subtitle: verify preferred system
-    cloudType: Cloud Type
-    launch: Launch your cloud
-    launchThank: Thank You
+    title:                            Summary
+    subtitle:                         verify preferred system
+    cloudType:                        Cloud Type
+    launch:                           Launch your cloud
+    launchThank:                      Thank You
     domain:
-      empty: You forgot to type a domain
-      name: Domain Name
+      empty:                          You forgot to type a domain
+      name:                           Domain Name
     region:
-      empty: You forgot to select a location
-      name: Location
+      empty:                          You forgot to select a location
+      name:                           Location
     image:
-      empty: No server OS selected
+      empty:                          No server OS selected
     config:
-      core: Cores
-      number: Number
-      ram: Ram
+      core:                           Cores
+      number:                         Number
+      ram:                            Ram
   scaling:
-    emptyScaling:  You forgot to type a resource
-    description: Select scaling configuration ( Horizontal / vertical )
-    invalidFormat: Enter vaild data
-    title: SCALING
+    emptyScaling:                     You forgot to type a resource
+    description:                      Select scaling configuration ( Horizontal / vertical )
+    invalidFormat:                    Enter vaild data
+    title:                            SCALING
     scale:
-      description: ' %'
+      description:                    ' %'
     scaleup:
       cpu:
-        title:  'Scale up when CPU is'
+        title:                        'Scale up when CPU is'
       cpuChooser:
-        title: Upper limit for the number of cores
-        description: From 1 to 30
+        title:                        Upper limit for the number of cores
+        description:                  From 1 to 30
       storageCapacity:
-        title: Upper limit - Storage Capacity
+        title:                        Upper limit - Storage Capacity
       ramChooser:
-        title: Upper limit - Ram
+        title:                        Upper limit - Ram
       memory:
-        title: 'Scale up when MEMORY is'
+        title:                        'Scale up when MEMORY is'
       disk:
-        title: 'Scale up when DISK is'
+        title:                        'Scale up when DISK is'
     scaledown:
       cpu:
-        title:  'Scale down when CPU is'
+        title:                        'Scale down when CPU is'
       cpuChooser:
-        title: Lower limit for the number of cores
-        description: From 1 to 30
+        title:                        Lower limit for the number of cores
+        description:                  From 1 to 30
       storageCapacity:
-        title: Lower limit - Storage Capacity
+        title:                        Lower limit - Storage Capacity
       ramChooser:
-        title: Lower limit - Ram
+        title:                        Lower limit - Ram
       memory:
-        title: 'Scale down when MEMORY'
+        title:                        'Scale down when MEMORY'
       disk:
-        title: 'Scale down when DISK is'
+        title:                        'Scale down when DISK is'
     horizontal:
-      title: HORIZONTAL SCALING
-      minReplivas: Lower limit for the number of replicas set by Rio/OS
-      maxReplivas: Upper limit for the number of replicas set by Rio/OS
-      scaleUpwaitTime: Select minutes to wait before another upscale operation
-      scaleDownwaitTime: Select minutes to wait before another downscale operation
-      scalingRuleTitle:  Select Autoscale Policies
-      scalingReplicaWaitTimeTitle: Select Autoscale Replicas
-      applyScaling: Enable Horizontal Scaling
-      when: when
-      percentage: Percentage
-      target: Target Value
+      title:                          HORIZONTAL SCALING
+      minReplivas:                    Lower limit for the number of replicas set by Rio/OS
+      maxReplivas:                    Upper limit for the number of replicas set by Rio/OS
+      scaleUpwaitTime:                Select minutes to wait before another upscale operation
+      scaleDownwaitTime:              Select minutes to wait before another downscale operation
+      scalingRuleTitle:               Select Autoscale Policies
+      scalingReplicaWaitTimeTitle:    Select Autoscale Replicas
+      applyScaling:                   Enable Horizontal Scaling
+      when:                           when
+      percentage:                     Percentage
+      target:                         Target Value
       cpu:
-        title: CPU
+        title:                        CPU
       memory:
-        title: Memory
+        title:                        Memory
       disk:
-        title: Disk
+        title:                        Disk
     vertical:
-      applyScaling: Enable vertical scaling
-      scalingWaitTimeTitle: Select Autoscale Wait Time
+      applyScaling:                   Enable vertical scaling
+      scalingWaitTimeTitle:           Select Autoscale Wait Time
 
 failWhalePage:
-  header: Error
-  reloadButton: |
+  header:                             Error
+  reloadButton:                       |
     <a href="#" onclick="window.location.href = window.location.href; return false;">Reload</a> to try again or
-  logoutButton: log out
+  logoutButton:                       log out
 
 loginPage:
-  greeting: "SIGN IN"
-  usernameLabel: "User name"
-  passwordLabel: "Password"
-  loggingInLabel: " (START VERIFICATION)"
-  signupLabel: "Sign up"
+  greeting:                           "SIGN IN"
+  usernameLabel:                      "User name"
+  passwordLabel:                      "Password"
+  loggingInLabel:                     " (START VERIFICATION)"
+  signupLabel:                        "Sign up"
   error:
-    generic: "There was an error ({errorCode}) while trying to log you in. Please try again."
-    authFailed: Username or Password incorrect.
-    timedOut: Your session has timed out.  Log in again to continue.
+    generic:                          "There was an error ({errorCode}) while trying to log you in. Please try again."
+    authFailed:                       Username or Password incorrect.
+    timedOut:                         Your session has timed out.  Log in again to continue.
 
 signupPage:
-  signup: SIGN UP
-  companyName: Company name
-  firstName: First name
-  lastName: Last name
-  phone: Phone
-  email: Email
-  activateOnCode: Activate on code
-  createAccount: Create account
-  alredyAccount: Already have an account?
-  signin: Sign in
+  signup:                             SIGN UP
+  companyName:                        Company name
+  firstName:                          First name
+  lastName:                           Last name
+  phone:                              Phone
+  email:                              Email
+  activateOnCode:                     Activate on code
+  createAccount:                      Create account
+  alredyAccount:                      Already have an account?
+  signin:                             Sign in
 
 dashboard:
-  maingauges: Main Gauges
-  statistics: Statistics
-  throughput: Throughput
-  errorSwitch: Error
-  osUsage: OS usage by time
-  maingaugesFirstSec: M
-  maingaugesSecondSec: ain gauges
-  statisticsFirstSec: S
-  statisticsSecondSec: tatistics
-  statisticsFirstSecNinja: N
-  statisticsSecondSecNinja: inja
-  statisticsFirstSecSensei: S
-  statisticsSecondSecSensei: ensei
+  maingauges:                         Main Gauges
+  statistics:                         Statistics
+  throughput:                         Throughput
+  errorSwitch:                        Error
+  osUsage:                            OS usage by time
+  maingaugesFirstSec:                 M
+  maingaugesSecondSec:                ain gauges
+  statisticsFirstSec:                 S
+  statisticsSecondSec:                tatistics
+  statisticsFirstSecNinja:            N
+  statisticsSecondSecNinja:           inja
+  statisticsFirstSecSensei:           S
+  statisticsSecondSecSensei:          ensei
   emptyNode:
-    ninja: <p>You must connect ninjas to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup ninjas in Rio OS.</p>
-    sensei: <p>You must connect senseis to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup senseis in Rio OS.</p>
-  osUsageFirstSec: O
-  osUsageSecondSec: s usage by time
-  error: <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
+    ninja:                            <p>You must connect ninjas to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup ninjas in Rio OS.</p>
+    sensei:                           <p>You must connect senseis to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup senseis in Rio OS.</p>
+  osUsageFirstSec:                    O
+  osUsageSecondSec:                   s usage by time
+  error:                              <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
   nodeStatistics:
-    errorAliceName: Tx/Rx errors
+    errorAliceName:                   Tx/Rx errors
 
 vnc:
-  title: CONSOLE
-  view: viewer
-  del: Send CtrlAltDel
+  title:                              CONSOLE
+  view:                               viewer
+  del:                                Send CtrlAltDel
 
 notifications:
   Stacks:
-    DeleteFailed: Delete failed try after some time
-    DeleteSuccess: deleted successful
+    DeleteFailed:                     Delete failed try after some time
+    DeleteSuccess:                    deleted successful
   secrets:
-    downloadFailed: Download failed try after some time
-    manageDownloadFailed: <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
-  emailExist: Sorry, that email is not available.
-  validEmail: Please enter a valid email address
-  somethingWentWrong: Proxy error. Api server is not runnning
-  invalidCredential: Incorrect email or password
-  domainName: Please enter domain name
-  secret: Please generate secret key
-  region: Please enter region
-  country: Please enter valid region
-  resource: Please select minimum resources to deploy
+    downloadFailed:                   Download failed try after some time
+    manageDownloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
+  emailExist:                         Sorry, that email is not available.
+  validEmail:                         Please enter a valid email address
+  somethingWentWrong:                 Proxy error. Api server is not runnning
+  invalidCredential:                  Incorrect email or password
+  domainName:                         Please enter domain name
+  secret:                             Please generate secret key
+  region:                             Please enter region
+  country:                            Please enter valid region
+  resource:                           Please select minimum resources to deploy
   network:
-    noSelection: Please select network
-    empty: No network  available
+    noSelection:                      Please select network
+    empty:                            No network  available
   plan:
-    noSelection: Please select server OS
-    empty: No Server OS configured
+    noSelection:                      Please select server OS
+    empty:                            No Server OS configured
   scaling:
-    noSelection: Please select scaling resource
-    emptyScaling:  You forgot to type a resource
-    invalidFormat: Enter vaild data
+    noSelection:                      Please select scaling resource
+    emptyScaling:                     You forgot to type a resource
+    invalidFormat:                    Enter vaild data
   blockchainNetwork:
-    empty: No Blockchian Network configured
-  failedLaunch: Launch failed.
-  failedBuildConfig: BuildConfig creation failed.
-  logData: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  novnc: Deploying..Console isn't ready yet.
-  noAction: No actions available
-  blockchainnetwork: Select blockchain network
+    empty:                            No Blockchian Network configured
+  failedLaunch:                       Launch failed.
+  failedBuildConfig:                  BuildConfig creation failed.
+  logData:                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  novnc:                              Deploying..Console isn't ready yet.
+  noAction:                           No actions available
+  blockchainnetwork:                  Select blockchain network
 
 audits:
   tableHeader:
-    info: Info
-    ip: IP Address
-    dateAndTime: Date and time
+    info:                             Info
+    ip:                               IP Address
+    dateAndTime:                      Date and time
 
 infraPage:
   metric:
-    power: "usage -"
-    percent: "%"
+    power:                            "usage -"
+    percent:                          "%"
 
 confirmDelete:
-  title: 'Are you sure you want to delete ?'
-  deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
-  protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
-  confirmAction: Delete
-  cancelAction: Cancel
-  largeDeleteText: '{key} and {othersCount} others'
+  title:                              'Are you sure you want to delete ?'
+  deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
+  protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
+  confirmAction:                      Delete
+  cancelAction:                       Cancel
+  largeDeleteText:                    '{key} and {othersCount} others'
 
 containerShell:
-  protip: "ProTip: Hold the {key} key when opening shell access to launch a new window."
+  protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
   status:
-    initializing: Initializing...
-    error: "Error: {error}"
-    connecting: Connecting...
-    connected: Connected
-    disconnected: Disconnected
-    closed: Closed
-    somethingWrong: Unable to connect
+    initializing:                     Initializing...
+    error: "Error:                    {error}"
+    connecting:                       Connecting...
+    connected:                        Connected
+    disconnected:                     Disconnected
+    closed:                           Closed
+    somethingWrong:                   Unable to connect
 
 formatIp:
-  noIp: None
-  unknownIp: Unknown
+  noIp:                               None
+  unknownIp:                          Unknown
 
 modalShell:
-  title: "Shell: {instanceName}"
+  title: "Shell:                      {instanceName}"
 
 saveCancel:
-  saving: Saving...
-  saved: Saved!
-  edit: Save
-  create: Create
-  cancel: Cancel
+  saving:                             Saving...
+  saved:                              Saved!
+  edit:                               Save
+  create:                             Create
+  cancel:                             Cancel
 
 schema:
   inputBoolean:
-    y: "True"
-    n: "False"
+    y:                                "True"
+    n:                                "False"
   inputCertificate:
-    prompt: Choose a Certificate...
+    prompt:                           Choose a Certificate...
   inputEnum:
-    option: Choose an option...
+    option:                           Choose an option...
   inputService:
-    prompt: Choose a Service...
+    prompt:                           Choose a Service...
     custom:
-      prompt: Custom...
-      placeholder: e.g. region1/environment1/stack1/service1
+      prompt:                         Custom...
+      placeholder:                    e.g. region1/environment1/stack1/service1
   inputSecret:
-    prompt: Choose a Secret...
+    prompt:                           Choose a Secret...
 
 schedulingRuleRow:
-  theHost: The host
-  must: must
-  should: should
-  shouldNot: should not
-  mustNot: must not
-  haveA: have a
-  of: of
-  hostLabel: host label
-  containerLabel: container with label
-  serviceName: service with the name
-  containerName: container with the name
+  theHost:                            The host
+  must:                               must
+  should:                             should
+  shouldNot:                          should not
+  mustNot:                            must not
+  haveA:                              have a
+  of:                                 of
+  hostLabel:                          host label
+  containerLabel:                     container with label
+  serviceName:                        service with the name
+  containerName:                      container with the name
 
 serviceLink:
   withAlias:
-      sameStack: "{service} as {alias}"
-      differentStack: "{stack}/{service} as {alias}"
+      sameStack:                      "{service} as {alias}"
+      differentStack:                 "{stack}/{service} as {alias}"
   noAlias:
-      sameStack: "{service}"
-      differentStack: "{stack}/{service}"
+      sameStack:                      "{service}"
+      differentStack:                 "{stack}/{service}"
 
 sidekickAddtlInfo:
-  info: Info
-  image: Image
-  entryPoint: Entrypoint
-  command: Command
-  containers: Containers
-  noContainers: No Containers
-  labels: Labels
-  noLabels: No Labels
+  info:                               Info
+  image:                              Image
+  entryPoint:                         Entrypoint
+  command:                            Command
+  containers:                         Containers
+  noContainers:                       No Containers
+  labels:                             Labels
+  noLabels:                           No Labels
 
 siteAccess:
-  header: Site Access
-  helpText: "Configure who should be allowed to log in and use {appName}."
-  unrestricted: "Allow any valid {individuals}"
-  restricted: "Allow members of Environments, plus Authorized {individuals} and {collection}"
-  required: "Restrict access to only Authorized {individuals} and {collection}"
-  listHeader: "Authorized {individuals} and {collection}"
-  noIdentity: None
-  users: Users
-  groups: Groups
-  organizations: Organizations
+  header:                             Site Access
+  helpText:                           "Configure who should be allowed to log in and use {appName}."
+  unrestricted:                       "Allow any valid {individuals}"
+  restricted:                         "Allow members of Environments, plus Authorized {individuals} and {collection}"
+  required:                           "Restrict access to only Authorized {individuals} and {collection}"
+  listHeader:                         "Authorized {individuals} and {collection}"
+  noIdentity:                         None
+  users:                              Users
+  groups:                             Groups
+  organizations:                      Organizations
 
 snapshotTimeline:
-  noData: No Snapshot Data
+  noData:                             No Snapshot Data
 
 stackSection:
-  outputs: Outputs
-  description: Description
-  none: No Services
-  tags: Tags
-  container: |
+  outputs:                            Outputs
+  description:                        Description
+  none:                               No Services
+  tags:                               Tags
+  container:                          |
     {numContainers, plural,
       =1 {Container}
       other {Containers}
     }
-  service: |
+  service:                            |
     {numServices, plural,
       =1 {Service}
       other {Services}
     }
-  sidekick: |
+  sidekick:                           |
     {numSidekicks, plural,
       =1 {+ 1 Sidekick}
       other {+ # Sidekicks}
     }
   add:
-    service: Add Service
-    loadBalancer: Add Load Balancer
-    serviceAlias: Add Service Alias
-    externalService: Add External Service
-    virtualMachine: Add Virtual Machine
+    service:                          Add Service
+    loadBalancer:                     Add Load Balancer
+    serviceAlias:                     Add Service Alias
+    externalService:                  Add External Service
+    virtualMachine:                   Add Virtual Machine
   table:
     dataTitle:
-      state: State
-      serviceName: Service Name
-      kind: Kind
-      details: Details
-      containers: Containers
-      actions: Actions
-  upgradeImage: Upgrade Container Image
+      state:                          State
+      serviceName:                    Service Name
+      kind:                           Kind
+      details:                        Details
+      containers:                     Containers
+      actions:                        Actions
+  upgradeImage:                       Upgrade Container Image
 
 
 snapshotSection:
-  none: Not backed up
-  multiple: 'Multiple: {latestDate}'
+  none:                               Not backed up
+  multiple: 'Multiple:                {latestDate}'
 
 storagePoolSection:
-  outputs: Outputs
-  readOnly: "(read-only)"
+  outputs:                            Outputs
+  readOnly:                           "(read-only)"
   hosts:
-    header: Hosts
-    none: No Hosts
+    header:                           Hosts
+    none:                             No Hosts
   volumes:
-    header: Volumes
-    add: Add Volume
-    none: No Volumes
+    header:                           Volumes
+    add:                              Add Volume
+    none:                             No Volumes
   models:
     table:
       header:
-        volumeName: 'Volume Name'
-        snapshotState: 'Snapshot State'
-        snapshotName: 'Snapshot Name'
-        backedUp: 'Backed Up'
-        mounts: 'Mounts (Container: Path)'
+        volumeName:                   'Volume Name'
+        snapshotState:                'Snapshot State'
+        snapshotName:                 'Snapshot Name'
+        backedUp:                     'Backed Up'
+        mounts: 'Mounts (Container:   Path)'
 
 svgServiceContainer:
-  sidekicks: Sidekicks
+  sidekicks:                          Sidekicks
 
 swarm:
   containerSection:
-    state: State
-    name: Container Name
-    image: Image
-    none: No Containers
+    state:                            State
+    name:                             Container Name
+    image:                            Image
+    none:                             No Containers
   serviceSection:
-    state: State
-    name: Service Name
-    ports: Ports
-    containers: Containers
-    none: No Services
+    state:                            State
+    name:                             Service Name
+    ports:                            Ports
+    containers:                       Containers
+    none:                             No Services
 
 swarmTab:
   dashboard:
-    header: Dashboard
+    header:                           Dashboard
     dashboard:
-      content: Portainer is a lightweight management UI which allows you to easily manage your Docker swarm cluster
-      button: Portainer UI
+      content:                        Portainer is a lightweight management UI which allows you to easily manage your Docker swarm cluster
+      button:                         Portainer UI
 
 tooltipLink:
-  list: List
-  linkGraph: Link Graph
-  composeYaml: Compose YAML
+  list:                               List
+  linkGraph:                          Link Graph
+  composeYaml:                        Compose YAML
 
 tooltipWarning:
-  notConfigured: Access Control Not Configured
-  dismiss: Dismiss
+  notConfigured:                      Access Control Not Configured
+  dismiss:                            Dismiss
 
 upgradeBtn:
   version:
-    current: 'Current'
+    current:                          'Current'
   status:
-    none: 'None'
-    loading: 'Checking upgrades...'
-    current: 'Up to date'
-    available: 'Upgrade available'
-    inprogress: 'Upgrade in progress'
-    upgraded: 'Upgraded: Finish Upgrade'
-    notfound: 'Template version not found'
-    error: 'Error checking for upgrade'
-    required: 'Upgrade required'
+    none:                             'None'
+    loading:                          'Checking upgrades...'
+    current:                          'Up to date'
+    available:                        'Upgrade available'
+    inprogress:                       'Upgrade in progress'
+    upgraded: 'Upgraded:              Finish Upgrade'
+    notfound:                         'Template version not found'
+    error:                            'Error checking for upgrade'
+    required:                         'Upgrade required'
 
 viewEditDescription:
   form:
     name:
-      placeholder: e.g. lab
+      placeholder:                    e.g. lab
     description:
-      placeholder: e.g. Environment for developer experimentation
+      placeholder:                    e.g. Environment for developer experimentation
 
 viewEditProject:
   showEdit:
-    edit: "Edit Environment:"
-    add: Add Environment
-    template: Environment Template
-    accessControl: Access Control
-    noMembers: Add one or more members who can use this environment.
+    edit:                             "Edit Environment:"
+    add:                              Add Environment
+    template:                         Environment Template
+    accessControl:                    Access Control
+    noMembers:                        Add one or more members who can use this environment.
   networkPolicy:
-    label: Network Policy
-    description: Control what containers are allowed to communicate with each other over the Managed Network.
-    unsupported: This environment has network policy rules which are not yet supported by the UI.  Please use the API to manage the policy.
-    noManager: Network Policies are available only for environments using Cattle Orchestration with the Network Policy Manager infrastructure template deployed.
-    withinStack: Within Stack
-    withinService: Within Service
-    withinLinked: Between Linked Services
-    default: Everything Else
-    allow: Allow
-    deny: Deny
-  header: "Environment:"
-  description: Description
-  helpBlock: |
+    label:                            Network Policy
+    description:                      Control what containers are allowed to communicate with each other over the Managed Network.
+    unsupported:                      This environment has network policy rules which are not yet supported by the UI.  Please use the API to manage the policy.
+    noManager:                        Network Policies are available only for environments using Cattle Orchestration with the Network Policy Manager infrastructure template deployed.
+    withinStack:                      Within Stack
+    withinService:                    Within Service
+    withinLinked:                     Between Linked Services
+    default:                          Everything Else
+    allow:                            Allow
+    deny:                             Deny
+  header:                             "Environment:"
+  description:                        Description
+  helpBlock:                          |
     Access Control is not enabled.<br/>
     Anybody with access to the API/UI acts as an admin and will be able to use any environment.
 
 
 vmConsole:
-  header: "Console:"
-  protip: "ProTip: Hold the {key} key when opening shell access to launch a new window."
-  canvas: Canvas not supported.
+  header:                             "Console:"
+  protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
+  canvas:                             Canvas not supported.
   footerActions:
-    buttonSend: Send Ctrl-Alt-Delete
-    buttonCancel: Close
+    buttonSend:                       Send Ctrl-Alt-Delete
+    buttonCancel:                     Close
 
 volumeRow:
   mounts:
-    readOnly: "(read-only)"
+    readOnly:                         "(read-only)"
 
 waitOrchestration:
-  count: '({sub} of {count})'
+  count:                              '({sub} of {count})'
 
 waitKubernetes:
-  addHost: 'Add at least one host'
-  activateHost: 'Waiting for a host to be active'
-  createStack: 'Creating Kubernetes system stack'
-  startServices: 'Starting services'
-  waitApi: 'Waiting for Kubernetes API'
+  addHost:                            'Add at least one host'
+  activateHost:                       'Waiting for a host to be active'
+  createStack:                        'Creating Kubernetes system stack'
+  startServices:                      'Starting services'
+  waitApi:                            'Waiting for Kubernetes API'
 
 waitMesos:
-  addHost: 'Add at least three hosts'
-  activateHost: 'Waiting for hosts to be active'
-  createStack: 'Creating Mesos system stack'
-  startServices: 'Starting services'
-  waitApi: 'Waiting for leading Mesos Master'
+  addHost:                            'Add at least three hosts'
+  activateHost:                       'Waiting for hosts to be active'
+  createStack:                        'Creating Mesos system stack'
+  startServices:                      'Starting services'
+  waitApi:                            'Waiting for leading Mesos Master'
 
 waitSwarm:
-  addHost: 'Add at least one host'
-  activateHost: 'Waiting for a host to be active'
-  createStack: 'Creating Swarm system stack'
-  startServices: 'Starting services'
+  addHost:                            'Add at least one host'
+  activateHost:                       'Waiting for a host to be active'
+  createStack:                        'Creating Swarm system stack'
+  startServices:                      'Starting services'
 
 ##############################
 # Mixins
 ##############################
 containerChoices:
-  hostGroup: "Host: {name}"
-  hostGroupWithState: "Host: {name} ({state})"
-  unknownHost: "Host: ???"
-  containerOption: "{name}"
-  containerOptionWithState: "{name} ({state})"
+  hostGroup: "Host:                   {name}"
+  hostGroupWithState: "Host:          {name} ({state})"
+  unknownHost: "Host:                 ???"
+  containerOption:                    "{name}"
+  containerOptionWithState:           "{name} ({state})"
 
 driver:
-  multiHostNames: "Hosts will be named <b>{first}</b> &mdash; <b>{last}</b>"
+  multiHostNames:                     "Hosts will be named <b>{first}</b> &mdash; <b>{last}</b>"
 
 ##############################
 # Services
 ##############################
 allServices:
-  stackGroup: "Stack: {name}"
-  noName: "(Stack: {id})"
+  stackGroup: "Stack:                 {name}"
+  noName: "(Stack:                    {id})"
 
 ##############################
 # Navigation
 ##############################
 nav:
-  dashboard: Dashboard
-  manage: Manage
-  digitalcloud: Digital cloud
-  docker: Container
-  blockchain: Blockchain
-  customApp: Application from Git
-  deploy: Deploy
-  infrastructureNetwork: Deploy network
-  deployApplication: Deploy application
+  dashboard:                          Dashboard
+  manage:                             Manage
+  digitalcloud:                       Digital cloud
+  docker:                             Container
+  blockchain:                         Blockchain
+  customApp:                          Application from Git
+  deploy:                             Deploy
+  infrastructureNetwork:              Deploy network
+  deployApplication:                  Deploy application
   user:
-    profile: Profile
-    logout: Logout
-    admin: Admin
+    profile:                          Profile
+    logout:                           Logout
+    admin:                            Admin
 
 ##############################
 # Resource Actions
 ##############################
 action:
-  activate: Activate
-  backup: Backup Snapshot
-  deleteBackup: Delete Backup
-  cancelUpgrade: Cancel Upgrade
-  cancelRollback: Cancel Rollback
-  clone: Clone
-  console: Open Console
-  deactivate: Deactivate
-  edit: Edit
-  evacuate: Evacuate
-  execute: Execute Shell
-  exportConfig: Export Config
-  finishUpgrade: Finish Upgrade
-  logs: View Logs
-  machineConfig: Machine Config
-  purge: Purge
-  remove: Delete
-  replay: Replay
-  restart: Restart
-  restore: Restore
-  retry: Retry
-  rollback: Rollback
-  revertToSnapshot: Revert Volume to Snapshot
-  restoreFromBackup: Restore Volume from Backup
-  setDefault: Set as Default
-  snapshot: Snapshot
-  start: Start
-  startServices: Start Services
-  stop: Stop
-  stopServices: Stop Services
-  switchNamespace: Switch to this Namespace
-  switchEnvironment: Switch to this Environment
-  upgrade: Upgrade
-  upgradeOrEdit: Upgrade/Edit
-  viewConfig: View Config
-  viewGraph: View Graph
-  viewInApi: View in API
-  viewInstance: View Instance
-  downloadSecret: Download secret
-  externalUrl: Open UI
-  nodeEdit: Edit node
-  nodeInstall: Install node
-  createSecret: Create Secret
-  installNode: Install
-  retryInstallNode: Retry Install
+  activate:                           Activate
+  backup:                             Backup Snapshot
+  deleteBackup:                       Delete Backup
+  cancelUpgrade:                      Cancel Upgrade
+  cancelRollback:                     Cancel Rollback
+  clone:                              Clone
+  console:                            Open Console
+  deactivate:                         Deactivate
+  edit:                               Edit
+  evacuate:                           Evacuate
+  execute:                            Execute Shell
+  exportConfig:                       Export Config
+  finishUpgrade:                      Finish Upgrade
+  logs:                               View Logs
+  machineConfig:                      Machine Config
+  purge:                              Purge
+  remove:                             Delete
+  replay:                             Replay
+  restart:                            Restart
+  restore:                            Restore
+  retry:                              Retry
+  rollback:                           Rollback
+  revertToSnapshot:                   Revert Volume to Snapshot
+  restoreFromBackup:                  Restore Volume from Backup
+  setDefault:                         Set as Default
+  snapshot:                           Snapshot
+  start:                              Start
+  startServices:                      Start Services
+  stop:                               Stop
+  stopServices:                       Stop Services
+  switchNamespace:                    Switch to this Namespace
+  switchEnvironment:                  Switch to this Environment
+  upgrade:                            Upgrade
+  upgradeOrEdit:                      Upgrade/Edit
+  viewConfig:                         View Config
+  viewGraph:                          View Graph
+  viewInApi:                          View in API
+  viewInstance:                       View Instance
+  downloadSecret:                     Download secret
+  externalUrl:                        Open UI
+  nodeEdit:                           Edit node
+  nodeInstall:                        Install node
+  createSecret:                       Create Secret
+  installNode:                        Install
+  retryInstallNode:                   Retry Install
 
 ##############################
 # Resource Actions
 ##############################
 validation:
-  required: '"{key}" is required'
+  required:                           '"{key}" is required'
   arrayLength:
-    exactly: '"{key}" should contain {count, plural, =1 {# item} other {# items}}'
-    between: '"{key}" should contain between {min} and {max} {max, plural, =1 {item} other {items}}'
-    min: '"{key}" should contain at least {count} {count, plural, =1 {item} other {items}}'
-    max: '"{key}" should contain at most {count} {count, plural, =1 {item} other {items}}'
+    exactly:                          '"{key}" should contain {count, plural, =1 {# item} other {# items}}'
+    between:                          '"{key}" should contain between {min} and {max} {max, plural, =1 {item} other {items}}'
+    min:                              '"{key}" should contain at least {count} {count, plural, =1 {item} other {items}}'
+    max:                              '"{key}" should contain at most {count} {count, plural, =1 {item} other {items}}'
   stringLength:
-    exactly: '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
-    between: '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
-    min: '"{key}" should be at least {count} {count, plural, =1 {character} other {characters}}'
-    max: '"{key}" should be at most {count} {count, plural, =1 {character} other {characters}}'
+    exactly:                          '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
+    between:                          '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
+    min:                              '"{key}" should be at least {count} {count, plural, =1 {character} other {characters}}'
+    max:                              '"{key}" should be at most {count} {count, plural, =1 {character} other {characters}}'
   number:
-    exactly: '"{key}" should be exactly {val}'
-    between: '"{key}" should be between {min} and {max}'
-    min: '"{key}" should be at least {val}'
-    max: '"{key}" should be at most {val}'
+    exactly:                          '"{key}" should be exactly {val}'
+    between:                          '"{key}" should be between {min} and {max}'
+    min:                              '"{key}" should be at least {val}'
+    max:                              '"{key}" should be at most {val}'
   chars: '"{key}" contains {count, plural, =1 {an invalid character} other {# invalid characters}}: {chars}'
 
 ##############################
@@ -1030,38 +1037,38 @@ validation:
 model:
   account:
     kind:
-      registeredAgent: Registered Agent
-      agent: Agent
-      service: Service
-      user: User
-      admin: Admin
-      project: Environment
+      registeredAgent:                Registered Agent
+      agent:                          Agent
+      service:                        Service
+      user:                           User
+      admin:                          Admin
+      project:                        Environment
   identity:
     displayType:
-      user: User
-      team: Team
-      group: Group
-      org: Organization
-      localUser: Local User
-      unknown: "{type}?"
+      user:                           User
+      team:                           Team
+      group:                          Group
+      org:                            Organization
+      localUser:                      Local User
+      unknown:                        "{type}?"
   openldapconfig:
     server:
-      label: Hostname or IP Address
+      label:                          Hostname or IP Address
     serviceAccountUsername:
-      label: Service Account Username
+      label:                          Service Account Username
     serviceAccountPassword:
-      label: Service Account Password
+      label:                          Service Account Password
     domain:
-      label: User Search Base
-      placeholder: "e.g. ou=Users,dc=mycompany,dc=com"
-      help: "Only users below this base will be used."
+      label:                          User Search Base
+      placeholder:                    "e.g. ou=Users,dc=mycompany,dc=com"
+      help:                           "Only users below this base will be used."
   projectMember:
     role:
-      member: Member
-      owner: Owner
-      readonly: Read-Only
-      restricted: Restricted
+      member:                         Member
+      owner:                          Owner
+      readonly:                       Read-Only
+      restricted:                     Restricted
   scaleService:
-    min: Minimum Scale
-    max: Maximum Scale
-    amount: By
+    min:                              Minimum Scale
+    max:                              Maximum Scale
+    amount:                           By

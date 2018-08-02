@@ -1,6 +1,7 @@
 import InputValidation from "nilavu/models/input-validation";
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
+import validator from 'npm:validator';
 import {
   get
 } from '@ember/object';
@@ -9,34 +10,24 @@ export default Mixin.create({
 
   intl: Ember.inject.service(),
 
-  fullNameValidation: computed('firstName', function() {
-    if (
-      Ember.isEmpty(this.get("firstName"))
-    ) {
+  emailValidation: computed('accountEmail', function() {
+
+        if (Ember.isEmpty(this.get("accountEmail"))) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_first_name')
+        reason: get(this, 'intl').t('validate.user.name.empty_email_id')
       });
     }
+        if(!validator.isEmail(this.get("accountEmail"))) {
+      return InputValidation.create({
+        failed: true,
+        reason: get(this, 'intl').t('validate.user.name.valid_email_id')
+      });
+    }
+
 
     return InputValidation.create({
       ok: true
     });
   }),
-
-  lastNameValidation: computed('lastName', function() {
-    if (
-      Ember.isEmpty(this.get("lastName"))
-    ) {
-      return InputValidation.create({
-        failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_last_name')
-      });
-    }
-
-    return InputValidation.create({
-      ok: true
-    });
-  }),
-
 });

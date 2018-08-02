@@ -27,12 +27,14 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
       this.testAuthToken();
     }, CHECK_AUTH_TIMER));
 
-    return this.testAuthToken().then(() => {
+    //TODO need to test authentication with api server after login and signup
+    //return this.testAuthToken().then(() => {
       //TO-DO test and enable updation of password
       // if (get(this, 'access.mustChangePassword')) {
       //   this.transitionTo('update-password');
       // }
-    });
+    //});
+
   },
 
   testAuthToken() {
