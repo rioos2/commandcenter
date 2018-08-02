@@ -1,25 +1,25 @@
 {
-    "name": "nilavu",
-    "version": "2.0",
-    "description": "CommandCenter v2 is a Ember.js browser based user interface for Rio/OS.",
-    "private": true,
-    "directories": {
-        "doc": "doc",
-        "test": "tests"
-    },
-    "scripts": {
-        "eslint":   "./node_modules/.bin/eslint  --max-warnings 0 ./*.js app ember-electron tests",
-        "jshint":   "./node_modules/.bin/jshint ./app ./dist/commandcenter_*.js",
-        "scramble": "./node_modules/.bin/javascript-obfuscator ./dist/commandcenter_*.js",
-        "start":    "./node_modules/.bin/ember server",
-        "build":    "./node_modules/.bin/ember build",
-        "test":     "./node_modules/.bin/ember test --reporter dot"
-    },
-    "repository": "https://gitlab.com/rioos/commmandcenter_v2",
-    "engines": {
-        "node": ">= 10.6.0",
-        "yarn": ">= 1.7.0"
-    },
+  "name": "nilavu",
+  "version": "2.0",
+  "description": "CommandCenter v2 is a Ember.js browser based user interface for Rio/OS.",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "eslint": "./node_modules/.bin/eslint  --max-warnings 0 ./*.js app ember-electron tests",
+    "jshint": "./node_modules/.bin/jshint ./app ./dist/commandcenter_*.js",
+    "scramble": "./node_modules/.bin/javascript-obfuscator ./dist/commandcenter_*.js",
+    "start": "./node_modules/.bin/ember server",
+    "build": "./node_modules/.bin/ember build",
+    "test": "./node_modules/.bin/ember test --reporter dot"
+  },
+  "repository": "https://gitlab.com/rioos/commmandcenter_v2",
+  "engines": {
+    "node": ">= 10.6.0",
+    "yarn": ">= 1.7.0"
+  },
   "author": "Rio Advancement Inc.",
   "license": "License - https://rio.digital",
   "devDependencies": {
@@ -85,7 +85,8 @@
     "xterm": "1.0.0",
     "yamljs": "^0.3.0",
     "ember-mocha": "^0.14.0",
-    "testem": "2.8.2"
+    "testem": "2.8.2",
+    "validator": "10.4.0"
   },
   "dependencies": {
     "@bower_components/animate.css": "daneden/animate.css#~3.2.0",
