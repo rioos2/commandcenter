@@ -30,12 +30,12 @@ export default Mixin.create({
   passwordValidation: computed("password",
     "username", "passwordRequired", "rejectedPasswords.[]", "accountEmail", "passwordMinLength",
     function() {
-      //Check whether the password need or not
-      if (!this.get('passwordRequired')) {
-        return InputValidation.create({
-          ok: true
-        });
-      }
+            //Check whether the password need or not
+       if (!this.get('passwordRequired')) {
+         return InputValidation.create({
+           ok: true
+         });
+       }
 
       // If blank, fail with a reason
       if (Ember.isEmpty(this.get("password"))) {
