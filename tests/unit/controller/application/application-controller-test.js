@@ -2,12 +2,12 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 
-describe('Stacks Controller', function() {
+describe('application-controller', () => {
   setupTest();
 
-
   it('exists', function() {
-    let controller = this.owner.lookup('controller:stacks');
+    let controller = this.owner.lookup('controller:application');
+
     expect(controller).to.be.ok;
   });
 });
