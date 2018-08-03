@@ -1,11 +1,11 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { reject } from 'rsvp';
 import { hash } from 'rsvp';
 
 export default Route.extend(DefaultHeaders, {
-  access: inject.service(),
+  access: service(),
 
 
   beforeModel() {

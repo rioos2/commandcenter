@@ -48,6 +48,11 @@ Router.map(function () {
       //this.route('help');
     });
 
+    // Organization (Team, Roles, Memeber)
+    this.route('organization', { resetNamespace: true }, function() {
+      this.route('index', { path: '/:org' });
+    });
+    
     // Applications (digital cloud, containers, blockchain)
     this.route('applications-tab', { path: '/apps', resetNamespace: true }, function () {
       //Route to manage application based on orchestrator.
