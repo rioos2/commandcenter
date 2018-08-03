@@ -1,63 +1,69 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
-import Subscribe from 'nilavu/mixins/subscribe';
-import { xhrConcur } from 'nilavu/utils/platform';
-import PromiseToCb from 'nilavu/mixins/promise-to-cb';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-
+import PromiseToCb from 'nilavu/mixins/promise-to-cb';
+import Subscribers from 'nilavu/mixins/subscribers';
+import C from 'nilavu/utils/constants';
+import { xhrConcur } from 'nilavu/utils/platform';
+import Route from '@ember/routing/route';
+import Ember from 'ember';
+import { get, set } from '@ember/object';
+import { inject as service } from '@ember/service';
+import {later} from '@ember/runloop';
 
 const CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
-export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
-  settings: Ember.inject.service(),
-  access: Ember.inject.service(),
-  language: Ember.inject.service('user-language'),
-  storeReset: Ember.inject.service(),
+export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
+  settings: service(),
+  access: service(),
+  language: service('user-language'),
+  storeReset: service(),
 
   testTimer: null,
 
   beforeModel(transition) {
+
     this._super.apply(this, arguments);
-    if (this.get('access.enabled')) {
-      if (this.get('access').isLoggedIn()) {
-        this.testAuthToken();
-      } else {
-        transition.send('logout', transition, false);
-        return Ember.RSVP.reject('Not logged in');
-      }
-    }
+
+    set(this, 'testTimer', later(() => {
+      this.testAuthToken();
+    }, CHECK_AUTH_TIMER));
+
+    //TODO need to test authentication with api server after login and signup
+    //return this.testAuthToken().then(() => {
+      //TO-DO test and enable updation of password
+      // if (get(this, 'access.mustChangePassword')) {
+      //   this.transitionTo('update-password');
+      // }
+    //});
+
   },
 
-  testAuthToken: function () {
-    let timer = Ember.run.later(() => {
-      this.get('access').testAuth().then((/* res */) => {
-        this.testAuthToken(); //This will never happen.
-      }, (/* err */) => {
-        this.send('logout', null, true);
+  testAuthToken() {
+    return get(this, 'access').testAuth()
+      .catch(() => {
+        this.transitionTo('login');
+        this.send('logout', null);
       });
-    }, CHECK_AUTH_TIMER);
-
-    this.set('testTimer', timer);
   },
-
-
-
 
   model(params, transition) {
     // Save whether the user is admin
-    let type = this.get(`session.${C.SESSION.USER_TYPE}`);
+    let type = this.get(`session.${ C.SESSION.USER_ROLES }`);
     let isAdmin = (type === C.USER.TYPE_ADMIN) || !this.get('access.enabled');
+
     this.set('access.admin', isAdmin);
     this.get('session').set(C.SESSION.BACK_TO, undefined);
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-       settingsmap: this.toCb('loadSettings'),
-        datacenter: this.toCb('loadDataCenter'),
-        stacks: this.toCb('loadStacks'),
-        events: this.toCb('loadEvents'),
+        settingsmap: this.toCb('loadSettings'),
+        datacenter: this.toCb('loadHealthz'),
+        stacks: this.toCb('loadAssemblys'),
+        // locations: this.cbFind('datacenter', 'datacenters'),
+        // plans: this.cbFind('planfactory', 'plans'),
+        // networks: this.cbFind('network', 'networks'),
+        events: this.toCb('loadAuditEvents'),
       };
 
-      async.auto(tasks, xhrConcur, function (err, res) {
+      async.auto(tasks, xhrConcur, (err, res) => {
         if (err) {
           reject(err);
         } else {
@@ -77,36 +83,92 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
   },
 
   activate() {
-
     let app = this.controllerFor('application');
+
     this._super();
-    if (!this.controllerFor('application').get('isPopup') && this.get('projects.current')) {
-      this.connectSubscribe();
-    }
+    this.connectSubscribers();
   },
 
   deactivate() {
     this._super();
-    this.disconnectSubscribe();
+    this.disconnectSubscribers();
     Ember.run.cancel(this.get('testTimer'));
 
     // Forget all the things
     this.get('storeReset').reset();
   },
 
+
+  actions: {
+    // 401: Authentication error, send back to login screen
+    error(err, transition) {
+      if (err.code === 401) {
+        this.send('logout', transition, true);
+
+        return false;
+      } else {
+        // Bubble up
+        return true;
+      }
+    },
+
+    /*
+    TO-DO: Unused.
+    The below code is to operate in an organization boundry
+     When we switch an organization, unsubcribe and load the new
+     organization details
+     */
+    switchOrigin(originId, transition = true) {
+      this.disconnectSubscribe(() => {
+        this.send('finishSwitchOrigin', originId, transition);
+      });
+    },
+
+    finishSwitchOrigin(originId, transition) {
+      this.get('storeReset').reset();
+      if (transition) {
+        this.intermediateTransitionTo('authenticated');
+      }
+      this.set(`tab-session.${ C.TABSESSION.PROJECT }`, originId);
+      this.refresh();
+    },
+  },
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
-
-    if (err && (isAuthEnabled || [401, 403].indexOf(err.status) >= 0)) {
+    if (err && ((isAuthEnabled && this.isAPIServerFlunked(err.code)) || this.deniedAuthorizationOrAuthentication(err.code))) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
+
       return;
     }
-
-    this.replaceWith('settings.projects');
+    this.replaceWith(transition.targetName);
 
     return ret;
+  },
+
+  /*
+   401: Authentication error
+   403: Authorization error
+   */
+  deniedAuthorizationOrAuthentication(code) {
+    return C.UNAUTHENTICATED_HTTP_CODES.includes(code) || C.UNAUTHORIZED_HTTP_CODES.includes(code);
+  },
+
+
+  /*
+   * 500 - Internal server error (Some of the systems connected to api aren't working)
+   * 502 - Badgateway: We get this error when
+   */
+  isAPIServerFlunked(code) {
+      return (C.BADGATEWAY_HTTP_CODES.includes(code) || C.INTERNALSERVER_HTTP_CODES.includes(code));
+    /* This code doesn't make sense, this sends
+    false or
+    undefined.
+    Both are same.
+    Should we do something like this to trap true/false
+    return ["500", "502"].includes(err.code);
+    */
   },
 
   cbFind(type, store = 'store', opt = null) {
@@ -116,71 +178,44 @@ export default Ember.Route.extend(Subscribe, PromiseToCb, DefaultHeaders, {
         results = null;
       }
 
-      return this.get(store).find(type, null, opt).then(function (res) {
+      return this.get(store).find(type, null, opt).then((res) => {
         cb(null, res);
-      }).catch(function (err) {
+      }).catch((err) => {
         cb(err, null);
       });
     };
   },
 
+  // Every Rio/OS site will have common settings stored under an url  'cluster_info' in system origin named 'rioos_system'.
+  // This methods load that setting. Setting is a set of known key value pairs.
   loadSettings() {
-    return this.get('userStore').find('settingsmap', null, { url: 'origins/rioos_system/settingsmap/cluster_info' });
+    return this.get('userStore').find('settingsmap', null, this.opts('origins/rioos_system/settingsmap/cluster_info'));
   },
 
-
-  loadDataCenter() {
-    var tmp = this.opts('healthz/overall');
-    return this.get('store').find('reports', null, this.opts('healthz/overall'));
+  // Load the datacenters overall healthz (cpu, memory, disk), node statistics, os usages
+  loadHealthz() {
+    return this.get('store').find('reportsstatistics', null, this.opts('healthz/overall'));
   },
 
-  loadStacks() {
-    return this.get('store').find('assembly', null, this.opts('accounts/' + this.get('session').get("id") + '/assemblys'));
+  /* Stacks launched by a customer are stored in an elementary level as Assemblys.
+       StacksFactory
+                 |
+  |--------------------------------|
+  AssemblyFactory             AssemblyFactory
+          |                          |
+  |-------------|           |-----------------|
+  Assembly  Assembly
+  */
+  loadAssemblys() {
+    return this.get('store').find('assembly', null, this.opts(`accounts/${  this.get('session').get('id')  }/assemblys`));
   },
-
 
   loadSecrets() {
-    return this.get('store').find('secret', null, this.opts('accounts/' + this.get('session').get("id") + '/secrets'));
+    return this.get('store').find('secret', null, this.opts(`accounts/${  this.get('session').get('id')  }/secrets`));
   },
 
-  loadEvents() {
-    return this.get('store').find('event', null, this.opts('accounts/' + this.get('session').get("id")+ '/audits'));
+  loadAuditEvents() {
+    return this.get('store').find('event', null, this.opts(`accounts/${  this.get('session').get('id')  }/audits`));
   },
 
-  actions: {
-    error(err, transition) {
-      // Unauthorized error, send back to login screen
-      if (err.status === 401) {
-        this.send('logout', transition, true);
-        return false;
-      }
-      else {
-        // Bubble up
-        return true;
-      }
-    },
-
-    showAbout() {
-      this.controllerFor('application').set('showAbout', true);
-    },
-
-    switchProject(projectId, transition = true) {
-      console.log('Switch to ' + projectId);
-      this.disconnectSubscribe(() => {
-        console.log('Switch is disconnected');
-        this.send('finishSwitchProject', projectId, transition);
-      });
-    },
-
-    finishSwitchProject(projectId, transition) {
-      console.log('Switch finishing');
-      this.get('storeReset').reset();
-      if (transition) {
-        this.intermediateTransitionTo('authenticated');
-      }
-      this.set(`tab-session.${C.TABSESSION.PROJECT}`, projectId);
-      this.refresh();
-      console.log('Switch finished');
-    },
-  },
 });

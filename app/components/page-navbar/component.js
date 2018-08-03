@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   actions: {
 
     logout: function() {
-      this.get('access').clearSessionKeys(true, true);
+      this.get('access').sessionClearRequest();
     },
 
   }

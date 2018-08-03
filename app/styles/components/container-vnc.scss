@@ -1,0 +1,39 @@
+.shell-body {
+  display: flex;
+
+  .terminal {
+    margin: 0 auto;
+    font-size: 12px;
+    font-family: "Lucida Console", Monaco, "Courier New", monospace;
+  }
+}
+
+.shell-status {
+  position: absolute;
+  margin: 10px 0;
+}
+
+.shell-popup {
+  padding: 20px;
+  background-color: #fafcff;
+  padding-top: 66px;
+}
+
+.xterm-rows {
+  padding: 16px;
+  background-color: black;
+  color: #eaeaea;
+  width: 732px;
+}
+
+.footer-actions-shell {
+  padding-bottom: 12px;
+  text-align: right;
+  position: relative;
+  padding-right: 199px;
+
+  .sell-txt {
+    padding-right: 32%;
+    font-size: 23px;
+  }
+}

@@ -1,0 +1,87 @@
+<div class="modal fade node_discovery node_modal" id="node_add_modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{t 'stackPage.admin.node.nodeSearchDiscovery'}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="node_discovery_types">{{t 'stackPage.admin.node.selectDiscoveryMode'}}</label>
+              <select class="form-control" id="node_discovery_types" name="node_discovery_types" onchange= {{action "selectStorage" value="target.value"}}>
+                {{#each types as |type|}}
+                <option value={{type.value}}>{{type.text}}</option>
+                {{/each}}
+                </select>
+            </div>
+          </div>
+        </div>
+
+        {{#if (eq searchType "Default")}}
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="msg">
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>{{t 'stackPage.admin.node.noteForAdvanceSubnet'}}
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq searchType "Subnet")}}
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="subnetAdvanceValue">{{t 'stackPage.admin.node.searchNodeBySubnet'}}</label> {{input type="text" class="form-control" id="subnet" value=subnetAdvanceValue placeholder=subnetAdvancePlaceHolder}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="default">
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>
+                {{noteForAdvanceSubnet}}
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if (eq searchType "Subnet Range")}}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="from">{{t 'stackPage.admin.node.fromSubnet'}}</label> {{input type="text" class="form-control" id="from" value=subnetRangeFrom}}
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="to">{{t 'stackPage.admin.node.toSubnet'}}</label> {{input type="text" class="form-control" id="to" value=subnetRangeTo}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="msg">
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>
+                {{noteForRangeSubnet}}
+              </label>
+            </div>
+          </div>
+        </div>
+        {{/if}}
+
+        <button type="submit" {{action 'nodeDiscovery'}} class="btn btn-default">
+            {{t 'stackPage.admin.node.searchButtonText'}}
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
+      </div>
+    </div>
+
+  </div>
+</div>

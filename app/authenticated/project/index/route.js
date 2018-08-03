@@ -2,12 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+ //It the user logined in redirect dashboard (infrastructure-tab)
   redirect() {
-    //The default is rioorch
-    let orch = "rioorch";
-
-    if (orch === 'rioorch') {
-      this.replaceWith('infrastructure-tab');
-    }
+    this.replaceWith('infrastructure-tab');
   },
 });

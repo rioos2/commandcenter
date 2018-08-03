@@ -1,6 +1,6 @@
 .cloud-performance {
     .performance-content {
-        background-image: url(../images/createcloud/cloudperformance.png);
+        background-image: url(/assets/images/createcloud/cloudperformance.png);
         background-repeat: no-repeat;
         background-size: 100% auto;
         padding-top: 100px;
@@ -28,7 +28,7 @@
         }
 
         .content {
-            position: relative;            
+            position: relative;
             margin: 0 auto;
             width: 380px;
         }
@@ -42,16 +42,26 @@
         color: #64687c;
     }
 
-    
+
 
     .ram-content {
         text-align: right;
-        padding: 0;        
+        padding: 0;
     }
 
     .capacity-content {
         text-align: left;
-        padding: 0;        
+        padding: 0;
+    }
+    .scaling-content {
+        padding-bottom: 10px;
+        .title {
+            font-size: 25px;
+            color: #bcbdce;
+            text-align: center;
+            // padding-top: 10px !important;
+            margin-bottom: 20px;
+      }
     }
 
     .chart-ram svg,
@@ -79,7 +89,7 @@
 
     @media only screen and (max-width: 992px) {
         .performance-content {
-            background-image: url(../images/createcloud/cloudperformance1.png);
+            background-image: url(/assets/images/createcloud/cloudperformance1.png);
             background-color: #1c2032;
         }
 
@@ -131,8 +141,16 @@
             margin-left: -15px;
         }
 
+
         .cores-content {
             margin-left: -70px;
         }
+
+    }
+    .scaling-count{
+      background-image: url(/assets/images/createcloud/cloudperformance.png) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% auto !important;
+      padding-top: 100px !important;
     }
 }

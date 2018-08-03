@@ -8,63 +8,88 @@
 @import 'components/navbar';
 @import 'pages/home.scss';
 @import 'components/loading.scss';
+@import 'components/modal.scss';
 @import 'pages/vnc.scss';
 @import 'components/resource-actions.scss';
 @import 'components/notification.scss';
+@import 'components/container-vnc.scss';
 @import 'pages/dashboard.scss';
+@import 'pages/no-vnc.scss';
 @import 'comp/chart-os.scss';
 @import 'comp/two-chart.scss';
 @import 'comp/alert.scss';
 @import 'comp/footer.scss';
+@import 'comp/label.scss';
 @import 'comp/category-tab.scss';
 @import 'comp/select-filter.scss';
 @import 'comp/chart-gauge.scss';
 @import 'comp/assembly-box.scss';
 @import 'comp/data-tooltip.scss';
+@import 'comp/res-tooltip.scss';
 @import 'pages/_fail-whale.scss';
 @import 'base/table.scss';
 @import 'components/createcloud';
-
-
+@import 'components/radio';
+@import 'admin/chef_work';
+@import 'admin/jscrollbar';
+@import 'admin/main';
+@import 'admin/select2';
+@import 'admin/sweetalert';
+@import 'admin/settings';
+@import 'flag/flags';
+@import 'wizard/wizard';
 //TO-DO: Why is this hanging here ?
 @import url(https://fonts.googleapis.com/css?family=Roboto);
-
 @font-face {
-    font-family: 'fselliot';
-    font-style: normal;
-    font-weight: lighter;
-    src:url('../fonts/FSElliot-Regular.otf') format("opentype");
+  font-family: 'fselliot';
+  font-style: normal;
+  font-weight: lighter;
+  src: url("../fonts/FSElliot-Regular.otf") format("opentype");
 }
-
-
 //TO-DO: Why is this hanging here ?
-
 body,
+body *,
 input,
 select,
-textarea,
-body * {
+textarea {
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
   font-family: 'fselliot';
 }
-body::after, body::before,
+
+body *::after,
+body *::before,
+body::after,
+body::before,
 input::after,
 input::before,
 select::after,
 select::before,
 textarea::after,
-textarea::before,
-body *::after,
-body *::before {
+textarea::before {
   box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    background-color: #132fa9;
+  margin: 0;
+  background-color: #1d43a9;
+}
+
+body.wizard-page {
+  background-image: url('/assets/images/wizard/wizard-bg.jpg');
+  background-size: cover;
+  background-position: top center;
+  position: relative;
 }
 
 .container {
-  padding: 0px;
+  padding: 0;
+}
+
+.rio-admin {
+  background-color: #fafcff;
+}
+
+.no-touch {
+  padding-right: 0 !important;
 }

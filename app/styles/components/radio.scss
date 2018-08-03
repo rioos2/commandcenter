@@ -1,0 +1,56 @@
+.rio-radio.mov-top {
+  padding-top: 7px;
+}
+
+.rio-radio {
+
+    .rio-selectbtn {
+        label {
+            border-color: transparent;
+            color: black;
+            text-transform: none;
+            font-size: 11px;
+            padding: 2px 9px 10px 8px;
+            text-transform: capitalize;
+            // box-shadow : 0px 6px 20px rgba(41, 49, 190, 0.05);
+
+            &:hover {
+                border-color:#2966d8;
+                box-shadow : 0px 6px 20px rgba(41, 49, 190, 0.3);
+            }
+        }
+
+        .option-input {
+            background: #dae1f5;
+            pointer-events: none;
+            height: 16px;
+            width: 16px;
+            top: 4px;
+
+
+            &:checked::before {
+                color: #2966d8;
+            }
+        }
+    }
+
+    .row {
+        position: relative;
+    }
+
+    .vl {
+        border-left: 2px solid #f4f7fe;
+        height: 70%;
+        position: absolute;
+        left: 50%;
+        top: 15%;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .rio-selectbtn {
+            margin-top: 0;
+        }
+
+        .vl { display:none;}
+    }
+}

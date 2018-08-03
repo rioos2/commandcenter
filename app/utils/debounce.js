@@ -1,5 +1,7 @@
 import Ember from 'ember';
-
+import { observer } from '@ember/object';
+import { debounce } from '@ember/runloop';
+import { throttle } from '@ember/runloop';
 // debouncedObserver('observeKey1','...','observerKeyN', function() {} [, delay] [,leadingEdge])
 export function debouncedObserver(...args) {
   var argsLength = args.length;
@@ -7,14 +9,11 @@ export function debouncedObserver(...args) {
 
   if (typeof args[argsLength - 1] === 'function') {
     funcIndex = argsLength - 1;
-  }
-  else if (typeof args[argsLength - 2] === 'function') {
+  } else if (typeof args[argsLength - 2] === 'function') {
     funcIndex = argsLength - 2;
-  }
-  else if (typeof args[argsLength - 3] === 'function') {
+  } else if (typeof args[argsLength - 3] === 'function') {
     funcIndex = argsLength - 3;
-  }
-  else {
+  } else {
     throw Error('Invalid arguments');
   }
 
@@ -22,15 +21,15 @@ export function debouncedObserver(...args) {
   keys = args.slice(0, funcIndex);
 
   var fn = function() {
-    if ( this.isDestroyed || this.isDestroying ) {
+    if (this.isDestroyed || this.isDestroying) {
       return;
     }
 
     opt[0].apply(this);
   };
 
-  return Ember.observer.apply(Ember, keys.concat(function() {
-    Ember.run.debounce(this, fn, opt[1] || 250, opt[2] || false);
+  return observer.apply(Ember, keys.concat(function() {
+    debounce(this, fn, opt[1] || 250, opt[2] || false);
   }));
 }
 
@@ -40,21 +39,18 @@ export function throttledObserver(...args) {
 
   if (typeof args[argsLength - 1] === 'function') {
     funcIndex = argsLength - 1;
-  }
-  else if (typeof args[argsLength - 2] === 'function') {
+  } else if (typeof args[argsLength - 2] === 'function') {
     funcIndex = argsLength - 2;
-  }
-  else if (typeof args[argsLength - 3] === 'function') {
+  } else if (typeof args[argsLength - 3] === 'function') {
     funcIndex = argsLength - 3;
-  }
-  else {
+  } else {
     throw Error('Invalid arguments');
   }
 
   opt = args.slice(funcIndex);
   keys = args.slice(0, funcIndex);
 
-  return Ember.observer.apply(Ember, keys.concat(function() {
-    Ember.run.throttle(this, opt[0], opt[1] || 250, opt[2] || false);
+  return observer.apply(Ember, keys.concat(function() {
+    throttle(this, opt[0], opt[1] || 250, opt[2] || false);
   }));
 }

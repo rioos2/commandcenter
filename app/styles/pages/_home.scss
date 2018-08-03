@@ -1,0 +1,105 @@
+
+.home {
+    .title {
+        color: #37395a;
+        font-size: 20px;
+        letter-spacing: 5px;
+        margin-bottom: 0px;
+        text-transform: uppercase;
+
+        span {
+            border-bottom: 3px solid #2d9aff;
+            letter-spacing: 0px;
+            padding-bottom: 5px;
+            margin-right: 5px;
+        }
+
+        @media (max-width: 576px) {
+            padding-left: 0 !important;
+            text-align: center;
+        }
+    }
+
+    .main-gauges {
+        background-image: url(/assets/images/home/bg_gauge.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        text-transform: uppercase;
+    }
+
+    .statistics {
+        background-color: #f0f4fa;
+         .empty-statis {
+           padding-top: 8%;
+           padding-bottom: 7%;
+           text-align: center;
+           color: #8790a1;
+           p {
+             font-size: 19px;
+           }
+         }
+         .status-round {
+             height: 35%;
+             position: relative;
+
+             .icon {
+                 width: 20px;
+                 filter: drop-shadow(0px 8px 6px rgba(44, 102, 22, 0.3));
+
+                 .cls-1warning {
+                   fill: #FF9800;
+                 }
+
+                 .cls-2warning {
+                   fill: #FFCC80;
+                 }
+
+                 .cls-1success {
+                   fill: #47ad1d;
+                 }
+
+                 .cls-2success {
+                   fill: #8ee094;
+                 }
+
+             }
+         }
+         .place-center {
+             text-align: -webkit-center;
+         }
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .list-content {
+        margin: 20px 20px 0 20px;
+
+        .list {
+            margin-bottom: 30px;
+        }
+    }
+
+    .os-useage-bytime{
+        background-color: #e3e9f6;
+    }
+
+    @media (max-width: 576px) {
+        .list-content {
+            margin: 0;
+        }
+
+        .column {
+            width: 100%;
+        }
+
+        .list {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
+    }
+}

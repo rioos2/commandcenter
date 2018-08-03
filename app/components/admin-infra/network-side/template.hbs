@@ -1,0 +1,51 @@
+{{admin-infra/network-edit network=model nodes=nodes allnodes=allnodes doReloaded='doReloaded' modelSpinner=modelSpinner}}
+<div class="network-detail-container">
+	<div class="network-detail-box" id="sd_detail1">
+		<div class="network-active-detail-name">
+			{{#if virtualNetworkAvailable}}{{name}}
+			<span class="network-edit" >
+				<a href="#network_edit" {{action 'openEditModal'}}>
+					{{t 'stackPage.admin.storage.edit'}}</a>
+				</span>
+				{{else}} &nbsp;{{/if}}
+		</div>
+		<div class="network-active-detail-detail">
+			<div class="sd-subheader">{{t 'stackPage.admin.network.detail'}}</div>
+			{{#if virtualNetworkAvailable}}
+				<div class="sd-ip-detail sd-table">
+					<div class="sd-title">{{t 'stackPage.admin.network.type'}}</div>
+					<div class="sd-value">{{type}}</div>
+				</div>
+				<div class="sd-type-detail sd-table">
+					<div class="sd-title">{{t 'stackPage.admin.network.range'}}</div>
+					<div class="sd-value">{{subnet}}</div>
+				</div>
+				<div class="sd-status-detail sd-table">
+					<div class="sd-title">{{t 'stackPage.admin.network.gateway'}}</div>
+					<div class="sd-value ">{{gateway}}</div>
+				</div>
+				<div class="sd-cdate-detail sd-table">
+					<div class="sd-title">{{t 'stackPage.admin.network.netmask'}}</div>
+					<div class="sd-value">{{netmask}}</div>
+				</div>
+				<div class="sd-cdate-detail sd-table">
+					<div class="sd-title">{{t 'stackPage.admin.network.status'}}</div>
+					<div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
+				</div>
+				{{else}}
+				<div class="sd-empty-pool">{{t 'stackPage.admin.network.noNetworkData'}}</div>
+			{{/if}}
+		</div>
+		<div class="network-active-detail-nodes">
+			<div class="sd-subheader">{{t 'stackPage.admin.network.nodes'}}</div>
+			{{#if virtualNetworkAvailable}}
+				{{#each nodes as |node|}}
+					{{admin-infra/network-node node=node }}
+				{{/each}}
+			{{else}}
+				<div class="sd-empty-pool">{{t 'stackPage.admin.network.nodeData'}}</div>
+			{{/if}}
+		</div>
+	</div>
+
+</div>

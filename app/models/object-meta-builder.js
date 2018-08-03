@@ -24,7 +24,7 @@ ObjectMetaBuilder.reopenClass({
       created_at: "",
       cluster_name: "",
       labels: {
-        rioos_category: "machine",
+        rioos_category: setting.cloudType,
         rioos_environment: "development"
       },
       annotations: {
@@ -32,9 +32,9 @@ ObjectMetaBuilder.reopenClass({
         key2: "value2"
       },
       owner_references: [{
-        kind: "AssemblyFactory",
-        api_version: "v1",
-        name: "abc",
+        kind: "",
+        api_version: "",
+        name: "",
         uid: "",
         block_owner_deletion: true
       }],

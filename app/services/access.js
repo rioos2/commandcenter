@@ -1,13 +1,15 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import C from 'nilavu/utils/constants';
+import Service from '@ember/service';
+import { get, set } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default Ember.Service.extend(DefaultHeaders, {
-  cookies: Ember.inject.service(),
-  session: Ember.inject.service(),
+export default Service.extend(DefaultHeaders, {
+  cookies: service(),
+  session: service(),
 
-  store: Ember.inject.service(),
-  userStore: Ember.inject.service('user-store'),
+  store:     service(),
+  userStore: service('user-store'),
 
   // These are set by authenticated/route
   // Is access control enabled
@@ -21,40 +23,42 @@ export default Ember.Service.extend(DefaultHeaders, {
   admin: null,
 
   // TO-DO: +Optional
-  //Include a promise handler to check if a token (API) exists or not
+  // Include a promise handler to check if a token (API) exists or not
   // For now, consider as Auth token expired
-  testAuth() {
-    // make a call to api base because it is authenticated
-    return this.get('userStore').rawRequest({
-      url: '/version',
-    }).then((xhr) => {
-      // Auth server can be reached
-      return Ember.RSVP.reject('Auth Succeeded');
-    }, (/* err */) => {
-      // Auth server can be reached
-      return Ember.RSVP.reject('Auth Failed');
-    });
-  },
 
-  detect: function () {
+    testAuth() {
+      // make a call to api base because it is authenticated
+      return this.get('userStore').rawRequest(this.rawRequestOpts({
+        url:    '/api/v1/test',
+      })).then((xhr) => {
+        // Auth token still good
+        return Ember.RSVP.resolve('Auth Succeeded');
+      }, (/* err */) => {
+        // Auth token expired
+        return Ember.RSVP.reject('Auth Failed');
+      });
+    },
+
+  detect() {
     if (this.get('enabled') !== null) {
       return Ember.RSVP.resolve();
     }
     this.setProperties({
-      'enabled': true,
-      'provider': 'password',
+      'enabled':       true,
+      'provider':      'password',
       'loadedVersion': '2.0-beta1',
     });
   },
 
-  login: function (username, password) {
+  login(username, password) {
     var session = this.get('session');
+
     return this.get('userStore').rawRequest({
-      url: '/api/v1/authenticate',
+      url:    '/api/v1/authenticate',
       method: 'POST',
-      data: {
-        email: username,
-        password: password,
+      data:   {
+        email:    username,
+        password,
       },
     }).then((xhr) => {
       var auth = xhr.body;
@@ -62,37 +66,60 @@ export default Ember.Service.extend(DefaultHeaders, {
       var origin;
 
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
+        //TO-DO origin and team will not  work here. since it placed on sub level
+        //Use flat npm for fix this
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
         }
       });
-
       this.get('cookies').setWithOptions(C.COOKIE.TOKEN, auth.token, {
-        path: '/',
+        path:   '/',
         secure: window.location.protocol === 'http:'
       });
+
       session.setProperties(interesting);
+
       return xhr;
     }).catch((res) => {
       let err;
+
       try {
         err = res.body;
       } catch (e) {
         err = {
-          type: 'error',
+          type:    'error',
           message: 'Error logging in'
         };
       }
+
       return Ember.RSVP.reject(err);
     });
   },
 
-  signup: function (form) {
-    var session = this.get('session');
+  activate() {
     return this.get('userStore').rawRequest({
-      url: '/api/v1/accounts',
+      url:    '/api/v1/wizards',
+      method: 'GET',
+    }).then((xhr) => {
+      var res;
+
+      if (xhr.body) {
+        res = xhr.body.registered && xhr.body.licensed
+      }
+
+      return res;
+    }).catch((err) => {
+      return Ember.RSVP.reject(err);
+    });
+  },
+
+  signup(form) {
+    var session = this.get('session');
+
+    return this.get('userStore').rawRequest({
+      url:    '/api/v1/accounts',
       method: 'POST',
-      data: form,
+      data:   form,
     }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
@@ -104,31 +131,35 @@ export default Ember.Service.extend(DefaultHeaders, {
         }
       });
       this.get('cookies').setWithOptions(C.COOKIE.TOKEN, auth.token, {
-        path: '/',
+        path:   '/',
         secure: window.location.protocol === 'https:'
       });
 
       session.setProperties(interesting);
+
       return xhr;
     }).catch((res) => {
       let err;
+
       try {
         err = res.body;
       } catch (e) {
         err = {
-          type: 'error',
+          type:    'error',
           message: 'Error logging in'
         };
       }
+
       return Ember.RSVP.reject(err);
     });
   },
 
-  clearSessionKeys: function (all, out = false) {
+  clearSessionKeys(all, out = false) {
     if (all === true) {
       this.get('session').clear();
     } else {
       var values = {};
+
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         values[key] = undefined;
       });
@@ -141,24 +172,23 @@ export default Ember.Service.extend(DefaultHeaders, {
     }
   },
 
+  sessionClearRequest() {
+    return this.get('userStore').rawRequest(this.rawRequestOpts({
+      url:    '/api/v1/logout',
+      method: 'POST',
+      data:   {
+        email: this.get('session').get('email'),
+        token: this.get('session').get('token'),
+      },
+    })).then((xhr) => {
+      this.clearSessionKeys(true, true);
+    }).catch((res) => {
+      this.clearSessionKeys(true, true);
+    });
+  },
+
   isLoggedIn() {
     return !!this.get('cookies').get(C.COOKIE.TOKEN);
   },
-
-  // TO-DO: _Optional.
-  // Include a promise handler to delete a token (API) if exists
-  // For now, consider as Auth token expired
-  clearToken() {
-    return Ember.RSVP.resolve('Token cleared');
-  },
-
-  isOwner() {
-    let schema = this.get('store').getById('schema', 'stack');
-    if (schema && schema.resourceFields.system) {
-      return schema.resourceFields.system.create;
-    }
-
-    return false;
-  }
 
 });

@@ -1,0 +1,217 @@
+.wizard-page {
+  p {
+    color: rgba(0,0,0,.6);
+    font-family: 'Raleway', sans-serif;
+    font-size: 100%;
+    font-weight: normal;
+    text-align: center;
+    z-index: 9999;
+  }
+
+  .welcome-wizard-img {
+    text-align: center;
+  }
+
+  .modal-dialog-wizard-step-licence {
+    width: 637px;
+    margin: 142px auto;
+    padding-left: 46px;
+    margin-top: 45px;
+  }
+
+  .licence-logo {
+    text-align: center;
+    padding-top: 35px;
+    margin-top: 20px;
+  }
+
+  .together-img {
+    text-align: center;
+
+    img {
+      width: 60px;
+    }
+  }
+
+  .licence-desc-space {
+    padding-bottom: 24px;
+  }
+
+  .modal-title {
+    font-weight: 700;
+  }
+
+  .last-btn {
+    text-align: center;
+    padding-top: 18px;
+
+    .flipper-container {
+      text-align: center;
+      margin-top: 40px;
+      -moz-perspective: 1000;
+      -webkit-perspective: 1000;
+      perspective: 1000;
+    }
+
+    .flipper {
+      display: inline-block;
+      position: relative;
+      text-decoration: none;
+      font-weight: 400;
+      text-transform: uppercase;
+      width: 18em;
+      height: 4.5em;
+      background-color: #282828;
+      box-shadow: 0 6px 26px rgba(41, 49, 190, 0.3);
+      -moz-transition: all 0.6s cubic-bezier(0.37, 0.74, 0.15, 1.65);
+      -o-transition: all 0.6s cubic-bezier(0.37, 0.74, 0.15, 1.65);
+      -webkit-transition: all 0.6s cubic-bezier(0.37, 0.74, 0.15, 1.65);
+      transition: all 0.6s cubic-bezier(0.37, 0.74, 0.15, 1.65);
+      -moz-transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+    .flipper {
+      &.dive {
+        -moz-transform: rotateX(90deg);
+        -webkit-transform: rotateX(90deg);
+        transform: rotateX(90deg);
+      }
+    }
+
+    .back-face,
+    .front-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      padding-right: 70px;
+      line-height: 4.5em;
+      -moz-border-radius: 2px;
+      -webkit-border-radius: 2px;
+      border-radius: 2px;
+      -moz-backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .back-face:before,
+    .front-face:before {
+      content: attr(data-icon);
+      font-size: 30px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 70px;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .front-face {
+      background-color: #2342c8;
+      color: #fff;
+      text-shadow: 0 1px 1px #309dd5;
+      -moz-transform: rotateX(0deg) translateZ(2.25em);
+      -ms-transform: rotateX(0deg) translateZ(2.25em);
+      -webkit-transform: rotateX(0deg) translateZ(2.25em);
+      transform: rotateX(0deg) translateZ(2.25em);
+      cursor: pointer;
+    }
+
+    .front-face:before {
+      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjEuMCIgeDI9IjEuMCIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NlMDMzZSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjZWIxZjU2Ii8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNmOTE4NTgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmYzIxNjEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=");
+      background-size: 100%;
+      background-image: -moz-linear-gradient(45deg, #2343ce 0%, #235fc6 50%, #2368c8 50%, #2c71d1);
+      background-image: -webkit-linear-gradient(45deg, #2343ce 0%, #235fc6 50%, #2368c8 50%, #2c71d1);
+      background-image: linear-gradient(45deg, #2343ce 0%, #235fc6 50%, #2368c8 50%, #2c71d1);
+    }
+
+    .back-face {
+      background-color: #77BD42;
+      color: #53842e;
+      -moz-transform: rotateX(-90deg) translateZ(2.25em);
+      -ms-transform: rotateX(-90deg) translateZ(2.25em);
+      -webkit-transform: rotateX(-90deg) translateZ(2.25em);
+      transform: rotateX(-90deg) translateZ(2.25em);
+    }
+
+    .back-face:before {
+      background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjEuMCIgeDI9IjEuMCIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzUzODQyZSIvPjxzdG9wIG9mZnNldD0iNTAlIiBzdG9wLWNvbG9yPSIjNzZiYzQyIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiM3ZGJkNGMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3N2JkNDIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=");
+      background-size: 100%;
+      background-image: -moz-linear-gradient(45deg, #53842e 0%, #76bc42 50%, #7dbd4c 50%, #77bd42);
+      background-image: -webkit-linear-gradient(45deg, #53842e 0%, #76bc42 50%, #7dbd4c 50%, #77bd42);
+      background-image: linear-gradient(45deg, #53842e 0%, #76bc42 50%, #7dbd4c 50%, #77bd42);
+    }
+  }
+  @media only screen and (max-width: 991px) {
+    .light-right {
+      display: none;
+    }
+
+    .light-down {
+      display: inline-block;
+    }
+
+    .domain-content,
+    .location-content {
+      text-align: center;
+    }
+
+    .cloud-content .content,
+    .cores-content .content,
+    .domain-content .content,
+    .flash-content .content,
+    .ip-content .content,
+    .location-content,
+    .logo-content .content,
+    .ram-content .content {
+      display: block;
+      padding: 0;
+    }
+
+    .flash-content .content {
+      margin-top: -40px;
+    }
+
+    .ram-content .content {
+      padding-top: 20px;
+    }
+  }
+}
+
+.wizard-bg {
+  margin: 0;
+  background: #edf4f9 !important;
+  background-image: url("/assets/images/second/bg.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% auto !important;
+  background-color: #e9eff9 !important;
+  color: #1a1d31 !important;
+  padding-bottom: 25px;
+}
+
+.wizard-logo-img {
+  width: 200px;
+  margin: 60px auto;
+  display: block;
+}
+
+.wizard-complete-check {
+  color: #27ad17;
+  align-items: left;
+  padding-right: -24px;
+}
+
+.wizard-tab-title {
+  text-transform: capitalize;
+}
+
+.wizard-btn {
+  background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
+}
+
+.wizard-activation-width {
+  width: 692px;
+}

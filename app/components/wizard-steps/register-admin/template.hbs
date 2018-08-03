@@ -1,0 +1,5 @@
+{{#if signupStep}}
+  {{wizard-steps/signup-admin proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
+{{else}}
+  {{wizard-steps/login-admin proceedNextStep='proceedNextStep' completedSteps=completedSteps}}
+{{/if}}

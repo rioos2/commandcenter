@@ -1,0 +1,18 @@
+<div class="footer-actions-shell">
+  <span class="sell-txt">{{t 'modalShell.title' instanceName=instance.displayName}}</span>
+    <button class="button btn vnc-close" title='close' {{action 'close'}}><span>{{fa-icon "remove"}}
+    </span></button>
+</div>
+
+<div>
+<div class="shell-body">
+</div>
+{{#if socketError}}
+  <div class="no-vnc">
+    <img src="assets/images/logo2.png" />
+  </div>
+  <div class="footer-actions">
+    <div class="console-status text-muted footer-actions-txt-cen">{{t (concat-str 'containerShell.status' status character='.') error=error}}</div>
+  </div>
+{{/if}}
+</div>

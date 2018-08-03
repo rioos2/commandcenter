@@ -1,29 +1,124 @@
 <section class="fail-whale">
-  <div class="error">
-    <h2 class="bg-danger">{{t 'failWhalePage.header'}}</h2>
-    <div class="r-p20">
-      <h4 class="r-mt20">{{model.code}} {{#if model.status}}({{model.status}}){{/if}}</h4>
-      <p>{{model.message}}</p>
-      <p class="small">{{model.detail}}</p>
-      <div class="r-mt20">
-        {{format-html-message 'failWhalePage.reloadButton'}}
-        <a class="hand" {{action "logout"}}>{{t 'failWhalePage.logoutButton'}}</a>
+
+
+  <section class="main">
+    <div class="error">
+      <h2 class="bg-danger">{{t 'failWhalePage.header'}}</h2>
+      <div class="r-p28">
+        <h4 class="r-mt20">{{model.code}} {{#if model.status}}({{model.status}}){{/if}}</h4>
+        <p>{{model.message}}</p>
+        <p class="small">{{model.detail}}</p>
+        <div>
+          {{format-html-message 'failWhalePage.reloadButton'}}
+          <a class="hand" {{action "logout"}}>{{t 'failWhalePage.logoutButton'}}</a>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="absolute cloud_left">
+      <ul class="inline-list">
+        <li class="cloud"></li>
+        <li class="cloud"></li>
+        <li class="cloud"></li>
+      </ul>
+    </div>
+
+    <div class="absolute cloud_right">
+      <ul class="inline-list">
+        <li class="cloud"></li>
+        <li class="cloud"></li>
+        <li class="cloud"></li>
+      </ul>
+    </div>
+
+    <span class="absolute sun"></span>
 
 
-  <div class="failplane">
-    <img src="{{app.baseAssets}}images/failwhale/fail-plane.svg" width="484" height="269" />
-    <img class="failprop" src="{{app.baseAssets}}images/failwhale/fail-prop.svg" width="123" height="246" />
-  </div>
+    <div class="absolute landscape left_m">
 
-  <img class="failcow" src="{{app.baseAssets}}images/failwhale/fail-cowparachute.svg" width="178" height="255" />
-  <img class="cloud" src="{{app.baseAssets}}images/failwhale/fail-cloud1.svg" width="254" height="121" />
-  <img class="cloud" src="{{app.baseAssets}}images/failwhale/fail-cloud2.svg" width="151" height="91" />
-  <img class="cloud" src="{{app.baseAssets}}images/failwhale/fail-cloud3.svg" width="175" height="102" />
-  <img class="cloud" src="{{app.baseAssets}}images/failwhale/fail-cloud4.svg" width="300" height="142" />
-  <img class="cloud" src="{{app.baseAssets}}images/failwhale/fail-cloud5.svg" width="320" height="152" />
+      <span class="grass gl">
+  					<span class="land_tree leftt-gras">
+  						<ul class="inline-list">
+  						  <li class="t_grass"></li>
+  						  <li class="t_grass"></li>
+  						  <li class="t_grass"></li>
+  						</ul>
+  					</span>
+      </span>
 
-  <div class="wave"></div>
+      <span class="absolute tree1"></span>
+      <span class="absolute tree2"></span>
+    </div>
+
+    <div class="absolute landscape max_right">
+
+      <span class="grass">
+  					<span class="land_tree">
+  						<ul class="inline-list">
+  						  <li class="t_grass"></li>
+  						  <li class="t_grass"></li>
+  						  <li class="t_grass"></li>
+  						</ul>
+  					</span>
+      </span>
+
+      <div class="mountain">
+        <div class="r-mountain"></div>
+        <ul class="snow inline-list">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="absolute boat">
+      <ul class="no-bullet">
+        <ul class="no-bullet fume">
+          <li class="fume4"></li>
+          <li class="fume3"></li>
+          <li class="fume2"></li>
+          <li class="fume1"></li>
+        </ul>
+        <li class="smokestack"></li>
+        <li class="white-body">
+          <ul class="windows inline-list">
+            <li class="circle"></li>
+            <li class="circle"></li>
+            <li class="circle"></li>
+          </ul>
+        </li>
+        <li class="boat-body"></li>
+      </ul>
+    </div>
+
+    <div class="absolute dark-back"></div>
+
+    <div class="absolute plane">
+      <ul class="no-bullet">
+        <li class="plane-body">
+          <ul class="windows inline-list">
+            <li class="circle"></li>
+            <li class="circle"></li>
+            <li class="circle"></li>
+            <li class="circle"></li>
+            <li class="circle"></li>
+          </ul>
+        </li>
+
+        <li class="wing1"></li>
+        <li class="wing1 flipwing"></li>
+        <li class="absolute teal"></li>
+      </ul>
+    </div>
+
+    <div class="absolute sea">
+      <span class="wave1"></span>
+      <span class="wave2"></span>
+      <span class="wave3"></span>
+      <span class="wave4"></span>
+    </div>
+
+  </section>
+
 </section>

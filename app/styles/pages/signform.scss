@@ -143,17 +143,17 @@
     }
   }
 
-  .has-error .legend.legend,
-  .has-error.form-group .control-label.control-label {
+  .credential-empty .legend.legend,
+  .credential-empty.form-group .control-label.control-label {
     color: #d9534f;
   }
 
-  .has-error.form-group .form-help,
-  .has-error.form-group .helper {
+  .credential-empty.form-group .form-help,
+  .credential-empty.form-group .helper {
     color: #d9534f;
   }
 
-  .has-error .bar::before {
+  .credential-empty .bar::before {
     background: #d9534f;
     left: 0;
     width: 100%;
@@ -220,12 +220,15 @@
 }
 // for only signup page
 .signup-page {
-  background-image: url("../images/signup/bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-color: #e8effa;
+
+  &.signup-pg {
+    background-image: url("/assets/images/signup/bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: #e8effa;
+    padding-top: 13px;
+  }
   height: 150vh;
-  padding-top: 13px;
   // overflow-x: hidden;
   h1 {
     font-size: 26px;
@@ -245,6 +248,10 @@
     display: block;
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .right-arrow {
+    float: right;
   }
 
   .signup-icon {
@@ -282,7 +289,7 @@
     width: 100%;
     padding: 48px 80px;
     border-radius: 1px;
-    background-image: url("../images/signup/bg1.png");
+    background-image: url("/assets/images/signup/bg1.png");
     background-repeat: no-repeat;
     border-radius: 6px;
 
@@ -335,13 +342,17 @@
 }
 // for only signin page
 .signin {
-  background-image: url("../images/signin/bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-  background-color: #132fa9;
   height: 100vh;
   padding-top: 2px;
   // overflow-x: hidden;
+
+  &.signin-pg {
+    background-image: url("/assets/images/signin/bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-color: #132fa9;
+  }
+  
   h1 {
     font-size: 26px;
     text-align: center;
@@ -373,7 +384,7 @@
     width: 100%;
     padding: 20px 270px 164px;
     border-radius: 1px;
-    background-image: url("../images/signin/bg1.png");
+    background-image: url("/assets/images/signin/bg1.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 

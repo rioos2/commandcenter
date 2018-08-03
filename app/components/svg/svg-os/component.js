@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   active: 'item-os',
 
   initializeChart: Ember.on('didInsertElement', function() {
-
     Ember.run.once('afterRender', this, this.imageData);
     if (this.validateOsName() == this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
@@ -17,12 +16,16 @@ export default Ember.Component.extend({
     }
   }),
 
+  icon: function() {
+    return this.get('vm.icon');
+  }.property('vm'),
+
   validateOsName: function () {
     return this.get('model.settings')[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro;
  },
 
   selectionChecker: function() {
-    var check = this.get("model.assemblyfactory.current_os_tab") == this.get("vm.type");
+    var check = this.get("model.stacksfactory.current_os_tab") == this.get("vm.type");
     if (check) {
       this.set("active", "item-os selected");
     } else {

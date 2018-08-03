@@ -8,18 +8,19 @@
                     <p class="name" style="text-transform: capitalize;">{{model.profile.first_name}}</p>
                     <div class="state {{model.state}}">
                         {{fa-icon "circle"}}
-                        <p>{{model.state}}</p>
+                        <p>{{memberShip}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 certification">
                 {{svg/svg-hex-certification class="certi-icon"}}
                 <p class="certisficated_date">{{createdAt}}</p>
-                <p class="certisficated">{{t 'settingsPage.certified'}}</p>
+                <p class="certisficated">{{memberShipStatus}}</p>
             </div>
         </div>
     </div>
     {{page-alert alert=tableLastData}}
+  <br>
     {{common-table model=tableData class="info-table"}}
 </div>
 {{page-footer}}

@@ -1,15 +1,29 @@
-import Ember from 'ember';
+import Application from  '@ember/application';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
+import Ember from 'ember';
 
 let App;
 
-App = Ember.Application.extend({
-  modulePrefix: config.modulePrefix,
+App = Application.extend({
+  modulePrefix:    config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver
 });
+
+// Trap the uncaught global errors to slack.
+// For now we print it on the console.
+// TO-DO Need to send error to slack channel
+Ember.onerror = function(error) {
+  console.log("(✖╭╮✖)  ****         Uncaught Exception             ****");
+  console.log(`          ,--.!,
+       __/   -*-
+     ,d08b.  '|'
+     0088MM
+     '9MMP'   `);
+  console.error(error);
+}
 
 loadInitializers(App, config.modulePrefix);
 

@@ -1,0 +1,17 @@
+<div class=row>
+  <div class=col-xs-4>
+    <div class="rio-selectbtn" title= {{errorMsg}}>
+  <label {{action 'sendType'}} class= {{enabler}}>
+    <input type="checkbox" class="option-input radio" checked={{active}} name="example"/>
+    <span>{{name}}</span>
+  </label>
+</div>
+</div>
+<div class="col-xs-8">
+  {{#each virtualNetworkFilterForNode as |virtualNetwork|}}
+    <div class="col-xs-6">
+      {{admin-infra/network-checkbox name=virtualNetwork.name enable=active data=virtualNetwork updateVirtualNetworkData="updateVirtualNetworkData"}}
+    </div>
+  {{/each}}
+</div>
+</div>

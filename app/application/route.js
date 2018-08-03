@@ -1,80 +1,85 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import C from 'nilavu/utils/constants';
 import {
   messageNow
 } from '../utils/message';
+import { inject as service } from '@ember/service';
 
-export default Ember.Route.extend({
-  access: Ember.inject.service(),
-  cookies: Ember.inject.service(),
-  language: Ember.inject.service('user-language'),
-  settings: Ember.inject.service(),
-  events: Ember.inject.service('es6-eventemitter'),
+export default Route.extend({
+  access: service(),
+  cookies: service(),
+  language: service('user-language'),
+  settings: service(),
+  modal: service(),
+  // es6-eventemitter is to transmit to events for analytics
+  events: service('es6-eventemitter'),
 
+  // Routes are extended to set previous params and previous route in initializers (initailzers/extend-ember-route)
   previousParams: null,
   previousRoute: null,
-  loadingShown: false,
-  loadingId: 0,
-  hideTimer: null,
-  previousLang: null,
+
+  updateWindowTitle: function() {
+    document.title = this.get('settings.appName') || 'Rio/OS';
+  }.observes('settings.appName'),
+
+  beforeModel() {
+    this.updateWindowTitle();
+
+    let agent = window.navigator.userAgent.toLowerCase();
+
+    if (agent.indexOf('msie ') >= 0 || agent.indexOf('trident/') >= 0) {
+      this.replaceWith('ie');
+
+      return;
+    }
+
+    // Find out if auth is enabled
+    return this.get('access').detect();
+  },
+
+  model(params, transition) {
+    this.get('language').initLanguage();
+
+    transition.finally(() => {
+      this.controllerFor('application').setProperties({
+        redirectTo: null,
+      });
+    });
+
+    if (params.redirectTo) {
+      let path = params.redirectTo;
+
+      if (path.substr(0, 1) === '/') {
+        this.get('session').set(C.SESSION.BACK_TO, path);
+      }
+    }
+
+    this.controllerFor('application').set('error', params);
+
+    console.log('[»] ✔ application');
+  },
 
   actions: {
+
     loading(transition) {
-      this.incrementProperty('loadingId');
-      let id = this.get('loadingId');
+      let controller = this.controllerFor('application');
 
-      Ember.run.cancel(this.get('hideTimer'));
-
-      if (!this.get('loadingShown')) {
-        this.set('loadingShown', true);
-
-        $('#loading-underlay').stop().show().fadeIn({
-          duration: 100, queue: false, easing: 'linear', complete: function () {
-            $('#loading-overlay').stop().show().fadeIn({ duration: 200, queue: false, easing: 'linear' });
-          }
+      controller.set('showLoading', true);
+      setTimeout(() => {
+        transition.promise.finally(() => {
+          controller.set('showLoading', false);
         });
-      }
-
-      transition.finally(() => {
-        var self = this;
-        function hide() {
-          self.set('loadingShown', false);
-          $('#loading-overlay').stop().fadeOut({
-            duration: 200, queue: false, easing: 'linear', complete: function () {
-              $('#loading-underlay').stop().fadeOut({ duration: 100, queue: false, easing: 'linear' });
-            }
-          });
-        }
-
-        if (this.get('loadingId') === id) {
-          if (transition.isAborted) {
-            this.set('hideTimer', Ember.run.next(hide));
-          } else {
-            hide();
-          }
-        }
-      });
+      }, 3000); // Time out in 3 secs
 
       return true;
     },
 
-
-      loading(transition, originRoute) {
-        let controller = this.controllerFor('application');
-        controller.set('pageLoader', true);
-        setTimeout(function() {
-          transition.promise.finally(function() {
-            controller.set('pageLoader', false);
-          });
-        }, 3000);
-        return true;
-      },
-
     error(err, transition) {
-      /*if we dont abort the transition we'll call the model calls again and fail transition correctly*/
+      /* if we dont abort the transition we'll call the model calls again and fail transition correctly*/
       transition.abort();
-      if (err && err.status && [401, 403].indexOf(err.status) >= 0) {
+      if (err && err.status && C.UNAUTHENTICATED_HTTP_CODES.indexOf(err.status) >= 0) {
         this.send('logout', transition, true);
+
         return;
       }
 
@@ -82,7 +87,7 @@ export default Ember.Route.extend({
       this.transitionTo('failWhale');
 
       console.log('» [ ✘ ] -----------------');
-      console.log('» [ ✘ ] Application Error', (err ? err.stack : undefined));
+      console.error('» [ ✘ ] Application Error', (err ? err.stack : undefined));
       console.log('» [ ✘ ] -----------------');
 
     },
@@ -103,38 +108,44 @@ export default Ember.Route.extend({
       let session = this.get('session');
       let access = this.get('access');
 
-      access.clearToken().finally(() => {
-        session.set(C.SESSION.ACCOUNT_ID, null);
+      session.set(C.SESSION.ACCOUNT_ID, null);
+      // When we open multiple tab window the tab session used as bowser store.
+      //Clear that as well
+      this.get('tab-session').clear();
 
-        this.get('tab-session').clear();
+      access.clearSessionKeys();
 
-        access.clearSessionKeys();
+      if (transition && !session.get(C.SESSION.BACK_TO)) {
+        session.set(C.SESSION.BACK_TO, window.location.href);
+      }
 
-        if (transition && !session.get(C.SESSION.BACK_TO)) {
-          session.set(C.SESSION.BACK_TO, window.location.href);
-        }
+      //TO-DO verifiy after migrating model internally, remove lacsso
+      if (this.get('modal.modalVisible')) {
+        this.get('modal').toggleModal();
+      }
 
-        let params = {
-          queryParams: {}
-        };
+      let params = {
+        queryParams: {}
+      };
 
-        if (timedOut) {
-          params.queryParams.timedOut = true;
-        }
+      if (timedOut) {
+        params.queryParams.timedOut = true;
+      }
 
-        if (errorMsg) {
-          params.queryParams.errorMsg = errorMsg;
-        }
+      if (errorMsg) {
+        params.queryParams.errorMsg = errorMsg;
+      }
 
-        this.transitionTo('login', params);
-      });
+      this.transitionTo('login', params);
+
     },
 
   },
 
-  /// Usage tracker which sends analytics information to countly.
+  // Usage tracker which sends analytics information to countly.
   trackUsage(id, opts) {
     let msg = messageNow(id, opts);
+
     if (msg) {
       this.get('events').emit(id, msg);
     }
@@ -144,6 +155,7 @@ export default Ember.Route.extend({
     let session = this.get('session');
 
     let backTo = session.get(C.SESSION.BACK_TO);
+
     session.set(C.SESSION.BACK_TO, undefined);
 
     if (backTo) {
@@ -153,49 +165,4 @@ export default Ember.Route.extend({
     }
   },
 
-  model(params, transition) {
-    this.get('language').initLanguage();
-
-    transition.finally(() => {
-      this.controllerFor('application').setProperties({
-        state: null,
-        code: null,
-        error_description: null,
-        redirectTo: null,
-      });
-    });
-
-    if (params.redirectTo) {
-      let path = params.redirectTo;
-      if (path.substr(0, 1) === '/') {
-        this.get('session').set(C.SESSION.BACK_TO, path);
-      }
-    }
-
-    if (params.isPopup) {
-      this.controllerFor('application').set('isPopup', true);
-    }
-
-    this.controllerFor('application').set('error', params);
-
-    console.log("[»] ✔ application");
-  },
-
-  updateWindowTitle: function() {
-    document.title = this.get('settings.appName') || 'Rio/OS';
-  }.observes('settings.appName'),
-
-  beforeModel() {
-    this.updateWindowTitle();
-
-    let agent = window.navigator.userAgent.toLowerCase();
-
-    if (agent.indexOf('msie ') >= 0 || agent.indexOf('trident/') >= 0) {
-      this.replaceWith('ie');
-      return;
-    }
-
-    // Find out if auth is enabled
-    return this.get('access').detect();
-  },
 });

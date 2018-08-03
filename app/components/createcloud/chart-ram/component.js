@@ -1,11 +1,6 @@
 import Ember from 'ember';
 
-const {
-  get
-} = Ember;
 export default Ember.Component.extend({
-  intl: Ember.inject.service(),
-
   didInsertElement() {
     let _this = this;
     let initValue = this.get('initValue');
@@ -14,12 +9,12 @@ export default Ember.Component.extend({
       min: 1,
       max: 100,
       parentThis: _this,
-      suffix: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
-      title: get(this, 'intl').t('launcherPage.sysConfig.ramChooser.title')
+      suffix: this.get('resource.suffix'),
+      title: this.get('resource.title')
     }
 
     renderChartRam()
-      .container('#chart-ram')
+      .container('#chart-' + this.get('resource.name'))
       .data(data)
       .debug(true)
       .run()

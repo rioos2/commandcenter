@@ -1,0 +1,10 @@
+<div class="r-p40 model-delete">
+  <h1 class="header model-genric">{{t 'confirmDelete.title'}}</h1>
+
+  <p>{{t 'confirmDelete.deleteNote' name=name}}</p>
+
+  <div class="footer-actions">
+    <button {{action "cancel"}} class="btn btn-primary">{{t 'confirmDelete.cancelAction'}}</button>
+    <button {{action "deleteAsm"}} class="btn btn-danger">{{t 'confirmDelete.confirmAction'}}</button>
+  </div>
+</div>

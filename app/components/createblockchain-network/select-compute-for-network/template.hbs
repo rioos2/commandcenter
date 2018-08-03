@@ -1,0 +1,21 @@
+<div class="layout1">
+    {{svg/svg-create-cloud class="createcloud-ico"}}
+    <p>{{t 'launcherPage.compute.BlockchainType'}}</p>
+</div>
+<div class={{if showInfo "display-none" "row m-0"}}>
+    {{svg/svg-dots class="dots-ico"}}
+    <p class="vert-description">
+        {{t 'launcherPage.compute.cloudType'}}
+    </p>
+    <p class="info" {{action "clickInfo" on="click"}}>i</p>
+    <div class="col-sm-6">
+        {{svg/svg-cpu class=(if isSelectedCPU "cpu-ico selected" "cpu-ico") click=(action "clickCPU")}}
+    </div>
+    <div class="col-sm-6">
+        {{svg/svg-gpu class=(unless isSelectedCPU "gpu-ico selected" "gpu-ico") click=(action "clickGPU")}}
+    </div>
+</div>
+<div class={{if showInfo "show-info row m-0" "display-none"}}>
+    <p class="close-btn" {{action "clickClose" on="click"}}>×</p>
+    {{createcloud/cloud-type-description}}
+</div>

@@ -1,105 +1,59 @@
 import Ember from "ember";
+import { get, computed } from "@ember/object";
 
 export default Ember.Controller.extend({
 
-  cacheNodes: [],
-  cacheOs: [],
+  intl: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
-  modelchanged: function() {
-    if(this.get('model.content')) {
-      this._addCache();
-      this._removeCache();
+  //Contains the HTTP code to say if the telemetry system pull is active or not
+  telemetryAvailabilityStatus: Ember.computed.alias('model.healthzDashboard.code'),
+
+  //The route loads the model in healthzDashboard key, the actual data is inside
+  //model.healthzDashboard.content
+  healthzModel: computed('model.healthzDashboard', function(){
+      const content =  get(this, 'model.healthzDashboard.content');
+      return !Ember.isEmpty(content) ? content.get('firstObject') : [];
+  }),
+
+  //Datacenter overall usage using gauges.
+  //the gauges shown are CPU, MEMORY, DISK and GPU.
+  //section main gauges
+  datacenterUsage: function() {
+      return !Ember.isEmpty(this.get('healthzModel')) ? this.get('healthzModel').results.guages : [];
+  }.property('healthzModel.@each.results.guages.counters.@each.counter'),
+
+  ///// The section where we formulate the data to show in the statistics
+  //section
+  senseiStatistics: computed('healthzModel',function() {
+    const content = get(this, 'healthzModel');
+     return !Ember.isEmpty(content) ? content.results.statistics.senseis : [];
+  }),
+
+  ninjaStatistics: computed('healthzModel',function() {
+    const content = get(this, 'healthzModel');
+     return !Ember.isEmpty(content) ? content.results.statistics.ninjas : [];
+  }),
+
+
+  telemetryUnavailable: function() {
+    if (get(this, "telemetryAvailabilityStatus") === "502") {
+     get(this, 'notifications').warning(get(this, 'intl').t('dashboard.error'), {
+        htmlContent: true,
+        autoClear: true,
+        clearDuration: 6000,
+        cssClasses: 'notification-warning'
+      });
     }
-  }.observes('model'),
+  }.observes('telemetryAvailabilityStatus'),
 
-  guageView: function(){
-    return this.get('model.content').length>0;
-  }.property('model.content'),
+  //Decider to show the statistis of ninja/sensei or not.
+  hasNinjaStatistics: function() {
+    return Ember.isEmpty(get(this, 'ninjaStatistics'));
+  }.property('ninjaStatistics'),
 
-  _removeCache: function() {
-    const self = this;
-    self.get('cacheNodes').forEach(function(node) {
-      if (self._hasRemoveRecordFor(node)) {
-        self.get('cacheNodes').removeObject(node);
-      }
-    });
-
-    self.get('cacheOs').forEach(function(os) {
-      if (self._hasRemoveOsFor(os)) {
-        self.get('cacheOs').removeObject(os);
-      }
-    });
-  },
-
-  _addCache: function() {
-    var stat = null;
-    const self = this;
-    if(self.get('model.content').length >0){
-    stat = self.get('model.content').objectAt(0);
-    stat.results.statistics.nodes.forEach(function(node) {
-      if (self._hasAddRecordFor(node)) {
-        self.get('cacheNodes').addObject(node);
-      }
-    });
-
-    stat.results.osusages.items.forEach(function(os) {
-      if (self._hasAddOsFor(os)) {
-        self.get('cacheOs').addObject(os);
-      }
-    });
-  }
-  },
-
-  _hasAddRecordFor: function(node) {
-    var flag = true;
-    const self = this;
-    self.get('cacheNodes').forEach(function(cache) {
-      if (cache.id === node.id) {
-        flag = false;
-      }
-    });
-    return flag;
-  },
-
-  _hasRemoveRecordFor: function(node) {
-    var stat = null;
-    var flag = true;
-    const self = this;
-    if(self.get('model.content').length >0){
-    stat = self.get('model.content').objectAt(0);
-    stat.results.statistics.nodes.forEach(function(cache) {
-      if (cache.id === node.id) {
-        flag = false;
-      }
-    });
-  }
-    return flag;
-  },
-
-  _hasAddOsFor: function(os) {
-    var flag = true;
-    const self = this;
-    self.get('cacheOs').forEach(function(cache) {
-      if (cache.id === os.id) {
-        flag = false;
-      }
-    });
-    return flag;
-  },
-
-  _hasRemoveOsFor: function(os) {
-    var stat = null;
-    var flag = true;
-    const self = this;
-    if(self.get('model.content').length >0){
-    stat = self.get('model.content').objectAt(0);
-    stat.results.osusages.items.forEach(function(cache) {
-      if (cache.id === os.id) {
-        flag = false;
-      }
-    });
-  }
-    return flag;
-  },
+  hasSenseiStatistics: function() {
+    return Ember.isEmpty(get(this, 'senseiStatistics'));
+  }.property('senseiStatistics'),
 
 });

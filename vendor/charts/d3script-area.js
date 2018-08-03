@@ -39,6 +39,10 @@ function renderChartArea(params) {
   var main = function (selection) {
     selection.each(function () {
 
+      if(Ember.isEmpty(attrs.data.entities)){
+        return ;
+      }
+
       // convert date
       attrs.data.entities.forEach(e => {
         e.values.forEach(v => {

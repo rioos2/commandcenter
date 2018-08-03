@@ -1,29 +1,30 @@
-<div class="col-container">
-    <div class="first-col">
+<div class="row">
+    <div class="col-md-4 first-col">
         <p class="sub-title">{{t 'launcherPage.location.title'}}</p>
         <p class="sub-description">{{t 'launcherPage.location.description'}}</p>
         {{svg/svg-dots class="dots-ico"}}
-        {{svg/svg-locateme class="locateme"}}
+        {{svg/svg-locateme class=(if locationAvailable "locateme" "locateme  disabled") click=(action "getLocation")}}
     </div>
 
-    <div class="second-col">
-        {{#if showField}}
-            <p class="closebtn" {{action "closeInputField" on="click"}}>×</p>
-            <div class="form-group">
-                {{input type="text" value=location}}
-                <label class="{{if location 'data-exist'}} control-label" for="input">Type your location</label><i class="bar"></i>
-                {{svg/svg-addlocation class="addlocation" click=(action 'addLocation')}}
-            </div>
-        {{/if}}
+    <div class="col-md-4 second-col">
+      <div id="rio-globe"></div>
     </div>
 
-    <div class="third-col">
-        <p class="title">Your Location(s)</p>
+    <div class="col-md-4 third-col">
+        <p class="title">{{t 'launcherPage.location.locations'}}</p>
         <ul class="rio-location-ul hex with-add">
+          {{#if locationAvailable}}
           {{#each model.datacenters.content as |data|}}
             {{createcloud/select-location-list model=data}}
           {{/each}}
+          {{else}}
+          <p class="sub-description">{{t 'launcherPage.location.noLocation'}}</p>
+          {{/if}}
         </ul>
-        {{svg/svg-addmore class="addmore" click=(action 'showInputField')}}
+        <div>
+        {{#link-to "admin.infra"}}
+        {{svg/svg-addmore class="addmore"}}
+        {{/link-to}}
+      </div>
     </div>
 </div>

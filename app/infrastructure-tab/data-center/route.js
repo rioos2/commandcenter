@@ -1,16 +1,11 @@
-import Ember from 'ember';
-import PolledModel from 'nilavu/mixins/polled-model';
+import { hash } from 'rsvp';
+import Route from '@ember/routing/route';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import { get } from "@ember/object";
 
-export default Ember.Route.extend(DefaultHeaders,{
-
-  model: function() {
-    const self = this;
-    return this.get('store').findAll('reports', this.opts('healthz/overall')).then((reports) => {
-      return  reports;
-    }).catch(function() {
-      self.set('loading', false);
-    });
+export default Route.extend(DefaultHeaders, {
+  model() {
+    const store = get(this, 'store');
+    return hash({ healthzDashboard: store.findAll('reportsstatistics',this.opts('healthz/overall')), });
   },
-
 });
