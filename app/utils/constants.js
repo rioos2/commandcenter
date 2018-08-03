@@ -12,6 +12,7 @@ var C = {
   //Internal server error
   INTERNALSERVER_HTTP_CODES: [500],
 
+  BADGATEWAY_HTTP_CODES: [502],
 
 
   /* --------  The section  that has  various Rio objects  ----*/
@@ -62,7 +63,7 @@ var C = {
       NOTREADY: ['notready', 'ninjanotready'],
     },
     STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
-    LICENSE_STATUS: { EXPIRED: 'Expired', }
+    LICENSE_STATUS: 'Expired'
   },
 
   /*

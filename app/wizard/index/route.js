@@ -23,7 +23,7 @@ export default Ember.Route.extend(DefaultHeaders, {
 
   getLicense: function() {
     return Ember.RSVP.hash({
-      license: this.get('store').findAll('license', this.opts('licenses', true)),
+      license: this.get('store').findAll('license', this.opts('licenses/senseis', true)),
     });
   },
 
@@ -31,8 +31,9 @@ export default Ember.Route.extend(DefaultHeaders, {
     reloadModel: function() {
       var self = this;
       this.model().then(function(model) {
-        self.getLicense().then(function(licence) {
-          model.license = licence;
+        self.getLicense().then(function(license) {
+          console.log(JSON.stringify(license))
+          model.license = license;
           self.controller.set('model', model);
         });
       });
