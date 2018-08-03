@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "eslint": "./node_modules/.bin/eslint  --max-warnings 0 ./*.js app ember-electron tests",
+    "eslint": "./node_modules/.bin/eslint  --max-warnings 0 app",
     "jshint": "./node_modules/.bin/jshint ./app ./dist/commandcenter_*.js",
     "scramble": "./node_modules/.bin/javascript-obfuscator ./dist/commandcenter_*.js",
     "start": "./node_modules/.bin/ember server",
@@ -17,8 +17,8 @@
   },
   "repository": "https://gitlab.com/rioos/commmandcenter_v2",
   "engines": {
-    "node": ">= 10.6.0",
-    "yarn": ">= 1.7.0"
+    "node": ">= 10.8.0",
+    "yarn": ">= 1.9.0"
   },
   "author": "Rio Advancement Inc.",
   "license": "License - https://rio.digital",
