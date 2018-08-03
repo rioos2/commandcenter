@@ -609,8 +609,10 @@ vnc:
 
 notifications:
   Stacks:
-    DeleteFailed:                     Delete failed try after some time
-    DeleteSuccess:                    deleted successful
+    DeleteFailed: Delete failed try after some time
+    DeleteSuccess: deleted successful
+  QRcode:
+    downloadFailed: Failed to show! try after some time.
   secrets:
     downloadFailed:                   Download failed try after some time
     manageDownloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
@@ -654,12 +656,17 @@ infraPage:
     percent:                          "%"
 
 confirmDelete:
-  title:                              'Are you sure you want to delete ?'
-  deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
-  protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
-  confirmAction:                      Delete
-  cancelAction:                       Cancel
-  largeDeleteText:                    '{key} and {othersCount} others'
+  title: 'Are you sure you want to delete ?'
+  deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
+  protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
+  confirmAction: Delete
+  cancelAction: Cancel
+  largeDeleteText: '{key} and {othersCount} others'
+QRCode:
+  title: QR code
+  qrNote: 'Note: show the QR code to Access'
+  cancelAction: Cancel
+
 
 containerShell:
   protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
@@ -963,51 +970,52 @@ nav:
 # Resource Actions
 ##############################
 action:
-  activate:                           Activate
-  backup:                             Backup Snapshot
-  deleteBackup:                       Delete Backup
-  cancelUpgrade:                      Cancel Upgrade
-  cancelRollback:                     Cancel Rollback
-  clone:                              Clone
-  console:                            Open Console
-  deactivate:                         Deactivate
-  edit:                               Edit
-  evacuate:                           Evacuate
-  execute:                            Execute Shell
-  exportConfig:                       Export Config
-  finishUpgrade:                      Finish Upgrade
-  logs:                               View Logs
-  machineConfig:                      Machine Config
-  purge:                              Purge
-  remove:                             Delete
-  replay:                             Replay
-  restart:                            Restart
-  restore:                            Restore
-  retry:                              Retry
-  rollback:                           Rollback
-  revertToSnapshot:                   Revert Volume to Snapshot
-  restoreFromBackup:                  Restore Volume from Backup
-  setDefault:                         Set as Default
-  snapshot:                           Snapshot
-  start:                              Start
-  startServices:                      Start Services
-  stop:                               Stop
-  stopServices:                       Stop Services
-  switchNamespace:                    Switch to this Namespace
-  switchEnvironment:                  Switch to this Environment
-  upgrade:                            Upgrade
-  upgradeOrEdit:                      Upgrade/Edit
-  viewConfig:                         View Config
-  viewGraph:                          View Graph
-  viewInApi:                          View in API
-  viewInstance:                       View Instance
-  downloadSecret:                     Download secret
-  externalUrl:                        Open UI
-  nodeEdit:                           Edit node
-  nodeInstall:                        Install node
-  createSecret:                       Create Secret
-  installNode:                        Install
-  retryInstallNode:                   Retry Install
+  activate: Activate
+  backup: Backup Snapshot
+  deleteBackup: Delete Backup
+  cancelUpgrade: Cancel Upgrade
+  cancelRollback: Cancel Rollback
+  clone: Clone
+  console: Open Console
+  deactivate: Deactivate
+  edit: Edit
+  evacuate: Evacuate
+  execute: Execute Shell
+  exportConfig: Export Config
+  finishUpgrade: Finish Upgrade
+  logs: View Logs
+  machineConfig: Machine Config
+  purge: Purge
+  remove: Delete
+  replay: Replay
+  restart: Restart
+  restore: Restore
+  retry: Retry
+  rollback: Rollback
+  revertToSnapshot: Revert Volume to Snapshot
+  restoreFromBackup: Restore Volume from Backup
+  setDefault: Set as Default
+  snapshot: Snapshot
+  start: Start
+  startServices: Start Services
+  stop: Stop
+  stopServices: Stop Services
+  switchNamespace: Switch to this Namespace
+  switchEnvironment: Switch to this Environment
+  upgrade: Upgrade
+  upgradeOrEdit: Upgrade/Edit
+  viewConfig: View Config
+  viewGraph: View Graph
+  viewInApi: View in API
+  viewInstance: View Instance
+  downloadSecret: Download secret
+  showQRcode: Show QR code
+  externalUrl: Open UI
+  nodeEdit: Edit node
+  nodeInstall: Install node
+  createSecret: Create Secret
+  installNode: Install
+  retryInstallNode: Retry Install
 
 ##############################
 # Resource Actions
