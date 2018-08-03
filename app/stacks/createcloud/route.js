@@ -104,9 +104,10 @@ export default Ember.Route.extend(DefaultHeaders,  {
      plan: "",
      network: '',
      os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
-   };
-   return this.get('store').createRecord(stacksfactoryData);
- }
+    };
+
+    return this.get('store').createRecord(stacksfactoryData);
+  }
 
 
 });

@@ -1,42 +1,42 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Route from '@ember/routing/route';
+import { inject } from '@ember/service';
+import { reject } from 'rsvp';
+import { hash } from 'rsvp';
 
-export default Ember.Route.extend(DefaultHeaders, {
-  access: Ember.inject.service(),
+export default Route.extend(DefaultHeaders, {
+  access: inject.service(),
 
 
-  beforeModel: function() {
+  beforeModel(){
     this.get('access').activate().then((config) => {
       if (config) {
         this.transitionTo('authenticated');
       }
     }).catch((err) => {
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 
   model() {
-    return Ember.RSVP.hash({
-      wizard: this.get('store').find('wizard', null, this.opts('wizards')),
-    });
+    return hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')) });
   },
 
-  getLicense: function() {
-    return Ember.RSVP.hash({
-      license: this.get('store').findAll('license', this.opts('licenses', true)),
-    });
+  getLicense() {
+    return hash({ license: this.get('store').findAll('license', this.opts('licenses', true)) });
   },
 
   actions: {
-    reloadModel: function() {
+    reloadModel(){
       var self = this;
-      this.model().then(function(model) {
-        self.getLicense().then(function(licence) {
+
+      this.model().then(-function(model) {
+        self.getLicense().then(-function(licence) {
           model.license = licence;
           self.controller.set('model', model);
         });
       });
-    }
-  }
+    },
+  },
 
 });

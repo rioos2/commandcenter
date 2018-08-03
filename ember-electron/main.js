@@ -1,6 +1,10 @@
 /* eslint-env node */
-const { app, BrowserWindow, protocol, ipcMain } = require('electron');
-const { dirname, join, resolve } = require('path');
+const {
+  app, BrowserWindow, protocol
+} = require('electron');
+const {
+  dirname, join, resolve
+} = require('path');
 const protocolServe = require('electron-protocol-serve');
 
 let mainWindow = null;
@@ -27,23 +31,24 @@ app.on('window-all-closed', () => {
   }
 });
 app.on('ready', () => {
- // mainWindow = new BrowserWindow({
- //   width: 800,
- //   height: 600,
- // });   
-    const electron = require ('electron');
-    const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-    mainWindow = new BrowserWindow({
-      width, 
-      height,
-      webPreferences: {
-          webSecurity: false,
-          allowRunningInsecureContent: false,
-      },
-      title: "RioOS",
-  });    
+  // mainWindow = new BrowserWindow({
+  //   width: 800,
+  //   height: 600,
+  // });
+  const electron = require('electron');
+  const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
 
-    require("./index");
+  mainWindow = new BrowserWindow({
+    width,
+    height,
+    webPreferences: {
+      webSecurity:    false,
+      allowRunningInsecureContent: false,
+    },
+    title: 'RioOS',
+  });
+
+  require('./index');
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
@@ -107,5 +112,5 @@ app.on('ready', () => {
 process.on('uncaughtException', (err) => {
   console.log('An exception in the main thread was not handled.');
   console.log('This is a serious issue that needs to be handled and/or debugged.');
-  console.log(`Exception: ${err}`);
+  console.log(`Exception: ${ err }`);
 });

@@ -1,4 +1,4 @@
-/*This used for calculate the postion for resource action when user click*/
+/*  This used for calculate the postion for resource action when user click*/
 export function resizeDropdown(event) {
   // Preserve compatibility with existing signature
   var $item = $('.dropdown-menu', event.target);

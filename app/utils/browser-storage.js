@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 /*
 *session:tab-session is overridden with window.sessionStorage
 *session:session is overridden with window.localStorage
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
   backing: 'overrideMe with window.localStorage or window.sessionStorage',
 
   unknownProperty(key) {

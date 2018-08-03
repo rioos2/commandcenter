@@ -1,7 +1,7 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   categories: [C.WIZARD.STEPS.WELCOME, C.WIZARD.STEPS.REGISTERADMIN, C.WIZARD.STEPS.ACTIVATE],
 
@@ -9,8 +9,8 @@ export default Ember.Controller.extend({
 
   panels: [],
 
-  //This has be evaluated based on data. So we show the tab that has max
-  //number of launches.
+  //  This has be evaluated based on data. So we show the tab that has max
+  //  number of launches.
   selectedTab: C.WIZARD.STEPS.WELCOME,
 
   actions: {

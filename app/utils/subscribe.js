@@ -1,11 +1,10 @@
 import C from 'nilavu/utils/constants';
 import Socket from 'nilavu/utils/socket';
-import Ember from 'ember';
+import { get } from '@ember/object';
+import EmberObject from '@ember/object';
+import { schedule } from '@ember/runloop';
 
-const { get } = Ember;
-
-
-export default Ember.Object.extend({
+export default EmberObject.extend({
 
   subscribeSocket: null,
   reconnect:       true,
@@ -22,7 +21,7 @@ export default Ember.Object.extend({
     var socket = Socket.create();
 
     socket.on('message', (event) => {
-      Ember.run.schedule('actions', this, function() {
+      schedule('actions', this, function() {
         // Fail-safe: make sure the message is for this project
         var currentProject = this.get(`tab-session.${ C.TABSESSION.PROJECT }`);
         var metadata = socket.getMetadata();
