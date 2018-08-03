@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   notifications: Ember.inject.service('notification-messages'),
 
   //Contains the HTTP code to say if the telemetry system pull is active or not
-  telemetryAvailabilityStatus: Ember.computed.alias('model.healthzDashboard.code'),
+  telemetryAvailabilityStatus: Ember.computed.alias('model.code'),
 
   //The route loads the model in healthzDashboard key, the actual data is inside
   //model.healthzDashboard.content
@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
 
 
   telemetryUnavailable: function() {
-    if (get(this, "telemetryAvailabilityStatus") === "502") {
+    if (get(this, "telemetryAvailabilityStatus") == "502") {
      get(this, 'notifications').warning(get(this, 'intl').t('dashboard.error'), {
         htmlContent: true,
         autoClear: true,

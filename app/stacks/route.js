@@ -30,8 +30,8 @@ export default Ember.Route.extend(DefaultHeaders,{
 
     model(params) {
         return Ember.RSVP.hash({
-          stacks: this.get('store').findAll('assembly',this.opts('accounts/' + this.get('session').get("id") + '/assemblys')),
-          stacksfactory: this.get('store').findAll('stacksfactory',this.opts('accounts/' + this.get('session').get("id") + '/stacksfactorys')),
+          stacks: this.get('store').findAll('assembly',this.opts('assemblys')),
+          stacksfactory: this.get('store').findAll('stacksfactory',this.opts('stacksfactorys')),
         });
     },
 

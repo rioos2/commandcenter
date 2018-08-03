@@ -105,8 +105,7 @@ export default Component.extend(DefaultHeaders, {
             var session = this.get("session");
             var id = this.get("session").get("id");
             this.set("model.secret.object_meta.account", id);
-            var url = 'accounts/' + id + '/secrets';
-            // var url = 'secrets';
+            var url = 'secrets';
             this.get('model.secret').save(this.opts(url)).then((result) => {
               this.set('doneCreate', true);
               this.set("model.stacksfactory.secret.id", result.id);

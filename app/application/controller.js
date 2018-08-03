@@ -33,7 +33,7 @@ export default Controller.extend({
   // currentRouteName is set by Ember.Router
   // but getting the application controller to get it is inconvenient sometimes
   currentRouteNameChanged: observer('currentRouteName', function() {
-    if (this.get('currentRouteName') == 'stacks.new.digitalcloud' || this.get('currentRouteName') == 'stacks.new.container' || this.get('currentRouteName') == 'stacks.new.blockchain_network' || this.get('currentRouteName') == 'stacks.new.blockchain_app') {
+    if (this.get('currentRouteName') == 'stacks.createcloud' || this.get('currentRouteName') == 'stacks.createcontainer' || this.get('currentRouteName') == 'stacks.blockchain.createnetwork' || this.get('currentRouteName') == 'stacks.blockchain.createapplication') {
       this.set('bassContainerCss', '');
     } else {
       this.set('bassContainerCss', 'container');

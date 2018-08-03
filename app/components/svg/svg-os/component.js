@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   active: 'item-os',
 
   initializeChart: Ember.on('didInsertElement', function() {
-    Ember.run.once('afterRender', this, this.imageData);
+    // Ember.run.once('afterRender', this, this.imageData);
     if (this.validateOsName() == this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
       this.set("active", "item-os selected");

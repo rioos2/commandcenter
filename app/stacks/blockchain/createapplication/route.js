@@ -26,7 +26,7 @@ export default Ember.Route.extend(DefaultHeaders, {
         datacenters: this.cbFind('datacenter', 'datacenters'),
         plans: this.cbFind('planfactory', 'plans'),
         networks: this.cbFind('network', 'networks'),
-        stacksfactory: this.cbFind('stacksfactory', 'accounts/' + this.get('session').get("id") + '/stacksfactorys'),
+        stacksfactory: this.cbFind('stacksfactory', 'stacksfactorys'),
       };
 
       async.auto(tasks, xhrConcur, function(err, res) {

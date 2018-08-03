@@ -1,15 +1,32 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import {  inject as service } from '@ember/service';
+import C from 'nilavu/utils/constants';
 
-export default Ember.Component.extend({
-  access: Ember.inject.service(),
+export default Component.extend({
+  access:        service(),
+  organization: service(),
 
   selector: null,
 
-  actions: {
+  email: function() {
+    return this.get('session.email');
+  }.property('session'),
 
-    logout: function() {
+  currentOrganization: function() {
+    return this.get('organization.currentOrganization');
+  }.property('organization.currentOrganization'),
+
+  actions: {
+    logout() {
       this.get('access').sessionClearRequest();
     },
 
+    switchOrigin(org) {
+      this.sendAction('switchOrganization', org);
+    },
+
+    createOrganization: function() {
+      $('#addorigin_modal').modal('show');
+    }
   }
 });

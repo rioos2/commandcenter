@@ -274,7 +274,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         var session = this.get("session");
         var id = this.get("session").get("id");
         this.set("model.stacksfactory.object_meta.account", id);
-        var url = 'accounts/' + id + '/stacksfactorys';
+        var url = 'stacksfactorys';
         var build_url = 'buildconfigs';
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {

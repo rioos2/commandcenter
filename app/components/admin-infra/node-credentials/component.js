@@ -80,7 +80,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('showSpinner', true);
       if (!error) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
-          url: '/api/v1/accounts/' + this.get('session').get("id") + '/secrets',
+          url: '/api/v1/secrets',
           method: 'POST',
           data: secret,
         })).then((xhr) => {

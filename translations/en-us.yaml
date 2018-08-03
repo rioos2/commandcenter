@@ -947,7 +947,23 @@ nav:
   deploy: Deploy
   infrastructureNetwork: Deploy network
   deployApplication: Deploy application
+  organization:
+    create:
+      header: Add Organization
+      nameLable: Name
+      orgNoteLabel: 'NOTE: '
+      orgNote: "Allow you to organize your resources into groups that fit the way you work. You can group resources (like Digital cloud and Containers) in ways that align with the  your projects. Example 'Organization: RioEngineering  grouped to Teams: QA, R&D'."
+      orgAddBtn: Add
+      orgNameEmpty: Enter organization name
+    team:
+      addBtn: Team
+      emptyTeam: No team added yet
+      teamCount: Team
+    tab:
+      index: Organization
   user:
+    org: Organization
+    createOrg: Add organization
     profile: Profile
     logout: Logout
     admin: Admin

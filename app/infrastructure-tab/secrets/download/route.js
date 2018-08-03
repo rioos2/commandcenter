@@ -12,7 +12,7 @@ export default Ember.Route.extend(DefaultHeaders, {
     const self = this;
     //TODO we should call store find to get single record.
     //this.get('store').getById("secret", params.id);
-    return this.get('store').findAll('secret',this.opts('accounts/' + this.get('session').get("id") + '/secrets')).then((reports) => {
+    return this.get('store').findAll('secret',this.opts('secrets')).then((reports) => {
       if(!this.secretDownload(reports.content, params.id)){
         this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear: true,

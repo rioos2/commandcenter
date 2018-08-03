@@ -39,7 +39,7 @@ export default Component.extend(DefaultHeaders, {
   }.property('model.status'),
 
   expired: function(){
-    return Ember.isEqual(this.get('model.status').capitalize(), C.ADMIN.LICENSE_STATUS.EXPIRED )? "": get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
+    return Ember.isEqual(this.get('model.status').capitalize(), C.NODE.LICENSE_STATUS.EXPIRED ) ? "": get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
   }.property('model.status','model.expired_at'),
 
   activate: function() {

@@ -8,7 +8,7 @@
         "test": "tests"
     },
     "scripts": {
-        "eslint":   "./node_modules/.bin/eslint  --max-warnings 0 ./*.js app ember-electron tests",
+        "eslint":   "./node_modules/.bin/eslint  --max-warnings 0 app",
         "jshint":   "./node_modules/.bin/jshint ./app ./dist/commandcenter_*.js",
         "scramble": "./node_modules/.bin/javascript-obfuscator ./dist/commandcenter_*.js",
         "start":    "./node_modules/.bin/ember server",
