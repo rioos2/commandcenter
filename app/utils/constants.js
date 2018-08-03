@@ -9,8 +9,10 @@ var C = {
   // 1. 403 return code when the user isn't authorized to access an  API
   UNAUTHORIZED_HTTP_CODES: [403],
 
-  //  Internal server error
-  INTERNALSERVER_HTTP_CODES: [500],
+  // Internal server error
+  INTERNALSERVER_HTTP_CODES: ['500'],
+
+  BADGATEWAY_HTTP_CODES: ['502'],
 
   BADGATEWAY_HTTP_CODES: [502],
 
@@ -19,12 +21,12 @@ var C = {
 
   /* Wizard page sequence steps and activation step default status*/
   WIZARD: {
-    //  List of steps
+    // List of steps
     STEPS: {
       WELCOME:       'welcome',
-      //  Registration page
+      // Registration page
       REGISTERADMIN: 'register-admin',
-      //  License activation page
+      // License activation page
       ACTIVATE:      'activate-license',
     },
     ACTIVATION: {
@@ -44,26 +46,6 @@ var C = {
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
     ROLES: { SUPERUSER: 'RIOOS:SUPERUSER', },
-  },
-
-  NODE: {
-    NINJANODES: "ninja_nodes",
-    CALMNODES: "calm_nodes",
-    NINJA_NODES_UNINSTALL_CONDITIONS: ["MemoryPressure", "DiskPressure", "NetworkUnavailable", "OutOfDisk"],
-    NINJA_NODES_RETRY_INSTALL_CONDITIONS: ["InstallComplete", "Ready"],
-    SUBNETSSEARCH: [{"value":'Subnet', "text":"Discover the active IP addresses in an IP block (eg: 192.168.2.0/24)"}, {"value":'Subnet Range', "text":"Discover the active IP addresses in an given range (eg: 192.168.2.10 - 192.168.2.15)"}],
-    NODEAUTHTYPE: ["Login Credentials", "SSH Key Verification"],
-    INSTALLFAILURE:["NinjaNotReady"],
-    NODEUNHEALTHY:"down",
-    NODEOFF: "OFF",
-    NODEON: "ON",
-    STATUS: {
-      INITIAL:  ['initialized', 'pending'],
-      READY:    ['ready', 'running', 'ninjaready'],
-      NOTREADY: ['notready', 'ninjanotready'],
-    },
-    STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
-    LICENSE_STATUS: 'Expired'
   },
 
   /*
@@ -166,10 +148,13 @@ var C = {
     NODEUNHEALTHY:                        ['down'],
     NODEOFF:                              'OFF',
     NODEON:                               'ON',
-    STATUS:                               {
-      RUNNING: 'Running',
-      STOPPED: 'Stopped',
-    }
+    STATUS:         {
+      INITIAL:  ['initialized', 'pending'],
+      READY:    ['ready', 'running', 'ninjaready'],
+      NOTREADY: ['notready', 'ninjanotready'],
+    },
+    STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
+    LICENSE_STATUS: { EXPIRED: 'Expired', }
   },
 
   /*
@@ -231,7 +216,7 @@ var C = {
   */
   NETWORK: {
     PACKETMEASURETYPE: {
-      //  Packet measurement types
+      // Packet measurement types
       THROUGHPUT: 'throughput',
       ERROR:      'error',
     },
@@ -251,13 +236,13 @@ var C = {
   // Ephemeral but same but across all browser tabs
   SESSION: {
     BACK_TO:        'backTo',
-    //  The fields id, token, email, roles, metadata.origin,
+    // The fields id, token, email, roles, metadata.origin,
     // metadata.team are pulled from successful login response.
     ACCOUNT_ID:     'id',
     TOKEN:          'token',
     EMAIL:          'email',
     USER_ROLES:     'roles',
-    //  User belongs to origansation (origins) origins have teams.
+    // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
     // This used for loading the default language for on user
@@ -266,9 +251,11 @@ var C = {
 
   // Ephemeral and unique for each browser tab
   TABSESSION: {
-    PROJECT:     'projectId',
-    PROJECTDATA: 'projectData',
-    NAMESPACE:   'namespaceId',
+    PROJECT:      'projectId',
+    TEAM:         'team',
+    ORGANIZATION:     'organization',
+    PROJECTDATA:  'projectData',
+    NAMESPACE:    'namespaceId',
   },
 
   /*

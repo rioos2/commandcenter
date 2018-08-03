@@ -48,6 +48,11 @@ Router.map(function () {
       //this.route('help');
     });
 
+    // Organization (Team, Roles, Memeber)
+    this.route('organization', { resetNamespace: true }, function() {
+      this.route('index', { path: '/:org' });
+    });
+    
     // Applications (digital cloud, containers, blockchain)
     this.route('applications-tab', { path: '/apps', resetNamespace: true }, function () {
       //Route to manage application based on orchestrator.
@@ -75,12 +80,8 @@ Router.map(function () {
     this.route('accounts', { resetNamespace: true }, function () {
       this.route('index', { path: '/' });
       this.route('info', { path: '/info' });
-
     });
-    this.route('organization', { resetNamespace: true }, function () {
-      this.route('index', { path: '/' });
-      this.route('info', { path: '/info' });
-        });
+
     this.route('admin', { path: '/admin', resetNamespace: true }, function () {
       this.route('index', { path: '/' });
       this.route('infra', { path: '/infra' });

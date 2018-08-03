@@ -1,21 +1,25 @@
-import Ember from 'ember';
+import C from 'nilavu/utils/constants';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin'
 
-export default Ember.Mixin.create({
-  session: Ember.inject.service(),
+export default Mixin.create({
+  organization:  service(),
+  session:       service(),
+  'tab-session': service('tab-session'),
 
   opts(url = '', forceReload = false) {
-    var session = this.get('session');
     let rioos_headers = {
-      headers: {
-        'X-AUTH-RIOOS-EMAIL': session.get("email"),
-        'Authorization': 'Bearer ' + session.get("token"),
+      headers:           {
+        'X-AUTH-RIOOS-EMAIL': this.get('session').get('email'),
+        'Authorization':      `Bearer ${  this.encodedHeader() }`,
       },
-      url: url,
-      forceReload: forceReload,
-      filter: false,
+      url,
+      forceReload,
+      filter:            false,
       removeAfterDelete: true,
-      isForAll: false,
+      isForAll:          false,
     };
+
     return rioos_headers;
   },
 
@@ -23,14 +27,30 @@ export default Ember.Mixin.create({
     var session = this.get('session');
     let rioos_headers = {
       headers: {
-        'X-AUTH-RIOOS-EMAIL': session.get("email"),
-        'Authorization': 'Bearer ' + session.get("token"),
+        'X-AUTH-RIOOS-EMAIL': session.get('email'),
+        'Authorization':      `Bearer ${  this.encodedHeader() }`,
       },
-      url: frame.url,
-      data: frame.data,
+      url:    frame.url,
+      data:   frame.data,
       method: frame.method
     };
+
     return rioos_headers;
   },
+
+  encodedHeader(){
+    var session = this.get('session');
+    var tabSession = this.get('tab-session');
+    var subHeader = {
+      'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
+      'organization':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
+      'team':               tabSession.get(C.TABSESSION.TEAM) || '',
+      'token':              session.get('token')
+    }
+    var encoded = btoa(JSON.stringify(subHeader));
+
+    // TO-DO need to encrypt the header
+    return encoded;
+  }
 
 });

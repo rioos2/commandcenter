@@ -1,3 +1,4 @@
+{{organization/create-modal nodes=nodes modelSpinner=modelSpinner doReload="doReload"}}
 <div class="theme-navbar">
   <!-- Fixed navbar -->
   <div class="navbar-wrapper">
@@ -68,14 +69,43 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu nav-profile">
+              <!-- selected organization -->
               <li>
-                {{#link-to "admin.infra"}}{{t 'nav.user.admin'}}{{/link-to}}
+                  <span class="org-name">{{currentOrganization}}</span>
+              <div class='row'>
+              </div>
+                <span class="org-email">{{email}}</span>
               </li>
               <li role="presentation" class="divider"></li>
+              <!-- List organizations with management org link-->
+              {{#each organizations as |origin|}}
+              <li>
+                <!-- <div class='row'> -->
+                  <a href="#" class="col-sm-9" {{action 'switchOrigin' origin.name}}>{{origin.name}}</a>
+                <span class="col-sm-3">{{#link-to "organization.index" origin.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
+              <!-- </div> -->
+              </li>
+              {{/each}}
+              <li role="presentation" class="divider"></li>
+              <!-- Create organization-->
+              <li {{action "createOrganization"}}>
+               <a href="#">{{t 'nav.user.createOrg'}}</a>
+              </li>
+              <li role="presentation" class="divider"></li>
+
+              <!-- Admin link-->
+              <li>
+                 {{#link-to "admin.infra"}} {{t 'nav.user.admin'}}{{/link-to}}
+              </li>
+              <li role="presentation" class="divider"></li>
+              <!-- Account link-->
               <li>
                 {{#link-to "accounts.index"}}{{t 'nav.user.profile'}}{{/link-to}}
               </li>
-              <li {{action "logout"}}><a href="#">{{t 'nav.user.logout'}}</a></li>
+              <!-- Logout action-->
+              <li {{action "logout"}}>
+               <a href="#">{{t 'nav.user.logout'}}</a>
+              </li>
             </ul>
           </li>
         </ul>

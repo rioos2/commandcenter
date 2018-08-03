@@ -26,18 +26,16 @@ export default Service.extend(DefaultHeaders, {
   // Include a promise handler to check if a token (API) exists or not
   // For now, consider as Auth token expired
 
-    testAuth() {
-      // make a call to api base because it is authenticated
-      return this.get('userStore').rawRequest(this.rawRequestOpts({
-        url:    '/api/v1/test',
-      })).then((xhr) => {
-        // Auth token still good
-        return Ember.RSVP.resolve('Auth Succeeded');
-      }, (/* err */) => {
-        // Auth token expired
-        return Ember.RSVP.reject('Auth Failed');
-      });
-    },
+  testAuth() {
+    // make a call to api base because it is authenticated
+    return this.get('userStore').rawRequest(this.rawRequestOpts({ url: '/api/v1/test', })).then((xhr) => {
+      // Auth token still good
+      return Ember.RSVP.resolve('Auth Succeeded');
+    }, (/* err */) => {
+      // Auth token expired
+      return Ember.RSVP.reject('Auth Failed');
+    });
+  },
 
   detect() {
     if (this.get('enabled') !== null) {
@@ -66,8 +64,8 @@ export default Service.extend(DefaultHeaders, {
       var origin;
 
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
-        //TO-DO origin and team will not  work here. since it placed on sub level
-        //Use flat npm for fix this
+        // TO-DO origin and team will not  work here. since it placed on sub level
+        // Use flat npm for fix this
         if (typeof auth[key] !== 'undefined') {
           interesting[key] = auth[key];
         }

@@ -1,20 +1,18 @@
 import Ember from 'ember';
-const {
-  get
-} = Ember;
+const { get } = Ember;
 
 export default Ember.Component.extend({
-  tagName: 'section',
-  className: '',
-
   intl: Ember.inject.service(),
+
+  tagName:   'section',
+  className: '',
 
   didInsertElement() {
     this.set('welcomeMsg', Ember.String.htmlSafe(get(this, 'intl').t('wizard.welcomeMessage')));
   },
 
   actions: {
-    nextStep: function() {
+    nextStep() {
       this.sendAction('nextStep', this.get('category'));
     },
   },

@@ -1,7 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 
 var Secret = Resource.extend({
-  type: 'secret',
+  type:    'secret',
   actions: {},
 });
 

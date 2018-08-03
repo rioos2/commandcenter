@@ -1,14 +1,14 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { reject } from 'rsvp';
 import { hash } from 'rsvp';
 
 export default Route.extend(DefaultHeaders, {
-  access: inject.service(),
+  access: service(),
 
 
-  beforeModel(){
+  beforeModel() {
     this.get('access').activate().then((config) => {
       if (config) {
         this.transitionTo('authenticated');
@@ -29,7 +29,7 @@ export default Route.extend(DefaultHeaders, {
   },
 
   actions: {
-    reloadModel(){
+    reloadModel() {
       var self = this;
       this.model().then(function(model) {
         self.getLicense().then(function(license) {
@@ -38,7 +38,11 @@ export default Route.extend(DefaultHeaders, {
           self.controller.set('model', model);
         });
       });
-    },
+    }
+  },
+
+  getLicense() {
+    return Ember.RSVP.hash({ license: this.get('store').findAll('license', this.opts('licenses', true)), });
   },
 
 });

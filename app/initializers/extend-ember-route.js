@@ -8,7 +8,7 @@ export function initialize(/* application */) {
     // Remember the current route (into the application route's previousRoute/Params properties)
     beforeModel() {
       this._super.apply(this, arguments);
-      this.rememberPrevious();
+      // this.rememberPrevious();
     },
 
     rememberPrevious() {

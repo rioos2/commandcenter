@@ -67,7 +67,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
     signUp() {
       this.showCredentialEmpty();
       if (!this.get('validate')) {
-        
+
         later(() => {
           this.get('access').signup(this.getform()).then(() => {
             this.send('finishLogin');

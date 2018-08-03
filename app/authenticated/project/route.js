@@ -5,8 +5,9 @@ export default Ember.Route.extend({
   access: Ember.inject.service(),
 
   loadingError(err, transition, ret) {
-    if (err && err.status && [C.UNAUTHENTICATED_HTTP_CODES, C.UNAUTHORIZED_HTTP_CODES].indexOf(err.status) >= 0) {
+    if (err && err.status && [401, 403].indexOf(err.status) >= 0) {
       this.send('logout', transition, true);
+
       return;
     }
 
