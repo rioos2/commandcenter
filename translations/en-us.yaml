@@ -374,14 +374,22 @@ stackPage:
       entitlement:
         title:                        License
         description:                  Edit activation code
+<<<<<<< HEAD
         node: '{optionName}:              Activated  {senseiActivated}/{senseiAllowed}'
+=======
+        ninjas: 'Ninjas:              Activated  {ninjaActivated}/{ninjaAllowed}'
+        senseis: 'Senseis:            Activated  {senseiActivated}/{senseiAllowed}'
+>>>>>>> origin/2-0-stable
         expired:                      " -  Expires in "
         days:                         " days"
         trial:                        Trial
         rioProduct:                   Rio/OS
         activeCode:                   Enter activation code
+<<<<<<< HEAD
         licenceid:                    Enter licence id
         licencepassword:              Enter licence password
+=======
+>>>>>>> origin/2-0-stable
         emptyActiveCode:              You forgot to type activation code
         activation:
           success:                    License activated successfully.
@@ -611,8 +619,15 @@ vnc:
 
 notifications:
   Stacks:
+<<<<<<< HEAD
     DeleteFailed:                     Delete failed try after some time
     DeleteSuccess:                    deleted successful
+=======
+    DeleteFailed: Delete failed try after some time
+    DeleteSuccess: deleted successful
+  QRcode:
+    downloadFailed: Failed to show! try after some time.
+>>>>>>> origin/2-0-stable
   secrets:
     downloadFailed:                   Download failed try after some time
     manageDownloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
@@ -656,12 +671,26 @@ infraPage:
     percent:                          "%"
 
 confirmDelete:
+<<<<<<< HEAD
   title:                              'Are you sure you want to delete ?'
   deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
   protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
   confirmAction:                      Delete
   cancelAction:                       Cancel
   largeDeleteText:                    '{key} and {othersCount} others'
+=======
+  title: 'Are you sure you want to delete ?'
+  deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
+  protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
+  confirmAction: Delete
+  cancelAction: Cancel
+  largeDeleteText: '{key} and {othersCount} others'
+QRCode:
+  title: QR code
+  qrNote: 'Note: show the QR code to Access'
+  cancelAction: Cancel
+
+>>>>>>> origin/2-0-stable
 
 containerShell:
   protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
@@ -965,6 +994,7 @@ nav:
 # Resource Actions
 ##############################
 action:
+<<<<<<< HEAD
   activate:                           Activate
   backup:                             Backup Snapshot
   deleteBackup:                       Delete Backup
@@ -1010,6 +1040,54 @@ action:
   createSecret:                       Create Secret
   installNode:                        Install
   retryInstallNode:                   Retry Install
+=======
+  activate: Activate
+  backup: Backup Snapshot
+  deleteBackup: Delete Backup
+  cancelUpgrade: Cancel Upgrade
+  cancelRollback: Cancel Rollback
+  clone: Clone
+  console: Open Console
+  deactivate: Deactivate
+  edit: Edit
+  evacuate: Evacuate
+  execute: Execute Shell
+  exportConfig: Export Config
+  finishUpgrade: Finish Upgrade
+  logs: View Logs
+  machineConfig: Machine Config
+  purge: Purge
+  remove: Delete
+  replay: Replay
+  restart: Restart
+  restore: Restore
+  retry: Retry
+  rollback: Rollback
+  revertToSnapshot: Revert Volume to Snapshot
+  restoreFromBackup: Restore Volume from Backup
+  setDefault: Set as Default
+  snapshot: Snapshot
+  start: Start
+  startServices: Start Services
+  stop: Stop
+  stopServices: Stop Services
+  switchNamespace: Switch to this Namespace
+  switchEnvironment: Switch to this Environment
+  upgrade: Upgrade
+  upgradeOrEdit: Upgrade/Edit
+  viewConfig: View Config
+  viewGraph: View Graph
+  viewInApi: View in API
+  viewInstance: View Instance
+  downloadSecret: Download secret
+  showQRcode: Show QR code
+  externalUrl: Open UI
+  nodeEdit: Edit node
+  nodeInstall: Install node
+  createSecret: Create Secret
+  installNode: Install
+  retryInstallNode: Retry Install
+>>>>>>> origin/2-0-stable
 
 ##############################
 # Resource Actions

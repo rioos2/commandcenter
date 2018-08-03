@@ -54,6 +54,6 @@ export function validateLabel(label) {
 }
 
 export default {
-    validateHostname:validateHostname,
-    validateLabel:validateLabel,
+  validateHostname:               validateHostname(),
+  validateLabel:                  validateLabel(),
 };

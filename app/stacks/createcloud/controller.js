@@ -1,5 +1,3 @@
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-    summaryContent: null,
-});
+export default Controller.extend({ summaryContent: null });
