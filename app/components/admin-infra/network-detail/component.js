@@ -14,6 +14,6 @@ export default Ember.Component.extend({
   }.property('model.network_type'),
 
   active: function() {
-    return Ember.isEqual(this.get('selectedVirtualNetwork'),this.get('model.id'))? "active" :"";
+    return Ember.isEqual(this.get('selectedVirtualNetwork'), this.get('model.id')) ? 'active' : '';
   }.property('selectedVirtualNetwork'),
 });

@@ -3,38 +3,44 @@ import Ember from 'ember';
 const DELAY = 100;
 
 export default Ember.Component.extend({
-  classNameBindings : ['inlineBlock:inline-block','clip:clip'],
-  tooltipService   : Ember.inject.service('tooltip'),
-  inlineBlock      : true,
-  clip             : false,
-  model            : null,
-  size             : 'default',
-  ariaRole         : ['tooltip'],
-  textChangedEvent : null,
-  tooltipFor       : null,
+  tooltipService:    Ember.inject.service('tooltip'),
+  classNameBindings: ['inlineBlock:inline-block', 'clip:clip'],
+  inlineBlock:       true,
+  clip:              false,
+  model:             null,
+  size:              'default',
+  ariaRole:          ['tooltip'],
+  textChangedEvent:  null,
+  tooltipFor:        null,
 
-  showTimer        : null,
+  showTimer: null,
 
   textChanged: Ember.observer('textChangedEvent', function() {
     this.show(this.get('textChangedEvent'));
   }),
 
+  modelObserver: Ember.observer('model', 'textChangedEvent', function() {
+    let opts = this.get('tooltipService.tooltipOpts');
+
+    if ((opts) && this.get('tooltipFor') === opts.tooltipFor ) {
+      this.set('tooltipService.tooltipOpts.model', this.get('model'));
+    }
+  }),
   mouseEnter(evt) {
-    if ( !this.get('tooltipService.requireClick') )
-      {
-        let tgt = Ember.$(evt.currentTarget);
+    if ( !this.get('tooltipService.requireClick') ) {
+      let tgt = Ember.$(evt.currentTarget);
 
-        if (this.get('tooltipService.tooltipOpts')) {
-          this.set('tooltipService.tooltipOpts', null);
-        }
-
-        // Wait for a little bit of time so that the mouse can pass through
-        // another tooltip-element on the way to the dropdown trigger of a
-        // tooltip-action-menu without changing the tooltip.
-        this.set('showTimer', Ember.run.later(() => {
-          this.show(tgt);
-        }, DELAY));
+      if (this.get('tooltipService.tooltipOpts')) {
+        this.set('tooltipService.tooltipOpts', null);
       }
+
+      // Wait for a little bit of time so that the mouse can pass through
+      // another tooltip-element on the way to the dropdown trigger of a
+      // tooltip-action-menu without changing the tooltip.
+      this.set('showTimer', Ember.run.later(() => {
+        this.show(tgt);
+      }, DELAY));
+    }
   },
 
   show(node) {
@@ -48,13 +54,13 @@ export default Ember.Component.extend({
     svc.cancelTimer();
 
     let out = {
-      type          : this.get('type'),
-      baseClass     : this.get('baseClass'),
-      eventPosition : node.offset(),
-      originalNode  : node,
-      model         : this.get('model'),
-      template      : this.get('tooltipTemplate'),
-      tooltipFor    : this.get('tooltipFor'),
+      type:          this.get('type'),
+      baseClass:     this.get('baseClass'),
+      eventPosition: node.offset(),
+      originalNode:  node,
+      model:         this.get('model'),
+      template:      this.get('tooltipTemplate'),
+      tooltipFor:    this.get('tooltipFor'),
     };
 
     if ( this.get('isCopyTo') ) {
@@ -64,21 +70,14 @@ export default Ember.Component.extend({
     svc.set('tooltipOpts', out);
   },
 
-  mouseLeave: function() {
+  mouseLeave() {
     if (!this.get('tooltipService.openedViaContextClick')) {
       if ( this.get('showTimer') ) {
         Ember.run.cancel(this.get('showTimer'));
-      }
-      else {
+      } else {
         this.get('tooltipService').leave();
       }
     }
   },
 
-  modelObserver: Ember.observer('model', 'textChangedEvent', function() {
-    let opts = this.get('tooltipService.tooltipOpts');
-    if ((opts) && this.get('tooltipFor') === opts.tooltipFor ) {
-      this.set('tooltipService.tooltipOpts.model', this.get('model'));
-    }
-  })
 });

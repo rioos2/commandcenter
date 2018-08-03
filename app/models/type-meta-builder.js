@@ -4,10 +4,12 @@ TypeMetaBuilder.reopenClass({
 
   buildTypeMeta(kind, ver) {
     var typeMeta;
+
     typeMeta = {
-      kind: kind,
+      kind,
       api_version: ver
     };
+
     return typeMeta;
   },
 

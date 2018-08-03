@@ -7,15 +7,16 @@ import Route from '@ember/routing/route';
 import Ember from 'ember';
 import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
-import {later} from '@ember/runloop';
+import { later } from '@ember/runloop';
 
 const CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
 export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
-  settings: service(),
-  access: service(),
-  language: service('user-language'),
-  storeReset: service(),
+  settings:       service(),
+  access:         service(),
+  language:       service('user-language'),
+  storeReset:     service(),
+  organization:   service(),
 
   testTimer: null,
 
@@ -27,22 +28,13 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
       this.testAuthToken();
     }, CHECK_AUTH_TIMER));
 
-    //TODO need to test authentication with api server after login and signup
-    //return this.testAuthToken().then(() => {
-      //TO-DO test and enable updation of password
+    return this.testAuthToken().then(() => {
+      // TO-DO test and enable updation of password
       // if (get(this, 'access.mustChangePassword')) {
       //   this.transitionTo('update-password');
       // }
-    //});
+    });
 
-  },
-
-  testAuthToken() {
-    return get(this, 'access').testAuth()
-      .catch(() => {
-        this.transitionTo('login');
-        this.send('logout', null);
-      });
   },
 
   model(params, transition) {
@@ -54,13 +46,15 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     this.get('session').set(C.SESSION.BACK_TO, undefined);
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
-        settingsmap: this.toCb('loadSettings'),
-        datacenter: this.toCb('loadHealthz'),
-        stacks: this.toCb('loadAssemblys'),
+        organizations: this.toCb('loadOrganizations'),
+        settingsmap:   this.toCb('loadSettings'),
+        // //This data will be load on sub infra route.
+        // datacenter: this.toCb('loadHealthz'),
+        stacks:        this.toCb('loadAssemblys'),
         // locations: this.cbFind('datacenter', 'datacenters'),
         // plans: this.cbFind('planfactory', 'plans'),
         // networks: this.cbFind('network', 'networks'),
-        events: this.toCb('loadAuditEvents'),
+        events:        this.toCb('loadAuditEvents'),
       };
 
       async.auto(tasks, xhrConcur, (err, res) => {
@@ -77,7 +71,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     }).catch((err) => {
       return this.loadingError(err, transition, Ember.Object.create({
         projects: [],
-        project: null,
+        project:  null,
       }));
     });
   },
@@ -118,24 +112,36 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
      When we switch an organization, unsubcribe and load the new
      organization details
      */
-    switchOrigin(originId, transition = true) {
-      this.disconnectSubscribe(() => {
-        this.send('finishSwitchOrigin', originId, transition);
+    switchOrigin(origin, transition = true) {
+      this.get('organization').selectOrganizationAndTeam(origin);
+      this.disconnectSubscribers(() => {
+        this.send('finishSwitchOrigin', origin, transition);
       });
+      location.reload();
     },
 
-    finishSwitchOrigin(originId, transition) {
+    finishSwitchOrigin(origin, transition) {
       this.get('storeReset').reset();
       if (transition) {
         this.intermediateTransitionTo('authenticated');
       }
-      this.set(`tab-session.${ C.TABSESSION.PROJECT }`, originId);
+      // this.set(`tab-session.${ C.TABSESSION.PROJECT }`, origin);
       this.refresh();
     },
   },
+
+  testAuthToken() {
+    return get(this, 'access').testAuth()
+      .catch(() => {
+        this.transitionTo('login');
+        this.send('logout', null);
+      });
+  },
+
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
-    if (err && ((isAuthEnabled && this.isAPIServerFlunked(err.code)) || this.deniedAuthorizationOrAuthentication(err.code))) {
+
+    if (err && ((isAuthEnabled && !this.isAPIServerFlunked(err.code)) || this.deniedAuthorizationOrAuthentication(err.code))) {
       this.set('access.enabled', true);
 
       this.send('logout', transition, (transition.targetName !== 'authenticated.index'));
@@ -161,7 +167,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
    * 502 - Badgateway: We get this error when
    */
   isAPIServerFlunked(code) {
-      return (C.BADGATEWAY_HTTP_CODES.includes(code) || C.INTERNALSERVER_HTTP_CODES.includes(code));
+    return (C.BADGATEWAY_HTTP_CODES.includes(code) || C.INTERNALSERVER_HTTP_CODES.includes(code));
     /* This code doesn't make sense, this sends
     false or
     undefined.
@@ -186,10 +192,16 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     };
   },
 
+  // Fetch all organization that belongs to the user.
+  loadOrganizations() {
+    this.get('organization').selectOrigin();
+
+    return this.get('store').find('origin', null, this.opts('origins'));
+  },
   // Every Rio/OS site will have common settings stored under an url  'cluster_info' in system origin named 'rioos_system'.
   // This methods load that setting. Setting is a set of known key value pairs.
   loadSettings() {
-    return this.get('userStore').find('settingsmap', null, this.opts('origins/rioos_system/settingsmap/cluster_info'));
+    return this.get('userStore').find('settingsmap', null, this.opts('settingsmap/cluster_info/origins/rioos_system'));
   },
 
   // Load the datacenters overall healthz (cpu, memory, disk), node statistics, os usages
@@ -207,15 +219,15 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   Assembly  Assembly
   */
   loadAssemblys() {
-    return this.get('store').find('assembly', null, this.opts(`accounts/${  this.get('session').get('id')  }/assemblys`));
+    return this.get('store').find('assembly', null, this.opts('assemblys'));
   },
 
   loadSecrets() {
-    return this.get('store').find('secret', null, this.opts(`accounts/${  this.get('session').get('id')  }/secrets`));
+    return this.get('store').find('secret', null, this.opts('secrets'));
   },
 
   loadAuditEvents() {
-    return this.get('store').find('event', null, this.opts(`accounts/${  this.get('session').get('id')  }/audits`));
+    return this.get('store').find('event', null, this.opts('audits'));
   },
 
 });

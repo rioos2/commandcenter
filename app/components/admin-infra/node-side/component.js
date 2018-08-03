@@ -12,20 +12,20 @@ export default Ember.Component.extend({
   }.property('model.node_ip'),
 
   status: function() {
-    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
+    return Ember.isEmpty(this.get('model.status.phase')) ? '' : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
-  emptyError: function () {
-      return this.get('intl').t('stackPage.admin.' + this.get('type') + '.noNode');
+  emptyError: function() {
+    return this.get('intl').t(`stackPage.admin.${  this.get('type')  }.noNode`);
   }.property('type'),
 
   bridges: function() {
-    return Ember.isEmpty(this.get('model.status.node_info.bridges'))? "":this.get('model.status.node_info.bridges') ;
+    return Ember.isEmpty(this.get('model.status.node_info.bridges')) ? '' : this.get('model.status.node_info.bridges') ;
   }.property('model.status.node_info.bridges'),
 
   nodeAvailable: function() {
     return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('ip')) );
-  }.property('status','name','ip'),
+  }.property('status', 'name', 'ip'),
 
 
 });

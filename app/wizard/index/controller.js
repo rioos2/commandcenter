@@ -18,5 +18,6 @@ export default Controller.extend({
       this.get('completedSteps').pushObject(step);
       this.set('selectedTab', this.get('categories')[this.get('categories').indexOf(step) + 1]);
     },
-  }
+  },
+
 });

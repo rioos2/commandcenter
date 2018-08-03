@@ -6,13 +6,13 @@ export function initialize(instance) {
 
   store.reopen({
     removeAfterDelete: false,
-    baseUrl: application.apiEndpoint,
-    skipTypeifyKeys: ['labels'],
+    baseUrl:           application.apiEndpoint,
+    skipTypeifyKeys:   ['labels'],
   });
 }
 
 export default {
-  name: 'auth-store',
+  name:  'auth-store',
   initialize,
   after: 'store',
 };

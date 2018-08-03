@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  application : Ember.inject.controller(),
-  queryParams : ['instanceId'],
-  instanceId  : null,
-  model       : null,
+  application: Ember.inject.controller(),
+  queryParams: ['instanceId'],
+  instanceId:  null,
+  model:       null,
 
   bootstrap: function() {
     if (this.get('application.isPopup')) {
@@ -13,7 +13,7 @@ export default Ember.Mixin.create({
   }.on('init'),
 
   actions: {
-    cancel: function() {
+    cancel() {
       window.close();
     }
   }

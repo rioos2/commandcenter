@@ -1,12 +1,11 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-const {
-  get
-} = Ember;
+const { get } = Ember;
+
 export default Ember.Component.extend({
   intl:       Ember.inject.service(),
 
-  tagName: 'section',
+  tagName:   'section',
   className: '',
 
   scalingRuleApplied: function(){
@@ -15,15 +14,15 @@ export default Ember.Component.extend({
 
   resources: function() {
     return {
-      maximum:{
-        name: "chart-scale-max-cpu",
+      maximum: {
+        name:   'chart-scale-max-cpu',
         suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title: get(this, 'intl').t('launcherPage.scaling.scaleup.cpu.title')
+        title:  get(this, 'intl').t('launcherPage.scaling.scaleup.cpu.title')
       },
-      minimum:{
-        name: "chart-scale-min-cpu",
+      minimum: {
+        name:   'chart-scale-min-cpu',
         suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title: get(this, 'intl').t('launcherPage.scaling.scaledown.cpu.title')
+        title:  get(this, 'intl').t('launcherPage.scaling.scaledown.cpu.title')
       }
     };
   }.property(),

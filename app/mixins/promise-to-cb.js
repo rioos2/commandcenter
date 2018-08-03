@@ -9,14 +9,15 @@ export default Ember.Mixin.create({
       }
 
       let promise;
+
       if ( typeof name_or_fn === 'string' ) {
         promise = this[name_or_fn](...args, results);
       } else {
         promise = name_or_fn(...args, results);
       }
-      promise.then(function(res) {
+      promise.then((res) => {
         cb(null, res);
-      }).catch(function(err) {
+      }).catch((err) => {
         cb(err, null);
       });
     };

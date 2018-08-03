@@ -51,6 +51,12 @@
       display: none;
       overflow: hidden;
       opacity: 0;
+
+          // border-radius: 0px;
+          // background-clip: unset;
+          // max-height: 600px;
+          // opacity: 1;
+          // display: block;
   }
 
   .dropdown:hover .dropdown-menu {
@@ -73,7 +79,22 @@
 
   .nav-profile {
     top: 60px !important;
-    left: -92px !important;
+    left: -91px !important;
+
+    .org-icon {
+      font-size: 23px;
+    }
+
+    .org-name {
+      color: #a6a8c3;
+      font-size: 21px;
+      padding-left: 20px;
+    }
+
+    .org-email {
+      color: #a6a8c3;
+      padding-left: 20px;
+    }
   }
 
   .right-menu {

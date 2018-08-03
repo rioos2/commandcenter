@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   }.property('pool.object_meta.name'),
 
   status: function() {
-    return Ember.isEmpty(this.get('pool.status.phase')) ? "" : this.get('pool.status.phase').capitalize();
+    return Ember.isEmpty(this.get('pool.status.phase')) ? '' : this.get('pool.status.phase').capitalize();
   }.property('pool.status.phase'),
 
   diskSize: function() {
