@@ -53,6 +53,13 @@
                 text-overflow: ellipsis;
             }
         }
+
+        [type=button].drop-network {
+          height: 37px;
+          width: 119px;
+          padding: 0px 0px 0px 16px;
+        }
+
         ul[role=listbox] {
             background-color: white;
             cursor: default;

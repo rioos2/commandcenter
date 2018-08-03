@@ -1,11 +1,10 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
-let schemas = Ember.Object.create({
-  reports: '/api/v1/healthz/overall'
-});
+let schemas = EmberObject.create({ reports: '/api/v1/healthz/overall' });
 
 
 export function fetchSchema(type) {
   let states = [schemas];
+
   return states.mapBy(type);
 }

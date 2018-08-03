@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import ArrayProxy from '@ember/array/proxy';
+import { once } from '@ember/runloop';
+import { sort } from '@ember/object/computed';
 
-export default Ember.ArrayProxy.extend({
-  sourceContent: null,
+export default ArrayProxy.extend({
+  sourceContent:  null,
   sortProperties: null,
 
   // Override this and return true/false for items that should/n't be included
@@ -14,17 +16,17 @@ export default Ember.ArrayProxy.extend({
   _boundFn: null,
 
   init() {
-    if ( !this.get('sortProperties') )
-    {
-      this.set('sortProperties', ['displayName','name','id']);
+    if (!this.get('sortProperties')) {
+      this.set('sortProperties', ['displayName', 'name', 'id']);
     }
 
-    if ( !this.get('filterFn') )
-    {
-      this.set('filterFn', function() { return true; });
+    if (!this.get('filterFn')) {
+      this.set('filterFn', () => {
+        return true;
+      });
     }
 
-    (this.get('dependentKeys')||[]).forEach((key) => {
+    (this.get('dependentKeys') || []).forEach((key) => {
       this.addObserver(key, this, 'sourceContentChanged');
     });
 
@@ -34,14 +36,15 @@ export default Ember.ArrayProxy.extend({
   },
 
   sourceContentChanged() {
-    Ember.run.once(this, 'updateContent');
+    once(this, 'updateContent');
   },
 
   updateContent() {
-    var neu = (this.get('sourceContent')||[]).filter(this.get('_boundFn'));
+    var neu = (this.get('sourceContent') || []).filter(this.get('_boundFn'));
+
     this.set('content', neu);
   },
 
   // The array proxy reads this property
-  arrangedContent: Ember.computed.sort('content','sortProperties'),
+  arrangedContent: sort('content', 'sortProperties'),
 });

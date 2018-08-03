@@ -44,6 +44,9 @@ function readLocales(environment) {
   return translationsOut;
 }
 //
+function checkComplition(environment) {
+  return Math.random();
+}
 //
 function readUIConfig(environment) {
   if (!process.env.RIOOS_HOME) {
@@ -73,7 +76,7 @@ module.exports = function (environment) {
     environment: environment,
     exportApplicationGlobal: true,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -111,18 +114,22 @@ module.exports = function (environment) {
       // when it is created
       version: pkg.version,
       appName: 'Rio/OS - ' + pkg.version,
+      desktop: process.env.EMBER_CLI_ELECTRON,
+      proxyPort: "8000",
+      proxyHost: "127.0.0.1",
       apiServer: loaded.http_api || "http://localhost:9636",
       apiEndpoint: '/api/v1',
-      authServer: loaded.auth_server || "http://localhost:9636",
-      authEndpoint: '/api/v1',
-      wsServer: loaded.watch_server || "https://localhost:7000",
-      wsEndpoint: '/api/v1/%KIND%?watch=true',
+      wsServer: loaded.uwatch_server || "ws://localhost:9443",
+      wsEndpoint: '/api/v1/',
       vncServer: loaded.vnc_server || "wss://localhost:8005",
+      containerConsolePort: loaded.container_console_port || "10250",
       countlyServer: loaded.countly_server || "http://countly.rioos.xyz",
       appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
       sendAnalytics: loaded.send_analytics || false,
       baseAssets: '/',
-      locales: readLocales(environment)
+      configPath: process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
+      locales: readLocales(environment),
+      activationComplete: checkComplition()
     },
   };
 
@@ -135,17 +142,26 @@ module.exports = function (environment) {
   }
 
   if (environment === 'test') {
-    // Testem prefers this...
-    ENV.baseURL = '/';
-    ENV.locationType = 'none';
+      // Testem prefers this...
+      ENV.locationType = 'none';
 
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+      // keep test console output quieter
+      ENV.APP.LOG_ACTIVE_GENERATION = false;
+      ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+      ENV.APP.rootElement = '#ember-testing';
+
+      // This is needed so that browserify dependencies in tests work correctly
+      // See https://github.com/ef4/ember-browserify/issues/14
+      ENV.browserify = {
+          tests: true
+      };
+
+      // Withuot manually setting this, pretender won't track requests
+      ENV['ember-cli-mirage'] = {
+          trackRequests: true
+      };
   }
-
 
 
   if (process.env.BASE_URL) {
@@ -162,7 +178,6 @@ module.exports = function (environment) {
     ENV.APP.baseAssets = process.env.BASE_ASSETS;
   }
 
-  // Override the Rancher server/endpoint with environment var
   var server = process.env.NILAVU;
 
   if (server) {

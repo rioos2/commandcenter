@@ -4,29 +4,20 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // SRI: {
-    //   enabled: false
-    // },
-    // fingerprint: {
-    //   enabled: false
-    // },
-    // minifyJS: {
-    //   enabled: false
-    // },
-    // minifyCSS: {
-    //   enabled: true
-    // },
-    // Add options here
-    // lessOptions: {
-    //   paths: [
-    //     'bower_components/bootstrap/less'
-    //   ],
-    // },
-    // sassOptions: {
-    //   includePaths: [
-    //     'bower_components/SpinKit/scss',
-    //   ]
-    // }
+
+    fingerprint: {
+      exclude: [
+        // These can be bind-mounted in
+        'assets/images',
+      ],
+      extensions: (['js', 'css', 'png', 'jpg', 'gif', 'svg', 'map', 'woff', 'woff2', 'ttf']),
+    },
+    minifyJS: {
+      enabled: false
+    },
+    minifyCSS: {
+      enabled: true
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
@@ -48,23 +39,31 @@ module.exports = function(defaults) {
   //     destDir: 'assets'
   // });
 
-  app.import('vendor/charts/d3.v4.min.js');
+  app.import('vendor/charts/d3.min.js');
   app.import('vendor/charts/d3script-area.js');
   app.import('vendor/charts/d3script-gauge.js');
   app.import('vendor/charts/d3script-blue-gauge.js');
+  app.import('vendor/charts/topojson.v0.min.js');
 
 
+  app.import('node_modules/@bower_components/jquery/dist/jquery.js');
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');
+  app.import('vendor/charts/loader.js');
   app.import('vendor/dropdown/position-calculator.js');
 
   app.import('vendor/analytics/countly.js');
 
+  app.import('vendor/versor.js');
   app.import('vendor/novnc.js');
   app.import('vendor/EasePack.min.js');
   app.import('vendor/TweenLite.min.js');
   app.import('vendor/moment.js');
+  app.import('vendor/charts/d3script-globe.js');
+  app.import('vendor/admin/jquery-scrollbar.js');
+  app.import('vendor/admin/select2-min.js');
+  app.import('vendor/admin/select2.js');
 
   app.import('node_modules/@bower_components/async/dist/async.js');
 
@@ -83,7 +82,7 @@ module.exports = function(defaults) {
   app.import('node_modules/@bower_components/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2', {
     destDir: 'fonts'
   });
-
+  app.import('node_modules/@bower_components/lacsso/lacsso.css');
 
   app.import('node_modules/@bower_components/bootstrap/dist/js/bootstrap.js');
 

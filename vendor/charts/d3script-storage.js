@@ -100,7 +100,7 @@ function renderChartStorage(params) {
           .attr('y', 0)
           .attr('width', attrs.svgWidth)
           .attr('height', attrs.svgHeight)
-          .attr("xlink:href", "images/createcloud/capacity.png")
+          .attr("xlink:href", "/assets/images/createcloud/capacity.png")
           .attr('opacity', attrs.imageOpacity)
 
         //add container g element

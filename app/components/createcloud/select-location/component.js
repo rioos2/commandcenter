@@ -1,29 +1,54 @@
 import Component from '@ember/component';
-
+import GeoTools from 'npm:geo-tools';
 export default Component.extend({
-    showField: false,
+  showField: false,
+  notifications: Ember.inject.service('notification-messages'),
+  initializeChart: Ember.on('didInsertElement', function() {
+    this.set("model.locationList", this.getCountry(this.get("model")));
+    renderGlobeChart(this.get("model"), this.get('notifications'));
+  }),
 
-    actions: {
-        showInputField: function() {
-            this.set('showField', true);
-        },
-        closeInputField: function() {
-            this.set('showField', false);
-        },
-
-        addLocation: function() {
-          this.set("model.assemblyfactory.object_meta.cluster_name", this.get('location'));
-          let noCountry = true;
-          this.get("model.datacenters.content").forEach((item) => {
-            if (this.get('location') == item.object_meta.name) {
-              this.set("model.assemblyfactory.country", item.advanced_settings.country);
-              noCountry = false;
-            }
-          });
-          if(noCountry) {
-            this.set("model.assemblyfactory.country","");
-          }
+  getCountry: function(model) {
+    const self = this;
+    let features = model.datacenters.content.map(function(x) {
+      return {
+        "type": "Feature",
+        "City": x.object_meta.name,
+        "geometry": {
+          "type": "Point",
+          "coordinates": self.getCoordinates(x.object_meta.name)
         }
+      }
+    });
+    let country = {
+      "type": "FeatureCollection",
+      "features": features,
+    };
+    return country;
+  },
 
+  getCoordinates: function(x) {
+    var f = [];
+    geocode(x, function(coordinates) {
+      f.pushObjects([coordinates.lng, coordinates.lat]);
+    });
+    return f;
+  },
+
+  locationAvailable: function(){
+    return this.get('model.datacenters.content').length > 0;
+  }.property('model.datacenters.content'),
+
+  actions: {
+    showInputField: function() {
+      this.set('showField', true);
+    },
+    closeInputField: function() {
+      this.set('showField', false);
+    },
+
+    getLocation: function() {
+      renderGlobeChart.getLocation();
     }
+  }
 });

@@ -1,4 +1,4 @@
-# Rio/OS UI - Nilavu
+# Rio/OS UI - CommandCenter
 
 This README outlines the details of collaborating on this Ember application.
 
@@ -8,17 +8,28 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 
-* Download [Node.js 8.9.4](https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz)
+### Install Node 10
+
+[Why Node 10](https://github.com/nodejs/Release#release-schedule) The release of Node 10 is `Oct
+2018`. So its safe to get in now. 
+
+* Download [Node.js 10.7+](https://nodejs.org/dist/v10.7.0/node-v10.7.0-linux-x64.tar.xz)
+
+Either way in prod we run behind a nginx  proxy, and are not dependent on service side node.
 
 ```
-wget https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
+
+wget https://nodejs.org/dist/v10.7.0/node-v10.7.0-linux-x64.tar.xz
+
 ```
+
 * Unzip downloaded tar to ~/software
 
 ```
-tar -xvf node-*.tar.xz
-```
 
+tar -xvf node-*.tar.xz
+
+```
 
 * Export PATH and NODE_HOME on ~/.bashrc
 
@@ -33,7 +44,7 @@ export PATH="$PATH:$NODE_HOME/bin"
 
 Close your terminal window  and open it back.
 
-* Install [Yarn](https://yarnpkg.com/en/)
+###* Install [Yarn](https://yarnpkg.com/en/)
 
 ```
 
@@ -46,27 +57,140 @@ sudo apt-get update && sudo apt-get install yarn
 
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
-* [Rio/OS API servr](https://gitlab.com/rioos/aran)
+* [Rio/OS API Gateway](https://gitlab.com/rioos/api_gateway)
 
+## RIOOS__HOME
 
-## Installation
+```
 
-* `git clone <forked-nilavu-repository-url>` this repository
+mkdir -p ~/code/rioos/home
+
+nano ~/.bashrc
+
+export RIOOS_HOME=~/code/rioos/home
+
+```
+
+## Develop ( Web )
+ 
+### 1. Clone commandcenter
+
+* `git clone <forked-commandcenter-repository-url> -b 2-0-stable` this repository
 * change into the new directory
 
-```
-cd nilavu
-yarn install
+
+### 2. Run in development
+
 ```
 
-## Running / Development
+make dev
 
-* `yarn start`
+```
+
+Visit your app at [https://localhost:8000](https://localhost:8000).
+
+This runs in headless mode. Needs an api to start chugging. 
+
+### 3. Edit configuration file 
+ 
+The file needs to be in $RIOOS_HOME/config (or) <projectdir>/config.
+
+```
+
+cd commandcenter_v2/config/config
+
+ls 
+
+# You'll see ui.toml
+
+nano ui.toml
+
+# Change the http_api to 
+
+http_api="https://console.rioos.xyz:7443"
+
+```
+
+```
+##############################################
+# This is a TOML UI Configuration for Rio/OS
+# Command Center
+##############################################
+title = "CommandCenter Configuration for Rio/OS"
+
+## API server endpoint that the commandcenter will connect to
+http_api = "https://console.rioos.xyz:7443"
+
+## uwatch_server is a host that the commandcenter will connect to for 
+## real time triggers on updating resources.
+uwatch_server = "ws://localhost:9443"
+
+## vnc server that we connect to using insecure mode.
+## replace it to wss if we wish to connect via secure mode.
+vnc_server = "wss://localhost:444"
+
+## Ninja port for connecting to console of containers
+container_console_port = "10250"
+
+## The analytics server for marketing. count.ly is used. 
+## The url of the  count.ly server.
+countly_server = "http://countly.rioos.xyz"
+
+## The api key to connect to the count.ly
+app_key = "9653325d8d0f5fe63c3491c93259bf4ff77821ca"
+
+```
+
+###* 4. optional:  Upgrade ember-api-store.
+
+When you wish to upgrade `ember-api-store` from git, 
+
+
+
+```
+yarn remove ember-api-store
+
+```
+
+* Above command removes the ember-api-store package from package.json
+
+* Add "ember-api-store": "git+https://gitlab.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
+
+* Install ember-api-store
+
+```
+make dev
+
+```
+
+##  Production 
+
+
+```
+
+make clean 
+
+make build
+
+make ship
+
+```
+
 * Visit your app at [https://localhost:8000](https://localhost:8000).
+
+
+## Develop ( Desktop App )
+
+```
+
+ember electron
+
+```
+
 
 ## How does SSL work  
 
-The ssl certificated are automatically pulled by `ember serve` from the `nilavu/ssl/`  directory.
+The ssl certificated are automatically pulled by `ember serve` from the `commandcenter/ssl/`  directory.
 
 This is due t the property `ssl: true` being turned on.in `.ember-cli` file.
 
@@ -86,46 +210,7 @@ This is due t the property `ssl: true` being turned on.in `.ember-cli` file.
 }
 
 ```
-## Configuration config/ui.toml
 
-The file needs to be in $RIOOS_HOME/config (or) projectdir/config
-
-```
-##############################################
-# This is a TOML UI Configuration for Rio/OS.
-# Boom.
-##############################################
-title = "UI Configuration for Rio/OS"
-
-## api host that nilavu will connect to
-http_api = "localhost:9636"
-
-## auth_server that nilavu will connect to
-auth_server = "localhost:9636"
-
-## watch_server is a host that the nilavu will connect to for real time triggers on
-## update to resources.
-watch_server = "https://localhost:7000"
-
-## vnc server that we connect to using insecure mode.
-## replace it to wss if we wish to connect via secure mode.
-vnc_server = "ws://localhost:9000"
-
-```
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
 
 ### Troubleshooting (dev)
 

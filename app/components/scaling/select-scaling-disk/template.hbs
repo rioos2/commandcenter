@@ -1,0 +1,5 @@
+{{#if scalingRuleApplied}}
+{{scaling/cloud-hscaling-disk-resource-type-chooser name=name category=category model=model selectedTab=selectedTab showLoading=showLoading scaleType=scaleType resources=resources}}
+{{else}}
+{{scaling/cloud-vscaling-disk-resource-type-chooser name=name category=category model=model selectedTab=selectedTab showLoading=showLoading scaleType=scaleType resources=resources}}
+{{/if}}

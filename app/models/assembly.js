@@ -1,14 +1,22 @@
 import Resource from 'ember-api-store/models/resource';
-const { get } = Ember;
+const {
+  get
+} = Ember;
 import C from 'nilavu/utils/constants';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Downloadjs from 'npm:downloadjs';
 
-var Assembly = Resource.extend({
+var Assembly = Resource.extend(DefaultHeaders, {
 
   type: 'assembly',
   lifecycle: Ember.inject.service('lifecycle'),
   router: Ember.inject.service(),
   intl: Ember.inject.service(),
   notifications: Ember.inject.service('notification-messages'),
+  modalService: Ember.inject.service('modal'),
+  session: Ember.inject.service(),
+  enableLink: false,
+  SecretData: '',
 
 
   availableActions: function() {
@@ -16,7 +24,7 @@ var Assembly = Resource.extend({
     return [{
         label: 'action.remove',
         icon: 'fa fa-trash-o',
-        action: 'delete',
+        action: 'deletePromt',
         enabled: true,
         altAction: 'delete',
         class: this.get('hasTerminated') ? 'disabled' : ' '
@@ -25,15 +33,44 @@ var Assembly = Resource.extend({
         label: 'action.console',
         icon: 'fa fa-terminal',
         action: 'console',
-        enabled: true
+        enabled: true,
+        class: (this.get('enableConsole') || this.get('hasTerminated') || this.get('hasFailed')) ? 'disabled' : ' '
+
+      },
+      {
+        label: 'action.downloadSecret',
+        icon: 'fa fa-download',
+        action: 'download',
+        enabled: true,
+        class: this.get('enableQRcode') ? 'disabled' : ' '
+      },
+      {
+        label: 'action.showQRcode',
+        icon: 'fa fa-qrcode',
+        action: 'showQRcode',
+        enabled: true,
+        class: this.get('enableQRcode') ? ' ' : 'disabled'
+      },
+      {
+        label: 'action.externalUrl',
+        icon: 'fa fa-external-link',
+        action: 'applicationUrl',
+        enabled: this.linkEnabler(),
       },
     ];
-  }.property('id', 'actionLinks', 'hasTerminated', 'okay'),
+  }.property('id', 'actionLinks', 'hasTerminated', 'status.phase', 'enableConsole'),
 
   hasTerminated: function() {
     return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
   }.property('status.phase'),
 
+  hasFailed: function() {
+    return C.MANAGEMENT.STATUS.FAILURE.includes(this.get('status.phase').toLowerCase());
+  }.property('status.phase'),
+
+  categorieType: function() {
+    return C.MANAGEMENT.STATUS.TERMINATE.includes(this.get('status.phase').toLowerCase());
+  }.property('spec.assembly_factory.spec.plan.category'),
 
   host: function() {
     return this.get('metadata.rioos_sh_vnc_host') ? this.get('metadata.rioos_sh_vnc_host') : "";
@@ -43,9 +80,71 @@ var Assembly = Resource.extend({
     return this.get('metadata.rioos_sh_vnc_port') ? this.get('metadata.rioos_sh_vnc_port') : "";
   }.property('metadata.rioos_sh_vnc_port'),
 
+  enableConsole: function() {
+    return Ember.isEmpty(this.get('host')) || Ember.isEmpty(this.get('port'));
+  }.property('host', 'port'),
+
   name: function() {
     return this.get('object_meta.name') ? this.get('object_meta.name') : "";
   }.property('object_meta.name'),
+
+  hasDownloaded: function(secrets, id) {
+    if (secrets.length != 0) {
+      Downloadjs(secrets, id + ".key", "text/plain");
+      return true;
+    }
+    return false;
+  },
+
+  enableQRcode: function() {
+    var self = this;
+    return this.get('store').find('secret', null, this.opts('secrets/' + this.get('spec.assembly_factory.secret.id'), true)).then(function(res) {
+      self.set('SecretData', res);
+      if (self.get('SecretData.secret_type') == 'rioos_sh/kryptonite') {
+        return true;
+      }
+    });
+    return false;
+  }.property(),
+
+  downloadAndWarnIfNone: function(res) {
+    let key = res.data['rioos_sh/ssh_pubkey'] || "";
+    if (!this.hasDownloaded(key, this.get('name'))) {
+      this.get('notifications').warning(Ember.String.htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-success'
+      });
+    };
+  },
+
+  applicationUrlData: function() {
+    let ip = !Ember.isEmpty(this.get('spec.endpoints.subsets.addresses')) ? this.get('spec.endpoints.subsets.addresses')[0].ip : "";
+    if (ip) {
+      let planBlueprintId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
+      let port = "";
+      let protocol = "";
+      if (planBlueprintId) {
+        this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
+          if (p.object_meta.name == planBlueprintId) {
+            port = p.metadata.rioos_sh_web_access_port;
+            protocol = p.metadata.rioos_sh_web_access_protocal;
+            if (protocol && port) {
+              this.set('enableLink', true);
+            }
+          }
+        });
+      };
+      let url = protocol + "://" + ip + ":" + port;
+      this.set('url', url);
+    }
+  },
+
+  linkEnabler: function() {
+    this.applicationUrlData();
+    return this.get('enableLink');
+  },
+
 
   actions: {
     delete() {
@@ -58,6 +157,7 @@ var Assembly = Resource.extend({
           cssClasses: 'notification-success'
         });
         this.set('hasTerminated', true);
+        this.get('modalService').toggleModal();
       }).catch((err) => {
         this.get('notifications').warning(get(this, 'intl').t('notifications.Stacks.DeleteFailed'), {
           autoClear: true,
@@ -67,8 +167,53 @@ var Assembly = Resource.extend({
       });
     },
 
+    showQRcode() {
+      var self = this;
+      if (!Ember.isEmpty(this.get('SecretData'))) {
+        let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || "";
+        this.set('rioos_sh_kryptonite_qrcode', key);
+        this.get('modalService').toggleModal('modal-show-qrcode', this);
+      } else {
+        self.get('notifications').warning(get(self, 'intl').t('notifications.QRcode.downloadFailed'), {
+          autoClear: true,
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
+        });
+      }
+    },
+
+    download() {
+      var self = this;
+      if (!Ember.isEmpty(self.get('SecretData'))) {
+        self.downloadAndWarnIfNone(self.get('SecretData'));
+      } else {
+        self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
+          autoClear: true,
+          clearDuration: 4200,
+          cssClasses: 'notification-warning'
+        });
+      }
+    },
+
     console() {
-      window.open(window.location.href + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
+      let type = this.get('spec.assembly_factory.spec.plan.category');
+      switch (type) {
+        case C.CATEGORIES.MACHINE:
+          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/console?vnchost=" + this.get('host') + "&vncport=" + this.get('port'), '_blank');
+          break;
+        case C.CATEGORIES.CONTAINER:
+          window.open(location.protocol + '//' + location.host + location.pathname + "/stack/containerconsole?vnchost=" + this.get('host') + "&account_id=" + this.get('session').get("id") + "&id=" + this.get('id'), '_blank');
+          break;
+      }
+
+    },
+
+    deletePromt: function() {
+      this.get('modalService').toggleModal('modal-confirm-delete', this);
+    },
+
+    applicationUrl: function() {
+      window.open(this.get('url'));
     },
 
   },

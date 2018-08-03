@@ -168,7 +168,7 @@ function renderChartRam(params) {
         image
           .attr('width', attrs.svgWidth)
           .attr('height', attrs.svgHeight)
-          .attr("xlink:href", "images/createcloud/ram.png")
+          .attr("xlink:href", "assets/images/createcloud/ram.png")
           .attr('opacity', attrs.imageOpacity)
 
         //add container g element

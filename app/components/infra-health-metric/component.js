@@ -21,7 +21,7 @@ export default Component.extend({
     },
 
     initializeChart: Ember.on('didInsertElement', function() {
-      
+
         let id = "g-" + this.get('model.name');
         let c_name = ".b-" + this.get('model.name');
 

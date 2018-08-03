@@ -1,24 +1,22 @@
-import Ember from 'ember';
 import BootstrapFixes from 'nilavu/utils/bootstrap-fixes';
+import Service from '@ember/service';
 
-export default Ember.Service.extend({
-  model          : null,
-  open           : false,
-  tooltipActions : null,
-  actionToggle   : null,
-  actionMenu     : null,
 
-  show: function(model,trigger,toggle) {
-    if (this.get('open') && this.get('actionMenu')) {
-      this.hide();
-    }
+export default Service.extend({
+  model:          null,
+  open:           false,
+  tooltipActions: null,
+  actionToggle:   null,
+  actionMenu:     null,
+
+  show(model, trigger, toggle) {
     let $parent = this.set('actionParent', $('#resource-actions-parent'));
     let $menu = this.set('actionMenu', $('#resource-actions'));
-    let $toggle = this.set('actionToggle', $(toggle||trigger));
+    let $toggle = this.set('actionToggle', $(toggle || trigger));
 
-    if ( model === this.get('model') && this.get('open') )
-    {
+    if (model === this.get('model') && this.get('open')) {
       event.preventDefault();
+
       return;
     }
 
@@ -35,7 +33,6 @@ export default Ember.Service.extend({
     });
 
     Ember.run.next(() => {
-
       if (this.get('tooltipActions')) {
         $menu.addClass('tooltip-actions');
       } else {
@@ -44,17 +41,17 @@ export default Ember.Service.extend({
         }
       }
 
-      $menu.css('visibility','hidden');
+      $menu.css('visibility', 'hidden');
       $menu.removeClass('hide');
       $toggle.addClass('open');
       $parent.addClass('open');
 
-      this.set('open',true);
+      this.set('open', true);
       // Delay ensure it works in firefox
       Ember.run.next(() => {
         BootstrapFixes.positionDropdown($menu, trigger, false);
         $('#resource-actions-first')[0].focus();
-        $menu.css('visibility','visible');
+        $menu.css('visibility', 'visible');
       });
     });
   },
@@ -64,43 +61,44 @@ export default Ember.Service.extend({
     this.get('actionParent').removeClass('hide');
     this.get('actionMenu').addClass('hide');
     this.setProperties({
-      actionToggle : null,
-      actionMenu   : null,
-      open         : false,
-      model        : null,
+      actionToggle: null,
+      actionMenu:   null,
+      open:         false,
+      model:        null,
     });
   },
 
-  triggerAction: function(actionName) {
+  triggerAction(actionName) {
     this.get('model').send(actionName);
   },
 
   activeActions: function() {
-    let list = (this.get('model.availableActions')||[]).filter(function(act) {
-      return Ember.get(act,'enabled') !== false || Ember.get(act,'divider');
+    let list = (this.get('model.availableActions') || []).filter((act) => {
+      return Ember.get(act, 'enabled') !== false || Ember.get(act, 'divider');
     });
 
     // Remove dividers at the beginning
-    while ( list.get('firstObject.divider') === true )
-    {
+    while (list.get('firstObject.divider') === true) {
       list.shiftObject();
     }
 
     // Remove dividers at the end
-    while ( list.get('lastObject.divider') === true )
-    {
+    while (list.get('lastObject.divider') === true) {
       list.popObject();
     }
 
     // Remove consecutive dividers
     let last = null;
-    list = list.filter(function(act) {
+
+    list = list.filter((act) => {
       let cur = (act.divider === true);
       let ok = !cur || (cur && !last);
+
       last = cur;
+
       return ok;
     });
 
     return list;
-  }.property('model.availableActions.[]','model.availableActions.@each.enabled','model.availableActions.@each.class', 'model'),
+  }.property('model.availableActions.[]', 'model.availableActions.@each.enabled', 'model.availableActions.@each.class', 'model'),
 });

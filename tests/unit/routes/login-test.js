@@ -1,11 +1,20 @@
-import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:login', 'Unit | Route | login', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
-});
+import { describe, it } from 'mocha';
+import { expect } from 'chai';
+import { setupTest } from 'ember-mocha';
 
-test('it exists', function(assert) {
-  let route = this.subject();
-  assert.ok(route);
+describe('Unit: Route: login/index', function (){
+  setupTest('route:login/index', {
+    needs: [
+      'service:session',
+      'service:intl',
+      'service:access'
+    ]
+  });
+
+  it('exists', function (){
+    let route = this.subject();
+
+    expect(route).to.be.ok;
+  });
 });

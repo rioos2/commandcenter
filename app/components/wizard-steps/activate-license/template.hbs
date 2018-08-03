@@ -1,0 +1,62 @@
+<div class="modal-dialog wizard-activation-width">
+  <div class="modal-content">
+    <div class="modal-header">
+    </div>
+    <div class="modal-body">
+      <h4 class="modal-title">{{t 'wizard.useTrialVersionHeader'}}</h4>
+
+      <div class="row licence-desc-space">
+        <div class="col-sm-9">
+          <div class="form-group">
+            <label for="default">
+                {{useTrialVersionNote}}
+              </label>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <button type="submit" {{action 'processTrail'}} class="btn btn-info wizard-btn">
+            {{t 'wizard.useTrial'}}
+              {{#if showSpinnerTrail}}
+              <i class="fa fa-circle-o-notch fa-spin"></i>
+              {{/if}}
+            </button>
+        </div>
+      </div>
+
+      <h4 class="modal-title">{{t 'wizard.usePurcashedLicenceHeader'}}</h4>
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="form-group">
+            <label for="default">
+                {{t 'wizard.usePurcashedVersionNote'}}
+              </label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            {{input type="text" class="form-control" id="licenceId" placeholder=licenceIdPlaceholder value=licenceId}}
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            {{input type="password" class="form-control" id="licencePwd" placeholder=licencePwdPlaceholder value=licencePwd}}
+          </div>
+        </div>
+        <div class="col-sm-3">
+
+          <button type="submit" {{action 'updateLicence'}} class="btn btn-info wizard-btn">
+                        {{t 'wizard.usePurcashedLicenceBtn'}}
+                        {{#if showSpinnerLicense}}
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        {{/if}}
+                      </button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

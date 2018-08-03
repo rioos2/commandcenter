@@ -1,32 +1,35 @@
-<div class="signup-page signform">
-  {{#link-to "signup"}}<img class="logo-img" src="images/logo2.png">{{/link-to}}
+<div class="signup-page signform signup-pg">
+  {{#link-to "signup"}}<img class="logo-img" src="assets/images/logo2.png">{{/link-to}}
   <div class="container">
-    <!-- <img class="signup-icon" src="images/signup/signupicon.png"> -->
     <form>
       <h1>{{t 'signupPage.signup'}}</h1>
 
       <div class="form-group {{val_company}}">
         {{input type="text" value=company_name}}
-        <label class="{{if company_name 'data-exist'}} control-label" for="input">{{t 'signupPage.companyName'}}</label><i class="bar"></i>
+        <label class="{{if company_name 'data-exist'}} control-label" for="input">{{t 'signupPage.companyName'}}</label>
+        <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_firstName}}">
         {{input type="text" value=first_name}}
-        <label class="{{if first_name 'data-exist'}} control-label" for="input">{{t 'signupPage.firstName'}}</label><i class="bar"></i>
+        <label class="{{if first_name 'data-exist'}} control-label" for="input">{{t 'signupPage.firstName'}}</label>
+        <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_lastName}}">
         {{input type="text" value=last_name}}
-        <label class="{{if last_name 'data-exist'}} control-label" for="input">{{t 'signupPage.lastName'}}</label><i class="bar"></i>
+        <label class="{{if last_name 'data-exist'}} control-label" for="input">{{t 'signupPage.lastName'}}</label>
+        <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_phone}}">
         {{input type="number" value=phone}}
-        <label class="{{if phone 'data-exist'}} control-label" for="input">{{t 'signupPage.phone'}}</label><i class="bar"></i>
+        <label class="{{if phone 'data-exist'}} control-label" for="input">{{t 'signupPage.phone'}}</label>
+        <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_email}}">
-        {{input type="text" value=email}}
+        {{input type="text" value=accountEmail}}
         <label class="{{if email 'data-exist'}} control-label" for="input">{{t 'signupPage.email'}}</label>
         <i class="bar"></i>
         {{#unless emailExistence}}
@@ -36,17 +39,18 @@
 
       <div class="form-group {{val_code}}">
         {{input type="password" value=password}}
-        <label class="{{if password 'data-exist'}} control-label" for="input">{{t 'signupPage.activateOnCode'}}</label><i class="bar"></i>
+        <label class="{{if password 'data-exist'}} control-label" for="input">{{t 'signupPage.activateOnCode'}}</label>
+        <i class="bar"></i>
       </div>
 
-    </form>
 
-    <div class="button-container">
-      <button class="button" {{action 'singUp'}}><span>{{t 'signupPage.createAccount'}}
+      <div class="button-container">
+        <button class="button" autofocus {{action 'signUp'}}><span>{{t 'signupPage.createAccount'}}
         {{fa-icon "long-arrow-right" class="right-arrow"}}
 
       </span></button>
-    </div>
+      </div>
+    </form>
 
     <div class="sub-description">
       {{t 'signupPage.alredyAccount'}}

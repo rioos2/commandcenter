@@ -1,0 +1,12 @@
+<div class="shell-popup">
+  {{#container-shell
+    instance=model
+    showProtip=false
+    cols=80
+    rows=24
+    dismiss=(action "cancel")
+    disconncted=(action "cancel")
+  }}
+  <button {{action "cancel"}} class="btn btn-primary">{{t 'consolePage.closeButton'}}</button>
+  {{/container-shell}}
+</div>

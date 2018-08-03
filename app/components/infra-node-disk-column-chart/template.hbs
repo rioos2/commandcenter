@@ -1,0 +1,28 @@
+<div>
+<div class="filter">
+  <div class="col-xs-12">
+  <div class="col-xs-6">
+  </div>
+<div class="col-xs-6 mv-filter-right mv-right">
+  <div class="select-filter">
+    <div class='md-select {{showDropDown}}' {{action "selectFilter" on="click"}}>
+
+      <label for="ul-id">
+        <button type="button" class="drop-network">
+          <span>{{selectType}}</span>
+        </button>
+      </label>
+      <ul role="listbox" class="md-whiteframe-z1" aria-activedescendant="state2_AK" name="ul-id">
+        {{#each diskTypes as |opt|}}
+            <li role="option" value="{{opt}}" tabindex="-1" {{action "processFilter" opt}}>
+              {{opt}}
+            </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+<div id="id-disk-column-{{model.id}}{{nodeType}}"></div>

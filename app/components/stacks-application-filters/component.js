@@ -49,6 +49,7 @@ export default Ember.Component.extend({
     actions: {
         applyRule: function (category) {
             let parmsHash = this.filterParmsHash(category);
+            this.get('router').transitionTo({queryParams: {search: undefined}});
             this.get('router').transitionTo(this.parentRoute, { queryParams: parmsHash });
         },
     }

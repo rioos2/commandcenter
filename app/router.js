@@ -21,6 +21,10 @@ Router.map(function () {
     this.route('index', { path: '/' });
   });
 
+  this.route('wizard', { path: '/wizard', resetNamespace: true }, function () {
+    this.route('index', { path: '/' });
+  });
+
   this.route('logout');
 
   this.route('authenticated', { path: '/' }, function () {
@@ -54,11 +58,16 @@ Router.map(function () {
       this.route('stacks', { path: '/stacks', resetNamespace: true }, function () {
         this.route('index', { path: '/' });
         this.route('createcloud', { path: '/createcloud' });
-
+        this.route('createcontainer', { path: '/createcontainer' });
+        this.route('blockchain', { path: '/blockchain' }, function () {
+          this.route('createnetwork', { path: '/createnetwork' });
+          this.route('createapplication', { path: '/createapplication' });
+        });
         // A single application (digital cloud, containers, blockchain)
         // Allows console based on the type of application
         this.route('stack', { path: '/stack', resetNamespace: true }, function () {
           this.route('console', { path: '/console' });
+          this.route('container-console', { path: '/containerconsole' });
         });
       });
     });
@@ -66,6 +75,15 @@ Router.map(function () {
     this.route('accounts', { resetNamespace: true }, function () {
       this.route('index', { path: '/' });
       this.route('info', { path: '/info' });
+
+    });
+    this.route('organization', { resetNamespace: true }, function () {
+      this.route('index', { path: '/' });
+      this.route('info', { path: '/info' });
+        });
+    this.route('admin', { path: '/admin', resetNamespace: true }, function () {
+      this.route('index', { path: '/' });
+      this.route('infra', { path: '/infra' });
     });
 
     // End: Authenticated

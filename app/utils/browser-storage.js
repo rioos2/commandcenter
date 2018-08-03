@@ -1,18 +1,21 @@
-import Ember from "ember";
-
-export default Ember.Mixin.create({
+import Mixin from '@ember/object/mixin';
+/*
+*session:tab-session is overridden with window.sessionStorage
+*session:session is overridden with window.localStorage
+*/
+export default Mixin.create({
   backing: 'overrideMe with window.localStorage or window.sessionStorage',
 
-  unknownProperty: function (key) {
+  unknownProperty(key) {
     var value; // = undefined;
     var backing = this.get('backing');
     var str = backing.getItem(key);
+
     if (str) {
       try {
         value = JSON.parse(str);
-      }
-      catch (e) {
-        console.log("Error parsing storage ['" + key + "']");
+      } catch (e) {
+        console.log(`Error parsing storage ['${  key  }']`);
         backing.removeItem(key);
         this.notifyPropertyChange(key);
       }
@@ -21,16 +24,14 @@ export default Ember.Mixin.create({
     return value;
   },
 
-  setUnknownProperty: function (key, value) {
-
+  setUnknownProperty(key, value) {
     var backing = this.get('backing');
 
     if (value === undefined) {
       backing.removeItem(key);
-    }
-    else {
-      console.log("Browser storage =>("+ key + "," + value +")");
-      if (typeof value === "object") {
+    } else {
+      console.log(`Browser storage =>(${  key  },${  value  })`);
+      if (typeof value === 'object') {
         backing.setItem(key, value);
       } else {
         backing.setItem(key, JSON.stringify(value));
@@ -38,15 +39,17 @@ export default Ember.Mixin.create({
     }
 
     this.notifyPropertyChange(key);
+
     return value;
   },
 
-  clear: function () {
+  clear() {
     var backing = this.get('backing');
 
     this.beginPropertyChanges();
     for (var i = 0; i < backing.length; i++) {
       var key = backing.key(i);
+
       if (key.indexOf('.') >= 0) {
         continue;
       }

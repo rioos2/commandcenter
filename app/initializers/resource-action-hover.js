@@ -1,38 +1,41 @@
-export function initialize(/* application */) {
+/*This is used for resource actions in dropdown to show mouse enter, mouse leave in a genric way.
+This opplies to all resourse action dropdowns*/
+export function initialize( /* application */ ) {
   var body = jQuery('BODY');
 
-  body.on('mouseenter','.resource-action-hover', function() {
+  body.on('mouseenter', '.resource-action-hover', function() {
     var $this = $(this);
+
     $this.addClass('hover');
     $this.data('isMouseIn', true);
   });
 
-  body.on('mouseleave','.resource-action-hover', function() {
+  body.on('mouseleave', '.resource-action-hover', function() {
     var $this = $(this);
+
     $this.data('isMouseIn', false);
-    if ( !$this.data('isMenuShown') )
-    {
+    if (!$this.data('isMenuShown')) {
       $this.removeClass('hover');
     }
   });
 
-  body.on('show.bs.dropdown','.resource-action-hover', function() {
+  body.on('show.bs.dropdown', '.resource-action-hover', function() {
     var $this = $(this);
+
     $this.data('isMenuShown', true);
   });
 
-  body.on('hide.bs.dropdown','.resource-action-hover', function() {
+  body.on('hide.bs.dropdown', '.resource-action-hover', function() {
     var $this = $(this);
+
     $this.data('isMenuShown', false);
-    if ( !$this.data('isMouseIn') )
-    {
+    if (!$this.data('isMouseIn')) {
       $this.removeClass('hover');
     }
   });
-
 }
 
 export default {
   name: 'resource-action-hover',
-  initialize: initialize
+  initialize
 };

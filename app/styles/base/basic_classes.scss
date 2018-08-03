@@ -148,6 +148,12 @@
         }
     }
 
+    .disable {
+       pointer-events: none;
+       -webkit-filter: grayscale(100%);
+       filter: grayscale(100%); 
+    }
+
     @keyframes click-wave {
         0% {
           height: 20px;
