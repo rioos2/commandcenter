@@ -14,6 +14,7 @@ var C = {
 
   BADGATEWAY_HTTP_CODES: ['502'],
 
+  BADGATEWAY_HTTP_CODES: [502],
 
 
   /* --------  The section  that has  various Rio objects  ----*/

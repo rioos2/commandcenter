@@ -182,6 +182,7 @@ stackPage:
       toggle:                         Toggle navigation
       add_btn:                        Add
       active_btn:                     Set
+      activate_btn:                   Activate
       save_btn:                       Save
       search_discovery_btn:           Search & Discover
       for_organ1:                     create team

@@ -1,18 +1,20 @@
 <div class="select-domain settings activate pad-top">
   <p class="sub-title"> {{product}} </p>
   <p class="sub-description">{{t 'stackPage.admin.settings.entitlement.description'}}</p>
-  {{editable-popup-textbox placeholder=placeHolder showSpinner=showSpinner targetActionName="performActivation" showEditBox=showActivationEditBox btnName=btnName}}
+
   <div class="row">
-    <div class="col-sm-5">
-      <p class="sub-title">{{t 'stackPage.admin.settings.entitlement.senseis' senseiActivated=senseiActivated senseiAllowed=senseiAllowed}}</p>
+    <div class="col-sm-4">
+      <p class="sub-title">{{t 'stackPage.admin.settings.entitlement.node' optionName=optionName senseiActivated=senseiActivated senseiAllowed=senseiAllowed}}</p>
       <p class="sub-description">{{status}}{{expired}}</p>
     </div>
-    <div class="col-sm-2">
-      {{svg/svg-dots class="dots-ico"}}
+    <div class="col-sm-8">
+      {{multi-editable-popup-textbox placeholder1=licenceid placeholder2=licencepassword showSpinner=showSpinner targetActionName="performActivation" showEditBox=showActivationEditBox btnName=btnName}}
+
     </div>
-    <div class="col-sm-5">
+
+    <!-- <div class="col-sm-5">
       <p class="sub-title"> {{t 'stackPage.admin.settings.entitlement.ninjas' ninjaActivated=ninjaActivated ninjaAllowed=ninjaAllowed}}</p>
       <p class="sub-description">{{status}}{{expired}}</p>
-    </div>
+    </div> -->
   </div>
 </div>

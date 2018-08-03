@@ -181,7 +181,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
           clearDuration: 4200,
           cssClasses:    'notification-warning'
         });
-      }
+      });
     },
 
     console() {

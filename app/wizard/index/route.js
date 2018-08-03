@@ -19,16 +19,22 @@ export default Route.extend(DefaultHeaders, {
   },
 
   model() {
-    return Ember.RSVP.hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')), });
+    return hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')) });
+  },
+
+  getLicense: function() {
+    return Ember.RSVP.hash({
+      license: this.get('store').findAll('license', this.opts('licenses/senseis', true)),
+    });
   },
 
   actions: {
     reloadModel() {
       var self = this;
-
-      this.model().then((model) => {
-        self.getLicense().then((licence) => {
-          model.license = licence;
+      this.model().then(function(model) {
+        self.getLicense().then(function(license) {
+          console.log(JSON.stringify(license))
+          model.license = license;
           self.controller.set('model', model);
         });
       });
