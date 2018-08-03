@@ -5,7 +5,7 @@ export default Ember.Route.extend({
   beforeModel(transition) {
     this.get('access').activate().then((config) => {
       if (!config) {
-          this.transitionTo('wizard');
+        this.transitionTo('wizard');
       }
     }).catch((err) => {
       return Ember.RSVP.reject(err);

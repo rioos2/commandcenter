@@ -1,18 +1,13 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 export default Ember.Component.extend({
-  tagName: "",
+  tagName: '',
 
-  pools: Ember.computed.alias('storagespool'),
   ariaEexpanded_pool: true,
   ariaEexpanded_disk: true,
 
-  didInsertElement: function() {
-    this.send('collapse_pool');
-    this.send('collapse_disk');
-  },
-
-  name: function() {
+  pools: Ember.computed.alias('storagespool'),
+  name:  function() {
     return this.get('model.object_meta.name');
   }.property('model.object_meta.name'),
 
@@ -25,7 +20,7 @@ export default Ember.Component.extend({
   }.property('model.storage_type'),
 
   status: function() {
-    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
+    return Ember.isEmpty(this.get('model.status.phase')) ? '' : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
   storageAvailable: function() {
@@ -37,12 +32,17 @@ export default Ember.Component.extend({
   }.property('disks'),
 
   createdAt: function() {
-    return Ember.isEmpty(this.get('model.created_at')) ? "" : this.get('model.created_at').split('T')[0];
+    return Ember.isEmpty(this.get('model.created_at')) ? '' : this.get('model.created_at').split('T')[0];
   }.property('model.created_at'),
 
   disks: function() {
     return this.get('model.storage_info.disks');
   }.property('model.storage_info.disks'),
+
+  didInsertElement() {
+    this.send('collapse_pool');
+    this.send('collapse_disk');
+  },
 
   count: function() {
     return this.get('pools.length') > 0 ? false : true;
@@ -51,7 +51,7 @@ export default Ember.Component.extend({
 
   actions: {
 
-    collapse_pool: function() {
+    collapse_pool() {
       if (this.get('ariaEexpanded_pool')) {
         this.set('ariaEexpanded_pool', false);
         this.set('collapsed_pool', 'collapsed');
@@ -65,7 +65,7 @@ export default Ember.Component.extend({
       }
     },
 
-    collapse_disk: function() {
+    collapse_disk() {
       if (this.get('ariaEexpanded_disk')) {
         this.set('ariaEexpanded_disk', false);
         this.set('collapsed_disk', 'collapsed');
@@ -79,14 +79,14 @@ export default Ember.Component.extend({
       }
     },
 
-    openModal: function() {
+    openModal() {
       $('#pooladd').modal('show');
     },
-    openEditModal: function(){
+    openEditModal(){
       $('#storage_edit').modal('show');
     },
 
-    doReloaded: function() {
+    doReloaded() {
       this.sendAction('doStorageReload');
     }
 

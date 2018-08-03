@@ -5,42 +5,42 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
 
-const {
-  get
-} = Ember;
-import {
-  denormalizeName
-} from 'nilavu/utils/denormalize';
+const { get } = Ember;
+
+import { denormalizeName } from 'nilavu/utils/denormalize';
 
 var Sensei = Resource.extend(DefaultHeaders, {
-  type: 'node',
-  displayName: Ember.computed.alias('name'),
-  intl: Ember.inject.service(),
-  session: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  userStore: Ember.inject.service('user-store'),
-
+  displayName:      Ember.computed.alias('name'),
   availableActions: function() {
     var a = this.get('actionLinks');
+
     return [
       {
-        label: 'action.retryInstallNode',
-        icon: 'fa fa-wrench',
-        action: 'retryInstallSensei',
+        label:   'action.retryInstallNode',
+        icon:    'fa fa-wrench',
+        action:  'retryInstallSensei',
         enabled: this.senseiRetryInstallOption(),
       }
     ];
   }.property('id', 'actionLinks'),
 
 
-  senseiRetryInstallOption: function() {
+  type:          'node',
+  intl:          Ember.inject.service(),
+  session:       Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
+  userStore:     Ember.inject.service('user-store'),
+
+  senseiRetryInstallOption() {
     let add = FilterCondition.nodeRetryInstallCondition(this.get('status.conditions'));
-    if (C.NODE.INSTALLFAILURE.includes(this.get("status.phase"))) {
+
+    if (C.NODE.INSTALLFAILURE.includes(this.get('status.phase'))) {
       add = true;
-    };
-    if (Ember.isEmpty(this.get("status.phase"))) {
+    }
+    if (Ember.isEmpty(this.get('status.phase'))) {
       add = false;
-    };
+    }
+
     return add;
   },
 
@@ -49,7 +49,7 @@ var Sensei = Resource.extend(DefaultHeaders, {
 
     retryInstallSensei() {
       this.set('nodeOperation', 'retry');
-      $('#node_auth_modal_' + this.get('id')).modal('show');
+      $(`#node_auth_modal_${  this.get('id') }`).modal('show');
     }
 
   },

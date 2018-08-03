@@ -1,19 +1,19 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  intl: Ember.inject.service(),
-  tagName: 'li',
-  classNames: ['smooth-disabled'],
+  intl:              Ember.inject.service(),
+  tagName:           'li',
+  classNames:        ['smooth-disabled'],
   classNameBindings: ['active', 'tabClassName'],
-
-  tabClassName: function() {
-    return 'wizard-steps/' + this.get('tab');
-  }.property('tab'),
 
   active: Ember.computed.equal('selectedTab', 'tab'),
 
+  tabClassName: function() {
+    return `wizard-steps/${  this.get('tab') }`;
+  }.property('tab'),
+
   title: function() {
-    return this.get('intl').t('wizard.' + this.get('tab') + '.title');
+    return this.get('intl').t(`wizard.${  this.get('tab')  }.title`);
   }.property('tab'),
 
   isComplete: function() {
@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   actions: {
-    select: function() {
+    select() {
       this.set('selectedTab', this.get('tab'));
     }
   }

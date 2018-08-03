@@ -5,7 +5,7 @@ export default Ember.Route.extend(DefaultHeaders, {
   access: Ember.inject.service(),
 
 
-  beforeModel: function() {
+  beforeModel() {
     this.get('access').activate().then((config) => {
       if (config) {
         this.transitionTo('authenticated');
@@ -16,27 +16,24 @@ export default Ember.Route.extend(DefaultHeaders, {
   },
 
   model() {
-    return Ember.RSVP.hash({
-      wizard: this.get('store').find('wizard', null, this.opts('wizards')),
-    });
-  },
-
-  getLicense: function() {
-    return Ember.RSVP.hash({
-      license: this.get('store').findAll('license', this.opts('licenses', true)),
-    });
+    return Ember.RSVP.hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')), });
   },
 
   actions: {
-    reloadModel: function() {
+    reloadModel() {
       var self = this;
-      this.model().then(function(model) {
-        self.getLicense().then(function(licence) {
+
+      this.model().then((model) => {
+        self.getLicense().then((licence) => {
           model.license = licence;
           self.controller.set('model', model);
         });
       });
     }
-  }
+  },
+
+  getLicense() {
+    return Ember.RSVP.hash({ license: this.get('store').findAll('license', this.opts('licenses', true)), });
+  },
 
 });

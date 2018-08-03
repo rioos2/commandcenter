@@ -10,7 +10,7 @@ export default Ember.Service.extend(DefaultHeaders, {
 
   currentOrganization: null,
   currentTeam:         null,
-  all: null,
+  all:                 null,
 
   // Get all organizations
   getAll() {

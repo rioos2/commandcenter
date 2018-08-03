@@ -1,11 +1,9 @@
-import {
-  buildAdminInfraPanel
-} from '../admin-infra-panel/component';
+import { buildAdminInfraPanel } from '../admin-infra-panel/component';
 export default buildAdminInfraPanel('network', {
   virtualNetwork: null,
-  selectedNodes: null,
+  selectedNodes:  null,
 
-  didInsertElement: function() {
+  didInsertElement() {
     if (!Ember.isEmpty(this.get('virtualNetworks'))) {
       this.send('SideData', this.get('virtualNetworks').get('firstObject'));
     }
@@ -20,39 +18,39 @@ export default buildAdminInfraPanel('network', {
   }.property('availableSize'),
 
   virtualNetworks: function() {
-    return Ember.isEmpty(this.get('model.networks.content'))? [] : this.get('model.networks.content');
+    return Ember.isEmpty(this.get('model.networks.content')) ? [] : this.get('model.networks.content');
   }.property('model.networks.content.@each'),
 
   nodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content'))? [] : this.get('model.nodes.content');
+    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content.@each'),
 
-  appliedNodesFor: function(virtualNetwork) {
-    return this.get('nodes').map(function(node) {
+  appliedNodesFor(virtualNetwork) {
+    return this.get('nodes').map((node) => {
       if (Object.keys(virtualNetwork.bridge_hosts).includes(node.id)){
         return node;
       }
-    }).filter(val => val !== undefined);
+    }).filter((val) => val !== undefined);
   },
 
   actions: {
-    SideData: function(net) {
+    SideData(net) {
       this.set('virtualNetwork', net);
       this.set('selectedVirtualNetwork', net.id);
       this.set('selectedNodes', this.appliedNodesFor(net));
     },
 
-    doReload: function() {
+    doReload() {
       $('#addnetwork_modal').modal('hide');
       this.sendAction('triggerReload');
     },
 
-    virtualNetworkReload: function() {
+    virtualNetworkReload() {
       $('#network_edit').modal('hide');
       this.sendAction('triggerReload');
     },
 
-    openModal: function() {
+    openModal() {
       $('#addnetwork_modal').modal('show');
     }
   }

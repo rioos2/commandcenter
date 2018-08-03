@@ -25,7 +25,7 @@ export default Component.extend({
       this.sendAction('switchOrganization', org);
     },
 
-    createOrganization: function() {
+    createOrganization() {
       $('#addorigin_modal').modal('show');
     }
   }

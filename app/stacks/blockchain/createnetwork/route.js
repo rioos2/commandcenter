@@ -2,9 +2,7 @@ import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
-import {
-  xhrConcur
-} from 'nilavu/utils/platform';
+import { xhrConcur } from 'nilavu/utils/platform';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
@@ -12,19 +10,19 @@ const { get } = Ember;
 
 
 export default Ember.Route.extend(DefaultHeaders,  {
-  settings    : Ember.inject.service(),
-  access: Ember.inject.service(),
-  router: Ember.inject.service(),
+  settings: Ember.inject.service(),
+  access:   Ember.inject.service(),
+  router:   Ember.inject.service(),
   model() {
     let setting = this.get('settings');
-      let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
-        plans: this.cbFind('planfactory', 'plans'),
-        networks: this.cbFind('network', 'networks'),
+        plans:       this.cbFind('planfactory', 'plans'),
+        networks:    this.cbFind('network', 'networks'),
       };
 
-      async.auto(tasks, xhrConcur, function(err, res) {
+      async.auto(tasks, xhrConcur, (err, res) => {
         if (err) {
           reject(err);
         } else {
@@ -37,10 +35,10 @@ export default Ember.Route.extend(DefaultHeaders,  {
       return Ember.Object.create({
         stacksfactory: this.loadedStacksFactory(this.getSettings(setting)),
         // secret: this.loadSecret(setting),
-        datacenters: hash.datacenters,
-        plans: hash.plans,
-        settings: this.getSettings(setting),
-        networks: hash.networks,
+        datacenters:   hash.datacenters,
+        plans:         hash.plans,
+        settings:      this.getSettings(setting),
+        networks:      hash.networks,
       });
     });
   },
@@ -52,43 +50,41 @@ export default Ember.Route.extend(DefaultHeaders,  {
         results = null;
       }
 
-      return this.get('store').findAll(type, this.opts(url)).then(function(res) {
+      return this.get('store').findAll(type, this.opts(url)).then((res) => {
         cb(null, res);
-      }).catch(function(err) {
+      }).catch((err) => {
         cb(err, null);
       });
     };
   },
 
-  getSettings: function(data){
-    return Ember.isEmpty(data.all.content)? {} : data.all.content.objectAt(0).data;
+  getSettings(data){
+    return Ember.isEmpty(data.all.content) ? {} : data.all.content.objectAt(0).data;
   },
 
   loadedStacksFactory(settings) {
     var stacksfactoryData;
+
     settings.cloudType = C.CATEGORIES.BLOCKCHAIN;
     stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type: 'stacksfactory',
-      replicas: 1,
-      resources: {
-        compute_type: settings[denormalizeName(`${C.SETTING.COMPUTE_TYPE}`)] || D.VPS.computeType,
-        storage_type: settings[denormalizeName(`${C.SETTING.DISK_TYPE}`)] || D.VPS.storageType,
-        version: settings[denormalizeName(`${C.SETTING.OS_VERSION}`)] || D.VPS.destroVersion,
-        cpu: parseInt(settings[denormalizeName(`${C.SETTING.CPU_CORE}`)] || D.VPS.cpuCore),
-        memory: parseInt(settings[denormalizeName(`${C.SETTING.RAM}`)] || D.VPS.ram),
-        storage: parseInt(settings[denormalizeName(`${C.SETTING.DISK}`)] || D.VPS.storage)
+      type:        'stacksfactory',
+      replicas:    1,
+      resources:   {
+        compute_type: settings[denormalizeName(`${ C.SETTING.COMPUTE_TYPE }`)] || D.VPS.computeType,
+        storage_type: settings[denormalizeName(`${ C.SETTING.DISK_TYPE }`)] || D.VPS.storageType,
+        version:      settings[denormalizeName(`${ C.SETTING.OS_VERSION }`)] || D.VPS.destroVersion,
+        cpu:          parseInt(settings[denormalizeName(`${ C.SETTING.CPU_CORE }`)] || D.VPS.cpuCore),
+        memory:       parseInt(settings[denormalizeName(`${ C.SETTING.RAM }`)] || D.VPS.ram),
+        storage:      parseInt(settings[denormalizeName(`${ C.SETTING.DISK }`)] || D.VPS.storage)
       },
-      status: {
-        phase: "",
-      },
-      secret: {
-        id: ""
-      },
-      plan: "",
+      status:  { phase: '', },
+      secret:  { id: '' },
+      plan:    '',
       network: '',
-      os: settings[denormalizeName(`${C.SETTING.OS_NAME}`)] || D.VPS.destro,
+      os:      settings[denormalizeName(`${ C.SETTING.OS_NAME }`)] || D.VPS.destro,
     };
+
     return this.get('store').createRecord(stacksfactoryData);
   }
 

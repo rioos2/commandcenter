@@ -1,11 +1,7 @@
-import InputValidation from "nilavu/models/input-validation";
-import {
-  computed
-} from '@ember/object';
+import InputValidation from 'nilavu/models/input-validation';
+import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
-import {
-  get
-} from '@ember/object';
+import { get } from '@ember/object';
 import Ember from 'ember';
 
 /*   USAGE
@@ -13,13 +9,13 @@ import Ember from 'ember';
  */
 
 export default Mixin.create({
-  intl: Ember.inject.service(),
+  intl:              Ember.inject.service(),
   rejectedPasswords: null,
 
   init() {
     this._super();
-    this.set("rejectedPasswords", []);
-    this.set("rejectedPasswordsMessages", Ember.Map.create());
+    this.set('rejectedPasswords', []);
+    this.set('rejectedPasswordsMessages', Ember.Map.create());
   },
 
   passwordMinLength: computed('passwordMinLength', function() {
@@ -27,18 +23,16 @@ export default Mixin.create({
     return this.get('passwordMinLength') || 8;
   }),
 
-  passwordValidation: computed("password",
-    "username", "passwordRequired", "rejectedPasswords.[]", "accountEmail", "passwordMinLength",
+  passwordValidation: computed('password',
+    'username', 'passwordRequired', 'rejectedPasswords.[]', 'accountEmail', 'passwordMinLength',
     function() {
-      //Check whether the password need or not
+      // Check whether the password need or not
       if (!this.get('passwordRequired')) {
-        return InputValidation.create({
-          ok: true
-        });
+        return InputValidation.create({ ok: true });
       }
 
       // If blank, fail with a reason
-      if (Ember.isEmpty(this.get("password"))) {
+      if (Ember.isEmpty(this.get('password'))) {
         return InputValidation.create({
           failed: true,
           reason: get(this, 'intl').t('validate.user.password.empty_password')
@@ -48,7 +42,7 @@ export default Mixin.create({
       if (this.get('rejectedPasswords').includes(this.get('password'))) {
         return InputValidation.create({
           failed: true,
-          reason: this.get("rejectedPasswordsMessages").get(this.get('password')) ||
+          reason: this.get('rejectedPasswordsMessages').get(this.get('password')) ||
             get(this, 'intl').t('validate.user.password.common_password')
         });
       }
@@ -57,7 +51,7 @@ export default Mixin.create({
       if (this.get('password').length < this.get('passwordMinLength')) {
         return InputValidation.create({
           failed: true,
-          reason: get(this, 'intl').t('validate.user.password.too_short', {character_length: this.get('passwordMinLength')})
+          reason: get(this, 'intl').t('validate.user.password.too_short', { character_length: this.get('passwordMinLength') })
         });
       }
 
@@ -77,7 +71,7 @@ export default Mixin.create({
 
       // Looks good!
       return InputValidation.create({
-        ok: true,
+        ok:     true,
         reason: 'okay'
       });
     })

@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   access:   Ember.inject.service(),
   language: Ember.inject.service('user-language'),
 
-  //Has rioos is activated or not. If not activated first step page
+  // Has rioos is activated or not. If not activated first step page
   beforeModel(transition) {
     this._super.apply(this, arguments);
 

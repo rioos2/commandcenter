@@ -3,54 +3,57 @@ import Resource from  'ember-api-store/models/resource';
 import Errors from 'nilavu/utils/errors';
 
 export default Ember.Mixin.create({
-  originalModel: null,
-  errors: null,
-  saving: false,
-  editing: true,
-  primaryResource: Ember.computed.alias('model'),
+  originalModel:           null,
+  errors:                  null,
+  saving:                  false,
+  editing:                 true,
+  primaryResource:         Ember.computed.alias('model'),
   originalPrimaryResource: Ember.computed.alias('originalModel'),
-  userStore: Ember.inject.service('user-store'),
-  access: Ember.inject.service(),
+  userStore:               Ember.inject.service('user-store'),
+  access:                  Ember.inject.service(),
 
-  initFields: function() {
+  initFields() {
     this._super();
     this.set('errors', null);
     this.set('saving', false);
   },
 
-  didReceiveAttrs: function() {
+  didReceiveAttrs() {
     this._super();
     this.set('errors', null);
     this.set('saving', false);
   },
 
-  validate: function() {
+  validate() {
     return true;
   },
 
-  generateUrl: function(object) {
+  generateUrl(object) {
     var name = this.get('access').namespaceName();
     var kind = object.kind;
-    var url = "";
-    if (kind.toLowerCase() === "deploymentconfig") {
-      url = "/oapi/v1/namespaces/" + name + "/" + kind.toLowerCase() + 's';
+    var url = '';
+
+    if (kind.toLowerCase() === 'deploymentconfig') {
+      url = `/oapi/v1/namespaces/${  name  }/${  kind.toLowerCase()  }s`;
     } else {
-      url = "namespaces/" + name + "/" + kind.toLowerCase() + 's';
+      url = `namespaces/${  name  }/${  kind.toLowerCase()  }s`;
     }
+
     return url;
   },
 
   actions: {
-    error: function(err) {
+    error(err) {
       if (err) {
         var body = Errors.stringify(err);
+
         this.set('errors', [body]);
       } else {
         this.set('errors', null);
       }
     },
 
-    save: function(cb) {
+    save(cb) {
       // Will save can return true/false or a promise
       Ember.RSVP.resolve(this.willSave()).then((ok) => {
         if (!ok) {
@@ -67,7 +70,8 @@ export default Ember.Mixin.create({
           .catch((err) => {
             this.send('error', err);
             this.errorSaving(err);
-          }).finally(() => {
+          })
+          .finally(() => {
             try {
               this.set('saving', false);
 
@@ -81,9 +85,10 @@ export default Ember.Mixin.create({
   },
 
   // willSave happens before save and can stop the save from happening
-  willSave: function() {
+  willSave() {
     this.set('errors', null);
     var ok = this.validate();
+
     if (!ok) {
       // Validation failed
       return false;
@@ -95,25 +100,28 @@ export default Ember.Mixin.create({
     }
 
     this.set('saving', true);
+
     return true;
   },
 
-  doSave: function(opt) {
+  doSave(opt) {
     const self = this;
+
     return this.get('primaryResource').save(opt).then((newData) => {
-      if (newData.objects && newData.type === "Template") {
+      if (newData.objects && newData.type === 'Template') {
         let objects = newData.objects;
-        async.eachSeries(objects, function(object, cb) {
+
+        async.eachSeries(objects, (object, cb) => {
           return self.get('userStore').rawRequest({
-            url: self.generateUrl(object),
+            url:    self.generateUrl(object),
             method: 'POST',
-            data: {
-              kind: object.kind,
+            data:   {
+              kind:       object.kind,
               apiVersion: object.apiVersion,
-              metadata: object.metadata,
-              spec: object.spec,
-              selector: object.selector,
-              status: object.status
+              metadata:   object.metadata,
+              spec:       object.spec,
+              selector:   object.selector,
+              status:     object.status
             },
           }).then(() => {
             return cb();
@@ -122,15 +130,18 @@ export default Ember.Mixin.create({
           });
         });
       }
+
       return this.mergeResult(newData);
     });
   },
 
-  mergeResult: function(newData) {
+  mergeResult(newData) {
     var original = this.get('originalPrimaryResource');
+
     if (original) {
       if (Resource.detectInstance(original)) {
         original.merge(newData);
+
         return original;
       }
     }
@@ -139,15 +150,15 @@ export default Ember.Mixin.create({
   },
 
   // didSave can be used to do additional saving of dependent resources
-  didSave: function(neu) {
+  didSave(neu) {
     return neu;
   },
 
   // doneSaving happens after didSave
-  doneSaving: function(neu) {
+  doneSaving(neu) {
     return neu || this.get('originalPrimaryResource') || this.get('primaryResource');
   },
 
   // errorSaving can be used to do additional cleanup of dependent resources on failure
-  errorSaving: function( /*err*/ ) {},
+  errorSaving( /* err*/ ) {},
 });

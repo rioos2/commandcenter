@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   pollInterval: 2000,
 
-  //growl: Ember.inject.service(),
+  // growl: Ember.inject.service(),
 
   pollTimer: null,
 
@@ -21,7 +21,8 @@ export default Ember.Mixin.create({
     this.set('pollTimer', Ember.run.later(() => {
       let controller = this.controller;
       let qp = {};
-      (controller.get('queryParams')||[]).forEach((param) => {
+
+      (controller.get('queryParams') || []).forEach((param) => {
         qp[param] = controller.get(param);
       });
       this.model(qp).then((model) => {
@@ -32,7 +33,7 @@ export default Ember.Mixin.create({
         }
       }).catch((err) => {
         console.log(err);
-        //this.get('growl').fromError(err);
+        // this.get('growl').fromError(err);
       });
     }, this.get('pollInterval')));
   },

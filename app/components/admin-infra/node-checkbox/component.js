@@ -1,30 +1,30 @@
 import Ember from 'ember';
-const {
-  get
-} = Ember;
+const { get } = Ember;
 
 export default Ember.Component.extend({
-  tagName: 'rio-radio',
   intl: Ember.inject.service(),
 
-  active: function(){
+  tagName: 'rio-radio',
+  active:  function(){
     return this.get('data.active');
   }.property('data.active'),
 
   enabler: function() {
     if (this.get('active')) {
-      return "";
+      return '';
     } else {
-      return "disabled";
+      return 'disabled';
     }
   }.property('active'),
 
   bridges: function() {
     var self = this;
-    return this.get('data.bridges').map(function(bridge) {
-      if (bridge.types.includes(self.get('type')))
+
+    return this.get('data.bridges').map((bridge) => {
+      if (bridge.types.includes(self.get('type'))) {
         return bridge;
-    }).filter(val => val !== undefined);
+      }
+    }).filter((val) => val !== undefined);
   }.property('type'),
 
   actions: {
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     },
     sendBridge(bridgeName) {
       this.sendAction('setBridge', this.get('active'), {
-        name: this.get('data.node_id'),
+        name:  this.get('data.node_id'),
         value: bridgeName
       });
     },

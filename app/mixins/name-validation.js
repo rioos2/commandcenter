@@ -1,9 +1,7 @@
-import InputValidation from "nilavu/models/input-validation";
+import InputValidation from 'nilavu/models/input-validation';
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
-import {
-  get
-} from '@ember/object';
+import { get } from '@ember/object';
 
 export default Mixin.create({
 
@@ -11,7 +9,7 @@ export default Mixin.create({
 
   fullNameValidation: computed('firstName', function() {
     if (
-      Ember.isEmpty(this.get("firstName"))
+      Ember.isEmpty(this.get('firstName'))
     ) {
       return InputValidation.create({
         failed: true,
@@ -19,14 +17,12 @@ export default Mixin.create({
       });
     }
 
-    return InputValidation.create({
-      ok: true
-    });
+    return InputValidation.create({ ok: true });
   }),
 
   lastNameValidation: computed('lastName', function() {
     if (
-      Ember.isEmpty(this.get("lastName"))
+      Ember.isEmpty(this.get('lastName'))
     ) {
       return InputValidation.create({
         failed: true,
@@ -34,9 +30,7 @@ export default Mixin.create({
       });
     }
 
-    return InputValidation.create({
-      ok: true
-    });
+    return InputValidation.create({ ok: true });
   }),
 
 });

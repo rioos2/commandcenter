@@ -1,14 +1,15 @@
 import Component from '@ember/component';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-const { get} = Ember;
+const { get } = Ember;
+
 import C from 'nilavu/utils/constants';
 
 export default Component.extend(DefaultHeaders, {
-  intl: Ember.inject.service(),
-  session: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:                  Ember.inject.service(),
+  session:               Ember.inject.service(),
+  notifications:         Ember.inject.service('notification-messages'),
   showActivationEditBox: true,
-  showSpinner: false,
+  showSpinner:           false,
 
   ninjaActivated: function(){
     return this.get('model.product_options.ninja.current');
@@ -39,32 +40,8 @@ export default Component.extend(DefaultHeaders, {
   }.property('model.status'),
 
   expired: function(){
-    return Ember.isEqual(this.get('model.status').capitalize(), C.NODE.LICENSE_STATUS.EXPIRED ) ? "": get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
-  }.property('model.status','model.expired_at'),
-
-  activate: function() {
-    this.set('showSpinner', true);
-      var url = 'license/activate';
-    this.get('model').save(this.opts(url)).then(() => {
-      this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
-        autoClear: true,
-        clearDuration: 4200,
-        cssClasses: 'notification-success'
-      });
-        this.set('showActivationEditBox', true);
-        this.set('modelSpinner', true);
-        this.set('showSpinner', false);
-        this.sendAction('doReload');
-    }).catch(err => {
-      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
-        autoClear: true,
-        clearDuration: 4200,
-        cssClasses: 'notification-warning'
-      });
-      this.set('showSpinner', false);
-      this.set('modelSpinner', false);
-    });
-  },
+    return Ember.isEqual(this.get('model.status').capitalize(), C.NODE.LICENSE_STATUS.EXPIRED ) ? '' : get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
+  }.property('model.status', 'model.expired_at'),
 
   btnName: function(){
     return get(this, 'intl').t('stackPage.admin.header.active_btn');
@@ -72,19 +49,44 @@ export default Component.extend(DefaultHeaders, {
 
   actions: {
 
-    performActivation: function(activationCode) {
+    performActivation(activationCode) {
       if (Ember.isEmpty(activationCode.trim())) {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
-          autoClear: true,
+          autoClear:     true,
           clearDuration: 4200,
-          cssClasses: 'notification-warning'
+          cssClasses:    'notification-warning'
         });
         this.set('showActivationEditBox', true);
       } else {
-        this.set("model.activation_code", activationCode);
+        this.set('model.activation_code', activationCode);
         this.activate();
       }
     },
 
-  }
+  },
+  activate() {
+    this.set('showSpinner', true);
+    var url = 'license/activate';
+
+    this.get('model').save(this.opts(url)).then(() => {
+      this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
+        autoClear:     true,
+        clearDuration: 4200,
+        cssClasses:    'notification-success'
+      });
+      this.set('showActivationEditBox', true);
+      this.set('modelSpinner', true);
+      this.set('showSpinner', false);
+      this.sendAction('doReload');
+    }).catch((err) => {
+      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
+        autoClear:     true,
+        clearDuration: 4200,
+        cssClasses:    'notification-warning'
+      });
+      this.set('showSpinner', false);
+      this.set('modelSpinner', false);
+    });
+  },
+
 });

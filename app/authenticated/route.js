@@ -7,7 +7,7 @@ import Route from '@ember/routing/route';
 import Ember from 'ember';
 import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
-import {later} from '@ember/runloop';
+import { later } from '@ember/runloop';
 
 const CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
@@ -29,19 +29,11 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     }, CHECK_AUTH_TIMER));
 
     return this.testAuthToken().then(() => {
-      //TO-DO test and enable updation of password
+      // TO-DO test and enable updation of password
       // if (get(this, 'access.mustChangePassword')) {
       //   this.transitionTo('update-password');
       // }
     });
-  },
-
-  testAuthToken() {
-    return get(this, 'access').testAuth()
-      .catch(() => {
-        this.transitionTo('login');
-        this.send('logout', null);
-      });
   },
 
   model(params, transition) {
@@ -54,14 +46,14 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     let promise = new Ember.RSVP.Promise((resolve, reject) => {
       let tasks = {
         organizations: this.toCb('loadOrganizations'),
-        settingsmap: this.toCb('loadSettings'),
-        ////This data will be load on sub infra route.
+        settingsmap:   this.toCb('loadSettings'),
+        // //This data will be load on sub infra route.
         // datacenter: this.toCb('loadHealthz'),
-        stacks: this.toCb('loadAssemblys'),
+        stacks:        this.toCb('loadAssemblys'),
         // locations: this.cbFind('datacenter', 'datacenters'),
         // plans: this.cbFind('planfactory', 'plans'),
         // networks: this.cbFind('network', 'networks'),
-        events: this.toCb('loadAuditEvents'),
+        events:        this.toCb('loadAuditEvents'),
       };
 
       async.auto(tasks, xhrConcur, (err, res) => {
@@ -78,7 +70,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     }).catch((err) => {
       return this.loadingError(err, transition, Ember.Object.create({
         projects: [],
-        project: null,
+        project:  null,
       }));
     });
   },
@@ -137,8 +129,17 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     },
   },
 
+  testAuthToken() {
+    return get(this, 'access').testAuth()
+      .catch(() => {
+        this.transitionTo('login');
+        this.send('logout', null);
+      });
+  },
+
   loadingError(err, transition, ret) {
     let isAuthEnabled = this.get('access.enabled');
+
     if (err && ((isAuthEnabled && !this.isAPIServerFlunked(err.code)) || this.deniedAuthorizationOrAuthentication(err.code))) {
       this.set('access.enabled', true);
 
@@ -165,7 +166,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
    * 502 - Badgateway: We get this error when
    */
   isAPIServerFlunked(code) {
-      return (C.BADGATEWAY_HTTP_CODES.includes(code) || C.INTERNALSERVER_HTTP_CODES.includes(code));
+    return (C.BADGATEWAY_HTTP_CODES.includes(code) || C.INTERNALSERVER_HTTP_CODES.includes(code));
     /* This code doesn't make sense, this sends
     false or
     undefined.
@@ -193,6 +194,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   // Fetch all organization that belongs to the user.
   loadOrganizations() {
     this.get('organization').selectOrigin();
+
     return this.get('store').find('origin', null, this.opts('origins'));
   },
   // Every Rio/OS site will have common settings stored under an url  'cluster_info' in system origin named 'rioos_system'.

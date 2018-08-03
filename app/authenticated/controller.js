@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   settings:    Ember.inject.service(),
   error:       null,
 
-  //Tells us current path of ember application
+  // Tells us current path of ember application
   currentPath: Ember.computed.alias('application.currentPath'),
 
   bootstrap: function() {

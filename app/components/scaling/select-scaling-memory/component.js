@@ -1,12 +1,11 @@
 import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-const {
-  get
-} = Ember;
+const { get } = Ember;
+
 export default Ember.Component.extend({
   intl:       Ember.inject.service(),
 
-  tagName: 'section',
+  tagName:   'section',
   className: '',
 
   scalingRuleApplied: function(){
@@ -16,14 +15,14 @@ export default Ember.Component.extend({
   resources: function() {
     return {
       maximum: {
-        name: "chart-scale-max-memory",
+        name:   'chart-scale-max-memory',
         suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title: get(this, 'intl').t('launcherPage.scaling.scaleup.memory.title')
+        title:  get(this, 'intl').t('launcherPage.scaling.scaleup.memory.title')
       },
       minimum: {
-        name: "chart-scale-min-memory",
+        name:   'chart-scale-min-memory',
         suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title: get(this, 'intl').t('launcherPage.scaling.scaledown.memory.title')
+        title:  get(this, 'intl').t('launcherPage.scaling.scaledown.memory.title')
       }
     };
   }.property(),
