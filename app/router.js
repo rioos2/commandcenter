@@ -93,7 +93,6 @@ Router.map(function() {
     this.route('accounts', { resetNamespace: true }, function() {
       this.route('index', { path: '/' });
       this.route('info', { path: '/info' });
-    });
 
     this.route('admin', {
       path:           '/admin',

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 const { computed, get } = Ember;
 
-export default Ember.Controller.extend({
+export default Controller.extend(SignupValidation, EmailValidation, PasswordValidation, {
 
   access:         Ember.inject.service(),
   store:          Ember.inject.service(),
@@ -61,7 +61,32 @@ export default Ember.Controller.extend({
       this.set('emailErrorMsg', get(this, 'intl').t('notifications.validEmail'));
       this.set('emailExistence', false);
     }
-  },
+    if (this.get('phoneValidation.failed')) {
+      this.set('validationError', this.get('phoneValidation.reason'));
+
+      return true;
+    }
+    if (this.get('emailValidation.failed')) {
+      this.set('validationError', this.get('emailValidation.reason'));
+
+      return true;
+    }
+    if (this.get('passwordValidation.failed')) {
+      this.set('validationError', this.get('passwordValidation.reason'));
+
+      return true;
+    }
+    this.set('validationError', '');
+
+    return false;
+  }.property(
+    'companyNameValidation.failed',
+    'fullNameValidation.failed',
+    'lastNameValidation.failed',
+    'phoneValidation.failed',
+    'emailValidation.failed',
+    'passwordValidation.failed',
+  ),
 
 
   check() {
@@ -79,8 +104,16 @@ export default Ember.Controller.extend({
     return emailReg.test(value);
   },
 
-  shouldProceed() {
-    return Ember.isEmpty(this.get('val_company')) && Ember.isEmpty(this.get('val_firstName')) && Ember.isEmpty(this.get('val_lastName')) && Ember.isEmpty(this.get('val_phone')) && Ember.isEmpty(this.get('val_code')) && Ember.isEmpty(this.get('val_email'));
+    return unUsedFields;
+  },
+  //notify if there is any errors
+  showCredentialEmpty() {
+    this.get('companyNameValidation.failed') ? this.set('val_company', 'credential-empty') : this.set('val_company', '');
+    this.get('fullNameValidation.failed') ? this.set('val_firstName', 'credential-empty') : this.set('val_firstName', '');
+    this.get('lastNameValidation.failed') ? this.set('val_lastName', 'credential-empty') : this.set('val_lastName', '');
+    this.get('phoneValidation.failed') ? this.set('val_phone', 'credential-empty') : this.set('val_phone', '');
+    this.get('emailValidation.failed') ? this.set('val_email', 'credential-empty') : this.set('val_email', '');
+    this.get('passwordValidation.failed') ? this.set('val_code', 'credential-empty') : this.set('val_code', '');
   },
 
 });

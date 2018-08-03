@@ -33,7 +33,8 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
       // if (get(this, 'access.mustChangePassword')) {
       //   this.transitionTo('update-password');
       // }
-    });
+    //});
+
   },
 
   model(params, transition) {

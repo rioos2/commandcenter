@@ -1,11 +1,10 @@
-import Ember from 'ember';
-import Util from 'nilavu/utils/util';
 import C from 'nilavu/utils/constants';
+import { isEmpty } from '@ember/utils';
 
 export function nodeRetryInstallCondition(obj) {
   let add = true;
 
-  if (Ember.isEmpty(obj)) {
+  if (isEmpty(obj)) {
     add = false;
   } else {
     obj.forEach((condition) => {

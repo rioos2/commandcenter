@@ -8,13 +8,21 @@ You will need the following things properly installed on your computer.
 
 * [Git](http://git-scm.com/)
 
-* Download [Node.js 10.6+](https:
-* //nodejs.org/dist/v10.6.0/node-v10.6.0-linux-x64.tar.xz)
+### Install Node 10
+
+[Why Node 10](https://github.com/nodejs/Release#release-schedule) The release of Node 10 is `Oct
+2018`. So its safe to get in now. 
+
+* Download [Node.js 10.7+](https://nodejs.org/dist/v10.7.0/node-v10.7.0-linux-x64.tar.xz)
+
+Either way in prod we run behind a nginx  proxy, and are not dependent on service side node.
 
 ```
-wget https://nodejs.org/dist/v10.6.0/node-v10.6.0-linux-x64.tar.xz
+
+wget https://nodejs.org/dist/v10.7.0/node-v10.7.0-linux-x64.tar.xz
 
 ```
+
 * Unzip downloaded tar to ~/software
 
 ```
@@ -36,7 +44,7 @@ export PATH="$PATH:$NODE_HOME/bin"
 
 Close your terminal window  and open it back.
 
-* Install [Yarn](https://yarnpkg.com/en/)
+###* Install [Yarn](https://yarnpkg.com/en/)
 
 ```
 
@@ -49,35 +57,33 @@ sudo apt-get update && sudo apt-get install yarn
 
 * [Ember CLI](http://www.ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
-* [Rio/OS API servr](https://gitlab.com/rioos/aran)
+* [Rio/OS API Gateway](https://gitlab.com/rioos/api_gateway)
 
+## RIOOS__HOME
 
-## Installation
+```
+
+mkdir -p ~/code/rioos/home
+
+nano ~/.bashrc
+
+export RIOOS_HOME=~/code/rioos/home
+
+```
+
+## Develop ( Web )
+ 
+### 1. Clone commandcenter
 
 * `git clone <forked-commandcenter-repository-url> -b 2-0-stable` this repository
 * change into the new directory
 
-```
 
-cd commandcenter_v2
-
-yarn install
+### 2. Run in development
 
 ```
 
-
-## WEB: Running /Development 
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-## Running / Development mode
-
-```
-
-yarn start
+make dev
 
 ```
 
@@ -85,57 +91,8 @@ Visit your app at [https://localhost:8000](https://localhost:8000).
 
 This runs in headless mode. Needs an api to start chugging. 
 
-Refer section `Edit configuration`
-
-### Upgrade ember-api-store.  - optional
-
-When you wish to upgrade `ember-api-store` from git, 
-
-*optional
-
-
-```
-yarn remove ember-api-store
-
-```
-
-* Above command removes the ember-api-store record in package.json
-
-* Add "ember-api-store": "git+https://gitlab.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
-
-* Install ember-api-store via yarn
-
-```
-yarn install
-
-```
-
-## Running / Production mode
-
-TO-DO: The recommended way is to use nginx in reverse proxy mode to serve in prod. This is ongoing with a nice Makefile
-
-```
-
-yarn build --environment=production
-
-yarn start -prod
-
-```
-
-* Visit your app at [https://localhost:8000](https://localhost:8000).
-
-
-## Running / Desktop Application mode
-
-```
-
-ember electron
-
-```
-
-
-## For development: If you wish to update ember-api-store
-
+### 3. Edit configuration file 
+ 
 The file needs to be in $RIOOS_HOME/config (or) <projectdir>/config.
 
 ```
@@ -183,6 +140,53 @@ countly_server = "http://countly.rioos.xyz"
 app_key = "9653325d8d0f5fe63c3491c93259bf4ff77821ca"
 
 ```
+
+###* 4. optional:  Upgrade ember-api-store.
+
+When you wish to upgrade `ember-api-store` from git, 
+
+
+
+```
+yarn remove ember-api-store
+
+```
+
+* Above command removes the ember-api-store package from package.json
+
+* Add "ember-api-store": "git+https://gitlab.com/rioadvancement/ember-api-store.git#master" in package.json under "devDependencies".
+
+* Install ember-api-store
+
+```
+make dev
+
+```
+
+##  Production 
+
+
+```
+
+make clean 
+
+make build
+
+make ship
+
+```
+
+* Visit your app at [https://localhost:8000](https://localhost:8000).
+
+
+## Develop ( Desktop App )
+
+```
+
+ember electron
+
+```
+
 
 ## How does SSL work  
 

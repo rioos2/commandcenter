@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import FilterParmsExtractor from 'nilavu/utils/filter-extractor';
 import flat from 'npm:flat';
@@ -11,9 +10,9 @@ export default Ember.Controller.extend({
 
   panels: [],
 
-  categories: Ember.computed.alias('stacksController.which'),
+  categories: alias('stacksController.which'),
 
-  fullmodel: Ember.computed.alias('model'),
+  fullmodel: alias('model'),
 
   // This has be evaluated based on data. So we show the tab that has max
   search: function() {
@@ -89,7 +88,7 @@ export default Ember.Controller.extend({
     this.get('categories').forEach((category) => {
       let stacks = this.get('groupedStacks').findBy('type', category);
 
-      if (!Ember.isEmpty(rules) && stacks) {
+      if (!isEmpty(rules) && stacks) {
         const _stacks = stacks;
         let _contents = _stacks.contents.filter((content) => {
           if (!Ember.isEmpty(this.get('search'))) {
@@ -107,7 +106,7 @@ export default Ember.Controller.extend({
       }
     });
 
-    Ember.run.scheduleOnce('afterRender', () => {
+    scheduleOnce('afterRender', () => {
       this._maxLaunchedCategory(filteredStacks);
     });
 

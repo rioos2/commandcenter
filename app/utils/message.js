@@ -1,4 +1,5 @@
 import C from 'nilavu/utils/constants';
+import { isEmpty } from '@ember/utils';
 // Sender should send a valid
 // The first parameter is a valid ANALYTIC_EVENT like LOGGED_IN.
 // The send parameter can be have various segmentation kvs. Th segmentation key
@@ -14,7 +15,7 @@ function messageNow(str, opts = {}) {
     opts.filter((f) => f.key.startsWith("seg_")) || {};
     */
 
-  if (!Ember.isEmpty(id)) {
+  if (!isEmpty(id)) {
     return {
       'key':          id,
       'count':        1,

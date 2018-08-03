@@ -1,5 +1,9 @@
 import { isSafari } from 'nilavu/utils/platform';
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import Evented from '@ember/object/evented';
+import { bind } from '@ember/runloop';
+import { cancel } from '@ember/runloop';
+import { later } from '@ember/runloop';
 
 var INSECURE = 'ws://';
 var SECURE = 'wss://';
@@ -12,7 +16,7 @@ const CONNECTED = 'connected';
 const CLOSING = 'closing';
 const RECONNECTING = 'reconnecting';
 
-export default Ember.Object.extend(Ember.Evented, {
+export default EmberObject.extend(Evented, {
   url:           null,
   autoReconnect: true,
   frameTimeout:  300000,
@@ -54,10 +58,10 @@ export default Ember.Object.extend(Ember.Evented, {
 
     socket.__sockId = id;
     socket.metadata = this.get('metadata');
-    socket.onmessage = Ember.run.bind(this, this._message);
-    socket.onopen = Ember.run.bind(this, this._opened);
-    socket.onerror = Ember.run.bind(this, this._error);
-    socket.onclose = Ember.run.bind(this, this._closed);
+    socket.onmessage = bind(this, this._message);
+    socket.onopen = bind(this, this._opened);
+    socket.onerror = bind(this, this._error);
+    socket.onclose = bind(this, this._closed);
 
     this.setProperties({
       _socket: socket,
@@ -142,7 +146,7 @@ export default Ember.Object.extend(Ember.Evented, {
 
     this.trigger('connected', this.get('_tries'), after);
     this._resetWatchdog();
-    Ember.run.cancel(this.get('_reconnectTimer'));
+    cancel(this.get('_reconnectTimer'));
   },
 
   _message(event) {
@@ -154,13 +158,13 @@ export default Ember.Object.extend(Ember.Evented, {
 
   _resetWatchdog() {
     if (this.get('_frameTimer')) {
-      Ember.run.cancel(this.get('_frameTimer'));
+      cancel(this.get('_frameTimer'));
     }
 
     let timeout = this.get('frameTimeout');
 
     if (timeout && this.get('_state') === CONNECTED) {
-      this.set('_frameTimer', Ember.run.later(this, function() {
+      this.set('_frameTimer', later(this, function() {
         this._log('Socket watchdog expired after', timeout, 'closing');
         this._close();
       }, timeout));
@@ -175,8 +179,8 @@ export default Ember.Object.extend(Ember.Evented, {
   _closed() {
     this.set('_closingId', null);
     this.set('_socket', null);
-    Ember.run.cancel(this.get('_reconnectTimer'));
-    Ember.run.cancel(this.get('_frameTimer'));
+    cancel(this.get('_reconnectTimer'));
+    cancel(this.get('_frameTimer'));
 
     let cbs = this.get('_disconnectCbs') || [];
 
@@ -209,7 +213,7 @@ export default Ember.Object.extend(Ember.Evented, {
       this.incrementProperty('_tries');
       let delay = Math.max(1000, Math.min(1000 * this.get('_tries'), 30000));
 
-      this.set('_reconnectTimer', Ember.run.later(this, this.connect, delay));
+      this.set('_reconnectTimer', later(this, this.connect, delay));
     } else {
       this.set('_state', DISCONNECTED);
     }

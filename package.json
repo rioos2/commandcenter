@@ -85,7 +85,8 @@
     "xterm": "1.0.0",
     "yamljs": "^0.3.0",
     "ember-mocha": "^0.14.0",
-    "testem": "2.8.2"
+    "testem": "2.8.2",
+    "validator": "10.4.0"
   },
   "dependencies": {
     "@bower_components/animate.css": "daneden/animate.css#~3.2.0",

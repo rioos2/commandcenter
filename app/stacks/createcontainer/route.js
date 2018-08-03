@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
@@ -6,7 +5,10 @@ import { xhrConcur } from 'nilavu/utils/platform';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
-const { get } = Ember;
+import { isEmpty } from '@ember/utils';
+import { Promise } from 'rsvp';
+import { inject } from '@ember/service';
+import Route from '@ember/routing/route';
 
 
 export default Ember.Route.extend(DefaultHeaders,  {

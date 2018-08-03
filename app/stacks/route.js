@@ -1,5 +1,3 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 
 export default Ember.Route.extend(DefaultHeaders, {
@@ -41,6 +39,5 @@ export default Ember.Route.extend(DefaultHeaders, {
       this.refresh();
     },
   },
-
 
 });
