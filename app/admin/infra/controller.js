@@ -1,8 +1,6 @@
-import Ember from 'ember';
-const  { get } = Ember;
+import Controller from '@ember/controller';
 
-import C from 'nilavu/utils/constants';
-export default Ember.Controller.extend({
+export default Controller.extend({
   selectedTab:  'dashboard',
   panels:       [],
   modelSpinner: false,
