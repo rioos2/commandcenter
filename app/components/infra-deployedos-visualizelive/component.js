@@ -1,6 +1,8 @@
 /* global renderChartGauge,renderChartArea, d3 */
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { on } from '@ember/object/evented';
+import { isEmpty } from '@ember/utils';
+export default Component.extend({
   classNames: ['chart-os'],
   overall:    '',
   ch3:        '',
@@ -9,7 +11,7 @@ export default Ember.Component.extend({
     this.updateData();
   }.observes('model'),
 
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
     var chart3 = renderChartArea();
 
     var chart5 = renderChartGauge();
@@ -44,7 +46,7 @@ export default Ember.Component.extend({
   },
 
   counter(){
-    if (Ember.isEmpty(this.get('model.content')) && this.get('model.content') !== undefined) {
+    if (isEmpty(this.get('model.content')) && this.get('model.content') !== undefined) {
 
       return Math.round(this.get('model.content').objectAt(0).results.osusages.cumulative.counter);
     } else {
@@ -53,7 +55,7 @@ export default Ember.Component.extend({
   },
 
   OsUsageData() {
-    if (Ember.isEmpty(this.get('model.content')) && this.get('model.content') !== undefined){
+    if (isEmpty(this.get('model.content')) && this.get('model.content') !== undefined){
       const self = this;
       const data = self.get('model.content').objectAt(0).results.osusages.items.map((item, index) => {
         var gradient = [];

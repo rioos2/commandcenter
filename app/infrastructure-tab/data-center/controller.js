@@ -1,27 +1,30 @@
-import Ember from 'ember';
 import { get, computed } from '@ember/object';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   // Contains the HTTP code to say if the telemetry system pull is active or not
-  telemetryAvailabilityStatus: Ember.computed.alias('model.code'),
+  telemetryAvailabilityStatus: alias('model.code'),
 
   // The route loads the model in healthzDashboard key, the actual data is inside
   // model.healthzDashboard.content
   healthzModel: computed('model.healthzDashboard', function(){
     const content =  get(this, 'model.healthzDashboard.content');
 
-    return !Ember.isEmpty(content) ? content.get('firstObject') : [];
+    return !isEmpty(content) ? content.get('firstObject') : [];
   }),
 
   // Datacenter overall usage using gauges.
   // the gauges shown are CPU, MEMORY, DISK and GPU.
   // section main gauges
   datacenterUsage: function() {
-    return !Ember.isEmpty(this.get('healthzModel')) ? this.get('healthzModel').results.guages : [];
+    return !isEmpty(this.get('healthzModel')) ? this.get('healthzModel').results.guages : [];
   }.property('healthzModel.@each.results.guages.counters.@each.counter'),
 
   // /// The section where we formulate the data to show in the statistics
@@ -29,13 +32,13 @@ export default Ember.Controller.extend({
   senseiStatistics: computed('healthzModel', function() {
     const content = get(this, 'healthzModel');
 
-    return !Ember.isEmpty(content) ? content.results.statistics.senseis : [];
+    return !isEmpty(content) ? content.results.statistics.senseis : [];
   }),
 
   ninjaStatistics: computed('healthzModel', function() {
     const content = get(this, 'healthzModel');
 
-    return !Ember.isEmpty(content) ? content.results.statistics.ninjas : [];
+    return !isEmpty(content) ? content.results.statistics.ninjas : [];
   }),
 
 
@@ -52,11 +55,11 @@ export default Ember.Controller.extend({
 
   // Decider to show the statistis of ninja/sensei or not.
   hasNinjaStatistics: function() {
-    return Ember.isEmpty(get(this, 'ninjaStatistics'));
+    return isEmpty(get(this, 'ninjaStatistics'));
   }.property('ninjaStatistics'),
 
   hasSenseiStatistics: function() {
-    return Ember.isEmpty(get(this, 'senseiStatistics'));
+    return isEmpty(get(this, 'senseiStatistics'));
   }.property('senseiStatistics'),
 
 });

@@ -1,10 +1,10 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import { denormalizeName } from 'nilavu/utils/denormalize';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-  intl:       Ember.inject.service(),
+export default Component.extend({
+  intl:     service(),
   tagName: 'rio-radio',
   enable:  '',
 

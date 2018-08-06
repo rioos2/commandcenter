@@ -1,12 +1,11 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
-
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { isEmpty } from '@ember/utils';
+export default Component.extend({
 
   isActive: false,
 
   diskTypeEmpty: function() {
-    return Ember.isEmpty(this.get('diskTypes'));
+    return isEmpty(this.get('diskTypes'));
   }.property('model.disk'),
 
   diskTypes: function() {
@@ -25,7 +24,7 @@ export default Ember.Component.extend({
 
   actions: {
 
-    selectFilter(show) {
+    selectFilter() {
       this.toggleProperty('isActive');
     },
 
@@ -43,7 +42,7 @@ export default Ember.Component.extend({
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      if (Ember.isEmpty(self.get('chartData'))) {
+      if (isEmpty(self.get('chartData'))) {
         self.set('chartData', self.setEmpty());
       }
       var data = google.visualization.arrayToDataTable(self.get('chartData.data'));
@@ -79,7 +78,7 @@ export default Ember.Component.extend({
   diskData(type) {
     let value = this.setEmpty();
 
-    if (!Ember.isEmpty(this.get('model.disk'))) {
+    if (!isEmpty(this.get('model.disk'))) {
       this.get('model.disk').forEach((p) => {
         if (p.name === type) {
           value = this.compressChartData(p)

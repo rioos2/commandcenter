@@ -1,6 +1,6 @@
-/* global renderBlueGaugeChart, d3, particlesJS */
+/* global d3 */
 import Component from '@ember/component';
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
 
@@ -8,22 +8,22 @@ export default Component.extend({
 
   guageOne: function() {
     // ram
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData('ram') : this.decide(this.contentData().counters[0], 'ram');
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('ram') : this.decide(this.contentData().counters[0], 'ram');
   }.property('model', 'model.counters.@each.counter'),
 
   guageTwo: function() {
     // cpu
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData('cpu') : this.decide(this.contentData().counters[1], 'cpu');
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('cpu') : this.decide(this.contentData().counters[1], 'cpu');
   }.property('model', 'model.counters.@each.counter'),
 
   guageThree: function() {
     // disk
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData('disk') : this.decide(this.contentData().counters[2], 'disk');
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('disk') : this.decide(this.contentData().counters[2], 'disk');
   }.property('model', 'model.counters.@each.counter'),
 
   guageFour: function() {
     // gpu
-    if (!Ember.isEmpty(Object.keys(this.contentData()))) {
+    if (!isEmpty(Object.keys(this.contentData()))) {
       if (this.contentData().counters.length > 3) {
         return this.shave(this.contentData().counters[3]);
       }
@@ -48,7 +48,7 @@ export default Component.extend({
   },
 
   decide(guageValue, name) {
-    return !Ember.isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
+    return !isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
   },
 
   shave(guageValue) {
