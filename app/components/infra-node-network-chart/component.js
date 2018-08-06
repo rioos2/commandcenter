@@ -1,7 +1,7 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { isEmpty } from '@ember/utils';
+export default Component.extend({
 
   isActive: false,
   activate: false,
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   }.property('model'),
 
   networkBridgeEmpty: function() {
-    return Ember.isEmpty(this.get('networkBridge'));
+    return isEmpty(this.get('networkBridge'));
   }.property('model.network'),
 
   networkBridge: function() {
@@ -31,7 +31,7 @@ export default Ember.Component.extend({
   }.property('networkBridge'),
 
   selectBridge: function() {
-    return !Ember.isEmpty(this.get('networkBridge')) ? this.get('networkBridge')[0] : ' ';
+    return !isEmpty(this.get('networkBridge')) ? this.get('networkBridge')[0] : ' ';
   }.property('networkBridge'),
 
   changed: function() {
@@ -62,9 +62,9 @@ export default Ember.Component.extend({
           title:          'Time',
           titleTextStyle: { color: '#333' },
           girdlines:      {
- color: '#333',
-            count: 4 
-},
+            color: '#333',
+            count: 4
+          },
         },
         vAxis: {
           minValue: 0,
@@ -77,13 +77,16 @@ export default Ember.Component.extend({
 
       };
 
-      var chart = new google.visualization.AreaChart(document.getElementById(`id-${  self.get('model').id  }${self.get('nodeType')}`));
+      var chart = new google.visualization.AreaChart(document.getElementById(`id-${  self.get('model').id  }${ self.get('nodeType') }`));
 
       chart.draw(data, options);
     }
   },
 
-  selected: C.NETWORK.PACKETMEASURETYPE.THROUGHPUT,
+  selected: function() {
+    return C.NETWORK.PACKETMEASURETYPE.THROUGHPUT;
+  }.property(),
+
   filteredData() {
 
     if (this.get('selected') == C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
@@ -100,7 +103,7 @@ export default Ember.Component.extend({
 
     this.get('model.network').forEach((n) => {
       if (n.name == this.get('selectBridge')) {
-        n.throughput.forEach((t, index) => {
+        n.throughput.forEach((t) => {
           throughput.push(t);
         });
       }
@@ -136,7 +139,7 @@ export default Ember.Component.extend({
       this.toggleProperty('activate');
     },
 
-    selectFilter(show) {
+    selectFilter() {
       this.toggleProperty('isActive');
     },
 
