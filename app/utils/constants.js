@@ -145,13 +145,15 @@ var C = {
     }],
     NODEAUTHTYPE:                         ['Login Credentials', 'SSH Key Verification'],
     INSTALLFAILURE:                       ['NinjaNotReady'],
-    NODEUNHEALTHY:                        ['down'],
+    NODEUNHEALTHY:                        'down',
     NODEOFF:                              'OFF',
     NODEON:                               'ON',
     STATUS:         {
       INITIAL:  ['initialized', 'pending'],
       READY:    ['ready', 'running', 'ninjaready'],
       NOTREADY: ['notready', 'ninjanotready'],
+      RUNNING:  'RUNNING',
+      STOPPED:  'STOPPED',
     },
     STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
     LICENSE_STATUS: { EXPIRED: 'Expired', }
