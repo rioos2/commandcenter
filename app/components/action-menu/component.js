@@ -1,10 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import { isAlternate } from 'nilavu/utils/platform';
+import { inject } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import $ from 'jquery';
+import { get } from '@ember/object';
 
-export default Ember.Component.extend({
-  resourceActions: Ember.inject.service('resource-actions'),
+export default Component.extend({
+  resourceActions: inject.service('resource-actions'),
 
-  tooltipService: Ember.inject.service('tooltip'),
+  tooltipService: inject.service('tooltip'),
 
   model:       null,
   size:        'xs',
@@ -13,10 +17,10 @@ export default Ember.Component.extend({
 
   tagName:        'div',
   classNames:     ['btn-group', 'resource-actions', 'action-menu'],
-  primaryAction: Ember.computed.alias('model.primaryAction'),
+  primaryAction: alias('model.primaryAction'),
 
   click(e) {
-    var tgt = Ember.$(e.target);
+    var tgt = $(e.target);
     var more = tgt.closest('.more-actions');
 
     if ( more && more.length ) {
@@ -42,10 +46,10 @@ export default Ember.Component.extend({
           e.preventDefault();
           e.stopPropagation();
 
-          if ( isAlternate(e) && Ember.get(action, 'altAction') ) {
-            this.sendToModel(Ember.get(action, 'altAction'));
+          if ( isAlternate(e) && get(action, 'altAction') ) {
+            this.sendToModel(get(action, 'altAction'));
           } else {
-            this.sendToModel(Ember.get(action, 'action'));
+            this.sendToModel(get(action, 'action'));
           }
         }
       }

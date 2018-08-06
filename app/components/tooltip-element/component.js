@@ -1,9 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
+import { observer } from '@ember/object';
+import $ from 'jquery';
+import { later } from '@ember/runloop';
+import { cancel } from '@ember/runloop';
 
 const DELAY = 100;
 
-export default Ember.Component.extend({
-  tooltipService:    Ember.inject.service('tooltip'),
+export default Component.extend({
+  tooltipService:    inject.service('tooltip'),
   classNameBindings: ['inlineBlock:inline-block', 'clip:clip'],
   inlineBlock:       true,
   clip:              false,
@@ -15,11 +20,11 @@ export default Ember.Component.extend({
 
   showTimer: null,
 
-  textChanged: Ember.observer('textChangedEvent', function() {
+  textChanged: observer('textChangedEvent', function() {
     this.show(this.get('textChangedEvent'));
   }),
 
-  modelObserver: Ember.observer('model', 'textChangedEvent', function() {
+  modelObserver: observer('model', 'textChangedEvent', function() {
     let opts = this.get('tooltipService.tooltipOpts');
 
     if ((opts) && this.get('tooltipFor') === opts.tooltipFor ) {
@@ -28,7 +33,7 @@ export default Ember.Component.extend({
   }),
   mouseEnter(evt) {
     if ( !this.get('tooltipService.requireClick') ) {
-      let tgt = Ember.$(evt.currentTarget);
+      let tgt = $(evt.currentTarget);
 
       if (this.get('tooltipService.tooltipOpts')) {
         this.set('tooltipService.tooltipOpts', null);
@@ -37,7 +42,7 @@ export default Ember.Component.extend({
       // Wait for a little bit of time so that the mouse can pass through
       // another tooltip-element on the way to the dropdown trigger of a
       // tooltip-action-menu without changing the tooltip.
-      this.set('showTimer', Ember.run.later(() => {
+      this.set('showTimer', later(() => {
         this.show(tgt);
       }, DELAY));
     }
@@ -73,7 +78,7 @@ export default Ember.Component.extend({
   mouseLeave() {
     if (!this.get('tooltipService.openedViaContextClick')) {
       if ( this.get('showTimer') ) {
-        Ember.run.cancel(this.get('showTimer'));
+        cancel(this.get('showTimer'));
       } else {
         this.get('tooltipService').leave();
       }
