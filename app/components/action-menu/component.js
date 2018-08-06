@@ -1,14 +1,14 @@
 import Component from '@ember/component';
 import { isAlternate } from 'nilavu/utils/platform';
-import { inject } from '@ember/service';
+import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 import $ from 'jquery';
 import { get } from '@ember/object';
 
 export default Component.extend({
-  resourceActions: inject.service('resource-actions'),
+  resourceActions: service('resource-actions'),
 
-  tooltipService: inject.service('tooltip'),
+  tooltipService: service('tooltip'),
 
   model:       null,
   size:        'xs',
