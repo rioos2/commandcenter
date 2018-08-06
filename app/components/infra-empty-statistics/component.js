@@ -1,8 +1,9 @@
-import Ember from 'ember';
-const { get } = Ember;
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-  intl:       Ember.inject.service(),
+export default Component.extend({
+  intl:       service(),
   classNames: ['chart-os'],
 
   didInsertElement() {
