@@ -47,7 +47,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   getUrl(option) {
     return this.get('userStore').rawRequest(this.rawRequestOpts({
-      url:    `/api/v1/accounts/${  option.accountid  }/assemblys/${  option.id  }/exec`,
+      url:    `/api/v1/assemblys/${  option.id  }/exec`,
       method: 'GET',
     })).then((xhr) => {
       console.log('Socket Url => ', xhr.body.url);
