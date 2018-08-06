@@ -1,11 +1,13 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-const { get } = Ember;
 
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+export default Component.extend(DefaultHeaders, {
+  intl:          service(),
+  notifications: service('notification-messages'),
   tagName:       '',
   selectedPools: [],
   activate:      false,
@@ -13,7 +15,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   // All partitions on particullar storage connector
   connectorPartitions: function() {
-    if (!Ember.isEmpty(this.get('connector.storage_info.disks'))) {
+    if (!isEmpty(this.get('connector.storage_info.disks'))) {
       return this.get('connector.storage_info.disks').map((d) => {
         return {
           disk:  d.disk,
@@ -28,7 +30,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   // Aleady used partitions by some pool
   usedPartitions: function() {
-    if (!Ember.isEmpty(this.get('pools'))) {
+    if (!isEmpty(this.get('pools'))) {
       return [].concat.apply([], this.get('pools').map((p) => p.storage_info.disks.map((d) => d.disk)));
     }
 
@@ -36,7 +38,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.property('pools'),
 
   type: function() {
-    return !Ember.isEmpty(this.get('connector.storage_type')) ? this.get('connector.storage_type') : '';
+    return !isEmpty(this.get('connector.storage_type')) ? this.get('connector.storage_type') : '';
   }.property('connector.storage_type'),
 
   // Unique non-used partitions by comparing already used partitions on pool
@@ -56,13 +58,13 @@ export default Ember.Component.extend(DefaultHeaders, {
       };
 
       this.get('unUsedPartitions').forEach((va) => {
-        if (!(val.disk == va.disk)) {
+        if (!(val.disk === va.disk)) {
           if (va.disk.includes(val.disk)) {
             groups.group.push(va.disk);
           }
         }
       });
-      if (Ember.isEmpty(groups.group)) {
+      if (isEmpty(groups.group)) {
         allGroupedPartition.push(groups);
       }
     });
@@ -88,18 +90,18 @@ export default Ember.Component.extend(DefaultHeaders, {
             object_meta:  { name: this.get('name'), },
             status:       { phase: 'Pending' }
           },
-        })).then((xhr) => {
+        })).then(() => {
           this.set('modelSpinner', true);
           this.set('showSpinner', false);
           this.sendAction('doReload');
           this.refresh();
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -116,7 +118,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     let data;
 
     this.get('connector.storage_info.disks').forEach((d) => {
-      if (d.disk == diskName) {
+      if (d.disk === diskName) {
         data = d;
       }
     });
@@ -126,13 +128,12 @@ export default Ember.Component.extend(DefaultHeaders, {
   },
 
   handlePartition(data, active) {
-    let find = false;
     let list = this.get('selectedPools').map((x) => {
       return x.disk;
     }).indexOf(data.disk);
 
     if (!active) {
-      (list == 0) ? this.get('selectedPools').shift() : this.get('selectedPools').splice(list, 1);
+      (list === 0) ? this.get('selectedPools').shift() : this.get('selectedPools').splice(list, 1);
     } else {
       this.get('selectedPools').push(data);
     }
@@ -141,18 +142,18 @@ export default Ember.Component.extend(DefaultHeaders, {
   validation() {
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('name'))) {
+    if (isEmpty(this.get('name'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.storage.pool.nameError'));
     }
-    if (Ember.isEmpty(this.get('selectedPools'))) {
+    if (isEmpty(this.get('selectedPools'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.storage.pool.diskError'));
     }
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
   displayMessage() {
-    if (Ember.isEmpty(this.get('storages'))) {
+    if (isEmpty(this.get('storages'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.storage.pool.storagesDisplayError'));
 
       return true;

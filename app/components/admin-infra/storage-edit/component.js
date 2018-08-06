@@ -1,11 +1,13 @@
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
+import { isEmpty } from '@ember/utils';
 
-import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+export default Component.extend(DefaultHeaders, {
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   nameSelect: function() {
     this.set('name', this.get('model.object_meta.name'));
@@ -32,17 +34,17 @@ export default Ember.Component.extend(DefaultHeaders, {
           url:    `/api/v1/storageconnectors/${  this.get('model.id') }`,
           method: 'PUT',
           data:   this.getData(),
-        })).then((xhr) => {
+        })).then(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', true);
           this.sendAction('doReloaded');
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -57,7 +59,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     return this.get('model');
   },
   validation() {
-    if (Ember.isEmpty(this.get('name'))) {
+    if (isEmpty(this.get('name'))) {
       this.set('validationWarning', get(this, 'intl').t('stackPage.admin.storage.nameError'));
 
       return true;
