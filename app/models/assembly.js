@@ -2,7 +2,6 @@ import Resource from 'ember-api-store/models/resource';
 import { get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/template';
 
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
@@ -95,7 +94,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
     let key = res.data['rioos_sh/ssh_pubkey'] || '';
 
     if (!this.hasDownloaded(key, this.get('name'))) {
-      this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
+      this.get('notifications').warning(Ember.String.htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
         autoClear:     true,
         clearDuration: 4200,
         cssClasses:    'notification-success'
