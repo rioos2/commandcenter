@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+export default Route.extend(DefaultHeaders, {
 
-export default Ember.Route.extend(DefaultHeaders, {
-
-  storeReset: Ember.inject.service(),
+  storeReset: service(),
 
   model() {
 

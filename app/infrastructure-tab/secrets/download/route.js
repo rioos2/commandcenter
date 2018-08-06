@@ -1,15 +1,14 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Downloadjs from 'npm:downloadjs';
-const  { get } = Ember;
+import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+export default Route.extend(DefaultHeaders, {
 
-export default Ember.Route.extend(DefaultHeaders, {
-
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   model(params) {
-    const self = this;
 
     // TODO we should call store find to get single record.
     // this.get('store').getById("secret", params.id);

@@ -1,9 +1,13 @@
 /* global renderChartGauge, d3 */
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { isEqual } from '@ember/utils';
+import { on } from '@ember/object/evented';
+import { scheduleOnce } from '@ember/runloop';
 
-export default Ember.Component.extend({
-  store: Ember.inject.service(),
+export default Component.extend({
+  store: service(),
 
   classNames:     ['two_chart'],
   noUrlTitle:     'No url found',
@@ -24,7 +28,7 @@ export default Ember.Component.extend({
   }.observes('model', 'model.counter'),
 
   nodeRunStatus: function(){
-    return Ember.isEqual(this.get('model.health'), 'up') ? C.NODE.STATUS.RUNNING : C.NODE.STATUS.STOPPED;
+    return isEqual(this.get('model.health'), 'up') ? C.NODE.STATUS.RUNNING : C.NODE.STATUS.STOPPED;
   }.property('model.health'),
 
   nodeStatus: function() {
@@ -39,7 +43,7 @@ export default Ember.Component.extend({
     return state;
   }.property('model.health'),
 
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
     var id = this.get('model').id + this.get('nodeType');
 
     this.$('.gauge_box').append(`<div class = "contant_bar"><canvas id = "canvas_back_${  id  }" width = "177" height = "138" class = "canvas_back"></canvas></div><div class="contant"><div class= "row_1"></div><div class= "row_2"></div><div class= "row_3"></div><div class= "row_4"></div><div class= "row_5"></div></div>`);
@@ -63,7 +67,7 @@ export default Ember.Component.extend({
     };
 
 
-    Ember.run.scheduleOnce('afterRender', this, function() {
+    scheduleOnce('afterRender', this, function() {
       var k_val = 0,
         i, j;
 

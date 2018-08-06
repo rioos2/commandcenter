@@ -1,6 +1,6 @@
-/* global renderBlueGaugeChart, d3, particlesJS */
+/* global renderBlueGaugeChart, d3 */
 import Component from '@ember/component';
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
 
 export default Component.extend({
   classNames: ['gauge-chart'],
@@ -11,9 +11,8 @@ export default Component.extend({
     this.updateGuages();
   }.observes('model.counter'),
 
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
 
-    let id = `g-${  this.get('model.name') }`;
     let c_name = `.b-${  this.get('model.name') }`;
 
     let blue = renderBlueGaugeChart()

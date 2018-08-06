@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   isActive:     false,
   showDropDown: function() {
@@ -18,7 +19,7 @@ export default Ember.Component.extend({
 
   actions: {
 
-    selectFilter(show) {
+    selectFilter() {
       this.toggleProperty('isActive');
     },
 
@@ -36,7 +37,7 @@ export default Ember.Component.extend({
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      if (Ember.isEmpty(self.get('chartData'))) {
+      if (isEmpty(self.get('chartData'))) {
         self.set('chartData', self.setEmpty());
       }
       var data = google.visualization.arrayToDataTable(self.get('chartData'));
