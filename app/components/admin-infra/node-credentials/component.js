@@ -1,13 +1,17 @@
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
+import { isEmpty } from '@ember/utils';
+import $ from 'jquery';
 
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  session:       Ember.inject.service(),
+export default Component.extend(DefaultHeaders, {
+  intl:          service(),
+  notifications: service('notification-messages'),
+  session:       service(),
 
   types: function() {
     return C.NODE.NODEAUTHTYPE;
@@ -43,12 +47,12 @@ export default Ember.Component.extend(DefaultHeaders, {
             this.send('retryInstallNode', xhr.body.id);
           }
           this.refresh();
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -57,7 +61,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     },
 
     installNode(secretId) {
-      var self = this;
+      // var self = this;
       let node = this.get('model');
 
       node.metadata = {};
@@ -71,7 +75,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         url:    '/api/v1/nodes',
         method: 'POST',
         data:   node,
-      })).then((result) => {
+      })).then(() => {
         this.get('notifications').info(get(this, 'intl').t('stackPage.admin.node.nodeCreate'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -80,7 +84,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         this.set('showSpinner', false);
         this.sendAction('doReload');
         $(`#node_auth_modal_${ this.get('model.id') }`).modal('hide');
-      }).catch((err) => {
+      }).catch(() => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeFailed'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -99,7 +103,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         url:    `/api/v1/nodes/${  this.get('model.id') }`,
         method: 'PUT',
         data:   node,
-      })).then((result) => {
+      })).then(() => {
         this.get('notifications').info(get(this, 'intl').t('stackPage.admin.node.nodeRetry'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -108,7 +112,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         this.set('showSpinner', false);
         this.sendAction('doReload');
         $(`#node_auth_modal_${ this.get('model.id') }`).modal('hide');
-      }).catch((err) => {
+      }).catch(() => {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.nodeRetryFailed'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -161,34 +165,34 @@ export default Ember.Component.extend(DefaultHeaders, {
     this.set('validationWarning', '');
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('userName'))) {
+    if (isEmpty(this.get('userName'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterUsername'));
     }
 
-    if (Ember.isEmpty(this.get('password'))) {
+    if (isEmpty(this.get('password'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterPassword'));
     }
 
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   validationSsh() {
     this.set('validationWarning', '');
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('sshUserName'))) {
+    if (isEmpty(this.get('sshUserName'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterUsername'));
     }
 
-    if (Ember.isEmpty(this.get('sshPrivateKey'))) {
+    if (isEmpty(this.get('sshPrivateKey'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.enterSshKey'));
     }
 
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   refresh() {

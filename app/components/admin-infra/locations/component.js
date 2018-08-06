@@ -1,4 +1,8 @@
+import { isEmpty } from '@ember/utils';
 import { buildAdminInfraPanel } from '../admin-infra-panel/component';
+import $ from 'jquery';
+
+
 export default buildAdminInfraPanel('locations', {
 
   selectedLocations:       null,
@@ -7,7 +11,7 @@ export default buildAdminInfraPanel('locations', {
   selectedVirtualNetworks: null,
 
   didInsertElement() {
-    if (!Ember.isEmpty(this.get('locations'))) {
+    if (!isEmpty(this.get('locations'))) {
       this.send('SideData', this.get('locations').get('firstObject'));
     }
   },
@@ -21,19 +25,19 @@ export default buildAdminInfraPanel('locations', {
   }.property('availableSize'),
 
   locations: function() {
-    return Ember.isEmpty(this.get('model.datacenters.content')) ? [] : this.get('model.datacenters.content');
+    return isEmpty(this.get('model.datacenters.content')) ? [] : this.get('model.datacenters.content');
   }.property('model.datacenters.content.@each'),
 
   nodes: function() {
-    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
+    return isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content.@each'),
 
   storages: function() {
-    return Ember.isEmpty(this.get('model.storageConnectors.content')) ? [] : this.get('model.storageConnectors.content');
+    return isEmpty(this.get('model.storageConnectors.content')) ? [] : this.get('model.storageConnectors.content');
   }.property('model.storageConnectors.content.@each'),
 
   virtualNetworks: function() {
-    return Ember.isEmpty(this.get('model.networks.content')) ? [] : this.get('model.networks.content');
+    return isEmpty(this.get('model.networks.content')) ? [] : this.get('model.networks.content');
   }.property('model.networks.content.@each'),
 
   filterStoragesFor(location) {
@@ -41,7 +45,7 @@ export default buildAdminInfraPanel('locations', {
     var name;
 
     self.get('storages').forEach((storage) => {
-      if (location.storage == storage.id) {
+      if (location.storage === storage.id) {
         name = storage.object_meta.name;
       }
     });

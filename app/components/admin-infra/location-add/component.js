@@ -1,16 +1,18 @@
-import Ember from 'ember';
-import { compare } from '@ember/utils';
-import C from 'nilavu/utils/constants';
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
+import { isEmpty } from '@ember/utils';
 import isoCurreny from 'npm:iso-country-currency';
 import Cities from 'npm:full-countries-cities';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
-const { get } = Ember;
+import $ from 'jquery';
 
-export default Ember.Component.extend(DefaultHeaders, flagsISo, {
+export default Component.extend(DefaultHeaders, flagsISo, {
 
-  intl:                    Ember.inject.service(),
-  notifications:           Ember.inject.service('notification-messages'),
+  intl:                    service(),
+  notifications:           service('notification-messages'),
   tagName:                 '',
   selectedNodes:           [],
   selectedVirtualNetworks: [],
@@ -69,18 +71,18 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
           url:    '/api/v1/datacenters',
           method: 'POST',
           data:   this.getData(),
-        })).then((xhr) => {
+        })).then(() => {
           this.set('modelSpinner', true);
           this.set('showSpinner', false);
           this.sendAction('doReload');
           this.refresh();
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -153,7 +155,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
     let id;
 
     this.get('model.storageConnectors.content').forEach((s) => {
-      if (name == s.object_meta.name) {
+      if (name === s.object_meta.name) {
         id = s.id;
       }
     });
@@ -162,7 +164,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   },
 
   nameGetter(data) {
-    if (!Ember.isEmpty(data)) {
+    if (!isEmpty(data)) {
       return data.map((d) => {
         return {
           name: d.object_meta.name,
@@ -175,15 +177,15 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   },
 
   displayMessage() {
-    if (Ember.isEmpty(this.get('storages'))) {
+    if (isEmpty(this.get('storages'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.storagesDisplayError'));
 
       return true;
-    } else if (Ember.isEmpty(this.get('nodes'))) {
+    } else if (isEmpty(this.get('nodes'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
 
       return true;
-    } else if (Ember.isEmpty(this.get('virtualNetworks'))) {
+    } else if (isEmpty(this.get('virtualNetworks'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.networksDisplayError'));
 
       return true;
@@ -196,31 +198,31 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   validation() {
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('city'))) {
+    if (isEmpty(this.get('city'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.cityError'));
     }
-    if (Ember.isEmpty(this.get('selectedStorage'))) {
+    if (isEmpty(this.get('selectedStorage'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.storageError'));
     }
-    if (Ember.isEmpty(this.get('currency'))) {
+    if (isEmpty(this.get('currency'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.currencyError'));
     }
-    if (Ember.isEmpty(this.get('selectedNodes'))) {
+    if (isEmpty(this.get('selectedNodes'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.nodesError'));
     }
     if (!this.filteredForSelectedVirtualNetworks(this.uniqueSelected(this.get('selectedVirtualNetworks')))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.networksSelectError'));
     }
-    if (Ember.isEmpty(this.get('selectedVirtualNetworks'))) {
+    if (isEmpty(this.get('selectedVirtualNetworks'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.networksError'));
     }
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
   uniqueSelected(virtualNetworks) {
     var uniqueVirtualNetworks = virtualNetworks.filter((item, index) => {
-      return virtualNetworks.indexOf(item) == index;
+      return virtualNetworks.indexOf(item) === index;
     });
 
     return uniqueVirtualNetworks;
@@ -233,7 +235,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
 
     uniqueVirtualNetworks.map((network_id) => {
       return self.get('virtualNetworks').filter((network) => {
-        if (network_id == network.id) {
+        if (network_id === network.id) {
           uniqueNetData.push(network);
         }
       });
@@ -251,7 +253,7 @@ export default Ember.Component.extend(DefaultHeaders, flagsISo, {
   },
 
   areEqual(filtedData, selectedData) {
-    return JSON.stringify(filtedData) == JSON.stringify(selectedData);
+    return JSON.stringify(filtedData) === JSON.stringify(selectedData);
   },
 
   getData() {

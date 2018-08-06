@@ -1,18 +1,22 @@
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/template';
+import $ from 'jquery';
+import { isEmpty } from '@ember/utils';
 
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+export default Component.extend(DefaultHeaders, {
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   noteForRangeSubnet: function() {
-    return Ember.String.htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForRangeSubnet'));
+    return htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForRangeSubnet'));
   }.property('model'),
 
   noteForAdvanceSubnet: function() {
-    return Ember.String.htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForAdvanceSubnet'));
+    return htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForAdvanceSubnet'));
   }.property('model'),
 
   subnetAdvancePlaceHolder: function() {
@@ -71,12 +75,12 @@ export default Ember.Component.extend(DefaultHeaders, {
           url:    '/api/v1/nodes/discover',
           method: 'POST',
           data:   filter,
-        })).then((xhr) => {
+        })).then(() => {
           $('#node_add_modal').modal('hide');
           this.set('modelSpinner', false);
           this.set('showSpinner', false);
           this.refresh();
-        }).catch((err) => {
+        }).catch(() => {
           this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.node.somethingWrong'), {
             autoClear:     true,
             clearDuration: 4200,
@@ -87,7 +91,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -132,11 +136,11 @@ export default Ember.Component.extend(DefaultHeaders, {
     this.set('validationWarning', '');
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('subnetAdvanceValue'))) {
+    if (isEmpty(this.get('subnetAdvanceValue'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.emptySubnetAdvanceValue'));
     }
 
-    if (!Ember.isEmpty(this.get('subnetAdvanceValue'))) {
+    if (!isEmpty(this.get('subnetAdvanceValue'))) {
       this.get('subnetAdvanceValue').replace(/\s/g, '').split(',').forEach((s) => {
         if (!this.checkSubnetFormate(s)) {
           validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.subnetRangeError'));
@@ -148,28 +152,28 @@ export default Ember.Component.extend(DefaultHeaders, {
 
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   validationRangeSubnet() {
     this.set('validationWarning', '');
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('subnetRangeFrom'))) {
+    if (isEmpty(this.get('subnetRangeFrom'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.emptySubnetRangeFrom'));
     }
 
-    if (!Ember.isEmpty(this.get('subnetRangeFrom'))) {
+    if (!isEmpty(this.get('subnetRangeFrom'))) {
       if (!this.checkIpFormate(this.get('subnetRangeFrom'))) {
         validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.subnetRangeValidFromError'));
       }
     }
 
-    if (Ember.isEmpty(this.get('subnetRangeTo'))) {
+    if (isEmpty(this.get('subnetRangeTo'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.emptySubnetRangeTo'));
     }
 
-    if (!Ember.isEmpty(this.get('subnetRangeTo'))) {
+    if (!isEmpty(this.get('subnetRangeTo'))) {
       if (!this.checkIpFormate(this.get('subnetRangeTo'))) {
         validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.node.subnetRangeValidToError'));
       }
@@ -177,7 +181,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   cidrsFormate(cidrs) {
@@ -191,7 +195,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     let filter_nodes = [];
 
     for (var s in this.dummyData()) {
-      if (!Ember.isEmpty(this.dummyData()[s])) {
+      if (!isEmpty(this.dummyData()[s])) {
         filter_nodes.push(this.dummyData()[s][type]);
       }
 

@@ -39,15 +39,15 @@ export default Ember.Component.extend({
     return this.get('model.storage_info.disks');
   }.property('model.storage_info.disks'),
 
-  didInsertElement() {
-    this.send('collapse_pool');
-    this.send('collapse_disk');
-  },
-
   count: function() {
     return this.get('pools.length') > 0 ? false : true;
   }.property('storagespool'),
 
+
+  didInsertElement() {
+    this.send('collapse_pool');
+    this.send('collapse_disk');
+  },
 
   actions: {
 

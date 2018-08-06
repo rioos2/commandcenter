@@ -22,23 +22,22 @@ export default Route.extend(DefaultHeaders, {
     return hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')) });
   },
 
-  getLicense: function() {
-    return Ember.RSVP.hash({
-      license: this.get('store').findAll('license', this.opts('licenses/senseis', true)),
-    });
-  },
-
   actions: {
     reloadModel() {
       var self = this;
-      this.model().then(function(model) {
-        self.getLicense().then(function(license) {
+
+      this.model().then((model) => {
+        self.getLicense().then((license) => {
           console.log(JSON.stringify(license))
           model.license = license;
           self.controller.set('model', model);
         });
       });
     }
+  },
+
+  getLicense() {
+    return Ember.RSVP.hash({ license: this.get('store').findAll('license', this.opts('licenses/senseis', true)), });
   },
 
   getLicense() {

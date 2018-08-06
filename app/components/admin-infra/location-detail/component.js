@@ -1,5 +1,8 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
+
+export default Component.extend({
 
   name: function() {
     return this.get('model.object_meta.name');
@@ -9,10 +12,10 @@ export default Ember.Component.extend({
     var networkTypes = [];
     var self = this;
 
-    if (!Ember.isEmpty(this.get('virtualNetworks'))) {
+    if (!isEmpty(this.get('virtualNetworks'))) {
       this.get('model.networks').forEach((net) => {
         self.get('virtualNetworks').forEach((network) => {
-          if (net == network.id) {
+          if (net === network.id) {
             networkTypes.push(network.network_type);
           }
         });
@@ -26,9 +29,9 @@ export default Ember.Component.extend({
     var self = this;
     var strData = '';
 
-    if (!Ember.isEmpty(this.get('storages'))) {
+    if (!isEmpty(this.get('storages'))) {
       self.get('storages').forEach((storage) => {
-        if (self.get('model.storage') == storage.id) {
+        if (self.get('model.storage') === storage.id) {
           strData = storage.host_ip;
         }
       });
@@ -38,7 +41,7 @@ export default Ember.Component.extend({
   }.property('storages'),
 
   active: function() {
-    return Ember.isEqual(this.get('selectedCluster'), this.get('model.id')) ? 'active' : '';
+    return isEqual(this.get('selectedCluster'), this.get('model.id')) ? 'active' : '';
   }.property('selectedCluster'),
 
 });

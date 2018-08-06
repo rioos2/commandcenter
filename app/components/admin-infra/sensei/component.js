@@ -1,15 +1,17 @@
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
+
+
 import { buildAdminInfraPanel } from '../admin-infra-panel/component';
-import C from 'nilavu/utils/constants';
 export default buildAdminInfraPanel('sensei', {
   network:       null,
   selectedNodes: null,
-  senseiNodes:   [],
-  userStore:     Ember.inject.service('user-store'),
+  userStore:     service('user-store'),
   nodeType:      'sensei',
 
 
   didInsertElement() {
-    if (!Ember.isEmpty(this.get('senseis'))) {
+    if (!isEmpty(this.get('senseis'))) {
       this.send('SideData', this.get('senseis').get('firstObject'));
     }
   },
@@ -19,14 +21,14 @@ export default buildAdminInfraPanel('sensei', {
   }.property('senseiNodes'),
 
   senseis: function() {
-    return Ember.isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content');
+    return isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content');
   }.property('model.senseis.content'),
 
   senseiNodes: function() {
-    return Ember.isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content').filter((sensei) => {
+    return isEmpty(this.get('model.senseis.content')) ? [] : this.get('model.senseis.content').filter((sensei) => {
       let add = false;
 
-      if (!Ember.isEmpty(sensei.status.phase)) {
+      if (!isEmpty(sensei.status.phase)) {
         add = true;
       }
 

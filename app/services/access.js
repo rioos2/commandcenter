@@ -28,7 +28,7 @@ export default Service.extend(DefaultHeaders, {
 
   testAuth() {
     return Ember.RSVP.resolve('Auth Succeeded');
-    //TODO
+    // TODO
     // // make a call to api base because it is authenticated
     // return this.get('userStore').rawRequest(this.rawRequestOpts({ url: '/api/v1/test', })).then((xhr) => {
     //   // Auth token still good

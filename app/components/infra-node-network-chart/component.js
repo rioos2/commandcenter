@@ -39,11 +39,31 @@ export default Component.extend({
     this.drawNetworkStatistics();
   }.observes('selectBridge', 'selected'),
 
+  selected: function() {
+    return C.NETWORK.PACKETMEASURETYPE.THROUGHPUT;
+  }.property(),
+
   didInsertElement() {
     this.send('packetFliper', this.get('selected'));
     this.drawNetworkStatistics();
   },
 
+  actions: {
+
+    packetFliper(type) {
+      this.set('selected', type);
+      this.toggleProperty('activate');
+    },
+
+    selectFilter() {
+      this.toggleProperty('isActive');
+    },
+
+    propagateFilter(opt) {
+      this.set('selectBridge', opt);
+    },
+
+  },
   drawNetworkStatistics() {
     var self = this;
 
@@ -82,10 +102,6 @@ export default Component.extend({
       chart.draw(data, options);
     }
   },
-
-  selected: function() {
-    return C.NETWORK.PACKETMEASURETYPE.THROUGHPUT;
-  }.property(),
 
   filteredData() {
 
@@ -132,20 +148,4 @@ export default Component.extend({
     return [['Year', 'Download', 'Upload'], ['0', 0, 0]];
   },
 
-  actions: {
-
-    packetFliper(type) {
-      this.set('selected', type);
-      this.toggleProperty('activate');
-    },
-
-    selectFilter() {
-      this.toggleProperty('isActive');
-    },
-
-    propagateFilter(opt) {
-      this.set('selectBridge', opt);
-    },
-
-  },
 });
