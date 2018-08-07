@@ -9,7 +9,7 @@ import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
 
-const CHECK_AUTH_TIMER = 60 * 10 * 1000;
+const  CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
 export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   settings:       service(),
@@ -49,12 +49,14 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
         organizations: this.toCb('loadOrganizations'),
         settingsmap:   this.toCb('loadSettings'),
         // //This data will be load on sub infra route.
+        // If prometheus or aduit server not connected with api_gateway promise will get 502, and the model will reurn projects [],
+        // in particular routes 502 error will be traped then show error msg(ex. aduits, healthz/overall)
         // datacenter: this.toCb('loadHealthz'),
         stacks:        this.toCb('loadAssemblys'),
         // locations: this.cbFind('datacenter', 'datacenters'),
         // plans: this.cbFind('planfactory', 'plans'),
         // networks: this.cbFind('network', 'networks'),
-        events:        this.toCb('loadAuditEvents'),
+        // events:        this.toCb('loadAuditEvents'),
       };
 
       async.auto(tasks, xhrConcur, (err, res) => {
@@ -196,7 +198,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   loadOrganizations() {
     this.get('organization').selectOrigin();
 
-    return this.get('store').find('origin', null, this.opts('origins'));
+    return this.get('store').find('origin', null, this.opts(`origins/accounts/${ this.get('session').get('id') }`));
   },
   // Every Rio/OS site will have common settings stored under an url  'cluster_info' in system origin named 'rioos_system'.
   // This methods load that setting. Setting is a set of known key value pairs.

@@ -16,7 +16,7 @@ export default Route.extend(DefaultHeaders, {
     let promise = new Promise((resolve, reject) => {
       let tasks = {
         profile: this.cbFind('account', `accounts/${  this.get('session').get('id') }`),
-        logData: this.cbFind('audit', `accounts/${  this.get('session').get('id')  }/audits`),
+        logData: this.cbFind('audit', 'audits'),
       };
 
       async.auto(tasks, xhrConcur, (err, res) => {
