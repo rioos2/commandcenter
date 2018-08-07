@@ -157,15 +157,17 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
     showQRcode() {
       var self = this;
+
       if (!Ember.isEmpty(this.get('SecretData'))) {
-        let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || "";
+        let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || '';
+
         this.set('rioos_sh_kryptonite_qrcode', key);
         this.get('modalService').toggleModal('modal-show-qrcode', this);
       } else {
         self.get('notifications').warning(get(self, 'intl').t('notifications.QRcode.downloadFailed'), {
-          autoClear: true,
+          autoClear:     true,
           clearDuration: 4200,
-          cssClasses: 'notification-warning'
+          cssClasses:    'notification-warning'
         });
       }
     },

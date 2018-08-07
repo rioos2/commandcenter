@@ -1,10 +1,13 @@
-import Ember from 'ember';
-export default Em.Component.extend({
-  intl:              Ember.inject.service(),
+import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
+import Component from '@ember/component';
+
+export default Component.extend({
+  intl:              service(),
   tagName:           'li',
   classNameBindings: ['active', 'tabClassName'],
 
-  active: Ember.computed.equal('selectedTab', 'tab'),
+  active: equal('selectedTab', 'tab'),
 
   tabClassName: function() {
     return `admin-infra/${  this.get('tab') }`;

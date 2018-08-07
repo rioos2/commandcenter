@@ -1,15 +1,17 @@
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
+import { isEmpty } from '@ember/utils';
 import { buildAdminInfraPanel } from '../admin-infra-panel/component';
-import C from 'nilavu/utils/constants';
+
 export default buildAdminInfraPanel('node', {
   network:       null,
   selectedNodes: null,
-  ninjaNodes:    [],
-  userStore:     Ember.inject.service('user-store'),
+  userStore:     service('user-store'),
   nodeType:      'node',
 
 
   didInsertElement() {
-    if (!Ember.isEmpty(this.get('nodes'))) {
+    if (!isEmpty(this.get('nodes'))) {
       this.send('SideData', this.get('nodes').get('firstObject'));
     }
   },
@@ -27,14 +29,14 @@ export default buildAdminInfraPanel('node', {
   }.property('calmNodes'),
 
   nodes: function() {
-    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
+    return isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content'),
 
   ninjaNodes: function() {
-    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
+    return isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = false;
 
-      if (!Ember.isEmpty(node.status.phase)) {
+      if (!isEmpty(node.status.phase)) {
         add = true;
       }
 
@@ -43,10 +45,10 @@ export default buildAdminInfraPanel('node', {
   }.property('model.nodes.content.[]'),
 
   calmNodes: function() {
-    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
+    return isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content').filter((node) => {
       let add = true;
 
-      if (this.get('ninjaNodes').map((n) => n.node_ip).includes(node.node_ip) || !Ember.isEmpty(node.status.phase)) {
+      if (this.get('ninjaNodes').map((n) => n.node_ip).includes(node.node_ip) || !isEmpty(node.status.phase)) {
         add = false;
       }
 
