@@ -1,8 +1,8 @@
 export default Ember.Component.extend({
 
-  editedText1: "",
-  editedText2: "",
-  actions: {
+  editedText1: '',
+  editedText2: '',
+  actions:     {
     clickInputIcon() {
       this.set('showEditBox', false);
     },
@@ -10,10 +10,10 @@ export default Ember.Component.extend({
       this.set('showEditBox', true);
     },
 
-  setPopupData(editedText1,editedText2) {
-    this.sendAction('targetActionName', editedText1, editedText2);
-  },
-}
+    setPopupData(editedText1, editedText2) {
+      this.sendAction('targetActionName', editedText1, editedText2);
+    },
+  }
 
 
 

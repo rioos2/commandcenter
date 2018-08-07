@@ -1,5 +1,6 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+
+export default Component.extend({
 
   storageName: function(){
     return this.get('model.object_meta.name');
@@ -14,7 +15,7 @@ export default Ember.Component.extend({
   }.property('model.storage_type'),
 
   active: function() {
-    return this.get('selectedStorage') == this.get('model.id') ? 'active' : '';
+    return this.get('selectedStorage') === this.get('model.id') ? 'active' : '';
   }.property('selectedStorage'),
 
 });

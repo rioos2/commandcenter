@@ -1,18 +1,17 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import { xhrConcur } from 'nilavu/utils/platform';
-const { get } = Ember;
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
 
+export default Route.extend(DefaultHeaders, {
 
-export default Ember.Route.extend(DefaultHeaders, {
+  access:    service(),
+  session:   service(),
+  intl:      service(),
+  userStore: service('user-store'),
 
-  access:    Ember.inject.service(),
-  session:   Ember.inject.service(),
-  intl:      Ember.inject.service(),
-  userStore: Ember.inject.service('user-store'),
-
-  model(params) {
-    return Ember.RSVP.hash({
+  model() {
+    return hash({
       storageConnectors: this.get('store').findAll('storage', this.opts('storageconnectors', true)),
       storagesPool:      this.get('store').findAll('storagepool', this.opts('storagespool', true)),
       datacenters:       this.get('store').findAll('datacenter', this.opts('datacenters', true)),

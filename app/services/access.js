@@ -27,14 +27,16 @@ export default Service.extend(DefaultHeaders, {
   // For now, consider as Auth token expired
 
   testAuth() {
-    // make a call to api base because it is authenticated
-    return this.get('userStore').rawRequest(this.rawRequestOpts({ url: '/api/v1/test', })).then((xhr) => {
-      // Auth token still good
-      return Ember.RSVP.resolve('Auth Succeeded');
-    }, (/* err */) => {
-      // Auth token expired
-      return Ember.RSVP.reject('Auth Failed');
-    });
+    return Ember.RSVP.resolve('Auth Succeeded');
+    // TODO
+    // // make a call to api base because it is authenticated
+    // return this.get('userStore').rawRequest(this.rawRequestOpts({ url: '/api/v1/test', })).then((xhr) => {
+    //   // Auth token still good
+    //   return Ember.RSVP.resolve('Auth Succeeded');
+    // }, (/* err */) => {
+    //   // Auth token expired
+    //   return Ember.RSVP.reject('Auth Failed');
+    // });
   },
 
   detect() {

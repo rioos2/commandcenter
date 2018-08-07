@@ -1,17 +1,19 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import { xhrConcur } from 'nilavu/utils/platform';
-import Ember from 'ember';
-const { get } = Ember;
+// import { get } from '@ember/object';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { Promise } from 'rsvp';
+import EmberObject from '@ember/object';
 
+export default Route.extend(DefaultHeaders, {
 
-export default Ember.Route.extend(DefaultHeaders, {
-
-  access:  Ember.inject.service(),
-  session: Ember.inject.service(),
-  intl:    Ember.inject.service(),
+  access:  service(),
+  session: service(),
+  intl:    service(),
 
   model() {
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
       let tasks = {
         profile: this.cbFind('account', `accounts/${  this.get('session').get('id') }`),
         logData: this.cbFind('audit', `accounts/${  this.get('session').get('id')  }/audits`),
@@ -27,17 +29,17 @@ export default Ember.Route.extend(DefaultHeaders, {
     }, 'Load all the things');
 
     return promise.then((hash) => {
-      return Ember.Object.create({
+      return EmberObject.create({
         profile: hash.profile,
         logData: hash.logData,
       });
-    }).catch((err) => {
+    }).catch(() => {
       return;
     });
   },
 
   afterModel(model) {
-    if (!(model.profile.content == undefined)) {
+    if (!(model.profile.content === undefined)) {
       model.profile = model.profile.content[0];
     }
 

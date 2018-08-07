@@ -1,11 +1,15 @@
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { isEqual } from '@ember/utils';
+import { isEmpty } from '@ember/utils';
+import { htmlSafe } from '@ember/string';
 
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:               Ember.inject.service(),
-  notifications:      Ember.inject.service('notification-messages'),
+export default Component.extend(DefaultHeaders, {
+  intl:               service(),
+  notifications:      service('notification-messages'),
   error:              false,
   selectedBridges:    [],
   selectedNodes:      [],
@@ -16,22 +20,22 @@ export default Ember.Component.extend(DefaultHeaders, {
 
     this.set('selectedNodes', []);
     this.set('selectedBridges', []);
-    if (Ember.isEqual(this.get('selectedType'), this.get('type'))){
+    if (isEqual(this.get('selectedType'), this.get('type'))){
       this.setNodeAndBridge();
     }
-    if (!Ember.isEmpty(this.get('allnodes'))) {
+    if (!isEmpty(this.get('allnodes'))) {
       var bridge_name = '';
 
       return this.get('allnodes').map((node) => {
         self.get('selectedBridges').map((bridge) => {
-          bridge_name = Ember.isEqual(bridge.name, node.id) ? bridge.value : '';
+          bridge_name = isEqual(bridge.name, node.id) ? bridge.value : '';
         });
         var data = {
           name:          node.object_meta.name,
           node_id:       node.id,
           active_bridge: bridge_name,
           bridges:       [],
-          active:        !Ember.isEmpty(bridge_name),
+          active:        !isEmpty(bridge_name),
         };
 
         node.status.node_info.bridges.forEach((name) => {
@@ -50,7 +54,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
 
   typeSelectionChanged: function() {
-    Ember.isEqual(this.get('selectedType'), this.get('type')) ? this.setDefaultValues() : this.refresh();
+    isEqual(this.get('selectedType'), this.get('type')) ? this.setDefaultValues() : this.refresh();
   }.observes('type'),
 
   networkSelectionChanged: function(){
@@ -58,11 +62,11 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.observes('network'),
 
   virtualNetworks: function() {
-    return !Ember.isEmpty(this.get('type')) ? C.AVAILABLE_NETWORK_TYPES : [];
+    return !isEmpty(this.get('type')) ? C.AVAILABLE_NETWORK_TYPES : [];
   }.property('type'),
 
   active: function() {
-    return Ember.isEmpty(this.get('network.used_bits'));
+    return isEmpty(this.get('network.used_bits'));
   }.property('network.used_bits'),
 
   typeSelect: function() {
@@ -86,17 +90,17 @@ export default Ember.Component.extend(DefaultHeaders, {
           url:    `/api/v1/networks/${  this.get('network.id') }`,
           method: 'PUT',
           data:   this.getData(),
-        })).then((xhr) => {
+        })).then(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', true);
           this.sendAction('doReloaded');
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
           this.set('modelSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -114,7 +118,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       var self = this;
 
       self.get('selectedBridges').forEach((bridge) => {
-        if (bridge.name == value.name) {
+        if (bridge.name === value.name) {
           self.get('selectedBridges').removeObject(bridge);
         }
       });
@@ -126,12 +130,13 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   setNodeAndBridge() {
     var self = this;
-    if (!Ember.isEmpty(this.get('network.bridge_hosts'))) {
-      Object.keys(self.get('network.bridge_hosts')).map(function(key) {
+
+    if (!isEmpty(this.get('network.bridge_hosts'))) {
+      Object.keys(self.get('network.bridge_hosts')).map((key) => {
         self.get('selectedNodes').addObject(key);
         self.get('selectedBridges').addObject({
-          name: key,
-          value: self.get('network.bridge_hosts.' + `${key}`)
+          name:  key,
+          value: self.get('network.bridge_hosts.' + `${ key }`)
         });
       });
     }
@@ -181,50 +186,50 @@ export default Ember.Component.extend(DefaultHeaders, {
   validation() {
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('name'))) {
+    if (isEmpty(this.get('name'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.nameError'));
     }
-    if (Ember.isEmpty(this.get('type'))) {
+    if (isEmpty(this.get('type'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.typeError'));
     }
-    if (Ember.isEmpty(this.get('netmask'))) {
+    if (isEmpty(this.get('netmask'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.netmaskError'));
     }
-    if (Ember.isEmpty(this.get('subnet'))) {
+    if (isEmpty(this.get('subnet'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.subnetError'));
     }
-    if (Ember.isEmpty(this.get('selectedBridges'))) {
+    if (isEmpty(this.get('selectedBridges'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.brigeHostError'));
     }
-    if (Ember.isEmpty(this.get('gateway'))) {
+    if (isEmpty(this.get('gateway'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.gatewayError'));
     }
 
-    if (!Ember.isEmpty(this.get('gateway'))) {
+    if (!isEmpty(this.get('gateway'))) {
       if (this.checkIpFormate(this.get('gateway'))) {
         validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.gatewayError${  this.checkIpType() }`));
       }
     }
-    if (!Ember.isEmpty(this.get('subnet'))) {
+    if (!isEmpty(this.get('subnet'))) {
       if (this.checkSubnetFormate(this.get('subnet'))) {
         validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.subnetRangeError${  this.checkIpType() }`));
       }
     }
-    if (!Ember.isEmpty(this.get('netmask'))) {
+    if (!isEmpty(this.get('netmask'))) {
       if (this.checkNetmaskFormate(this.get('netmask'))) {
         validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.netmaskError${  this.checkIpType() }`));
       }
     }
 
-    if (Ember.isEmpty(this.get('selectedNodes'))) {
+    if (isEmpty(this.get('selectedNodes'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.nodesError'));
     }
-    if (this.get('selectedNodes').length != this.get('selectedBridges').length) {
+    if (this.get('selectedNodes').length !== this.get('selectedBridges').length) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.network.bridgeError'));
     }
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   checkNetmaskFormate(ip) {
@@ -247,7 +252,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     let data;
 
     this.get('allnodes').forEach((node) => {
-      if (node.object_meta.name == nodeName) {
+      if (node.object_meta.name === nodeName) {
         data = node.id;
       }
     });
