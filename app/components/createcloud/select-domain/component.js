@@ -63,8 +63,6 @@ export default Component.extend(DefaultHeaders, {
     },
 
     createSecret() {
-      // var self = this;
-
       if (!this.checkDomain() && !this.checkSecrectType()) {
         this.set('showSpinner', true);
         this.sendAction('done', 'step2');
@@ -73,7 +71,6 @@ export default Component.extend(DefaultHeaders, {
         this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
         this.set('model.secret.object_meta.name', this.get('model.stacksfactory.object_meta.name'));
 
-        // var session = this.get('session');
         var id = this.get('session').get('id');
 
         this.set('model.secret.object_meta.account', id);
