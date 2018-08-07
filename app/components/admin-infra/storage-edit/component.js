@@ -1,7 +1,7 @@
 import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/template';
+import { htmlSafe } from '@ember/string';
 import { isEmpty } from '@ember/utils';
 
 import DefaultHeaders from 'nilavu/mixins/default-headers';
