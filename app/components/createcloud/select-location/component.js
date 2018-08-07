@@ -1,9 +1,12 @@
 import Component from '@ember/component';
 import GeoTools from 'npm:geo-tools';
+import { on } from '@ember/object/evented';
+import { inject as service } from '@ember/service';
+
 export default Component.extend({
-  notifications:   Ember.inject.service('notification-messages'),
+  notifications:   service('notification-messages'),
   showField:       false,
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
     this.set('model.locationList', this.getCountry(this.get('model')));
     renderGlobeChart(this.get('model'), this.get('notifications'));
   }),

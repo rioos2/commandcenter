@@ -1,14 +1,15 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
   enable:  '',
 
   selectionChecker: function() {
-    var check = this.get('secretType') == this.get('key');
+    var check = this.get('secretType') === this.get('key');
 
     if (check) {
       this.set('active', true);
@@ -19,7 +20,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
 
-    if (this.get('key') == this.validateSecret()) {
+    if (this.get('key') === this.validateSecret()) {
       this.send('sendType');
     }
 

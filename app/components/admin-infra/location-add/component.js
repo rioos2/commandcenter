@@ -1,13 +1,13 @@
+import Ember from 'ember';
 import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/string';
-import { isEmpty } from '@ember/utils';
 import isoCurreny from 'npm:iso-country-currency';
 import Cities from 'npm:full-countries-cities';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
-import $ from 'jquery';
+import { htmlSafe } from '@ember/string';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend(DefaultHeaders, flagsISo, {
 
