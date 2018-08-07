@@ -1,17 +1,16 @@
 import Component from '@ember/component';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
-const { get } = Ember;
-
+import { get } from '@ember/object';
 import { denormalizeName } from 'nilavu/utils/denormalize';
-
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend(DefaultHeaders, {
-  intl:              Ember.inject.service(),
-  session:           Ember.inject.service(),
-  notifications:     Ember.inject.service('notification-messages'),
+  intl:              service(),
+  session:           service(),
+  notifications:     service('notification-messages'),
   showDomainEditBox: true,
   activate:          false,
   showSpinner:       false,
@@ -41,7 +40,7 @@ export default Component.extend(DefaultHeaders, {
   actions: {
     setNewDomain(newDomainName) {
       this.set('showDomainEditBox', true);
-      if (Ember.isEmpty(newDomainName.trim())) {
+      if (isEmpty(newDomainName.trim())) {
         this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.emptyDomain'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -54,7 +53,7 @@ export default Component.extend(DefaultHeaders, {
 
   },
   checkDomain() {
-    let checkDomain =  Ember.isEmpty(this.get('model.stacksfactory.object_meta.name'));
+    let checkDomain =  isEmpty(this.get('model.stacksfactory.object_meta.name'));
 
     if (checkDomain) {
       this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));

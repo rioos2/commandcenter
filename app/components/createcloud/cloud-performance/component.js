@@ -1,10 +1,12 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
-const  { get } = Ember;
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 
 export default Component.extend({
-  intl:        Ember.inject.service(),
-  storageType: Ember.computed.alias('model.stacksfactory.resources.storage_type'),
+  intl:        service(),
+  storageType: alias('model.stacksfactory.resources.storage_type'),
 
   isSelectedFlash: function() {
     return this.get('storageType') === C.VPS.RESOURSE.SSD;

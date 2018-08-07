@@ -1,12 +1,13 @@
-import Ember from 'ember';
-const { get } = Ember;
-
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 import C from 'nilavu/utils/constants';
 
-export default Ember.Component.extend({
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  store:         Ember.inject.service(),
+export default Component.extend({
+  intl:          service(),
+  notifications: service('notification-messages'),
+  store:         service(),
 
   activate:   false,
   groupedVms: function() {
@@ -15,13 +16,13 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.checkPlanEmpty();
-    if (!Ember.isEmpty(this.get('groupedVms'))) {
+    if (!isEmpty(this.get('groupedVms'))) {
       let item_found = false;
 
       this.get('groupedVms').forEach((e) => {
-        if (e.type == this.get('model.stacksfactory.os')) {
+        if (e.type === this.get('model.stacksfactory.os')) {
           e.version.forEach((v) => {
-            if (v.version == this.get('model.stacksfactory.resources.version')) {
+            if (v.version === this.get('model.stacksfactory.resources.version')) {
               item_found = true;
               this.refreshPlan(e, v);
             }
@@ -60,7 +61,7 @@ export default Ember.Component.extend({
     navigatorLeft() {
       var index = this.indexReader();
 
-      if (!index == 0) {
+       if (!(index === 0))
         this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
         this.setPlan(this.get('groupedVms')[index - 1]);
         this.setIcon(this.get('groupedVms')[index - 1]);
@@ -89,13 +90,12 @@ export default Ember.Component.extend({
   },
 
   setIcon(plan) {
-    let planFirstItem = plan.version[0];
 
     this.set('model.selected_icon', plan.icon);
   },
 
   checkPlanEmpty(){
-    if (Ember.isEmpty(this.get('groupedVms'))){
+    if (isEmpty(this.get('groupedVms'))){
       this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
         autoClear:     true,
         clearDuration: 6000,
@@ -115,7 +115,7 @@ export default Ember.Component.extend({
         planGroup.pushObject(plan.object_meta.name);
       }
       uniqueVmGroup = planGroup.filter((elem, index, self) => {
-        return index == self.indexOf(elem);
+        return index === self.indexOf(elem);
       })
     });
     uniqueVmGroup.forEach((vm) => {
@@ -127,7 +127,7 @@ export default Ember.Component.extend({
       }
 
       planfactory.forEach((plan) => {
-        if (plan.object_meta.name == vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.CONTAINER) {
+        if (plan.object_meta.name === vm && plan.status.phase.toLowerCase() === C.PHASE.READY && plan.category.toLowerCase() === C.CATEGORIES.CONTAINER) {
           createVmGroup.item.pushObject(plan);
           createVmGroup.icon = plan.icon;
           createVmGroup.version.pushObject({
