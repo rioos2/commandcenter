@@ -10,7 +10,6 @@ import $ from 'jquery';
 var Node = Resource.extend(DefaultHeaders, {
   displayName:      alias('name'),
   availableActions: function() {
-    // var a = this.get('actionLinks');
 
     return [{
       label:   'action.installNode',

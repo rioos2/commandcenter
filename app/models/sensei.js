@@ -10,7 +10,6 @@ import $ from 'jquery';
 var Sensei = Resource.extend(DefaultHeaders, {
   displayName:      alias('name'),
   availableActions: function() {
-    // var a = this.get('actionLinks');
 
     return [
       {
