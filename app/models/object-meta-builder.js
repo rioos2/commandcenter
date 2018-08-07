@@ -1,8 +1,9 @@
 import Haikunator from 'npm:haikunator';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
+import EmberObject from '@ember/object';
 import { denormalizeName } from 'nilavu/utils/denormalize';
-const ObjectMetaBuilder = Ember.Object.extend({});
+const ObjectMetaBuilder = EmberObject.extend({});
 
 ObjectMetaBuilder.reopenClass({
 

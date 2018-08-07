@@ -1,6 +1,8 @@
 import Resource from 'ember-api-store/models/resource';
-const { get } = Ember;
-
+import { get } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Downloadjs from 'npm:downloadjs';
@@ -8,7 +10,6 @@ import Downloadjs from 'npm:downloadjs';
 var Assembly = Resource.extend(DefaultHeaders, {
 
   availableActions: function() {
-    var a = this.get('actionLinks');
 
     return [{
       label:     'action.remove',
@@ -62,7 +63,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   }.property('metadata.rioos_sh_vnc_port'),
 
   enableConsole: function() {
-    return Ember.isEmpty(this.get('host')) || Ember.isEmpty(this.get('port'));
+    return isEmpty(this.get('host')) || isEmpty(this.get('port'));
   }.property('host', 'port'),
 
   name: function() {
@@ -70,12 +71,12 @@ var Assembly = Resource.extend(DefaultHeaders, {
   }.property('object_meta.name'),
 
   type:          'assembly',
-  lifecycle:     Ember.inject.service('lifecycle'),
-  router:        Ember.inject.service(),
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  modalService:  Ember.inject.service('modal'),
-  session:       Ember.inject.service(),
+  lifecycle:     service('lifecycle'),
+  router:        service(),
+  intl:          service(),
+  notifications: service('notification-messages'),
+  modalService:  service('modal'),
+  session:       service(),
   enableLink:    false,
 
 
@@ -102,7 +103,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   },
 
   applicationUrlData() {
-    let ip = !Ember.isEmpty(this.get('spec.endpoints.subsets.addresses')) ? this.get('spec.endpoints.subsets.addresses')[0].ip : '';
+    let ip = !isEmpty(this.get('spec.endpoints.subsets.addresses')) ? this.get('spec.endpoints.subsets.addresses')[0].ip : '';
 
     if (ip) {
       let planBlueprintId = this.get('spec.assembly_factory.metadata.rioos_sh_blueprint_applied');
@@ -146,7 +147,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
         });
         this.set('hasTerminated', true);
         this.get('modalService').toggleModal();
-      }).catch((err) => {
+      }).catch(() => {
         this.get('notifications').warning(get(this, 'intl').t('notifications.Stacks.DeleteFailed'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -158,16 +159,16 @@ var Assembly = Resource.extend(DefaultHeaders, {
     showQRcode() {
       var self = this;
 
-      if (!Ember.isEmpty(this.get('SecretData'))) {
+      if (!isEmpty(this.get('SecretData'))) {
         let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || '';
 
         this.set('rioos_sh_kryptonite_qrcode', key);
         this.get('modalService').toggleModal('modal-show-qrcode', this);
       } else {
         self.get('notifications').warning(get(self, 'intl').t('notifications.QRcode.downloadFailed'), {
-          autoClear:     true,
-          clearDuration: 4200,
-          cssClasses:    'notification-warning'
+          autoClear:      true,
+          clearDuration:  4200,
+          cssClasses:     'notification-warning'
         });
       }
     },
