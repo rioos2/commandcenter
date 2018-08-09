@@ -1,27 +1,30 @@
-/* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
-import Ember from 'ember';
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
+
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
-const { get } = Ember;
 
 import C from 'nilavu/utils/constants';
 
 
-export default Ember.Component.extend(DefaultHeaders, {
-  session:           Ember.inject.service(),
-  intl:              Ember.inject.service(),
-  notifications:     Ember.inject.service('notification-messages'),
+export default Component.extend(DefaultHeaders, {
+  session:           service(),
+  intl:              service(),
+  notifications:     service('notification-messages'),
   noImage:           true,
   validationWarning: '',
   networkExist:      true,
 
   domainName:  '',
-  compute:     Ember.computed.alias('model.stacksfactory.resources.compute_type'),
-  storageType: Ember.computed.alias('model.stacksfactory.resources.storage_type'),
-  network:     Ember.computed.alias('model.stacksfactory.network'),
-  clusterName: Ember.computed.alias('model.stacksfactory.object_meta.cluster_name'),
-  resources:   Ember.computed.alias('model.stacksfactory.resources'),
-  af:          Ember.computed.alias('model.stacksfactory'),
+  compute:     alias('model.stacksfactory.resources.compute_type'),
+  storageType: alias('model.stacksfactory.resources.storage_type'),
+  network:     alias('model.stacksfactory.network'),
+  clusterName: alias('model.stacksfactory.object_meta.cluster_name'),
+  resources:   alias('model.stacksfactory.resources'),
+  af:          alias('model.stacksfactory'),
 
 
   isSelectedCPU: function() {
@@ -53,7 +56,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.observes('model.stacksfactory.os'),
 
   distroNameFromPlan: function() {
-    if (this.get('model.stacksfactory.os') == undefined) {
+    if (this.get('model.stacksfactory.os') === undefined) {
       this.set('noImage', true);
     } else {
       this.set('noImage', false);
@@ -63,7 +66,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   }.property('model.stacksfactory.os'),
 
   regionExisit: function() {
-    return Ember.isEmpty(this.get('clusterName'));
+    return isEmpty(this.get('clusterName'));
   }.property('clusterName'),
 
   // countryExisit: function() {
@@ -71,25 +74,25 @@ export default Ember.Component.extend(DefaultHeaders, {
   // }.property('model.assemblyfactory.country'),
 
   networkExisit: function() {
-    return Ember.isEmpty(this.get('network'));
+    return isEmpty(this.get('network'));
   }.property('network'),
 
   imageExisit: function() {
-    return Ember.isEmpty(this.get('model.stacksfactory.os'));
+    return isEmpty(this.get('model.stacksfactory.os'));
   }.property('model.stacksfactory.os'),
 
   blockchainNetworkAvailable: function() {
-    return (Ember.isEmpty(this.get('model.stacksfactory.metadata.rioos_sh_blockchain_network_id')) && Ember.isEqual(this.get('model.stacksfactory.object_meta.labels.rioos_category'), C.CATEGORIES.BLOCKCHAIN_TEMPLATE)) ? true : false;
+    return (isEmpty(this.get('model.stacksfactory.metadata.rioos_sh_blockchain_network_id')) && isEqual(this.get('model.stacksfactory.object_meta.labels.rioos_category'), C.CATEGORIES.BLOCKCHAIN_TEMPLATE)) ? true : false;
   }.property('model.stacksfactory.metadata.rioos_sh_blockchain_network_id'),
 
   horizontalScalingExist: function() {
-    return (!Ember.isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.horizontal_scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') > 0 && this.get('model.hscaling.target_value.max_target_value_cpu') > 0 ||
+    return (!isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.horizontal_scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') > 0 && this.get('model.hscaling.target_value.max_target_value_cpu') > 0 ||
         this.get('model.hscaling.target_value.min_target_value_memory') > 0 && this.get('model.hscaling.target_value.max_target_value_memory') > 0 ||
         this.get('model.hscaling.target_value.min_target_value_disk') > 0 && this.get('model.hscaling.target_value.max_target_value_disk') > 0 ) : false ) : false;
   }.property('model.scaling', 'model.hscaling.horizontal_scaling_rule_apply', 'model.hscaling.target_value.min_target_value_cpu', 'model.hscaling.target_value.max_target_value_cpu', 'model.hscaling.target_value.min_target_value_memory', 'model.hscaling.target_value.max_target_value_memory', 'model.hscaling.target_value.min_target_value_disk', 'model.hscaling.target_value.max_target_value_disk'),
 
   verticalScalingExist: function() {
-    return (!Ember.isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.horizontal_scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') > 0 && this.get('model.hscaling.target_value.max_target_value_cpu') > 0 ||
+    return (!isEmpty(this.get('model.hscaling'))) ? (this.get('model.hscaling.horizontal_scaling_rule_apply') ? !(this.get('model.hscaling.target_value.min_target_value_cpu') > 0 && this.get('model.hscaling.target_value.max_target_value_cpu') > 0 ||
         this.get('model.hscaling.target_value.min_target_value_memory') > 0 && this.get('model.hscaling.target_value.max_target_value_memory') > 0 ||
         this.get('model.hscaling.target_value.min_target_value_disk') > 0 && this.get('model.hscaling.target_value.max_target_value_disk') > 0 ) : false ) : false;
   }.property('model.scaling', 'model.hscaling.horizontal_scaling_rule_apply', 'model.hscaling.target_value.min_target_value_cpu', 'model.hscaling.target_value.max_target_value_cpu', 'model.hscaling.target_value.min_target_value_memory', 'model.hscaling.target_value.max_target_value_memory', 'model.hscaling.target_value.min_target_value_disk', 'model.hscaling.target_value.max_target_value_disk'),
@@ -107,7 +110,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       if (!this.validation()) {
         this.set('filpper', 'dive');
         this.set('showSpinner', true);
-        var session = this.get('session');
+        // var session = this.get('session');
         var id = this.get('session').get('id');
 
         this.set('model.stacksfactory.object_meta.account', id);
@@ -116,7 +119,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
         this.resourceUpdate();
         this.get('model.stacksfactory').save(this.opts(url)).then((result) => {
-          if (result.object_meta.labels.rioos_category == C.CATEGORIES.CONTAINER) {
+          if (result.object_meta.labels.rioos_category === C.CATEGORIES.CONTAINER) {
             if (this.hscalingApplied()) {
               this.set('model.hscaling.object_meta.account', id);
               this.createHorizontalScaling(result);
@@ -127,7 +130,7 @@ export default Ember.Component.extend(DefaultHeaders, {
             }
 
           }
-          if (result.object_meta.labels.rioos_category == C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
+          if (result.object_meta.labels.rioos_category === C.CATEGORIES.BLOCKCHAIN_TEMPLATE) {
             this.createBuildConfig(result);
             this.get('model.buildconfig').save(this.opts(build_url)).then(() => {
               this.get('notifications').info(get(this, 'intl').t('launcherPage.buildconfig.success'), {
@@ -136,7 +139,7 @@ export default Ember.Component.extend(DefaultHeaders, {
                 cssClasses:    'notification-success'
               });
               this.set('showSpinner', false);
-            }).catch((err) => {
+            }).catch(() => {
               this.get('notifications').warning(get(this, 'intl').t('notifications.failedBuildConfig'), {
                 autoClear:     true,
                 clearDuration: 4200,
@@ -146,7 +149,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           }
           // this.get('router').transitionTo('/apps/stacks');
           window.location = '/apps/stacks';
-        }).catch((err) => {
+        }).catch(() => {
           this.set('filpper', '');
           this.get('notifications').warning(get(this, 'intl').t('notifications.failedLaunch'), {
             autoClear:     true,
@@ -169,7 +172,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
 
   setResource(resource, scale) {
-    if (!Ember.isEmpty(this.get('model.' + `${ scale }` + '.target_value.max_target_value_' + `${ resource }`)) || !Ember.isEmpty(this.get('model.' + `${ scale }` + '.target_value.min_target_value_' + `${ resource }`))) {
+    if (!isEmpty(this.get('model.' + `${ scale }` + '.target_value.max_target_value_' + `${ resource }`)) || !isEmpty(this.get('model.' + `${ scale }` + '.target_value.min_target_value_' + `${ resource }`))) {
       this.get('model.' + `${ scale }` + '.spec.metrics').pushObject({
         metric_type: 'Resource',
         'resource':  {
@@ -194,16 +197,16 @@ export default Ember.Component.extend(DefaultHeaders, {
   scalingResourceExist(scale) {
     var self = this;
 
-    if (Ember.isEqual(this.get('model.object_meta.labels.rioos_category')), C.CATEGORIES.CONTAINER) {
+    if (isEqual(this.get('model.object_meta.labels.rioos_category')), C.CATEGORIES.CONTAINER) {
       self.set('model.' + `${ scale }` + '.spec.metrics', []);
       C.RESOURCES.map((resource) => {
         self.setResource(resource, scale);
       });
     }
   },
-
+  // Need to be  validate via mixins helpers as like as in signup
   validation() {
-    if (Ember.isEmpty(this.get('model.stacksfactory.secret.id')) && this.get('model.stacksfactory.object_meta.labels.rioos_category') != C.CATEGORIES.BLOCKCHAIN) {
+    if (isEmpty(this.get('model.stacksfactory.secret.id')) && this.get('model.stacksfactory.object_meta.labels.rioos_category') !== C.CATEGORIES.BLOCKCHAIN) {
       this.set('validationWarning', get(this, 'intl').t('notifications.secret'));
 
       return true;
@@ -215,7 +218,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('validationWarning', get(this, 'intl').t('notifications.region'));
 
       return true;
-    } else if (Ember.isEmpty(this.get('model.stacksfactory.os'))) {
+    } else if (isEmpty(this.get('model.stacksfactory.os'))) {
       this.set('validationWarning', get(this, 'intl').t('notifications.plan.noSelection'));
 
       return true;
@@ -247,13 +250,13 @@ export default Ember.Component.extend(DefaultHeaders, {
     var self = this;
 
     this.set('model.buildconfig.object_meta.cluster_name', result.object_meta.cluster_name);
-    if (!Ember.isEmpty(result.spec.plan.meta_data.rioos_sh_blockchain_network)) {
+    if (!isEmpty(result.spec.plan.meta_data.rioos_sh_blockchain_network)) {
       this.set('model.buildconfig.spec.strategy.build_type', result.spec.plan.metadata.rioos_sh_blockchain_network);
     }
-    if (!Ember.isEmpty(result.spec.assembly_factory)) {
+    if (!isEmpty(result.spec.assembly_factory)) {
       result.spec.assembly_factory.map((assemblyfactory) => {
-        if (!Ember.isEmpty(assemblyfactory.spec.plan) && !Ember.isEmpty(result.spec.plan)) {
-          if (Ember.isEqual(assemblyfactory.spec.plan.category, result.spec.plan.category)) {
+        if (!isEmpty(assemblyfactory.spec.plan) && !isEmpty(result.spec.plan)) {
+          if (isEqual(assemblyfactory.spec.plan.category, result.spec.plan.category)) {
             self.get('model.buildconfig.object_meta.owner_references').map((owner) => {
               owner.name = result.object_meta.name;
               owner.uid = result.id;
@@ -262,7 +265,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         }
       })
     }
-    if (!Ember.isEmpty(this.get('model.buildconfig.spec.build_trigger_policys'))) {
+    if (!isEmpty(this.get('model.buildconfig.spec.build_trigger_policys'))) {
       this.get('model.buildconfig.spec.build_trigger_policys').map((build) => {
         build.webhook.secret = result.secret.id;
       });
@@ -274,7 +277,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     var self = this;
 
     this.scalingResourceExist('hscaling');
-    if (!Ember.isEmpty(stacksfactory.spec.assembly_factory)) {
+    if (!isEmpty(stacksfactory.spec.assembly_factory)) {
       var hs_url = 'horizontalscaling';
 
       stacksfactory.spec.assembly_factory.map(function(assemblyfactory) {
@@ -291,7 +294,7 @@ export default Ember.Component.extend(DefaultHeaders, {
             cssClasses:    'notification-success'
           });
           self.set('showSpinner', false);
-        }).catch((err) => {
+        }).catch(() => {
           self.get('notifications').warning(get(this, 'intl').t('notifications.failedHScaling'), {
             autoClear:     true,
             clearDuration: 4200,
@@ -315,7 +318,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     var self = this;
 
     this.scalingResourceExist('vscaling');
-    if (!Ember.isEmpty(stacksfactory.spec.assembly_factory)) {
+    if (!isEmpty(stacksfactory.spec.assembly_factory)) {
       var vs_url = 'verticalscaling';
 
       self.verticalResourceUpdate();
@@ -333,7 +336,7 @@ export default Ember.Component.extend(DefaultHeaders, {
             cssClasses:    'notification-success'
           });
           self.set('showSpinner', false);
-        }).catch((err) => {
+        }).catch(() => {
           self.get('notifications').warning(get(this, 'intl').t('notifications.failedVScaling'), {
             autoClear:     true,
             clearDuration: 4200,

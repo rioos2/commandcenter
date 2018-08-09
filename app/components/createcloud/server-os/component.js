@@ -157,8 +157,6 @@ export default Component.extend({
   },
 
   setIcon(plan) {
-    let planFirstItem = plan.version[0];
-
     this.set('model.selected_icon', plan.icon);
   },
 

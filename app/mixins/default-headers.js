@@ -47,6 +47,7 @@ export default Mixin.create({
       'team':               tabSession.get(C.TABSESSION.TEAM) || '',
       'token':              session.get('token')
     }
+
     return btoa(JSON.stringify(subHeader));
   }
 

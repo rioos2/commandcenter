@@ -1,10 +1,11 @@
 import Component from '@ember/component';
-import C from 'nilavu/utils/constants';
-const { get } = Ember;
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   selectedTab:              'cpu',
   panels:                   [],
@@ -40,7 +41,7 @@ export default Component.extend({
 
   validate(scaleData) {
     this.set('flag', true);
-    if (Ember.isEmpty(scaleData.trim())) {
+    if (isEmpty(scaleData.trim())) {
       this.set('flag', false);
       this.get('notifications').warning(get(this, 'intl').t('launcherPage.scaling.emptyScaling'), {
         autoClear:     true,
