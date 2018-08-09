@@ -61,7 +61,7 @@ export default Component.extend({
     navigatorLeft() {
       var index = this.indexReader();
 
-       if (!(index === 0))
+      if (!(index === 0)) {
         this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
         this.setPlan(this.get('groupedVms')[index - 1]);
         this.setIcon(this.get('groupedVms')[index - 1]);
@@ -72,7 +72,6 @@ export default Component.extend({
       this.sendAction('done', 'step5');
     },
   },
-
 
   setFirstPlanFactory() {
     let plan = this.get('groupedVms')[0];

@@ -2,20 +2,21 @@ import InputValidation from 'nilavu/models/input-validation';
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { get } from '@ember/object';
-import Ember from 'ember';
-
+import { inject as service } from '@ember/service';
+import EmberMap from '@ember/map';
+import { isEmpty } from '@ember/utils';
 /*   USAGE
  *  set passwordMinLength, passwordRequired propertie on controller or component when use this mixin.
  */
 
 export default Mixin.create({
-  intl:              Ember.inject.service(),
+  intl:              service(),
   rejectedPasswords: null,
 
   init() {
     this._super();
     this.set('rejectedPasswords', []);
-    this.set('rejectedPasswordsMessages', Ember.Map.create());
+    this.set('rejectedPasswordsMessages', EmberMap.create());
   },
 
   passwordMinLength: computed('passwordMinLength', function() {
@@ -32,7 +33,7 @@ export default Mixin.create({
       }
 
       // If blank, fail with a reason
-      if (Ember.isEmpty(this.get('password'))) {
+      if (isEmpty(this.get('password'))) {
         return InputValidation.create({
           failed: true,
           reason: get(this, 'intl').t('validate.user.password.empty_password')
@@ -55,14 +56,14 @@ export default Mixin.create({
         });
       }
 
-      if (!Ember.isEmpty(this.get('username')) && this.get('password') === this.get('username')) {
+      if (!isEmpty(this.get('username')) && this.get('password') === this.get('username')) {
         return InputValidation.create({
           failed: true,
           reason: get(this, 'intl').t('validate.user.password.same_as_username')
         });
       }
 
-      if (!Ember.isEmpty(this.get('accountEmail')) && this.get('password') === this.get('accountEmail')) {
+      if (!isEmpty(this.get('accountEmail')) && this.get('password') === this.get('accountEmail')) {
         return InputValidation.create({
           failed: true,
           reason: get(this, 'intl').t('validate.user.password.same_as_email')

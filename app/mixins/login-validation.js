@@ -2,15 +2,17 @@ import InputValidation from 'nilavu/models/input-validation';
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 export default Mixin.create({
 
-  intl: Ember.inject.service(),
+  intl: service(),
 
   // If blank, fail with a reason
   userNameValidation: computed('username', function() {
     if (
-      Ember.isEmpty(this.get('username'))
+      isEmpty(this.get('username'))
     ) {
       return InputValidation.create({
         failed: true,
@@ -24,7 +26,7 @@ export default Mixin.create({
   // If blank, fail with a reason
   passwordValidation: computed('password', function() {
     if (
-      Ember.isEmpty(this.get('password'))
+      isEmpty(this.get('password'))
     ) {
       return InputValidation.create({
         failed: true,

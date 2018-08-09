@@ -1,6 +1,5 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-
+import { helper as buildHelper } from '@ember/component/helper';
 export function showStatusBulb(params) {
   var state;
 
@@ -23,4 +22,4 @@ export function showStatusBulb(params) {
   return state;
 }
 
-export default Ember.Helper.helper(showStatusBulb);
+export default buildHelper(showStatusBulb);
