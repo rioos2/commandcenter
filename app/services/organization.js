@@ -1,12 +1,15 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Service.extend(DefaultHeaders, {
-  access:        Ember.inject.service(),
-  'tab-session': Ember.inject.service('tab-session'),
-  userStore:     Ember.inject.service('user-store'),
-  store:         Ember.inject.service(),
+export default Service.extend(DefaultHeaders, {
+  access:        service(),
+  'tab-session': service('tab-session'),
+  userStore:     service('user-store'),
+  store:         service(),
+  session:       service(),
 
   currentOrganization: null,
   currentTeam:         null,
@@ -14,14 +17,14 @@ export default Ember.Service.extend(DefaultHeaders, {
 
   // Get all organizations
   getAll() {
-    return this.get('store').find('origin', null, this.opts('origins'));
+    return this.get('store').find('origin', null, this.opts(`origins/accounts/${ this.get('session').get('id') }`));
   },
 
   // Check the existence of origansation and team on session
   checkOriginAndTeamSession() {
     var tabSession = this.get('tab-session');
 
-    return Ember.isEmpty(tabSession.get(C.TABSESSION.ORGANIZATION)) /* && Ember.isEmpty(tabSession.get(C.TABSESSION.TEAM))*/;
+    return isEmpty(tabSession.get(C.TABSESSION.ORGANIZATION)) /* && isEmpty(tabSession.get(C.TABSESSION.TEAM))*/;
   },
 
   // Update selected organization and team to the session

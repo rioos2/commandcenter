@@ -47,10 +47,7 @@ export default Mixin.create({
       'team':               tabSession.get(C.TABSESSION.TEAM) || '',
       'token':              session.get('token')
     }
-    var encoded = btoa(JSON.stringify(subHeader));
-
-    // TO-DO need to encrypt the header
-    return encoded;
+    return btoa(JSON.stringify(subHeader));
   }
 
 });

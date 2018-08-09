@@ -1,7 +1,4 @@
-import Ember from 'ember';
-import { inject as service } from '@ember/service';
-import Route from '@ember/routing/route';
-import C from 'nilavu/utils/constants';
+import Resource from 'ember-api-store/models/resource';
 
 export default Resource.extend({
 

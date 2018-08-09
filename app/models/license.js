@@ -1,10 +1,11 @@
 import Resource from 'ember-api-store/models/resource';
+import EmberObject from '@ember/object';
 
 var License = Resource.extend({
   type: 'license',
 
   getLicense() {
-    return Ember.Object.create({ license: this.get('store').findAll('license', this.opts('license', true)), });
+    return EmberObject.create({ license: this.get('store').findAll('license', this.opts('license', true)), });
   }
 
 });
