@@ -1,6 +1,8 @@
-import Ember from 'ember';
-export default Em.Component.extend({
-  intl:              Ember.inject.service(),
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+
+export default Component.extend({
+  intl:              service(),
   tagName:           'li',
   classNameBindings: ['active', 'tabClassName', ':tabDisabled'],
 

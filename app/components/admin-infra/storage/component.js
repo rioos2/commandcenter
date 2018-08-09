@@ -1,10 +1,13 @@
+import { isEmpty } from '@ember/utils';
 import { buildAdminInfraPanel } from '../admin-infra-panel/component';
+import $ from 'jquery';
+
 export default buildAdminInfraPanel('storage', {
   storageData:  null,
   storagespool: null,
 
   didInsertElement() {
-    if (!Ember.isEmpty(this.get('storages'))) {
+    if (!isEmpty(this.get('storages'))) {
       this.send('SideData', this.get('storages').get('firstObject'));
     }
   },
@@ -18,7 +21,7 @@ export default buildAdminInfraPanel('storage', {
   }.property('model'),
 
   storages: function() {
-    return Ember.isEmpty(this.get('model.storageConnectors.content')) ? [] : this.get('model.storageConnectors.content');
+    return isEmpty(this.get('model.storageConnectors.content')) ? [] : this.get('model.storageConnectors.content');
   }.property('model.storageConnectors.content.@each'),
 
   poolsUpdater: function() {
@@ -29,7 +32,7 @@ export default buildAdminInfraPanel('storage', {
     var pool_list = [];
 
     this.get('model.storagesPool.content').forEach((strpool) => {
-      if (storageConnector.id == strpool.connector_id) {
+      if (storageConnector.id === strpool.connector_id) {
         pool_list.push(strpool);
       }
     });

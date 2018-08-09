@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   didInsertElement() {
     let _this = this;
     let initValue = this.get('initValue');

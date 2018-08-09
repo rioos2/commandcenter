@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import config from 'nilavu/config/environment';
+import { next } from '@ember/runloop';
+import $ from 'jquery';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   instance: null,
 
@@ -33,7 +35,7 @@ export default Ember.Component.extend({
   }.property('rfbState'),
   didInsertElement() {
     this._super();
-    Ember.run.next(this, 'exec');
+    next(this, 'exec');
   },
 
   willDestroyElement() {

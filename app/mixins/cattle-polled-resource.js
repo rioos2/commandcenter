@@ -1,8 +1,8 @@
-import Ember from 'ember';
 import Util from 'nilavu/utils/util';
 import C from 'nilavu/utils/constants';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   reservedKeys: ['delayTimer', 'pollTimer'],
 
   replaceWith() {
