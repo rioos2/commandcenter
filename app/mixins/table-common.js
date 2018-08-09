@@ -52,7 +52,7 @@ export default Mixin.create({
       }
     },
 
-    onColumnClick(column, model) {
+    onColumnClick(column, /* model*/) {
       if (column.sorted) {
         this.setProperties({
           dir:         column.ascending ? 'asc' : 'desc',

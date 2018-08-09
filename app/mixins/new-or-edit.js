@@ -1,16 +1,19 @@
-import Ember from 'ember';
 import Resource from  'ember-api-store/models/resource';
 import Errors from 'nilavu/utils/errors';
+import { inject as service } from '@ember/service';
+import Mixin from '@ember/object/mixin';
+import { alias } from '@ember/object/computed';
+import { resolve } from 'rsvp';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   originalModel:           null,
   errors:                  null,
   saving:                  false,
   editing:                 true,
-  primaryResource:         Ember.computed.alias('model'),
-  originalPrimaryResource: Ember.computed.alias('originalModel'),
-  userStore:               Ember.inject.service('user-store'),
-  access:                  Ember.inject.service(),
+  primaryResource:         alias('model'),
+  originalPrimaryResource: alias('originalModel'),
+  userStore:               service('user-store'),
+  access:                  service(),
 
   initFields() {
     this._super();
@@ -55,7 +58,7 @@ export default Ember.Mixin.create({
 
     save(cb) {
       // Will save can return true/false or a promise
-      Ember.RSVP.resolve(this.willSave()).then((ok) => {
+      resolve(this.willSave()).then((ok) => {
         if (!ok) {
           // Validation or something else said not to save
           if (cb) {
