@@ -1,31 +1,44 @@
-import Ember from 'ember';
-const { get } = Ember;
-
-import C from 'nilavu/utils/constants';
+import { inject as service } from '@ember/service';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  session:       Ember.inject.service(),
+import OrganizationUser from 'nilavu/mixins/organization-validation';
+import Component from '@ember/component';
+import { htmlSafe } from '@ember/template';
+export default Component.extend(DefaultHeaders, OrganizationUser, {
+  intl:          service(),
+  notifications: service('notification-messages'),
+  session:       service(),
+
+  validate: function() {
+    if (this.get('organizationNameValidation.failed')) {
+      this.set('validationError', this.get('organizationNameValidation.reason'));
+
+      return true;
+    }
+    this.set('validationError', '');
+
+    return false;
+  }.property(
+    'organizationNameValidation.failed'
+  ),
 
   actions: {
 
     createOrganization() {
       this.set('showSpinner', true);
-      if (!this.validation()) {
+      if (!this.get('validate')) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
           url:    '/api/v1/origins',
           method: 'POST',
           data:   this.getData(),
-        })).then((xhr) => {
+        })).then(() => {
           this.set('showSpinner', false);
           location.reload();
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationError')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -35,16 +48,6 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   },
 
-  validation() {
-    var validationString = '';
-
-    if (Ember.isEmpty(this.get('originName'))) {
-      validationString = get(this, 'intl').t('nav.organization.create.orgNameEmpty');
-    }
-    this.set('validationWarning', validationString);
-
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
-  },
 
   getData() {
     return {
