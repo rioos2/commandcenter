@@ -1,12 +1,13 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import C from 'nilavu/utils/constants';
 import Service from '@ember/service';
-import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { resolve, reject } from 'rsvp';
+
 
 export default Service.extend(DefaultHeaders, {
-  cookies: service(),
-  session: service(),
+  cookies:   service(),
+  session:   service(),
 
   store:     service(),
   userStore: service('user-store'),
@@ -27,7 +28,7 @@ export default Service.extend(DefaultHeaders, {
   // For now, consider as Auth token expired
 
   testAuth() {
-    return Ember.RSVP.resolve('Auth Succeeded');
+    return resolve('Auth Succeeded');
     // TODO
     // // make a call to api base because it is authenticated
     // return this.get('userStore').rawRequest(this.rawRequestOpts({ url: '/api/v1/test', })).then((xhr) => {
@@ -35,13 +36,13 @@ export default Service.extend(DefaultHeaders, {
     //   return Ember.RSVP.resolve('Auth Succeeded');
     // }, (/* err */) => {
     //   // Auth token expired
-    //   return Ember.RSVP.reject('Auth Failed');
+    //   return reject('Auth Failed');
     // });
   },
 
   detect() {
     if (this.get('enabled') !== null) {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
     this.setProperties({
       'enabled':       true,
@@ -63,7 +64,6 @@ export default Service.extend(DefaultHeaders, {
     }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
-      var origin;
 
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         // TO-DO origin and team will not  work here. since it placed on sub level
@@ -92,7 +92,7 @@ export default Service.extend(DefaultHeaders, {
         };
       }
 
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 
@@ -109,7 +109,7 @@ export default Service.extend(DefaultHeaders, {
 
       return res;
     }).catch((err) => {
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 
@@ -123,7 +123,6 @@ export default Service.extend(DefaultHeaders, {
     }).then((xhr) => {
       var auth = xhr.body;
       var interesting = {};
-      var origin;
 
       C.TOKEN_TO_SESSION_KEYS.forEach((key) => {
         if (typeof auth[key] !== 'undefined') {
@@ -150,7 +149,7 @@ export default Service.extend(DefaultHeaders, {
         };
       }
 
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 
@@ -180,9 +179,9 @@ export default Service.extend(DefaultHeaders, {
         email: this.get('session').get('email'),
         token: this.get('session').get('token'),
       },
-    })).then((xhr) => {
+    })).then((/* xhr*/) => {
       this.clearSessionKeys(true, true);
-    }).catch((res) => {
+    }).catch((/* res */) => {
       this.clearSessionKeys(true, true);
     });
   },
