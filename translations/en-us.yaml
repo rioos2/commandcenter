@@ -374,7 +374,7 @@ stackPage:
       entitlement:
         title:                        License
         description:                  Edit activation code
-        node:                         '{optionName}:Activated  {senseiActivated}/{senseiAllowed}'
+        node:                         '{optionName}:Activated  {Activated}/{Allowed}'
         expired:                      " -  Expires in "
         days:                         " days"
         trial:                        Trial

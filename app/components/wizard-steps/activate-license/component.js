@@ -1,13 +1,17 @@
-import Ember from 'ember';
-const { get } = Ember;
-
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
+import { later } from '@ember/runloop';
+import { htmlSafe } from '@ember/string';
+import Component from '@ember/component';
+import { get } from '@ember/object';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
 
-  intl:               Ember.inject.service(),
-  notifications:      Ember.inject.service('notification-messages'),
-  access:        Ember.inject.service(),
+export default Component.extend(DefaultHeaders, {
+
+  intl:          service(),
+  notifications: service('notification-messages'),
+  access:        service(),
 
 
   tagName:            'section',
@@ -16,7 +20,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   showSpinnerTrail:   false,
 
   useTrialVersionNote: function() {
-    return Ember.String.htmlSafe(get(this, 'intl').t('wizard.useTrialVersionNote'));
+    return htmlSafe(get(this, 'intl').t('wizard.useTrialVersionNote'));
   }.property('model'),
 
   licenceIdPlaceholder: function() {
@@ -39,7 +43,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         url:    '/api/v1/licenses/activate',
         method: 'POST',
         data:   license,
-      })).then((xhr) => {
+      })).then(() => {
         this.set('showSpinnerTrail', false);
         this.get('notifications').warning(get(this, 'intl').t('wizard.licenseSuccessMsg'), {
           autoClear:     true,
@@ -47,7 +51,7 @@ export default Ember.Component.extend(DefaultHeaders, {
           cssClasses:    'notification-success'
         });
         location.reload();
-      }).catch((err) => {
+      }).catch(() => {
         this.set('showSpinnerTrail', false);
         this.get('notifications').warning(get(this, 'intl').t('wizard.licenseFailedMsg'), {
           autoClear:     true,
@@ -72,9 +76,9 @@ export default Ember.Component.extend(DefaultHeaders, {
           url:    '/api/v1/licenses/activate',
           method: 'POST',
           data:   license,
-        })).then((xhr) => {
+        })).then(() => {
           this.checkLicense();
-        }).catch((err) => {
+        }).catch(() => {
           this.set('showSpinnerLicense', false);
           this.get('notifications').warning(get(this, 'intl').t('wizard.licenseFailedMsg'), {
             autoClear:     true,
@@ -84,7 +88,7 @@ export default Ember.Component.extend(DefaultHeaders, {
         });
       } else {
         this.set('showSpinnerLicense', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -96,21 +100,21 @@ export default Ember.Component.extend(DefaultHeaders, {
   validation() {
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('licenceId'))) {
+    if (isEmpty(this.get('licenceId'))) {
       validationString = validationString.concat(get(this, 'intl').t('wizard.licenseIDError'));
     }
-    if (Ember.isEmpty(this.get('licencePwd'))) {
+    if (isEmpty(this.get('licencePwd'))) {
       validationString = validationString.concat(get(this, 'intl').t('wizard.licensePwdError'));
     }
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   checkLicenseStatus() {
     let self = this;
 
-    Em.run.later(() => {
+    later(() => {
       let license = self.get('model.license.license.content').get('firstObject');
 
       if (license.status === 'active') {
@@ -135,7 +139,7 @@ export default Ember.Component.extend(DefaultHeaders, {
   checkLicense() {
     let self = this;
 
-    Em.run.later(() => {
+    later(() => {
       self.sendAction('reloadModel');
       self.checkLicenseStatus();
     }, 1500);

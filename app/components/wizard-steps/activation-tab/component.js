@@ -1,12 +1,14 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
 
-export default Ember.Component.extend({
-  intl:              Ember.inject.service(),
+export default Component.extend({
+  intl:              service(),
   tagName:           'li',
   classNames:        ['smooth-disabled'],
   classNameBindings: ['active', 'tabClassName'],
 
-  active: Ember.computed.equal('selectedTab', 'tab'),
+  active: equal('selectedTab', 'tab'),
 
   tabClassName: function() {
     return `wizard-steps/${  this.get('tab') }`;

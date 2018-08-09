@@ -1,12 +1,12 @@
-import Ember from 'ember';
-const { computed, get } = Ember;
-
-import C from 'nilavu/utils/constants';
-
-export default Ember.Component.extend({
-  access:        Ember.inject.service(),
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { get } from '@ember/object';
+import { later } from '@ember/runloop';
+export default Component.extend({
+  access:        service(),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   showPassword: false,
 
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
       this.check();
       if (this.shouldProceed()) {
         this.set('showSpinner', true);
-        Ember.run.later(() => {
+        later(() => {
           this.get('access').login(this.get('username').toLowerCase(), this.get('password')).then(() => {
             this.set('showSpinner', false);
             this.get('completedSteps').pushObject(this.get('category'));
@@ -61,7 +61,7 @@ export default Ember.Component.extend({
   },
 
   shouldProceed() {
-    return Ember.isEmpty(this.get('val_username')) && Ember.isEmpty(this.get('val_password'));
+    return isEmpty(this.get('val_username')) && isEmpty(this.get('val_password'));
   },
 
 });
