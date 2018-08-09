@@ -73,7 +73,6 @@ export default Component.extend({
     },
   },
 
-
   setFirstPlanFactory() {
     let plan = this.get('groupedVms')[0];
     let planFirstItem = plan.version[0];
