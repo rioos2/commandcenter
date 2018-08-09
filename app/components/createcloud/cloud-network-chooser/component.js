@@ -1,10 +1,13 @@
-/* global renderChartNumberOfCores, renderChartRam, renderChartLinearProgressSlider*/
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { on } from '@ember/object/evented';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
 
-export default Ember.Component.extend({
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+export default Component.extend({
+  intl:          service(),
+  notifications: service('notification-messages'),
   networks:      {
     'private_ipv4': 'Private IPv4',
     'public_ipv4':  'Public IPv4',
@@ -13,7 +16,7 @@ export default Ember.Component.extend({
   },
   disabledNetworks: [],
 
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
     this.waringMessage();
   }),
 
@@ -27,12 +30,12 @@ export default Ember.Component.extend({
       self.set(disable, '');
     });
 
-    if (!Ember.isEmpty(this.get('model.stacksfactory.object_meta.cluster_name')) && !Ember.isEmpty(this.get('model.datacenters.content')) && !Ember.isEmpty(self.get('model.networks.content'))) {
+    if (!isEmpty(this.get('model.stacksfactory.object_meta.cluster_name')) && !isEmpty(this.get('model.datacenters.content')) && !isEmpty(self.get('model.networks.content'))) {
       this.get('model.datacenters.content').filter((location) => {
-        if (Ember.isEqual(location.object_meta.name, self.get('model.stacksfactory.object_meta.cluster_name'))) {
+        if (isEqual(location.object_meta.name, self.get('model.stacksfactory.object_meta.cluster_name'))) {
           location.networks.map((network_id) => {
             self.get('model.networks.content').map((network) => {
-              if (Ember.isEqual(network.id, network_id)) {
+              if (isEqual(network.id, network_id)) {
                 virtualNetworks.removeObject(network.network_type);
               }
             });
@@ -63,7 +66,7 @@ export default Ember.Component.extend({
       }
       Object.keys(this.get('networks')).map((key) => {
         Object.keys(self.get('model.stacksfactory.resources')).map((network_type) => {
-          if (Ember.isEqual(key, network_type)) {
+          if (isEqual(key, network_type)) {
             self.set('model.stacksfactory.network', network_type);
           }
         });
@@ -79,7 +82,7 @@ export default Ember.Component.extend({
   },
 
   waringMessage() {
-    if (Ember.isEmpty(this.get('model.networks.content'))) {
+    if (isEmpty(this.get('model.networks.content'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.network.empty'), {
         autoClear:     true,
         clearDuration: 6000,

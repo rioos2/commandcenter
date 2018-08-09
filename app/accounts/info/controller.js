@@ -17,7 +17,7 @@ export default Controller.extend({
   }.property('model'),
 
   alertMessage: function() {
-    if (this.get('model.logData.code') === '502') {
+    if (C.BADGATEWAY_HTTP_CODES.includes(this.get('model.logData.code'))) {
       this.get('notifications').warning(get(this, 'intl').t('auditLogsPage.connectionError'), {
         htmlContent:   true,
         autoClear:     true,

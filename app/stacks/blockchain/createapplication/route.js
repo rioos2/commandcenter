@@ -1,21 +1,22 @@
-import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
-import TypeMetaBuilder from 'nilavu/models/type-meta-builder';
 import { xhrConcur } from 'nilavu/utils/platform';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
-const { get } = Ember;
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { Promise } from 'rsvp';
+import EmberObject from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
-
-export default Ember.Route.extend(DefaultHeaders, {
-  settings: Ember.inject.service(),
-  access:   Ember.inject.service(),
-  router:   Ember.inject.service(),
+export default Route.extend(DefaultHeaders, {
+  settings: service(),
+  access:   service(),
+  router:   service(),
   model() {
     let setting = this.get('settings');
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
       let tasks = {
         datacenters:   this.cbFind('datacenter', 'datacenters'),
         plans:         this.cbFind('planfactory', 'plans'),
@@ -33,7 +34,7 @@ export default Ember.Route.extend(DefaultHeaders, {
     }, 'Load all the things');
 
     return promise.then((hash) => {
-      return Ember.Object.create({
+      return EmberObject.create({
         stacksfactory:      this.loadStacksFactory(this.getSettings(setting)),
         secret:             this.loadSecret(setting),
         datacenters:        hash.datacenters,
@@ -62,7 +63,7 @@ export default Ember.Route.extend(DefaultHeaders, {
   },
 
   getSettings(data) {
-    return Ember.isEmpty(data.all.content) ? {} : data.all.content.objectAt(0).data;
+    return isEmpty(data.all.content) ? {} : data.all.content.objectAt(0).data;
   },
 
   getSecretType(setting) {

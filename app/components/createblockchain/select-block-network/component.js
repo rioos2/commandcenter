@@ -1,15 +1,19 @@
 import Component from '@ember/component';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
 import C from 'nilavu/utils/constants';
-const { get } = Ember;
 
 export default Component.extend({
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   showInfo: false,
   activate: false,
 
-  compute:                Ember.computed.alias('model.stacksfactory.resources.compute_type'),
+  compute:                alias('model.stacksfactory.resources.compute_type'),
   blockchianNetworkFound: function() {
     return this.get('blockchianNetwork').length > 0;
   }.property('blockchianNetwork'),
@@ -17,10 +21,10 @@ export default Component.extend({
   blockchianNetwork: function() {
     var blockchainnetwork = [];
 
-    if (!Ember.isEmpty(this.get('model.blockchainnetworks.content'))) {
+    if (!isEmpty(this.get('model.blockchainnetworks.content'))) {
       this.get('model.blockchainnetworks.content').map((blockchianNetwork) => {
-        if (!Ember.isEmpty(blockchianNetwork.spec.plan)) {
-          if (Ember.isEqual(blockchianNetwork.spec.plan.category, C.CATEGORIES.BLOCKCHAIN)) {
+        if (!isEmpty(blockchianNetwork.spec.plan)) {
+          if (isEqual(blockchianNetwork.spec.plan.category, C.CATEGORIES.BLOCKCHAIN)) {
             blockchainnetwork.push(blockchianNetwork);
           }
         }
@@ -32,7 +36,7 @@ export default Component.extend({
 
   didInsertElement() {
     this.checkBlockchainNetworkEmpty();
-    if (!Ember.isEmpty(this.get('blockchianNetwork'))) {
+    if (!isEmpty(this.get('blockchianNetwork'))) {
       this.send('refreshAfterSelect', this.get('blockchianNetwork')[0]);
     }
   },
@@ -54,7 +58,7 @@ export default Component.extend({
     }
   },
   checkBlockchainNetworkEmpty() {
-    if (Ember.isEmpty(this.get('blockchianNetwork'))) {
+    if (isEmpty(this.get('blockchianNetwork'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.blockchainNetwork.empty'), {
         autoClear:     true,
         clearDuration: 6000,
