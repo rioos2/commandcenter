@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
-const { get } = Ember;
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-export default Ember.Component.extend({
-  intl:       Ember.inject.service(),
+export default Component.extend({
+  intl:       service(),
 
   tagName:   'section',
   className: '',

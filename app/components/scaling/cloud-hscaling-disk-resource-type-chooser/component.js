@@ -1,5 +1,7 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { get } from '@ember/object';
+
+export default Component.extend({
   maxCpuResource(){
     return {
       name:   'hscaling-max-cpu',

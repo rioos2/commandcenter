@@ -8,6 +8,7 @@ export default Component.extend({
   showField:       false,
   initializeChart: on('didInsertElement', function() {
     this.set('model.locationList', this.getCountry(this.get('model')));
+
     renderGlobeChart(this.get('model'), this.get('notifications'));
   }),
 
@@ -52,6 +53,7 @@ export default Component.extend({
 
     geocode(x, (coordinates) => {
       f.pushObjects([coordinates.lng, coordinates.lat]);
+
     });
 
     return f;
