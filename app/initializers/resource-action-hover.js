@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* This is used for resource actions in dropdown to show mouse enter, mouse leave in a genric way.
 This opplies to all resourse action dropdowns*/
 export function initialize( /* application */ ) {
