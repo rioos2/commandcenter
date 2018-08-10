@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import GeoTools from 'npm:geo-tools';
+import GeoTools from 'npm:geo-tools'; // eslint-disable-line
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 
@@ -9,7 +9,7 @@ export default Component.extend({
   initializeChart: on('didInsertElement', function() {
     this.set('model.locationList', this.getCountry(this.get('model')));
 
-    renderGlobeChart(this.get('model'), this.get('notifications'));
+    renderGlobeChart(this.get('model'), this.get('notifications')); // eslint-disable-line
   }),
 
   locationAvailable: function(){
@@ -25,7 +25,7 @@ export default Component.extend({
     },
 
     getLocation() {
-      renderGlobeChart.getLocation();
+      renderGlobeChart.getLocation(); // eslint-disable-line
     }
   },
   getCountry(model) {
@@ -51,7 +51,7 @@ export default Component.extend({
   getCoordinates(x) {
     var f = [];
 
-    geocode(x, (coordinates) => {
+    geocode(x, (coordinates) => { // eslint-disable-line
       f.pushObjects([coordinates.lng, coordinates.lat]);
 
     });
