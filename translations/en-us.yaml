@@ -975,6 +975,8 @@ nav:
       teamCount: Team
     tab:
       index: Organization
+    tab2:
+      index: Team
   team:
     create:
       header: 'Add team in '
@@ -987,6 +989,7 @@ nav:
       tmDescriptionEmpty: Enter description
     show:
       createdAt: Created At
+      inviteTo: Invite To
       about: About
   user:
     org: Organization

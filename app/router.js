@@ -55,6 +55,7 @@ Router.map(function() {
     // Organization (Team, Roles, Memeber)
     this.route('organization', { resetNamespace: true }, function() {
       this.route('index', { path: '/:org' });
+      this.route('team', { path: '/:org/team/:org' });
     });
 
     // Applications (digital cloud, containers, blockchain)

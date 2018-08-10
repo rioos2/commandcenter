@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import OrganizationUser from 'nilavu/mixins/organization-validation';
 import Component from '@ember/component';
-import { htmlSafe } from '@ember/template';
+import { htmlSafe } from '@ember/string';
 export default Component.extend(DefaultHeaders, OrganizationUser, {
   intl:          service(),
   notifications: service('notification-messages'),
