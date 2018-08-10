@@ -27,14 +27,14 @@ export default Component.extend({
             this.get('completedSteps').pushObject(this.get('category'));
             this.sendAction('proceedNextStep');
           }).catch((err) => {
-            if (err.status == 500) {
+            if (err.status === C.INTERNALSERVER_ERROR) {
               this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
               });
             }
-            if (err.code == '409') {
+            if (err.code === C.INTERNAL_CONFLICTS) {
               this.set('val_email', 'credential-empty');
               this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
               this.set('emailExistence', false);
@@ -65,7 +65,7 @@ export default Component.extend({
   },
 
   emailValidation() {
-    if (this.validationEmail(this.get('email')) && this.get('email') != '') {
+    if (this.validationEmail(this.get('email')) && this.get('email') !== '') {
       this.set('val_email', '')
       this.set('emailExistence', true);
     } else {
@@ -77,11 +77,11 @@ export default Component.extend({
 
 
   check() {
-    this.get('company_name') != null && this.get('company_name') != '' ? this.set('val_company', '') : this.set('val_company', 'credential-empty');
-    this.get('first_name') != null && this.get('first_name') != '' ? this.set('val_firstName', '') : this.set('val_firstName', 'credential-empty');
-    this.get('last_name') != null && this.get('last_name') != '' ? this.set('val_lastName', '') : this.set('val_lastName', 'credential-empty');
-    this.get('phone') != null && this.get('phone') != '' ? this.set('val_phone', '') : this.set('val_phone', 'credential-empty');
-    this.get('password') != null && this.get('password') != '' ? this.set('val_code', '') : this.set('val_code', 'credential-empty');
+    this.get('company_name') !== null && this.get('company_name') !== '' ? this.set('val_company', '') : this.set('val_company', 'credential-empty');
+    this.get('first_name') !== null && this.get('first_name') !== '' ? this.set('val_firstName', '') : this.set('val_firstName', 'credential-empty');
+    this.get('last_name') !== null && this.get('last_name') !== '' ? this.set('val_lastName', '') : this.set('val_lastName', 'credential-empty');
+    this.get('phone') !== null && this.get('phone') !== '' ? this.set('val_phone', '') : this.set('val_phone', 'credential-empty');
+    this.get('password') !== null && this.get('password') !== '' ? this.set('val_code', '') : this.set('val_code', 'credential-empty');
     this.emailValidation();
   },
 
