@@ -1,20 +1,27 @@
 var C = {
 
   /* --------  The section  that has  various  http codes  ----*/
+  // Stack all the base http codes here
+  UNAUTHENTICATED: 401,
+
+  UNAUTHORIZED: 403,
+
   // This is contains the  list of codes that can be  treated as unauthenticated
   // 1. 401 return code when the user isn't authenticated.
-  UNAUTHENTICATED_HTTP_CODES: [401],
+  UNAUTHENTICATED_HTTP_CODES: [C.UNAUTHENTICATED],
 
   // This is contains the  list of codes that can be  treated as unauthorized
   // 1. 403 return code when the user isn't authorized to access an  API
-  UNAUTHORIZED_HTTP_CODES: [403],
+  UNAUTHORIZED_HTTP_CODES: [C.UNAUTHORIZED],
+
+  // This contains the list of codes that can be treated as unauthorized and
+  //  unauthenticated
+  UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES: [C.UNAUTHENTICATED, C.UNAUTHORIZED],
 
   // Internal server error
   INTERNALSERVER_HTTP_CODES: ['500'],
 
   BADGATEWAY_HTTP_CODES: ['502'],
-
-  HTTP_ERROR_CODES: [401, 403],
 
 
   /* --------  The section  that has  various Rio objects  ----*/
