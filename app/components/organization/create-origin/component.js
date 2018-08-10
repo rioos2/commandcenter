@@ -30,10 +30,10 @@ export default Component.extend(DefaultHeaders, OrganizationUser, {
           url:    '/api/v1/origins',
           method: 'POST',
           data:   this.getData(),
-        })).then(() => {
+        })).then((/* xhr*/) => {
           this.set('showSpinner', false);
           location.reload();
-        }).catch(() => {
+        }).catch((/* err*/) => {
           this.set('showSpinner', false);
         });
       } else {

@@ -1,26 +1,30 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
+import { alias } from '@ember/object/computed';
+import { isNone } from '@ember/utils';
+import { isEmpty } from '@ember/utils';
+import EmberObject from '@ember/object';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName:     'section',
   className:   '',
   parentRoute: 'stacks',
 
-  group:      Ember.computed.alias('category'),
+  group:      alias('category'),
   stacksData: function() {
     const grp = this.get('group');
 
-    return this.get('model').filter((sd) => !Ember.isNone(sd) && sd.type === grp);
+    return this.get('model').filter((sd) => !isNone(sd) && sd.type === grp);
   }.property('model', 'group'),
 
   stacksDataContents: function() {
     const data = this.get('stacksData');
 
-    return Ember.isEmpty(data) ? [] : data.findBy('type', this.get('group')).get('contents');
+    return isEmpty(data) ? [] : data.findBy('type', this.get('group')).get('contents');
   }.property('stacksData'),
 
   stacksCount: function() {
-    if (Ember.isEmpty(this.get('stacksDataContents'))) {
+    if (isEmpty(this.get('stacksDataContents'))) {
       return [].length;
     }
 
@@ -40,7 +44,7 @@ export default Ember.Component.extend({
   },
 
   searchParmsHash(searchSelected) {
-    let states = Ember.Object.create();
+    let states = EmberObject.create();
 
     states.set(C.FILTERS.QUERY_PARAM_SEARCH, searchSelected);
 

@@ -36,7 +36,7 @@ export default Route.extend(DefaultHeaders, {
       return s.id === id;
     });
 
-    if (result.length != 0) {
+    if (result.length !== 0) {
       Downloadjs(result[0].data.rsa_key, `${ id }.key`, 'text/plain');
 
       return true;

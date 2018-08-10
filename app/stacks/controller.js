@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 import C from 'nilavu/utils/constants';
 
 //* bit ugly to stamp the filter with their purpose */
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: [C.FILTERS.QUERY_PARAM_OS, C.FILTERS.QUERY_PARAM_LOCATION,
     C.FILTERS.QUERY_PARAM_DB, C.FILTERS.QUERY_PARAM_NETWORK, C.FILTERS.QUERY_PARAM_STATUS,
     C.FILTERS.QUERY_PARAM_SEARCH],

@@ -67,14 +67,14 @@ export default Component.extend({
   drawNetworkStatistics() {
     var self = this;
 
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { 'packages': ['corechart'] }); // eslint-disable-line
+    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
 
     function drawChart() {
       if (self.get('networkBridgeEmpty')) {
         self.set('chartData', self.setEmpty());
       }
-      var data = google.visualization.arrayToDataTable(self.get('chartData'));
+      var data = google.visualization.arrayToDataTable(self.get('chartData')); // eslint-disable-line
 
       var options = {
         title: 'Network Speed',
@@ -97,7 +97,7 @@ export default Component.extend({
 
       };
 
-      var chart = new google.visualization.AreaChart(document.getElementById(`id-${  self.get('model').id  }${ self.get('nodeType') }`));
+      var chart = new google.visualization.AreaChart(document.getElementById(`id-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
 
       chart.draw(data, options);
     }
@@ -105,7 +105,7 @@ export default Component.extend({
 
   filteredData() {
 
-    if (this.get('selected') == C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
+    if (this.get('selected') === C.NETWORK.PACKETMEASURETYPE.THROUGHPUT) {
       return this.networkThroughput();
     } else {
       return this.networkError();
@@ -118,7 +118,7 @@ export default Component.extend({
     ];
 
     this.get('model.network').forEach((n) => {
-      if (n.name == this.get('selectBridge')) {
+      if (n.name === this.get('selectBridge')) {
         n.throughput.forEach((t) => {
           throughput.push(t);
         });
@@ -134,7 +134,7 @@ export default Component.extend({
     ];
 
     this.get('model.network').forEach((n) => {
-      if (n.name == this.get('selectBridge')) {
+      if (n.name === this.get('selectBridge')) {
         n.error.forEach((t) => {
           error.push(t);
         });

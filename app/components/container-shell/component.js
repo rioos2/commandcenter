@@ -1,10 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import { alternateLabel } from 'nilavu/utils/platform';
 import Terminal from 'npm:xterm';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import { inject as service } from '@ember/service';
+import { next } from '@ember/runloop';
 
-export default Ember.Component.extend(DefaultHeaders, {
-  userStore:      Ember.inject.service('user-store'),
+export default Component.extend(DefaultHeaders, {
+  userStore:     service('user-store'),
   instance:       null,
   command:        null,
   cols:           80,
@@ -20,7 +22,7 @@ export default Ember.Component.extend(DefaultHeaders, {
 
   didInsertElement() {
     this._super();
-    Ember.run.next(this, 'exec');
+    next(this, 'exec');
   },
 
   willDestroyElement() {
@@ -114,7 +116,7 @@ export default Ember.Component.extend(DefaultHeaders, {
     socket.onclose = () => {
       try {
         this.set('status', 'closed');
-        term.destroy();
+        term.destroy(); // eslint-disable-line
         if (!this.get('userClosed')) {
           this.sendAction('dismiss');
         }

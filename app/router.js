@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 import { applyRoutes, clearRoutes } from 'nilavu/utils/additional-routes';
 
-const Router = Ember.Router.extend({ location: config.locationType });
+const Router = EmberRouter.extend({ location: config.locationType });
 
 
 Router.map(function() {
@@ -55,7 +55,7 @@ Router.map(function() {
     // Organization (Team, Roles, Memeber)
     this.route('organization', { resetNamespace: true }, function() {
       this.route('index', { path: '/:org' });
-      this.route('team', { path: '/:org/team/:org' });
+      this.route('team', { path: '/:org/team/:team' });
     });
 
     // Applications (digital cloud, containers, blockchain)

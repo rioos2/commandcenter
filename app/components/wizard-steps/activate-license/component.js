@@ -35,7 +35,6 @@ export default Component.extend(DefaultHeaders, {
 
     processTrail() {
       this.set('showSpinnerTrail', true);
-      alert(JSON.stringify(this.get('model')));
       let license = this.get('model.license.license.content').get('firstObject');
 
       //  console.log(JSON.stringify(license)
