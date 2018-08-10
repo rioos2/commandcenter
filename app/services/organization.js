@@ -44,7 +44,6 @@ export default Service.extend(DefaultHeaders, {
 
   // Set default organization and team if not in tab-session
   selectOrigin() {
-    var self = this;
 
     if (this.checkOriginAndTeamSession()) {
       return this.getAll().then((all) => {
