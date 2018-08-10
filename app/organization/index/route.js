@@ -9,7 +9,7 @@ export default Route.extend(DefaultHeaders, {
 
     return hash({
       origin: this.get('store').find('origin', null, this.opts(`origins/${ params.org }`)),
-      teams:  this.get('store').find('team', null, this.opts(`teams/origins/${ params.org }`)),
+      teams:  this.get('store').find('team', null, this.opts(`teams/origins/${ params.org }`, true)),
     });
   },
 
