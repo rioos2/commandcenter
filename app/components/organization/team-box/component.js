@@ -17,7 +17,7 @@ export default Component.extend({
 
   actions: {
     goTeam(){
-      this.get('router').transitionTo('organization.team', this.get('originName'), this.get('model.id'));
+      this.get('router').transitionTo('organization.team', this.get('originName'), this.get('team.id'));
     }
   },
 

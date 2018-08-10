@@ -997,6 +997,9 @@ nav:
       inviteTo: Invite To
       about: About
       emptyBtn: +Add team
+    member:
+      emptyBtn: +invite
+
   user:
     org: Organization
     createOrg: Add organization

@@ -1,31 +1,34 @@
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
 import EmberObject from '@ember/object';
 import { alias } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 import C from 'nilavu/utils/constants';
 import $ from 'jquery';
 
 
 
 export default Component.extend({
+  intl:          service(),
   tagName:     '',
   className:   '',
   parentRoute: 'organization',
 
   group:      alias('category'),
-  members:     alias('model.members'),
+  members:     alias('model.team.members'),
 
-  teamsDataContents: function() {
-    return (this.get('model.members') === undefined) ? [] : this.get('model.members');
-  }.property('model.members'),
+  memberDataContents: function() {
+    return (this.get('members') === null) ? [] : this.get('members');
+  }.property('members'),
 
-  teamsCount: function() {
-    if (isEmpty(this.get('teamsDataContents'))) {
-      return [].length;
-    }
-
-    return this.get('teamsDataContents').length;
+  emptyBtn: function() {
+    return this.get('intl').t('nav.team.member.emptyBtn');
   }.property('teamsDataContents'),
+
+  memberCount: function() {
+
+
+    return this.get('memberDataContents').length;
+  }.property('memberDataContents'),
 
   actions: {
 
@@ -37,8 +40,8 @@ export default Component.extend({
       // //
     },
 
-    createTeam() {
-      $('#addteam_modal').modal('show');
+    inviteMember() {
+      $('#invitemember_modal').modal('show');
     },
 
   },
