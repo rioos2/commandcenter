@@ -1,10 +1,13 @@
+import { isEmpty } from '@ember/utils';
+import $ from 'jquery';
 import { buildAdminInfraPanel } from '../admin-infra-panel/component';
+
 export default buildAdminInfraPanel('network', {
   virtualNetwork: null,
   selectedNodes:  null,
 
   didInsertElement() {
-    if (!Ember.isEmpty(this.get('virtualNetworks'))) {
+    if (!isEmpty(this.get('virtualNetworks'))) {
       this.send('SideData', this.get('virtualNetworks').get('firstObject'));
     }
   },
@@ -18,11 +21,11 @@ export default buildAdminInfraPanel('network', {
   }.property('availableSize'),
 
   virtualNetworks: function() {
-    return Ember.isEmpty(this.get('model.networks.content')) ? [] : this.get('model.networks.content');
+    return isEmpty(this.get('model.networks.content')) ? [] : this.get('model.networks.content');
   }.property('model.networks.content.@each'),
 
   nodes: function(){
-    return Ember.isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
+    return isEmpty(this.get('model.nodes.content')) ? [] : this.get('model.nodes.content');
   }.property('model.nodes.content.@each'),
 
   appliedNodesFor(virtualNetwork) {

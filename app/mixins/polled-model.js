@@ -1,6 +1,8 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { cancel } from '@ember/runloop';
+import { later } from '@ember/runloop';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   pollInterval: 2000,
 
   // growl: Ember.inject.service(),
@@ -17,8 +19,8 @@ export default Ember.Mixin.create({
   },
 
   scheduleTimer() {
-    Ember.run.cancel(this.get('pollTimer'));
-    this.set('pollTimer', Ember.run.later(() => {
+    cancel(this.get('pollTimer'));
+    this.set('pollTimer', later(() => {
       let controller = this.controller;
       let qp = {};
 
@@ -39,7 +41,7 @@ export default Ember.Mixin.create({
   },
 
   cancelTimer() {
-    Ember.run.cancel(this.get('pollTimer'));
+    cancel(this.get('pollTimer'));
     // This prevents scheduleTimer from rescheduling if deactivate happened at just the wrong time.
     this.set('pollTimer', null);
   }

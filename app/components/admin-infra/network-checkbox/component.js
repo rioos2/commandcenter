@@ -1,8 +1,8 @@
-import Ember from 'ember';
-const { get } = Ember;
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-  intl:              Ember.inject.service(),
+export default Component.extend({
+  intl:              service(),
   tagName:           'rio-radio',
   active:            false,
   classNameBindings: ['enable::disabled'],

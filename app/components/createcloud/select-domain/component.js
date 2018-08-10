@@ -3,15 +3,15 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
-const { get } = Ember;
-
+import { get } from '@ember/object';
 import { denormalizeName } from 'nilavu/utils/denormalize';
-
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend(DefaultHeaders, {
-  intl:              Ember.inject.service(),
-  session:           Ember.inject.service(),
-  notifications:     Ember.inject.service('notification-messages'),
+  intl:              service(),
+  session:           service(),
+  notifications:     service('notification-messages'),
   showDomainEditBox: true,
   activate:          false,
   showSpinner:       false,
@@ -51,7 +51,7 @@ export default Component.extend(DefaultHeaders, {
 
     setNewDomain(newDomainName) {
       this.set('showDomainEditBox', true);
-      if (Ember.isEmpty(newDomainName.trim())) {
+      if (isEmpty(newDomainName.trim())) {
         this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.emptyDomain'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -63,8 +63,6 @@ export default Component.extend(DefaultHeaders, {
     },
 
     createSecret() {
-      var self = this;
-
       if (!this.checkDomain() && !this.checkSecrectType()) {
         this.set('showSpinner', true);
         this.sendAction('done', 'step2');
@@ -73,7 +71,6 @@ export default Component.extend(DefaultHeaders, {
         this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
         this.set('model.secret.object_meta.name', this.get('model.stacksfactory.object_meta.name'));
 
-        var session = this.get('session');
         var id = this.get('session').get('id');
 
         this.set('model.secret.object_meta.account', id);
@@ -88,7 +85,7 @@ export default Component.extend(DefaultHeaders, {
             cssClasses:    'notification-success'
           });
           this.set('showSpinner', false);
-        }).catch((err) => {
+        }).catch(() => {
           this.get('notifications').warning(get(this, 'intl').t('launcherPage.domain.keyGenerate.failure'), {
             autoClear:     true,
             clearDuration: 4200,
@@ -110,7 +107,7 @@ export default Component.extend(DefaultHeaders, {
   },
 
   checkDomain() {
-    let checkDomain =  Ember.isEmpty(this.get('model.stacksfactory.object_meta.name'));
+    let checkDomain =  isEmpty(this.get('model.stacksfactory.object_meta.name'));
 
     if (checkDomain) {
       this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));
@@ -120,7 +117,7 @@ export default Component.extend(DefaultHeaders, {
   },
 
   checkSecrectType() {
-    let checkSecrectType =  Ember.isEmpty(this.get('secretType'));
+    let checkSecrectType =  isEmpty(this.get('secretType'));
 
     if (checkSecrectType) {
       this.set('errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptySecretType'));

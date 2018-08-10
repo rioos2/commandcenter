@@ -1,16 +1,18 @@
-import Ember from 'ember';
-const { get } = Ember;
+import { get } from '@ember/object';
+import Component from '@ember/component';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
 
 import C from 'nilavu/utils/constants';
 
-export default Ember.Component.extend({
-  intl: Ember.inject.service(),
+export default Component.extend({
+  intl: service(),
 
 
   tagName: 'rio-radio',
   active:  false,
   enabler: function() {
-    return ((this.get('type') == C.NODE.STORAGE_TYPE.CEPH) && (Ember.isEmpty(this.get('disk.point')) && this.get('disk.type') == 'disk')) ? '' : ((Ember.isEmpty(this.get('disk.point')) && this.get('type') != C.NODE.STORAGE_TYPE.CEPH) ? '' : 'disabled');
+    return ((this.get('type') === C.NODE.STORAGE_TYPE.CEPH) && (isEmpty(this.get('disk.point')) && this.get('disk.type') === 'disk')) ? '' : ((isEmpty(this.get('disk.point')) && this.get('type') !== C.NODE.STORAGE_TYPE.CEPH) ? '' : 'disabled');
   }.property('disk', 'type'),
 
   errorMsg: function() {
