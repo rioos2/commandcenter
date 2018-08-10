@@ -1,16 +1,21 @@
 import C from 'nilavu/utils/constants';
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { inject as controller } from '@ember/controller';
+import { alias } from '@ember/object/computed';
+import { schedule } from '@ember/runloop';
+import $ from 'jquery';
 
-export default Ember.Controller.extend({
-  application: Ember.inject.controller(),
-  settings:    Ember.inject.service(),
+export default Controller.extend({
+  application: controller(),
+  settings:    service(),
   error:       null,
 
   // Tells us current path of ember application
-  currentPath: Ember.computed.alias('application.currentPath'),
+  currentPath: alias('application.currentPath'),
 
   bootstrap: function() {
-    Ember.run.schedule('afterRender', this, () => {
+    schedule('afterRender', this, () => {
       this.get('application').setProperties({
         error:             null,
         error_description: null,
