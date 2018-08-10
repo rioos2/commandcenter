@@ -68,7 +68,7 @@ export default Ember.Component.extend(DefaultHeaders, {
       this.set('showSpinner', true);
       if (!error) {
         this.get('store').request(this.rawRequestOpts({
-          url:    '/api/v1/nodes/discover',
+          url:    '/api/v1/ninjasz',
           method: 'POST',
           data:   filter,
         })).then((xhr) => {
