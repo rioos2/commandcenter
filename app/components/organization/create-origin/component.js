@@ -1,12 +1,16 @@
-import Ember from 'ember';
-const { get } = Ember;
-
-import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-export default Ember.Component.extend(DefaultHeaders, {
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
-  session:       Ember.inject.service(),
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
+import { isEmpty } from '@ember/utils';
+import { get } from '@ember/object';
+
+
+
+export default Component.extend(DefaultHeaders, {
+  intl:          service(),
+  notifications: service('notification-messages'),
+  session:       service(),
 
   actions: {
 
@@ -17,15 +21,15 @@ export default Ember.Component.extend(DefaultHeaders, {
           url:    '/api/v1/origins',
           method: 'POST',
           data:   this.getData(),
-        })).then((xhr) => {
+        })).then((/* xhr*/) => {
           this.set('showSpinner', false);
           location.reload();
-        }).catch((err) => {
+        }).catch((/* err*/) => {
           this.set('showSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(Ember.String.htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -38,12 +42,12 @@ export default Ember.Component.extend(DefaultHeaders, {
   validation() {
     var validationString = '';
 
-    if (Ember.isEmpty(this.get('originName'))) {
+    if (isEmpty(this.get('originName'))) {
       validationString = get(this, 'intl').t('nav.organization.create.orgNameEmpty');
     }
     this.set('validationWarning', validationString);
 
-    return Ember.isEmpty(this.get('validationWarning')) ? false : true;
+    return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
   getData() {
