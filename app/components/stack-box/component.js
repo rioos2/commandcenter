@@ -1,16 +1,20 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
 
 export default Component.extend({
-  store:            Ember.inject.service(),
+  store:            service(),
   classNames:       ['container-list'],
   pollInterval:     2000,
   pollTimer:        null,
   offAssembly:      ['Stopped', 'Failed'],
-  assemblyFactory:  Ember.computed.alias('model.spec.assembly_factory'),
-  assemblyEndpoint: Ember.computed.alias('model.spec.endpoints'),
-  spec:             Ember.computed.alias('model.spec'),
-  metaData:         Ember.computed.alias('model.metadata'),
+  assemblyFactory:  alias('model.spec.assembly_factory'),
+  assemblyEndpoint: alias('model.spec.endpoints'),
+  spec:             alias('model.spec'),
+  metaData:         alias('model.metadata'),
 
   region: function() {
     return this.get('assemblyFactory.object_meta.cluster_name');
@@ -19,7 +23,7 @@ export default Component.extend({
   name: function() {
     let nameCollection = this.get('model.object_meta.name').split('.');
 
-    if (!Ember.isEmpty(nameCollection)) {
+    if (!isEmpty(nameCollection)) {
       return nameCollection[0];
     }
   }.property('model'),
@@ -33,7 +37,7 @@ export default Component.extend({
   }.property('model.id'),
 
   assemblyConditionMessage: function() {
-    return (!Ember.isEmpty(this.get('model.status.reason'))) ? this.get('model.status.reason') : '';
+    return (!isEmpty(this.get('model.status.reason'))) ? this.get('model.status.reason') : '';
   }.property('model.status.reason', 'assemblyStatus'),
 
   image: function() {
@@ -52,11 +56,11 @@ export default Component.extend({
     var icon = '';
     var self = this;
 
-    if (!Ember.isEmpty(this.get('assemblyFactory.spec.plan'))) {
+    if (!isEmpty(this.get('assemblyFactory.spec.plan'))) {
       this.get('assemblyFactory.spec.plan.plans').filter((plan) => {
         var planIcon = '';
 
-        if (Ember.isEqual(plan.object_meta.name, self.get('assemblyFactory.metadata.rioos_sh_blueprint_applied'))) {
+        if (isEqual(plan.object_meta.name, self.get('assemblyFactory.metadata.rioos_sh_blueprint_applied'))) {
           plan.icon.split('.')[0].split('_').forEach((s) => {
             planIcon = `${ planIcon + s.capitalize()  } `;
           });
@@ -119,7 +123,7 @@ export default Component.extend({
   }.property('model.spec.metrics.@each'),
 
   ipFinder() {
-    if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
+    if (!isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].ip;
     }
 
@@ -127,7 +131,7 @@ export default Component.extend({
   },
 
   ipTypeFinder() {
-    if (!Ember.isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
+    if (!isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
       return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
     }
 
@@ -135,7 +139,7 @@ export default Component.extend({
   },
 
   metricsDataFinder() {
-    if (!(this.get(`model.spec.metrics.${  this.get('model.id') }`) == undefined)) {
+    if (!(this.get(`model.spec.metrics.${  this.get('model.id') }`) === undefined)) {
       this.set('model.spec.metrics.counter', parseInt(this.get(`model.spec.metrics.${  this.get('model.id') }`)));
 
       return this.get('spec.metrics');

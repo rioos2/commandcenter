@@ -1,15 +1,12 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
-import D from 'nilavu/utils/default';
-import { denormalizeName } from 'nilavu/utils/denormalize';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   tagName: '',
   active:  'cpu-ico blknetwork',
 
   selectionChecker: function() {
-    var check = this.get('model.stacksfactory.metadata.rioos_sh_blockchain_network_id') == this.get('network.id');
+    var check = this.get('model.stacksfactory.metadata.rioos_sh_blockchain_network_id') === this.get('network.id');
 
     if (check) {
       this.set('active', 'cpu-ico blknetwork selected');
