@@ -1,16 +1,17 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
+import { on } from '@ember/object/evented';
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   tagName: '',
   active:  'item-os',
 
-  initializeChart: Ember.on('didInsertElement', function() {
+  initializeChart: on('didInsertElement', function() {
     // Ember.run.once('afterRender', this, this.imageData);
-    if (this.validateOsName() == this.get('vm.type')) {
+    if (this.validateOsName() === this.get('vm.type')) {
       this.sendAction('refreshAfterAction', this.get('vm'));
       this.set('active', 'item-os selected');
     }
@@ -21,7 +22,7 @@ export default Ember.Component.extend({
   }.property('vm'),
 
   selectionChecker: function() {
-    var check = this.get('model.stacksfactory.current_os_tab') == this.get('vm.type');
+    var check = this.get('model.stacksfactory.current_os_tab') === this.get('vm.type');
 
     if (check) {
       this.set('active', 'item-os selected');

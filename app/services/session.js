@@ -1,7 +1,7 @@
 import BrowserStore from 'nilavu/utils/browser-storage';
 import C from 'nilavu/utils/constants';
 import Service from '@ember/service';
-
+import $ from 'jquery';
 
 export default Service.extend(BrowserStore, {
   backing: window.localStorage,

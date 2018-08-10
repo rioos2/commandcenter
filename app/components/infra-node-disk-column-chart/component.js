@@ -38,15 +38,15 @@ export default Component.extend({
   drawProcessStatistics() {
     var self = this;
 
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { packages: ['corechart'] }); // eslint-disable-line
+    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
 
     function drawChart() {
       if (isEmpty(self.get('chartData'))) {
         self.set('chartData', self.setEmpty());
       }
-      var data = google.visualization.arrayToDataTable(self.get('chartData.data'));
-      var view = new google.visualization.DataView(data);
+      var data = google.visualization.arrayToDataTable(self.get('chartData.data')); // eslint-disable-line
+      var view = new google.visualization.DataView(data); // eslint-disable-line
 
       view.setColumns([0, 1,
         {
@@ -69,7 +69,7 @@ export default Component.extend({
         bar:    { groupWidth: '55%' },
         legend: { position: 'none' },
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById(`id-disk-column-${  self.get('model').id  }${ self.get('nodeType') }`));
+      var chart = new google.visualization.ColumnChart(document.getElementById(`id-disk-column-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
 
       chart.draw(view, options);
     }

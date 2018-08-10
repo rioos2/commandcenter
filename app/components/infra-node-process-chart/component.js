@@ -33,14 +33,14 @@ export default Component.extend({
   drawProcessStatistics() {
     var self = this;
 
-    google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { packages: ['corechart'] }); // eslint-disable-line
+    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
 
     function drawChart() {
       if (isEmpty(self.get('chartData'))) {
         self.set('chartData', self.setEmpty());
       }
-      var data = google.visualization.arrayToDataTable(self.get('chartData'));
+      var data = google.visualization.arrayToDataTable(self.get('chartData')); // eslint-disable-line
 
       var options = {
         title:  `Top 10 running processes by percent of ${  self.get('selectType')  } usage`,
@@ -51,7 +51,7 @@ export default Component.extend({
         // colors: ['#F74479', '#AA38E6', '#00FFAF', '#4EE2FA', '#ffeb3b']
       };
 
-      var chart = new google.visualization.PieChart(document.getElementById(`id-process-${  self.get('model').id  }${ self.get('nodeType') }`));
+      var chart = new google.visualization.PieChart(document.getElementById(`id-process-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
 
       chart.draw(data, options);
     }
@@ -59,7 +59,7 @@ export default Component.extend({
 
   filteredData(type) {
 
-    if (this.get('types')[0] == type) {
+    if (this.get('types')[0] === type) {
       return this.cpuData();
     } else {
       return this.memData();

@@ -1,19 +1,24 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { inject as controller } from '@ember/controller';
+import { alias } from '@ember/object/computed';
+import EmberObject from '@ember/object';
+import { later } from '@ember/runloop';
+import { isEmpty } from '@ember/utils';
+import { scheduleOnce } from '@ember/runloop';
 import C from 'nilavu/utils/constants';
 import FilterParmsExtractor from 'nilavu/utils/filter-extractor';
-import flat from 'npm:flat';
 
 
-export default Ember.Controller.extend({
-  stacksController: Ember.inject.controller('stacks'),
+export default Controller.extend({
+  stacksController: controller('stacks'),
 
   showLoading: false,
 
   panels: [],
 
-  categories: Ember.computed.alias('stacksController.which'),
+  categories: alias('stacksController.which'),
 
-  fullmodel: Ember.computed.alias('model'),
+  fullmodel: alias('model'),
 
   // This has be evaluated based on data. So we show the tab that has max
   search: function() {
@@ -38,7 +43,7 @@ export default Ember.Controller.extend({
   },
   // in stacksController
   recvQueryParms() {
-    let recevd = Ember.Object.create();
+    let recevd = EmberObject.create();
     const self = this;
 
     C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH.forEach((f) => {
@@ -89,10 +94,10 @@ export default Ember.Controller.extend({
     this.get('categories').forEach((category) => {
       let stacks = this.get('groupedStacks').findBy('type', category);
 
-      if (!Ember.isEmpty(rules) && stacks) {
+      if (!isEmpty(rules) && stacks) {
         const _stacks = stacks;
         let _contents = _stacks.contents.filter((content) => {
-          if (!Ember.isEmpty(this.get('search'))) {
+          if (!isEmpty(this.get('search'))) {
             return this.findBySearch(rules, content);
           } else {
             return this.findByFilter(rules, content);
@@ -107,11 +112,11 @@ export default Ember.Controller.extend({
       }
     });
 
-    Ember.run.scheduleOnce('afterRender', () => {
+    scheduleOnce('afterRender', () => {
       this._maxLaunchedCategory(filteredStacks);
     });
 
-    Em.run.later(() => {
+    later(() => {
       self.spinnerCheck();
     }, 500);
 
@@ -121,8 +126,8 @@ export default Ember.Controller.extend({
   // Returns the extracted parms from the received query parms
   extractedParms() {
 
-    if (!Ember.isEmpty(this.get('search'))) {
-      return Ember.Object.create({
+    if (!isEmpty(this.get('search'))) {
+      return EmberObject.create({
         sentKey:    C.FILTERS.QUERY_PARAM_SEARCH,
         sentValue:  this.get('search'),
         accessedBy: C.FILTERS_SEARCH_ACCESSORS
@@ -150,7 +155,7 @@ export default Ember.Controller.extend({
       var hasType = result.findBy('type', category);
 
       if (!hasType) {
-        result.pushObject(Ember.Object.create({
+        result.pushObject(EmberObject.create({
           type:     category,
           contents: []
         }));
@@ -166,9 +171,9 @@ export default Ember.Controller.extend({
     let maxLaunchedCategory = C.CATEGORIES.MACHINE;
     let maxLaunched = 0;
 
-    if (!Ember.isEmpty(fss)) {
+    if (!isEmpty(fss)) {
       fss.forEach((stack) => {
-        if (!Ember.isEmpty(stack) && stack.length > maxLaunched) {
+        if (!isEmpty(stack) && stack.length > maxLaunched) {
           maxLaunchedCategory = stack.type;
           maxLaunched = stack.length;
         }

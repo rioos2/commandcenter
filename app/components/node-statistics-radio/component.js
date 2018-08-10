@@ -9,11 +9,11 @@ export default Component.extend({
   enable:  '',
 
   selectionChecker: function() {
-    this.set('active', (this.get('selected') == this.get('name')));
+    this.set('active', (this.get('selected') === this.get('name')));
   }.observes('activate'),
 
   aliasName: function(){
-    return this.get('name') == C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.nodeStatistics.errorAliceName') : this.get('name');
+    return this.get('name') === C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.nodeStatistics.errorAliceName') : this.get('name');
   }.property('name'),
 
   actions: {

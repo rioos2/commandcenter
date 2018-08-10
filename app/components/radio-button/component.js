@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName:           'input',
   type:              'radio',
   disabled:          false,
@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   checked: function() {
     return this.get('value') === this.get('selection');
   }.property('value', 'selection'),
+
   click() {
     this.set('selection', this.get('value'));
   },

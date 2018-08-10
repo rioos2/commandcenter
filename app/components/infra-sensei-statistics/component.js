@@ -6,7 +6,7 @@ export default Component.extend({
   reportNodesUpdate: function() {
     if (!isEmpty(this.get('counterModel.content'))) {
       this.get('counterModel.content').objectAt(0).results.statistics.senseis.forEach((mn) => {
-        if (this.get('model.id') == mn.id){
+        if (this.get('model.id') === mn.id){
           this.set('model.counter', mn.counter);
         }
       });
