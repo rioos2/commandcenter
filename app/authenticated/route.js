@@ -4,11 +4,12 @@ import Subscribers from 'nilavu/mixins/subscribers';
 import C from 'nilavu/utils/constants';
 import { xhrConcur } from 'nilavu/utils/platform';
 import Route from '@ember/routing/route';
-import Ember from 'ember';
 import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
-
+import { Promise } from 'rsvp';
+import EmberObject from '@ember/object';
+import { cancel } from '@ember/runloop';
 const  CHECK_AUTH_TIMER = 60 * 10 * 1000;
 
 export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
@@ -20,7 +21,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
 
   testTimer: null,
 
-  beforeModel(transition) {
+  beforeModel() {
 
     this._super.apply(this, arguments);
 
@@ -44,7 +45,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
 
     this.set('access.admin', isAdmin);
     this.get('session').set(C.SESSION.BACK_TO, undefined);
-    let promise = new Ember.RSVP.Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
       let tasks = {
         organizations: this.toCb('loadOrganizations'),
         settingsmap:   this.toCb('loadSettings'),
@@ -69,9 +70,9 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
     }, 'Load all the things');
 
     return promise.then((hash) => {
-      return Ember.Object.create(hash);
+      return EmberObject.create(hash);
     }).catch((err) => {
-      return this.loadingError(err, transition, Ember.Object.create({
+      return this.loadingError(err, transition, EmberObject.create({
         projects: [],
         project:  null,
       }));
@@ -79,7 +80,6 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   },
 
   activate() {
-    let app = this.controllerFor('application');
 
     this._super();
     this.connectSubscribers();
@@ -88,7 +88,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   deactivate() {
     this._super();
     this.disconnectSubscribers();
-    Ember.run.cancel(this.get('testTimer'));
+    cancel(this.get('testTimer'));
 
     // Forget all the things
     this.get('storeReset').reset();
