@@ -43,9 +43,7 @@ export default Component.extend(DefaultHeaders, {
     var validationString = '';
 
     if (isEmpty(this.get('teamName'))) {
-      validationString = get(this, 'intl').t('nav.team.create.tmNameEmpty');
-    } else if (isEmpty(this.get('teamDescription'))) {
-      validationString = get(this, 'intl').t('nav.team.create.tmDescriptionEmpty');
+      validationString = get(this, 'intl').t('nav.team.create.tmEmailEmpty');
     }
     this.set('validationWarning', validationString);
 

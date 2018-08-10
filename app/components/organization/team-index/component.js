@@ -12,13 +12,11 @@ export default Component.extend({
   parentRoute: 'organization',
 
   group:      alias('category'),
-
+  members:     alias('model.members'),
 
   teamsDataContents: function() {
-    console.log(JSON.stringify(this.get('model'))) ;
-
-    return this.get('model.member');
-  }.property('model.member'),
+    return (this.get('model.members') === undefined) ? [] : this.get('model.members');
+  }.property('model.members'),
 
   teamsCount: function() {
     if (isEmpty(this.get('teamsDataContents'))) {

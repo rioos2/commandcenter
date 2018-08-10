@@ -3,21 +3,14 @@
     <div class="modal-content modal-content-create-origin">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{t 'nav.team.create.header'}}{{originName}}</h4>
+        <h4 class="modal-title">{{t 'nav.team.create.header1'}}{{originName}}</h4>
       </div>
       <div class="modal-body">
 
           <div class="row">
             <div class="col-sm-12">
               <div class="form-group">
-                <label for="team_name">{{t 'nav.team.create.nameLable'}}</label> {{input type="text" class="form-control" id="team_name" value=teamName}}
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="team_description">{{t 'nav.team.create.descriptionLable'}}</label> {{input type="text" class="form-control" id="team_description" value=teamDescription}}
+                <label for="team_name">{{t 'nav.team.create.emailLable'}}</label> {{input type="text" class="form-control" id="team_name" value=teamName}}
               </div>
             </div>
           </div>
@@ -31,7 +24,7 @@
             </div>
           </div>
           <button type="submit" {{action 'createTeam'}} class="btn btn-default">
-            {{t 'nav.team.create.tmAddBtn'}}
+            {{t 'nav.team.create.inviteButton'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>
             {{/if}}

@@ -383,8 +383,9 @@ stackPage:
         emptyActiveCode:              You forgot to type activation code
         licenceid:                    Enter licence id
         licencepassword:              Enter licence password
-
-
+        activation:
+          success:                    License activated successfully
+          failure:                    License activation failed
 launcherPage:
   compute:
     selectType:                       Pick Cloud Type
@@ -980,13 +981,17 @@ nav:
   team:
     create:
       header: 'Add team in '
+      header1: 'Add member in'
       nameLable: Name
+      emailLable: Emails
       descriptionLable: Description
       tmNoteLabel: 'NOTE: '
       tmNote: Teams you can invite and manage users and control your resource spend
       tmAddBtn: Add
       tmNameEmpty: Enter team name
+      tmEmailEmpty: Enter Email id
       tmDescriptionEmpty: Enter description
+      inviteButton: Invite
     show:
       createdAt: Created At
       inviteTo: Invite To
