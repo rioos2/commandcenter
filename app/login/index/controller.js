@@ -1,18 +1,16 @@
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import InputValidation from 'nilavu/models/input-validation';
-import LoginValidation from 'nilavu/mixins/login-validation';
-const {
-  computed,
-  get
-} = Ember;
-
-export default Ember.Controller.extend(LoginValidation, {
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
+import { schedule } from '@ember/runloop';
+import $ from 'jquery';
+import { later } from '@ember/runloop';
+export default Controller.extend(/* LoginValidation,*/ {
 
   // LoginValidation validate username, password
-  access:        Ember.inject.service(),
-  intl:          Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  access:        service(),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
   showPassword: false,
 
@@ -36,9 +34,9 @@ export default Ember.Controller.extend(LoginValidation, {
   ),
 
   bootstrap: function() {
-    Ember.run.schedule('afterRender', this, () => {
-      var user = Ember.$('.login-user')[0];
-      var pass = Ember.$('.login-pass')[0];
+    schedule('afterRender', this, () => {
+      var user = $('.login-user')[0];
+      var pass = $('.login-pass')[0];
 
       if (user) {
         if (user.value) {
@@ -69,7 +67,7 @@ export default Ember.Controller.extend(LoginValidation, {
       this.showCredentialEmpty();
       if (!this.get('validate')) {
         this.set('showSpinner', true);
-        Ember.run.later(() => {
+        later(() => {
           this.get('access').login(this.get('username').toLowerCase(), this.get('password')).then(() => {
             this.set('showSpinner', false);
             this.send('trackUsage', C.ANALYTIC_EVENTS.LOGGED_IN);

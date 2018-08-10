@@ -436,4 +436,15 @@ C.INITIALIZING_STATES = [
   'reinitializing'
 ];
 
+C.UNAUTHENTICATED_HTTP_CODES = [C.UNAUTHENTICATED];
+
+// This is contains the  list of codes that can be  treated as unauthorized
+// 1. 403 return code when the user isn't authorized to access an  API
+C.UNAUTHORIZED_HTTP_CODES = [C.UNAUTHORIZED];
+
+// This contains the list of codes that can be treated as unauthorized and
+//  unauthenticated
+C.UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES = [C.UNAUTHENTICATED, C.UNAUTHORIZED];
+
+
 export default C;

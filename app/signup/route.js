@@ -1,14 +1,14 @@
-import Ember from 'ember';
-
-export default Ember.Route.extend({
-  access: Ember.inject.service(),
-  beforeModel(transition) {
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+export default Route.extend({
+  access: service(),
+  beforeModel(/* transition*/) {
     this.get('access').activate().then((config) => {
       if (!config) {
         this.transitionTo('wizard');
       }
     }).catch((err) => {
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 
