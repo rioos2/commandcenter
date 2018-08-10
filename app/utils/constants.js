@@ -14,6 +14,11 @@ var C = {
 
   BADGATEWAY_HTTP_CODES: ['502'],
 
+  ERROR_CODE: {
+    UNAUTHENTICATED_HTTP_CODES: 401,
+    UNAUTHORIZED_HTTP_CODES:    403,
+  },
+
 
   /* --------  The section  that has  various Rio objects  ----*/
 

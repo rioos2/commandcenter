@@ -80,7 +80,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   },
 
   activate() {
-    
+
     this._super();
     this.connectSubscribers();
   },
