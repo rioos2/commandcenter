@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 import { isAlternate } from 'nilavu/utils/platform';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
-  resourceActions: Ember.inject.service('resource-actions'),
+export default Component.extend({
+  resourceActions: service('resource-actions'),
   icon:            'icon-help',
   label:           '',
   prefix:          null,

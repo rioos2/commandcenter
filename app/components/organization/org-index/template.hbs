@@ -1,23 +1,39 @@
-<div class="col-sm-12 content-left">
-	<div class="panel panel-default kv-panel org-index">
-		<div class="panel-heading">
-			<div class="panel-header">
-				{{t 'nav.organization.team.teamCount'}} ({{availableSize}})
-			</div>
-      <!-- TODO need to remove disabled class after create action for team post-->
-			<div class="pull-right kv-right-head-button disabled">
-				<button type="button" class="btn">+ {{t 'nav.organization.team.addBtn'}}</button>
-			</div>
-		</div>
-		<div class="panel-body">
-			<div class="empty-network">
-				<div class="pin-img">
-					<img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
-				</div>
-				<div class="empty-network-add-link">
-					<span>{{t 'nav.organization.team.emptyTeam'}}</span>
-				</div>
-			</div>
-		</div>
-	</div>
+{{organization/create-team originName=currentOrigin modelSpinner=modelSpinner}}
+<div class="filter">
+    <div class="row">
+        <div class="col-sm-12 col-lg-2">
+            <div class="cloud-count">
+                {{svg/svg-cloud-count}}
+                <label>{{teamsCount}} teams</label>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-10">
+            <div class="row p-r-15">
+                <div class="col-sm-2 col-md-2 col-lg-1 filter-text">
+                    {{#conditional-loading-spinner condition=showLoading}}
+                        <span>{{t 'stackPage.applicationTab.filterBy'}}</span>
+                    {{/conditional-loading-spinner}}
+                </div>
+                <div class="col-sm-10 col-md-10 col-lg-11">
+                    <div class="row">
+                        {{organization/origin-filters model=teamsDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
+                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
+                            <div class="search-content">
+                                <button {{action "createTeam"}} type="button" class="btn">+ Team</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cloud-lists row">
+  {{#each teamsDataContents as |teamsDataContent|}}
+      <div class="list col-sm-5 col-md-3">
+          {{organization/team-box originName=currentOrigin model=teamsDataContent}}
+      </div>
+      {{else}}
+     {{organization/team-box-empty btnName=emptyBtn btnAction="createTeam"}}
+  {{/each}}
 </div>

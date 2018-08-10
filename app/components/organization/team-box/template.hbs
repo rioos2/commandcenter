@@ -1,0 +1,23 @@
+<div class="team-box left" {{action 'goTeam'}}>
+  <div class="domain">
+    <div class="icon status" data-tooltip="{{teamStatus}}">
+      {{svg/svg-status status=teamStatus}}
+    </div>
+    <p class="text1" title={{model.object_meta.name}}>{{model.object_meta.name}}</p>
+    <p class="text2">Active</p>
+  </div>
+  <div class="ip">
+    <div class="icon">
+      {{fa-icon "tasks"}}
+    </div>
+    <p class="text1">{{t 'nav.team.show.createdAt'}}</p>
+    <p class="text2">{{model.created_at}}</p>
+  </div>
+  <div class="location">
+    <div class="icon">
+      {{fa-icon "tag"}}
+    </div>
+    <p class="text1">{{t 'nav.team.show.about'}}</p>
+    <p class="text2">{{model.description}}</p>
+  </div>
+</div>

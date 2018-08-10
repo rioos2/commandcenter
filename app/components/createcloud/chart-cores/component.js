@@ -14,7 +14,7 @@ export default Component.extend({
       title:       this.get('resource.title')
     }
 
-    renderChartNumberOfCores()
+    renderChartNumberOfCores() // eslint-disable-line
       .container(`#chart-cores-${ this.get('resource.name') }`)
       .data(data)
     // .backgroundColor('#1D1E33')

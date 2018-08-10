@@ -1,8 +1,9 @@
 import Route from '@ember/routing/route';
+
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 
-export default Ember.Route.extend(DefaultHeaders, {
-  resetController(controller, isExiting, transition) {
+export default Route.extend(DefaultHeaders, {
+  resetController(controller, isExiting) {
     if (isExiting) {
       this.transitionTo({
         queryParams: {

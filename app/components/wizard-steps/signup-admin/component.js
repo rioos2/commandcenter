@@ -1,25 +1,28 @@
-import Ember from 'ember';
-const { computed, get } = Ember;
-
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
+import { isEmpty } from '@ember/utils';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { get } from '@ember/object';
+import { later } from '@ember/runloop';
 
-export default Ember.Component.extend({
-  notifications: Ember.inject.service('notification-messages'),
-  access:         Ember.inject.service(),
-  store:          Ember.inject.service(),
-  intl:           Ember.inject.service(),
-  userStore:      Ember.inject.service('store'),
+export default Component.extend({
+  notifications: service('notification-messages'),
+  access:         service(),
+  store:          service(),
+  intl:           service(),
+  userStore:      service('store'),
   tagName:       '',
   className:     '',
 
   emailExistence: true,
 
-  name:    Em.computed.alias('first_name'),
+  name:    computed.alias('first_name'),
   actions: {
     singUp() {
       this.check();
       if (this.shouldProceed()) {
-        Ember.run.later(() => {
+        later(() => {
           this.get('access').signup(this.getFormInput()).then(() => {
             this.get('completedSteps').pushObject(this.get('category'));
             this.sendAction('proceedNextStep');
@@ -55,7 +58,7 @@ export default Ember.Component.extend({
   externalAccountFields() {
     let externalFields = {
       registration_ip_address: '',
-      roles:                   [C.ACCOUNT.ROLES.SUPERUSER],
+      teams:                   [C.ACCOUNT.ROLES.SUPERUSER],
     };
 
     return externalFields;
@@ -89,7 +92,7 @@ export default Ember.Component.extend({
   },
 
   shouldProceed() {
-    return Ember.isEmpty(this.get('val_company')) && Ember.isEmpty(this.get('val_firstName')) && Ember.isEmpty(this.get('val_lastName')) && Ember.isEmpty(this.get('val_phone')) && Ember.isEmpty(this.get('val_code')) && Ember.isEmpty(this.get('val_email'));
+    return isEmpty(this.get('val_company')) && isEmpty(this.get('val_firstName')) && isEmpty(this.get('val_lastName')) && isEmpty(this.get('val_phone')) && isEmpty(this.get('val_code')) && isEmpty(this.get('val_email'));
   },
 
 });

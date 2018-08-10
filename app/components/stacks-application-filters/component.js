@@ -1,12 +1,15 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
+import { alias } from '@ember/object/computed';
+import EmberObject from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
-export default Ember.Component.extend({
+export default Component.extend({
   panel: [],
 
   parentRoute: 'stacks',
 
-  group: Ember.computed.alias('category'),
+  group: alias('category'),
 
   filterByOS: function() {
     return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_OS);
@@ -38,13 +41,13 @@ export default Ember.Component.extend({
   },
   // Verify if you get filter by string ubuntu first.
   filterParmsHash(category) {
-    let states = Ember.Object.create();
+    let states = EmberObject.create();
     let p = this.panel.filter((f) => f.get('group') === category);
 
     p.map((pn) => {
       const _initedState = pn.filterSelectionChanged();
 
-      if (!Ember.isEmpty(_initedState)) {
+      if (!isEmpty(_initedState)) {
         states.set(_initedState.selector, _initedState.selected);
       }
     });

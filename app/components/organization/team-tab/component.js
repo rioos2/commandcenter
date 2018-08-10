@@ -1,24 +1,22 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
 
-export default Ember.Component.extend({
-  intl:              Ember.inject.service(),
+
+export default Component.extend({
+  intl:              service(),
   tagName:           'li',
   classNameBindings: ['active', 'tabClassName'],
 
-  active: Ember.computed.equal('selectedTab', 'tab'),
+  active: equal('selectedTab', 'tab'),
 
   tabClassName: function() {
-    return `stacks-application-${  this.get('tab') }`;
-  }.property('tab'),
-
-  iconName: function() {
-    return `svg/svg-${  this.get('tab') }`;
+    return `organization/team-${  this.get('tab') }`;
   }.property('tab'),
 
   title: function() {
-    return this.get('intl').t(`stackPage.${  this.get('tab') }`);
+    return this.get('intl').t(`nav.organization.tab2.${  this.get('tab') }`);
   }.property('tab'),
-
 
   _addToCollection: function() {
     this.get('panels').addObject(this.get('tabClassName'));

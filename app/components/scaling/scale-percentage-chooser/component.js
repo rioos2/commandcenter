@@ -1,9 +1,8 @@
-import Ember from 'ember';
-const  { get } = Ember;
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-
-export default Ember.Component.extend({
-  intl:       Ember.inject.service(),
+export default Component.extend({
+  intl:       service(),
 
   didInsertElement() {
     let _this = this;
@@ -19,7 +18,7 @@ export default Ember.Component.extend({
     //     suffix: get(this, 'intl').t('launcherPage.scaling.horizontal.scaleup.description'),
     //     title: get(this, 'intl').t('launcherPage.scaling.horizontal.scaleup.'+this.get('resource')+'.title')
 
-    renderChartRam()
+    renderChartRam() // eslint-disable-line
       .container(`#${ this.get('resource.name') }${ this.get('scaleType') }`)
       .data(data)
     // .backgroundColor('#1D1E33')

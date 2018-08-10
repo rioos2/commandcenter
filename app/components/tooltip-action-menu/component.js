@@ -1,15 +1,18 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import Tooltip from 'nilavu/mixins/tooltip';
 import StrippedName from 'nilavu/mixins/stripped-name';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 
-export default Ember.Component.extend(Tooltip, StrippedName, {
-  resourceActions:  Ember.inject.service('resource-actions'),
+
+export default Component.extend(Tooltip, StrippedName, {
+  resourceActions:  service('resource-actions'),
   needs:            ['application'],
   inTooltip:        false,
   layoutName:       'tooltip-action-menu',
 
-  model:            Ember.computed.alias('tooltipService.tooltipOpts.model'),
-  actionsOpen:      Ember.computed.alias('resourceActions.open'),
+  model:            alias('tooltipService.tooltipOpts.model'),
+  actionsOpen:      alias('resourceActions.open'),
   openChanged: function() {
     this.set('tooltipService.requireClick', this.get('actionsOpen'));
     if ( !this.get('actionsOpen') && !this.get('inTooltip') ) {

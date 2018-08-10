@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
@@ -8,6 +7,7 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
 import { htmlSafe } from '@ember/string';
 import { isEmpty } from '@ember/utils';
+import $ from 'jquery';
 
 export default Component.extend(DefaultHeaders, flagsISo, {
 

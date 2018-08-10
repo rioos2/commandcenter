@@ -1,6 +1,7 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-
-export default Ember.Route.extend(DefaultHeaders, {
+import Route from '@ember/routing/route';
+import { hash } from 'rsvp';
+export default Route.extend(DefaultHeaders, {
 
   queryParams: {
     os:       { refreshModel: true }, // Select by OS
@@ -11,8 +12,8 @@ export default Ember.Route.extend(DefaultHeaders, {
     search:   { refreshModel: true }, // search
   },
 
-  model(params) {
-    return Ember.RSVP.hash({
+  model() {
+    return hash({
       stacks:        this.get('store').findAll('assembly', this.opts('assemblys')),
       stacksfactory: this.get('store').findAll('stacksfactory', this.opts('stacksfactorys')),
     });
