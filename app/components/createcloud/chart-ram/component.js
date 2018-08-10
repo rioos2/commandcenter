@@ -13,7 +13,7 @@ export default Component.extend({
       title:      this.get('resource.title')
     }
 
-    renderChartRam()
+    renderChartRam() // eslint-disable-line
       .container(`#chart-${  this.get('resource.name') }`)
       .data(data)
       .debug(true)

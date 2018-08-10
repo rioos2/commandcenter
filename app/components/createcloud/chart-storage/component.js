@@ -14,7 +14,7 @@ export default Component.extend({
       title:       this.get('resource.title')
     }
 
-    renderChartStorage()
+    renderChartStorage() // eslint-disable-line
       .container(`#chart-${ this.get('resource.name') }`)
       .data(data)
       .debug(true)

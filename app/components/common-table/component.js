@@ -1,14 +1,13 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import Table from 'ember-light-table';
-import C from 'nilavu/utils/constants';
-const  { get } = Ember;
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
 
-import { denormalizeName } from 'nilavu/utils/denormalize';
 
 export default Component.extend({
 
-  intl:       Ember.inject.service(),
+  intl:       service(),
   model: null,
 
   columns: computed(function() {
