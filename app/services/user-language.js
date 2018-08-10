@@ -1,6 +1,5 @@
 import C from 'nilavu/utils/constants';
 import { loadScript } from 'nilavu/utils/load-script';
-import Ember from 'ember';
 import { ajaxPromise } from 'ember-api-store/utils/ajax-promise';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';

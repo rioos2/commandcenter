@@ -3,9 +3,6 @@ import Resource from 'ember-api-store/models/resource';
 export default Resource.extend({
 
   availableActions: function() {
-  // let a = this.defaultActionLinks();
-    var a = this.get('actionLinks');
-
     return [
       {
         label:   'delete',

@@ -1,8 +1,8 @@
 import Resource from 'ember-api-store/models/resource';
 import { get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import { htmlSafe } from '@ember/string';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Downloadjs from 'npm:downloadjs';
@@ -81,7 +81,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
 
   hasDownloaded(secrets, id) {
-    if (secrets.length != 0) {
+    if (secrets.length !== 0) {
       Downloadjs(secrets, `${ id  }.key`, 'text/plain');
 
       return true;
@@ -94,7 +94,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
     let key = res.data['rioos_sh/ssh_pubkey'] || '';
 
     if (!this.hasDownloaded(key, this.get('name'))) {
-      this.get('notifications').warning(Ember.String.htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
+      this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
         autoClear:     true,
         clearDuration: 4200,
         cssClasses:    'notification-success'
@@ -112,7 +112,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
       if (planBlueprintId) {
         this.get('spec.assembly_factory.spec.plan.plans').forEach((p) => {
-          if (p.object_meta.name == planBlueprintId) {
+          if (p.object_meta.name === planBlueprintId) {
             port = p.metadata.rioos_sh_web_access_port;
             protocol = p.metadata.rioos_sh_web_access_protocal;
             if (protocol && port) {

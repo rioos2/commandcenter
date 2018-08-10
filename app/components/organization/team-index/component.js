@@ -3,6 +3,7 @@ import { isEmpty } from '@ember/utils';
 import EmberObject from '@ember/object';
 import { alias } from '@ember/object/computed';
 import C from 'nilavu/utils/constants';
+import $ from 'jquery';
 
 
 

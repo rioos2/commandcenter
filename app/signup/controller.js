@@ -1,3 +1,4 @@
+import C from 'nilavu/utils/constants';
 import SignupValidation from 'nilavu/mixins/signup-validation';
 import EmailValidation from 'nilavu/mixins/email-validation';
 import PasswordValidation from 'nilavu/mixins/password-validation';
@@ -72,7 +73,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
           this.get('access').signup(this.getform()).then(() => {
             this.send('finishLogin');
           }).catch((err) => {
-            if (err.status == 500) {
+            if (err.status === C.INTERNALSERVER_ERROR) {
               this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
                 autoClear:     true,
                 clearDuration: 4200,
@@ -80,7 +81,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
               });
             }
             // Show error message if emailid already exist
-            if (err.code == '409') {
+            if (err.code === C.INTERNAL_CONFLICTS) {
               this.set('val_email', 'credential-empty');
               this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
               this.set('emailExistence', false);
