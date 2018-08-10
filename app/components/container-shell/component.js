@@ -116,7 +116,7 @@ export default Component.extend(DefaultHeaders, {
     socket.onclose = () => {
       try {
         this.set('status', 'closed');
-        term.destroy();
+        term.destroy(); // eslint-disable-line
         if (!this.get('userClosed')) {
           this.sendAction('dismiss');
         }

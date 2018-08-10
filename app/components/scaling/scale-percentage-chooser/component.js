@@ -18,7 +18,7 @@ export default Component.extend({
     //     suffix: get(this, 'intl').t('launcherPage.scaling.horizontal.scaleup.description'),
     //     title: get(this, 'intl').t('launcherPage.scaling.horizontal.scaleup.'+this.get('resource')+'.title')
 
-    renderChartRam()
+    renderChartRam() // eslint-disable-line
       .container(`#${ this.get('resource.name') }${ this.get('scaleType') }`)
       .data(data)
     // .backgroundColor('#1D1E33')

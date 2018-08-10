@@ -3,6 +3,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 import { isEmpty } from '@ember/utils';
+import C from 'nilavu/utils/constants';
 
 export default Controller.extend({
 
@@ -43,7 +44,7 @@ export default Controller.extend({
 
 
   telemetryUnavailable: function() {
-    if (get(this, 'telemetryAvailabilityStatus') == '502') {
+    if (C.BADGATEWAY_HTTP_CODES.includes(get(this, 'telemetryAvailabilityStatus'))) {
       get(this, 'notifications').warning(get(this, 'intl').t('dashboard.error'), {
         htmlContent:   true,
         autoClear:     true,

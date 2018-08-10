@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
 
-export default Ember.Route.extend({
-  storeReset: Ember.inject.service(),
+export default Route.extend({
+  storeReset: service(),
 
   model() {
     return this.controllerFor('application').get('error');
