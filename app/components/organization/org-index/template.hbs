@@ -31,7 +31,9 @@
 <div class="cloud-lists row">
   {{#each teamsDataContents as |teamsDataContent|}}
       <div class="list col-sm-5 col-md-3">
-          {{organization/team-box model=teamsDataContent}}
+          {{organization/team-box originName=currentOrigin model=teamsDataContent}}
       </div>
+      {{else}}
+     {{organization/team-box-empty btnName=emptyBtn btnAction="createTeam"}}
   {{/each}}
 </div>

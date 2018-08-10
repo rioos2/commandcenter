@@ -1,29 +1,31 @@
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
 import EmberObject from '@ember/object';
 import { alias } from '@ember/object/computed';
 import C from 'nilavu/utils/constants';
+import { inject as service } from '@ember/service';
+import $ from 'jquery';
 
 
 
 export default Component.extend({
+  intl:          service(),
+
+
   tagName:     '',
   className:   '',
   parentRoute: 'organization',
 
-  group:      alias('category'),
-
-
+  group:             alias('category'),
   teamsDataContents: function() {
-    return this.get('model.teams.content');
+    return (this.get('model.teams') === undefined) ? [] : this.get('model.teams.content');
   }.property('model.teams'),
 
   teamsCount: function() {
-    if (isEmpty(this.get('teamsDataContents'))) {
-      return [].length;
-    }
-
     return this.get('teamsDataContents').length;
+  }.property('teamsDataContents'),
+
+  emptyBtn: function() {
+    return this.get('intl').t('nav.team.show.emptyBtn');
   }.property('teamsDataContents'),
 
   actions: {
