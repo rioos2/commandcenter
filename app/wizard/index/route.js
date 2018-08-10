@@ -28,7 +28,6 @@ export default Route.extend(DefaultHeaders, {
 
       this.model().then((model) => {
         self.getLicense().then((license) => {
-          console.log(JSON.stringify(license))
           model.license = license;
           self.controller.set('model', model);
         });
@@ -37,11 +36,9 @@ export default Route.extend(DefaultHeaders, {
   },
 
   getLicense() {
-    return Ember.RSVP.hash({ license: this.get('store').findAll('license', this.opts('licenses/senseis', true)), });
+    return hash({ license: this.get('store').findAll('license', this.opts('licenses/senseis', true)), });
   },
 
-  getLicense() {
-    return Ember.RSVP.hash({ license: this.get('store').findAll('license', this.opts('licenses', true)), });
-  },
+
 
 });

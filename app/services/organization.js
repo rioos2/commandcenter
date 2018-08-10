@@ -3,6 +3,7 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
+import { reject } from 'rsvp';
 
 export default Service.extend(DefaultHeaders, {
   access:        service(),
@@ -53,10 +54,10 @@ export default Service.extend(DefaultHeaders, {
         if (origansation.name) {
           return this.selectOrganizationAndTeam(origansation.name /* , team*/ );
         } else {
-          return fail();
+          return reject();
         }
       }).catch(() => {
-        return fail();
+        return reject();
       });
     }
     this.set('currentOrganization', this.get('tab-session').get(C.TABSESSION.ORGANIZATION));
@@ -65,11 +66,12 @@ export default Service.extend(DefaultHeaders, {
       if (all) {
         return all;
       } else {
-        return fail();
+        return reject();
       }
     }).catch(() => {
-      return fail();
+      return reject();
     });
+
   },
 
 });
