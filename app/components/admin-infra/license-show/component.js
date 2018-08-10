@@ -13,21 +13,13 @@ export default Component.extend(DefaultHeaders, {
   showActivationEditBox: true,
   showSpinner:           false,
 
-  ninjaActivated: function(){
-    return this.get('model.activation.remain');
-  }.property('model.activation.remain'),
+  Activated: function(){
+    return this.get('model.activation.no_of_activations_available');
+  }.property('model.activation.no_of_activations_available'),
 
-  ninjaAllowed: function(){
-    return this.get('model.activation.limit');
-  }.property('model.activation.limit'),
-
-  senseiActivated: function(){
-    return this.get('model.activation.remain');
-  }.property('model.activation.remain'),
-
-  senseiAllowed: function(){
-    return this.get('model.activation.limit');
-  }.property('model.activation.limit'),
+  Allowed: function(){
+    return this.get('model.activation.total_number_of_activations');
+  }.property('model.activation.total_number_of_activations'),
 
   product: function(){
     return this.get('model.product');
