@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import {  inject as service } from '@ember/service';
-import C from 'nilavu/utils/constants';
+import $ from 'jquery';
 
 export default Component.extend({
   access:        service(),

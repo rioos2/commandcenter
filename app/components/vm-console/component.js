@@ -77,7 +77,7 @@ export default Component.extend({
       self.set('rfbState', state);
     }
 
-    var rfb = new NoVNC.RFB({
+    var rfb = new NoVNC.RFB({ // eslint-disable-line
       target:        this.$('.console-canvas')[0],
       //    encrypt: parts.protocol === 'wss',
       true_color:    true,

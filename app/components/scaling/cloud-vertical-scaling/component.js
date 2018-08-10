@@ -49,7 +49,7 @@ export default Component.extend({
         cssClasses:    'notification-warning'
       });
     } else
-    if (parseInt(scaleData.trim()) != scaleData.trim()) {
+    if (parseInt(scaleData.trim()) !== scaleData.trim()) {
       this.set('flag', false);
       this.get('notifications').warning(get(this, 'intl').t('launcherPage.scaling.invalidFormat'), {
         autoClear:     true,
