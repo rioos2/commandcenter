@@ -1,22 +1,31 @@
-import DefaultHeaders from 'nilavu/mixins/default-headers';
-import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
+import OrganizationUser from 'nilavu/mixins/organization-validation';
+import Component from '@ember/component';
 import { htmlSafe } from '@ember/string';
-import { isEmpty } from '@ember/utils';
-import { get } from '@ember/object';
-
-
-
-export default Component.extend(DefaultHeaders, {
+export default Component.extend(DefaultHeaders, OrganizationUser, {
   intl:          service(),
   notifications: service('notification-messages'),
   session:       service(),
+
+  validate: function() {
+    if (this.get('organizationNameValidation.failed')) {
+      this.set('validationError', this.get('organizationNameValidation.reason'));
+
+      return true;
+    }
+    this.set('validationError', '');
+
+    return false;
+  }.property(
+    'organizationNameValidation.failed'
+  ),
 
   actions: {
 
     createOrganization() {
       this.set('showSpinner', true);
-      if (!this.validation()) {
+      if (!this.get('validate')) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
           url:    '/api/v1/origins',
           method: 'POST',
@@ -29,7 +38,7 @@ export default Component.extend(DefaultHeaders, {
         });
       } else {
         this.set('showSpinner', false);
-        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
+        this.get('notifications').warning(htmlSafe(this.get('validationError')), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -39,16 +48,6 @@ export default Component.extend(DefaultHeaders, {
 
   },
 
-  validation() {
-    var validationString = '';
-
-    if (isEmpty(this.get('originName'))) {
-      validationString = get(this, 'intl').t('nav.organization.create.orgNameEmpty');
-    }
-    this.set('validationWarning', validationString);
-
-    return isEmpty(this.get('validationWarning')) ? false : true;
-  },
 
   getData() {
     return {

@@ -2,25 +2,21 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { equal } from '@ember/object/computed';
 
+
 export default Component.extend({
   intl:              service(),
   tagName:           'li',
-  classNames:        ['smooth-disabled'],
   classNameBindings: ['active', 'tabClassName'],
 
   active: equal('selectedTab', 'tab'),
 
   tabClassName: function() {
-    return `wizard-steps/${  this.get('tab') }`;
+    return `organization/team-${  this.get('tab') }`;
   }.property('tab'),
 
   title: function() {
-    return this.get('intl').t(`wizard.${  this.get('tab')  }.title`);
+    return this.get('intl').t(`nav.organization.tab2.${  this.get('tab') }`);
   }.property('tab'),
-
-  isComplete: function() {
-    return this.get('completedSteps').includes(this.get('tab'));
-  }.property('model', 'selectedTab', 'tab', 'completedSteps'),
 
   _addToCollection: function() {
     this.get('panels').addObject(this.get('tabClassName'));
