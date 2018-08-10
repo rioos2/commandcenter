@@ -1,7 +1,6 @@
-import Ember from 'ember';
-import C from 'nilavu/utils/constants';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   categories:  ['index'],
   panels:      [],
