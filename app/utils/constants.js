@@ -1,6 +1,14 @@
 var C = {
 
   /* --------  The section  that has  various  http codes  ----*/
+  // Stack all the base http codes here
+  INTERNALSERVER_ERROR: 500,
+  // Conflicts, if there is a record that already exists. Eg: email
+  INTERNAL_CONFLICTS:   '409',
+  // When the downstream systems are down
+  BAD_GATEWAY:          502,
+
+  /* --------  The section  that has  various  http codes  ----*/
   // This is contains the  list of codes that can be  treated as unauthenticated
   // 1. 401 return code when the user isn't authenticated.
   UNAUTHENTICATED_HTTP_CODES: [401],
