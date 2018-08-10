@@ -2,6 +2,12 @@ var C = {
 
   /* --------  The section  that has  various  http codes  ----*/
   // Stack all the base http codes here
+  INTERNALSERVER_ERROR: 500,
+  // Conflicts, if there is a record that already exists. Eg: email
+  INTERNAL_CONFLICTS:   '409',
+  // When the downstream systems are down
+  BAD_GATEWAY:          502,
+
   UNAUTHENTICATED: 401,
 
   UNAUTHORIZED: 403,
