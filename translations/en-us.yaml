@@ -975,6 +975,19 @@ nav:
       teamCount: Team
     tab:
       index: Organization
+  team:
+    create:
+      header: 'Add team in '
+      nameLable: Name
+      descriptionLable: Description
+      tmNoteLabel: 'NOTE: '
+      tmNote: Teams you can invite and manage users and control your resource spend
+      tmAddBtn: Add
+      tmNameEmpty: Enter team name
+      tmDescriptionEmpty: Enter description
+    show:
+      createdAt: Created At
+      about: About
   user:
     org: Organization
     createOrg: Add organization

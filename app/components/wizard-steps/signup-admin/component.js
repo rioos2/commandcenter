@@ -58,7 +58,7 @@ export default Component.extend({
   externalAccountFields() {
     let externalFields = {
       registration_ip_address: '',
-      roles:                   [C.ACCOUNT.ROLES.SUPERUSER],
+      teams:                   [C.ACCOUNT.ROLES.SUPERUSER],
     };
 
     return externalFields;
