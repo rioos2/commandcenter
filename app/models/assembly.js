@@ -1,6 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 import { get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import { htmlSafe } from '@ember/string';
 import { inject as service } from '@ember/service';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';

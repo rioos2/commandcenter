@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-lg-2">
             <div class="cloud-count">
                 {{svg/svg-cloud-count}}
-                <label>{{teamsCount}} mem</label>
+                <label>{{memberCount}} mem</label>
             </div>
         </div>
         <div class="col-sm-12 col-lg-10">
@@ -16,10 +16,10 @@
                 </div>
                 <div class="col-sm-10 col-md-10 col-lg-11">
                     <div class="row">
-                        {{organization/team-filters model=teamsDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
+                        {{organization/team-filters model=memberDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
-                                <button {{action "createTeam"}} type="button" class="btn">+ Invite</button>
+                                <button {{action "inviteMember"}} type="button" class="btn disabled">+ Invite</button>
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,11 @@
     </div>
 </div>
 <div class="cloud-lists row">
-  {{#each teamsDataContents as |teamsDataContent|}}
+  {{#each memberDataContents as |member|}}
       <div class="list col-sm-5 col-md-3">
-          {{organization/team-member-box model=teamsDataContent}}
+          {{organization/team-member-box member=member}}
       </div>
+      {{else}}
+     {{organization/team-box-empty btnName=emptyBtn hide=true btnAction="inviteMember"}}
   {{/each}}
 </div>
