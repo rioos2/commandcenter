@@ -4,15 +4,15 @@ import { setupTest } from 'ember-mocha';
 
 describe('authenticated-project-help-controller', () => {
   setupTest('controller:authenticated/project/help', {
-      needs: [
-          'service:settings',
-                ]
+    needs: [
+      'service:settings',
+    ]
   });
 
-  
   it('exists', function() {
 
     let route = this.subject();
+
     expect(route).to.be.ok;
 
   });

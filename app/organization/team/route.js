@@ -1,10 +1,9 @@
 import Route from '@ember/routing/route';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import { hash } from 'rsvp';
 
 export default Route.extend(DefaultHeaders, {
   currentOrigin: null,
-  model(params) {
+  model(/* params*/) {
     return {
       'id':          '1045474111066767360',
       'name':        '',
