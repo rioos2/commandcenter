@@ -6,7 +6,6 @@ import C from 'nilavu/utils/constants';
 import $ from 'jquery';
 
 
-
 export default Component.extend({
   intl:          service(),
   tagName:     '',
