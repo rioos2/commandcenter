@@ -12,18 +12,6 @@ var C = {
 
   UNAUTHORIZED: 403,
 
-  // This is contains the  list of codes that can be  treated as unauthenticated
-  // 1. 401 return code when the user isn't authenticated.
-  UNAUTHENTICATED_HTTP_CODES: [C.UNAUTHENTICATED],
-
-  // This is contains the  list of codes that can be  treated as unauthorized
-  // 1. 403 return code when the user isn't authorized to access an  API
-  UNAUTHORIZED_HTTP_CODES: [C.UNAUTHORIZED],
-
-  // This contains the list of codes that can be treated as unauthorized and
-  //  unauthenticated
-  UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES: [C.UNAUTHENTICATED, C.UNAUTHORIZED],
-
   // Internal server error
   INTERNALSERVER_HTTP_CODES: ['500'],
 
@@ -366,6 +354,19 @@ var C = {
   },
 
 };
+
+// This is contains the  list of codes that can be  treated as unauthenticated
+// 1. 401 return code when the user isn't authenticated.
+C.UNAUTHENTICATED_HTTP_CODES = [C.UNAUTHENTICATED],
+
+// This is contains the  list of codes that can be  treated as unauthorized
+// 1. 403 return code when the user isn't authorized to access an  API
+C.UNAUTHORIZED_HTTP_CODES = [C.UNAUTHORIZED],
+
+// This contains the list of codes that can be treated as unauthorized and
+//  unauthenticated
+C.UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES = [C.UNAUTHENTICATED, C.UNAUTHORIZED],
+
 
 /*
 * Assembly management page filter selector and accessor
