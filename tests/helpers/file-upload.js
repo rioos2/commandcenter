@@ -26,7 +26,7 @@ export function fileUpload($element, content, options) {
 export default registerAsyncHelper('fileUpload', (app, selector, content, options) => {
   let file = createFile(content, options);
 
-  return triggerEvent(
+  return triggerEvent( // eslint-disable-line
     selector,
     'change',
     { testingFiles: [file] }

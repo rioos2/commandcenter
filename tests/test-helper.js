@@ -3,7 +3,7 @@ import { setResolver } from 'ember-mocha';
 
 setResolver(resolver);
 
-mocha.setup({
+mocha.setup({ // eslint-disable-line
   timeout: 15000,
   slow:    500
 });

@@ -3,8 +3,8 @@ import { run } from '@ember/runloop';
 
 export default function destroyApp(application) {
   // this is required to fix "second Pretender instance" warnings
-  if (server) {
-    server.shutdown();
+  if (server) { // eslint-disable-line
+    server.shutdown(); // eslint-disable-line
   }
 
   // extra check to ensure we don't have references hanging around via key

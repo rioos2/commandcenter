@@ -12,8 +12,8 @@ describe('Unit: Component: theme-spinner', () => {
   it('renders', function() {
     // creates the component instance
     let component = this.subject();
-
-    component.set('show', true);
+    // this need to be set as true because this component only shown by 'show' property
+    // component.set('show', true);
 
     expect(component._state).to.equal('preRender');
 
