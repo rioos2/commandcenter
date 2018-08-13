@@ -6,7 +6,6 @@ import { inject as service } from '@ember/service';
 import C from 'nilavu/utils/constants';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Downloadjs from 'npm:downloadjs';
-import { htmlSafe } from '@ember/string';
 var Assembly = Resource.extend(DefaultHeaders, {
 
   availableActions: function() {
