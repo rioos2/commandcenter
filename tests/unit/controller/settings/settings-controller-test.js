@@ -5,7 +5,6 @@ import { setupTest } from 'ember-mocha';
 describe('settings-controller', () => {
   setupTest();
 
-  
   it('exists', function() {
     let controller = this.owner.lookup('controller:settings');
 
