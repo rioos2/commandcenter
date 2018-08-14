@@ -12,7 +12,8 @@ install_dependencies:
     paths:
       - node_modules
   before_script:
-    - apt-get install -y git
+    - apt-get update -yqqq
+    - apt-get install -y build-essential git
   script:
     - yarn install
   artifacts:
@@ -32,6 +33,7 @@ test:
     - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
     # Update packages
     - apt-get update -yqqq
+    - apt-get install -y build-essential git
     # Install Chrome browser
     - apt-get install -y google-chrome-stable
     # Install Virtual Display emulator
