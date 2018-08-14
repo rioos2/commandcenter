@@ -18,11 +18,6 @@ FATAL: you must setup eslint globally, (or) ./node_modules/.bin/eslint
 	   Run 'make dev' to fix the problem.
 endef
 
-define NOT_FOUND_JSHINT
-FATAL: you must setup jshint globally, (or) ./node_modules/.bin/jshint
-	   Run 'make dev' to fix the problem.
-endef
-
 ifndef RIOOS_HOME
  $(error $(NOT_SET_RIOOS_HOME))
 endif
@@ -39,9 +34,6 @@ ifeq (,$(wildcard ./node_modules/.bin/ember))
 endif
 ifeq (,$(wildcard ./node_modules/.bin/eslint))
 	$(error $(NOT_FOUND_ESLINT))
-endif
-ifeq (,$(wildcard ./node_modules/.bin/jshint))
-	$(error $(NOT_FOUND_JSHINT))
 endif
 
 initialize: setup
@@ -94,4 +86,3 @@ dev:
 	@echo "» DEV: yarn start"
 	yarn start
 .PHONY: dev
-
