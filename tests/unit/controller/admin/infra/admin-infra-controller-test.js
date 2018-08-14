@@ -5,7 +5,6 @@ import { setupTest } from 'ember-mocha';
 describe('admin info controller', () => {
   setupTest();
 
-  
   it('exists', function() {
     let controller = this.owner.lookup('controller:admin/infra');
 
