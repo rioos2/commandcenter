@@ -1,0 +1,41 @@
+stages:
+  - prepare
+  - test
+variables:
+  EMBER_CLI_VERSION: "3.2.2"
+  PHANTOMJS_VERSION: "2.1.15"
+install_dependencies:
+  image: node:10.8.0-slim
+  stage: prepare
+  tags:
+    - docker
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    - npm install phantomjs-prebuilt@${PHANTOMJS_VERSION}
+  script:
+    - make install
+  artifacts:
+    paths:
+      - node_modules/
+test:
+  image: node:10.8.0-slim
+  stage: test
+  tags:
+    - docker
+  cache:
+    paths:
+      - node_modules
+  before_script:
+    - set -xe
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+    # Update packages
+    - apt-get update -yqqq
+    # Install Chrome browser
+    - apt-get install -y google-chrome-stable
+    # Install Virtual Display emulator
+    - apt-get install -y xvfb
+  script:
+    - xvfb-run -a make test

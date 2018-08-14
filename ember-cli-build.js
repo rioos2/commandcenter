@@ -1,6 +1,8 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const environment = process.env.EMBER_ENV;
+const isTesting = environment === 'test';
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -18,8 +20,8 @@ module.exports = function(defaults) {
     minifyCSS: {
       enabled: true
     },
-    //For disable eslint when test mocha
-    // hinting: false,
+    //For disable eslint when yarn test
+    // hinting: !isTesting,
   });
 
   // Use `app.import` to add additional libraries to the generated
