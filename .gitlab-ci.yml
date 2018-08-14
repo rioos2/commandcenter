@@ -11,6 +11,8 @@ install_dependencies:
   cache:
     paths:
       - node_modules
+  before_script:
+    - apt-get install -y git
   script:
     - yarn install
   artifacts:
