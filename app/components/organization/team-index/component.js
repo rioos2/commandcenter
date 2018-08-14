@@ -22,7 +22,7 @@ export default Component.extend({
 
   emptyBtn: function() {
     return this.get('intl').t('nav.team.member.emptyBtn');
-  }.property('teamsDataContents'),
+  }.property('memberDataContents'),
 
   memberCount: function() {
 

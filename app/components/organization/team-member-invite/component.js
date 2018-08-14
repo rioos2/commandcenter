@@ -4,21 +4,21 @@ import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
 import { isEmpty } from '@ember/utils';
 import { get } from '@ember/object';
-
-
+import C from 'nilavu/utils/constants';
 
 export default Component.extend(DefaultHeaders, {
   intl:          service(),
   notifications: service('notification-messages'),
   session:       service(),
+  'tab-session':  service('tab-session'),
 
   actions: {
 
-    createTeam() {
+    createMember() {
       this.set('showSpinner', true);
       if (!this.validation()) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
-          url:    '/api/v1/teams',
+          url:    '/api/v1/teams/invitations',
           method: 'POST',
           data:   this.getData(),
         })).then(() => {
@@ -42,7 +42,7 @@ export default Component.extend(DefaultHeaders, {
   validation() {
     var validationString = '';
 
-    if (isEmpty(this.get('teamName'))) {
+    if (isEmpty(this.get('memberName'))) {
       validationString = get(this, 'intl').t('nav.team.create.tmEmailEmpty');
     }
     this.set('validationWarning', validationString);
@@ -50,12 +50,13 @@ export default Component.extend(DefaultHeaders, {
     return isEmpty(this.get('validationWarning')) ? false : true;
   },
 
+
   getData() {
     return {
-      name:        this.get('teamName'),
-      description:        this.get('teamDescription'),
-      object_meta: { account: this.get('session').get('id'), },
-      metadata:    { origin: this.get('originName'), },
+      account_id:            this.get('session').get('id'),
+      origin_id:          this.get('tab-session').get(C.TABSESSION.ORGANIZATION),
+      team_id:               this.get('model.id'),
+      users:                 [this.get('memberName')],
     };
   },
 

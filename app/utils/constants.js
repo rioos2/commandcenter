@@ -67,6 +67,22 @@ var C = {
       FAILURE: 'failure',
     },
   },
+  /*
+  * This section belongs to organization management page.
+  * organization status and states.
+  */
+  ORGANIZATION: {
+    STATE: {
+      WARNING: 'warning',
+      SUCCESS: 'success',
+      FAILURE: 'failure',
+    },
+    MEMBER: {
+      NODEON:  'ACTIVE',
+      NODEOFF: 'INACTIVE',
+    },
+    STATUS: { PENDING: 'pending', }
+  },
 
   /*
   * Assembly categories
@@ -149,6 +165,7 @@ var C = {
     NODEUNHEALTHY:                        'down',
     NODEOFF:                              'OFF',
     NODEON:                               'ON',
+    NODEPENDING:                           'pending',
     STATUS:         {
       INITIAL:  ['initialized', 'pending'],
       READY:    ['ready', 'running', 'ninjaready'],
@@ -158,6 +175,7 @@ var C = {
     },
     STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
     LICENSE_STATUS: { EXPIRED: 'Expired', }
+
   },
 
   /*

@@ -1,3 +1,6 @@
 .team-box {
   width: calc(100% - 6px) !important;
+  &:hover{
+           border: 1px solid #99ecef;
+       }
 }

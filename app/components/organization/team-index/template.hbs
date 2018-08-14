@@ -1,10 +1,10 @@
-{{organization/team-invite originName=currentOrigin modelSpinner=modelSpinner}}
+{{organization/team-member-invite originName=currentOrigin model=model.team modelSpinner=modelSpinner}}
 <div class="filter">
     <div class="row">
         <div class="col-sm-12 col-lg-2">
             <div class="cloud-count">
                 {{svg/svg-cloud-count}}
-                <label>{{memberCount}} mem</label>
+                <label>{{memberCount}} member</label>
             </div>
         </div>
         <div class="col-sm-12 col-lg-10">
@@ -19,7 +19,7 @@
                         {{organization/team-filters model=memberDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
-                                <button {{action "inviteMember"}} type="button" class="btn disabled">+ Invite</button>
+                                <button {{action "inviteMember"}} type="button" class="btn">+ Invite</button>
                             </div>
                         </div>
                     </div>
@@ -29,11 +29,11 @@
     </div>
 </div>
 <div class="cloud-lists row">
-  {{#each memberDataContents as |member|}}
+  {{#each memberDataContents as |memberDataContent|}}
       <div class="list col-sm-5 col-md-3">
-          {{organization/team-member-box member=member}}
+          {{organization/team-member-box originName=currentOrigin model=memberDataContent}}
       </div>
       {{else}}
-     {{organization/team-box-empty btnName=emptyBtn hide=true btnAction="inviteMember"}}
+     {{organization/team-member-box-empty btnName=emptyBtn btnAction="createMember"}}
   {{/each}}
 </div>
