@@ -13,7 +13,7 @@ install_dependencies:
       - node_modules
   before_script:
     - apt-get update -yqqq
-    - apt-get install -y build-essential git
+    - apt-get install -y build-essential git python
   script:
     - yarn install
   artifacts:
@@ -39,4 +39,4 @@ test:
     # Install Virtual Display emulator
     - apt-get install -y xvfb
   script:
-    - xvfb-run -a make test
+    - xvfb-run -a yarn test
