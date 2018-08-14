@@ -78,8 +78,8 @@ var C = {
       FAILURE: 'failure',
     },
     MEMBER: {
-      NODEON:  'ACTIVE',
-      NODEOFF: 'INACTIVE',
+      MEMBERACTIVE:   'ACTIVE',
+      MEMBERINACTIVE: 'INACTIVE',
     },
     STATUS: { PENDING: 'pending', }
   },

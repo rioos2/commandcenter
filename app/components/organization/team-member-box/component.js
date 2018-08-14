@@ -6,11 +6,11 @@ export default Component.extend({
   classNames:       ['container-list'],
 
   memberStatus: function() {
-    var state = C.ORGANIZATION.MEMBER.NODEON;
+    var state = C.ORGANIZATION.MEMBER.MEMBERACTIVE;
 
     this.set('memberStyle', C.ORGANIZATION.STATE.SUCCESS);
     if (this.get('model.status') === C.ORGANIZATION.STATUS.PENDING) {
-      state = C.ORGANIZATION.MEMBER.NODEOFF;
+      state = C.ORGANIZATION.MEMBER.MEMBERINACTIVE;
       this.set('memberStyle', C.ORGANIZATION.STATE.WARNING);
     }
 

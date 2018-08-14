@@ -1001,6 +1001,8 @@ nav:
       emptyBtn: +invite
       status: Status
       email: Email
+    totalCounts:
+      member: member
 
   user:
     org: Organization
