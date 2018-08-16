@@ -12,24 +12,8 @@ export default Component.extend({
 
   group: alias('category'),
 
-  filterByOS: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_OS);
-  }.property('allFilters'),
-
-  filterByLocation: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_LOCATION);
-  }.property('allFilters'),
-
-  filterByDB: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_DB);
-  }.property('allFilters'),
-
   filterByStatus: function() {
     return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_STATUS);
-  }.property('allFilters'),
-
-  filterByNetwork: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_NETWORK);
   }.property('allFilters'),
 
   actions: {

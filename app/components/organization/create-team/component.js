@@ -54,9 +54,12 @@ export default Component.extend(DefaultHeaders, {
 
   getData() {
     return {
-      name:        this.get('teamName'),
+      full_name:        this.get('teamName'),
       description:        this.get('teamDescription'),
-      object_meta: { account: this.get('session').get('id'), },
+      object_meta: {
+        name:        this.get('teamName'),
+        account: this.get('session').get('id'),
+      },
       metadata:    { origin: this.get('originName'), },
     };
   },

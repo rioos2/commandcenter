@@ -1,23 +1,23 @@
-<div class="team-box left">
-  <div class="domain">
-    <div class="icon status" data-tooltip="{{memberStatus}}">
-      {{svg/svg-status status=memberStatus}}
+  <div class="team-box left">
+    <div class="domain">
+      <div class="icon status" data-tooltip="{{memberStatus}}">
+        {{svg/svg-status status=memberStyle}}
+      </div>
+      <p class="text1"> {{t 'nav.team.member.email'}} </p>
+      <p class="text2">{{model.invite_to}}</p>
     </div>
-    <p class="text1" title={{member.object_meta.name}}>{{member.object_meta.name}}</p>
-    <p class="text2">Active</p>
-  </div>
-  <div class="ip">
-    <div class="icon">
-      {{fa-icon "tasks"}}
+    <div class="ip">
+      <div class="icon">
+        {{fa-icon "tasks"}}
+      </div>
+      <p class="text1">{{t 'nav.team.member.status'}}</p>
+      <p class="text2">{{model.status}}</p>
     </div>
-    <p class="text1">{{t 'nav.team.show.inviteTo'}}</p>
-    <p class="text2">{{member.invite_to}}</p>
-  </div>
-  <div class="location">
-    <div class="icon">
-      {{fa-icon "tag"}}
+    <div class="location">
+      <div class="icon">
+        {{fa-icon "tag"}}
+      </div>
+      <p class="text1">{{t 'nav.team.show.createdAt'}}</p>
+      <p class="text2">{{createdAt}}</p>
     </div>
-    <p class="text1">{{t 'nav.team.show.about'}}</p>
-    <p class="text2">{{member.description}}</p>
   </div>
-</div>
