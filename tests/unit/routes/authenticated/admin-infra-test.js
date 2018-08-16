@@ -8,7 +8,9 @@ describe('Unit: Route: authenticated/admin/infra', () => {
     needs: [
       'service:session',
       'service:access',
-      'service:intl'
+      'service:intl',
+      'service:tab-session',
+      'service:organization'
     ]
   });
 
