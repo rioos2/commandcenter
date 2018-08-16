@@ -21,7 +21,7 @@ export default Route.extend(DefaultHeaders, {
 
   actions: {
     // This will reload after edit processed by component
-    reloadModel() {
+    reloadInner() {
 
       var self = this;
 
