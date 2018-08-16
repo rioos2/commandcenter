@@ -23,7 +23,7 @@ export default Component.extend(DefaultHeaders, {
           data:   this.getData(),
         })).then(() => {
           this.set('showSpinner', false);
-          this.sendAction('doReloadModel');
+          this.sendAction('doReloadInner');
         }).catch(() => {
           this.set('showSpinner', false);
         });

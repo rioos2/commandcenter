@@ -42,9 +42,9 @@ export default Component.extend({
       $('#addteam_modal').modal('show');
     },
 
-    doReloadModel() {
+    doReloadInner() {
       $('#addteam_modal').modal('hide');
-      this.sendAction('reloadModel');
+      this.sendAction('reloadInner');
     },
 
   },

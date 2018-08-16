@@ -1,4 +1,4 @@
-{{organization/create-team originName=currentOrigin doReloadModel="doReloadModel"}}
+{{organization/create-team originName=currentOrigin doReloadInner="doReloadInner"}}
 <div class="filter">
     <div class="row">
         <div class="col-sm-12 col-lg-2">
@@ -29,7 +29,7 @@
     </div>
 </div>
 <div class="cloud-lists row">
-  {{#if innerSpinner}}
+  {{#if showInnerSpinner}}
   <div class="spinner infra-spinner">
   {{stack-launch-spinner size=25 showSpinner=true}}
   </div>

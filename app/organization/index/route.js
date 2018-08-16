@@ -25,10 +25,10 @@ export default Route.extend(DefaultHeaders, {
 
       var self = this;
 
-      self.controller.set('innerSpinner', true);
+      self.controller.set('showInnerSpinner', true);
       self.model({ org: self.get('currentOrigin') }).then((res) => {
         self.controller.set('model', res);
-        self.controller.set('innerSpinner', false);
+        self.controller.set('showInnerSpinner', false);
       });
     }
   }
