@@ -13,7 +13,7 @@
     </div>
     <div class="content">
       {{#each panels as |tab|}}
-        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin model=model category=tab}}
+        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin innerSpinner=innerSpinner reloadModel="reloadModel" model=model category=tab}}
       {{/each}}
     </div>
   </div>

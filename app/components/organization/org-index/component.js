@@ -42,6 +42,11 @@ export default Component.extend({
       $('#addteam_modal').modal('show');
     },
 
+    doReloadModel() {
+      $('#addteam_modal').modal('hide');
+      this.sendAction('reloadModel');
+    },
+
   },
 
   searchParmsHash(searchSelected) {

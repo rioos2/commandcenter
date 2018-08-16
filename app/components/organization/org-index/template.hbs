@@ -1,4 +1,4 @@
-{{organization/create-team originName=currentOrigin modelSpinner=modelSpinner}}
+{{organization/create-team originName=currentOrigin doReloadModel="doReloadModel"}}
 <div class="filter">
     <div class="row">
         <div class="col-sm-12 col-lg-2">
@@ -29,6 +29,11 @@
     </div>
 </div>
 <div class="cloud-lists row">
+  {{#if innerSpinner}}
+  <div class="spinner infra-spinner">
+  {{stack-launch-spinner size=25 showSpinner=true}}
+  </div>
+  {{else}}
   {{#each teamsDataContents as |teamsDataContent|}}
       <div class="list col-sm-5 col-md-3">
           {{organization/team-box originName=currentOrigin model=teamsDataContent}}
@@ -36,4 +41,5 @@
       {{else}}
      {{organization/team-box-empty btnName=emptyBtn btnAction="createTeam"}}
   {{/each}}
+  {{/if}}
 </div>
