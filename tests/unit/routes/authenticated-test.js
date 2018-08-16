@@ -10,7 +10,9 @@ describe('Unit: Route: authenticated', () => {
       'service:settings',
       'service:access',
       'service:user-language',
-      'service:storeReset'
+      'service:storeReset',
+      'service:organization',
+      'service:tab-session'
     ]
   });
 
