@@ -29,6 +29,10 @@ export default Component.extend({
     return this.get('memberDataContents').length;
   }.property('memberDataContents'),
 
+  didInsertElement() {
+    this.set('team', this.get('model.team.full_name'));
+  },
+
   actions: {
 
     search() {

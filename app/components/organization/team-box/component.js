@@ -5,7 +5,7 @@ import { alias } from '@ember/object/computed';
 export default Component.extend({
   router:     service(),
   classNames:       ['container-list'],
-  team:       alias('model'),
+  team:       alias('model.team'),
 
   teamStatus: function() {
     return 'success';

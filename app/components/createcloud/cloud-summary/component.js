@@ -308,10 +308,10 @@ export default Component.extend(DefaultHeaders, {
   verticalResourceUpdate() {
     this.set('model.vscaling.spec.min_resource.cpu', this.get('model.vscaling.spec.min_resource.cpu').toString());
     this.set('model.vscaling.spec.max_resource.cpu', this.get('model.vscaling.spec.max_resource.cpu').toString());
-    this.set('model.vscaling.spec.max_resource.disk', this.get('model.vscaling.spec.max_resource.disk') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
-    this.set('model.vscaling.spec.min_resource.disk', this.get('model.vscaling.spec.min_resource.disk') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
-    this.set('model.vscaling.spec.max_resource.ram', this.get('model.vscaling.spec.max_resource.ram') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
-    this.set('model.vscaling.spec.min_resource.ram', this.get('model.vscaling.spec.min_resource.ram') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set('model.vscaling.spec.max_resource.storage', this.get('model.vscaling.spec.max_resource.storage') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set('model.vscaling.spec.min_resource.storage', this.get('model.vscaling.spec.min_resource.storage') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set('model.vscaling.spec.max_resource.memory', this.get('model.vscaling.spec.max_resource.memory') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
+    this.set('model.vscaling.spec.min_resource.memory', this.get('model.vscaling.spec.min_resource.memory') + get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix-i'));
   },
 
   createVerticalScaling(stacksfactory){

@@ -12,6 +12,10 @@ export default Component.extend(DefaultHeaders, {
   session:       service(),
   'tab-session':  service('tab-session'),
 
+  emailFieldNote: function() {
+    return get(this, 'intl').t('nav.team.create.emailFieldNote');
+  }.property('originName'),
+
   actions: {
 
     createMember() {

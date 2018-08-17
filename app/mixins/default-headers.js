@@ -11,7 +11,7 @@ export default Mixin.create({
     let rioos_headers = {
       headers:           {
         'X-AUTH-RIOOS-EMAIL': this.get('session').get('email'),
-        'Authorization':      `Bearer ${  this.encodedHeader() }`,
+        'Authorization':      `Bearer ${  this.encodedHeaderFromTabSession() }`,
       },
       url,
       forceReload,
@@ -28,7 +28,7 @@ export default Mixin.create({
     let rioos_headers = {
       headers: {
         'X-AUTH-RIOOS-EMAIL': session.get('email'),
-        'Authorization':      `Bearer ${  this.encodedHeader() }`,
+        'Authorization':      `Bearer ${  this.encodedHeaderFromTabSession() }`,
       },
       url:    frame.url,
       data:   frame.data,
@@ -38,13 +38,40 @@ export default Mixin.create({
     return rioos_headers;
   },
 
-  encodedHeader(){
+  rawRequestOptsUsingService(frame) {
+    var session = this.get('session');
+    let rioos_headers = {
+      headers: {
+        'X-AUTH-RIOOS-EMAIL': session.get('email'),
+        'Authorization':      `Bearer ${  this.encodedHeaderFromService() }`,
+      },
+      url:    frame.url,
+      data:   frame.data,
+      method: frame.method
+    };
+
+    return rioos_headers;
+  },
+
+  encodedHeaderFromTabSession(){
     var session = this.get('session');
     var tabSession = this.get('tab-session');
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
       'organization':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
       'team':               tabSession.get(C.TABSESSION.TEAM) || '',
+      'token':              session.get('token')
+    }
+
+    return btoa(JSON.stringify(subHeader));
+  },
+
+  encodedHeaderFromService(){
+    var session = this.get('session');
+    var subHeader = {
+      'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
+      'organization':       this.get('organization').get('currentOrganization') || '',
+      'team':               this.get('organization').get('currentTeam') || '',
       'token':              session.get('token')
     }
 

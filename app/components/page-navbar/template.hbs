@@ -74,6 +74,11 @@
                   <span class="org-name">{{currentOrganization}}</span>
               <div class='row'>
               </div>
+              {{#if currentTeam}}
+                <span class="org-team">{{currentTeam}}</span>
+                <div class='row'>
+                </div>
+                {{/if}}
                 <span class="org-email">{{email}}</span>
               </li>
               <li role="presentation" class="divider"></li>
@@ -81,8 +86,8 @@
               {{#each organizations as |origin|}}
               <li>
                 <!-- <div class='row'> -->
-                  <a href="#" class="col-sm-9" {{action 'switchOrigin' origin.name}}>{{origin.name}}</a>
-                <span class="col-sm-3">{{#link-to "organization.index" origin.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
+                  <a href="#" class="col-sm-9" {{action 'switchOrigin' origin.object_meta.name}}>{{origin.object_meta.name}}</a>
+                <span class="col-sm-3">{{#link-to "organization.index" origin.object_meta.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
               <!-- </div> -->
               </li>
               {{/each}}

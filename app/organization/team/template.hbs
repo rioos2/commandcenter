@@ -5,7 +5,7 @@
     {{/each}}
     <ul class="dashboardNav">
       {{#each categories as |category|}}
-       {{organization/team-tab panels=panels selectedTab=selectedTab tab=category}}
+       {{organization/team-tab panels=panels currentOrigin=currentOrigin team=team selectedTab=selectedTab tab=category}}
       {{/each}}
     </ul>
     <div class="slider slider-one">
@@ -13,7 +13,7 @@
     </div>
     <div class="content">
       {{#each panels as |tab|}}
-        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin model=model category=tab}}
+        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin team=team model=model category=tab}}
       {{/each}}
     </div>
   </div>

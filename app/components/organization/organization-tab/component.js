@@ -2,7 +2,6 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { equal } from '@ember/object/computed';
 
-
 export default Component.extend({
   intl:              service(),
   tagName:           'li',
@@ -12,10 +11,6 @@ export default Component.extend({
 
   tabClassName: function() {
     return `organization/org-${  this.get('tab') }`;
-  }.property('tab'),
-
-  title: function() {
-    return this.get('intl').t(`nav.organization.tab.${  this.get('tab') }`);
   }.property('tab'),
 
   _addToCollection: function() {
