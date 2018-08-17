@@ -8,7 +8,10 @@ import $ from 'jquery';
 
 
 export default Component.extend({
-  intl:          service(),
+  intl:                  service(),
+  organization:          service(),
+  'tab-session':         service('tab-session'),
+
 
 
   tagName:     '',
@@ -16,12 +19,27 @@ export default Component.extend({
   parentRoute: 'organization',
 
   group:             alias('category'),
+
+  currentTeam: function() {
+    return this.get('tab-session').get(C.TABSESSION.TEAM);
+  }.property('tab-session', 'organization.currentOrganization'),
+
   teamsDataContents: function() {
     return (this.get('model.teams') === undefined) ? [] : this.get('model.teams.content');
   }.property('model.teams'),
 
+  teamsName: function() {
+    return this.get('teamsDataContents').map((t) => {
+      return t.team.full_name;
+    });
+  }.property('teamsDataContents'),
+
   teamsCount: function() {
     return this.get('teamsDataContents').length;
+  }.property('teamsDataContents'),
+
+  selectPlaceHolder: function() {
+    return this.get('intl').t('nav.team.show.selectPlaceHolder');
   }.property('teamsDataContents'),
 
   emptyBtn: function() {
@@ -45,6 +63,11 @@ export default Component.extend({
     doReloadInner() {
       $('#addteam_modal').modal('hide');
       this.sendAction('reloadInner');
+    },
+
+    selectTeam(team) {
+      this.get('organization').selectOrganizationAndTeam(this.get('currentOrigin'), team);
+      location.reload();
     },
 
   },

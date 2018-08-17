@@ -29,11 +29,11 @@ export default Service.extend(DefaultHeaders, {
   },
 
   // Update selected organization and team to the session
-  selectOrganizationAndTeam(origansation /* , team*/ ) {
+  selectOrganizationAndTeam(origansation, team = ''  ) {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
-    // tabSession.set(C.TABSESSION.TEAM, team);
-    // this.set('currentTeam', team);
+    this.get('tab-session').set(C.TABSESSION.TEAM, team);
+    this.set('currentTeam', team);
   },
 
   // Update selected team to the session
@@ -51,8 +51,8 @@ export default Service.extend(DefaultHeaders, {
         var origansation = all.content.firstObject;
 
         // var team = this.get('all.items.firstObject.name');
-        if (origansation.name) {
-          return this.selectOrganizationAndTeam(origansation.name /* , team*/ );
+        if (origansation.object_meta.name) {
+          return this.selectOrganizationAndTeam(origansation.object_meta.name /* , team*/ );
         } else {
           return reject();
         }

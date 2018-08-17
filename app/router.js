@@ -29,6 +29,13 @@ Router.map(function() {
   this.route('logout');
 
   this.route('authenticated', { path: '/' }, function() {
+
+    this.route('invitations', { resetNamespace: true }, function() {
+      this.route('index', { path: '/invitations' });
+      this.route('accept', { path: '/:invite_id/accept' });
+
+    });
+
     // //
     this.route('project', { path: '/env' }, function() {
       this.route('index', { path: '/' });

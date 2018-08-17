@@ -14,9 +14,6 @@ export default Component.extend({
     return `organization/team-${  this.get('tab') }`;
   }.property('tab'),
 
-  title: function() {
-    return this.get('intl').t(`nav.organization.tab2.${  this.get('tab') }`);
-  }.property('tab'),
 
   _addToCollection: function() {
     this.get('panels').addObject(this.get('tabClassName'));
@@ -25,6 +22,10 @@ export default Component.extend({
   actions: {
     select() {
       this.set('selectedTab', this.get('tab'));
+    },
+
+    redirect() {
+      this.get('router').transitionTo(`/organization/${  this.get('currentOrigin') }`);
     }
   }
 });

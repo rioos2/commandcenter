@@ -8,7 +8,7 @@ export default Component.extend({
 
   guageOne: function() {
     // ram
-    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('ram') : this.decide(this.contentData().counters[0], 'ram');
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('memory') : this.decide(this.contentData().counters[0], 'memory');
   }.property('model', 'model.counters.@each.counter'),
 
   guageTwo: function() {
@@ -18,7 +18,7 @@ export default Component.extend({
 
   guageThree: function() {
     // disk
-    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('disk') : this.decide(this.contentData().counters[2], 'disk');
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('storage') : this.decide(this.contentData().counters[2], 'storage');
   }.property('model', 'model.counters.@each.counter'),
 
   guageFour: function() {

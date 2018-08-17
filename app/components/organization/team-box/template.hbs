@@ -3,7 +3,7 @@
     <div class="icon status" data-tooltip="{{teamStatus}}">
       {{svg/svg-status status=teamStatus}}
     </div>
-    <p class="text1" title={{model.object_meta.name}}>{{model.object_meta.name}}</p>
+    <p class="text1" title={{team.object_meta.name}}>{{team.full_name}}</p>
     <p class="text2">Active</p>
   </div>
   <div class="ip">
@@ -18,6 +18,6 @@
       {{fa-icon "tag"}}
     </div>
     <p class="text1">{{t 'nav.team.show.about'}}</p>
-    <p class="text2">{{model.description}}</p>
+    <p class="text2">{{team.description}}</p>
   </div>
 </div>

@@ -167,6 +167,10 @@ wizard:
   activate-license:
     title:                            Activate
 
+invitations:
+  invitationSuccess:                  'Thanks for accepting your invitation to {teamName} -- welcome'
+  invitationFailed:                   Your invite was not accepted. Please contact the site's administrator
+
 stackPage:
   machine:                            Digital Cloud
   container:                          Container
@@ -978,6 +982,8 @@ nav:
       index: Organization
     tab2:
       index: Team
+    show:
+      selectTeam: 'Switch team:'
   team:
     create:
       header: 'Add team in '
@@ -992,11 +998,13 @@ nav:
       tmEmailEmpty: Enter Email id
       tmDescriptionEmpty: Enter description
       inviteButton: Invite
+      emailFieldNote: Fill in the members emails you want to invite, one per line
     show:
       createdAt: Created At
       inviteTo: Invite To
       about: About
       emptyBtn: +Add team
+      selectPlaceHolder: Select team
     member:
       emptyBtn: +invite
       status: Status
