@@ -388,6 +388,7 @@ stackPage:
           failure:                    License activation failed
       logs:
         title:                        Logs
+        noLogs:                        No logs added yet.
 launcherPage:
   compute:
     selectType:                       Pick Cloud Type

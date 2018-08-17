@@ -2,6 +2,10 @@ import { isEmpty } from '@ember/utils';
 import { buildAdminSettingPanel } from '../admin-setting-panel/component';
 export default buildAdminSettingPanel('logs', {
 
+  emptyLogs: function() {
+    return isEmpty(this.get('model.logs.content'));
+  }.property('model.logs.content'),
+
   tableData: function() {
     let data = isEmpty(this.get('model.logs.content')) ? [] : this.get('model.license.content');
 
