@@ -613,10 +613,9 @@ notifications:
     DeleteFailed: Delete failed try after some time
     DeleteSuccess: Deleted successfully
   QRcode:
-    downloadFailed: Failed to show! try after some time.
+    downloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
   secrets:
     downloadFailed:                   Download failed try after some time
-    manageDownloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
   emailExist:                         Sorry, that email is not available.
   validEmail:                         Please enter a valid email address
   somethingWentWrong:                 Proxy error. Api server is not runnning

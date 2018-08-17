@@ -38,6 +38,13 @@ var Assembly = Resource.extend(DefaultHeaders, {
       action:  'applicationUrl',
       enabled: this.linkEnabler(),
     },
+    {
+      label:   'action.showQRcode',
+      icon:    'fa fa-qrcode',
+      action:  'showQRcode',
+      enabled: true,
+      class:   this.get('enableQRcode') ? 'disabled' : ' '
+    },
     ];
   }.property('id', 'actionLinks', 'hasTerminated', 'status.phase', 'enableConsole'),
 
@@ -93,10 +100,10 @@ var Assembly = Resource.extend(DefaultHeaders, {
     let key = res.data['rioos_sh/ssh_pubkey'] || '';
 
     if (!this.hasDownloaded(key, this.get('name'))) {
-      this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.secrets.manageDownloadFailed')), {
+      this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
         autoClear:     true,
         clearDuration: 4200,
-        cssClasses:    'notification-success'
+        cssClasses:    'notification-warning'
       });
     }
   },
@@ -132,6 +139,13 @@ var Assembly = Resource.extend(DefaultHeaders, {
     return this.get('enableLink');
   },
 
+  qrCodeNotExists(){
+    this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.QRcode.downloadFailed')), {
+      autoClear:     true,
+      clearDuration: 4200,
+      cssClasses:    'notification-warning'
+    });
+  },
 
   actions: {
     delete() {
@@ -158,18 +172,22 @@ var Assembly = Resource.extend(DefaultHeaders, {
     showQRcode() {
       var self = this;
 
-      if (!isEmpty(this.get('SecretData'))) {
-        let key = this.get('SecretData').data['rioos_sh_kryptonite_qrcode'] || '';
+      this.get('store').find('secret', null, this.opts(`secrets/${  this.get('spec.assembly_factory.secret.id') }`, true)).then((res) => {
+        let key = res.data['rioos_sh_kryptonite_qrcode'] || '';
 
-        this.set('rioos_sh_kryptonite_qrcode', key);
-        this.get('modalService').toggleModal('modal-show-qrcode', this);
-      } else {
-        self.get('notifications').warning(get(self, 'intl').t('notifications.QRcode.downloadFailed'), {
-          autoClear:      true,
-          clearDuration:  4200,
-          cssClasses:     'notification-warning'
+        if (key){
+          this.set('rioos_sh_kryptonite_qrcode', `data:image/png;base64,${ key }`);
+          this.get('modalService').toggleModal('modal-show-qrcode', this);
+        } else {
+          this.qrCodeNotExists();
+        }
+      }).catch(() => {
+        self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
+          autoClear:     true,
+          clearDuration: 4200,
+          cssClasses:    'notification-warning'
         });
-      }
+      });
     },
 
     download() {
@@ -177,6 +195,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
       return this.get('store').find('secret', null, this.opts(`secrets/${  this.get('spec.assembly_factory.secret.id') }`, true)).then((res) => {
         self.downloadAndWarnIfNone(res);
+
       }).catch(() => {
         self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear:     true,
