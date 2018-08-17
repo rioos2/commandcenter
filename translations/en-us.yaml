@@ -1005,6 +1005,10 @@ nav:
       emptyBtn: +Add team
     member:
       emptyBtn: +invite
+      status: Status
+      email: Email
+    totalCounts:
+      member: member
 
   user:
     org: Organization
