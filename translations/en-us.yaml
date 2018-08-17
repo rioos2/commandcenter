@@ -386,6 +386,8 @@ stackPage:
         activation:
           success:                    License activated successfully
           failure:                    License activation failed
+      logs:
+        title:                        Logs
 launcherPage:
   compute:
     selectType:                       Pick Cloud Type
@@ -649,6 +651,10 @@ audits:
   tableHeader:
     info:                             Info
     ip:                               IP Address
+    dateAndTime:                      Date and time
+logs:
+  tableHeader:
+    info:                             Description
     dateAndTime:                      Date and time
 
 infraPage:

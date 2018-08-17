@@ -14,11 +14,12 @@
           <div class="col-sm-9 content-left">
             <ul class="nav navbar-nav">
               {{admin-infra/admin-setting-tab panels=panels selectedTab=selectedSettingTab tab="entitlement"}}
+              {{admin-infra/admin-setting-tab panels=panels selectedTab=selectedSettingTab tab="logs"}}
             </ul>
           </div>
           <div class="vm-modal-body">
             {{#each panels as |tab|}}
-              {{component tab selectedTab=selectedSettingTab licenses=licenses triggerReload="triggerReload" modelSpinner=modelSpinner}}
+              {{component tab selectedTab=selectedSettingTab model=model triggerReload="triggerReload" modelSpinner=modelSpinner}}
             {{/each}}
           </div>
         </div>
