@@ -131,12 +131,12 @@ export default Route.extend(DefaultHeaders,  {
         scale_up_wait_time:   5,
         scale_down_wait_time: 5,
         min_resource:         {
-          cpu:  '1',
+          cpu:     '1',
           memory:  '1',
           storage: '1',
         },
         max_resource: {
-          cpu:  '2',
+          cpu:     '2',
           memory:  '2',
           storage: '10',
         },
@@ -145,12 +145,12 @@ export default Route.extend(DefaultHeaders,  {
       status: {
         last_scale_time:  '',
         current_resource: {
-          cpu:  '1',
+          cpu:     '1',
           memory:  '1 GiB',
           storage: '1 GiB',
         },
         desired_resource: {
-          cpu:  '1',
+          cpu:     '1',
           memory:  '1 GiB',
           storage: '1 GiB',
         },
