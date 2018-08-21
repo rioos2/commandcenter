@@ -7,7 +7,7 @@ export default buildAdminSettingPanel('logs', {
   }.property('model.logs.content'),
 
   tableData: function() {
-    let data = isEmpty(this.get('model.logs.content')) ? [] : this.get('model.license.content');
+    let data = isEmpty(this.get('model.logs.content')) ? [] : this.get('model.logs.content');
 
     if (!isEmpty(data)) {
       data.forEach((e) => {
