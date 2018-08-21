@@ -61,7 +61,8 @@ Router.map(function() {
 
     // Organization (Team, Roles, Memeber)
     this.route('organization', { resetNamespace: true }, function() {
-      this.route('index', { path: '/:org' });
+      this.route('index', { path: '/' });
+      this.route('organization', { path: '/:org' });
       this.route('team', { path: '/:org/team/:teamid' });
     });
 

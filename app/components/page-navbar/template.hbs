@@ -1,4 +1,3 @@
-{{organization/create-origin nodes=nodes modelSpinner=modelSpinner doReload="doReload"}}
 <div class="theme-navbar">
   <!-- Fixed navbar -->
   <div class="navbar-wrapper">
@@ -87,14 +86,14 @@
               <li>
                 <!-- <div class='row'> -->
                   <a href="#" class="col-sm-9" {{action 'switchOrigin' origin.object_meta.name}}>{{origin.object_meta.name}}</a>
-                <span class="col-sm-3">{{#link-to "organization.index" origin.object_meta.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
+                <span class="col-sm-3">{{#link-to "organization.organization" origin.object_meta.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
               <!-- </div> -->
               </li>
               {{/each}}
               <li role="presentation" class="divider"></li>
               <!-- Create organization-->
-              <li {{action "createOrganization"}}>
-               <a href="#">{{t 'nav.user.createOrg'}}</a>
+              <li>
+               {{#link-to "organization.index"}}{{t 'nav.user.linkOrg'}}{{/link-to}}
               </li>
               <li role="presentation" class="divider"></li>
 

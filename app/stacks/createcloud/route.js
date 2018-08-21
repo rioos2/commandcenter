@@ -67,6 +67,8 @@ export default Route.extend(DefaultHeaders,  {
     return this.getSettings(setting)[denormalizeName(`${ C.SETTING.TRUSTED_KEY }`)] || D.VPS.trusted_key;
   },
 
+  // build New secret object
+
   loadSecret(setting) {
     var secretData = {
       type:        'secret',
@@ -79,6 +81,7 @@ export default Route.extend(DefaultHeaders,  {
     return this.get('store').createRecord(secretData);
   },
 
+  // build New stacksfactory object
   loadStacksFactory(settings) {
     var stacksfactoryData;
 

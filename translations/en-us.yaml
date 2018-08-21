@@ -990,6 +990,9 @@ nav:
       index: Team
     show:
       selectTeam: 'Switch team:'
+      createdAt: Created At
+      account: Account ID
+      emptyBtn: +Add origin
   team:
     create:
       header: 'Add team in '
@@ -1021,6 +1024,7 @@ nav:
   user:
     org: Organization
     createOrg: Add organization
+    linkOrg: Manage organization
     profile: Profile
     logout: Logout
     admin: Admin

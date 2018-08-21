@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 import {  inject as service } from '@ember/service';
-import $ from 'jquery';
 
 export default Component.extend({
   access:        service(),
@@ -31,9 +30,5 @@ export default Component.extend({
     switchOrigin(org) {
       this.sendAction('switchOrganization', org);
     },
-
-    createOrganization() {
-      $('#addorigin_modal').modal('show');
-    }
   }
 });
