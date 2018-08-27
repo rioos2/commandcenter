@@ -99,7 +99,7 @@ var C = {
   /*
   * Assembly resources
   */
-  RESOURCES: ['cpu', 'memory', 'disk'],
+  RESOURCES: ['cpu', 'memory', 'storage'],
 
   /*
   * Digital cloud management page filter query params and key to read data from model.
