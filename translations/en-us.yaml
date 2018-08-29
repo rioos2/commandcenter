@@ -1003,6 +1003,8 @@ nav:
       createdAt: Created At
       account: Account ID
       emptyBtn: +Add origin
+    index:
+      name: Organization
   team:
     create:
       header: 'Add team in '

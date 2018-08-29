@@ -13,6 +13,10 @@ export default Component.extend({
     return `organization/list-${  this.get('tab') }`;
   }.property('tab'),
 
+  tabName: function() {
+    return this.get('intl').t(`nav.organization.${  this.get('tab') }.name`);
+  }.property('tab'),
+
   _addToCollection: function() {
     this.get('panels').addObject(this.get('tabClassName'));
   }.on('didInsertElement'),

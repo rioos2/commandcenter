@@ -20,6 +20,10 @@ export default Component.extend({
   actions: {
     select() {
       this.set('selectedTab', this.get('tab'));
+    },
+
+    redirectOriginManagement() {
+      this.get('router').transitionTo('/organization');
     }
   }
 });

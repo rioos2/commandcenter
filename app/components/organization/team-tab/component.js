@@ -24,8 +24,12 @@ export default Component.extend({
       this.set('selectedTab', this.get('tab'));
     },
 
-    redirect() {
+    redirectOrigin() {
       this.get('router').transitionTo(`/organization/${  this.get('currentOrigin') }`);
+    },
+
+    redirectOriginManagement() {
+      this.get('router').transitionTo('/organization');
     }
   }
 });
