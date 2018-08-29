@@ -10,7 +10,7 @@ var D = {
     network:            'public_ipv4',
     destro:             '',
     destroVersion:      '',
-    disableSecretTypes: '',
+    disableSecretTypes: 'ecdsa,ed25519',
     defaultSecret:      'rsa',
     secretTypes:        'rsa,ecdsa,ed25519',
     bitsInKey:          '2048',
