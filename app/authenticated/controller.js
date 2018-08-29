@@ -9,6 +9,7 @@ import $ from 'jquery';
 export default Controller.extend({
   application: controller(),
   settings:    service(),
+  guardian:    service(),
   error:       null,
 
   // Tells us current path of ember application
@@ -30,6 +31,11 @@ export default Controller.extend({
     });
   }.on('init'),
 
+  redirectIfNeeded: function() {
+    if (this.get('guardian').transByAccountState()) {
+      this.transitionToRoute(this.get('guardian.state.transition'));
+    }
+  }.observes('currentPath'),
 
   hasHosts: function() {
     return (this.get('model.hosts.length') > 0);

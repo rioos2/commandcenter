@@ -102,6 +102,7 @@ Router.map(function() {
     this.route('accounts', { resetNamespace: true }, function() {
       this.route('index', { path: '/' });
       this.route('info', { path: '/info' });
+      this.route('contact-admin', { path: '/contact-admin' });
     });
 
     this.route('admin', {

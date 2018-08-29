@@ -90,7 +90,9 @@
               <!-- </div> -->
               </li>
               {{/each}}
+              {{#if organizations}}
               <li role="presentation" class="divider"></li>
+              {{/if}}
               <!-- Create organization-->
               <li>
                {{#link-to "organization.index"}}{{t 'nav.user.linkOrg'}}{{/link-to}}

@@ -264,7 +264,7 @@ var C = {
     ACCOUNT_ID:     'id',
     TOKEN:          'token',
     EMAIL:          'email',
-    USER_ROLES:     'roles',
+    USER_ROLES:     'is_admin',
     // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',

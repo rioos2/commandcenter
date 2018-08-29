@@ -59,6 +59,16 @@ generic:
 ##############################
 # Routes
 ##############################
+guardian:
+  admin:
+    organization:
+      noOrigin: Create organization
+    team:
+      noTeam: Create team
+  regular:
+    organization:
+      noOrigin: Please contact your admin to onboard
+
 accountsPage:
   index:
     header:                           Accounts
