@@ -3,21 +3,24 @@ import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 
 export default Component.extend({
-  router:     service(),
+  intl:             service(),
+  router:           service(),
   classNames:       ['container-list'],
-  origin:       alias('model'),
+  origin:           alias('model'),
+  createdAt:        alias('model.object_meta.created_at'),
+  name:             alias('model.object_meta.name'),
 
   originStatus: function() {
-    return 'success';
+    return this.get('intl').t('nav.organization.show.status');
   }.property('origin'),
 
-  createdAt: function() {
-    return this.profileTimestamp(this.get('origin.object_meta.created_at'));
-  }.property('origin.object_meta.created_at'),
+  createdAtMoment: function() {
+    return this.profileTimestamp(this.get('createdAt'));
+  }.property('createdAt'),
 
   actions: {
     goOrigin(){
-      this.get('router').transitionTo('organization.organization', this.get('origin.object_meta.name'));
+      this.get('router').transitionTo('organization.organization', this.get('name'));
     }
   },
 

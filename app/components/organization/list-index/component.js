@@ -11,19 +11,20 @@ export default Component.extend({
   intl:                  service(),
   organization:          service(),
   'tab-session':         service('tab-session'),
+  tagName:       '',
+  className:     '',
 
-  tagName:     '',
-  className:   '',
+  origins:               alias('model.origins'),
 
-  group:             alias('category'),
+
 
   currentOrganization: function() {
     return this.get('tab-session').get(C.TABSESSION.ORGANIZATION);
   }.property('tab-session', 'organization.currentOrganization'),
 
   orgDataContents: function() {
-    return (this.get('model.origins') === undefined) ? [] : this.get('model.origins.content');
-  }.property('model.origins'),
+    return (this.get('origins') === undefined) ? [] : this.get('origins');
+  }.property('origins'),
 
 
   orgCount: function() {
