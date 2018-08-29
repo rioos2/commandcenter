@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
+import { get, computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import C from 'nilavu/utils/constants';
 import { inject as service } from '@ember/service';
@@ -18,26 +19,25 @@ export default Component.extend({
 
 
 
-  currentOrganization: function() {
-    return this.get('tab-session').get(C.TABSESSION.ORGANIZATION);
-  }.property('tab-session', 'organization.currentOrganization'),
+  currentOrganization: computed('tab-session', 'organization.currentOrganization', function() {
+    return get(this, 'tab-session').get(C.TABSESSION.ORGANIZATION);
+  }),
 
-  orgDataContents: function() {
-    return (this.get('origins') === undefined) ? [] : this.get('origins');
-  }.property('origins'),
+  orgDataContents: computed('origins', function() {
+    return (get(this, 'origins') === undefined) ? [] : get(this, 'origins');
+  }),
 
+  orgCount: computed('orgDataContents', function() {
+    return get(this, 'orgDataContents').length;
+  }),
 
-  orgCount: function() {
-    return this.get('orgDataContents').length;
-  }.property('orgDataContents'),
+  selectPlaceHolder: computed('orgDataContents', function() {
+    return get(this, 'intl').t('nav.team.show.selectPlaceHolder');
+  }),
 
-  selectPlaceHolder: function() {
-    return this.get('intl').t('nav.team.show.selectPlaceHolder');
-  }.property('orgDataContents'),
-
-  emptyBtn: function() {
-    return this.get('intl').t('nav.team.show.emptyBtn');
-  }.property('orgDataContents'),
+  emptyBtnName: computed('orgDataContents', function() {
+    return get(this, 'intl').t('nav.team.show.emptyBtn');
+  }),
 
   actions: {
 
