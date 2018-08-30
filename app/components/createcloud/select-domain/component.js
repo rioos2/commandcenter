@@ -65,8 +65,7 @@ export default Component.extend(DefaultHeaders, {
     createSecret() {
       if (!this.checkDomain() && !this.checkSecrectType()) {
         this.set('showSpinner', true);
-        this.sendAction('done', 'step2');
-        this.set('model.secret.data.ssh-algorithm', this.get('secretType'));
+        this.set('model.secret.secret_type', this.get('secretType'));
         this.set('model.secret.data.ssh_keypair_size', this.get('bitsInKey'));
         this.set('model.secret.object_meta', ObjectMetaBuilder.buildObjectMeta());
         this.set('model.secret.object_meta.name', this.get('model.stacksfactory.object_meta.name'));
