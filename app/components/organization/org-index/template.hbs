@@ -17,9 +17,6 @@
                 <div class="col-sm-10 col-md-10 col-lg-11">
                     <div class="row">
                         {{organization/origin-filters model=teamsDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
-                        <div class="col-sm-3 col-md-3 col-lg-2 filter-text">
-                                <span>{{t 'nav.organization.show.selectTeam'}}</span>
-                        </div>
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
                                 <button {{action "createTeam"}} type="button" class="btn">{{t 'nav.team.show.add'}}</button>
