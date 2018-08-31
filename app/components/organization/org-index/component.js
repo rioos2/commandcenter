@@ -65,11 +65,6 @@ export default Component.extend({
       this.sendAction('reloadInner');
     },
 
-    selectTeam(team) {
-      this.get('organization').selectOrganizationAndTeam(this.get('currentOrigin'), team);
-      location.reload();
-    },
-
   },
 
   searchParmsHash(searchSelected) {

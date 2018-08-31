@@ -14,6 +14,10 @@ export default Component.extend({
     return this.get('session.email');
   }.property('session'),
 
+  isAdmin: function() {
+    return this.get('session').get(C.SESSION.USER_ROLES);
+  }.property('guardian'),
+
   currentOrganization: function() {
     return this.get('organization.currentOrganization');
   }.property('organization.currentOrganization'),

@@ -36,7 +36,7 @@ export default Component.extend({
   }),
 
   emptyBtnName: computed('orgDataContents', function() {
-    return get(this, 'intl').t('nav.team.show.emptyBtn');
+    return get(this, 'intl').t('nav.organization.show.emptyBtn');
   }),
 
   actions: {

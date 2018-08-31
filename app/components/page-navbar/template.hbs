@@ -100,10 +100,12 @@
               <li role="presentation" class="divider"></li>
 
               <!-- Admin link-->
+              {{#if isAdmin}}
               <li>
                  {{#link-to "admin.infra"}} {{t 'nav.user.admin'}}{{/link-to}}
               </li>
               <li role="presentation" class="divider"></li>
+              {{/if}}
               <!-- Account link-->
               <li>
                 {{#link-to "accounts.index"}}{{t 'nav.user.profile'}}{{/link-to}}

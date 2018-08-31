@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-lg-2">
             <div class="cloud-count">
                 {{svg/svg-cloud-count}}
-                <label>{{orgCount}} origin</label>
+                <label>{{orgCount}} {{t 'nav.organization.show.count'}}</label>
             </div>
         </div>
         <div class="col-sm-12 col-lg-10">
@@ -19,7 +19,7 @@
                         {{organization/origin-filters model=orgDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
-                                <button {{action "createOrigin"}} type="button" class="btn">+ Origin</button>
+                                <button {{action "createOrigin"}} type="button" class="btn">{{t 'nav.organization.show.add'}}</button>
                             </div>
                         </div>
                     </div>

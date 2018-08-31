@@ -7,6 +7,7 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
+import { htmlSafe } from '@ember/string';
 
 export default Service.extend(DefaultHeaders, {
   intl:          service(),
@@ -55,10 +56,10 @@ export default Service.extend(DefaultHeaders, {
     switch (this.isAdmin()) {
     case true:
       if (!this.hasOrganization()) {
-        msg = this.get('intl').t('guardian.admin.organization.noOrigin');
+        msg = htmlSafe(this.get('intl').t('guardian.admin.organization.noOrigin'));
         transition = '/organization';
       } else if (!this.hasTeam()) {
-        msg = this.get('intl').t('guardian.admin.team.noTeam');
+        msg = htmlSafe(this.get('intl').t('guardian.admin.team.noTeam'));
         transition = `/organization/${ this.get('organization').get('currentOrganization') }`;
       }
       break;

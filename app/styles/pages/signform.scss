@@ -347,12 +347,12 @@
   // overflow-x: hidden;
 
   &.signin-pg {
-    background-image: url("/assets/images/signin/bg.png");
+    background-image: url("/assets/images/login/bg.png");
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-color: #132fa9;
   }
-  
+
   h1 {
     font-size: 26px;
     text-align: center;
@@ -384,7 +384,7 @@
     width: 100%;
     padding: 20px 270px 164px;
     border-radius: 1px;
-    background-image: url("/assets/images/signin/bg1.png");
+    background-image: url("/assets/images/login/bg1.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
 

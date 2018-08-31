@@ -17,37 +17,53 @@ export default Service.extend(DefaultHeaders, {
   all:                 null,
 
   // Get all organizations
-  getAll() {
+  getOriginAll() {
     return this.get('store').find('origin', null, this.opts(`origins/accounts/${ this.get('session').get('id') }`));
+  },
+
+  getTeamsByOrigin(org) {
+    return this.get('store').find('team', null, this.opts(`teams/origins/${ org }`));
   },
 
   // Check the existence of origansation and team on session
   checkOriginAndTeamSession() {
     var tabSession = this.get('tab-session');
 
-    return isEmpty(tabSession.get(C.TABSESSION.ORGANIZATION)) /* && isEmpty(tabSession.get(C.TABSESSION.TEAM))*/;
+    return isEmpty(tabSession.get(C.TABSESSION.ORGANIZATION)) || isEmpty(tabSession.get(C.TABSESSION.TEAM));
   },
 
   // Update selected organization and team to the session
   selectOrganizationAndTeam(origansation, team = ''  ) {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
+    if (isEmpty(team)){
+      this.selectTeamByOrigin(origansation).then((team) => {
+        this.selectTeam(team);
+      });
+    }
+    this.selectTeam(team);
+  },
+
+  // Get first team from organization if exisit
+  selectTeam(team) {
     this.get('tab-session').set(C.TABSESSION.TEAM, team);
     this.set('currentTeam', team);
   },
 
-  // Update selected team to the session
-  selectTeam(team) {
-    this.get('tab-session').set(C.TABSESSION.TEAM, team);
-    this.set('currentTeam', team);
-    location.reload();
+  // Get first team from organization if exisit
+  selectTeamByOrigin(origin) {
+    return this.getTeamsByOrigin(origin).then((all) => {
+      var team = !isEmpty(all.content) ? all.content.firstObject : '';
+
+      return !isEmpty(team) ? team.team.full_name : '';
+    });
   },
 
   // Set default organization and team if not in tab-session
   selectOrigin() {
 
     if (this.checkOriginAndTeamSession()) {
-      return this.getAll().then((all) => {
+      return this.getOriginAll().then((all) => {
         var origansation = all.content.firstObject;
 
         // var team = this.get('all.items.firstObject.name');
@@ -62,7 +78,7 @@ export default Service.extend(DefaultHeaders, {
     }
     this.set('currentOrganization', this.get('tab-session').get(C.TABSESSION.ORGANIZATION));
 
-    return this.getAll().then((all) => {
+    return this.getOriginAll().then((all) => {
       if (all) {
         return all;
       } else {

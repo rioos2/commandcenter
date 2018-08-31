@@ -14,8 +14,8 @@ export default Route.extend(DefaultHeaders, {
 
   model() {
     return hash({
-      stacks:        this.get('store').findAll('assembly', this.opts('assemblys')),
-      stacksfactory: this.get('store').findAll('stacksfactory', this.opts('stacksfactorys')),
+      stacks:        this.get('store').findAll('assembly', this.opts('machines')),
+      stacksfactory: this.get('store').findAll('stacksfactory', this.opts('machinefactorys')),
     });
   },
 

@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-lg-2">
             <div class="cloud-count">
                 {{svg/svg-cloud-count}}
-                <label>{{teamsCount}} teams</label>
+                <label>{{teamsCount}} {{t 'nav.team.show.count'}}</label>
             </div>
         </div>
         <div class="col-sm-12 col-lg-10">
@@ -20,12 +20,9 @@
                         <div class="col-sm-3 col-md-3 col-lg-2 filter-text">
                                 <span>{{t 'nav.organization.show.selectTeam'}}</span>
                         </div>
-                          <div class="col-sm-4">
-                            {{select-drop-down options=teamsName callBackAction="selectTeam" initValue=currentTeam placeholder=selectPlaceHolder}}
-                          </div>
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
-                                <button {{action "createTeam"}} type="button" class="btn">+ Team</button>
+                                <button {{action "createTeam"}} type="button" class="btn">{{t 'nav.team.show.add'}}</button>
                             </div>
                         </div>
                     </div>

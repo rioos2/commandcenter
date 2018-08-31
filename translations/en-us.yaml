@@ -62,12 +62,12 @@ generic:
 guardian:
   admin:
     organization:
-      noOrigin: Create organization
+      noOrigin: One small step to complete your signup. Add an organization</br> *You can always add organizations later from the profile menu at the top right of your screen
     team:
-      noTeam: Create team
+      noTeam: One small step to complete your signup. Add a team in an organization</br> *You can always add teams for an organization later from the profile menu at the top right of your screen
   regular:
     organization:
-      noOrigin: Please contact your admin to onboard
+      noOrigin: One small step to complete your signup.</br>Your account has not been approved by a staff member yet. You will be sent an email when it is approved.
 
 accountsPage:
   index:
@@ -1004,8 +1004,10 @@ nav:
       account: Account ID
       emptyBtn: +Add origin
       status: success
+      count: origins
+      add: + Add
     index:
-      name: Organization
+      name: Organizations
   team:
     create:
       header: 'Add team in '
@@ -1027,6 +1029,8 @@ nav:
       about: About
       emptyBtn: +Add team
       selectPlaceHolder: Select team
+      count: teams
+      add: + Add
     member:
       emptyBtn: +invite
       status: Status
@@ -1037,7 +1041,7 @@ nav:
   user:
     org: Organization
     createOrg: Add organization
-    linkOrg: Manage organization
+    linkOrg: Organizations
     profile: Profile
     logout: Logout
     admin: Admin
@@ -1092,6 +1096,8 @@ action:
   createSecret: Create Secret
   installNode: Install
   retryInstallNode: Retry Install
+  view: View
+  switch: Switch
 
 ##############################
 # Resource Actions

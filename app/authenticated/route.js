@@ -53,7 +53,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
         // If prometheus or aduit server not connected with api_gateway promise will get 502, and the model will reurn projects [],
         // in particular routes 502 error will be traped then show error msg(ex. aduits, healthz/overall)
         // datacenter: this.toCb('loadHealthz'),
-        stacks:        this.toCb('loadAssemblys'),
+        // stacks:        this.toCb('loadAssemblys'),
         // locations: this.cbFind('datacenter', 'datacenters'),
         // plans: this.cbFind('planfactory', 'plans'),
         // networks: this.cbFind('network', 'networks'),
@@ -221,7 +221,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
   Assembly  Assembly
   */
   loadAssemblys() {
-    return this.get('store').find('assembly', null, this.opts('assemblys'));
+    return this.get('store').find('assembly', null, this.opts('machines'));
   },
 
   loadSecrets() {
