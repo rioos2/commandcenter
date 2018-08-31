@@ -13,9 +13,7 @@ export default Route.extend(DefaultHeaders, {
   },
 
   model() {
-    return hash({
-      stacks:        this.get('store').findAll('assembly', this.opts('machines')),
-    });
+    return hash({ stacks: this.get('store').findAll('assembly', this.opts('machines')), });
   },
 
   resetController(controller) {
