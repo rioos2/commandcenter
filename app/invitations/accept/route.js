@@ -5,6 +5,7 @@ import { get } from '@ember/object';
 
 export default Router.extend({
   intl:              service(),
+  access:            service(),
   invitation:        service(),
   notifications: service('notification-messages'),
 
@@ -17,7 +18,7 @@ export default Router.extend({
         clearDuration: 4200,
         cssClasses:    'notification-success'
       });
-      this.transitionTo('authenticated');
+      this.get('access').sessionClearRequest();
     }).catch((err) => {
       this.get('notifications').warning(get(this, 'intl').t('invitations.invitationFailed'), {
         autoClear:     true,
