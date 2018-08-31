@@ -177,7 +177,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
         if (key){
           this.set('rioos_sh_kryptonite_qrcode', `${ key }`);
-          this.get('modalService').toggleModal('modal-show-qrcode', this);
+          this.get('modalService').toggleModal('modal-show-qrcode', { 'key': this.get('rioos_sh_kryptonite_qrcode') });
         } else {
           this.qrCodeNotExists();
         }
