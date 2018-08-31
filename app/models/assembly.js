@@ -139,14 +139,6 @@ var Assembly = Resource.extend(DefaultHeaders, {
     return this.get('enableLink');
   },
 
-  qrCodeNotExists(){
-    this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.QRcode.downloadFailed')), {
-      autoClear:     true,
-      clearDuration: 4200,
-      cssClasses:    'notification-warning'
-    });
-  },
-
   actions: {
     delete() {
       let date = new Date();
@@ -173,14 +165,16 @@ var Assembly = Resource.extend(DefaultHeaders, {
       var self = this;
 
       this.get('store').find('secret', null, this.opts(`secrets/${  this.get('spec.assembly_factory.secret.id') }`, true)).then((res) => {
-        let key = res.data['rioos_sh_kryptonite_qrcode'] || '';
+        let qrCode = res.data['rioos_sh_kryptonite_qrcode'] || '';
 
-        if (key){
-          this.set('rioos_sh_kryptonite_qrcode', `${ key }`);
-          this.get('modalService').toggleModal('modal-show-qrcode', { 'key': this.get('rioos_sh_kryptonite_qrcode') });
+        if (qrCode){
+          this.get('modalService').toggleModal('modal-show-qrcode', { 'key': qrCode });
         } else {
-          this.qrCodeNotExists();
-        }
+          this.get('notifications').warning(htmlSafe(get(this, 'intl').t('notifications.QRcode.downloadFailed')), {
+            autoClear:     true,
+            clearDuration: 4200,
+            cssClasses:    'notification-warning'
+          });        }
       }).catch(() => {
         self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear:     true,
