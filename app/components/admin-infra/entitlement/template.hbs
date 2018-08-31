@@ -6,7 +6,7 @@
 			</div>
 		{{else}}
 			{{#each licenses as |license|}}
-				{{admin-infra/license-show model=license modelSpinner=modelSpinner doReload="doReload"}}
+				{{admin-infra/license-show model=license showInnerSpinner=modelSpinner doReload="doReload"}}
 			{{/each}}
 		{{/if}}
 	</div>

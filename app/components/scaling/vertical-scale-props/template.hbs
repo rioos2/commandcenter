@@ -7,13 +7,13 @@
     <div class="row">
       <div class="col-md-6 p-b-30">
         <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleUpwaitTime'}}</p>
-        <p class="sub-description text-center">{{model.hscaling.spec.scale_up_wait_time}}</p>
-        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleUpTime" showEditBox=showScaleUpTimeEditBox btnName=btnName}}
+        <p class="sub-description text-center">{{upWaitTime}}</p>
+        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleUpTime" showEditBox=editScaleUpWaitTime}}
       </div>
       <div class="col-md-6 p-b-30">
         <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleDownwaitTime'}}</p>
-        <p class="sub-description text-center">{{model.hscaling.spec.scale_down_wait_time}}</p>
-        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleDownTime" showEditBox=showScaleDownTimeEditBox btnName=btnName}}
+        <p class="sub-description text-center">{{downWaitTime}}</p>
+        {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleDownTime" showEditBox=editScaleDownWaitTime}}
       </div>
     </div>
   </div>

@@ -18,12 +18,12 @@ export default Component.extend(DefaultHeaders, {
     return C.AVAILABLE_NETWORK_TYPES;
   }.property(),
 
-  active: function(){
+  hasIpTypeSelected: function(){
     return isEmpty(this.get('type'));
   }.property('type'),
 
 
-  nodeBridgeData: function() {
+  bridges: function() {
     if (!isEmpty(this.get('nodes'))) {
       return this.get('nodes').map((node) => {
         var data = {
@@ -47,19 +47,19 @@ export default Component.extend(DefaultHeaders, {
   }.property('nodes'),
 
   didInsertElement() {
-    this.set('error', this.displayMessage());
+    this.set('error', this.requiredNodesToProceed());
   },
 
   actions: {
-    updatePoolData(active, name) {
-      this.attachAndDetachNode(active, name);
+    updatePoolData(active, name, id) {
+      this.assocateNodesWithBridges(active, name, id);
     },
 
-    setVirtualNetwork(value) {
+    protocolSelected(value) {
       this.set('type', value);
     },
 
-    setBridge(active, value) {
+    bridgesSelected(active, value) {
       var self = this;
 
       self.get('selectedBridges').forEach((bridge) => {
@@ -71,8 +71,7 @@ export default Component.extend(DefaultHeaders, {
         self.get('selectedBridges').addObject(value);
       }
     },
-
-    createVirtualNetwork() {
+    create() {
       this.set('showSpinner', true);
       if (!this.validation()) {
         this.get('userStore').rawRequest(this.rawRequestOpts({
@@ -80,13 +79,13 @@ export default Component.extend(DefaultHeaders, {
           method: 'POST',
           data:   this.getData(),
         })).then(() => {
-          this.set('modelSpinner', true);
+          this.set('showInnerSpinner', true);
           this.set('showSpinner', false);
           this.sendAction('doReload');
           this.refresh();
         }).catch(() => {
           this.set('showSpinner', false);
-          this.set('modelSpinner', false);
+          this.set('showInnerSpinner', false);
         });
       } else {
         this.set('showSpinner', false);
@@ -100,7 +99,7 @@ export default Component.extend(DefaultHeaders, {
 
   },
 
-  displayMessage() {
+  requiredNodesToProceed() {
     if (isEmpty(this.get('nodes'))) {
       this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
 
@@ -110,30 +109,39 @@ export default Component.extend(DefaultHeaders, {
     }
   },
 
-  attachAndDetachNode(active, nodeName) {
-    let data;
+  assocateNodesWithBridges(active, nodeName, id) {
+    let matchedNodeId;
+    const self = this;
 
     this.get('nodes').forEach((node) => {
       if (node.object_meta.name === nodeName) {
-        data = node.id;
+        matchedNodeId = node.id;
       }
     });
-    active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
+    if (!active && !isEmpty(this.get('selectedBridges'))) {
+      self.get('selectedBridges').forEach((bridge) => {
+        if (bridge.name == id){ // eslint-disable-line
+          self.get('selectedBridges').removeObject(bridge);
+        }
+      });
+    }
+
+    active ? this.get('selectedNodes').addObject(matchedNodeId) : this.get('selectedNodes').removeObject(matchedNodeId);
   },
 
-  checkNetmaskFormate(ip) {
+  verifyNetmask(ip) {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.NETMASK) : !ip.match(C.REGEX.IPV6.NETMASK);
   },
 
-  checkIpFormate(ip) {
+  verifyIP(ip) {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.IP) : !ip.match(C.REGEX.IPV6.IP);
   },
 
-  checkSubnetFormate(ip) {
+  verifySubnet(ip) {
     return this.get('type').includes('ipv4') ? !ip.match(C.REGEX.IPV4.SUBNET) : !ip.match(C.REGEX.IPV6.SUBNET);
   },
 
-  checkIpType() {
+  verifyProtocol() {
     return !this.get('type').includes('ipv4') ? 'ipv6' : 'ipv4';
   },
 
@@ -160,18 +168,18 @@ export default Component.extend(DefaultHeaders, {
     }
 
     if (!isEmpty(this.get('gateway'))) {
-      if (this.checkIpFormate(this.get('gateway'))) {
-        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.gatewayError${  this.checkIpType() }`));
+      if (this.verifyIP(this.get('gateway'))) {
+        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.gatewayError${  this.verifyProtocol() }`));
       }
     }
     if (!isEmpty(this.get('subnet'))) {
-      if (this.checkSubnetFormate(this.get('subnet'))) {
-        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.subnetRangeError${  this.checkIpType() }`));
+      if (this.verifySubnet(this.get('subnet'))) {
+        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.subnetRangeError${  this.verifyProtocol() }`));
       }
     }
     if (!isEmpty(this.get('netmask'))) {
-      if (this.checkNetmaskFormate(this.get('netmask'))) {
-        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.netmaskError${  this.checkIpType() }`));
+      if (this.verifyNetmask(this.get('netmask'))) {
+        validationString = validationString.concat(get(this, 'intl').t(`stackPage.admin.network.netmaskError${  this.verifyProtocol() }`));
       }
     }
 

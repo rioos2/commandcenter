@@ -159,6 +159,7 @@ wizard:
   licensePwdError:                    Enter licence password </br>
   licenseSuccessMsg:                  License updated successfully
   licenseFailedMsg:                   License update failed
+  licenseErrorMsg:                    'License update failed - "{error}"'
   loginWithRegisteredAccount:         Account already created
   welcome:
     title:                            Welcome
@@ -379,7 +380,7 @@ stackPage:
         title:                        License
         description:                  Edit activation code
         node:                         '{optionName}:Activated  {Activated}/{Allowed}'
-        expired:                      " -  Expires in "
+        expired:                      "  Expires in "
         days:                         " days"
         trial:                        Trial
         rioProduct:                   Rio/OS
@@ -387,6 +388,8 @@ stackPage:
         emptyActiveCode:              You forgot to type activation code
         licenceid:                    Enter licence id
         licencepassword:              Enter licence password
+        used:                         " used"
+        total:                        " total"
         activation:
           success:                    License activated successfully
           failure:                    License activation failed
