@@ -46,8 +46,7 @@ export default Component.extend({
   },
 
   counter(){
-    if (isEmpty(this.get('model.content')) && this.get('model.content') !== undefined) {
-
+    if (!isEmpty(this.get('model.content')) && this.get('model.content') !== undefined) {
       return Math.round(this.get('model.content').objectAt(0).results.osusages.cumulative.counter);
     } else {
       return '0';
@@ -55,7 +54,7 @@ export default Component.extend({
   },
 
   OsUsageData() {
-    if (isEmpty(this.get('model.content')) && this.get('model.content') !== undefined){
+    if (!isEmpty(this.get('model.content')) && this.get('model.content') !== undefined){
       const self = this;
       const data = self.get('model.content').objectAt(0).results.osusages.items.map((item, index) => {
         var gradient = [];
