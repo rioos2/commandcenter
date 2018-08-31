@@ -58,8 +58,8 @@ export default Mixin.create({
     var tabSession = this.get('tab-session');
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
-      'organization':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
-      'team':               tabSession.get(C.TABSESSION.TEAM) || '',
+      'org_id':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
+      'team_id':               tabSession.get(C.TABSESSION.TEAM) || '',
       'token':              session.get('token')
     }
 
@@ -70,8 +70,8 @@ export default Mixin.create({
     var session = this.get('session');
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
-      'organization':       this.get('organization').get('currentOrganization') || '',
-      'team':               this.get('organization').get('currentTeam') || '',
+      'org_id':       this.get('organization').get('currentOrganization') || '',
+      'team_id':               this.get('organization').get('currentTeam') || '',
       'token':              session.get('token')
     }
 

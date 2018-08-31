@@ -1,10 +1,10 @@
-{{organization/create-team originName=currentOrigin doReloadInner="doReloadInner"}}
+{{organization/create-origin doReloadInner="doReloadInner"}}
 <div class="filter">
     <div class="row">
         <div class="col-sm-12 col-lg-2">
             <div class="cloud-count">
                 {{svg/svg-cloud-count}}
-                <label>{{teamsCount}} {{t 'nav.team.show.count'}}</label>
+                <label>{{orgCount}} {{t 'nav.organization.show.count'}}</label>
             </div>
         </div>
         <div class="col-sm-12 col-lg-10">
@@ -16,13 +16,10 @@
                 </div>
                 <div class="col-sm-10 col-md-10 col-lg-11">
                     <div class="row">
-                        {{organization/origin-filters model=teamsDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
-                        <div class="col-sm-3 col-md-3 col-lg-2 filter-text">
-                                <span>{{t 'nav.organization.show.selectTeam'}}</span>
-                        </div>
+                        {{organization/origin-filters model=orgDataContents fullmodel=fullmodel category=group showLoading=showLoading}}
                         <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 push-right">
                             <div class="search-content">
-                                <button {{action "createTeam"}} type="button" class="btn">{{t 'nav.team.show.add'}}</button>
+                                <button {{action "createOrigin"}} type="button" class="btn">{{t 'nav.organization.show.add'}}</button>
                             </div>
                         </div>
                     </div>
@@ -37,12 +34,12 @@
   {{stack-launch-spinner size=25 showSpinner=true}}
   </div>
   {{else}}
-  {{#each teamsDataContents as |teamsDataContent|}}
+  {{#each orgDataContents as |orgDataContent|}}
       <div class="list col-sm-5 col-md-3">
-          {{organization/team-box originName=currentOrigin model=teamsDataContent}}
+          {{organization/origin-box model=orgDataContent}}
       </div>
       {{else}}
-     {{organization/team-box-empty btnName=emptyBtn btnAction="createTeam"}}
+     {{organization/team-box-empty btnName=emptyBtnName btnAction="createTeam"}}
   {{/each}}
   {{/if}}
 </div>

@@ -114,7 +114,7 @@ export default Component.extend(DefaultHeaders, {
         var id = this.get('session').get('id');
 
         this.set('model.stacksfactory.object_meta.account', id);
-        var url = 'stacksfactorys';
+        var url = 'machinefactorys';
         var build_url = 'buildconfigs';
 
         this.resourceUpdate();

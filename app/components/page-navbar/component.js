@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 import {  inject as service } from '@ember/service';
-import $ from 'jquery';
 
 export default Component.extend({
   access:        service(),
@@ -14,6 +13,10 @@ export default Component.extend({
   email: function() {
     return this.get('session.email');
   }.property('session'),
+
+  isAdmin: function() {
+    return this.get('session').get(C.SESSION.USER_ROLES);
+  }.property('guardian'),
 
   currentOrganization: function() {
     return this.get('organization.currentOrganization');
@@ -31,9 +34,5 @@ export default Component.extend({
     switchOrigin(org) {
       this.sendAction('switchOrganization', org);
     },
-
-    createOrganization() {
-      $('#addorigin_modal').modal('show');
-    }
   }
 });

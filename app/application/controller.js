@@ -41,7 +41,7 @@ export default Controller.extend({
     this.set('app.currentRouteName', this.get('currentRouteName'));
   }),
 
-  // TO-DO: Rathish, where is this used.
+  // This will called out when user click the action link
   actions: {
     clickedAction(actionName) {
       this.get('resourceActions').triggerAction(actionName);

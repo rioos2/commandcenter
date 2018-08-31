@@ -32,6 +32,7 @@ export default Component.extend(DefaultHeaders, OrganizationUser, {
           data:   this.getData(),
         })).then((/* xhr*/) => {
           this.set('showSpinner', false);
+          this.sendAction('doReloadInner');
           location.reload();
         }).catch((/* err*/) => {
           this.set('showSpinner', false);

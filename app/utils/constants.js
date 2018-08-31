@@ -282,7 +282,7 @@ var C = {
     ACCOUNT_ID:     'id',
     TOKEN:          'token',
     EMAIL:          'email',
-    USER_ROLES:     'roles',
+    USER_ROLES:     'is_admin',
     // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
@@ -362,8 +362,8 @@ var C = {
     OS_VERSION:               'ui$digicloud$os_version',
     SECRET_TYPE_NAMES:        'ui$digicloud$secret_type_names',
     SECRET_TYPE:              'ui$digicloud$secret_type',
+    DEFAULT_SECRET_TYPE:      'ui$digicloud$default_secret_type',
     SECRET_KEY_LENGTH:        'ui$digicloud$secret_key_length',
-    TRUSTED_KEY:              'ui$digicloud$trusted_key',
   },
 
   USER: {

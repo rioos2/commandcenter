@@ -1,10 +1,16 @@
-<div class="team-box left" {{action 'goTeam'}}>
+<div class="team-box left">
   <div class="domain">
     <div class="icon status" data-tooltip="{{teamStatus}}">
       {{svg/svg-status status=teamStatus}}
     </div>
     <p class="text1" title={{team.object_meta.name}}>{{team.full_name}}</p>
     <p class="text2">Active</p>
+
+    <div class="pull-right st-pin">
+      <div class="team-action">
+        {{action-menu model=model}}
+      </div>
+    </div>
   </div>
   <div class="ip">
     <div class="icon">

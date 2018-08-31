@@ -67,7 +67,7 @@ export default Route.extend(DefaultHeaders, {
   },
 
   getSecretType(setting) {
-    return this.getSettings(setting)[denormalizeName(`${ C.SETTING.TRUSTED_KEY }`)] || D.VPS.trusted_key;
+    return this.getSettings(setting)[denormalizeName(`${ C.SETTING.DEFAULT_SECRET_TYPE }`)] || D.VPS.defaultSecret;
   },
 
   loadSecret(setting) {

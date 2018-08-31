@@ -15,12 +15,6 @@ export default Component.extend({
     return this.profileTimestamp(this.get('team.object_meta.created_at'));
   }.property('team.object_meta.created_at'),
 
-  actions: {
-    goTeam(){
-      this.get('router').transitionTo('organization.team', this.get('originName'), this.get('team.id'));
-    }
-  },
-
 
   profileTimestamp(date) {
     return moment(date).utcOffset(date).format('MMM DD, YYYY').toString();
