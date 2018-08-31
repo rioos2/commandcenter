@@ -35,6 +35,18 @@ var C = {
       STATUS:  { ACTIVATING: 'activating', }
     },
   },
+  LICENSE: {
+    SUBPRODUCT: { NONE: 'SubProdut ?' },
+    STATUS:     {
+      NONE:        'MAY BE ACTIVE, CHECK IN PROGRESS',
+      NOT_EXPIRED: 'active',
+      EXPIRED:     'expired'
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS:  { ACTIVATING: 'activating' }
+    },
+  },
 
   /* Account membership and roles*/
   ACCOUNT: {
@@ -135,6 +147,14 @@ var C = {
     ASSEMBLYIPV4:      'IPv4',
   },
 
+  HORIZONTAL_SCALE: {
+    MIN_REPLICAS:        1,
+    MAX_REPLICAS:        2,
+    SCALEUP_WAITTIME:    10,
+    SCALEDOWN_WAIT_TIME: 10
+
+  },
+
   /*
   * Secrets types of assembly
   */
@@ -174,8 +194,6 @@ var C = {
       STOPPED:  'STOPPED',
     },
     STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
-    LICENSE_STATUS: { EXPIRED: 'Expired', }
-
   },
 
   /*

@@ -23,7 +23,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="network_type">{{t 'stackPage.admin.network.type'}}</label>
-                <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "setVirtualNetwork" value="target.value"}}>
+                <select class="form-control" id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "protocolSelected" value="target.value"}}>
                                                          <option disabled selected>select</option>
                                                         {{#each virtualNetworks as |virtualNetwork|}}
                                                         <option>{{virtualNetwork}}</option>
@@ -39,7 +39,7 @@
                 <label for="network_gateway">
                   {{t 'stackPage.admin.network.gateway'}}
                 </label>
-                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_gateway" value=gateway}}
+                {{input type="text" class=(if hasIpTypeSelected "form-control disabled" "form-control") id="network_gateway" value=gateway}}
               </div>
             </div>
             <div class="col-sm-6">
@@ -47,7 +47,7 @@
                 <label for="network_subnetip">
                   {{t 'stackPage.admin.network.subnet'}}
                 </label>
-                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_subnetip" value=subnet}}
+                {{input type="text" class=(if hasIpTypeSelected "form-control disabled" "form-control") id="network_subnetip" value=subnet}}
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
                 <label for="network_netmask">
                   {{t 'stackPage.admin.network.netmask'}}
                 </label>
-                {{input type="text" class=(if active "form-control disabled" "form-control") id="network_netmask" value=netmask}}
+                {{input type="text" class=(if hasIpTypeSelected "form-control disabled" "form-control") id="network_netmask" value=netmask}}
               </div>
             </div>
           </div>
@@ -66,16 +66,16 @@
               <div class="form-group">
                 <label for="network_nodes">{{t 'stackPage.admin.network.selectNode'}}</label>
                 <div class="rio-radio mov-top">
-                  {{#each nodeBridgeData as |data|}}
+                  {{#each bridges as |bridge|}}
                     <div class="col-xs-12">
-                      {{admin-infra/node-checkbox name=data.name data=data updatePoolData="updatePoolData" type=type  setBridge= "setBridge"}}
+                      {{admin-infra/node-checkbox name=bridge.name data=bridge updatePoolData="updatePoolData" type=type  setBridge= "bridgesSelected"}}
                     </div>
                   {{/each}}
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" {{action 'createVirtualNetwork'}} class="btn btn-default">
+          <button type="submit" {{action 'create'}} class="btn btn-default">
             {{t 'stackPage.admin.header.add_btn'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>

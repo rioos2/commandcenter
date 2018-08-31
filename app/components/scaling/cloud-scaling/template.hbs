@@ -22,10 +22,10 @@
       </div>
     </div>
     {{#if enableHorizontal}}
-      {{scaling/cloud-horizontal-scaling model=model modelSpinner=modelSpinner scaleType="horizontal"}}
+      {{scaling/horizontal-scale-props model=model modelSpinner=modelSpinner scaleType="horizontal"}}
     {{/if}}
     {{#if enableVertical}}
-      {{scaling/cloud-vertical-scaling model=model modelSpinner=modelSpinner scaleType="vertical"}}
+      {{scaling/vertical-scale-props model=model modelSpinner=modelSpinner scaleType="vertical"}}
     {{/if}}
   </div>
 </div>

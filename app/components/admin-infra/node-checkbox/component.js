@@ -30,7 +30,7 @@ export default Component.extend({
   actions: {
     sendType() {
       this.toggleProperty('active');
-      this.sendAction('updatePoolData', this.get('active'), this.get('name'));
+      this.sendAction('updatePoolData', this.get('active'), this.get('name'), this.get('data.node_id'));
     },
     sendBridge(bridgeName) {
       this.sendAction('setBridge', this.get('active'), {

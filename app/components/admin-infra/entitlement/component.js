@@ -9,7 +9,7 @@ export default buildAdminSettingPanel('entitlement', {
   }.property('model.license'),
 
   actions: {
-    doReload() {
+    doInnerReload() {
       this.sendAction('triggerReload');
     },
   }

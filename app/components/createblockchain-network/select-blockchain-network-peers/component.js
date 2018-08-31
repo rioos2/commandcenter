@@ -15,10 +15,6 @@ export default Component.extend(DefaultHeaders, {
   activate:          false,
   showSpinner:       false,
 
-  btnName: function(){
-    return get(this, 'intl').t('launcherPage.domain.buttonSet');
-  }.property(),
-
   domainPlaceHolder: function() {
     return get(this, 'intl').t('launcherPage.domain.domainPlaceHolder');
   }.property('domainPlaceHolder'),

@@ -110,8 +110,8 @@ export default Component.extend(DefaultHeaders, {
     setVirtualNetwork(value) {
       this.set('type', value);
     },
-    updatePoolData(active, name) {
-      this.attachAndDetachNode(active, name);
+    updatePoolData(active, name, id) {
+      this.attachAndDetachNode(active, name, id);
     },
 
     setBridge(active, value) {
@@ -248,14 +248,22 @@ export default Component.extend(DefaultHeaders, {
     return !this.get('type').includes('ipv4') ? 'ipv6' : 'ipv4';
   },
 
-  attachAndDetachNode(active, nodeName) {
+  attachAndDetachNode(active, nodeName, id) {
     let data;
+    const self = this;
 
     this.get('allnodes').forEach((node) => {
       if (node.object_meta.name === nodeName) {
         data = node.id;
       }
     });
+    if (!active && !isEmpty(this.get('selectedBridges'))) {
+      self.get('selectedBridges').forEach((bridge) => {
+        if (bridge.name == id){ // eslint-disable-line
+          self.get('selectedBridges').removeObject(bridge);
+        }
+      });
+    }
     active ? this.get('selectedNodes').addObject(data) : this.get('selectedNodes').removeObject(data);
   },
 });

@@ -20,10 +20,6 @@ export default Component.extend(DefaultHeaders, {
     return get(this, 'intl').t('launcherPage.domain.domainPlaceHolder');
   }.property('domainPlaceHolder'),
 
-  btnName: function(){
-    return get(this, 'intl').t('launcherPage.domain.buttonSet');
-  }.property(),
-
   validateDomain: function() {
     return this.get('model.settings')[denormalizeName(`${ C.SETTING.DOMAIN }`)] || D.VPS.domain;
   }.property('model.settings'),
