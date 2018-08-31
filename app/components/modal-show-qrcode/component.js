@@ -6,8 +6,8 @@ export default ModalBase.extend({
   originalModel: alias('modalService.modalOpts'),
 
   name: function() {
-    return this.get('originalModel.rioos_sh_kryptonite_qrcode');
-  }.property('originalModel.rioos_sh_kryptonite_qrcode'),
+    return this.get('originalModel.key');
+  }.property('originalModel.key'),
 
   actions: {
     cancel() {
