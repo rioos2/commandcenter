@@ -1,10 +1,10 @@
 import Resource from 'ember-api-store/models/resource';
 
-var Logs = Resource.extend({
-  type:    'logs',
+var Log = Resource.extend({
+  type:    'log',
   actions: {},
 
 
 });
 
-export default Logs;
+export default Log;

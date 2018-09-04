@@ -5,6 +5,10 @@ import { inject as service } from '@ember/service';
 import C from 'nilavu/utils/constants';
 import { isEqual } from '@ember/utils';
 import { isEmpty } from '@ember/utils';
+import { alias } from '@ember/object/computed';
+import { later } from '@ember/runloop';
+import { computed } from '@ember/object';
+
 
 export default Component.extend(DefaultHeaders, {
   intl:                  service(),
@@ -13,46 +17,66 @@ export default Component.extend(DefaultHeaders, {
   showActivationEditBox: true,
   showSpinner:           false,
 
-  Activated: function(){
-    return this.get('model.activation.no_of_activations_available');
-  }.property('model.activation.no_of_activations_available'),
+  objectMetaData:        alias('model.object_meta.name'),
+  status:                alias('model.status'),
+  expiredAt:             alias('model.expired_at'),
+  activation:            alias('model.activation'),
 
-  Allowed: function(){
-    return this.get('model.activation.total_number_of_activations');
-  }.property('model.activation.total_number_of_activations'),
 
-  product: function(){
-    return this.get('model.product');
-  }.property('model.product'),
+  /* This section contains the product name and subproduct details i
+     The product name is hardcoded as Rio/OS v2
+  */
+  product: alias('model.product'),
 
-  optionName: function(){
-    return this.get('model.object_meta.name').capitalize();
-  }.property('model.object_meta.name'),
+  // The subproduct names can be
+  // 1. Sensei
+  // 2. Ninja
+  subProductName: computed('objectMetaData', function() {
+    const o = get(this, 'objectMetaData');
 
-  licenceid: function() {
-    return get(this, 'intl').t('stackPage.admin.settings.entitlement.licenceid');
-  }.property('licenceid'),
+    if (!isEmpty(o)) {
+      return o.toString().capitalize();
+    }
 
-  licencepassword: function() {
-    return get(this, 'intl').t('stackPage.admin.settings.entitlement.licencepassword');
-  }.property('licencepassword'),
+    return C.LICENSE.SUBPRODUCT.NONE;
+  }),
 
-  status: function() {
-    return this.get('model.status').capitalize();
-  }.property('model.status'),
+  /* This section contains the status of activation details */
 
-  expired: function(){
-    return isEqual(this.get('model.status').capitalize(), C.NODE.LICENSE_STATUS ) ? '' : get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
-  }.property('model.status', 'model.expired_at'),
+  statusShow: computed('status', function() {
+    const s = get(this, 'status');
 
-  btnName: function(){
-    return get(this, 'intl').t('stackPage.admin.header.activate_btn');
-  }.property(),
+    if (!isEmpty(s)) {
+      return s.capitalize();
+    }
+
+    return C.LICENSE.STATUS.NONE;
+  }),
+
+  activated: computed('activation', function(){
+    return  get(this, 'activation').no_of_activations_available + get(this, 'intl').t('stackPage.admin.settings.entitlement.used');
+  }),
+
+  allowed: computed('activation', function() {
+    return get(this, 'activation').total_number_of_activations + get(this, 'intl').t('stackPage.admin.settings.entitlement.total')  ;
+  }),
+
+  expired: computed('status', 'expiredAt', function(){
+    const x = get(this, 'status');
+
+    if (isEqual(x, C.LICENSE.STATUS.EXPIRED)) {
+      return C.LICENSE.STATUS.EXPIRED;
+    }
+
+    return   get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + get(this, 'expiredAt') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
+
+
+  }),
 
   actions: {
 
-    performActivation(licenceid, licencepassword) {
-      if (isEmpty(licenceid.trim()) || isEmpty(licencepassword.trim()))  {
+    performActivation(id, password) {
+      if (isEmpty(id.trim()) || isEmpty(password.trim()))  {
         this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
           autoClear:     true,
           clearDuration: 4200,
@@ -60,15 +84,14 @@ export default Component.extend(DefaultHeaders, {
         });
         this.set('showActivationEditBox', true);
       } else {
-        this.set('model.license_id', licenceid);
-        this.set('model.password', licencepassword);
+        this.set('model.license_id', id);
+        this.set('model.password', password);
         this.set('model.activation_completed', true);
-        this.set('model.product', C.WIZARD.ACTIVATION.PRODUCT);
-        this.set('model.status', C.WIZARD.ACTIVATION.STATUS.ACTIVATING);
+        this.set('model.product', C.LICENSE.ACTIVATION.PRODUCT);
+        this.set('model.status', C.LICENSE.ACTIVATION.STATUS.ACTIVATING);
         this.activate();
       }
     },
-
   },
   activate() {
     this.set('showSpinner', true);
@@ -78,15 +101,7 @@ export default Component.extend(DefaultHeaders, {
       method: 'POST',
       data:   JSON.stringify(this.get('model')),
     })).then(() => {
-      this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
-        autoClear:     true,
-        clearDuration: 4200,
-        cssClasses:    'notification-success'
-      });
-      this.set('showActivationEditBox', true);
-      this.set('modelSpinner', true);
-      this.set('showSpinner', false);
-      this.sendAction('doReload');
+      this.checkLicense();
     }).catch(() => {
       this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
         autoClear:     true,
@@ -94,8 +109,43 @@ export default Component.extend(DefaultHeaders, {
         cssClasses:    'notification-warning'
       });
       this.set('showSpinner', false);
-      this.set('modelSpinner', false);
+      this.set('showInnerSpinner', false);
     });
+  },
+
+  checkLicense() {
+    let self = this;
+
+    later(() => {
+      self.sendAction('doInnerReload');
+      self.checkLicenseStatus();
+    }, 1500);
+  },
+
+  checkLicenseStatus() {
+    let self = this;
+
+    later(() => {
+      if (self.get('status') ===  C.LICENSE.STATUS.ACTIVE) {
+        self.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
+          autoClear:     true,
+          clearDuration: 4200,
+          cssClasses:    'notification-success'
+        });
+        self.set('showActivationEditBox', true);
+        self.set('showInnerSpinner', true);
+        self.set('showSpinner', false);
+      } else {
+        self.get('notifications').warning(get(self, 'intl').t('wizard.licenseErrorMsg', { error: self.get('model.error') }), {
+          autoClear:     true,
+          clearDuration: 4200,
+          cssClasses:    'notification-warning'
+        });
+        self.set('showActivationEditBox', true);
+        self.set('showInnerSpinner', true);
+        self.set('showSpinner', false);
+      }
+    }, 1500);
   },
 
 

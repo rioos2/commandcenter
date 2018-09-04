@@ -37,6 +37,18 @@ var C = {
       STATUS:  { ACTIVATING: 'activating', }
     },
   },
+  LICENSE: {
+    SUBPRODUCT: { NONE: 'SubProdut ?' },
+    STATUS:     {
+      NONE:        'MAY BE ACTIVE, CHECK IN PROGRESS',
+      NOT_EXPIRED: 'active',
+      EXPIRED:     'expired'
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS:  { ACTIVATING: 'activating' }
+    },
+  },
 
   /* Account membership and roles*/
   ACCOUNT: {
@@ -101,7 +113,7 @@ var C = {
   /*
   * Assembly resources
   */
-  RESOURCES: ['cpu', 'memory', 'disk'],
+  RESOURCES: ['cpu', 'memory', 'storage'],
 
   /*
   * Digital cloud management page filter query params and key to read data from model.
@@ -135,6 +147,14 @@ var C = {
     ASSEMBLYOFF:       'OFF',
     ASSEMBLYON:        'ON',
     ASSEMBLYIPV4:      'IPv4',
+  },
+
+  HORIZONTAL_SCALE: {
+    MIN_REPLICAS:        1,
+    MAX_REPLICAS:        2,
+    SCALEUP_WAITTIME:    10,
+    SCALEDOWN_WAIT_TIME: 10
+
   },
 
   /*
@@ -176,8 +196,6 @@ var C = {
       STOPPED:  'STOPPED',
     },
     STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
-    LICENSE_STATUS: { EXPIRED: 'Expired', }
-
   },
 
   /*

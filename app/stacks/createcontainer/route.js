@@ -160,8 +160,8 @@ export default Route.extend(DefaultHeaders,  {
         max_target_value_cpu:    80,
         min_target_value_memory: 20,
         max_target_value_memory: 80,
-        min_target_value_disk:   20,
-        max_target_value_disk:   80,
+        min_target_value_storage: 20,
+        max_target_value_storage: 80,
       },
       vertical_scaling_rule_apply: false,
     };

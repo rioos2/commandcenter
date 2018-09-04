@@ -19,7 +19,7 @@ export default Route.extend(DefaultHeaders, {
       nodes:             this.get('store').findAll('node', this.opts('nodes')),
       license:           this.get('store').findAll('license', this.opts('licenses', true)),
       senseis:           this.get('store').findAll('sensei', this.opts('senseis')),
-      logs:              this.get('store').findAll('log', this.opts('logs')),
+      logs:              this.get('store').find('log', null, this.opts('logs')),
     });
   },
   actions: {

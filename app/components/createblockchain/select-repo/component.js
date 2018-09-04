@@ -12,10 +12,6 @@ export default Component.extend(DefaultHeaders, {
   showPeerEditBox: true,
   repoUrl:         '',
 
-  btnName: function(){
-    return get(this, 'intl').t('launcherPage.domain.buttonSet');
-  }.property(),
-
   repoPlaceHolder: function() {
     return get(this, 'intl').t('launcherPage.repo.urlPlaceHolder');
   }.property('repoPlaceHolder'),
