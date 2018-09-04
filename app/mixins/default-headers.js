@@ -59,7 +59,7 @@ export default Mixin.create({
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
       'org_id':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
-      'team_id':               tabSession.get(C.TABSESSION.TEAMID) || '',
+      'team_id':               tabSession.get(C.TABSESSION.ID) || '',
       'token':              session.get('token')
     }
 

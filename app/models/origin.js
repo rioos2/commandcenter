@@ -3,47 +3,53 @@ import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
 import { getOwner } from '@ember/application';
 import C from 'nilavu/utils/constants';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+
 
 
 var Origin = Resource.extend({
+
+  name:           alias('object_meta.name'),
+
 
   availableActions: function() {
 
     return [{
       label:   'action.view',
       icon:    'fa fa-eye',
-      action:  'goOrigin',
+      action:  'goToOrigin',
       enabled: true,
     },
     {
       label:   'action.switch',
       icon:    'fa fa-toggle-on',
-      action:  'selectOrigin',
-      enabled:  this.get('switchActionCheck'),
+      action:  'switchOrigin',
+      enabled:  this.get('canSwitch'),
     }
     ];
   }.property('id', 'actionLinks'),
 
-  switchActionCheck: function() {
-    return  !(this.get('tab-session').get(C.TABSESSION.ORGANIZATION) === this.get('object_meta.name'));
-  }.property('object_meta.name'),
+  canSwitch: computed('name', function() {
+    return  !(this.get('tab-session').get(C.TABSESSION.ORGANIZATION) === this.get('name'));
+  }),
 
-  organizationUpdate:    null,
-  router:             service(),
-  organization:       service(),
-  'tab-session':      service('tab-session'),
+  waitAndChangeOrganization:    null,
+  router:                    service(),
+  organization:              service(),
+  'tab-session':             service('tab-session'),
 
   actions: {
 
-    goOrigin(){
-      this.get('router').transitionTo('organization.organization', this.get('object_meta.name'));
+    goToOrigin(){
+      this.get('router').transitionTo('organization.organization', this.get('name'));
     },
 
-    selectOrigin() {
+    switchOrigin() {
       let authenticated = getOwner(this).lookup('route:authenticated');
 
-      authenticated.send('switchOrigin', this.get('object_meta.name'));
-      this.set('organizationUpdate', later(() => {
+      authenticated.send('switchOrigin', this.get('name'));
+      this.set('waitAndChangeOrganization', later(() => {
         location.reload();
       }, 3000));
     }

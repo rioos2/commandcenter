@@ -37,7 +37,6 @@ export default Service.extend(DefaultHeaders, {
   hasTeam() {
     return !isEmpty(this.get('tab-session').get(C.TABSESSION.TEAM));
   },
-
   /**
    transByAccountState update account state => structure below
    {

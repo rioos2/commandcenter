@@ -80,7 +80,7 @@ export default Route.extend({
       }
 
       this.controllerFor('application').set('error', err);
-      if (C.ACCESS_DENIED.includes(err.code)){
+      if (C.AUTHORIZATION_DENIED.includes(err.code)){
         this.transitionTo('access-denied');
       } else {
         this.transitionTo('failWhale');

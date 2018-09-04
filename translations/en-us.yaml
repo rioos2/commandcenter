@@ -1004,9 +1004,9 @@ nav:
     show:
       selectTeam: 'Switch team:'
       createdAt: Created At
-      account: Account ID
+      account: Account
       emptyBtn: +Add origin
-      statusNotSeleted: success
+      statusNotSeleted: generic
       statusSeleted: selected
       count: origins
       add: + Add
@@ -1032,7 +1032,7 @@ nav:
       inviteTo: Invite To
       about: About
       emptyBtn: +Add team
-      statusNotSeleted: success
+      statusNotSeleted: generic
       statusSeleted: selected
       selectPlaceHolder: Select team
       count: teams

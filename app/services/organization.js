@@ -4,7 +4,6 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import { reject } from 'rsvp';
-import { later } from '@ember/runloop';
 
 export default Service.extend(DefaultHeaders, {
   access:        service(),
@@ -40,21 +39,20 @@ export default Service.extend(DefaultHeaders, {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
     if ($.isEmptyObject(team)){
-      this.teamsByOrigin(origansation).then((team) => {
-        this.teamChanged(team);
+      this.teamsByOrigin(origansation).then((teamData) => {
+        this.teamChanged(teamData);
       });
+    } else {
+      this.teamChanged(team);
     }
-    this.teamChanged(team);
   },
 
   // Get first team from organization if exisit
   teamChanged(team) {
-    this.set('waitAndChangeOrganization', later(() => {
-      this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
-      this.get('tab-session').set(C.TABSESSION.TEAMID, team.team.id);
-      this.set('currentTeam', team.team.full_name);
-      this.set('currentTeamId', team.team.id);
-    }, 1500));
+    this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
+    this.get('tab-session').set(C.TABSESSION.ID, team.team.id);
+    this.set('currentTeam', team.team.full_name);
+    this.set('currentTeamId', team.team.id);
   },
 
   // Get first team from organization if exisit
