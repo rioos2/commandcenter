@@ -12,9 +12,11 @@ export default Service.extend(DefaultHeaders, {
   store:         service(),
   session:       service(),
 
-  currentOrganization: null,
-  currentTeam:         null,
-  all:                 null,
+  currentOrganization:       null,
+  currentTeam:               null,
+  currentTeamId:             null,
+  all:                       null,
+  waitAndChangeOrganization: null,
 
   // Get all organizations
   getOriginAll() {
@@ -33,29 +35,30 @@ export default Service.extend(DefaultHeaders, {
   },
 
   // Update selected organization and team to the session
-  selectOrganizationAndTeam(origansation, team = ''  ) {
+  orgnizationChanged(origansation, team = {}  ) {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
-    if (isEmpty(team)){
-      this.selectTeamByOrigin(origansation).then((team) => {
-        this.selectTeam(team);
+    if ($.isEmptyObject(team)){
+      this.teamsByOrigin(origansation).then((teamData) => {
+        this.teamChanged(teamData);
       });
+    } else {
+      this.teamChanged(team);
     }
-    this.selectTeam(team);
   },
 
   // Get first team from organization if exisit
-  selectTeam(team) {
-    this.get('tab-session').set(C.TABSESSION.TEAM, team);
-    this.set('currentTeam', team);
+  teamChanged(team) {
+    this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
+    this.get('tab-session').set(C.TABSESSION.ID, team.team.id);
+    this.set('currentTeam', team.team.full_name);
+    this.set('currentTeamId', team.team.id);
   },
 
   // Get first team from organization if exisit
-  selectTeamByOrigin(origin) {
+  teamsByOrigin(origin) {
     return this.getTeamsByOrigin(origin).then((all) => {
-      var team = !isEmpty(all.content) ? all.content.firstObject : '';
-
-      return !isEmpty(team) ? team.team.full_name : '';
+      return !isEmpty(all.content) ? all.content.firstObject : {};
     });
   },
 
@@ -68,7 +71,7 @@ export default Service.extend(DefaultHeaders, {
 
         // var team = this.get('all.items.firstObject.name');
         if (origansation.object_meta.name) {
-          return this.selectOrganizationAndTeam(origansation.object_meta.name /* , team*/ );
+          return this.orgnizationChanged(origansation.object_meta.name /* , team*/ );
         } else {
           return reject();
         }

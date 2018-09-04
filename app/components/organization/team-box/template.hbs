@@ -1,7 +1,7 @@
 <div class="team-box left">
   <div class="domain">
-    <div class="icon status" data-tooltip="{{teamStatus}}">
-      {{svg/svg-status status=teamStatus}}
+    <div class="icon status">
+      {{svg/svg-status status=isSelected}}
     </div>
     <p class="text1" title={{team.object_meta.name}}>{{team.full_name}}</p>
     <p class="text2">Active</p>
@@ -17,7 +17,7 @@
       {{fa-icon "tasks"}}
     </div>
     <p class="text1">{{t 'nav.team.show.createdAt'}}</p>
-    <p class="text2">{{createdAt}}</p>
+    <p class="text2">{{hoursAgo}}</p>
   </div>
   <div class="location">
     <div class="icon">

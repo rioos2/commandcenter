@@ -113,6 +113,12 @@ Router.map(function() {
       this.route('infra', { path: '/infra' });
     });
 
+    this.route('access-denied', {
+      path:           '/access-denied',
+      resetNamespace: true
+    }, function() {
+      this.route('index', { path: '/' });
+    });
     // End: Authenticated
   });
 

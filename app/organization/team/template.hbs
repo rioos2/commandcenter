@@ -13,7 +13,7 @@
     </div>
     <div class="content">
       {{#each panels as |tab|}}
-        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin team=team model=model category=tab}}
+        {{component tab selectedTab=selectedTab currentOrigin=currentOrigin team=team model=model category=tab isAdmin=isAdmin}}
       {{/each}}
     </div>
   </div>

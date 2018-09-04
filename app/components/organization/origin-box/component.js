@@ -1,32 +1,32 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import C from 'nilavu/utils/constants';
 
 export default Component.extend({
   intl:             service(),
   router:           service(),
+  'tab-session':    service('tab-session'),
   classNames:       ['container-list'],
   origin:           alias('model'),
-  createdAt:        alias('model.object_meta.created_at'),
-  name:             alias('model.object_meta.name'),
+  objectMeta:       alias('origin.object_meta'),
+  createdAt:        alias('objectMeta.created_at'),
+  name:             alias('objectMeta.name'),
 
-  originStatus: function() {
-    return this.get('intl').t('nav.organization.show.status');
-  }.property('origin'),
+  isSelected: computed('origin', function() {
+    return (this.get('name') === this.get('currentOrigin')) ? this.get('intl').t('generic.statusSeleted') : this.get('intl').t('generic.statusNotSeleted');
+  }),
 
-  createdAtMoment: function() {
-    return this.profileTimestamp(this.get('createdAt'));
-  }.property('createdAt'),
+  hoursAgo: computed('createdAt', function() {
+    const date = this.get('createdAt');
 
-  actions: {
-    goOrigin(){
-      this.get('router').transitionTo('organization.organization', this.get('name'));
-    }
-  },
+    return moment(this.get(date)).utcOffset(date).format('MMM DD, YYYY').toString();
 
+  }),
 
-  profileTimestamp(date) {
-    return moment(date).utcOffset(date).format('MMM DD, YYYY').toString();
-  },
+  currentOrigin: computed('tab-session', function() {
+    return this.get('tab-session').get(C.TABSESSION.ORGANIZATION);
+  }),
 
 });
