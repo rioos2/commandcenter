@@ -59,7 +59,7 @@ export default Mixin.create({
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
       'org_id':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
-      'team_id':               tabSession.get(C.TABSESSION.TEAM) || '',
+      'team_id':               tabSession.get(C.TABSESSION.TEAMID) || '',
       'token':              session.get('token')
     }
 
@@ -71,7 +71,7 @@ export default Mixin.create({
     var subHeader = {
       'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
       'org_id':       this.get('organization').get('currentOrganization') || '',
-      'team_id':               this.get('organization').get('currentTeam') || '',
+      'team_id':               this.get('organization').get('currentTeamId') || '',
       'token':              session.get('token')
     }
 

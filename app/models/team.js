@@ -1,5 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 import { inject as service } from '@ember/service';
+import { getOwner } from '@ember/application';
+import { later } from '@ember/runloop';
 
 var Team = Resource.extend({
 
@@ -22,6 +24,7 @@ var Team = Resource.extend({
 
   router:       service(),
   organization: service(),
+  teamUpdate:   null,
 
   actions: {
 
@@ -30,9 +33,12 @@ var Team = Resource.extend({
     },
 
     selectTeam() {
-      this.get('organization').selectOrganizationAndTeam(this.get('metadata.origin'), this.get('team.full_name'));
+      let authenticated = getOwner(this).lookup('route:authenticated');
 
-      location.reload();
+      authenticated.send('switchOrigin', this.get('metadata.origin'), this);
+      this.set('teamUpdate', later(() => {
+        location.reload();
+      }, 2000));
     }
 
   },

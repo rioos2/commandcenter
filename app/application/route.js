@@ -80,8 +80,11 @@ export default Route.extend({
       }
 
       this.controllerFor('application').set('error', err);
-      this.transitionTo('failWhale');
-
+      if (C.ACCESS_DENIED.includes(err.code)){
+        this.transitionTo('access-denied');
+      } else {
+        this.transitionTo('failWhale');
+      }
       console.log('» [ ✘ ] -----------------');
       console.error('» [ ✘ ] Application Error', (err ? err.stack : undefined));
       console.log('» [ ✘ ] -----------------');

@@ -17,6 +17,8 @@ var C = {
 
   BADGATEWAY_HTTP_CODES: ['502'],
 
+  ACCESS_DENIED: ['403'],
+
 
   /* --------  The section  that has  various Rio objects  ----*/
 
@@ -276,6 +278,7 @@ var C = {
   TABSESSION: {
     PROJECT:      'projectId',
     TEAM:         'team',
+    TEAMID:         'id',
     ORGANIZATION:     'organization',
     PROJECTDATA:  'projectData',
     NAMESPACE:    'namespaceId',

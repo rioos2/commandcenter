@@ -1,6 +1,8 @@
 import Resource from 'ember-api-store/models/resource';
 import { inject as service } from '@ember/service';
 import { later } from '@ember/runloop';
+import { getOwner } from '@ember/application';
+
 
 var Origin = Resource.extend({
 
@@ -32,10 +34,12 @@ var Origin = Resource.extend({
     },
 
     selectOrigin() {
-      this.get('organization').selectOrganizationAndTeam(this.get('object_meta.name'));
+      let authenticated = getOwner(this).lookup('route:authenticated');
+
+      authenticated.send('switchOrigin', this.get('object_meta.name'));
       this.set('organizationUpdate', later(() => {
         location.reload();
-      }, 2500));
+      }, 3000));
     }
 
   },

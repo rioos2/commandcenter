@@ -114,12 +114,11 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
      When we switch an organization, unsubcribe and load the new
      organization details
      */
-    switchOrigin(origin, transition = true) {
-      this.get('organization').selectOrganizationAndTeam(origin);
+    switchOrigin(origin, team = {}, transition = true) {
+      this.get('organization').selectOrganizationAndTeam(origin, team);
       this.disconnectSubscribers(() => {
         this.send('finishSwitchOrigin', origin, transition);
       });
-      location.reload();
     },
 
     finishSwitchOrigin(origin, transition) {

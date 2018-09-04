@@ -4,6 +4,7 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import { reject } from 'rsvp';
+import { later } from '@ember/runloop';
 
 export default Service.extend(DefaultHeaders, {
   access:        service(),
@@ -14,7 +15,9 @@ export default Service.extend(DefaultHeaders, {
 
   currentOrganization: null,
   currentTeam:         null,
+  currentTeamId:       null,
   all:                 null,
+  updateTeam:          null,
 
   // Get all organizations
   getOriginAll() {
@@ -33,10 +36,10 @@ export default Service.extend(DefaultHeaders, {
   },
 
   // Update selected organization and team to the session
-  selectOrganizationAndTeam(origansation, team = ''  ) {
+  selectOrganizationAndTeam(origansation, team = {}  ) {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
-    if (isEmpty(team)){
+    if ($.isEmptyObject(team)){
       this.selectTeamByOrigin(origansation).then((team) => {
         this.selectTeam(team);
       });
@@ -46,16 +49,18 @@ export default Service.extend(DefaultHeaders, {
 
   // Get first team from organization if exisit
   selectTeam(team) {
-    this.get('tab-session').set(C.TABSESSION.TEAM, team);
-    this.set('currentTeam', team);
+    this.set('updateTeam', later(() => {
+      this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
+      this.get('tab-session').set(C.TABSESSION.TEAMID, team.id);
+      this.set('currentTeam', team.team.full_name);
+      this.set('currentTeamId', team.id);
+    }, 1500));
   },
 
   // Get first team from organization if exisit
   selectTeamByOrigin(origin) {
     return this.getTeamsByOrigin(origin).then((all) => {
-      var team = !isEmpty(all.content) ? all.content.firstObject : '';
-
-      return !isEmpty(team) ? team.team.full_name : '';
+      return !isEmpty(all.content) ? all.content.firstObject : {};
     });
   },
 
