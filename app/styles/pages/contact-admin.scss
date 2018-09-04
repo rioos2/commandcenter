@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-color: $bg-fourth-color;
-  height: 100%;
+  height: -webkit-fill-available;
   user-select: none;
 
   .logo-img {

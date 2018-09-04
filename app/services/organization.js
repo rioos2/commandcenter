@@ -51,9 +51,9 @@ export default Service.extend(DefaultHeaders, {
   selectTeam(team) {
     this.set('updateTeam', later(() => {
       this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
-      this.get('tab-session').set(C.TABSESSION.TEAMID, team.id);
+      this.get('tab-session').set(C.TABSESSION.TEAMID, team.team.id);
       this.set('currentTeam', team.team.full_name);
-      this.set('currentTeamId', team.id);
+      this.set('currentTeamId', team.team.id);
     }, 1500));
   },
 
