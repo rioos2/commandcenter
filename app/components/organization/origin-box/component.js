@@ -15,7 +15,7 @@ export default Component.extend({
   name:             alias('objectMeta.name'),
 
   isSelected: computed('origin', function() {
-    return (this.get('name') === this.get('currentOrigin')) ? this.get('intl').t('nav.organization.show.statusSeleted') : this.get('intl').t('nav.organization.show.statusNotSeleted');
+    return (this.get('name') === this.get('currentOrigin')) ? this.get('intl').t('generic.statusSeleted') : this.get('intl').t('generic.statusNotSeleted');
   }),
 
   hoursAgo: computed('createdAt', function() {

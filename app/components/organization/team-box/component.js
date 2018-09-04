@@ -17,7 +17,7 @@ export default Component.extend({
   createdAt:     alias('objectMeta.created_at'),
 
   isSelected: computed('team', function() {
-    return  (this.get('fullName') === this.get('currentTeam')) ? this.get('intl').t('nav.team.show.statusSeleted') : this.get('intl').t('nav.team.show.statusNotSeleted');
+    return  (this.get('fullName') === this.get('currentTeam')) ? this.get('intl').t('generic.statusSeleted') : this.get('intl').t('generic.statusNotSeleted');
   }),
 
   currentTeam: computed('tab-session', function() {

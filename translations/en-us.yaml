@@ -54,6 +54,8 @@ generic:
   # These are not "yes" and "no" to avoid being parsed as bools by yaml parser.
   noo:                                No
   yess:                               Yes
+  statusNotSeleted:                   success
+  statusSeleted:                      selected
 
 
 ##############################
@@ -1006,8 +1008,6 @@ nav:
       createdAt: Created At
       account: Account
       emptyBtn: +Add origin
-      statusNotSeleted: generic
-      statusSeleted: selected
       count: origins
       add: + Add
     index:
@@ -1032,8 +1032,6 @@ nav:
       inviteTo: Invite To
       about: About
       emptyBtn: +Add team
-      statusNotSeleted: generic
-      statusSeleted: selected
       selectPlaceHolder: Select team
       count: teams
       add: + Add
