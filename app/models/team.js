@@ -2,6 +2,7 @@ import Resource from 'ember-api-store/models/resource';
 import { inject as service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import { later } from '@ember/runloop';
+import C from 'nilavu/utils/constants';
 
 var Team = Resource.extend({
 
@@ -17,18 +18,24 @@ var Team = Resource.extend({
       label:   'action.switch',
       icon:    'fa fa-toggle-on',
       action:  'selectTeam',
-      enabled: true,
+      enabled: this.get('switchActionCheck'),
     }
     ];
   }.property('id', 'actionLinks'),
 
-  router:       service(),
-  organization: service(),
-  teamUpdate:   null,
+  switchActionCheck: function() {
+    return  !(this.get('tab-session').get(C.TABSESSION.TEAM) === this.get('team.full_name'));
+  }.property('team.full_name'),
+
+  router:        service(),
+  organization:  service(),
+  teamUpdate:    null,
+  'tab-session': service('tab-session'),
 
   actions: {
 
     goTeam(){
+      alert(JSON.stringify(this.get('team.full_name')));
       this.get('router').transitionTo('organization.team', this.get('metadata.origin'), this.get('team.id'));
     },
 

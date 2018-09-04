@@ -1006,7 +1006,8 @@ nav:
       createdAt: Created At
       account: Account ID
       emptyBtn: +Add origin
-      status: success
+      statusNotSeleted: success
+      statusSeleted: selected
       count: origins
       add: + Add
     index:
@@ -1031,6 +1032,8 @@ nav:
       inviteTo: Invite To
       about: About
       emptyBtn: +Add team
+      statusNotSeleted: success
+      statusSeleted: selected
       selectPlaceHolder: Select team
       count: teams
       add: + Add

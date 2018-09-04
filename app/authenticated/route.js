@@ -115,7 +115,7 @@ export default Route.extend(Subscribers, PromiseToCb, DefaultHeaders, {
      organization details
      */
     switchOrigin(origin, team = {}, transition = true) {
-      this.get('organization').selectOrganizationAndTeam(origin, team);
+      this.get('organization').orgnizationChanged(origin, team);
       this.disconnectSubscribers(() => {
         this.send('finishSwitchOrigin', origin, transition);
       });

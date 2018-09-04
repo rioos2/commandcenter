@@ -13,11 +13,11 @@ export default Service.extend(DefaultHeaders, {
   store:         service(),
   session:       service(),
 
-  currentOrganization: null,
-  currentTeam:         null,
-  currentTeamId:       null,
-  all:                 null,
-  updateTeam:          null,
+  currentOrganization:       null,
+  currentTeam:               null,
+  currentTeamId:             null,
+  all:                       null,
+  waitAndChangeOrganization: null,
 
   // Get all organizations
   getOriginAll() {
@@ -36,20 +36,20 @@ export default Service.extend(DefaultHeaders, {
   },
 
   // Update selected organization and team to the session
-  selectOrganizationAndTeam(origansation, team = {}  ) {
+  orgnizationChanged(origansation, team = {}  ) {
     this.get('tab-session').set(C.TABSESSION.ORGANIZATION, origansation);
     this.set('currentOrganization', origansation);
     if ($.isEmptyObject(team)){
-      this.selectTeamByOrigin(origansation).then((team) => {
-        this.selectTeam(team);
+      this.teamsByOrigin(origansation).then((team) => {
+        this.teamChanged(team);
       });
     }
-    this.selectTeam(team);
+    this.teamChanged(team);
   },
 
   // Get first team from organization if exisit
-  selectTeam(team) {
-    this.set('updateTeam', later(() => {
+  teamChanged(team) {
+    this.set('waitAndChangeOrganization', later(() => {
       this.get('tab-session').set(C.TABSESSION.TEAM, team.team.full_name);
       this.get('tab-session').set(C.TABSESSION.TEAMID, team.team.id);
       this.set('currentTeam', team.team.full_name);
@@ -58,7 +58,7 @@ export default Service.extend(DefaultHeaders, {
   },
 
   // Get first team from organization if exisit
-  selectTeamByOrigin(origin) {
+  teamsByOrigin(origin) {
     return this.getTeamsByOrigin(origin).then((all) => {
       return !isEmpty(all.content) ? all.content.firstObject : {};
     });
@@ -73,7 +73,7 @@ export default Service.extend(DefaultHeaders, {
 
         // var team = this.get('all.items.firstObject.name');
         if (origansation.object_meta.name) {
-          return this.selectOrganizationAndTeam(origansation.object_meta.name /* , team*/ );
+          return this.orgnizationChanged(origansation.object_meta.name /* , team*/ );
         } else {
           return reject();
         }
