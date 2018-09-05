@@ -2,7 +2,7 @@ import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { setupComponentTest } from 'ember-mocha';
 
-describe('Unit: Component: theme-spinner', () => {
+describe('theme-spinner', () => {
   setupComponentTest('theme-spinner', {
     unit: true
     // specify the other units that are required for this test
