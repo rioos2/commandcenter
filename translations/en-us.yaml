@@ -13,12 +13,14 @@ generic:
   cancel:                             Cancel
   closeModal:                         Close
   created:                            Created
+  createdAt:                          Created At
   default:                            Default
   description:                        Description
   disable:                            Disable
   disabled:                           Disabled
   domainName:                         Domain Name
   edit:                               Edit
+  email:                              Email
   emptyString:                        ""
   enable:                             Enable
   enabled:                            Enabled
@@ -44,6 +46,7 @@ generic:
   saving:                             Saving
   search:                             Search
   state:                              State
+  status:                             Status
   test:                               Test
   testing:                            Testing
   to:                                 To
@@ -602,6 +605,48 @@ signupPage:
   alredyAccount:                      Already have an account?
   signin:                             Sign in
 
+account:
+  userManagement:
+    active: Active
+    suspend:
+      title: Suspend
+      success: '{email} suspended.'
+      failed: 'Update failed'
+    revokeSuspend:
+      title: Revoke Suspend
+      success: '{email} suspend revoked.'
+      failed: 'Update failed'
+    admin:
+      title: Admin
+      success: '{email} is an admin now.'
+      failed: 'Update failed'
+    revokeAdmin:
+      title: Revoke Admin
+      success: '{email} admin permession revoked.'
+      failed: 'Update failed'
+  actionPopup:
+    suspend:
+      header: 'Are you sure you want to suspend "{firstName}"?'
+      buttonCancel: Cancel
+      buttonSuspend: Suspend
+      suspendNote: Rio/OS will not be accessible for this user
+    revokeSuspend:
+      header: 'Are you sure you want to revoke suspend for "{firstName}"?'
+      buttonCancel: Cancel
+      buttonRevokeSuspend: Revoke Suspend
+      revokeSuspendNote: Rio/OS will be accessible for this user
+    admin:
+      header: 'Are you sure you want to make "{firstName}" as admin ?'
+      buttonCancel: Cancel
+      buttonMakeAdmin: Make admin
+      makeAdminNote: 'Rio/OS will be accessible to "{firstName}" as super user'
+    revokeAdmin:
+      header: 'Are you sure you want to revoke admin permission for "{firstName}"?'
+      buttonCancel: Cancel
+      buttonRevokeAdmin: Revoke admin
+      revokeAdminNote: 'Rio/OS will be accessible to "{firstName}" as regular user'
+
+
 dashboard:
   maingauges:                         Main Gauges
   statistics:                         Statistics
@@ -1102,6 +1147,10 @@ action:
   retryInstallNode: Retry Install
   view: View
   switch: Switch
+  makeAdmin: Make Admin
+  makeSuspend: Suspend
+  revokeAdmin: Revoke Admin
+  revokeSuspend: Revoke Suspend
 
 ##############################
 # Resource Actions

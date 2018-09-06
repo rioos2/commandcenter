@@ -174,7 +174,8 @@ var Assembly = Resource.extend(DefaultHeaders, {
             autoClear:     true,
             clearDuration: 4200,
             cssClasses:    'notification-warning'
-          });        }
+          });
+        }
       }).catch(() => {
         self.get('notifications').warning(get(self, 'intl').t('notifications.secrets.downloadFailed'), {
           autoClear:     true,

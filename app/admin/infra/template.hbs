@@ -2,7 +2,9 @@
 	<div class="tabs">
 		{{radio-button checked=(eq "dashboard" selectedTab) value=selectedTab selection=selectedTab id="dashboard" name="tab-control"}} {{radio-button checked=(eq "users" selectedTab) value=selectedTab selection=selectedTab id="users" name="tab-control"}} {{radio-button checked=(eq "settings" selectedTab) value=selectedTab selection=selectedTab id="settings" name="tab-control"}}
 		<ul class="dashboardNav">
-			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="dashboard"}} {{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="users"}} {{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="settings" }}
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="dashboard"}}
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="users"}}
+			{{admin-infra/infra-tab panels=panels selectedTab=selectedTab tab="settings" }}
 		</ul>
 		<div class="slider">
 			<div class="indicator"></div>
