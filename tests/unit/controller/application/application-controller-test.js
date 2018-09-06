@@ -16,10 +16,8 @@ describe('Unit: Controller: application', () => {
 
       controller.set('session', EmberObject.create({
         settings() {},
-
         tooltipService() {},
         resourceActions() {}
-
       }));
     }
   });

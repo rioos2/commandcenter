@@ -15,7 +15,6 @@ import EmberObject from '@ember/object';
 // });
 describe('Unit: Controller: stack/container-console', () => {
   setupTest('controller:stack/container-console', {
-
     beforeEach() {
       let controller = this.subject();
 
@@ -23,6 +22,7 @@ describe('Unit: Controller: stack/container-console', () => {
     }
   });
 });
+
 // Replace this with your real tests.
 it('exists', function() {
   let controller = this.subject();

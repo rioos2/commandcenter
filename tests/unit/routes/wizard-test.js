@@ -21,9 +21,9 @@ describe('Unit: Route: wizard/index', () => {
   setupTest('route:wizard/index', {
 
     beforeEach() {
-      let controller = this.subject();
+      let route = this.subject();
 
-      controller.set('session', EmberObject.create({ queryParams() {}, }));
+      route.set('session', EmberObject.create({ queryParams() {}, }));
     }
   });
 });
