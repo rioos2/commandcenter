@@ -1,23 +1,17 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
-import { run } from '@ember/runloop';
-import wait from 'ember-test-helpers/wait';
 
-describe('admin info controller', () => {
-  setupTest();
-  this.timeout(15000);
+// import { run } from '@ember/runloop';
+// import wait from 'ember-test-helpers/wait';
 
-  it('exists', function(done) {
-    setTimeout(done, 15000);
-    run(() => {
+describe('Unit: Controller: admin/infra', () => {
+  setupTest('controller:admin/infra', {});
 
-      let controller = this.owner.lookup('controller:admin/infra');
+  // Replace this with your real tests.
+  it('exists', function() {
+    let controller = this.subject();
 
-      expect(controller).to.be.ok;
-    });
-    wait().then(() => {
-      done();
-    });
+    expect(controller).to.be.ok;
   });
 });

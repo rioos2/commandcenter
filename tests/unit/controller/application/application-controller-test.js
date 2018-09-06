@@ -1,21 +1,32 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
-import { run } from '@ember/runloop';
-import wait from 'ember-test-helpers/wait';
+import EmberObject from '@ember/object';
 
-describe('application-controller', () => {
-  setupTest();
-  this.timeout(15000);
-  it('exists', function(done) {
-    setTimeout(done, 15000);
-    run(() => {
-      let controller = this.owner.lookup('controller:application');
+describe('Unit: Controller: application', () => {
+  setupTest('controller:application', {
+  //   needs: [
+  //     'service:settings',
+  //     'service:tooltipService',
+  //     'service:resourceActions',
+  //   ]
+  // });
+    beforeEach() {
+      let controller = this.subject();
 
-      expect(controller).to.be.ok;
-    });
-    wait().then(() => {
-      done();
-    });
+      controller.set('session', EmberObject.create({
+        settings() {},
+
+        tooltipService() {},
+        resourceActions() {}
+
+      }));
+    }
   });
+});
+// Replace this with your real tests.
+it('exists', function() {
+  let controller = this.subject();
+
+  expect(controller).to.be.ok;
 });
