@@ -20,6 +20,7 @@ export default Route.extend(DefaultHeaders, {
       license:           this.get('store').findAll('license', this.opts('licenses', true)),
       senseis:           this.get('store').findAll('sensei', this.opts('senseis')),
       logs:              this.get('store').find('log', null, this.opts('logs')),
+      accounts:          this.get('store').find('account', null, this.opts('accounts')),
     });
   },
   actions: {

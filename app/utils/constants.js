@@ -60,7 +60,8 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED:   'Registered',
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
-    ROLES: { SUPERUSER: 'RIOOS:SUPERUSER', },
+    ROLES:  { SUPERUSER: 'RIOOS:SUPERUSER', },
+    STATES: ['approval', 'suspend'],
   },
 
   /*
@@ -285,6 +286,7 @@ var C = {
     TOKEN:          'token',
     EMAIL:          'email',
     USER_ROLES:     'is_admin',
+    SUSPEND:        'suspend',
     // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
@@ -467,6 +469,7 @@ C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.EMAIL,
   C.SESSION.TOKEN,
   C.SESSION.USER_ROLES,
+  C.SESSION.SUSPEND,
 ];
 
 //  Initial state of assembly

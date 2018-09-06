@@ -37,6 +37,10 @@ export default Service.extend(DefaultHeaders, {
   hasTeam() {
     return !isEmpty(this.get('tab-session').get(C.TABSESSION.TEAM));
   },
+
+  hasSuspended() {
+    return this.get('session').get(C.SESSION.SUSPEND);
+  },
   /**
    transByAccountState update account state => structure below
    {
@@ -63,7 +67,7 @@ export default Service.extend(DefaultHeaders, {
       }
       break;
     case false:
-      if (!this.hasOrganization()) {
+      if (!this.hasOrganization() || this.hasSuspended()) {
         transition = '/accounts/contact-admin';
       }
       break;
