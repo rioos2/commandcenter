@@ -137,7 +137,7 @@ auditLogsPage:
   connectionError:                    <span>Failed to pull audits data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>
 
 consolePage:
-  header:                             'Shell:'
+  header:                             'CONSOLE'
   closeButton:                        Close
 
 validate:
