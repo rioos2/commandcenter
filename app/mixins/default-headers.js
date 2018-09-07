@@ -1,25 +1,21 @@
-import C from 'nilavu/utils/constants';
-import { inject as service } from '@ember/service';
-import Mixin from '@ember/object/mixin'
+import Ember from 'ember';
 
-export default Mixin.create({
-  organization:  service(),
-  session:       service(),
-  'tab-session': service('tab-session'),
+export default Ember.Mixin.create({
+  session: Ember.inject.service(),
 
   opts(url = '', forceReload = false) {
+    var session = this.get('session');
     let rioos_headers = {
-      headers:           {
-        'X-AUTH-RIOOS-EMAIL': this.get('session').get('email'),
-        'Authorization':      `Bearer ${  this.encodedHeaderFromTabSession() }`,
+      headers: {
+        'X-AUTH-RIOOS-EMAIL': session.get("email"),
+        'Authorization': 'Bearer ' + session.get("token"),
       },
-      url,
-      forceReload,
-      filter:            false,
+      url: url,
+      forceReload: forceReload,
+      filter: false,
       removeAfterDelete: true,
-      isForAll:          false,
+      isForAll: false,
     };
-
     return rioos_headers;
   },
 
@@ -27,55 +23,14 @@ export default Mixin.create({
     var session = this.get('session');
     let rioos_headers = {
       headers: {
-        'X-AUTH-RIOOS-EMAIL': session.get('email'),
-        'Authorization':      `Bearer ${  this.encodedHeaderFromTabSession() }`,
+        'X-AUTH-RIOOS-EMAIL': session.get("email"),
+        'Authorization': 'Bearer ' + session.get("token"),
       },
-      url:    frame.url,
-      data:   frame.data,
+      url: frame.url,
+      data: frame.data,
       method: frame.method
     };
-
     return rioos_headers;
   },
-
-  rawRequestOptsUsingService(frame) {
-    var session = this.get('session');
-    let rioos_headers = {
-      headers: {
-        'X-AUTH-RIOOS-EMAIL': session.get('email'),
-        'Authorization':      `Bearer ${  this.encodedHeaderFromService() }`,
-      },
-      url:    frame.url,
-      data:   frame.data,
-      method: frame.method
-    };
-
-    return rioos_headers;
-  },
-
-  encodedHeaderFromTabSession(){
-    var session = this.get('session');
-    var tabSession = this.get('tab-session');
-    var subHeader = {
-      'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
-      'org_id':       tabSession.get(C.TABSESSION.ORGANIZATION) || '',
-      'team_id':               tabSession.get(C.TABSESSION.ID) || '',
-      'token':              session.get('token')
-    }
-
-    return btoa(JSON.stringify(subHeader));
-  },
-
-  encodedHeaderFromService(){
-    var session = this.get('session');
-    var subHeader = {
-      'account_id':         session.get(C.SESSION.ACCOUNT_ID) || '',
-      'org_id':       this.get('organization').get('currentOrganization') || '',
-      'team_id':               this.get('organization').get('currentTeamId') || '',
-      'token':              session.get('token')
-    }
-
-    return btoa(JSON.stringify(subHeader));
-  }
 
 });

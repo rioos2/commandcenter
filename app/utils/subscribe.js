@@ -15,7 +15,7 @@ export default EmberObject.extend({
   init() {
     this._super();
 
-    var store = Nilavu.__container__.lookup('service:store'); // eslint-disable-line
+    var store = Nilavu.__container__.lookup('service:store');
     // this.container.lookup('thing:main');
 
     var socket = Socket.create();

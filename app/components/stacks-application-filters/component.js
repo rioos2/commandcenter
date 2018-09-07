@@ -1,61 +1,56 @@
-import Component from '@ember/component';
+import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import { alias } from '@ember/object/computed';
-import EmberObject from '@ember/object';
-import { isEmpty } from '@ember/utils';
 
-export default Component.extend({
-  panel: [],
+export default Ember.Component.extend({
+    panel: [],
 
-  parentRoute: 'stacks',
+    group: Ember.computed.alias('category'),
 
-  group: alias('category'),
+    parentRoute: 'stacks',
 
-  filterByOS: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_OS);
-  }.property('allFilters'),
+    allFilters: C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH,
 
-  filterByLocation: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_LOCATION);
-  }.property('allFilters'),
+    filterByOS: function () {
+        return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_OS);
+    }.property('allFilters'),
 
-  filterByDB: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_DB);
-  }.property('allFilters'),
+    filterByLocation: function () {
+        return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_LOCATION);
+    }.property('allFilters'),
 
-  filterByStatus: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_STATUS);
-  }.property('allFilters'),
+    filterByDB: function () {
+        return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_DB);
+    }.property('allFilters'),
 
-  filterByNetwork: function() {
-    return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_NETWORK);
-  }.property('allFilters'),
+    filterByStatus: function () {
+        return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_STATUS);
+    }.property('allFilters'),
 
-  actions: {
-    applyRule(category) {
-      let parmsHash = this.filterParmsHash(category);
+    filterByNetwork: function () {
+        return this.allFilters.find((f) => f.selector === C.FILTERS.QUERY_PARAM_NETWORK);
+    }.property('allFilters'),
 
-      this.get('router').transitionTo({ queryParams: { search: undefined } });
-      this.get('router').transitionTo(this.parentRoute, { queryParams: parmsHash });
+    //Verify if you get filter by string ubuntu first.
+    filterParmsHash: function (category) {
+        let states = Ember.Object.create();
+        let p = this.panel.filter((f) => f.get('group') === category);
+
+        p.map(function (pn) {
+            const _initedState = pn.filterSelectionChanged();
+            if (!Ember.isEmpty(_initedState)) {
+                states.set(_initedState.selector, _initedState.selected);
+            }
+        });
+
+        return states;
+
     },
-  },
-  // Verify if you get filter by string ubuntu first.
-  filterParmsHash(category) {
-    let states = EmberObject.create();
-    let p = this.panel.filter((f) => f.get('group') === category);
 
-    p.map((pn) => {
-      const _initedState = pn.filterSelectionChanged();
-
-      if (!isEmpty(_initedState)) {
-        states.set(_initedState.selector, _initedState.selected);
-      }
-    });
-
-    return states;
-
-  },
-
-  allFilters: C.FILTERS.QUERYPARM_TO_ACCESSOR_HASH,
-
+    actions: {
+        applyRule: function (category) {
+            let parmsHash = this.filterParmsHash(category);
+            this.get('router').transitionTo({queryParams: {search: undefined}});
+            this.get('router').transitionTo(this.parentRoute, { queryParams: parmsHash });
+        },
+    }
 });

@@ -1,8 +1,9 @@
-import Resource from 'ember-api-store/models/resource';
+import Resource from 'ember-api-store/models/resource'; 
 
 var Reports = Resource.extend({
-  type:    'reports',
-  actions: {},
+  type: 'reports',
+  actions: {
+  },
 
 
 });

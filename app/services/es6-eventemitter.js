@@ -11,7 +11,7 @@ export default Service.extend({
     this._super();
     C.ANALYTIC_EVENTS_ALL.forEach((cTrack) => {
       emitter.on(cTrack, (cTrack) => {
-        Countly.add_event(cTrack); // eslint-disable-line
+        Countly.add_event(cTrack);
       });
     });
   },

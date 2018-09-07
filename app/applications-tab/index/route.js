@@ -1,7 +1,7 @@
-import Route from '@ember/routing/route';
+import Ember from 'ember';
 
-export default Route.extend({
-  redirect() {
+export default Ember.Route.extend({
+  redirect: function() {
     this.transitionTo('stacks.index');
   }
 });

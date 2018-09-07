@@ -1,153 +1,90 @@
 import Component from '@ember/component';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import { get } from '@ember/object';
-import { inject as service } from '@ember/service';
+const { get} = Ember;
 import C from 'nilavu/utils/constants';
-import { isEqual } from '@ember/utils';
-import { isEmpty } from '@ember/utils';
-import { alias } from '@ember/object/computed';
-import { later } from '@ember/runloop';
-import { computed } from '@ember/object';
-
 
 export default Component.extend(DefaultHeaders, {
-  intl:                  service(),
-  session:               service(),
-  notifications:         service('notification-messages'),
+  intl: Ember.inject.service(),
+  session: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
   showActivationEditBox: true,
-  showSpinner:           false,
+  showSpinner: false,
 
-  objectMetaData:        alias('model.object_meta.name'),
-  status:                alias('model.status'),
-  expiredAt:             alias('model.expired_at'),
-  activation:            alias('model.activation'),
+  ninjaActivated: function(){
+    return this.get('model.product_options.ninja.current');
+  }.property('model.product_options.ninja.current'),
 
+  ninjaAllowed: function(){
+    return this.get('model.product_options.ninja.maximum');
+  }.property('model.product_options.ninja.maximum'),
 
-  /* This section contains the product name and subproduct details i
-     The product name is hardcoded as Rio/OS v2
-  */
-  product: alias('model.product'),
+  senseiActivated: function(){
+    return this.get('model.product_options.sensei.current');
+  }.property('model.product_options.sensei.current'),
 
-  // The subproduct names can be
-  // 1. Sensei
-  // 2. Ninja
-  subProductName: computed('objectMetaData', function() {
-    const o = get(this, 'objectMetaData');
+  senseiAllowed: function(){
+    return this.get('model.product_options.sensei.maximum');
+  }.property('model.product_options.sensei.maximum'),
 
-    if (!isEmpty(o)) {
-      return o.toString().capitalize();
-    }
+  product: function(){
+    return this.get('model.product');
+  }.property('model.product'),
 
-    return C.LICENSE.SUBPRODUCT.NONE;
-  }),
+  placeHolder: function() {
+    return get(this, 'intl').t('stackPage.admin.settings.entitlement.activeCode');
+  }.property('placeHolder'),
 
-  /* This section contains the status of activation details */
+  status: function() {
+    return this.get('model.status').capitalize();
+  }.property('model.status'),
 
-  statusShow: computed('status', function() {
-    const s = get(this, 'status');
+  expired: function(){
+    return Ember.isEqual(this.get('model.status').capitalize(), C.ADMIN.LICENSE_STATUS.EXPIRED )? "": get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + this.get('model.expired_at') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
+  }.property('model.status','model.expired_at'),
 
-    if (!isEmpty(s)) {
-      return s.capitalize();
-    }
-
-    return C.LICENSE.STATUS.NONE;
-  }),
-
-  activated: computed('activation', function(){
-    return  get(this, 'activation').no_of_activations_available + get(this, 'intl').t('stackPage.admin.settings.entitlement.used');
-  }),
-
-  allowed: computed('activation', function() {
-    return get(this, 'activation').total_number_of_activations + get(this, 'intl').t('stackPage.admin.settings.entitlement.total')  ;
-  }),
-
-  expired: computed('status', 'expiredAt', function(){
-    const x = get(this, 'status');
-
-    if (isEqual(x, C.LICENSE.STATUS.EXPIRED)) {
-      return C.LICENSE.STATUS.EXPIRED;
-    }
-
-    return   get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + get(this, 'expiredAt') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
-
-
-  }),
-
-  actions: {
-
-    performActivation(id, password) {
-      if (isEmpty(id.trim()) || isEmpty(password.trim()))  {
-        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
-          autoClear:     true,
-          clearDuration: 4200,
-          cssClasses:    'notification-warning'
-        });
-        this.set('showActivationEditBox', true);
-      } else {
-        this.set('model.license_id', id);
-        this.set('model.password', password);
-        this.set('model.activation_completed', true);
-        this.set('model.product', C.LICENSE.ACTIVATION.PRODUCT);
-        this.set('model.status', C.LICENSE.ACTIVATION.STATUS.ACTIVATING);
-        this.activate();
-      }
-    },
-  },
-  activate() {
+  activate: function() {
     this.set('showSpinner', true);
-
-    this.get('store').rawRequest(this.rawRequestOpts({
-      url:    '/api/v1/licenses/activate',
-      method: 'POST',
-      data:   JSON.stringify(this.get('model')),
-    })).then(() => {
-      this.checkLicense();
-    }).catch(() => {
-      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
-        autoClear:     true,
+      var url = 'license/activate';
+    this.get('model').save(this.opts(url)).then(() => {
+      this.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
+        autoClear: true,
         clearDuration: 4200,
-        cssClasses:    'notification-warning'
+        cssClasses: 'notification-success'
+      });
+        this.set('showActivationEditBox', true);
+        this.set('modelSpinner', true);
+        this.set('showSpinner', false);
+        this.sendAction('doReload');
+    }).catch(err => {
+      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
+        autoClear: true,
+        clearDuration: 4200,
+        cssClasses: 'notification-warning'
       });
       this.set('showSpinner', false);
-      this.set('showInnerSpinner', false);
+      this.set('modelSpinner', false);
     });
   },
 
-  checkLicense() {
-    let self = this;
+  btnName: function(){
+    return get(this, 'intl').t('stackPage.admin.header.active_btn');
+  }.property(),
 
-    later(() => {
-      self.sendAction('doInnerReload');
-      self.checkLicenseStatus();
-    }, 1500);
-  },
+  actions: {
 
-  checkLicenseStatus() {
-    let self = this;
-
-    later(() => {
-      if (self.get('status') ===  C.LICENSE.STATUS.ACTIVE) {
-        self.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
-          autoClear:     true,
+    performActivation: function(activationCode) {
+      if (Ember.isEmpty(activationCode.trim())) {
+        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
+          autoClear: true,
           clearDuration: 4200,
-          cssClasses:    'notification-success'
+          cssClasses: 'notification-warning'
         });
-        self.set('showActivationEditBox', true);
-        self.set('showInnerSpinner', true);
-        self.set('showSpinner', false);
+        this.set('showActivationEditBox', true);
       } else {
-        self.get('notifications').warning(get(self, 'intl').t('wizard.licenseErrorMsg', { error: self.get('model.error') }), {
-          autoClear:     true,
-          clearDuration: 4200,
-          cssClasses:    'notification-warning'
-        });
-        self.set('showActivationEditBox', true);
-        self.set('showInnerSpinner', true);
-        self.set('showSpinner', false);
+        this.set("model.activation_code", activationCode);
+        this.activate();
       }
-    }, 1500);
-  },
+    },
 
-
+  }
 });
-

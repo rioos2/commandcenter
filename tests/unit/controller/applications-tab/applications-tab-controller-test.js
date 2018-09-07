@@ -1,18 +1,14 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
-import wait from 'ember-test-helpers/wait';
 
-describe('applications-tab-controller', function() { // eslint-disable-line
+describe('applications-tab-controller', () => {
   setupTest();
 
-  it('exists', function(done) {
+  
+  it('exists', function() {
     let controller = this.owner.lookup('controller:applications-tab');
 
-    wait().then(() => {
-
-      expect(controller).to.be.ok;
-      done();
-    });
+    expect(controller).to.be.ok;
   });
 });

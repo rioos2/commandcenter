@@ -1,35 +1,66 @@
-/* global d3 */
+/* global renderBlueGaugeChart, d3, particlesJS */
 import Component from '@ember/component';
-import HealthGauges from 'nilavu/utils/health_gauges';
-import C from 'nilavu/utils/constants';
+import Ember from 'ember';
 
 export default Component.extend({
 
   tagName: '',
 
-  showCounters: [],
-
-  builtIns: function() {
-    return this.get('showCounters');
+  guageOne: function() {
+    //ram
+    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("ram") : this.decide(this.contentData().counters[0], "ram");
   }.property('model', 'model.counters.@each.counter'),
 
-  init() {
-    this._super(...arguments);
+  guageTwo: function() {
+    //cpu
+    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("cpu") : this.decide(this.contentData().counters[1], "cpu");
+  }.property('model', 'model.counters.@each.counter'),
 
-    const model = this.get('model');
+  guageThree: function() {
+    //disk
+    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("disk") : this.decide(this.contentData().counters[2], "disk");
+  }.property('model', 'model.counters.@each.counter'),
 
-    const props = C.BUILTIN_BASIC_GAUGES;
+  guageFour: function() {
+    //gpu
+    if (!Ember.isEmpty(Object.keys(this.contentData()))) {
+      if (this.contentData().counters.length > 3) {
+        return this.shave(this.contentData().counters[3]);
+      }
+    }
+    return this.emptyData("gpu");
+  }.property('model', 'model.counters.@each.counter'),
 
-    const hg = HealthGauges.create({
-      model,
-      props
-    });
-
-    this.set('showCounters', hg.show);
+  emptyData: function(data) {
+    return {
+      name: data,
+      counter: "0",
+    }
   },
 
+  contentData: function() {
+    if (this.get('model')) {
+      return this.get('model');
+    }
+    return {};
+  },
+
+  decide: function(guageValue, name) {
+    return !Ember.isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
+  },
+
+  shave: function(guageValue) {
+    let name = guageValue.name;
+    if ((guageValue.name).split("_").length > 1) {
+      name = (guageValue.name).split("_")[0];
+    }
+    return {
+      name: name,
+      counter: parseInt(guageValue.counter),
+      description: guageValue.description,
+      cpu: guageValue.cpu,
+    }
+
+  },
 
 });
-
-
-

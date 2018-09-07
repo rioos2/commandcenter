@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{t 'dojos.dashboard.networks.edit.title'}}</h4>
+        <h4 class="modal-title">{{t 'stackPage.admin.network.edit_title'}}</h4>
       </div>
       <div class="modal-body">
         <form action="#">
@@ -17,12 +17,12 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="networkname">{{t 'generic.name'}}</label> {{input type="text" class="form-control " id="networkname" value=name}}
+                  <label for="networkname">{{t 'stackPage.admin.network.name'}}</label> {{input type="text" class="form-control " id="networkname" value=name}}
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="networktype">{{t 'dojos.dashboard.networks.details.type'}}</label>
+                  <label for="networktype">{{t 'stackPage.admin.network.type'}}</label>
                   <select class= {{if active "form-control" "form-control disabled"}} id="modal_cluster_storage" name="modal_cluster_storage" onchange= {{action "setVirtualNetwork" value="target.value"}}>
                         {{#each virtualNetworks as |virtualNetwork|}}
                           <option selected={{eq type virtualNetwork}}>{{virtualNetwork}}</option>
@@ -35,31 +35,31 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="gateway">{{t 'dojos.dashboard.networks.details.gateway'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="gateway" value=gateway}}
+                  <label for="gateway">{{t 'stackPage.admin.network.gateway'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="gateway" value=gateway}}
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="network_subnet_ip">{{t 'dojos.dashboard.networks.add.subnet'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="network_subnet_ip" value=subnet}}
+                  <label for="network_subnet_ip">{{t 'stackPage.admin.network.subnet'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="network_subnet_ip" value=subnet}}
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="netmask">{{t 'dojos.dashboard.networks.details.netmask'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="netmask" value=netmask}}
+                  <label for="netmask">{{t 'stackPage.admin.network.netmask'}}</label> {{input type="text" class=(if active "form-control" "form-control disabled") id="netmask" value=netmask}}
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label for="network_status">{{t 'generic.status'}}</label> {{input type="text" class="form-control disabled" id="network_status" value=status}}
+                  <label for="network_status">{{t 'stackPage.admin.network.status'}}</label> {{input type="text" class="form-control disabled" id="network_status" value=status}}
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="network_nodes">{{t 'dojos.dashboard.networks.add.bridge.select'}}</label>
+                  <label for="network_nodes">{{t 'stackPage.admin.network.selectNode'}}</label>
                   <div class={{if active "rio-radio mov-top" "rio-radio mov-top disabled"}}>
                     {{#each nodeBridgeData as |data|}}
                       <div class="col-xs-12">
@@ -71,7 +71,7 @@
               </div>
             </div>
             <button type="submit" {{action 'editVirtualNetwork'}} class="btn btn-default">
-          {{t 'actions.save'}}
+          {{t 'stackPage.admin.header.save_btn'}}
           {{#if showSpinner}}
           <i class="fa fa-circle-o-notch fa-spin"></i>
           {{/if}}

@@ -2,18 +2,18 @@
   {{#link-to "signup"}}
   <img class="logo-img" src="assets/images/logo1.png">{{/link-to}}
   <div class="container">
-    <h1>{{t 'loginPage.title'}}</h1>
+    <h1>{{t 'loginPage.greeting'}}</h1>
     <form>
       <div class="form-group {{userNameValidate}}">
         {{input type="text" class="login-user" value=username}}
-        <label class="{{if username 'data-exist'}} control-label"  for="input">{{t 'generic.username'}}</label>
+        <label class="{{if username 'data-exist'}} control-label" for="input">{{t 'loginPage.usernameLabel'}}</label>
         <i class="bar"></i>
       </div>
 
       <div class="form-group {{passwordValidate}}">
         {{input type=(if showPassword "text" "password") class="login-password" value=password}}
         <label class="{{if password 'data-exist'}} control-label" for="input">
-          {{t 'generic.password'}}
+          {{t 'loginPage.passwordLabel'}}
         </label>
         {{fa-icon "eye" click=(action "toggleHiddenPassword") class="eye-icon icon-eye-open"}}
         <i class="bar"></i>
@@ -22,8 +22,8 @@
 
     <div class="button-container">
       <button class="button" autofocus {{action 'login'}}>
-        <span>{{t 'loginPage.title'}}
-          <span class="startvalidation"> {{t 'loginPage.loggingIn'}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span>{{t 'loginPage.greeting'}}
+          <span class="startvalidation"> {{t 'loginPage.loggingInLabel'}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 {{theme-spinner size=50 condition=showSpinner}}
                 {{#unless showSpinner}}
                 {{fa-icon "long-arrow-right" class="right-arrow"}}
@@ -34,7 +34,7 @@
   </form>
 
     <div class="sub-description">
-      {{#link-to "signup" class="signform-link" }}{{t 'loginPage.signup'}}{{/link-to}} {{fa-icon "edit" class="signup-icon"}}
+      {{#link-to "signup" class="signform-link" }}{{t 'loginPage.signupLabel'}}{{/link-to}} {{fa-icon "edit" class="signup-icon"}}
     </div>
 
   </div>

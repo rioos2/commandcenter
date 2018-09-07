@@ -1,22 +1,16 @@
 import C from 'nilavu/utils/constants';
-import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
-import { inject as controller } from '@ember/controller';
-import { alias } from '@ember/object/computed';
-import { schedule } from '@ember/runloop';
-import $ from 'jquery';
+import Ember from 'ember';
 
-export default Controller.extend({
-  application: controller(),
-  settings:    service(),
-  guardian:    service(),
+export default Ember.Controller.extend({
+  application: Ember.inject.controller(),
+  settings:    Ember.inject.service(),
   error:       null,
 
-  // Tells us current path of ember application
-  currentPath: alias('application.currentPath'),
+  //Tells us current path of ember application
+  currentPath: Ember.computed.alias('application.currentPath'),
 
   bootstrap: function() {
-    schedule('afterRender', this, () => {
+    Ember.run.schedule('afterRender', this, () => {
       this.get('application').setProperties({
         error:             null,
         error_description: null,
@@ -31,11 +25,6 @@ export default Controller.extend({
     });
   }.on('init'),
 
-  redirectIfNeeded: function() {
-    if (this.get('guardian').transByAccountState()) {
-      this.transitionToRoute(this.get('guardian.state.transition'));
-    }
-  }.observes('currentPath'),
 
   hasHosts: function() {
     return (this.get('model.hosts.length') > 0);

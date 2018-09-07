@@ -1,10 +1,9 @@
 import C from 'nilavu/utils/constants';
 import Service from '@ember/service';
-import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+
 
 export default Service.extend({
-  userStore: service('user-store'),
+  userStore: Ember.inject.service('user-store'),
 
   unremoved: function() {
     return this.get('userStore').all('userpreference');
@@ -77,7 +76,7 @@ export default Service.extend({
     this.endPropertyChanges();
   },
 
-  tablePerPage: computed(`${ C.PREFS.TABLE_COUNT }`, function() {
+  tablePerPage: Ember.computed(`${ C.PREFS.TABLE_COUNT }`, function() {
     let out = this.get(`${ C.PREFS.TABLE_COUNT }`);
 
     if (!out) {

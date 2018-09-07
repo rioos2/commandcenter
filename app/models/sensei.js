@@ -1,43 +1,46 @@
 import Resource from 'ember-api-store/models/resource';
-import { isEmpty } from '@ember/utils';
+import Ember from 'ember';
 import FilterCondition from 'nilavu/utils/filter-conditions';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
+import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
-import { alias } from '@ember/object/computed';
-import { inject as service } from '@ember/service';
-import $ from 'jquery';
+
+const {
+  get
+} = Ember;
+import {
+  denormalizeName
+} from 'nilavu/utils/denormalize';
 
 var Sensei = Resource.extend(DefaultHeaders, {
-  displayName:      alias('name'),
-  availableActions: function() {
+  type: 'node',
+  displayName: Ember.computed.alias('name'),
+  intl: Ember.inject.service(),
+  session: Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
+  userStore: Ember.inject.service('user-store'),
 
+  availableActions: function() {
+    var a = this.get('actionLinks');
     return [
       {
-        label:   'action.retryInstallNode',
-        icon:    'fa fa-wrench',
-        action:  'retryInstallSensei',
+        label: 'action.retryInstallNode',
+        icon: 'fa fa-wrench',
+        action: 'retryInstallSensei',
         enabled: this.senseiRetryInstallOption(),
       }
     ];
   }.property('id', 'actionLinks'),
 
 
-  type:          'node',
-  intl:          service(),
-  session:       service(),
-  notifications: service('notification-messages'),
-  userStore:     service('user-store'),
-
-  senseiRetryInstallOption() {
+  senseiRetryInstallOption: function() {
     let add = FilterCondition.nodeRetryInstallCondition(this.get('status.conditions'));
-
-    if (C.NODE.INSTALLFAILURE.includes(this.get('status.phase'))) {
+    if (C.NODE.INSTALLFAILURE.includes(this.get("status.phase"))) {
       add = true;
-    }
-    if (isEmpty(this.get('status.phase'))) {
+    };
+    if (Ember.isEmpty(this.get("status.phase"))) {
       add = false;
-    }
-
+    };
     return add;
   },
 
@@ -46,7 +49,7 @@ var Sensei = Resource.extend(DefaultHeaders, {
 
     retryInstallSensei() {
       this.set('nodeOperation', 'retry');
-      $(`#node_auth_modal_${  this.get('id') }`).modal('show');
+      $('#node_auth_modal_' + this.get('id')).modal('show');
     }
 
   },

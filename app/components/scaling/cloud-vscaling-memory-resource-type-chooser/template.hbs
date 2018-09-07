@@ -4,10 +4,10 @@
       <div class="col-md-12">
         <div class="rio-selectbtn row">
           <div class="col-md-6">
-            {{deploy-widgets/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.max_resource.memory resource=maxMemoryResource}}
+            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.max_resource.ram resource=maxMemoryResource}}
           </div>
           <div class="col-md-6">
-            {{deploy-widgets/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.min_resource.memory resource=minMemoryResource}}
+            {{createcloud/chart-ram class="chart-ram" model=model initValue=model.vscaling.spec.min_resource.ram resource=minMemoryResource}}
           </div>
         </div>
         <div class="rio-selectbtn row">
@@ -23,10 +23,10 @@
 
         <!-- <div class="rio-selectbtn row">
           <div class="col-md-6">
-          {{scaling/scale-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.max_target_value_storage resource=maxCpuResource}}
+          {{scaling/scale-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.max_target_value_disk resource=maxCpuResource}}
         </div>
         <div class="col-md-6">
-          {{scaling/scaledown-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.min_target_value_storage resource="disk"}}
+          {{scaling/scaledown-percentage-chooser class="chart-cores" model=model initValue=model.hscaling.target_value.min_target_value_disk resource="disk"}}
           </div>
         </div> -->
       </div>

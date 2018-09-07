@@ -1,4 +1,3 @@
-import C from 'nilavu/utils/constants';
 import SignupValidation from 'nilavu/mixins/signup-validation';
 import EmailValidation from 'nilavu/mixins/email-validation';
 import PasswordValidation from 'nilavu/mixins/password-validation';
@@ -19,7 +18,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
   passwordMinLength: 8,
   name:              alias('first_name'),
   email:             alias('accountEmail'),
-  // validating fields for signup
+ //validating fields for signup
   validate:          function() {
     if (this.get('companyNameValidation.failed')) {
       this.set('validationError', this.get('companyNameValidation.reason'));
@@ -66,24 +65,24 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
 
   actions: {
     signUp() {
-      this.required();
+      this.showCredentialEmpty();
       if (!this.get('validate')) {
-
+        
         later(() => {
           this.get('access').signup(this.getform()).then(() => {
             this.send('finishLogin');
           }).catch((err) => {
-            if (err.status === C.INTERNALSERVER_ERROR) {
-              this.get('notifications').warning(get(this, 'intl').t('error.apiserver_is_down'), {
+            if (err.status == 500) {
+              this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
               });
             }
-            // Show error message if emailid already exist
-            if (err.code === C.INTERNAL_CONFLICTS) {
+            //Show error message if emailid already exist
+            if (err.code == '409') {
               this.set('val_email', 'credential-empty');
-              this.set('emailErrorMsg', get(this, 'intl').t('validations.name.exists'));
+              this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
               this.set('emailExistence', false);
             }
           })
@@ -100,20 +99,20 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
       }
     }
   },
-
   getform() {
     this.set('accountEmail', this.get('accountEmail').toLowerCase());
     let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'phone', 'password');
-    var notUsedAttrs = this.notUsedAccountFields();
-
-    return $.extend(attrs, notUsedAttrs);
+    var unUsedAttrs = this.unUsedAccountFields();
+    return $.extend(attrs, unUsedAttrs);
   },
 
-  notUsedAccountFields() {
-    return  { registration_ip_address: '', };
+  unUsedAccountFields() {
+    let unUsedFields = { registration_ip_address: '', };
+
+    return unUsedFields;
   },
-  // notify if there is any errors
-  required() {
+  //notify if there is any errors
+  showCredentialEmpty() {
     this.get('companyNameValidation.failed') ? this.set('val_company', 'credential-empty') : this.set('val_company', '');
     this.get('fullNameValidation.failed') ? this.set('val_firstName', 'credential-empty') : this.set('val_firstName', '');
     this.get('lastNameValidation.failed') ? this.set('val_lastName', 'credential-empty') : this.set('val_lastName', '');

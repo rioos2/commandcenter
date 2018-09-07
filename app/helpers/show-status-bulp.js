@@ -1,25 +1,24 @@
+import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import { helper as buildHelper } from '@ember/component/helper';
+
 export function showStatusBulb(params) {
   var state;
-
-  C.NODE.STATUS.READY.forEach((status) => {
-    if (status === (params[0] || '').toLowerCase()) {
-      state = 'sd-green';
+  C.ADMIN.STATUS.READY.forEach(status => {
+    if (status === (params[0]||'').toLowerCase()) {
+      state = "sd-green";
     }
   });
-  C.NODE.STATUS.INITIAL.forEach((status) => {
-    if (status === (params[0] || '').toLowerCase()) {
-      state = 'sd-yellow';
+  C.ADMIN.STATUS.INITIAL.forEach(status => {
+    if (status === (params[0]||'').toLowerCase()) {
+      state = "sd-yellow";
     }
   });
-  C.NODE.STATUS.NOTREADY.forEach((status) => {
-    if (status === (params[0] || '').toLowerCase()) {
-      state = 'sd-red';
+  C.ADMIN.STATUS.NOTREADY.forEach(status => {
+    if (status === (params[0]||'').toLowerCase()) {
+      state = "sd-red";
     }
   });
-
-  return state;
+return state;
 }
 
-export default buildHelper(showStatusBulb);
+export default Ember.Helper.helper(showStatusBulb);

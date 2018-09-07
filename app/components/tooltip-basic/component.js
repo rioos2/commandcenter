@@ -1,12 +1,11 @@
-import Component from '@ember/component';
+import Ember from 'ember';
 import Tooltip from 'nilavu/mixins/tooltip';
-import { alias } from '@ember/object/computed';
 
-export default Component.extend(Tooltip, {
-  needs:   ['application'],
-  display: null,
+export default Ember.Component.extend(Tooltip, {
+  needs   : ['application'],
+  model   : Ember.computed.alias('tooltipService.tooltipOpts.model'),
+  display : null,
 
-  model:         alias('tooltipService.tooltipOpts.model'),
   selectPartial: function() {
     var template = this.get('tooltipService.tooltipOpts.template');
     var out      = template;

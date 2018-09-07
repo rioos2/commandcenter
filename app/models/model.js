@@ -1,19 +1,16 @@
-import EmberObject from '@ember/object';
-import { isEmpty } from '@ember/utils';
-const Model = EmberObject.extend();
+
+const Model = Ember.Object.extend();
 
 Model.reopenClass({
   extractByKey(collection, klass) {
     const retval = {};
-
-    if (isEmpty(collection)) {
+    if (Ember.isEmpty(collection)) {
       return retval;
     }
 
-    collection.forEach((item) => {
+    collection.forEach(function(item) {
       retval[item.id] = klass.create(item);
     });
-
     return retval;
   }
 });

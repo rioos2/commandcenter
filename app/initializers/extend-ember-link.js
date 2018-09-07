@@ -1,6 +1,7 @@
-import LinkComponent from '@ember/routing/link-component';
+import Ember from 'ember';
+
 export function initialize(/* application */) {
-  LinkComponent.reopen({
+  Ember.LinkComponent.reopen({
     attributeBindings: ['tooltip', 'data-placement'],
 
     // Set activeParent=true on a {{link-to}} to automatically propagate the active

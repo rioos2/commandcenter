@@ -7,25 +7,24 @@
             <li role="presentation" class="brand-nav" data-tooltip="Security"><a href="#tab{{model.id}}{{type}}4" aria-controls="tab3" role="tab" data-toggle="tab" class="tabsecur">{{svg/svg-secur}}</a></li>
             <li role="presentation" class="brand-nav ul-desc">
                 <div class="p-l-7">
-                    <div class="choose-desc">{{t 'dashboard.statistics.static1'}}</div>
-                    <div class="category-desc">{{t
-                    'dashboard.statistics.static2'}}</div>
+                    <div class="choose-desc">{{t 'stackPage.admin.node.choose'}}</div>
+                    <div class="category-desc">{{t 'stackPage.admin.node.category'}}</div>
                 </div>
             </li>
         </ul>
     </div>
     <div class="col-md-12 col-lg-10 tab-right">
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="tab{{id}}{{type}}1">
-                {{infra-node-visualizecpu  id=id name=name counter=counter health=health date=date grouped=type}}
+            <div role="tabpanel" class="tab-pane active" id="tab{{model.id}}{{type}}1">
+                {{infra-node-visualizecpu model=model nodeType=type}}
             </div>
-            <div role="tabpanel" class="tab-pane" id="tab{{id}}{{type}}2">
+            <div role="tabpanel" class="tab-pane" id="tab{{model.id}}{{type}}2">
                 {{infra-node-network-chart model=model nodeType=type}}
             </div>
-            <div role="tabpanel" class="tab-pane" id="tab{{id}}{{type}}3">
+            <div role="tabpanel" class="tab-pane" id="tab{{model.id}}{{type}}3">
                 {{infra-node-process-chart model=model nodeType=type}}
             </div>
-            <div role="tabpanel" class="tab-pane" id="tab{{id}}{{type}}4">
+            <div role="tabpanel" class="tab-pane" id="tab{{model.id}}{{type}}4">
                 {{infra-node-disk-column-chart model=model nodeType=type}}
             </div>
         </div>

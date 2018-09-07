@@ -10,10 +10,11 @@ var D = {
     network:            'public_ipv4',
     destro:             '',
     destroVersion:      '',
-    disableSecretTypes: '',
-    defaultSecret:      'rioos_sh_ssh_rsa',
-    secretTypes:        'rioos_sh_ssh_rsa,rioos_sh_ssh_dsa,rioos_sh_ssh_ed25519,rioos_sh_ssh_x509',
+    disableSecretTypes: 'ecdsa,ed25519',
+    defaultSecret:      'rsa',
+    secretTypes:        'rsa,ecdsa,ed25519',
     bitsInKey:          '2048',
+    trusted_key:        'rioos_sh/kryptonite'
   },
 };
 

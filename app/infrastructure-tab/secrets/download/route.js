@@ -1,47 +1,44 @@
+import Ember from 'ember';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Downloadjs from 'npm:downloadjs';
-import Route from '@ember/routing/route';
-import { get } from '@ember/object';
-import { inject as service } from '@ember/service';
-export default Route.extend(DefaultHeaders, {
+const  {get} = Ember;
 
-  intl:          service(),
-  notifications: service('notification-messages'),
+export default Ember.Route.extend(DefaultHeaders, {
 
-  model(params) {
+  intl:       Ember.inject.service(),
+  notifications: Ember.inject.service('notification-messages'),
 
-    // TODO we should call store find to get single record.
-    // this.get('store').getById("secret", params.id);
-    return this.get('store').findAll('secret', this.opts('secrets')).then((reports) => {
-      if (!this.secretDownload(reports.content, params.id)){
+  model: function(params) {
+    const self = this;
+    //TODO we should call store find to get single record.
+    //this.get('store').getById("secret", params.id);
+    return this.get('store').findAll('secret',this.opts('accounts/' + this.get('session').get("id") + '/secrets')).then((reports) => {
+      if(!this.secretDownload(reports.content, params.id)){
         this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
-          autoClear:     true,
+          autoClear: true,
           clearDuration: 4200,
-          cssClasses:    'notification-warning'
+          cssClasses: 'notification-warning'
         });
-      }
+      };
       this.transitionTo('authenticated');
     }).catch(function() {
       this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {
-        autoClear:     true,
+        autoClear: true,
         clearDuration: 4200,
-        cssClasses:    'notification-warning'
+        cssClasses: 'notification-warning'
       });
       this.transitionTo('authenticated');
     });
   },
 
-  secretDownload(secrets, id) {
-    var result = secrets.filter((s) => {
-      return s.id === id;
-    });
-
-    if (result.length !== 0) {
-      Downloadjs(result[0].data.rsa_key, `${ id }.key`, 'text/plain');
-
-      return true;
-    }
-
-    return false;
+  secretDownload: function(secrets, id) {
+    var result = secrets.filter(function (s) {
+       return s.id === id;
+     });
+     if (result.length != 0) {
+       Downloadjs(result[0].data.rsa_key, id+".key", "text/plain");
+       return true;
+     }
+     return false;
   },
 });

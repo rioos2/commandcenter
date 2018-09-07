@@ -1,57 +1,34 @@
 var C = {
-  /* --------  The section  that has  general stuff used globally  ----*/
-  // Yeah the term global is irrelevant, as constants is global
-  // Global mean some keys can be used anywhere.
-
-  UNKNOWN: 'Unknown',
 
   /* --------  The section  that has  various  http codes  ----*/
-  // Stack all the base http codes here
-  INTERNALSERVER_ERROR: 500,
-  // Conflicts, if there is a record that already exists. Eg: email
-  INTERNAL_CONFLICTS:   '409',
-  // When the downstream systems are down
-  BAD_GATEWAY:          502,
+  // This is contains the  list of codes that can be  treated as unauthenticated
+  // 1. 401 return code when the user isn't authenticated.
+  UNAUTHENTICATED_HTTP_CODES: [401],
 
-  UNAUTHENTICATED: 401,
+  // This is contains the  list of codes that can be  treated as unauthorized
+  // 1. 403 return code when the user isn't authorized to access an  API
+  UNAUTHORIZED_HTTP_CODES: [403],
 
-  UNAUTHORIZED: 403,
+  //  Internal server error
+  INTERNALSERVER_HTTP_CODES: [500],
 
-  // Internal server error
-  INTERNALSERVER_HTTP_CODES: ['500'],
-
-  BADGATEWAY_HTTP_CODES: ['502'],
-
-  AUTHORIZATION_DENIED: ['403'],
 
 
   /* --------  The section  that has  various Rio objects  ----*/
 
   /* Wizard page sequence steps and activation step default status*/
   WIZARD: {
-    // List of steps
+    //  List of steps
     STEPS: {
       WELCOME:       'welcome',
-      // Registration page
+      //  Registration page
       REGISTERADMIN: 'register-admin',
-      // License activation page
+      //  License activation page
       ACTIVATE:      'activate-license',
     },
     ACTIVATION: {
       PRODUCT: 'RioOS',
       STATUS:  { ACTIVATING: 'activating', }
-    },
-  },
-  LICENSE: {
-    SUBPRODUCT: { NONE: 'SubProdut ?' },
-    STATUS:     {
-      NONE:        'MAY BE ACTIVE, CHECK IN PROGRESS',
-      NOT_EXPIRED: 'active',
-      EXPIRED:     'expired'
-    },
-    ACTIVATION: {
-      PRODUCT: 'RioOS',
-      STATUS:  { ACTIVATING: 'activating' }
     },
   },
 
@@ -65,67 +42,27 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED:   'Registered',
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
-    ROLES:  { SUPERUSER: 'RIOOS:SUPERUSER', },
-    STATES: ['approval', 'suspend'],
+    ROLES: { SUPERUSER: 'RIOOS:SUPERUSER', },
   },
 
-  /* --------  The section  that has  various  builtin telemetry specifications   ----*/
-  // The Gauge is a counter. The builtIn basic gauges are
-
-  // The consumption in a datacenter for the basics
-  BUILTIN_BASIC_GAUGES: ['cpu', 'memory', 'storage', 'gpu'],
-
-  // The below status is used by the healtz nodes
-  // This includes
-  // 1. expanded status
-  // 2. attribute styling
-  // 3. tooltips
-  HEALTHZ_STATE: {
-    STATUS: {
-      Unknown: ['unknown'],
-      Running:   ['running', 'on', 'up', 'scheduled', 'reachable'],
-      Stopped:   ['running', 'off', 'down', 'failed', 'unhealthy'],
-    },
-
-    ATTRS: {
-      success:   ['running', 'on', 'up', 'scheduled', 'healthy'],
-      warning:   ['bootstrapped', 'pending', 'scheduled', 'initializing', 'initialized', 'bootstrapping', 'booting', 'rebooting', 'starting', 'stopping', 'terminating', 'awaitpending', 'standstill', 'unreachable', 'down', 'unhealthy', 'stopped', 'unknown'],
-      failure:   ['stopped', 'failed', 'terminated'],
-      terminate: ['terminated', 'terminating'],
-    },
-
-    TOOLTIP: {
-
-      'ON & HEALTHY':      ['running', 'on', 'up', 'scheduled', 'healthy'],
-
-      'OFF - STOPPED':     ['off', 'down', 'terminated', 'unhealthy', 'stopped'],
-
-      'CLONE IN PROGRESS ': ['initializing'],
-
-      'HYPERVISOR STARTING UP IN DEVICE ': ['booting'],
-
-      'MAYBE DOWN, PROBE IN PROGRESS': ['unknown'],
-    },
-
-    UNKNOWN: 'unknown',
-
-  },
 
   /*
-  * This section belongs to organization management page.
-  * organization status and states.
+  * This section belongs to digital cloud management page.
+  * Assembly status and states.
   */
-  ORGANIZATION: {
+  MANAGEMENT: {
+    STATUS: {
+      WARNING:   ['bootstrapped', 'pending', 'scheduled', 'initializing', 'initialized', 'bootstrapping', 'booting', 'rebooting', 'starting', 'stopping', 'terminating', 'awaitpending', 'standstill', 'unreachable'],
+      SUCCESS:   ['running'],
+      FAILURE:   ['stopped', 'failed', 'terminated'],
+      TERMINATE: ['terminated', 'terminating'],
+    },
+
     STATE: {
       WARNING: 'warning',
       SUCCESS: 'success',
       FAILURE: 'failure',
     },
-    MEMBER: {
-      MEMBERACTIVE:   'ACTIVE',
-      MEMBERINACTIVE: 'INACTIVE',
-    },
-    STATUS: { PENDING: 'pending', }
   },
 
   /*
@@ -143,7 +80,7 @@ var C = {
   /*
   * Assembly resources
   */
-  RESOURCES: ['cpu', 'memory', 'storage'],
+  RESOURCES: ['cpu', 'memory', 'disk'],
 
   /*
   * Digital cloud management page filter query params and key to read data from model.
@@ -167,6 +104,16 @@ var C = {
     SELECT_NETWORK_ACCESSOR:  '',
     SELECT_STATUS_ACCESSOR:   'status.phase',
     SELECT_NAME_ACCESSOR:     'object_meta.name',
+  },
+
+  /*
+  * Assembly state.
+  */
+  ASSEMBLY: {
+    ASSEMBLYOFFPHASES: ['stopped', 'failed', 'terminated'],
+    ASSEMBLYOFF:       'OFF',
+    ASSEMBLYON:        'ON',
+    ASSEMBLYIPV4:      'IPv4',
   },
 
   /*
@@ -196,18 +143,13 @@ var C = {
     }],
     NODEAUTHTYPE:                         ['Login Credentials', 'SSH Key Verification'],
     INSTALLFAILURE:                       ['NinjaNotReady'],
-    NODEUNHEALTHY:                        'down',
+    NODEUNHEALTHY:                        ['down'],
     NODEOFF:                              'OFF',
     NODEON:                               'ON',
-    NODEPENDING:                           'pending',
-    STATUS:         {
-      INITIAL:  ['initialized', 'pending'],
-      READY:    ['ready', 'running', 'ninjaready'],
-      NOTREADY: ['notready', 'ninjanotready'],
-      RUNNING:  'RUNNING',
-      STOPPED:  'STOPPED',
-    },
-    STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
+    STATUS:                               {
+      RUNNING: 'Running',
+      STOPPED: 'Stopped',
+    }
   },
 
   /*
@@ -232,9 +174,7 @@ var C = {
       NETMASK: /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
       SUBNET:      /^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$/,
     },
-    /* eslint-disable */
     URI: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.​\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[​6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1​,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00​a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u​00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
-      /* eslint-enable */
   },
 
   PHASE: { READY: 'ready', },
@@ -271,7 +211,7 @@ var C = {
   */
   NETWORK: {
     PACKETMEASURETYPE: {
-      // Packet measurement types
+      //  Packet measurement types
       THROUGHPUT: 'throughput',
       ERROR:      'error',
     },
@@ -291,14 +231,13 @@ var C = {
   // Ephemeral but same but across all browser tabs
   SESSION: {
     BACK_TO:        'backTo',
-    // The fields id, token, email, roles, metadata.origin,
+    //  The fields id, token, email, roles, metadata.origin,
     // metadata.team are pulled from successful login response.
     ACCOUNT_ID:     'id',
     TOKEN:          'token',
     EMAIL:          'email',
-    USER_ROLES:     'is_admin',
-    SUSPEND:        'suspend',
-    // User belongs to origansation (origins) origins have teams.
+    USER_ROLES:     'roles',
+    //  User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
     // This used for loading the default language for on user
@@ -307,12 +246,9 @@ var C = {
 
   // Ephemeral and unique for each browser tab
   TABSESSION: {
-    PROJECT:      'projectId',
-    TEAM:         'team',
-    ID:           'id',
-    ORGANIZATION:     'organization',
-    PROJECTDATA:  'projectData',
-    NAMESPACE:    'namespaceId',
+    PROJECT:     'projectId',
+    PROJECTDATA: 'projectData',
+    NAMESPACE:   'namespaceId',
   },
 
   /*
@@ -378,8 +314,8 @@ var C = {
     OS_VERSION:               'ui$digicloud$os_version',
     SECRET_TYPE_NAMES:        'ui$digicloud$secret_type_names',
     SECRET_TYPE:              'ui$digicloud$secret_type',
-    DEFAULT_SECRET_TYPE:      'ui$digicloud$default_secret_type',
     SECRET_KEY_LENGTH:        'ui$digicloud$secret_key_length',
+    TRUSTED_KEY:              'ui$digicloud$trusted_key',
   },
 
   USER: {
@@ -408,19 +344,6 @@ var C = {
   },
 
 };
-
-// This is contains the  list of codes that can be  treated as unauthenticated
-// 1. 401 return code when the user isn't authenticated.
-C.UNAUTHENTICATED_HTTP_CODES = [C.UNAUTHENTICATED],
-
-// This is contains the  list of codes that can be  treated as unauthorized
-// 1. 403 return code when the user isn't authorized to access an  API
-C.UNAUTHORIZED_HTTP_CODES = [C.UNAUTHORIZED],
-
-// This contains the list of codes that can be treated as unauthorized and
-//  unauthenticated
-C.UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES = [C.UNAUTHENTICATED, C.UNAUTHORIZED],
-
 
 /*
 * Assembly management page filter selector and accessor
@@ -480,7 +403,6 @@ C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.EMAIL,
   C.SESSION.TOKEN,
   C.SESSION.USER_ROLES,
-  C.SESSION.SUSPEND,
 ];
 
 //  Initial state of assembly

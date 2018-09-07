@@ -1,14 +1,14 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { inject } from '@ember/service';
 import { reject } from 'rsvp';
 import { hash } from 'rsvp';
 
 export default Route.extend(DefaultHeaders, {
-  access: service(),
+  access: inject.service(),
 
 
-  beforeModel() {
+  beforeModel(){
     this.get('access').activate().then((config) => {
       if (config) {
         this.transitionTo('authenticated');
@@ -22,23 +22,21 @@ export default Route.extend(DefaultHeaders, {
     return hash({ wizard: this.get('store').find('wizard', null, this.opts('wizards')) });
   },
 
+  getLicense() {
+    return hash({ license: this.get('store').findAll('license', this.opts('licenses', true)) });
+  },
+
   actions: {
-    reloadModel() {
+    reloadModel(){
       var self = this;
 
-      this.model().then((model) => {
-        self.getLicense().then((license) => {
-          model.license = license;
+      this.model().then(-function(model) {
+        self.getLicense().then(-function(licence) {
+          model.license = licence;
           self.controller.set('model', model);
         });
       });
-    }
+    },
   },
-
-  getLicense() {
-    return hash({ license: this.get('store').findAll('license', this.opts('licenses/senseis', true)), });
-  },
-
-
 
 });

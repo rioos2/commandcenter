@@ -1,12 +1,12 @@
-import Component from '@ember/component';
+import Ember from 'ember';
 
-export default Component.extend({
+export default Ember.Component.extend({
 
   seletedOs: function() {
-    if (this.get('selected')) {
+    if(this.get('selected')) {
       return this.get('selected');
     } else {
-      return 'none.png';
+      return "none.png";
     }
   }.property('selected'),
 

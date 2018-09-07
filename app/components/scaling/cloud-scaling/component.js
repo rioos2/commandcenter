@@ -14,13 +14,13 @@ export default Component.extend({
   actions: {
     sendHorizontal() {
       this.toggleProperty('model.hscaling.horizontal_scaling_rule_apply');
-      if (this.get('model.vscaling.vertical_scaling_rule_apply')){
+      if(this.get('model.vscaling.vertical_scaling_rule_apply')){
         this.toggleProperty('model.vscaling.vertical_scaling_rule_apply');
       }
     },
     sendVertical() {
       this.toggleProperty('model.vscaling.vertical_scaling_rule_apply');
-      if (this.get('model.hscaling.horizontal_scaling_rule_apply')){
+      if(this.get('model.hscaling.horizontal_scaling_rule_apply')){
         this.toggleProperty('model.hscaling.horizontal_scaling_rule_apply');
       }
     },

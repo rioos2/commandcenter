@@ -1,21 +1,19 @@
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { equal } from '@ember/object/computed';
+import Ember from 'ember';
 
-export default Component.extend({
-  intl:              service(),
-  tagName:           'li',
-  classNames:        ['smooth-disabled'],
+export default Ember.Component.extend({
+  intl: Ember.inject.service(),
+  tagName: 'li',
+  classNames: ['smooth-disabled'],
   classNameBindings: ['active', 'tabClassName'],
 
-  active: equal('selectedTab', 'tab'),
-
   tabClassName: function() {
-    return `wizard-steps/${  this.get('tab') }`;
+    return 'wizard-steps/' + this.get('tab');
   }.property('tab'),
 
+  active: Ember.computed.equal('selectedTab', 'tab'),
+
   title: function() {
-    return this.get('intl').t(`wizard.${  this.get('tab')  }.title`);
+    return this.get('intl').t('wizard.' + this.get('tab') + '.title');
   }.property('tab'),
 
   isComplete: function() {
@@ -27,7 +25,7 @@ export default Component.extend({
   }.on('didInsertElement'),
 
   actions: {
-    select() {
+    select: function() {
       this.set('selectedTab', this.get('tab'));
     }
   }

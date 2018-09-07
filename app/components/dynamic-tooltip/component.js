@@ -1,12 +1,11 @@
-import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
+import Ember from 'ember';
 
-export default Component.extend({
+export default Ember.Component.extend({
 
   tagName: '',
 
   showMsg: function() {
-    return !isEmpty(this.get('msg')) ? false : true;
+    return !Ember.isEmpty(this.get('msg')) ? false : true;
   }.property('msg'),
 
 });

@@ -1,6 +1,5 @@
-import Component from '@ember/component';
-
-export default Component.extend({
+import Ember from 'ember';
+export default Ember.Component.extend({
 
   name: function(){
     return this.get('network.object_meta.name');

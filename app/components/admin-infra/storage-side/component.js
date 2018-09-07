@@ -1,16 +1,18 @@
-import Component from '@ember/component';
-import { alias } from '@ember/object/computed';
-import { isEmpty } from '@ember/utils';
-import $ from 'jquery';
+import Ember from 'ember';
+import C from 'nilavu/utils/constants';
+export default Ember.Component.extend({
+  tagName: "",
 
-export default Component.extend({
-  tagName: '',
-
+  pools: Ember.computed.alias('storagespool'),
   ariaEexpanded_pool: true,
   ariaEexpanded_disk: true,
 
-  pools: alias('storagespool'),
-  name:  function() {
+  didInsertElement: function() {
+    this.send('collapse_pool');
+    this.send('collapse_disk');
+  },
+
+  name: function() {
     return this.get('model.object_meta.name');
   }.property('model.object_meta.name'),
 
@@ -23,11 +25,11 @@ export default Component.extend({
   }.property('model.storage_type'),
 
   status: function() {
-    return isEmpty(this.get('model.status.phase')) ? '' : this.get('model.status.phase').capitalize();
+    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
   storageAvailable: function() {
-    return !(isEmpty(this.get('status')) && isEmpty(this.get('name')) && isEmpty(this.get('ip')) && isEmpty(this.get('type')));
+    return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('ip')) && Ember.isEmpty(this.get('type')));
   }.property('status', 'name', 'type', 'ip'),
 
   diskSize: function() {
@@ -35,7 +37,7 @@ export default Component.extend({
   }.property('disks'),
 
   createdAt: function() {
-    return isEmpty(this.get('model.created_at')) ? '' : this.get('model.created_at').split('T')[0];
+    return Ember.isEmpty(this.get('model.created_at')) ? "" : this.get('model.created_at').split('T')[0];
   }.property('model.created_at'),
 
   disks: function() {
@@ -47,14 +49,9 @@ export default Component.extend({
   }.property('storagespool'),
 
 
-  didInsertElement() {
-    this.send('collapse_pool');
-    this.send('collapse_disk');
-  },
-
   actions: {
 
-    collapse_pool() {
+    collapse_pool: function() {
       if (this.get('ariaEexpanded_pool')) {
         this.set('ariaEexpanded_pool', false);
         this.set('collapsed_pool', 'collapsed');
@@ -68,7 +65,7 @@ export default Component.extend({
       }
     },
 
-    collapse_disk() {
+    collapse_disk: function() {
       if (this.get('ariaEexpanded_disk')) {
         this.set('ariaEexpanded_disk', false);
         this.set('collapsed_disk', 'collapsed');
@@ -82,14 +79,14 @@ export default Component.extend({
       }
     },
 
-    openModal() {
+    openModal: function() {
       $('#pooladd').modal('show');
     },
-    openEditModal(){
+    openEditModal: function(){
       $('#storage_edit').modal('show');
     },
 
-    doReloaded() {
+    doReloaded: function() {
       this.sendAction('doStorageReload');
     }
 
