@@ -1,19 +1,19 @@
 {{admin-infra/storage-pool-count disks=disks}}
 <div class="sd-pool-name sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.name'}} </div>
+  <div class="sd-title">{{t 'generic.name'}} </div>
   <div class="sd-value">{{name}}</div>
 </div>
 <div class="sd-pool-name sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.pool.status'}} </div>
+  <div class="sd-title">{{t 'generic.status'}} </div>
   <div class="sd-value {{show-status-bulp  status}}">{{status}}</div>
 </div>
 <div class="sd-pool-type sd-table">
-  <div class="sd-title">{{t 'stackPage.admin.storage.pool.diskCount'}} </div>
+  <div class="sd-title">{{t 'dojos.dashboard.storages.disks.size'}} </div>
   <div class="sd-value">{{diskSize}}</div>
 </div>
 <div class="sd-pool-detail sd-table">
-<div class="sd-title">{{t 'stackPage.admin.storage.pool.disks'}}</div>
-<span class="sd-value sd-more-cluster-nodes" data-toggle="modal" data-target="#storage_count" >{{t 'stackPage.admin.storage.pool.list'}}</span>
+<div class="sd-title">{{t 'dojos.dashboard.storages.disks.title'}}</div>
+<span class="sd-value sd-more-cluster-nodes" data-toggle="modal" data-target="#storage_count" >{{t 'actions.view'}}</span>
 </div>
 <div class="pool-active">
 </div>

@@ -1,16 +1,26 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import Tooltip from 'nilavu/mixins/tooltip';
 import StrippedName from 'nilavu/mixins/stripped-name';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 
-export default Ember.Component.extend(Tooltip, StrippedName, {
-  resourceActions:  Ember.inject.service('resource-actions'),
+
+export default Component.extend(Tooltip, StrippedName, {
+  resourceActions:  service('resource-actions'),
   needs:            ['application'],
-  model:            Ember.computed.alias('tooltipService.tooltipOpts.model'),
-  actionsOpen:      Ember.computed.alias('resourceActions.open'),
   inTooltip:        false,
   layoutName:       'tooltip-action-menu',
 
-  init: function() {
+  model:            alias('tooltipService.tooltipOpts.model'),
+  actionsOpen:      alias('resourceActions.open'),
+  openChanged: function() {
+    this.set('tooltipService.requireClick', this.get('actionsOpen'));
+    if ( !this.get('actionsOpen') && !this.get('inTooltip') ) {
+      this.get('tooltipService').leave();
+    }
+  }.observes('actionsOpen'),
+
+  init() {
     if (this.get('tooltipTemplate')) {
       this.set('layoutName', this.get('tooltipTemplate'));
     }
@@ -21,7 +31,7 @@ export default Ember.Component.extend(Tooltip, StrippedName, {
     this.set('actionsOpen', false);
   },
 
-  mouseEnter: function() {
+  mouseEnter() {
     this._super();
     this.set('inTooltip', true);
 
@@ -30,20 +40,11 @@ export default Ember.Component.extend(Tooltip, StrippedName, {
     this.get('actionsOpen');
   },
 
-  mouseLeave: function() {
+  mouseLeave() {
     this.set('inTooltip', false);
-    if ( !this.get('actionsOpen') )
-    {
+    if ( !this.get('actionsOpen') ) {
       this.get('tooltipService').leave();
     }
   },
-
-  openChanged: function() {
-    this.set('tooltipService.requireClick', this.get('actionsOpen'));
-    if ( !this.get('actionsOpen') && !this.get('inTooltip') )
-    {
-      this.get('tooltipService').leave();
-    }
-  }.observes('actionsOpen'),
 
 });

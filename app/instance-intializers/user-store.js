@@ -16,7 +16,7 @@ export function initialize(instance) {
 }
 
 export default {
-  name: 'user-store',
+  name:  'user-store',
   initialize,
   after: 'store',
 };

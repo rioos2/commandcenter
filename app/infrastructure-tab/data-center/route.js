@@ -1,11 +1,20 @@
-import { hash } from 'rsvp';
-import Route from '@ember/routing/route';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import { get } from "@ember/object";
-
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 export default Route.extend(DefaultHeaders, {
+
+  storeReset: service(),
+
   model() {
-    const store = get(this, 'store');
-    return hash({ healthzDashboard: store.findAll('reportsstatistics',this.opts('healthz/overall')), });
-  },
+
+    const self = this;
+
+    return this.get('store').findAll('reportsstatistics', this.opts('healthz/overall')).then((reports) => {
+      return  { 'healthzDashboard': reports };
+    }).catch((err) => {
+      self.set('loading', false);
+
+      return err;
+    });
+  }
 });

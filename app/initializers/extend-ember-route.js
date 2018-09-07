@@ -1,14 +1,14 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { getOwner } from '@ember/application';
 
-const { getOwner } = Ember;
 
 export function initialize(/* application */) {
-  Ember.Route.reopen({
+  Route.reopen({
 
     // Remember the current route (into the application route's previousRoute/Params properties)
     beforeModel() {
       this._super.apply(this, arguments);
-      this.rememberPrevious();
+      // this.rememberPrevious();
     },
 
     rememberPrevious() {

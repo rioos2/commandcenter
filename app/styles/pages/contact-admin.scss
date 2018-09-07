@@ -1,0 +1,52 @@
+.contact-admin {
+  background-image: url("/assets/images/signup/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-color: $bg-fourth-color;
+  height: -webkit-fill-available;
+  user-select: none;
+
+  .logo-img {
+    width: 200px;
+    margin: 60px 0;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .col-container {
+    display: table;
+    width: 100%;
+  }
+
+  .info-box {
+    width: 400px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ececec;
+    margin-bottom: 100px;
+    -webkit-box-shadow: 4px 3px 11px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 3px 11px 0 rgba(0,0,0,0.75);
+    box-shadow: 4px 3px 11px 0 rgba(0,0,0,0.75);
+
+    p {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      box-sizing: border-box;
+      font-family: fselliot;
+      font-size: 18px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .col-container {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
+    }
+  }
+}

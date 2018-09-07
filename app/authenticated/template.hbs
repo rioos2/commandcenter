@@ -1,5 +1,7 @@
- {{page-navbar currentPath=currentPath}}
-
+ {{page-navbar currentPath=currentPath switchOrganization='switchOrigin' model=model organizations=model.organizations}}
+ {{#if guardian.state.message}}
+ {{bar-notification message=guardian.state.message}}
+ {{/if}}
 <main class="clearfix">
   {{outlet}}
 </main>

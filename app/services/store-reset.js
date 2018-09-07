@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import config from './../config/environment';
-
-export default Ember.Service.extend({
-  store:     Ember.inject.service(),
-  userStore: Ember.inject.service('user-store'),
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+export default Service.extend({
+  store:     service(),
+  userStore: service('user-store'),
   // webhookStore: Ember.inject.service('webhook-store'),
   // catalog: Ember.inject.service(),
 

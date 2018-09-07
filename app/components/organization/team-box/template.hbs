@@ -1,0 +1,29 @@
+<div class="team-box left">
+  <div class="domain">
+    <div class="icon status">
+      {{svg/svg-status status=isSelected}}
+    </div>
+    <p class="text1" title={{team.object_meta.name}}>{{team.full_name}}</p>
+    <p class="text2">Active</p>
+
+    <div class="pull-right st-pin">
+      <div class="team-action">
+        {{action-menu model=model}}
+      </div>
+    </div>
+  </div>
+  <div class="ip">
+    <div class="icon">
+      {{fa-icon "tasks"}}
+    </div>
+    <p class="text1">{{t 'nav.team.show.createdAt'}}</p>
+    <p class="text2">{{hoursAgo}}</p>
+  </div>
+  <div class="location">
+    <div class="icon">
+      {{fa-icon "tag"}}
+    </div>
+    <p class="text1">{{t 'nav.team.show.about'}}</p>
+    <p class="text2">{{team.description}}</p>
+  </div>
+</div>
