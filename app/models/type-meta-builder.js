@@ -1,13 +1,16 @@
-const TypeMetaBuilder = Ember.Object.extend({});
+import EmberObject from '@ember/object';
+const TypeMetaBuilder = EmberObject.extend({});
 
 TypeMetaBuilder.reopenClass({
 
   buildTypeMeta(kind, ver) {
     var typeMeta;
+
     typeMeta = {
-      kind: kind,
+      kind,
       api_version: ver
     };
+
     return typeMeta;
   },
 

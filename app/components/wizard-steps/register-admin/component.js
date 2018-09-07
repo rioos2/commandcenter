@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
-  tagName: 'section',
+export default Component.extend({
+  tagName:   'section',
   className: '',
 
   signupStep: function() {

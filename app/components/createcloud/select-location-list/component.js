@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
 
   statusNotOkay: function() {

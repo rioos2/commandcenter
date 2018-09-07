@@ -1,21 +1,21 @@
-import Ember from 'ember';
-
+import Service from '@ember/service';
+import { later, cancel } from '@ember/runloop';
 const DELAY = 250;
 
-export default Ember.Service.extend({
+export default Service.extend({
   mouseLeaveTimer:       null,
   requireClick:          false,
   tooltipOpts:           null,
   openedViaContextClick: false,
 
   startTimer() {
-    this.set('mouseLeaveTimer', Ember.run.later(() => {
+    this.set('mouseLeaveTimer', later(() => {
       this.hide();
     }, DELAY));
   },
 
   cancelTimer() {
-    Ember.run.cancel(this.get('mouseLeaveTimer'));
+    cancel(this.get('mouseLeaveTimer'));
   },
 
   hide() {

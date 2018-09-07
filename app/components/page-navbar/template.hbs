@@ -68,14 +68,52 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu nav-profile">
+              <!-- selected organization -->
               <li>
-                {{#link-to "admin.infra"}}{{t 'nav.user.admin'}}{{/link-to}}
+                  <span class="org-name">{{currentOrganization}}</span>
+              <div class='row'>
+              </div>
+              {{#if currentTeam}}
+                <span class="org-team">{{currentTeam}}</span>
+                <div class='row'>
+                </div>
+                {{/if}}
+                <span class="org-email">{{email}}</span>
               </li>
               <li role="presentation" class="divider"></li>
+              <!-- List organizations with management org link-->
+              {{#each organizations as |origin|}}
+              <li>
+                <!-- <div class='row'> -->
+                  <a href="#" class="col-sm-9" {{action 'switchOrigin' origin.object_meta.name}}>{{origin.object_meta.name}}</a>
+                <span class="col-sm-3">{{#link-to "organization.organization" origin.object_meta.name}}{{fa-icon "fa-pencil"}}{{/link-to}}</span>
+              <!-- </div> -->
+              </li>
+              {{/each}}
+              {{#if organizations}}
+              <li role="presentation" class="divider"></li>
+              {{/if}}
+              <!-- Create organization-->
+              <li>
+               {{#link-to "organization.index"}}{{t 'nav.user.linkOrg'}}{{/link-to}}
+              </li>
+              <li role="presentation" class="divider"></li>
+
+              <!-- Admin link-->
+              {{#if isAdmin}}
+              <li>
+                 {{#link-to "admin.infra"}} {{t 'nav.user.admin'}}{{/link-to}}
+              </li>
+              <li role="presentation" class="divider"></li>
+              {{/if}}
+              <!-- Account link-->
               <li>
                 {{#link-to "accounts.index"}}{{t 'nav.user.profile'}}{{/link-to}}
               </li>
-              <li {{action "logout"}}><a href="#">{{t 'nav.user.logout'}}</a></li>
+              <!-- Logout action-->
+              <li {{action "logout"}}>
+               <a href="#">{{t 'nav.user.logout'}}</a>
+              </li>
             </ul>
           </li>
         </ul>

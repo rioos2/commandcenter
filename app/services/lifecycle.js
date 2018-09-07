@@ -1,11 +1,12 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { reject } from 'rsvp';
 
 export default Service.extend(DefaultHeaders, {
-  userStore: Ember.inject.service('store'),
+  userStore: service('store'),
 
   delete(assemblyId, data) {
-    var session = this.get('session');
 
     // Here metrics.counter value changes by component as integer but api only accept that field as string.
     delete data.spec;
@@ -28,7 +29,7 @@ export default Service.extend(DefaultHeaders, {
         };
       }
 
-      return Ember.RSVP.reject(err);
+      return reject(err);
     });
   },
 

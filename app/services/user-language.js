@@ -1,17 +1,18 @@
 import C from 'nilavu/utils/constants';
 import { loadScript } from 'nilavu/utils/load-script';
-import Ember from 'ember';
 import { ajaxPromise } from 'ember-api-store/utils/ajax-promise';
-
+import Service from '@ember/service';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { resolve } from 'rsvp';
 const RTL_LANGUAGES = ['fa-ir'];
 
-export default Ember.Service.extend({
-  prefs:         Ember.inject.service(),
-  session:       Ember.inject.service(),
-  cookies:       Ember.inject.service(),
-  intl:          Ember.inject.service(),
-  locales:       Ember.computed.alias('app.locales'),
-  cookies:       Ember.inject.service(),
+export default Service.extend({
+  prefs:         service(),
+  session:       service(),
+  cookies:       service(),
+  intl:          service(),
+  locales:       alias('app.locales'),
   loadedLocales: null,
 
   bootstrap: function() {
@@ -58,7 +59,7 @@ export default Ember.Service.extend({
     if (savePref && session.get(C.SESSION.ACCOUNT_ID)) {
       return this.set(`prefs.${ C.PREFS.LANGUAGE }`, lang);
     } else {
-      return Ember.RSVP.resolve();
+      return resolve();
     }
   },
 
@@ -70,7 +71,7 @@ export default Ember.Service.extend({
       this.get('intl').setLocale(language);
       this.setLanguage(language, false);
 
-      return Ember.RSVP.resolve();
+      return resolve();
     } else {
       return ajaxPromise({
         url:      `${ this.get('app.baseAssets') }translations/${ language }.json?${ application.version }`,
@@ -82,7 +83,7 @@ export default Ember.Service.extend({
         if (this.get('app.needIntlPolyfill')) {
           promise = loadScript(`${ this.get('app.baseAssets') }assets/intl/locales/${ language.toLowerCase() }.js?${ application.version }`);
         } else {
-          promise = Ember.RSVP.resolve();
+          promise = resolve();
         }
 
         return promise.then(() => {
@@ -93,7 +94,7 @@ export default Ember.Service.extend({
             this.setLanguage(language, false);
           });
         });
-      }).catch((err) => {
+      }).catch((/* err*/) => {
         // this.get('growl').fromError('Error loading language: ' + language, err);
         if (language !== C.LANGUAGE.DEFAULT) {
           return this.sideLoadLanguage(C.LANGUAGE.DEFAULT);

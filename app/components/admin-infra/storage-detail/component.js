@@ -1,20 +1,21 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
 
-storageName: function(){
-  return this.get('model.object_meta.name');
-}.property('model.object_meta.name'),
+export default Component.extend({
 
-ip: function() {
-  return this.get('model.host_ip');
-}.property('model.host_ip'),
+  storageName: function(){
+    return this.get('model.object_meta.name');
+  }.property('model.object_meta.name'),
 
-type: function() {
-  return this.get('model.storage_type');
-}.property('model.storage_type'),
+  ip: function() {
+    return this.get('model.host_ip');
+  }.property('model.host_ip'),
 
-active: function() {
-  return this.get('selectedStorage') == this.get('model.id') ? "active" : "";
-}.property('selectedStorage'),
+  type: function() {
+    return this.get('model.storage_type');
+  }.property('model.storage_type'),
+
+  active: function() {
+    return this.get('selectedStorage') === this.get('model.id') ? 'active' : '';
+  }.property('selectedStorage'),
 
 });

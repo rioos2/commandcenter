@@ -88,7 +88,7 @@ export default Service.extend({
 
   remove(name, opt) {
     opt = opt || {};
-    //When removing a cookie expire with a random old date
+    // When removing a cookie expire with a random old date
     opt.expire = new Date('Wed, 24 Feb 1982 18:42:00 UTC');
 
     return this.setWithOptions(name, 'removed', opt);

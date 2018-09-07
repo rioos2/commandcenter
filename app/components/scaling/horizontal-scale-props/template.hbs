@@ -1,0 +1,52 @@
+<div class="select-domain">
+  <div class="row">
+    <div class="scaling-content">
+      <p class="title">{{t 'launcherPage.scaling.horizontal.scalingReplicaWaitTimeTitle'}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 ">
+      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.minReplivas'}}</p>
+      <p class="sub-description text-center ">{{minReplicas}}</p>
+      {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setMinReplicas" showEditBox=editMinReplicas}}
+    </div>
+    <div class="col-md-6">
+      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.maxReplivas'}} </p>
+      <p class="sub-description text-center">{{maxReplicas}}</p>
+      {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setMaxReplicas" showEditBox=editMaxReplicas}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 p-b-30">
+      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleUpwaitTime'}}</p>
+      <p class="sub-description text-center">{{upWaitTime}}</p>
+      {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleUpTime" showEditBox=editScaleUpWaitTime}}
+    </div>
+    <div class="col-md-6 p-b-30">
+      <p class="sub-description">{{t 'launcherPage.scaling.horizontal.scaleDownwaitTime'}}</p>
+      <p class="sub-description text-center">{{downWaitTime}}</p>
+      {{editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setScaleDownTime" showEditBox=editScaleDownWaitTime}}
+    </div>
+  </div>
+</div>
+<div class="select-domain">
+  <div class="scaling-content">
+    <p class="title">{{t 'launcherPage.scaling.horizontal.scalingRuleTitle'}}</p>
+  </div>
+</div>
+<div class="dashboard">
+  <div class="tabs">
+    {{radio-button checked=(eq "cpu" selectedTab) value=selectedTab selection=selectedTab id="cpu" name="tab-control"}} {{radio-button checked=(eq "memory" selectedTab) value=selectedTab selection=selectedTab id="memory" name="tab-control"}} {{radio-button checked=(eq "disk" selectedTab) value=selectedTab selection=selectedTab id="disk" name="tab-control"}}
+    <ul class="dashboardNav">
+      {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="cpu"}} {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="memory"}} {{scaling/scaling-tab panels=panels selectedTab=selectedTab tab="disk" }}
+    </ul>
+    <div class="slider">
+      <div class="indicator"></div>
+    </div>
+    <div class="content">
+      {{#each panels as |tab|}}
+        {{component tab selectedTab=selectedTab model=model modelSpinner=modelSpinner scaleType=scaleType}}
+      {{/each}}
+    </div>
+  </div>
+</div>

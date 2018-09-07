@@ -1,9 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
-  resetController: function (controller, isExisting/*, transition*/) {
-    if (isExisting)
-    {
+export default Route.extend({
+  resetController(controller, isExisting/* , transition*/) {
+    if (isExisting) {
       controller.set('showAddtlInfo', false);
     }
   },

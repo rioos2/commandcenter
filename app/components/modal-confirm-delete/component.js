@@ -1,12 +1,13 @@
-import Ember from 'ember';
 import ModalBase from 'lacsso/components/modal-base';
+import { alias } from '@ember/object/computed';
+
 
 export default ModalBase.extend({
-  classNames: ['lacsso', 'modal-container', 'large-modal', 'modal-overlay-width'],
-  originalModel: Ember.computed.alias('modalService.modalOpts'),
+  classNames:    ['lacsso', 'modal-container', 'large-modal', 'modal-overlay-width'],
+  originalModel: alias('modalService.modalOpts'),
 
   name: function() {
-     return this.get('originalModel').get('name');
+    return this.get('originalModel').get('name');
   }.property('originalModel.name'),
 
   actions: {
@@ -14,7 +15,7 @@ export default ModalBase.extend({
       this.get('modalService').toggleModal();
     },
 
-    deleteAsm: function() {
+    deleteAsm() {
       this.get('originalModel').send('delete');
     }
   },

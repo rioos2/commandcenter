@@ -1,34 +1,52 @@
 var C = {
 
   /* --------  The section  that has  various  http codes  ----*/
-  // This is contains the  list of codes that can be  treated as unauthenticated
-  // 1. 401 return code when the user isn't authenticated.
-  UNAUTHENTICATED_HTTP_CODES: [401],
+  // Stack all the base http codes here
+  INTERNALSERVER_ERROR: 500,
+  // Conflicts, if there is a record that already exists. Eg: email
+  INTERNAL_CONFLICTS:   '409',
+  // When the downstream systems are down
+  BAD_GATEWAY:          502,
 
-  // This is contains the  list of codes that can be  treated as unauthorized
-  // 1. 403 return code when the user isn't authorized to access an  API
-  UNAUTHORIZED_HTTP_CODES: [403],
+  UNAUTHENTICATED: 401,
 
-  //  Internal server error
-  INTERNALSERVER_HTTP_CODES: [500],
+  UNAUTHORIZED: 403,
 
+  // Internal server error
+  INTERNALSERVER_HTTP_CODES: ['500'],
+
+  BADGATEWAY_HTTP_CODES: ['502'],
+
+  AUTHORIZATION_DENIED: ['403'],
 
 
   /* --------  The section  that has  various Rio objects  ----*/
 
   /* Wizard page sequence steps and activation step default status*/
   WIZARD: {
-    //  List of steps
+    // List of steps
     STEPS: {
       WELCOME:       'welcome',
-      //  Registration page
+      // Registration page
       REGISTERADMIN: 'register-admin',
-      //  License activation page
+      // License activation page
       ACTIVATE:      'activate-license',
     },
     ACTIVATION: {
       PRODUCT: 'RioOS',
       STATUS:  { ACTIVATING: 'activating', }
+    },
+  },
+  LICENSE: {
+    SUBPRODUCT: { NONE: 'SubProdut ?' },
+    STATUS:     {
+      NONE:        'MAY BE ACTIVE, CHECK IN PROGRESS',
+      NOT_EXPIRED: 'active',
+      EXPIRED:     'expired'
+    },
+    ACTIVATION: {
+      PRODUCT: 'RioOS',
+      STATUS:  { ACTIVATING: 'activating' }
     },
   },
 
@@ -42,9 +60,9 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED:   'Registered',
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
-    ROLES: { SUPERUSER: 'RIOOS:SUPERUSER', },
+    ROLES:  { SUPERUSER: 'RIOOS:SUPERUSER', },
+    STATES: ['approval', 'suspend'],
   },
-
 
   /*
   * This section belongs to digital cloud management page.
@@ -64,6 +82,22 @@ var C = {
       FAILURE: 'failure',
     },
   },
+  /*
+  * This section belongs to organization management page.
+  * organization status and states.
+  */
+  ORGANIZATION: {
+    STATE: {
+      WARNING: 'warning',
+      SUCCESS: 'success',
+      FAILURE: 'failure',
+    },
+    MEMBER: {
+      MEMBERACTIVE:   'ACTIVE',
+      MEMBERINACTIVE: 'INACTIVE',
+    },
+    STATUS: { PENDING: 'pending', }
+  },
 
   /*
   * Assembly categories
@@ -80,7 +114,7 @@ var C = {
   /*
   * Assembly resources
   */
-  RESOURCES: ['cpu', 'memory', 'disk'],
+  RESOURCES: ['cpu', 'memory', 'storage'],
 
   /*
   * Digital cloud management page filter query params and key to read data from model.
@@ -116,6 +150,14 @@ var C = {
     ASSEMBLYIPV4:      'IPv4',
   },
 
+  HORIZONTAL_SCALE: {
+    MIN_REPLICAS:        1,
+    MAX_REPLICAS:        2,
+    SCALEUP_WAITTIME:    10,
+    SCALEDOWN_WAIT_TIME: 10
+
+  },
+
   /*
   * Secrets types of assembly
   */
@@ -143,13 +185,18 @@ var C = {
     }],
     NODEAUTHTYPE:                         ['Login Credentials', 'SSH Key Verification'],
     INSTALLFAILURE:                       ['NinjaNotReady'],
-    NODEUNHEALTHY:                        ['down'],
+    NODEUNHEALTHY:                        'down',
     NODEOFF:                              'OFF',
     NODEON:                               'ON',
-    STATUS:                               {
-      RUNNING: 'Running',
-      STOPPED: 'Stopped',
-    }
+    NODEPENDING:                           'pending',
+    STATUS:         {
+      INITIAL:  ['initialized', 'pending'],
+      READY:    ['ready', 'running', 'ninjaready'],
+      NOTREADY: ['notready', 'ninjanotready'],
+      RUNNING:  'RUNNING',
+      STOPPED:  'STOPPED',
+    },
+    STORAGE_TYPE:   { CEPH: 'rioos_sh/ceph', },
   },
 
   /*
@@ -174,7 +221,9 @@ var C = {
       NETMASK: /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/,
       SUBNET:      /^s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]d|1dd|[1-9]?d)(.(25[0-5]|2[0-4]d|1dd|[1-9]?d)){3}))|:)))(%.+)?s*(\/([0-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8]))?$/,
     },
+    /* eslint-disable */
     URI: /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.​\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[​6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1​,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00​a1-\uffff0-9]+-?)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]+-?)*[a-z\u​00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/[^\s]*)?$/i,
+      /* eslint-enable */
   },
 
   PHASE: { READY: 'ready', },
@@ -211,7 +260,7 @@ var C = {
   */
   NETWORK: {
     PACKETMEASURETYPE: {
-      //  Packet measurement types
+      // Packet measurement types
       THROUGHPUT: 'throughput',
       ERROR:      'error',
     },
@@ -231,13 +280,14 @@ var C = {
   // Ephemeral but same but across all browser tabs
   SESSION: {
     BACK_TO:        'backTo',
-    //  The fields id, token, email, roles, metadata.origin,
+    // The fields id, token, email, roles, metadata.origin,
     // metadata.team are pulled from successful login response.
     ACCOUNT_ID:     'id',
     TOKEN:          'token',
     EMAIL:          'email',
-    USER_ROLES:     'roles',
-    //  User belongs to origansation (origins) origins have teams.
+    USER_ROLES:     'is_admin',
+    SUSPEND:        'suspend',
+    // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
     // This used for loading the default language for on user
@@ -246,9 +296,12 @@ var C = {
 
   // Ephemeral and unique for each browser tab
   TABSESSION: {
-    PROJECT:     'projectId',
-    PROJECTDATA: 'projectData',
-    NAMESPACE:   'namespaceId',
+    PROJECT:      'projectId',
+    TEAM:         'team',
+    ID:           'id',
+    ORGANIZATION:     'organization',
+    PROJECTDATA:  'projectData',
+    NAMESPACE:    'namespaceId',
   },
 
   /*
@@ -314,8 +367,8 @@ var C = {
     OS_VERSION:               'ui$digicloud$os_version',
     SECRET_TYPE_NAMES:        'ui$digicloud$secret_type_names',
     SECRET_TYPE:              'ui$digicloud$secret_type',
+    DEFAULT_SECRET_TYPE:      'ui$digicloud$default_secret_type',
     SECRET_KEY_LENGTH:        'ui$digicloud$secret_key_length',
-    TRUSTED_KEY:              'ui$digicloud$trusted_key',
   },
 
   USER: {
@@ -344,6 +397,19 @@ var C = {
   },
 
 };
+
+// This is contains the  list of codes that can be  treated as unauthenticated
+// 1. 401 return code when the user isn't authenticated.
+C.UNAUTHENTICATED_HTTP_CODES = [C.UNAUTHENTICATED],
+
+// This is contains the  list of codes that can be  treated as unauthorized
+// 1. 403 return code when the user isn't authorized to access an  API
+C.UNAUTHORIZED_HTTP_CODES = [C.UNAUTHORIZED],
+
+// This contains the list of codes that can be treated as unauthorized and
+//  unauthenticated
+C.UNAUTHENTICATED_UNAUTHORIZED_HTTP_CODES = [C.UNAUTHENTICATED, C.UNAUTHORIZED],
+
 
 /*
 * Assembly management page filter selector and accessor
@@ -403,6 +469,7 @@ C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.EMAIL,
   C.SESSION.TOKEN,
   C.SESSION.USER_ROLES,
+  C.SESSION.SUSPEND,
 ];
 
 //  Initial state of assembly

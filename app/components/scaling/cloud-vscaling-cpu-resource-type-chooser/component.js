@@ -1,21 +1,23 @@
-import Ember from 'ember';
-const { get} = Ember;
-export default Ember.Component.extend({
-  intl:       Ember.inject.service(),
-  
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { get } from '@ember/object';
+
+export default Component.extend({
+  intl:       service(),
+
   maxCpuResource: function(){
     return {
-      name: "max-core-select",
+      name:        'max-core-select',
       description: get(this, 'intl').t('launcherPage.scaling.scaleup.cpuChooser.description'),
-      title: get(this, 'intl').t('launcherPage.scaling.scaleup.cpuChooser.title')
+      title:       get(this, 'intl').t('launcherPage.scaling.scaleup.cpuChooser.title')
     };
   }.property(),
 
   minCpuResource: function(){
     return {
-      name: "min-core-select",
+      name:        'min-core-select',
       description: get(this, 'intl').t('launcherPage.scaling.scaledown.cpuChooser.description'),
-      title: get(this, 'intl').t('launcherPage.scaling.scaledown.cpuChooser.title')
+      title:       get(this, 'intl').t('launcherPage.scaling.scaledown.cpuChooser.title')
     };
   }.property(),
 

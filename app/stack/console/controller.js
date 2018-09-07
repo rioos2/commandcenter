@@ -1,14 +1,15 @@
-export default Ember.Controller.extend({
+import Controller from '@ember/controller';
+export default Controller.extend({
   queryParams: [
     'vnchost', 'vncport'
   ],
-  host: null,
-  port: null,
-  name: null,
+  host:           null,
+  port:           null,
+  name:           null,
   sendCtrlAltDel: false,
 
   vncname: function() {
-    return "VNC viewer  " + this.get('name');
+    return `VNC viewer  ${  this.get('name') }`;
   }.property('name'),
 
   vncPort: function() {

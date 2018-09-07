@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 import Console from 'nilavu/mixins/console';
 
-export default Ember.Controller.extend(Console, {
+export default Controller.extend(Console, {
   queryParams: [
     'vnchost', 'account_id', 'id'
   ],

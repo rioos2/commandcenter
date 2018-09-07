@@ -1,12 +1,12 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   model(params) {
     return {
-      host: params.vnchost,
+      host:  params.vnchost,
       accid: params.account_id,
-      id: params.id
+      id:    params.id
     }
   },
 });
