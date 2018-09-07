@@ -11,7 +11,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   availableActions: function() {
 
     return [{
-      label:     'action.remove',
+      label:     'actions.delete',
       icon:      'fa fa-trash-o',
       action:    'deletePromt',
       enabled:   true,
@@ -19,7 +19,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
       class:     this.get('hasTerminated') ? 'disabled' : ' '
     },
     {
-      label:   'action.console',
+      label:   'actions.open_console',
       icon:    'fa fa-terminal',
       action:  'console',
       enabled: true,
@@ -27,19 +27,19 @@ var Assembly = Resource.extend(DefaultHeaders, {
 
     },
     {
-      label:   'action.downloadSecret',
+      label:   'actions.download_secret',
       icon:    'fa fa-download',
       action:  'download',
       enabled: true,
     },
     {
-      label:   'action.externalUrl',
+      label:   'action.open_ui',
       icon:    'fa fa-external-link',
       action:  'applicationUrl',
       enabled: this.linkEnabler(),
     },
     {
-      label:   'action.showQRcode',
+      label:   'actions.show_qrcode',
       icon:    'fa fa-qrcode',
       action:  'showQRcode',
       enabled: true,

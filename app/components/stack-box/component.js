@@ -1,118 +1,139 @@
 import Component from '@ember/component';
-import C from 'nilavu/utils/constants';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { get } from '@ember/object';
 import { alias } from '@ember/object/computed';
-import { isEmpty } from '@ember/utils';
-import { isEqual } from '@ember/utils';
+import { isEmpty, isEqual } from '@ember/utils';
+import C from 'nilavu/utils/constants';
+import VisualStatus from 'nilavu/utils/visual_status';
 
 export default Component.extend({
   store:            service(),
   classNames:       ['container-list'],
-  pollInterval:     2000,
-  pollTimer:        null,
-  offAssembly:      ['Stopped', 'Failed'],
-  assemblyFactory:  alias('model.spec.assembly_factory'),
-  assemblyEndpoint: alias('model.spec.endpoints'),
+
   spec:             alias('model.spec'),
   metaData:         alias('model.metadata'),
+  objectMeta:       alias('model.object_meta'),
+  status:           alias('model.status'),
 
-  region: function() {
-    return this.get('assemblyFactory.object_meta.cluster_name');
-  }.property('assemblyFactory.object_meta.cluster_name'),
+  // The parent
+  assemblyFactory:           alias('spec.assembly_factory'),
+  assemblyFactoryObjectMeta: alias('assemblyFactory.object_meta'),
 
-  name: function() {
-    let nameCollection = this.get('model.object_meta.name').split('.');
+  // The Basic plan
+  //
+  blueprint:  alias('assemblyFactory.spec.plan'),
 
-    if (!isEmpty(nameCollection)) {
-      return nameCollection[0];
+  // The endpoints contains, ip address
+  endpoints: alias('spec.endpoints'),
+
+  // Basics
+  // 1. Id
+  // 2. Name
+  // 3. Location
+  id: alias('model.id'),
+
+  location: alias('assemblyFactoryObjectMeta.cluster_name'),
+
+  name: computed('objectMeta.name', function() {
+    const ns = this.get('objectMeta.name').split('.');
+    const n  = ns.get('firstObject');
+
+    if (!isEmpty(n)) {
+      return n;
     }
-  }.property('model'),
 
-  assemblyPhase: function() {
-    return this.get('model.status.phase');
-  }.property('model.status.phase'),
+    return C.UNKNOWN;
+  }),
 
-  id: function() {
-    return this.get('model.id');
-  }.property('model.id'),
+  /* The section is about status */
+  statusPhase: computed('status', function() {
+    return get(this, 'status.phase')
+  }), //eslint-disable-line
 
-  assemblyConditionMessage: function() {
-    return (!isEmpty(this.get('model.status.reason'))) ? this.get('model.status.reason') : '';
-  }.property('model.status.reason', 'assemblyStatus'),
+  // The last status message reasoned updated
+  statusReason: computed('status.reason', function() {
+    return (!isEmpty(this.get('status.reason'))) ? this.get('status.reason') : '';
+  }),
 
-  image: function() {
-    return this.get('assemblyFactory.spec.plan.icon');
-  }.property('model'),
+  // History of what happened. This is essentially all conditions.
+  statusHistory: computed('status.conditions', function() {
+    const c =  get(this, 'status.conditions').map((c) => {
+      const cs = c.status.trim().toLowerCase();
 
-  version: function() {
-    return this.get('assemblyFactory.spec.plan.version');
-  }.property('assemblyFactory.spec.plan.version'),
+      const csm = cs.match(/true/i);
 
-  addressesLength: function() {
-    return this.get('assemblyEndpoint.subsets.addresses').length;
-  }.property('assemblyEndpoint.subsets.addresses'),
+      const csi = csm  ? '"icon check"' : '"icon times"';
 
-  appliedBluePrintName: function() {
-    var icon = '';
-    var self = this;
+      const csr = csm ? ' ' : c.reason; // eslint-disable-line
 
-    if (!isEmpty(this.get('assemblyFactory.spec.plan'))) {
-      this.get('assemblyFactory.spec.plan.plans').filter((plan) => {
-        var planIcon = '';
+      return  `<fa icon=${ csi }>${ c.condition_type }${ csr }</fa> <br></br>`;
+    });
 
-        if (isEqual(plan.object_meta.name, self.get('assemblyFactory.metadata.rioos_sh_blueprint_applied'))) {
-          plan.icon.split('.')[0].split('_').forEach((s) => {
-            planIcon = `${ planIcon + s.capitalize()  } `;
-          });
-          icon = planIcon;
-        }
+    return c.join('').htmlSafe();
+
+  }),
+
+  // The style attr of the status
+  statusAttr: computed('status.phase', function() {
+    const health = get(this, 'status.phase');
+
+    return  VisualStatus.create({ health }).attr();
+  }),
+
+  // An enhanced tooltip
+  statusToolTip: computed('status.phase', function() {
+    const health = get(this, 'status.phase');
+
+    return  VisualStatus.create({ health }).tooltip();
+  }),
+
+  /* The section about blueprints */
+  blueprintVersion: alias('blueprint.version'), //eslint-disable-line
+
+  blueprintParentIcon: alias('blueprint.icon'), //eslint-disable-line
+
+  // From a list of plans grab the icon of the plan applied.
+  blueprintName: function() {
+    const self = this;
+
+    if (!isEmpty(this.get('blueprint'))) {
+      const p =   get(this, 'blueprint.plans').filter((plan) => {
+        return   isEqual(plan.object_meta.name, self.get('assemblyFactory.metadata.rioos_sh_blueprint_applied'));
       });
+
+      const pf = p.get('firstObject');
+
+      // strip the file extenstion (example: .png, .jpg)
+      if (!isEmpty(pf)) {
+        return  pf.icon.replace(/\.[0-9a-z]+$/i, '').capitalize();
+      }
+
     }
 
-    return icon;
+    return `${ C.UNKNOWN  }`
+
   }.property('assemblyFactory'),
 
-  assemblyStatus: function() {
-    var state = '';
+  /* The section about endpoints */
+  hasIPs: function() {
+    return get(this, 'endpoints.subsets.addresses').length;
+  }.property('endpoints.subsets.addresses'),
 
-    C.MANAGEMENT.STATUS.WARNING.forEach((status) => {
-      if (status === this.get('model.status.phase').toLowerCase()) {
-        state = C.MANAGEMENT.STATE.WARNING;
-      }
-    });
-    C.MANAGEMENT.STATUS.FAILURE.forEach((status) => {
-      if (status === this.get('model.status.phase').toLowerCase()) {
-        state = C.MANAGEMENT.STATE.FAILURE;
-      }
-    });
-    C.MANAGEMENT.STATUS.SUCCESS.forEach((status) => {
-      if (status === this.get('model.status.phase').toLowerCase()) {
-        state = C.MANAGEMENT.STATE.SUCCESS;
-      }
-    });
+  // This has both ip and its protocol tied up and formatted as a html
+  // Think the function must me named renderIPAndProtocols ?
+  ips: function() {
+    const e = get(this, 'endpoints.subsets.addresses');
+    let all = '';
 
-    return state;
-  }.property('model.status.phase'),
+    return (e.map((xe) => {
+      const ip = xe.ip;
+      const protocol_version = xe.protocol_version.toLowerCase();
 
-  assemblyState: function() {
-    var state = C.ASSEMBLY.ASSEMBLYON;
+      return  all.concat(`<p class=text1>${ protocol_version }</p>`, `<p class=text2>${ ip }</p>`);
+    })).join('').htmlSafe();
 
-    C.ASSEMBLY.ASSEMBLYOFFPHASES.forEach((phase) => {
-      if (this.get('model.status.phase').toLowerCase() === phase) {
-        state = C.ASSEMBLY.ASSEMBLYOFF
-      }
-    });
-
-    return state;
-  }.property('model.status.phase'),
-
-  ip: function() {
-    return this.ipFinder();
-  }.property('assemblyEndpoint.subsets.addresses.@each.{ip}'),
-
-  ipType: function() {
-    return this.ipTypeFinder();
-  }.property('assemblyEndpoint.subsets.addresses.@each.{protocol_version}'),
+  }.property('endpoints.subsets.addresses'),
 
   metricsData: function() {
     if (this.get('spec.metrics')) {
@@ -122,25 +143,12 @@ export default Component.extend({
     return this.metricsDataFinder();
   }.property('model.spec.metrics.@each'),
 
-  ipFinder() {
-    if (!isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
-      return this.get('assemblyEndpoint.subsets.addresses')[0].ip;
-    }
-
-    return 'Not yet assigned';
-  },
-
-  ipTypeFinder() {
-    if (!isEmpty(this.get('assemblyEndpoint.subsets.addresses'))) {
-      return this.get('assemblyEndpoint.subsets.addresses')[0].protocol_version;
-    }
-
-    return C.ASSEMBLY.ASSEMBLYIPV4;
-  },
 
   metricsDataFinder() {
+
     if (!(this.get(`model.spec.metrics.${  this.get('model.id') }`) === undefined)) {
       this.set('model.spec.metrics.counter', parseInt(this.get(`model.spec.metrics.${  this.get('model.id') }`)));
+      alert(`=> metrics ${  this.get('spec.metrics') }`);
 
       return this.get('spec.metrics');
     }

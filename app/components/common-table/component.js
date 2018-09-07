@@ -12,20 +12,20 @@ export default Component.extend({
 
   columns: computed(function() {
     return [{
-      label:          get(this, 'intl').t('audits.tableHeader.info'),
+      label:          get(this, 'intl').t('eventsPage.table.info'),
       valuePath:      'envelope.event.message',
       cellClassNames: 'info-column',
       sortable:       false,
       cellComponent:  'label-info'
     }, {
-      label:          get(this, 'intl').t('audits.tableHeader.ip'),
+      label:          get(this, 'intl').t('eventsPage.table.ip'),
       valuePath:      'envelope.address',
       cellClassNames: 'ipaddress-column',
       width:          '16%',
       sortable:       false,
 
     }, {
-      label:          get(this, 'intl').t('audits.tableHeader.dateAndTime'),
+      label:          get(this, 'intl').t('eventsPage.table.dateAndTime'),
       valuePath:      'envelope.timestamp',
       style:          'font-weight:bold',
       cellClassNames: 'date-column',

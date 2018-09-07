@@ -8,18 +8,18 @@ export default Component.extend({
   maxDiskResource: function(){
     return {
       name:        'max-disk',
-      suffix:      get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
-      description: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.description'),
-      title:       get(this, 'intl').t('launcherPage.scaling.scaledown.storageCapacity.title')
+      suffix:      get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      description: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      title:       get(this, 'intl').t('launcherPage.scaling.down.storage.limit')
     };
   }.property(),
 
   minDiskResource: function(){
     return {
       name:        'min-disk',
-      suffix:      get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
-      description: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.description'),
-      title:       get(this, 'intl').t('launcherPage.scaling.scaleup.storageCapacity.title')
+      suffix:      get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      description: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      title:       get(this, 'intl').t('launcherPage.scaling.up.storage.limit')
     };
   }.property(),
 });

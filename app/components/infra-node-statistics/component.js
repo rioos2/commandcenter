@@ -1,16 +1,48 @@
 import Component from '@ember/component';
+import { get, computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
   classNames: ['category-tab'],
 
-  reportNodesUpdate: function() {
-    if (!isEmpty(this.get('counterModel.content'))) {
-      this.get('counterModel.content').objectAt(0).results.statistics.ninjas.forEach((mn) => {
-        if (this.get('model.id') === mn.id){
-          this.set('model.counter', mn.counter);
-        }
-      });
+  // Return the id
+  id: computed('model',  function() {
+    return get(this, 'model.id');
+  }),
+
+  // Return the name
+  name: computed('model',  function() {
+    return get(this, 'model.name');
+  }),
+
+  // Return the id
+  date: computed('model',  function() {
+    return get(this, 'model.date');
+  }),
+
+  // Return the health
+  health: computed('model',  function() {
+    return get(this, 'model.health');
+  }),
+
+  // Return the counter
+  counter: computed('model',  function() {
+    return get(this, 'model.counter');
+  }),
+
+  statisticsChanged: function() {
+    const changed = this.get('healthzModel.content');
+
+    if (!isEmpty(changed)) {
+      const f = changed.get('firstObject');
+
+      if (!isEmpty(f)) {
+        f.results.statistics.ninjas.forEach((n) => {
+          if (this.get('id') === n.id){
+            this.set('counter', n.counter);
+          }
+        });
+      }
     }
-  }.observes('counterModel.content.@each.results.statistics.ninjas.@each.counter', 'model'),
+  }.observes('healthzModel.content.@each.results.statistics.ninjas.@each.counter', 'model'),
 });

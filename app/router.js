@@ -81,21 +81,26 @@ Router.map(function() {
         resetNamespace: true
       }, function() {
         this.route('index', { path: '/' });
-        this.route('createcloud', { path: '/createcloud' });
-        this.route('createcontainer', { path: '/createcontainer' });
-        this.route('blockchain', { path: '/blockchain' }, function() {
-          this.route('createnetwork', { path: '/createnetwork' });
-          this.route('createapplication', { path: '/createapplication' });
-        });
-        // A single application (digital cloud, containers, blockchain)
-        // Allows console based on the type of application
-        this.route('stack', {
-          path:           '/stack',
-          resetNamespace: true
-        }, function() {
-          this.route('console', { path: '/console' });
-          this.route('container-console', { path: '/containerconsole' });
-        });
+      });
+
+      // A single application  - digital cloud
+      // Allows console based on the type of application
+      this.route('machines', {
+        path:           '/machines',
+        resetNamespace: true
+      }, function() {
+        this.route('new', { path: '/new' });
+        this.route('console', { path: '/console' });
+      });
+
+      // A single application - containers
+      // Allows console based on the type of application
+      this.route('containers', {
+        path:           '/containers',
+        resetNamespace: true
+      }, function() {
+        this.route('new', { path: '/new' });
+        this.route('console', { path: '/console' });
       });
     });
 

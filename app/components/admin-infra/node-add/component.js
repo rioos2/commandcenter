@@ -12,15 +12,15 @@ export default Component.extend(DefaultHeaders, {
   notifications: service('notification-messages'),
 
   noteForRangeSubnet: function() {
-    return htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForRangeSubnet'));
+    return htmlSafe(get(this, 'intl').t('dojos.dashboard.ninjas.install.subnet.range.note'));
   }.property('model'),
 
   noteForAdvanceSubnet: function() {
-    return htmlSafe(get(this, 'intl').t('stackPage.admin.node.noteForAdvanceSubnet'));
+    return htmlSafe(get(this, 'intl').t('dojos.dashboard.ninjas.install.subnet.range.note'));
   }.property('model'),
 
   subnetAdvancePlaceHolder: function() {
-    return get(this, 'intl').t('stackPage.admin.node.searchNodeBySubnetPlaceholder');
+    return get(this, 'intl').t('dojos.dashboard.ninjas.install.ipblock.placeholder');
   }.property('model'),
 
   types: function() {

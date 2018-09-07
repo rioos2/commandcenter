@@ -8,16 +8,16 @@ export default Component.extend({
   maxMemoryResource: function(){
     return {
       name:   'max-memory-select',
-      suffix: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
-      title:  get(this, 'intl').t('launcherPage.scaling.scaleup.ramChooser.title')
+      suffix: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      title:  get(this, 'intl').t('launcherPage.scaling.up.memory.limit')
     };
   }.property(),
 
   minMemoryResource: function(){
     return {
       name:   'min-memory-select',
-      suffix: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
-      title:  get(this, 'intl').t('launcherPage.scaling.scaledown.ramChooser.title')
+      suffix: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
+      title:  get(this, 'intl').t('launcherPage.scaling.down.memory.limit')
     };
   }.property(),
 });

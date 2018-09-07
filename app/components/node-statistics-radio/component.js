@@ -13,7 +13,7 @@ export default Component.extend({
   }.observes('activate'),
 
   aliasName: function(){
-    return this.get('name') === C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.nodeStatistics.errorAliceName') : this.get('name');
+    return this.get('name') === C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.statistics.rx_tx') : this.get('name');
   }.property('name'),
 
   actions: {

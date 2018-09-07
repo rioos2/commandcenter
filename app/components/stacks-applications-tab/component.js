@@ -18,7 +18,7 @@ export default Component.extend({
   }.property('tab'),
 
   title: function() {
-    return this.get('intl').t(`stackPage.${  this.get('tab') }`);
+    return this.get('intl').t(`managePage.${  this.get('tab') }.title`);
   }.property('tab'),
 
 

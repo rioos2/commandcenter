@@ -36,7 +36,7 @@ export default Mixin.create({
       if (isEmpty(this.get('password'))) {
         return InputValidation.create({
           failed: true,
-          reason: get(this, 'intl').t('validate.user.password.empty_password')
+          reason: get(this, 'intl').t('validation.user.password.empty_password')
         });
       }
 
@@ -44,7 +44,7 @@ export default Mixin.create({
         return InputValidation.create({
           failed: true,
           reason: this.get('rejectedPasswordsMessages').get(this.get('password')) ||
-            get(this, 'intl').t('validate.user.password.common_password')
+            get(this, 'intl').t('validation.user.password.common_password')
         });
       }
 
@@ -52,21 +52,21 @@ export default Mixin.create({
       if (this.get('password').length < this.get('passwordMinLength')) {
         return InputValidation.create({
           failed: true,
-          reason: get(this, 'intl').t('validate.user.password.too_short', { character_length: this.get('passwordMinLength') })
+          reason: get(this, 'intl').t('validation.user.password.too_short', { character_length: this.get('passwordMinLength') })
         });
       }
 
       if (!isEmpty(this.get('username')) && this.get('password') === this.get('username')) {
         return InputValidation.create({
           failed: true,
-          reason: get(this, 'intl').t('validate.user.password.same_as_username')
+          reason: get(this, 'intl').t('validation.user.password.same_as_username')
         });
       }
 
       if (!isEmpty(this.get('accountEmail')) && this.get('password') === this.get('accountEmail')) {
         return InputValidation.create({
           failed: true,
-          reason: get(this, 'intl').t('validate.user.password.same_as_email')
+          reason: get(this, 'intl').t('validation.user.password.same_as_email')
         });
       }
 

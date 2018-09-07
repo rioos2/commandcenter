@@ -10,6 +10,7 @@ describe('Unit: Component: theme-spinner', () => {
   });
 
   it('renders', function() {
+
     // creates the component instance
     let component = this.subject();
     // this need to be set as true because this component only shown by 'show' property

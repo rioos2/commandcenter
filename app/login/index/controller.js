@@ -5,9 +5,11 @@ import Controller from '@ember/controller';
 import { schedule } from '@ember/runloop';
 import $ from 'jquery';
 import { later } from '@ember/runloop';
-export default Controller.extend(/* LoginValidation,*/ {
+import LoginValidation from 'nilavu/mixins/login-validation';
 
-  // LoginValidation validate username, password
+
+export default Controller.extend(LoginValidation, {
+
   access:        service(),
   intl:          service(),
   notifications: service('notification-messages'),
@@ -52,7 +54,7 @@ export default Controller.extend(/* LoginValidation,*/ {
     if (this.get('errorMsg')) {
       return this.get('errorMsg');
     } else if (this.get('timedOut')) {
-      return this.get('intl').t('loginPage.error.timedOut');
+      return this.get('intl').t('loginPage.error.session_timeout');
     } else {
       return '';
     }
@@ -64,7 +66,7 @@ export default Controller.extend(/* LoginValidation,*/ {
     },
 
     login() {
-      this.showCredentialEmpty();
+      this.required();
       if (!this.get('validate')) {
         this.set('showSpinner', true);
         later(() => {
@@ -75,14 +77,14 @@ export default Controller.extend(/* LoginValidation,*/ {
           }).catch((err) => {
             // err.code from api_gateway is return a string. It's desireable send it as int
             if (C.UNAUTHENTICATED_HTTP_CODES.includes(parseInt(err.code))) {
-              this.get('notifications').warning(get(this, 'intl').t('notifications.invalidCredential'), {
+              this.get('notifications').warning(get(this, 'intl').t('loginPage.error.username_password_incorrect'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
               });
             }
-            if (err.status === C.INTERNALSERVER_HTTP_CODES) {
-              this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
+            if (C.INTERNALSERVER_ERROR === parseInt(err.status)) {
+              this.get('notifications').warning(get(this, 'intl').t('error.apiserver_is_down'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
@@ -105,7 +107,7 @@ export default Controller.extend(/* LoginValidation,*/ {
     }
   },
 
-  showCredentialEmpty() {
+  required() {
     this.get('userNameValidation.failed') ?  this.set('userNameValidate', 'credential-empty') : this.set('userNameValidate', '');
     this.get('passwordValidation.failed') ? this.set('passwordValidate', 'credential-empty') : this.set('passwordValidate', '');
   },

@@ -3,7 +3,7 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName:          'section',
   className:        '',
-  selectedInfraTab: 'sensei',
+  selectedInfraTab: 'senseis',
   panels:           [],
 
   actions: {

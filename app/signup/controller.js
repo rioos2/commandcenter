@@ -66,7 +66,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
 
   actions: {
     signUp() {
-      this.showCredentialEmpty();
+      this.required();
       if (!this.get('validate')) {
 
         later(() => {
@@ -74,7 +74,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
             this.send('finishLogin');
           }).catch((err) => {
             if (err.status === C.INTERNALSERVER_ERROR) {
-              this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
+              this.get('notifications').warning(get(this, 'intl').t('error.apiserver_is_down'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
@@ -83,7 +83,7 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
             // Show error message if emailid already exist
             if (err.code === C.INTERNAL_CONFLICTS) {
               this.set('val_email', 'credential-empty');
-              this.set('emailErrorMsg', get(this, 'intl').t('notifications.emailExist'));
+              this.set('emailErrorMsg', get(this, 'intl').t('validations.name.exists'));
               this.set('emailExistence', false);
             }
           })
@@ -100,21 +100,20 @@ export default Controller.extend(SignupValidation, EmailValidation, PasswordVali
       }
     }
   },
+
   getform() {
     this.set('accountEmail', this.get('accountEmail').toLowerCase());
     let attrs = this.getProperties('name', 'company_name', 'email', 'first_name', 'last_name', 'firstname', 'phone', 'password');
-    var unUsedAttrs = this.unUsedAccountFields();
+    var notUsedAttrs = this.notUsedAccountFields();
 
-    return $.extend(attrs, unUsedAttrs);
+    return $.extend(attrs, notUsedAttrs);
   },
 
-  unUsedAccountFields() {
-    let unUsedFields = { registration_ip_address: '', };
-
-    return unUsedFields;
+  notUsedAccountFields() {
+    return  { registration_ip_address: '', };
   },
   // notify if there is any errors
-  showCredentialEmpty() {
+  required() {
     this.get('companyNameValidation.failed') ? this.set('val_company', 'credential-empty') : this.set('val_company', '');
     this.get('fullNameValidation.failed') ? this.set('val_firstName', 'credential-empty') : this.set('val_firstName', '');
     this.get('lastNameValidation.failed') ? this.set('val_lastName', 'credential-empty') : this.set('val_lastName', '');

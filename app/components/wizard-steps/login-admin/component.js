@@ -34,14 +34,14 @@ export default Component.extend({
             this.sendAction('proceedNextStep');
           }).catch((err) => {
             if (err.code === '401') {
-              this.get('notifications').warning(get(this, 'intl').t('notifications.invalidCredential'), {
+              this.get('notifications').warning(get(this, 'intl').t('error.username_password_incorrect'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'
               });
             }
             if (err.status === 500) {
-              this.get('notifications').warning(get(this, 'intl').t('notifications.somethingWentWrong'), {
+              this.get('notifications').warning(get(this, 'intl').t('error.apiserver_is_down'), {
                 autoClear:     true,
                 clearDuration: 4200,
                 cssClasses:    'notification-warning'

@@ -9,6 +9,6 @@ export default Component.extend({
   didInsertElement() {
     let d = document.getElementById(`empty-message-${ this.get('type') }`);
 
-    d.insertAdjacentHTML('afterend', get(this, 'intl').t(`dashboard.emptyNode.${ this.get('type') }`));
+    d.insertAdjacentHTML('afterend', get(this, 'intl').t(`dashboard.statistics.required.${ this.get('type') }`));
   },
 });
