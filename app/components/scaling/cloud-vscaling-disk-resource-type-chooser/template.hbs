@@ -4,10 +4,10 @@
       <div class="col-md-12">
         <div class="rio-selectbtn row">
           <div class="col-md-6">
-            {{createcloud/chart-storage class="chart-storage" model=model initValue=model.vscaling.spec.max_resource.storage resource=maxDiskResource}}
+            {{deploy-widgets/chart-storage class="chart-storage" model=model initValue=model.vscaling.spec.max_resource.storage resource=maxDiskResource}}
           </div>
           <div class="col-md-6">
-            {{createcloud/chart-storage class="chart-storage" model=model initValue=model.vscaling.spec.min_resource.storage resource=minDiskResource}}
+            {{deploy-widgets/chart-storage class="chart-storage" model=model initValue=model.vscaling.spec.min_resource.storage resource=minDiskResource}}
           </div>
         </div>
         <div class="rio-selectbtn row">

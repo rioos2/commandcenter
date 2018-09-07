@@ -1,70 +1,35 @@
 /* global d3 */
 import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
+import HealthGauges from 'nilavu/utils/health_gauges';
+import C from 'nilavu/utils/constants';
 
 export default Component.extend({
 
   tagName: '',
 
-  guageOne: function() {
-    // ram
-    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('memory') : this.decide(this.contentData().counters[0], 'memory');
+  showCounters: [],
+
+  builtIns: function() {
+    return this.get('showCounters');
   }.property('model', 'model.counters.@each.counter'),
 
-  guageTwo: function() {
-    // cpu
-    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('cpu') : this.decide(this.contentData().counters[1], 'cpu');
-  }.property('model', 'model.counters.@each.counter'),
+  init() {
+    this._super(...arguments);
 
-  guageThree: function() {
-    // disk
-    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('storage') : this.decide(this.contentData().counters[2], 'storage');
-  }.property('model', 'model.counters.@each.counter'),
+    const model = this.get('model');
 
-  guageFour: function() {
-    // gpu
-    if (!isEmpty(Object.keys(this.contentData()))) {
-      if (this.contentData().counters.length > 3) {
-        return this.shave(this.contentData().counters[3]);
-      }
-    }
+    const props = C.BUILTIN_BASIC_GAUGES;
 
-    return this.emptyData('gpu');
-  }.property('model', 'model.counters.@each.counter'),
+    const hg = HealthGauges.create({
+      model,
+      props
+    });
 
-  emptyData(data) {
-    return {
-      name:    data,
-      counter: '0',
-    }
+    this.set('showCounters', hg.show);
   },
 
-  contentData() {
-    if (this.get('model')) {
-      return this.get('model');
-    }
-
-    return {};
-  },
-
-  decide(guageValue, name) {
-    return !isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
-  },
-
-  shave(guageValue) {
-    let name = guageValue.name;
-
-    if ((guageValue.name).split('_').length > 1) {
-      name = (guageValue.name).split('_')[0];
-    }
-
-    return {
-      name,
-      counter:     parseInt(guageValue.counter),
-      description: guageValue.description,
-      cpu:         guageValue.cpu,
-    }
-
-  },
 
 });
+
+
+

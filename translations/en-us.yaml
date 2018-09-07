@@ -1,11 +1,168 @@
-languageName:                         "English"
-languageContribute:                   "Help Translate Rio/OS"
-rioosXYZ:                             "Rio/OS"
-
-##############################
-# Really generic things used in multiple places (use sparingly)
-##############################
+languageName: English
+rioosXYZ: Rio/OS
 generic:
+<<<<<<< HEAD
+  about: About
+  actions: Actions
+  createdAt: 'Created At'
+  description: Description
+  emptyString: ""
+  enable: Enable
+  enabled: Enabled
+  email: Email
+  emails: Emails
+  username: 'User name'
+  password: Password
+  status: Status
+  select: Select
+  missing: '*%MISSING%*'
+  name: Name
+  number: Number
+  none: None
+  saved: Saved
+  saving: Saving
+  noo: No
+  yess: Yes
+  note: 'NOTE:  '
+  M: M
+  N: N
+  O: O
+  P: P
+  S: S
+
+###########################
+# action names commonly used must be here
+###########################
+#
+actions:
+  none: 'No actions available'
+  save: Save
+  search: Search
+  edit: Edit
+  editMe: 'Edit me'
+  set: Set
+  delete: Delete
+  open_console: 'Open Console'
+  download_secret: 'Download Secret'
+  show_qrcode: 'Show QR Code'
+  open_ui: 'Open UI'
+  view: View
+  add: Add
+  deploy: Deploy
+#########################
+# The main navigation bar
+########################
+nav:
+  dashboard: Dashboard
+  deploy:
+    title: Deploy
+    digitalcloud: 'Digital cloud'
+    docker: Container
+    application: 'Application from Git'
+  manage: Manage
+  user:
+    origin:
+      title: Organization
+      add: 'Add organization'
+    profile: Profile
+    logout: Logout
+  admin: Admin
+
+########################
+# Getting Started Wizard
+########################
+wizards:
+  step1:
+    title: Welcome
+    detail: 'Congratulations, you installed Rio OS Version 2.0'
+    slogan: '<p>The world''s first and only enterprise cloud operating system.</p> <p>Finally, The Power Of The Cloud With The Privacy Of Ownership.</p> <p>Launch & Scale Your Own Cloud In Seconds</p> <p>Register a new account to get started.</p>'
+  step2:
+    title: Register
+    created: 'Account already created'
+  step3:
+    title: License
+    detail: 'If you already have a license key, use the form and button below to get started now.'
+    static1: 'You can use Rio OS Version 2.0 for free, use the button to simply sign up for a <span>free</span> trial license now.'
+    activate: Activate
+    new: 'NEW USERS'
+    trial: 'ACTIVATE TRIAL'
+    licensed: 'ALREADY HAVE A LICENSE?'
+    save: 'ACTIVATE KEY'
+    id:
+      placeholder:  'Enter license Id - from your purchase invoice email'
+    password:
+      placeholder: 'Enter license password - from your purchase invoice email'
+
+##########
+# Login
+#########
+# The required sections tell us to say which ones are need.
+# We load the required sections and send out message like
+##  - Missing email, Missing username
+loginPage:
+  title: 'SIGN IN'
+  loggingIn: ' (START VERIFICATION)'
+  signup: 'Sign up'
+  require:
+    email: 'Enter username'
+    password: 'Enter password'
+  error:
+    username_password_incorrect: 'Username or Password is incorrect.'
+    session_timedOut: 'Your session has timed out.  Log in again to continue.'
+    email_exists: 'Sorry, that email is not available.'
+
+#######
+# Signup section
+#######
+#
+signupPage:
+  title: 'SIGN UP'
+  static1: 'Already have an account?'
+  company_name: 'Company name'
+  first_name: 'First name'
+  last_name: 'Last name'
+  phone: Phone
+  password: 'Activate on code'
+  create_account: 'Create account'
+  signin: 'Sign in'
+
+########
+# Main dashboard
+# Gauges, Statistics, OS USAGE
+#
+#
+dashboard:
+  toggle: 'Toggle navigation'
+  gauges:
+    title: 'Main Gauges'
+    subtitle: 'ain gauges'
+    power: 'usage -'
+    percent: '%'
+  statistics:
+    title: Statistics
+    subtitle: tatistics
+    static1: CHOOSE
+    static2: CATEGORY
+    ninja: inja
+    sensei: ensei
+    throughput: Throughput
+    rx_tx: 'Tx/Rx errors'
+    price_per_month: 'Price per month'
+    USD: USD
+    required:
+      ninja: '<p>You must connect ninjas to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup ninjas in Rio OS.</p>'
+      sensei: '<p>You must connect senseis to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup senseis in Rio OS.</p>'
+  osusages:
+    title: 'OS usage by time'
+    subtitle: 's usage by time'
+  error: '<p>Failed to pull metrics about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>'
+
+##########
+# Events
+##########
+eventsPage:
+  title: 'Event Logs'
+=======
   actions:                            Actions
   activate:                           Activate
   any:                                Any
@@ -107,24 +264,67 @@ accountsPage:
 
 auditLogsPage:
   header:                             Audit Logs
+>>>>>>> 2-1-stable
   form:
     eventType:
-      placeholder:                    Event Type
+        placeholder: 'Event Type'
     resourceType:
-      placeholder:                    "Resource Type:"
-      dropdownPlaceholder:            'Select a Resource Type:'
-      dropdownList:
+        placeholder: 'Resource Type:'
+        dropdownPlaceholder: 'Select a Resource Type:'
+        dropdownList: null
     resourceId:
-      placeholder:                    Resource ID
+        placeholder: 'Resource ID'
     requestIp:
-      placeholder:                    Request IP
+        placeholder: 'Request IP'
     authType:
-      placeholder:                    "Auth Type:"
-      dropdownPlaceholder:            'Select an Auth Type:'
-      dropdownList:
-    clearButtonText:                  Clear Filters
-    searchButtonText:                 Search
+        placeholder: 'Auth Type:'
+        dropdownPlaceholder: 'Select an Auth Type:'
+        dropdownList: null
+    clearButtonText: 'Clear Filters'
   table:
+<<<<<<< HEAD
+    info: Info
+    ip: 'IP Address'
+    dateAndTime: 'Date and time'
+    time: Time
+    eventType: 'Event Type'
+    environment: Environment
+    resourceTypeId: 'Resource Type:ID'
+    identity: Identity
+    authIp: 'Auth & IP'
+  first: 'First Page'
+  next: 'Next Page'
+  error: '<span>Failed to pull events from blockchain. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>'
+#############################
+# Administrative dashboard
+# sections like:
+# users, settings, infrastructure
+#############################
+dojos:
+  users:
+    title: Users
+  settings:
+    title: Settings
+    logs:
+      title:  Logs
+      required: 'No logs added yet.'
+      table:
+        info: Description
+        dateAndTime: 'Date and time'
+    entitlement:
+      title: Licenses
+      edit:
+        title: 'Edit activation code'
+        static1: ' -  Expires in '
+        static2: ' days'
+        trial: Trial
+        code:
+          title: 'Enter activation code'
+          id: 'Enter licence id'
+          password: 'Enter licence password'
+          success: 'Awesome. You have activated the full version successfully'
+          error: "Couldn't activate the full version. Try again"
+=======
     time:                             Time
     eventType:                        Event Type
     description:                      Description
@@ -186,153 +386,204 @@ wizard:
 invitations:
   invitationSuccess:                  'Thanks for accepting your invitation to {teamName} -- welcome'
   invitationFailed:                   Your invite was not accepted. Please contact the site's administrator
+>>>>>>> 2-1-stable
 
-stackPage:
-  machine:                            Digital Cloud
-  container:                          Container
-  blockchain:                         Blockchain
-  launchCloud:                        Launch
-  applicationTab:
-    organization_manage:              Organization Management
-    feature:                          Features
-    clouds:                           clouds
-    filterBy:                         "Filter by:"
-  admin:
-    header:
-      toggle:                         Toggle navigation
-      add_btn:                        Add
-      active_btn:                     Set
-      activate_btn:                   Activate
-      save_btn:                       Save
-      search_discovery_btn:           Search & Discover
-      for_organ1:                     create team
-    sensei:
-      title:                          Senseis
-      connected:                      'Connected Senseis'
-      noNode:                         No senseis added yet.
-    node:
-      title:                          Ninjas
-      connected:                      'Connected Ninjas'
-      for_organ2:                     Organization Management
-      discoverNodes:                  'Discovered Ninjas'
-      noNode:                         No Ninjas added yet.
-      noNodeDiscovered:               No ninjas descovered yet.
-      ip:                             IP
-      schedule:                       Scheduled
-      bridges:                        Bridges
-      noBridges:                      No bridges attached.
-      status:                         Status
-      metrics:                        Metrics
-      metricsShow:                    View
-      addNode:                        'Add Node'
-      discoverNode:                   'Discover Ninjas'
-      nodeCreate:                     'Ninja install started successfully'
-      nodeRetry:                      'Ninja retried started successfully'
-      nodeSecretCreate:               'Node secret create successfully'
-      nodeFailed:                     'Ninja install failed'
-      nodeRetryFailed:                'Ninja retry failed'
-      select_auth_placeholder:        'Select authentication type'
-      nodeSearchDiscovery:            'Search & Discover'
-      selectDiscoveryMode:            'Select discovery mode'
-      nodeNote: 'NOTE:                '
-      searchNodeBySubnet:             'Enter an IP Block in CIDR notation'
-      searchNodeBySubnetPlaceholder: 'eg: 192.168.2.0/24'
-      fromSubnet:                     'From IP address'
-      toSubnet:                       'To IP address'
-      noteForAdvanceSubnet: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0/24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
-      noteForRangeSubnet: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0 - 192.168.2.24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
-      emptySubnetAdvanceValue: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
-      subnetRangeError: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
-      subnetRangeZeroError: 'The IP address of the block to be searched must start from zero. Valid: 192.168.2.0/24, 104.111.164.0/31</br>'
-      emptySubnetRangeFrom: 'Missing From IP in CIDR (example: 192.168.1.1)</br>'
-      subnetRangeValidFromError: 'Enter vaild From IP in CIDR (example: 192.168.1.1)</br>'
-      emptySubnetRangeTo: 'Missing To IP in CIDR (example: 192.168.1.1)</br>'
-      subnetRangeValidToError: 'Enter vaild To IP in CIDR (example: 192.168.1.1)</br>'
-      enterUsername:                  'Enter username</br>'
-      enterPassword:                  'Enter password</br>'
-      enterSshKey:                    'Enter SSH public key</br>'
-      searchButtonText:               Search
-      securityVerification:           Security Verification
-      selectAuthenticationMethod:     Select authentication method
-      nodeAuthUsername:               User name
-      nodeAuthPassword:               Password
-      nodeCreateBtn:                  Create
-      nodeSshKey:                     SSH key
-      nodeAuthNote:                   This security verification is used to connect to the node
-      somethingWrong:                 Something went wrong
-      sshPlaceholder: 'Copy & Paste the SSH Private Key: eg: id_rsa.key'
-      nodeStatus:                     Status
-      labelNew:                       New
-      nodeNewReady:                   Ready
-      pricePerMonth:                  Price per month
-      usd:                            USD
-      category:                       CATEGORY
-      choose:                         CHOOSE
-    storage:
-      title:                          Storages
-      connected:                      'Connected Storages'
-      noStorage:                      No storages added yet.
-      addStorage:                     '+Add Storage'
-      detail:                         DETAILS
-      name:                           Name
-      ip:                             IP
-      type:                           Type
-      path:                           Location
-      status:                         Status
-      createdAt:                      Created At
-      addStorageTwo:                  Add a storage
-      select:                         Select Storage
-      ipAddress:                      IP Address for Storage location
-      pass:                           Password
-      user:                           Username
-      noStorageData:                  No storages added yet.
-      edit_title:                     Edit Storage
-      nameError:                      Enter storage Name
-      edit:                           Edit
-      disk:
-        list:                         DISKS
-        free:                         Free Disk / Partition
-        noDisk:                       'No disks added yet.'
-      pool:
-        title:                        POOLS
-        createPool:                   '+Create Pool'
-        noPool:                       'No pools created.'
-        poolCluster:                  Pool Cluster
-        availSize:                    Size
-        usedSize:                     UsedSize
-        add:                          Add pool
-        name:                         Pool Name
-        diskCount:                    No.of Disks
-        status:                       Status
-        nameError:                    Please enter pool name </br>
-        diskError:                    Please select free disk/partition
-        diskChooseMsg:                Using an existing disk/partion that is mounted will result in data loss.
-        disks:                        Disks
-        list:                         View
-        storagesDisplayError:         Create storage before attempting create pool.
-    locations:
-      title:                          Locations
-      connected:                      'Connected Locations'
-      noCluster:                      No locations added yet.
-      addCluster:                     '+Add Location'
-      storage:                        Storage
-      type:                           Type
-      detail:                         DETAILS
-      country:                        Country
-      network:                        Networks
-      status:                         Status
-      noClusterData:                  No locations added yet.
-      noClusterNode:                  No nodes attached.
-      noClusterNetwork:               No virtual networks attached.
-      add_title:                      Add Location
-      add_city:                       Select city
-      add_country:                    Select country
-      add_select_storage:             Select storage
-      add_select_storage_placeholder: Select
-      add_select_country_placeholder: Select country
-      add_select_node:                Select Nodes
-      add_select_network:             Apply Virtual Networks
+  dashboard:
+    title:  Infrastructure
+    senseis:
+      title: Senseis
+      required: 'No senseis added yet.'
+      connected: 'Connected Senseis'
+    ninjas:
+      title: Ninjas
+      success: 'Ninja install in progress'
+      successRetry: 'Ninja retry in progress'
+      successSecret: 'Ninja access secret created'
+      error: 'Ninja install failed'
+      errorRetry: 'Ninja retry failed'
+      detail:
+        title: 'Connected Ninjas'
+        ip: IP
+        schedule: Scheduled
+        addNode: 'Add Node'
+        required: 'No Ninjas added yet.'
+      details:
+        bridges:
+          title: Bridges
+          required: 'No bridges attached.'
+          status: Status
+          metrics: Metrics
+      discovery:
+        title: 'Discovered Ninjas'
+        discover: 'Discover Ninjas'
+        search: 'Search & Discover'
+        required: 'No ninjas discovered yet.'
+      install:
+        note: 'NOTE:                '
+        mode:
+          label: 'Select discovery mode'
+        security:
+          title: 'Security Verification'
+          static: 'Select authentication method'
+          ssh:
+            title: 'SSH key'
+            note: 'This security verification is used to connect to the node'
+            placeholder: 'Copy & Paste the SSH Private Key: eg: id_rsa.key'
+          validation:
+            username: 'Enter username</br>'
+            password: 'Enter password</br>'
+            ssh_pubkey: 'Enter SSH public key</br>'
+        ipblock:
+          label: 'Enter an IP Block in CIDR notation'
+          placeholder: 'eg: 192.168.2.0/24'
+        subnet:
+          range:
+            from: 'From IP address'
+            to: 'To IP address'
+            note: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0 - 192.168.2.24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
+            error: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
+            errorFrom: 'Enter vaild From IP in CIDR (example: 192.168.1.1)</br>'
+            errorTo: 'Enter vaild To IP in CIDR (example: 192.168.1.1)</br>'
+            zero: 'The IP address of the block to be searched must start from zero. Valid: 192.168.2.0/24, 104.111.164.0/31</br>'
+            requiredFrom: 'Missing From IP in CIDR (example: 192.168.1.1)</br>'
+            requiredTo: 'Missing To IP in CIDR (example: 192.168.1.1)</br>'
+          specific:
+            note: '<p>Admins can search and install Rio/OS Ninja. The searched list shows a list of active nodes in an IP block (eg: 192.168.2.0/24) ready to install Rio/OS Ninja on it.</p><br><p>Read about <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">What is Rio/OS Ninja</a></p>'
+            required: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29,192.168.2.1/25)</br>'
+    storages:
+      title: Storages
+      required: 'No storages added yet.'
+      connected: 'Connected Storages'
       add:
+        title: '+Add Storage'
+        addStorage: 'Add a storage'
+      details:
+        title: DETAILS
+        ip: IP
+        type: Type
+        path: Location
+        edit: 'Edit Storage'
+        error: 'Enter storage name'
+      disks:
+        title: DISKS
+        subtitle: 'Free Disk / Partition'
+        required: 'No disks added yet.'
+        size: 'No.of Disks'
+        view:
+          title: Disks
+          required: 'Create storage before attempting create pool.'
+      pools:
+        title: POOLS
+        addPool: '+Add Pool'
+        required: 'No pools added yet.'
+        size: Size
+        usedSize: UsedSize
+        add:
+          title: 'Add pool'
+          name: 'Pool Name'
+          requiredPartition: 'Using an existing disk/partion that is mounted will result in data loss.'
+    locations:
+      title: Locations
+      connected: 'Connected Locations'
+      required: 'No locations added yet.'
+      details:
+        storage: Storage
+        title: DETAILS
+        country: Country
+        network: Networks
+        status: Status
+        required: 'No nodes attached.'
+        requiredNetwork: 'No virtual networks attached.'
+      add:
+<<<<<<< HEAD
+        title: 'Add Location'
+        city: 'Select City'
+        nodes:
+          title: 'Select Nodes'
+        storages:
+          title: 'Select Storages'
+          placeholder: Select
+        country:
+          title: 'Select Country'
+          placeholder: 'Select Country'
+        network:
+          title: 'Apply Virtual Networks'
+        error:
+          requiredStorages: 'Add storage before attempting add location.'
+          requiredNodes: 'Add node before attempting add location.'
+          requiredNetworks: 'Add network before attempting add location.'
+    networks:
+      title: 'Virtual Networks'
+      connected: 'Connected Virtual Networks'
+      required: 'No virtual networks added yet.'
+      details:
+        title: DETAILS
+        type: Type
+        gateway: Gateway
+        nodes: NODES
+        netmask: Netmask
+        range: Range
+      add:
+        title: 'Add Virtual Network'
+        subnet: 'Subnet IP'
+        bridge:
+          title: 'Bridge Type'
+          select: 'Select Nodes'
+          required: 'No nodes attached.'
+      edit:
+        title: 'Edit Virtual Network'
+      error:
+        requiredName: 'Missing name (example: riopub001)</br>'
+        requireType: 'Missing type</br>'
+        requireSubNet: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
+        requiredGateway: 'Missing Gateway IP (example: 192.168.2.1)</br>'
+        requireBridge: 'Missing bridge</br>'
+        requiredNodes: 'Select node</br>'
+        requiredNetmask: 'Missing Netmask (example: 255.255.255.0)</br>'
+        requireBridgeFor: 'Select bridge for selected nodes.<br>'
+        requiredRangeIPV4: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.0/29)</br>'
+        requiredRangeIPV6: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)</br>'
+        reqiredGatewayIPV4: 'Enter vaild Gateway IP (example: 192.168.2.1)</br>'
+        requiredGatewayIPV6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)</br>'
+        requiredNetmaskIPV4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
+        requiredNetmaskIPV6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
+
+##########/
+# Stacks Page
+# Launch, Manage
+managePage:
+  machine:
+    title: 'Digital Cloud'
+    console:
+      title: CONSOLE
+      view: viewer
+      del: 'Send CtrlAltDel'
+    qrcode:
+      title: 'QR code'
+      note: 'Note:'
+      static: '   show the QR code to Access'
+  container:
+    title: Container
+    console:
+      title: 'Shell:                      {instanceName}'
+      protip: 'ProTip:                    Hold the {key} key when opening shell access to launch a new window.'
+      status:
+        initializing: Initializing...
+        error: 'Error:                    {error}'
+        connecting: Connecting...
+        connected: Connected
+        disconnected: Disconnected
+        closed: Closed
+        somethingWrong: 'Unable to connect'
+  filter:
+    title: Features
+    clouds: clouds
+    by: 'Filter by:'
+
+##########/
+# launcher Page
+# digitalcloud, containers
+=======
         cityError:                    Select city</br>
         storageError:                 Select storage</br>
         currencyError:                Select country</br>
@@ -411,172 +662,148 @@ stackPage:
       logs:
         title:                        Logs
         noLogs:                        No logs added yet.
+>>>>>>> 2-1-stable
 launcherPage:
+  machine:
+    title: 'CREATING A DIGITAL CLOUD'
+  container:
+    title: 'CREATING A CONTAINER'
   compute:
-    selectType:                       Pick Cloud Type
-    createCloud:                      CREATING A DIGITAL CLOUD
-    createContainer:                  CREATING A CONTAINER
-    cloudType:                        PICK YOUR CLOUD TYPE
-    BlockchainType:                   CREATING BLOCKCHAIN NETWORK
-    ApplicationType:                  CREATING BLOCKCHAIN
+    title: 'PICK YOUR CLOUD TYPE'
     cpu:
-      title:                          cpu
-      description:                    CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.
-      capTitle:                       CPU
+      title: cpu
+      titleUpcase: CPU
+      static1: 'CPU virtualization emphasizes performance and runs directly on the processor whenever possible. The underlying physical resources are used whenever possible and the virtualization layer runs instructions only as needed to make virtual machines operate as if they were running directly on a physical machine. When CPU resources are overcommitted, the Rio/OS host time-slices the physical processors across all virtual machines so each virtual machine runs as if it has its specified number of virtual processors.'
     gpu:
-      title:                          gpu
-      description:                    The GPU software is installed at the virtualization layer along with the hypervisor. The GPU software creates virtual GPUs enabling every virtual machine (VM) to share the physical GPU installed on the server. The  virtualization software includes a graphics driver for every VM. Because work that was typically done by the CPU is offloaded to the GPU, the user has a much better experience, and demanding engineering and creative applications can now be supported in a virtualized and cloud environment.
-      capTitle:                       GPU
+      title: gpu
+      titleUpcase: GPU
+      static1: 'The GPU software is installed at the virtualization layer along with the hypervisor. The GPU software creates virtual GPUs enabling every virtual machine (VM) to share the physical GPU installed on the server. The  virtualization software includes a graphics driver for every VM. Because work that was typically done by the CPU is offloaded to the GPU, the user has a much better experience, and demanding engineering and creative applications can now be supported in a virtualized and cloud environment.'
   domain:
-    title:                            Select a Domain Name
-    subtitle:                         Edit subdomain or use the configured domain name
-    selectDomain:                     Select a Domain
-    domainPlaceHolder:                Enter domain name
-    emptyDomain:                      You forgot to type a subdomain name
-    domainWithoutSymbol:              subdomain should be alphanumeric
-    domainName:                       Edit me
-    buttonSet:                        Set
-    keyGenerate:
-      title:                          TYPE OF KEY TO GENERATE
-      subtitle:                       Generate a self signed certificate.
-      bitkey:                         BITS IN KEY
-      success:                        Secret key generated successfully.
-      failure:                        Failed to generate secret key. You can't access to digital cloud upon launch.
-      emptyDomain:                    Please enter domain name.
-      emptySecretType:                Please select secret type.
+    title: 'Select a Domain Name'
+    subtitle: 'Edit subdomain or use the configured domain name'
+    required: 'Please enter a domain name.'
+    select:
+      title: 'Select a Domain'
+      placeholder: 'Enter domain name'
+  secret:
+    title: 'TYPE OF KEY TO GENERATE'
+    subtitle: 'Generate a self signed certificate.'
+    bitkey: 'BITS IN KEY'
+    success: 'Secret key generated successfully.'
   location:
-    title:                            Select Location
-    description:                      Select a data center that is close to your location
-    locations:                        Your location(s)
-    empty:                            Nothing found
-    noLocation:                       No location available
-  sysConfig:
-    title:                            Cloud Performance
-    subtitle:                         CLOUD PERFORMANCE
-    description:                      Select system configuration
-    storageType:
-      title:                          Storage type
-      flash:                          Flash
-      or:                             or
-      hdd:                            HDD
-    storageCapacity:
-      title:                          Storage Capacity
-      description:                    you can set any capacity
-      suffix:                         ' GB'
-      suffix-i:                       ' GiB'
-    cpuChooser:
-      title:                          Select number of cores
-      description:                    From 1 to 30
-    peerChooser:
-      title:                          Select number of peers
-      description:                    From 1
-    ramChooser:
-      title:                          ram
-  repo:
-    title:                            Select Repository
-    subtitle: 'Edit repository, eg:   https://github.com/rioadvancement/build-blockchain-insurance-app.git'
-    urlPlaceHolder:                   Enter repository
-    emptyUrl:                         You forgot to type a url
-    invalidFormat:                    Enter vaild url
-  blockchainApp:
-    title:                            Select a Blockchain Network
-    subtitle:                         Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
-    emptynetwork:                     No blockchain network available
-    network:                          Blockchain Networks
-  serverOs:
-    title:                            Server OS
-    subtitle:                         Select preferred system
-    select:                           select
-    selected:                         selected
-    description:                      Troublesome aspect of the slider. Proper use of the settings required a secret knowledge of the underlying codebase, and did not allow for intuitive configuration. Plainly put - the carousel config was poopy.No longer! In version 4.1 the carousel
-      functionality and settings have been re-worked to function in a straight forward, intuitive manner.
-    empty:                            no image selected
-  buildconfig:
-    success:                          Build Config created successfully.
+    title: 'Select Location'
+    required: 'You forgot to select a location'
+    globe:
+      title: 'Select a data center that is close to your location'
+      display: 'Your location(s)'
+      none: 'No location available'
+  resource:
+    title: 'CLOUD PERFORMANCE'
+    description: 'Select system configuration'
+    capacity:
+      cpu:
+        title: 'Select number of cores'
+        description: 'From 1 to 30'
+        static1: Cores
+      ram:
+        title: ram
+        titleUpcase: RAM
+      storage:
+        type:
+        title: 'Storage type'
+        flash: Flash
+        or: or
+        hdd: HDD
+        select:
+          title: 'Storage Capacity'
+          description: 'you can set any capacity'
+          suffix: ' GB'
+          suffix-i: ' GiB'
+  appstore:
+    machine:
+      title: 'Server OS'
+      subtitle: 'Select preferred system'
+      select: select
+      selected: selected
+      required: 'no appstore os selected'
   network:
-    title:                            Networking
-    empty:                            No network selected
+    title: Networking
+    required: 'No network selected'
     type:
-      private:                        Private
-      public:                         Public
-      ipv4:                           IPv4
-      ipv6:                           IPv6
+      private: Private
+      public: Public
+      ipv4: IPv4
+      ipv6: IPv6
   summary:
-    title:                            Summary
-    subtitle:                         verify preferred system
-    cloudType:                        Cloud Type
-    launch:                           Launch your cloud
-    launchThank:                      Thank You
-    domain:
-      empty:                          You forgot to type a domain
-      name:                           Domain Name
-    region:
-      empty:                          You forgot to select a location
-      name:                           Location
-    image:
-      empty:                          No server OS selected
-    config:
-      core:                           Cores
-      number:                         Number
-      ram:                            Ram
+    title: Summary
+    subtitle: 'verify preferred system'
+    cloudType: 'Cloud Type'
+    domain: 'Domain Name'
+    location: 'Location'
+    launch:
+      now: 'Launch your cloud'
+      done: 'Thank You'
   scaling:
-    emptyScaling:                     You forgot to type a resource
-    description:                      Select scaling configuration ( Horizontal / vertical )
-    invalidFormat:                    Enter vaild data
-    title:                            SCALING
-    scale:
-      description:                    ' %'
-    scaleup:
+    title: SCALING
+    subtitle: 'Select scaling configuration ( Horizontal / Vertical )'
+    percent: ' %'
+    up:
       cpu:
-        title:                        'Scale up when CPU is'
-      cpuChooser:
-        title:                        Upper limit for the number of cores
-        description:                  From 1 to 30
-      storageCapacity:
-        title:                        Upper limit - Storage Capacity
-      ramChooser:
-        title:                        Upper limit - Ram
+        title: 'Scale up when CPU is'
+        limit: 'Upper limit for the number of cores'
+        static1: 'From 1 to 30'
+      storage:
+        title: 'Scale up when DISK is'
+        limit: 'Upper limit - Disk Capacity'
       memory:
-        title:                        'Scale up when MEMORY is'
-      disk:
-        title:                        'Scale up when DISK is'
-    scaledown:
+        title: 'Scale up when MEMORY is'
+        limit: 'Upper limit - Memory'
+    down:
       cpu:
-        title:                        'Scale down when CPU is'
-      cpuChooser:
-        title:                        Lower limit for the number of cores
-        description:                  From 1 to 30
-      storageCapacity:
-        title:                        Lower limit - Storage Capacity
-      ramChooser:
-        title:                        Lower limit - Ram
+        title: 'Scale down when CPU is'
+        limit: 'Lower limit for the number of cores'
+        static1: 'From 1 to 30'
+      storage:
+        title: 'Scale down when DISK is'
+        limit: 'Lower limit - Storage Capacity'
       memory:
-        title:                        'Scale down when MEMORY'
-      disk:
-        title:                        'Scale down when DISK is'
+        title: 'Scale down when MEMORY'
+        limit: 'Lower limit - Memory'
     horizontal:
-      title:                          HORIZONTAL SCALING
-      minReplivas:                    Lower limit for the number of replicas set by Rio/OS
-      maxReplivas:                    Upper limit for the number of replicas set by Rio/OS
-      scaleUpwaitTime:                Select minutes to wait before another upscale operation
-      scaleDownwaitTime:              Select minutes to wait before another downscale operation
-      scalingRuleTitle:               Select Autoscale Policies
-      scalingReplicaWaitTimeTitle:    Select Autoscale Replicas
-      applyScaling:                   Enable Horizontal Scaling
-      when:                           when
-      percentage:                     Percentage
-      target:                         Target Value
-      cpu:
-        title:                        CPU
-      memory:
-        title:                        Memory
-      disk:
-        title:                        Disk
+      title: 'HORIZONTAL SCALING'
+      enable: 'Enable Horizontal Scaling'
+      minReplicas: 'Lower limit for the number of replicas set by Rio/OS'
+      maxReplicas: 'Upper limit for the number of replicas set by Rio/OS'
+      scaleUpwaitTime: 'Select minutes to wait before another upscale operation'
+      scaleDownwaitTime: 'Select minutes to wait before another downscale operation'
+      scalingRuleTitle: 'Select Autoscale Policies'
+      scalingReplicaWaitTimeTitle: 'Select Autoscale Replicas'
+      when: when
+      percentage: Percentage
+      target: 'Target Value'
+      cpu: {title: CPU}
+      memory: {title: Memory}
+      disk: {title: Disk}
     vertical:
-      applyScaling:                   Enable vertical scaling
-      scalingWaitTimeTitle:           Select Autoscale Wait Time
+      title: 'VERTICAL SCALING'
+      enable: 'Enable vertical scaling'
+      scalingWaitTimeTitle: 'Select Autoscale Wait Time'
 
 failWhalePage:
+<<<<<<< HEAD
+  header: Error
+  reload: "<a href=\"#\" onclick=\"window.location.href = window.location.href; return false;\">Reload</a> to try again or\n"
+  logout: 'log out'
+
+messages:
+  stacks:
+    deleteFailed: 'Delete failed try after some time'
+    failedLaunch: 'Launch failed.'
+    deleteSuccess: 'Deleted successfully'
+    novnc: "Deploying..Console isn''t ready yet."
+    QRcode:
+      downloadFailed: '<p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>'
+=======
   header:                             Error
   reloadButton:                       |
     <a href="#" onclick="window.location.href = window.location.href; return false;">Reload</a> to try again or
@@ -681,52 +908,25 @@ notifications:
     DeleteSuccess: Deleted successfully
   QRcode:
     downloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
+>>>>>>> 2-1-stable
   secrets:
-    downloadFailed:                   Download failed try after some time
-  emailExist:                         Sorry, that email is not available.
-  validEmail:                         Please enter a valid email address
-  somethingWentWrong:                 Proxy error. Api server is not runnning
-  invalidCredential:                  Incorrect email or password
-  domainName:                         Please enter domain name
-  secret:                             Please generate secret key
-  region:                             Please enter region
-  country:                            Please enter valid region
-  resource:                           Please select minimum resources to deploy
-  network:
-    noSelection:                      Please select network
-    empty:                            No network  available
-  plan:
-    noSelection:                      Please select server OS
-    empty:                            No Server OS configured
-  scaling:
-    noSelection:                      Please select scaling resource
-    emptyScaling:                     You forgot to type a resource
-    invalidFormat:                    Enter vaild data
-  blockchainNetwork:
-    empty:                            No Blockchian Network configured
-  failedLaunch:                       Launch failed.
-  failedBuildConfig:                  BuildConfig creation failed.
-  logData:                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  novnc:                              Deploying..Console isn't ready yet.
-  noAction:                           No actions available
-  blockchainnetwork:                  Select blockchain network
+    downloadFailed: 'Download failed try after some time'
 
-audits:
-  tableHeader:
-    info:                             Info
-    ip:                               IP Address
-    dateAndTime:                      Date and time
-logs:
-  tableHeader:
-    info:                             Description
-    dateAndTime:                      Date and time
+error:
+  apiserver_is_down: 'API Server is down.'
+  apiserver_returned_code: 'Code => ({code}) while trying to log you in. Please try again (or) contact administrator.'
 
-infraPage:
-  metric:
-    power:                            "usage -"
-    percent:                          "%"
 
 confirmDelete:
+<<<<<<< HEAD
+    title: 'Are you sure you want to delete ?'
+    deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
+    protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
+    confirmAction: Delete
+    cancelAction: Cancel
+    largeDeleteText: '{key} and {othersCount} others'
+
+=======
   title: 'Are you sure you want to delete ?'
   deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
   protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
@@ -1155,63 +1355,46 @@ action:
 ##############################
 # Resource Actions
 ##############################
+>>>>>>> 2-1-stable
 validation:
-  required:                           '"{key}" is required'
+  required: '"{key}" is required'
+  domain:
+    contains_symbols: 'subdomain should be alphanumeric'
+    required: 'You forgot to type a subdomain name'
+  secret:
+    error: 'Failed to generate secret key. You can''t access to digital cloud upon launch.'
+  invitations:
+    message: 'Thanks for accepting your invitation to {teamName}. Welcome'
+    error: 'Your invite was not accepted. Please contact the site''s administrator'
+  user:
+    password:
+      required: 'Enter password'
+      too_short: 'Password too short must be {character_length} character'
+      common_password: 'One of the 10000 most common passwords. Please use a more secure password'
+      same_as_username: 'Password is the same as your username. Please use a more secure password'
+      same_as_email: 'Password is the same as your email. Please use a more secure password'
+    name:
+      empty_name: 'Enter user name'
+      empty_first_name: 'Enter first name'
+      empty_last_name: 'Enter last name'
+      empty_company_name: 'Enter company name'
+      empty_email_id: 'Enter email id'
+      valid_email_id: 'Enter valid email id'
+      exists: 'Email exists'
+      empty_phone_number: 'Enter phone number'
   arrayLength:
-    exactly:                          '"{key}" should contain {count, plural, =1 {# item} other {# items}}'
-    between:                          '"{key}" should contain between {min} and {max} {max, plural, =1 {item} other {items}}'
-    min:                              '"{key}" should contain at least {count} {count, plural, =1 {item} other {items}}'
-    max:                              '"{key}" should contain at most {count} {count, plural, =1 {item} other {items}}'
+    exactly: '"{key}" should contain {count, plural, =1 {# item} other {# items}}'
+    between: '"{key}" should contain between {min} and {max} {max, plural, =1 {item} other {items}}'
+    min: '"{key}" should contain at least {count} {count, plural, =1 {item} other {items}}'
+    max: '"{key}" should contain at most {count} {count, plural, =1 {item} other {items}}'
   stringLength:
-    exactly:                          '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
-    between:                          '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
-    min:                              '"{key}" should be at least {count} {count, plural, =1 {character} other {characters}}'
-    max:                              '"{key}" should be at most {count} {count, plural, =1 {character} other {characters}}'
+    exactly: '"{key}" should be {count, plural, =1 {# character} other {# characters}}'
+    between: '"{key}" should be between {min} and {max} {max, plural, =1 {character} other {characters}}'
+    min: '"{key}" should be at least {count} {count, plural, =1 {character} other {characters}}'
+    max: '"{key}" should be at most {count} {count, plural, =1 {character} other {characters}}'
   number:
-    exactly:                          '"{key}" should be exactly {val}'
-    between:                          '"{key}" should be between {min} and {max}'
-    min:                              '"{key}" should be at least {val}'
-    max:                              '"{key}" should be at most {val}'
+    exactly: '"{key}" should be exactly {val}'
+    between: '"{key}" should be between {min} and {max}'
+    min: '"{key}" should be at least {val}'
+    max: '"{key}" should be at most {val}'
   chars: '"{key}" contains {count, plural, =1 {an invalid character} other {# invalid characters}}: {chars}'
-
-##############################
-# Model Properties
-##############################
-model:
-  account:
-    kind:
-      registeredAgent:                Registered Agent
-      agent:                          Agent
-      service:                        Service
-      user:                           User
-      admin:                          Admin
-      project:                        Environment
-  identity:
-    displayType:
-      user:                           User
-      team:                           Team
-      group:                          Group
-      org:                            Organization
-      localUser:                      Local User
-      unknown:                        "{type}?"
-  openldapconfig:
-    server:
-      label:                          Hostname or IP Address
-    serviceAccountUsername:
-      label:                          Service Account Username
-    serviceAccountPassword:
-      label:                          Service Account Password
-    domain:
-      label:                          User Search Base
-      placeholder:                    "e.g. ou=Users,dc=mycompany,dc=com"
-      help:                           "Only users below this base will be used."
-  projectMember:
-    role:
-      member:                         Member
-      owner:                          Owner
-      readonly:                       Read-Only
-      restricted:                     Restricted
-  scaleService:
-    min:                              Minimum Scale
-    max:                              Maximum Scale
-    amount:                           By

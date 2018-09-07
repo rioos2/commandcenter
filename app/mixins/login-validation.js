@@ -16,7 +16,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_name')
+        reason: get(this, 'intl').t('loginPage.require.email')
       });
     }
 
@@ -30,7 +30,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.password.empty_password')
+        reason: get(this, 'intl').t('loginPage.require.password')
       });
     }
 

@@ -16,13 +16,13 @@ export default Component.extend({
     return {
       maximum: {
         name:   'chart-scale-max-disk',
-        suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title:  get(this, 'intl').t('launcherPage.scaling.scaleup.disk.title')
+        suffix: get(this, 'intl').t('launcherPage.scaling.percent'),
+        title:  get(this, 'intl').t('launcherPage.scaling.up.storage.title')
       },
       minimum: {
         name:   'chart-scale-min-disk',
-        suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title:  get(this, 'intl').t('launcherPage.scaling.scaledown.disk.title')
+        suffix: get(this, 'intl').t('launcherPage.scaling.percent'),
+        title:  get(this, 'intl').t('launcherPage.scaling.down.storage.title')
       }
     };
   }.property(),

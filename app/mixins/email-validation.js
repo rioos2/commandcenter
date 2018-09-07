@@ -14,13 +14,13 @@ export default Mixin.create({
     if (isEmpty(this.get('accountEmail'))) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_email_id')
+        reason: get(this, 'intl').t('validation.user.name.empty_email_id')
       });
     }
     if (!validator.isEmail(this.get('accountEmail'))) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.valid_email_id')
+        reason: get(this, 'intl').t('validation.user.name.valid_email_id')
       });
     }
 

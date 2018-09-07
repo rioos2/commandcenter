@@ -12,13 +12,13 @@ export default Component.extend({
 
   columns: computed(function() {
     return [{
-      label:          get(this, 'intl').t('logs.tableHeader.info'),
+      label:          get(this, 'intl').t('dojos.settings.logs.table.info'),
       valuePath:      'log',
       cellClassNames: 'info-column',
       sortable:       false,
       cellComponent:  'label-info'
     }, {
-      label:          get(this, 'intl').t('logs.tableHeader.dateAndTime'),
+      label:          get(this, 'intl').t('dojos.settings.logs.table.dateAndTime'),
       valuePath:      'time',
       style:          'font-weight:bold',
       cellClassNames: 'date-column',

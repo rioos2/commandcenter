@@ -14,7 +14,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_company_name')
+        reason: get(this, 'intl').t('signupPage.company_name')
       });
     }
 
@@ -27,7 +27,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_first_name')
+        reason: get(this, 'intl').t('signupPage.first_name')
       });
     }
 
@@ -40,7 +40,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_last_name')
+        reason: get(this, 'intl').t('signupPage.last_name')
       });
     }
 
@@ -53,7 +53,7 @@ export default Mixin.create({
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('validate.user.name.empty_phone_number')
+        reason: get(this, 'intl').t('signupPage.phone')
       });
     }
 

@@ -1,4 +1,9 @@
 var C = {
+  /* --------  The section  that has  general stuff used globally  ----*/
+  // Yeah the term global is irrelevant, as constants is global
+  // Global mean some keys can be used anywhere.
+
+  UNKNOWN: 'Unknown',
 
   /* --------  The section  that has  various  http codes  ----*/
   // Stack all the base http codes here
@@ -64,24 +69,48 @@ var C = {
     STATES: ['approval', 'suspend'],
   },
 
-  /*
-  * This section belongs to digital cloud management page.
-  * Assembly status and states.
-  */
-  MANAGEMENT: {
+  /* --------  The section  that has  various  builtin telemetry specifications   ----*/
+  // The Gauge is a counter. The builtIn basic gauges are
+
+  // The consumption in a datacenter for the basics
+  BUILTIN_BASIC_GAUGES: ['cpu', 'memory', 'storage', 'gpu'],
+
+  // The below status is used by the healtz nodes
+  // This includes
+  // 1. expanded status
+  // 2. attribute styling
+  // 3. tooltips
+  HEALTHZ_STATE: {
     STATUS: {
-      WARNING:   ['bootstrapped', 'pending', 'scheduled', 'initializing', 'initialized', 'bootstrapping', 'booting', 'rebooting', 'starting', 'stopping', 'terminating', 'awaitpending', 'standstill', 'unreachable'],
-      SUCCESS:   ['running'],
-      FAILURE:   ['stopped', 'failed', 'terminated'],
-      TERMINATE: ['terminated', 'terminating'],
+      Unknown: ['unknown'],
+      Running:   ['running', 'on', 'up', 'scheduled', 'reachable'],
+      Stopped:   ['running', 'off', 'down', 'failed', 'unhealthy'],
     },
 
-    STATE: {
-      WARNING: 'warning',
-      SUCCESS: 'success',
-      FAILURE: 'failure',
+    ATTRS: {
+      success:   ['running', 'on', 'up', 'scheduled', 'healthy'],
+      warning:   ['bootstrapped', 'pending', 'scheduled', 'initializing', 'initialized', 'bootstrapping', 'booting', 'rebooting', 'starting', 'stopping', 'terminating', 'awaitpending', 'standstill', 'unreachable', 'down', 'unhealthy', 'stopped', 'unknown'],
+      failure:   ['stopped', 'failed', 'terminated'],
+      terminate: ['terminated', 'terminating'],
     },
+
+    TOOLTIP: {
+
+      'ON & HEALTHY':      ['running', 'on', 'up', 'scheduled', 'healthy'],
+
+      'OFF - STOPPED':     ['off', 'down', 'terminated', 'unhealthy', 'stopped'],
+
+      'CLONE IN PROGRESS ': ['initializing'],
+
+      'HYPERVISOR STARTING UP IN DEVICE ': ['booting'],
+
+      'MAYBE DOWN, PROBE IN PROGRESS': ['unknown'],
+    },
+
+    UNKNOWN: 'unknown',
+
   },
+
   /*
   * This section belongs to organization management page.
   * organization status and states.
@@ -138,24 +167,6 @@ var C = {
     SELECT_NETWORK_ACCESSOR:  '',
     SELECT_STATUS_ACCESSOR:   'status.phase',
     SELECT_NAME_ACCESSOR:     'object_meta.name',
-  },
-
-  /*
-  * Assembly state.
-  */
-  ASSEMBLY: {
-    ASSEMBLYOFFPHASES: ['stopped', 'failed', 'terminated'],
-    ASSEMBLYOFF:       'OFF',
-    ASSEMBLYON:        'ON',
-    ASSEMBLYIPV4:      'IPv4',
-  },
-
-  HORIZONTAL_SCALE: {
-    MIN_REPLICAS:        1,
-    MAX_REPLICAS:        2,
-    SCALEUP_WAITTIME:    10,
-    SCALEDOWN_WAIT_TIME: 10
-
   },
 
   /*

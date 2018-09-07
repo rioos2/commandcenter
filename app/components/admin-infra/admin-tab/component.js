@@ -15,7 +15,7 @@ export default Component.extend({
   }.property('selectedTab'),
 
   title: function() {
-    return this.get('intl').t(`stackPage.admin.${  this.get('tab')  }.title`);
+    return this.get('intl').t(`dojos.dashboard.${  this.get('tab')  }.title`);
   }.property('tab'),
 
   _addToCollection: function() {

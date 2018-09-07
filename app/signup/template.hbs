@@ -2,23 +2,26 @@
   {{#link-to "signup"}}<img class="logo-img" src="assets/images/logo2.png">{{/link-to}}
   <div class="container">
     <form>
-      <h1>{{t 'signupPage.signup'}}</h1>
+      <h1>{{t 'signupPage.title'}}</h1>
 
       <div class="form-group {{val_company}}">
         {{input type="text" value=company_name}}
-        <label class="{{if company_name 'data-exist'}} control-label" for="input">{{t 'signupPage.companyName'}}</label>
+        <label class="{{if company_name 'data-exist'}} control-label"
+        for="input">{{t 'signupPage.company_name'}}</label>
         <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_firstName}}">
         {{input type="text" value=first_name}}
-        <label class="{{if first_name 'data-exist'}} control-label" for="input">{{t 'signupPage.firstName'}}</label>
+        <label class="{{if first_name 'data-exist'}} control-label"
+        for="input">{{t 'signupPage.first_name'}}</label>
         <i class="bar"></i>
       </div>
 
       <div class="form-group {{val_lastName}}">
         {{input type="text" value=last_name}}
-        <label class="{{if last_name 'data-exist'}} control-label" for="input">{{t 'signupPage.lastName'}}</label>
+        <label class="{{if last_name 'data-exist'}} control-label"
+        for="input">{{t 'signupPage.last_name'}}</label>
         <i class="bar"></i>
       </div>
 
@@ -30,7 +33,7 @@
 
       <div class="form-group {{val_email}}">
         {{input type="text" value=accountEmail}}
-        <label class="{{if email 'data-exist'}} control-label" for="input">{{t 'signupPage.email'}}</label>
+        <label class="{{if email 'data-exist'}} control-label" for="input">{{t 'generic.email'}}</label>
         <i class="bar"></i>
         {{#unless emailExistence}}
           {{fa-icon "exclamation-circle" class="wariningcolor"}} <span class='wariningcolor'>{{emailErrorMsg}}</span>
@@ -39,13 +42,14 @@
 
       <div class="form-group {{val_code}}">
         {{input type="password" value=password}}
-        <label class="{{if password 'data-exist'}} control-label" for="input">{{t 'signupPage.activateOnCode'}}</label>
+        <label class="{{if password 'data-exist'}} control-label"  for="input">{{t 'signupPage.password'}}</label>
         <i class="bar"></i>
       </div>
 
 
       <div class="button-container">
-        <button class="button" autofocus {{action 'signUp'}}><span>{{t 'signupPage.createAccount'}}
+        <button class="button" autofocus {{action 'signUp'}}><span>{{t
+        'signupPage.create_account'}}
         {{fa-icon "long-arrow-right" class="right-arrow"}}
 
       </span></button>
@@ -53,7 +57,7 @@
     </form>
 
     <div class="sub-description">
-      {{t 'signupPage.alredyAccount'}}
+      {{t 'signupPage.static1'}}
       {{#link-to "login" class="signup-link" }}{{t 'signupPage.signin'}}{{/link-to}}
     </div>
 

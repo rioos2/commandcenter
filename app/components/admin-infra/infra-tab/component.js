@@ -14,7 +14,7 @@ export default Component.extend({
   }.property('tab'),
 
   title: function() {
-    return this.get('intl').t(`stackPage.admin.${  this.get('tab')  }.title`);
+    return this.get('intl').t(`dojos.${  this.get('tab')  }.title`);
   }.property('tab'),
 
   iconName: function() {

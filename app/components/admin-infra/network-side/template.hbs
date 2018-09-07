@@ -5,31 +5,31 @@
 			{{#if virtualNetworkAvailable}}{{name}}
 			<span class="network-edit" >
 				<a href="#network_edit" {{action 'openEditModal'}}>
-					{{t 'stackPage.admin.storage.edit'}}</a>
+					{{t 'actions.edit'}}</a>
 				</span>
 				{{else}} &nbsp;{{/if}}
 		</div>
 		<div class="network-active-detail-detail">
-			<div class="sd-subheader">{{t 'stackPage.admin.network.detail'}}</div>
+			<div class="sd-subheader">{{t 'dojos.dashboard.networks.details.title'}}</div>
 			{{#if virtualNetworkAvailable}}
 				<div class="sd-ip-detail sd-table">
-					<div class="sd-title">{{t 'stackPage.admin.network.type'}}</div>
+					<div class="sd-title">{{t 'dojos.dashboard.networks.details.type'}}</div>
 					<div class="sd-value">{{type}}</div>
 				</div>
 				<div class="sd-type-detail sd-table">
-					<div class="sd-title">{{t 'stackPage.admin.network.range'}}</div>
+					<div class="sd-title">{{t 'dojos.dashboard.networks.details.range'}}</div>
 					<div class="sd-value">{{subnet}}</div>
 				</div>
 				<div class="sd-status-detail sd-table">
-					<div class="sd-title">{{t 'stackPage.admin.network.gateway'}}</div>
+					<div class="sd-title">{{t 'dojos.dashboard.networks.details.gateway'}}</div>
 					<div class="sd-value ">{{gateway}}</div>
 				</div>
 				<div class="sd-cdate-detail sd-table">
-					<div class="sd-title">{{t 'stackPage.admin.network.netmask'}}</div>
+					<div class="sd-title">{{t 'dojos.dashboard.networks.details.netmask'}}</div>
 					<div class="sd-value">{{netmask}}</div>
 				</div>
 				<div class="sd-cdate-detail sd-table">
-					<div class="sd-title">{{t 'stackPage.admin.network.status'}}</div>
+					<div class="sd-title">{{t 'generic.status'}}</div>
 					<div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
 				</div>
 				{{else}}
@@ -37,7 +37,7 @@
 			{{/if}}
 		</div>
 		<div class="network-active-detail-nodes">
-			<div class="sd-subheader">{{t 'stackPage.admin.network.nodes'}}</div>
+			<div class="sd-subheader">{{t 'dojos.dashboard.networks.details.nodes'}}</div>
 			{{#if virtualNetworkAvailable}}
 				{{#each nodes as |node|}}
 					{{admin-infra/network-node node=node }}

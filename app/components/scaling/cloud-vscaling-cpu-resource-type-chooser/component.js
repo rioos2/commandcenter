@@ -8,16 +8,16 @@ export default Component.extend({
   maxCpuResource: function(){
     return {
       name:        'max-core-select',
-      description: get(this, 'intl').t('launcherPage.scaling.scaleup.cpuChooser.description'),
-      title:       get(this, 'intl').t('launcherPage.scaling.scaleup.cpuChooser.title')
+      description: get(this, 'intl').t('launcherPage.scaling.up.cpu.title'),
+      title:       get(this, 'intl').t('launcherPage.scaling.up.cpu.limit')
     };
   }.property(),
 
   minCpuResource: function(){
     return {
       name:        'min-core-select',
-      description: get(this, 'intl').t('launcherPage.scaling.scaledown.cpuChooser.description'),
-      title:       get(this, 'intl').t('launcherPage.scaling.scaledown.cpuChooser.title')
+      description: get(this, 'intl').t('launcherPage.scaling.down.cpu.title'),
+      title:       get(this, 'intl').t('launcherPage.scaling.down.cpu.limit')
     };
   }.property(),
 

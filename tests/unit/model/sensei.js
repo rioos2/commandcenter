@@ -5,10 +5,11 @@ import { setupTest } from 'ember-mocha';
 describe('Unit: Model: sensei', () => {
   setupTest('sensei', { needs: [] });
 
-  it('has a type of "sensei"', function() {
+  it('senseiRetryInstallOption check', function() {
     let model = this.subject();
 
-    expect(model.get('type')).to.equal('node');
+    model.set('status.phase', 'INSTALLFAILURE');
+    expect(model.get('senseiRetryInstallOption')).to.be.true;
   });
 
 

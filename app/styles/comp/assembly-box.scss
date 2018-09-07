@@ -37,11 +37,11 @@
                 }
 
                 .cls-1success {
-                  fill: #2958cd;
+                  fill: $deploy-status-success-outer-color;
                 }
 
                 .cls-2success {
-                  fill: $rio-second-color;
+                  fill: $deploy-status-success-inner-color;
                 }
 
                 .cls-1selected {

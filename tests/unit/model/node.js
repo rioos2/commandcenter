@@ -5,11 +5,17 @@ import { setupTest } from 'ember-mocha';
 describe('Unit: Model: node', () => {
   setupTest('node', { needs: [] });
 
-  it('has a type of "node"', function() {
+  it('nodeInstallOption', function() {
     let model = this.subject();
 
-    expect(model.get('type')).to.equal('node');
+    model.set('status.phase', '');
+    expect(model.get('nodeInstallOption')).to.be.true;
+
+    model.set('status.phase', 'INSTALLFAILURE');
+    expect(model.get('nodeInstallOption')).to.be.false;
+
   });
+
 
 
 });

@@ -16,13 +16,13 @@ export default Component.extend({
     return {
       maximum: {
         name:   'chart-scale-max-memory',
-        suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title:  get(this, 'intl').t('launcherPage.scaling.scaleup.memory.title')
+        suffix: get(this, 'intl').t('launcherPage.scaling.percent'),
+        title:  get(this, 'intl').t('launcherPage.scaling.up.memory.title')
       },
       minimum: {
         name:   'chart-scale-min-memory',
-        suffix: get(this, 'intl').t('launcherPage.scaling.scale.description'),
-        title:  get(this, 'intl').t('launcherPage.scaling.scaledown.memory.title')
+        suffix: get(this, 'intl').t('launcherPage.scaling.percent'),
+        title:  get(this, 'intl').t('launcherPage.scaling.down.memory.title')
       }
     };
   }.property(),
