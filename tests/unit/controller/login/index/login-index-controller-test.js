@@ -4,17 +4,17 @@ import { setupTest } from 'ember-mocha';
 
 describe('login-index-controller', () => {
   setupTest('controller:login/index', {
-      needs: [
-          'service:session',
-          'service:access',
-          'service:intl'
-      ]
+    needs: [
+      'service:session',
+      'service:access',
+      'service:intl'
+    ]
   });
 
-  
   it('exists', function() {
 
     let route = this.subject();
+
     expect(route).to.be.ok;
 
   });

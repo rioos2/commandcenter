@@ -1,22 +1,24 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
 
-export default Ember.Component.extend({
-  intl: Ember.inject.service(),
-  tagName: 'li',
+export default Component.extend({
+  intl:              service(),
+  tagName:           'li',
   classNameBindings: ['active', 'tabClassName'],
 
+  active: equal('selectedTab', 'tab'),
+
   tabClassName: function() {
-    return 'stacks-application-' + this.get('tab');
+    return `stacks-application-${  this.get('tab') }`;
   }.property('tab'),
 
   iconName: function() {
-    return 'svg/svg-' + this.get('tab');
+    return `svg/svg-${  this.get('tab') }`;
   }.property('tab'),
 
-  active: Ember.computed.equal('selectedTab', 'tab'),
-
   title: function() {
-    return this.get('intl').t('stackPage.' + this.get('tab'));
+    return this.get('intl').t(`stackPage.${  this.get('tab') }`);
   }.property('tab'),
 
 
@@ -25,7 +27,7 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   actions: {
-    select: function() {
+    select() {
       this.set('selectedTab', this.get('tab'));
     }
   }

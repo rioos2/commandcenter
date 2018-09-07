@@ -5,7 +5,6 @@ import { setupTest } from 'ember-mocha';
 describe('applications-tab-controller', () => {
   setupTest();
 
-  
   it('exists', function() {
     let controller = this.owner.lookup('controller:applications-tab');
 

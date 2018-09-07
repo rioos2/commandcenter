@@ -1,0 +1,29 @@
+<div class="col-sm-12 content-left activate">
+	<div class="panel panel-default kv-panel">
+		<div class="panel-body">
+			{{#if modelSpinner}}
+        <div class="spinner infra-spinner">
+          {{stack-launch-spinner size=25 showSpinner=true}}
+        </div>
+      {{else}}
+			{{#if emptyLogs}}
+		<div class="empty-network">
+			<div class="pin-img">
+				<img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+			</div>
+			<div class="empty-network-add-link">
+				<span>{{t 'stackPage.admin.settings.logs.noLogs'}}</span>
+			</div>
+		</div>
+
+{{else}}
+<div class="logs">
+<br>
+	{{log-table model=tableData class="info-table"}}
+</div>
+{{page-footer}}
+{{/if}}
+{{/if}}
+</div>
+</div>
+</div>

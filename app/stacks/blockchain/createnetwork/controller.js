@@ -1,10 +1,8 @@
 import Controller from '@ember/controller';
-import D from 'nilavu/utils/default';
-const {
-  get
-} = Ember;
+import { inject as service } from '@ember/service';
+
 export default Controller.extend({
-  intl: Ember.inject.service(),
+  intl: service(),
 
   summaryContent: null,
 

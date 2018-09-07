@@ -1,0 +1,23 @@
+<div class="contact-admin">
+    <div class="container">
+        <img class="logo-img" src="assets/images/logo2.png">
+          <div class="col-container">
+              <div class="page">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="r-p28">
+                          <h4 class="r-mt20">{{model.code}} {{#if model.status}}({{model.status}}){{/if}}</h4>
+                          <p>{{model.message}}</p>
+                          <p class="small">{{model.detail}}</p>
+                          <div>
+                            <a class="hand" {{action "logout"}}>{{t 'failWhalePage.logoutButton'}}</a>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+    </div>
+</div>

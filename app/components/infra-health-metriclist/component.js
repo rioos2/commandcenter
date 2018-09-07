@@ -1,64 +1,68 @@
-/* global renderBlueGaugeChart, d3, particlesJS */
+/* global d3 */
 import Component from '@ember/component';
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
 
   tagName: '',
 
   guageOne: function() {
-    //ram
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("ram") : this.decide(this.contentData().counters[0], "ram");
+    // ram
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('memory') : this.decide(this.contentData().counters[0], 'memory');
   }.property('model', 'model.counters.@each.counter'),
 
   guageTwo: function() {
-    //cpu
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("cpu") : this.decide(this.contentData().counters[1], "cpu");
+    // cpu
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('cpu') : this.decide(this.contentData().counters[1], 'cpu');
   }.property('model', 'model.counters.@each.counter'),
 
   guageThree: function() {
-    //disk
-    return Ember.isEmpty(Object.keys(this.contentData())) ? this.emptyData("disk") : this.decide(this.contentData().counters[2], "disk");
+    // disk
+    return isEmpty(Object.keys(this.contentData())) ? this.emptyData('storage') : this.decide(this.contentData().counters[2], 'storage');
   }.property('model', 'model.counters.@each.counter'),
 
   guageFour: function() {
-    //gpu
-    if (!Ember.isEmpty(Object.keys(this.contentData()))) {
+    // gpu
+    if (!isEmpty(Object.keys(this.contentData()))) {
       if (this.contentData().counters.length > 3) {
         return this.shave(this.contentData().counters[3]);
       }
     }
-    return this.emptyData("gpu");
+
+    return this.emptyData('gpu');
   }.property('model', 'model.counters.@each.counter'),
 
-  emptyData: function(data) {
+  emptyData(data) {
     return {
-      name: data,
-      counter: "0",
+      name:    data,
+      counter: '0',
     }
   },
 
-  contentData: function() {
+  contentData() {
     if (this.get('model')) {
       return this.get('model');
     }
+
     return {};
   },
 
-  decide: function(guageValue, name) {
-    return !Ember.isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
+  decide(guageValue, name) {
+    return !isEmpty(guageValue.name) ? this.shave(guageValue) : this.emptyData(name);
   },
 
-  shave: function(guageValue) {
+  shave(guageValue) {
     let name = guageValue.name;
-    if ((guageValue.name).split("_").length > 1) {
-      name = (guageValue.name).split("_")[0];
+
+    if ((guageValue.name).split('_').length > 1) {
+      name = (guageValue.name).split('_')[0];
     }
+
     return {
-      name: name,
-      counter: parseInt(guageValue.counter),
+      name,
+      counter:     parseInt(guageValue.counter),
       description: guageValue.description,
-      cpu: guageValue.cpu,
+      cpu:         guageValue.cpu,
     }
 
   },

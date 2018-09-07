@@ -1,18 +1,45 @@
-<div class="select-domain settings activate pad-top">
-  <p class="sub-title"> {{product}} </p>
-  <p class="sub-description">{{t 'stackPage.admin.settings.entitlement.description'}}</p>
-  {{editable-popup-textbox placeholder=placeHolder showSpinner=showSpinner targetActionName="performActivation" showEditBox=showActivationEditBox btnName=btnName}}
+<div class="stack-box">
+ <div class="select-domain settings activate pad-top">
+  <p class="sub-title"> {{subProductName}} </p>
   <div class="row">
     <div class="col-sm-5">
-      <p class="sub-title">{{t 'stackPage.admin.settings.entitlement.senseis' senseiActivated=senseiActivated senseiAllowed=senseiAllowed}}</p>
-      <p class="sub-description">{{status}}{{expired}}</p>
+      <div class="cluster-container padding-30 ">
+        <div class="cluster-box">
+          <div class="cluster-subbox-1">
+            <div class="pull-left st-name">
+               {{status}}
+            </div>
+          </div>
+          <div class="cluster-subbox-2">
+            <span class="sub-name">{{expired}}</span>
+            <span class="content3 two_chart">
+              <div class="tabalert">
+                <div class="status-round">
+                  <div class="icon status" data-tooltip={{activated}}>
+                    {{svg/svg-status status="rio-status-icon"}}
+                  </div>
+                </div>
+              </div>
+          </span>&nbsp;&nbsp;
+            <span class="content3 two_chart">
+              <div class="tabalert">
+                <div class="status-round">
+                  <div class="icon status" data-tooltip={{allowed}}>
+                    {{svg/svg-status status="rio-status-icon"}}
+                  </div>
+                </div>
+              </div>
+          </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-2">
-      {{svg/svg-dots class="dots-ico"}}
+    <div class="col-sm-7">
+      <p class="sub-description">{{t 'stackPage.admin.settings.entitlement.description'}}</p>
+      {{multi-editable-popup-textbox placeholder1=licenseId placeholder2=licensePassword showSpinner=showSpinner targetActionName="performActivation" showEditBox=showActivationEditBox}}
+
     </div>
-    <div class="col-sm-5">
-      <p class="sub-title"> {{t 'stackPage.admin.settings.entitlement.ninjas' ninjaActivated=ninjaActivated ninjaAllowed=ninjaAllowed}}</p>
-      <p class="sub-description">{{status}}{{expired}}</p>
-    </div>
+
   </div>
+</div>
 </div>

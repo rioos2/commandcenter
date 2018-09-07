@@ -1,23 +1,28 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import { isAlternate } from 'nilavu/utils/platform';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import $ from 'jquery';
+import { get } from '@ember/object';
 
-export default Ember.Component.extend({
-  model           : null,
-  size            : 'xs',
-  showPrimary     : true,
-  inTooltip       : false, 
+export default Component.extend({
+  resourceActions: service('resource-actions'),
 
-  resourceActions : Ember.inject.service('resource-actions'),
+  tooltipService: service('tooltip'),
 
-  tagName         : 'div',
-  classNames      : ['btn-group','resource-actions','action-menu'],
-  tooltipService  : Ember.inject.service('tooltip'),
+  model:       null,
+  size:        'xs',
+  showPrimary: true,
+  inTooltip:   false,
 
-  primaryAction   : Ember.computed.alias('model.primaryAction'),
+  tagName:        'div',
+  classNames:     ['btn-group', 'resource-actions', 'action-menu'],
+  primaryAction: alias('model.primaryAction'),
 
   click(e) {
-    var tgt = Ember.$(e.target);
+    var tgt = $(e.target);
     var more = tgt.closest('.more-actions');
+
     if ( more && more.length ) {
       e.preventDefault();
 
@@ -32,17 +37,19 @@ export default Ember.Component.extend({
       this.get('resourceActions').show(this.get('model'), more, this.$());
     } else {
 
-      let idx = parseInt(tgt.closest('BUTTON').data('primary'),10);
+      let idx = parseInt(tgt.closest('BUTTON').data('primary'), 10);
+
       if ( !isNaN(idx) ) {
         var action = this.get('model.primaryAction');
+
         if ( action ) {
           e.preventDefault();
           e.stopPropagation();
 
-          if ( isAlternate(e) && Ember.get(action,'altAction') ) {
-            this.sendToModel(Ember.get(action,'altAction'));
+          if ( isAlternate(e) && get(action, 'altAction') ) {
+            this.sendToModel(get(action, 'altAction'));
           } else {
-            this.sendToModel(Ember.get(action,'action'));
+            this.sendToModel(get(action, 'action'));
           }
         }
       }

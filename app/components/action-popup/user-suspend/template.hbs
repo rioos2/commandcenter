@@ -1,0 +1,10 @@
+<div class="r-p40 model-delete">
+  <h1 class="header model-genric">{{t 'account.actionPopup.suspend.header' firstName=originalModel.first_name}}</h1>
+
+  <p>{{t 'account.actionPopup.suspend.suspendNote' firstName=originalModel.first_name}}</p>
+
+  <div class="footer-actions">
+    <button {{action "cancel"}} class="btn btn-primary">{{t 'account.actionPopup.suspend.buttonCancel'}}</button>
+    <button {{action "suspend"}} class="btn btn-danger">{{t 'account.actionPopup.suspend.buttonSuspend'}}</button>
+  </div>
+</div>

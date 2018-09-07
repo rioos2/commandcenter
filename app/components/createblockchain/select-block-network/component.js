@@ -1,66 +1,70 @@
 import Component from '@ember/component';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+import { isEmpty } from '@ember/utils';
+import { isEqual } from '@ember/utils';
 import C from 'nilavu/utils/constants';
-const {
-  get
-} = Ember;
 
 export default Component.extend({
-  intl: Ember.inject.service(),
-  notifications: Ember.inject.service('notification-messages'),
+  intl:          service(),
+  notifications: service('notification-messages'),
 
-  compute: Ember.computed.alias('model.stacksfactory.resources.compute_type'),
   showInfo: false,
   activate: false,
 
-  didInsertElement() {
-    this.checkBlockchainNetworkEmpty();
-    if (!Ember.isEmpty(this.get('blockchianNetwork'))) {
-      this.send('refreshAfterSelect', this.get('blockchianNetwork')[0]);
-    }
-  },
-
+  compute:                alias('model.stacksfactory.resources.compute_type'),
   blockchianNetworkFound: function() {
     return this.get('blockchianNetwork').length > 0;
   }.property('blockchianNetwork'),
 
-  checkBlockchainNetworkEmpty: function() {
-    if (Ember.isEmpty(this.get('blockchianNetwork'))) {
-      this.get('notifications').warning(get(this, 'intl').t('notifications.blockchainNetwork.empty'), {
-        autoClear: true,
-        clearDuration: 6000,
-        cssClasses: 'notification-warning'
-      });
-    }
-  },
-
   blockchianNetwork: function() {
     var blockchainnetwork = [];
-    if (!Ember.isEmpty(this.get('model.blockchainnetworks.content'))) {
-      this.get('model.blockchainnetworks.content').map(function(blockchianNetwork) {
-        if (!Ember.isEmpty(blockchianNetwork.spec.plan)) {
-          if (Ember.isEqual(blockchianNetwork.spec.plan.category, C.CATEGORIES.BLOCKCHAIN)) {
+
+    if (!isEmpty(this.get('model.blockchainnetworks.content'))) {
+      this.get('model.blockchainnetworks.content').map((blockchianNetwork) => {
+        if (!isEmpty(blockchianNetwork.spec.plan)) {
+          if (isEqual(blockchianNetwork.spec.plan.category, C.CATEGORIES.BLOCKCHAIN)) {
             blockchainnetwork.push(blockchianNetwork);
           }
         }
       });
     }
+
     return blockchainnetwork;
   }.property('model'),
+
+  didInsertElement() {
+    this.checkBlockchainNetworkEmpty();
+    if (!isEmpty(this.get('blockchianNetwork'))) {
+      this.send('refreshAfterSelect', this.get('blockchianNetwork')[0]);
+    }
+  },
 
   actions: {
 
     refreshAfterSelect(item) {
-      this.set("selected", item);
-      this.set("model.stacksfactory.metadata.rioos_sh_blockchain_network_id", item.id);
+      this.set('selected', item);
+      this.set('model.stacksfactory.metadata.rioos_sh_blockchain_network_id', item.id);
       this.toggleProperty('activate');
     },
 
-    clickInfo: function() {
+    clickInfo() {
       this.set('showInfo', true);
     },
 
-    clickClose: function() {
+    clickClose() {
       this.set('showInfo', false);
     }
-  }
+  },
+  checkBlockchainNetworkEmpty() {
+    if (isEmpty(this.get('blockchianNetwork'))) {
+      this.get('notifications').warning(get(this, 'intl').t('notifications.blockchainNetwork.empty'), {
+        autoClear:     true,
+        clearDuration: 6000,
+        cssClasses:    'notification-warning'
+      });
+    }
+  },
+
 });

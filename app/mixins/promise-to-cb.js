@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   toCb(name_or_fn, ...args) {
     return (results, cb) => {
       if ( typeof results === 'function' ) {
@@ -9,14 +9,15 @@ export default Ember.Mixin.create({
       }
 
       let promise;
+
       if ( typeof name_or_fn === 'string' ) {
         promise = this[name_or_fn](...args, results);
       } else {
         promise = name_or_fn(...args, results);
       }
-      promise.then(function(res) {
+      promise.then((res) => {
         cb(null, res);
-      }).catch(function(err) {
+      }).catch((err) => {
         cb(err, null);
       });
     };
