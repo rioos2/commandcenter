@@ -1,7 +1,8 @@
-import Route from '@ember/routing/route';
-export default Route.extend({
+import Ember from 'ember';
 
-  beforeModel() {
+export default Ember.Route.extend({
+
+  beforeModel: function() {
     this.transitionTo('infrastructure-tab.data-center');
   }
 

@@ -1,39 +1,42 @@
 <div class="row p-t-10">
   <div class="col-xs-6">
-    <div class="server-desc">{{name}}</div>
+    <div class="server-desc">{{model.name}}</div>
+    {{!-- left chart --}}
     <div class="gauge_box"></div>
   </div>
   <div class="col-xs-6">
     <img class="dot-to-dot" src="assets/images/home/dot_to_dot.png">
     <div class="row p-t-24" style="max-width:300px">
-      <span style="position:relative;display:inline"
-      class="hex_chart{{idAttr}}"></span>
+      {{!-- right chart --}}
+      <span style="position:relative;display:inline" class="hex_chart{{model.id}}{{nodeType}}"></span>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12 col-sm-6 p-l-20">
     <div class="content1">
-      <p class="title1 m-0">{{date}}</p>
-      <p class="title2 m-0">{{t 'dashboard.statistics.price_per_month'}}</p>
+      <p class="title1 m-0">{{model.date}}</p>
+      <p class="title2 m-0">{{t 'stackPage.admin.node.pricePerMonth'}}</p>
     </div>
     <div class="content2">
     </div>
     <div class="content3">
-      <p>{{cost_of_consumption}} {{t 'dashboard.statistics.USD'}}</p>
+      <p>{{model.cost_of_consumption}} {{t 'stackPage.admin.node.usd'}}</p>
     </div>
   </div>
   <div class="col-xs-12 col-sm-6 m-b-10 place-center">
-    <div class="col-xs-4 p-t-10">
+    <div class="col-xs-4">
     <div class="row">
       <div class="content1">
-        <p class="title1 m-0">{{date}}</p>
-        <p class="title2 m-0">{{t 'generic.status'}}</p>
+        <p class="title1 m-0">{{model.date}}</p>
+        <p class="title2 m-0">{{t 'stackPage.admin.node.status'}}</p>
+      </div>
+      <div class="content2">
       </div>
     </div>
     <div class="row">
       <div class="content1">
-        <p class="title2 m-0">{{statusText}}</p>
+        <p class="title2 m-0">{{nodeRunStatus}}</p>
       </div>
       </div>
     </div>
@@ -42,8 +45,8 @@
         <p>
           <div class="tabalert">
             <div class="status-round">
-              <div class="icon status" data-tooltip={{statusToolTip}}>
-                {{svg/svg-status status=statusAttr}}
+              <div class="icon status" data-tooltip= {{nodeStatus}}>
+                {{svg/svg-status status=nodeStyle}}
               </div>
             </div>
           </div>

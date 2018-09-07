@@ -3,8 +3,7 @@
   {{!-- Main gauges --}}
   <div id="maingauge" class="main-gauges p-t-50 p-b-50">
     <p class="title p-l-50">
-      <span class="underline">{{t 'generic.M'}}</span>{{t
-      'dashboard.gauges.subtitle'}}</p>
+      <span class="underline">{{t 'dashboard.maingaugesFirstSec'}}</span>{{t 'dashboard.maingaugesSecondSec'}}</p>
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
         {{infra-health-metriclist model=datacenterUsage}}
@@ -14,17 +13,15 @@
   {{!-- Statistics --}}
   <div class="statistics p-t-50 p-b-50">
     <p class="title p-l-50 p-b-20">
-      <span class="underline">{{t 'generic.N'}}</span>{{t
-      'dashboard.statistics.ninja'}}
-      <span class="underline">{{t 'generic.S'}}</span>{{t
-      'dashboard.statistics.subtitle'}}</p>
+      <span class="underline">{{t 'dashboard.statisticsFirstSecNinja'}}</span>{{t 'dashboard.statisticsSecondSecNinja'}}
+      <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
     {{#if hasNinjaStatistics}}
       {{infra-empty-statistics type="ninja" model=healthzModel}}
     {{else}}
       <div class="row list-content">
         {{#each ninjaStatistics as |ninja|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-node-statistics model=ninja type="ninja" healthzModel=healthzModel}}
+            {{infra-node-statistics model=ninja type="ninja" counterModel=healthzModel}}
           </div>
         {{/each}}
       </div>
@@ -33,17 +30,15 @@
 
   <div class="statistics p-t-50 p-b-50">
     <p class="title p-l-50 p-b-20">
-      <span class="underline">{{t 'generic.S'}}</span>{{t
-      'dashboard.statistics.sensei'}}
-      <span class="underline">{{t 'generic.S'}}</span>{{t
-      'dashboard.statistics.subtitle'}}</p>
+      <span class="underline">{{t 'dashboard.statisticsFirstSecSensei'}}</span>{{t 'dashboard.statisticsSecondSecSensei'}}
+      <span class="underline">{{t 'dashboard.statisticsFirstSec'}}</span>{{t 'dashboard.statisticsSecondSec'}}</p>
     {{#if hasSenseiStatistics}}
       {{infra-empty-statistics type="sensei" model=healthzModel}}
     {{else}}
       <div class="row list-content">
         {{#each senseiStatistics as |sensei|}}
           <div class="col-md-6 col-sm-12 list">
-            {{infra-sensei-statistics model=sensei type="sensei" healthzModel=healthzModel}}
+            {{infra-sensei-statistics model=sensei type="sensei" counterModel=healthzModel}}
           </div>
         {{/each}}
       </div>
@@ -53,8 +48,7 @@
   {{!-- OS useage by time No horiz error. but not middle. --}}
   <div id="osusage" class="os-useage-bytime p-t-50 p-b-50">
     <p class="title p-l-50 p-b-30">
-      <span class="underline">{{t 'generic.O'}}</span>{{t
-      'dashboard.osusages.subtitle'}}</p>
+      <span class="underline">{{t 'dashboard.osUsageFirstSec'}}</span>{{t 'dashboard.osUsageSecondSec'}}</p>
     {{infra-deployedos-visualizelive model=model.healthzDashboard}}
   </div>
 

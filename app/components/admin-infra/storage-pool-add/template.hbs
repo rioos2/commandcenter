@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{t 'dojos.dashboard.storages.pools.add.title'}}</h4>
+        <h4 class="modal-title">{{t 'stackPage.admin.storage.pool.add'}}</h4>
       </div>
       <div class="modal-body">
         <form action="/action_page.php">
@@ -15,10 +15,10 @@
 						</div>
 					{{else}}
           <div class="form-group">
-            <label for="poolname">{{t 'generic.name'}} </label> {{input type="text" class="form-control" id="poolname" value=name}}
+            <label for="poolname">{{t 'stackPage.admin.storage.name'}} </label> {{input type="text" class="form-control" id="poolname" value=name}}
           </div>
           <div class="form-group">
-            <label for="pooldisk">{{t 'dojos.dashboard.storages.disks.subtitle'}}</label>
+            <label for="pooldisk">{{t 'stackPage.admin.storage.disk.free'}}</label>
             <div class="rio-radio mov-top">
 
               {{#each removeRootPartitions as |key|}}
@@ -30,7 +30,7 @@
           </div>
           <div class="col-xs-12">
             <button type="submit" {{action 'createPool'}} class="btn btn-default">
-              {{t 'actions.add'}}
+              {{t 'stackPage.admin.header.add_btn'}}
               {{#if showSpinner}}
               <i class="fa fa-circle-o-notch fa-spin"></i>
               {{/if}}

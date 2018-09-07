@@ -16,7 +16,7 @@ App = Application.extend({
 // For now we print it on the console.
 // TO-DO Need to send error to slack channel
 Ember.onerror = function(error) {
-  console.log('(✖╭╮✖)  ****         Uncaught Exception             ****');
+  console.log("(✖╭╮✖)  ****         Uncaught Exception             ****");
   console.log(`          ,--.!,
        __/   -*-
      ,d08b.  '|'

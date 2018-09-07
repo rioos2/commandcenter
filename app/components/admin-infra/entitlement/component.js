@@ -1,15 +1,7 @@
-import { isEmpty } from '@ember/utils';
-import { buildAdminSettingPanel } from '../admin-setting-panel/component';
-
-
-export default buildAdminSettingPanel('entitlement', {
-
-  licenses: function(){
-    return isEmpty(this.get('model.license.content')) ? [] : this.get('model.license.content');
-  }.property('model.license'),
-
+import Component from '@ember/component';
+export default Component.extend({
   actions: {
-    doInnerReload() {
+    doReload: function() {
       this.sendAction('triggerReload');
     },
   }

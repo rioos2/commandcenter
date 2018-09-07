@@ -1,29 +1,27 @@
-import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
-import $ from 'jquery';
+import Ember from 'ember';
 
-export default Route.extend({
-  storeReset: service(),
+export default Ember.Route.extend({
+  storeReset: Ember.inject.service(),
 
-  model() {
+  actions: {
+    activate: function() {
+      $('BODY').addClass('farm');
+    },
+
+    deactivate: function() {
+      $('BODY').removeClass('farm');
+    },
+  },
+
+  model: function() {
     return this.controllerFor('application').get('error');
   },
 
-  afterModel(model) {
+  afterModel: function(model) {
     if ( model ) {
       this.get('storeReset').reset();
     } else {
       this.transitionTo('authenticated');
     }
-  },
-  actions: {
-    activate() {
-      $('BODY').addClass('farm');
-    },
-
-    deactivate() {
-      $('BODY').removeClass('farm');
-    },
-  },
-
+  }
 });

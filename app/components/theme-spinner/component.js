@@ -1,18 +1,18 @@
-import Component from '@ember/component';
+import Ember from 'ember';
 
-export default Component.extend({
+export default Ember.Component.extend({
   tagName: '',
-  large:   25,
-  medium:  20,
-  small:   16,
-  show:    false,
+  large: 25,
+  medium: 20,
+  small: 16,
+  show: false,
 
   value: function() {
-    return this.get('large');
+     return this.get('large');
   }.property('size'),
 
   hide: function() {
-    this.set('show', this.get('condition'));
+    this.set('show',this.get('condition'));
   }.observes('condition'),
 
 });

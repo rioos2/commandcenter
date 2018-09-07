@@ -1,33 +1,33 @@
+import Ember from 'ember';
 import Util from 'nilavu/utils/util';
 import C from 'nilavu/utils/constants';
-import Mixin from '@ember/object/mixin';
 
-export default Mixin.create({
-  reservedKeys: ['delayTimer', 'pollTimer'],
+export default Ember.Mixin.create({
+  reservedKeys: ['delayTimer','pollTimer'],
 
-  replaceWith() {
-    this._super.apply(this, arguments);
+  replaceWith: function() {
+    this._super.apply(this,arguments);
     this.transitioningChanged();
   },
 
   // ember-api-store hook
-  wasAdded() {
+  wasAdded: function() {
     this.transitioningChanged();
   },
 
   // ember-api-store hook
-  wasRemoved() {
+  wasRemoved: function() {
     this.transitioningChanged();
   },
 
   delayTimer: null,
-  clearDelay() {
+  clearDelay: function() {
     clearTimeout(this.get('delayTimer'));
     this.set('delayTimer', null);
   },
 
   pollTimer: null,
-  clearPoll() {
+  clearPoll: function() {
     clearTimeout(this.get('pollTimer'));
     this.set('pollTimer', null);
   },
@@ -35,9 +35,9 @@ export default Mixin.create({
   needsPolling: function() {
     return ( this.get('transitioning') === 'yes' ) ||
            ( this.get('state') === 'requested' );
-  }.property('transitioning', 'state'),
+  }.property('transitioning','state'),
 
-  remove() {
+  remove: function() {
     return this._super().finally(() => {
       this.reload();
     });
@@ -48,62 +48,68 @@ export default Mixin.create({
     var interval = this.constructor.pollTransitioningInterval;
 
     // This resource doesn't want polling
-    if ( !delay || !interval ) {
+    if ( !delay || !interval )
+    {
       return;
     }
 
     // This resource isn't transitioning or isn't in the store
-    if ( !this.get('needsPolling') || !this.isInStore() ) {
+    if ( !this.get('needsPolling') || !this.isInStore() )
+    {
       this.clearPoll();
       this.clearDelay();
-
       return;
     }
 
     // We're already polling or waiting, just let that one finish
-    if ( this.get('delayTimer') ) {
+    if ( this.get('delayTimer') )
+    {
       return;
     }
 
-    this.set('delayTimer', setTimeout(() => {
+    this.set('delayTimer', setTimeout(function() {
       this.transitioningPoll();
-    }, Util.timerFuzz(delay)));
+    }.bind(this), Util.timerFuzz(delay)));
   }.observes('transitioning'),
 
   reloadOpts: function() {
     return null;
   }.property(),
 
-  transitioningPoll() {
+  transitioningPoll: function() {
     this.clearPoll();
 
-    if ( !this.get('needsPolling') || !this.isInStore() ) {
+    if ( !this.get('needsPolling') || !this.isInStore() )
+    {
       return;
     }
 
-    // console.log('Polling', this.toString());
+    //console.log('Polling', this.toString());
     this.reload(this.get('reloadOpts')).then(() => {
-      // console.log('Poll Finished', this.toString());
-      if ( this.get('needsPolling') ) {
+      //console.log('Poll Finished', this.toString());
+      if ( this.get('needsPolling') )
+      {
         let interval = this.constructor.pollTransitioningInterval;
         let factor = this.constructor.pollTransitioningIntervalFactor;
-
-        if ( factor ) {
+        if ( factor )
+        {
           interval *= factor;
         }
 
         let max = this.constructor.pollTransitioningIntervalMax;
-
-        if ( max ) {
-          interval = Math.min(max, interval);
+        if ( max )
+        {
+          interval = Math.min(max,interval);
         }
 
-        // console.log('Rescheduling', this.toString());
-        this.set('pollTimer', setTimeout(() => {
-          // console.log('2 expired', this.toString());
+        //console.log('Rescheduling', this.toString());
+        this.set('pollTimer', setTimeout(function() {
+          //console.log('2 expired', this.toString());
           this.transitioningPoll();
-        }, Util.timerFuzz(interval)));
-      } else {
+        }.bind(this), Util.timerFuzz(interval)));
+      }
+      else
+      {
         // If not transitioning anymore, stop polling
         this.clearPoll();
         this.clearDelay();

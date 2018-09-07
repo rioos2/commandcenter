@@ -1,20 +1,20 @@
-import { get } from '@ember/object';
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { htmlSafe } from '@ember/string';
+import Ember from 'ember';
+const {
+  get
+} = Ember;
 
-export default Component.extend({
-  intl: service(),
-
-  tagName:   'section',
+export default Ember.Component.extend({
+  tagName: 'section',
   className: '',
 
+  intl: Ember.inject.service(),
+
   didInsertElement() {
-    this.set('welcomeMsg', htmlSafe(get(this, 'intl').t('wizard.welcomeMessage')));
+    this.set('welcomeMsg', Ember.String.htmlSafe(get(this, 'intl').t('wizard.welcomeMessage')));
   },
 
   actions: {
-    nextStep() {
+    nextStep: function() {
       this.sendAction('nextStep', this.get('category'));
     },
   },

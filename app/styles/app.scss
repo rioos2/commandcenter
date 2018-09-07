@@ -7,15 +7,12 @@
 @import 'pages/signform.scss';
 @import 'components/navbar';
 @import 'pages/home.scss';
-@import 'pages/contact-admin.scss';
 @import 'components/loading.scss';
 @import 'components/modal.scss';
 @import 'pages/vnc.scss';
 @import 'components/resource-actions.scss';
 @import 'components/notification.scss';
 @import 'components/container-vnc.scss';
-@import 'components/select-dropdown.scss';
-@import 'components/notification-bar.scss';
 @import 'pages/dashboard.scss';
 @import 'pages/no-vnc.scss';
 @import 'comp/chart-os.scss';
@@ -33,8 +30,6 @@
 @import 'base/table.scss';
 @import 'components/createcloud';
 @import 'components/radio';
-@import 'components/organization/origin';
-@import 'components/organization/team';
 @import 'admin/chef_work';
 @import 'admin/jscrollbar';
 @import 'admin/main';
@@ -81,7 +76,7 @@ body {
 }
 
 body.wizard-page {
-  background-image: url('/assets/images/login/sign_bg.jpg');
+  background-image: url('/assets/images/wizard/wizard-bg.jpg');
   background-size: cover;
   background-position: top center;
   position: relative;

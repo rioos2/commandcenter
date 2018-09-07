@@ -1,4 +1,5 @@
 import BrowserStore from 'nilavu/utils/browser-storage';
-import Service from '@ember/service';
+import Ember from 'ember';
+
 // When we open multiple tab window the tab session used as bowser store.
-export default Service.extend(BrowserStore, { backing: window.sessionStorage, });
+export default Ember.Service.extend(BrowserStore, { backing: window.sessionStorage, });

@@ -1,11 +1,9 @@
-import Component from '@ember/component';
-import { isEmpty } from '@ember/utils';
-import $ from 'jquery';
-
-export default Component.extend({
+import Ember from 'ember';
+import C from 'nilavu/utils/constants';
+export default Ember.Component.extend({
 
   nameSelect: function(){
-    this.set('name', this.get('model.object_meta.name'));
+      this.set('name',this.get('model.object_meta.name'));
   }.observes('model'),
 
   type: function() {
@@ -25,22 +23,22 @@ export default Component.extend({
   }.property('model.netmask'),
 
   status: function() {
-    return isEmpty(this.get('model.status.phase')) ? '' : this.get('model.status.phase').capitalize();
+    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
   virtualNetworkAvailable: function() {
-    return !(isEmpty(this.get('status')) && isEmpty(this.get('name')) && isEmpty(this.get('subnet')) && isEmpty(this.get('type')) && isEmpty(this.get('gateway')));
-  }.property('status', 'name', 'type', 'gateway', 'subnet'),
+    return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('subnet')) && Ember.isEmpty(this.get('type')) && Ember.isEmpty(this.get('gateway')));
+  }.property('status','name','type','gateway','subnet'),
 
-  actions: {
-    openEditModal(){
-      $('#network_edit').modal('show');
-    },
+actions: {
+  openEditModal: function(){
+    $('#network_edit').modal('show');
+  },
 
-    doReloaded() {
-      this.sendAction('virtualNetworkReload');
-    }
-
+  doReloaded: function() {
+    this.sendAction('virtualNetworkReload');
   }
+
+}
 
 });

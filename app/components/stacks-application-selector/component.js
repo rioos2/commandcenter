@@ -1,16 +1,14 @@
-import Component from '@ember/component';
-import { equal } from '@ember/object/computed';
-import { inject as service } from '@ember/service';
+import Ember from 'ember';
 
-export default Component.extend({
-  intl:              service(),
-  tagName:           'input',
+export default Ember.Component.extend({
+  intl: Ember.inject.service(),
+  tagName: 'input',
   classNameBindings: ['active', 'tabClassName'],
 
-  active: equal('selectedTab', 'tab'),
-
-  tabClassName: function() {
-    return `stacks-application-${  this.get('tab') }`;
+  tabClassName: function () {
+    return 'stacks-application-' + this.get('tab');
   }.property('tab'),
+
+  active: Ember.computed.equal('selectedTab', 'tab')
 
 });

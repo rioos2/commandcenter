@@ -1,40 +1,44 @@
-import InputValidation from 'nilavu/models/input-validation';
+import InputValidation from "nilavu/models/input-validation";
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
-import { get } from '@ember/object';
-import { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
+import {
+  get
+} from '@ember/object';
 
 export default Mixin.create({
 
-  intl: service(),
+  intl: Ember.inject.service(),
 
   // If blank, fail with a reason
   userNameValidation: computed('username', function() {
     if (
-      isEmpty(this.get('username'))
+      Ember.isEmpty(this.get("username"))
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('loginPage.require.email')
+        reason: get(this, 'intl').t('validate.user.name.empty_name')
       });
     }
 
-    return InputValidation.create({ ok: true });
+    return InputValidation.create({
+      ok: true
+    });
   }),
 
   // If blank, fail with a reason
   passwordValidation: computed('password', function() {
     if (
-      isEmpty(this.get('password'))
+      Ember.isEmpty(this.get("password"))
     ) {
       return InputValidation.create({
         failed: true,
-        reason: get(this, 'intl').t('loginPage.require.password')
+        reason: get(this, 'intl').t('validate.user.password.empty_password')
       });
     }
 
-    return InputValidation.create({ ok: true });
+    return InputValidation.create({
+      ok: true
+    });
   }),
 
 });

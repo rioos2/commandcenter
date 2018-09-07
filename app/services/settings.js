@@ -1,15 +1,14 @@
 
 import C from 'nilavu/utils/constants';
-import Service from '@ember/service';
-import Evented from '@ember/object/evented';
-import { inject as service } from '@ember/service';
+import Ember from 'ember';
+
 export function normalizeName(str) {
   return str.replace(/\./g, C.SETTING.DOT_CHAR).toLowerCase();
 }
 
-export default Service.extend(Evented, {
-  intl:      service(),
-  userStore: service('user-store'),
+export default Ember.Service.extend(Ember.Evented, {
+  intl:      Ember.inject.service(),
+  userStore: Ember.inject.service('user-store'),
 
   all:          null,
   promiseCount: 0,
@@ -69,6 +68,7 @@ export default Service.extend(Evented, {
   }.property('app.version'),
 
   docsBase: function() {
+    let full = this.get('uiVersion');
     let version = 'latest';
 
     let lang = ((this.get('intl._locale') || [])[0] || '').replace(/-.*$/, '');

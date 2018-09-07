@@ -1,6 +1,6 @@
 import missingMessage from 'nilavu/utils/intl/missing-message';
-import { get } from '@ember/object';
-import { makeArray } from '@ember/array';
+import Ember from 'ember';
+const { get, makeArray } = Ember;
 
 export function initialize(instance) {
   var intl = instance.lookup('service:intl');

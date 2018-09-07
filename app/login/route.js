@@ -1,12 +1,11 @@
-import { inject as service } from '@ember/service';
-import Route from '@ember/routing/route';
-import { reject } from 'rsvp';
-export default Route.extend({
-  access:   service(),
-  language: service('user-language'),
+import Ember from 'ember';
 
-  // Has rioos is activated or not. If not activated first step page
-  beforeModel(/* transition*/) {
+export default Ember.Route.extend({
+  access:   Ember.inject.service(),
+  language: Ember.inject.service('user-language'),
+
+  //Has rioos is activated or not. If not activated first step page
+  beforeModel(transition) {
     this._super.apply(this, arguments);
 
     return this.get('language').initUnauthed().then(() => {
@@ -18,7 +17,7 @@ export default Route.extend({
           this.transitionTo('wizard');
         }
       }).catch((err) => {
-        return reject(err);
+        return Ember.RSVP.reject(err);
       });
     });
   },

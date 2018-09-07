@@ -1,17 +1,16 @@
-import Component from '@ember/component';
+import Ember from 'ember';
 
-export default Component.extend({
-  tagName:           'input',
-  type:              'radio',
-  disabled:          false,
+export default Ember.Component.extend({
+  tagName: 'input',
+  type: 'radio',  
+  disabled: false,
   attributeBindings: ['name', 'type', 'checked:checked', 'disabled:disabled'],
 
-  checked: function() {
-    return this.get('value') === this.get('selection');
-  }.property('value', 'selection'),
-
-  click() {
+  click : function() {
     this.set('selection', this.get('value'));
   },
 
+  checked : function() {
+    return this.get('value') === this.get('selection');
+  }.property('value','selection')
 });

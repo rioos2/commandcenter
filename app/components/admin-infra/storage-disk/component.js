@@ -1,6 +1,5 @@
-import Component from '@ember/component';
-
-export default Component.extend({
+import Ember from 'ember';
+export default Ember.Component.extend({
 
   diskName: function() {
     return this.get('disk.disk');

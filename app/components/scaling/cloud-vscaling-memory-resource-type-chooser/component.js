@@ -1,23 +1,21 @@
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
-
-export default Component.extend({
-  intl:       service(),
+import Ember from 'ember';
+const { get} = Ember;
+export default Ember.Component.extend({
+  intl:       Ember.inject.service(),
 
   maxMemoryResource: function(){
     return {
-      name:   'max-memory-select',
-      suffix: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
-      title:  get(this, 'intl').t('launcherPage.scaling.up.memory.limit')
+      name: "max-memory-select",
+      suffix: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
+      title: get(this, 'intl').t('launcherPage.scaling.scaleup.ramChooser.title')
     };
   }.property(),
 
   minMemoryResource: function(){
     return {
-      name:   'min-memory-select',
-      suffix: get(this, 'intl').t('launcherPage.resource.capacity.storage.select.suffix'),
-      title:  get(this, 'intl').t('launcherPage.scaling.down.memory.limit')
-    };
+      name: "min-memory-select",
+      suffix: get(this, 'intl').t('launcherPage.sysConfig.storageCapacity.suffix'),
+      title: get(this, 'intl').t('launcherPage.scaling.scaledown.ramChooser.title')
+      };
   }.property(),
 });

@@ -3,13 +3,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{t 'dojos.dashboard.ninjas.discovery.search'}}</h4>
+        <h4 class="modal-title">{{t 'stackPage.admin.node.nodeSearchDiscovery'}}</h4>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="node_discovery_types">{{t 'dojos.dashboard.ninjas.install.mode.label'}}</label>
+              <label for="node_discovery_types">{{t 'stackPage.admin.node.selectDiscoveryMode'}}</label>
               <select class="form-control" id="node_discovery_types" name="node_discovery_types" onchange= {{action "selectStorage" value="target.value"}}>
                 {{#each types as |type|}}
                 <option value={{type.value}}>{{type.text}}</option>
@@ -24,7 +24,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="msg">
-                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>{{t 'dojos.dashboard.ninjas.install.subnet.note'}}
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>{{t 'stackPage.admin.node.noteForAdvanceSubnet'}}
               </label>
             </div>
           </div>
@@ -34,7 +34,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="subnetAdvanceValue">{{t 'dojos.dashboard.ninjas.install.ipblock.label'}}</label> {{input type="text" class="form-control" id="subnet" value=subnetAdvanceValue placeholder=subnetAdvancePlaceHolder}}
+              <label for="subnetAdvanceValue">{{t 'stackPage.admin.node.searchNodeBySubnet'}}</label> {{input type="text" class="form-control" id="subnet" value=subnetAdvanceValue placeholder=subnetAdvancePlaceHolder}}
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="default">
-                <span class="note">{{t 'dojos.dashboard.ninjas.install.note'}}</span>
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>
                 {{noteForAdvanceSubnet}}
               </label>
             </div>
@@ -53,12 +53,12 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="from">{{t 'dojos.dashboard.ninjas.install.subnet.range.from'}}</label> {{input type="text" class="form-control" id="from" value=subnetRangeFrom}}
+              <label for="from">{{t 'stackPage.admin.node.fromSubnet'}}</label> {{input type="text" class="form-control" id="from" value=subnetRangeFrom}}
             </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group">
-              <label for="to">{{t 'dojos.dashboard.ninjas.install.subnet.range.to'}}</label> {{input type="text" class="form-control" id="to" value=subnetRangeTo}}
+              <label for="to">{{t 'stackPage.admin.node.toSubnet'}}</label> {{input type="text" class="form-control" id="to" value=subnetRangeTo}}
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="msg">
-                <span class="note">{{t 'dojos.dashboard.ninjas.install.note'}}</span>
+                <span class="note">{{t 'stackPage.admin.node.nodeNote'}}</span>
                 {{noteForRangeSubnet}}
               </label>
             </div>
@@ -75,7 +75,7 @@
         {{/if}}
 
         <button type="submit" {{action 'nodeDiscovery'}} class="btn btn-default">
-            {{t 'actions.search'}}
+            {{t 'stackPage.admin.node.searchButtonText'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>
             {{/if}}

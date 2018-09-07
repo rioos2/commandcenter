@@ -1,9 +1,7 @@
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
-
-export default Component.extend({
-  intl: service(),
+import Ember from 'ember';
+import C from 'nilavu/utils/constants';
+export default Ember.Component.extend({
+  intl: Ember.inject.service(),
 
   name: function() {
     return this.get('model.object_meta.name');
@@ -14,20 +12,20 @@ export default Component.extend({
   }.property('model.node_ip'),
 
   status: function() {
-    return isEmpty(this.get('model.status.phase')) ? '' : this.get('model.status.phase').capitalize();
+    return Ember.isEmpty(this.get('model.status.phase')) ? "" : this.get('model.status.phase').capitalize();
   }.property('model.status.phase'),
 
-  emptyError: function() {
-    return this.get('intl').t(`stackPage.admin.${  this.get('type')  }.noNode`);
+  emptyError: function () {
+      return this.get('intl').t('stackPage.admin.' + this.get('type') + '.noNode');
   }.property('type'),
 
   bridges: function() {
-    return isEmpty(this.get('model.status.node_info.bridges')) ? '' : this.get('model.status.node_info.bridges') ;
+    return Ember.isEmpty(this.get('model.status.node_info.bridges'))? "":this.get('model.status.node_info.bridges') ;
   }.property('model.status.node_info.bridges'),
 
   nodeAvailable: function() {
-    return !(isEmpty(this.get('status')) && isEmpty(this.get('name')) && isEmpty(this.get('ip')) );
-  }.property('status', 'name', 'ip'),
+    return !(Ember.isEmpty(this.get('status')) && Ember.isEmpty(this.get('name')) && Ember.isEmpty(this.get('ip')) );
+  }.property('status','name','ip'),
 
 
 });

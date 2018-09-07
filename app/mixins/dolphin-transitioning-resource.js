@@ -1,15 +1,8 @@
 import C from 'nilavu/utils/constants';
 import Util from 'nilavu/utils/util';
+import Ember from 'ember';
 import Resource from 'ember-api-store/models/resource';
 import { normalizeType } from '../utils/normalize';
-import Mixin from '@ember/object/mixin';
-import { inject as service } from '@ember/service';
-import {
-  get, computed, set
-} from '@ember/object';
-import { equal } from '@ember/object/computed';
-import { isArray } from '@ember/array';
-import { Promise } from 'rsvp';
 
 const defaultStateMap = {
   'activating':              {
@@ -161,9 +154,9 @@ const stateColorSortMap = {
 };
 const stateColorUnknown = 5;
 
-export default Mixin.create({
-  endpointSvc: service('endpoint'), // Some machine drivers have a property called 'endpoint'
-  cookies:     service(),
+export default Ember.Mixin.create({
+  endpointSvc: Ember.inject.service('endpoint'), // Some machine drivers have a property called 'endpoint'
+  cookies:     Ember.inject.service(),
   // growl: Ember.inject.service(),
   // intl: Ember.inject.service(),
 
@@ -193,7 +186,7 @@ export default Mixin.create({
     return [];
   }.property(),
 
-  translatedAvailableActions: computed('availableActions', 'intl._locale', function() {
+  translatedAvailableActions: Ember.computed('availableActions', 'intl._locale', function() {
     // use this if you need to pass translated actions to addons
     var availableActions = this.get('availableActions');
 
@@ -216,14 +209,14 @@ export default Mixin.create({
 
     for (var i = 0; i < all.get('length'); i++) {
       obj = all.objectAt(i);
-      if (get(obj, 'divider')) {
+      if (Ember.get(obj, 'divider')) {
         // Nothing was found, stop at the first divider;
         if (seenAnAction) {
           return null;
         }
-      } else if (get(obj, 'enabled')) {
+      } else if (Ember.get(obj, 'enabled')) {
         seenAnAction = true;
-        if (get(obj, 'icon') && get(obj, 'action') !== 'promptDelete') {
+        if (Ember.get(obj, 'icon') && Ember.get(obj, 'action') !== 'promptDelete') {
           return obj;
         }
       }
@@ -272,13 +265,13 @@ export default Mixin.create({
     return this.get('name') || `(${  this.get('id')  })`;
   }.property('name', 'id'),
 
-  isTransitioning: equal('transitioning', 'yes'),
-  isError:         equal('transitioning', 'error'),
-  isRemoved:       computed('state', () => {
+  isTransitioning: Ember.computed.equal('transitioning', 'yes'),
+  isError:         Ember.computed.equal('transitioning', 'error'),
+  isRemoved:       Ember.computed('state', () => {
     return !C.MANAGEMENT.STATUS.TERMINATE.includes(this.state);
   }),
-  isPurged:        equal('state', 'purged'),
-  isActive:        equal('state', 'active'),
+  isPurged:        Ember.computed.equal('state', 'purged'),
+  isActive:        Ember.computed.equal('state', 'active'),
 
   relevantState: function() {
     return this.get('combinedState') || this.get('state');
@@ -376,7 +369,7 @@ export default Mixin.create({
       seenObjs = [];
     }
     this.eachKeys((val, key) => {
-      set(this, key, recurse(val, depth));
+      Ember.set(this, key, recurse(val, depth));
     }, false);
 
     return this;
@@ -388,7 +381,7 @@ export default Mixin.create({
         return val;
       } else if (typeof val === 'string') {
         return val.trim();
-      } else if (isArray(val)) {
+      } else if (Ember.isArray(val)) {
         val.beginPropertyChanges();
         val.forEach((v, idx) => {
           var out = recurse(v, depth + 1);
@@ -413,7 +406,7 @@ export default Mixin.create({
         Object.keys(val).forEach((key) => {
           // Skip keys with dots in them, like container labels
           if (key.indexOf('.') === -1) {
-            set(val, key, recurse(val[key], depth + 1));
+            Ember.set(val, key, recurse(val[key], depth + 1));
           }
         });
 
@@ -488,14 +481,16 @@ export default Mixin.create({
         this.set(key, val);
       }
 
-      if (field.type === 'int' && typeof val === 'string' && key !== 'id') { // Sigh: ids are all marked int, rancher/rancher#515
+      if (field.type === 'int' && typeof val === 'string' && key !== 'id') // Sigh: ids are all marked int, rancher/rancher#515
+      {
         val = parseInt(val, 10) || null;
         this.set(key, val);
       }
 
       // Empty strings on nullable fields -> null
       if (['string', 'password', 'float', 'int', 'date', 'blob', 'enum', 'multiline', 'masked'].indexOf(field.type) >= 0) {
-        if ((typeof val === 'string' && !val) || val === null) { // empty/null strings or null numbers
+        if ((typeof val === 'string' && !val) || val === null) // empty/null strings or null numbers
+        {
           if (field.nullable) {
             val = null;
             this.set(key, val);
@@ -503,9 +498,9 @@ export default Mixin.create({
         }
       }
 
-      var len = (val ? get(val, 'length') : 0);
+      var len = (val ? Ember.get(val, 'length') : 0);
 
-      if (field.required && (val === null || (typeof val === 'string' && len === 0) || (isArray(val) && len === 0))) {
+      if (field.required && (val === null || (typeof val === 'string' && len === 0) || (Ember.isArray(val) && len === 0))) {
         errors.push(intl.t('validation.required', { key: displayKey }));
         continue;
       }
@@ -636,12 +631,12 @@ export default Mixin.create({
   delete(/* arguments*/) {
     var promise = this._super.apply(this, arguments);
 
-    return promise.catch((/* err */) => {
+    return promise.catch((err) => {
       // this.get('growl').fromError('Error deleting',err);
     });
   },
 
-  doAction(/* name,data, opt*/) {
+  doAction(name, data, opt) {
     var promise = this._super.apply(this, arguments);
 
     // if ( !opt || opt.catchGrowl !== false )
@@ -661,7 +656,7 @@ export default Mixin.create({
   waitInterval:   1000,
   waitTimeout:    30000,
   _waitForTestFn(testFn, msg) {
-    return new Promise((resolve, reject) => {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       var timeout = setTimeout(() =>  {
         clearInterval(interval);
         clearTimeout(timeout);

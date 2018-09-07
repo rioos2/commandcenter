@@ -1,10 +1,11 @@
-const AdminInfraPanel = Component.extend({ classNameBindings: [':modal-tab', 'activeTab::invisible'], });
-
-import Component from '@ember/component';
-import { equal } from '@ember/object/computed';
+const AdminInfraPanel = Ember.Component.extend({
+  classNameBindings: [':modal-tab', 'activeTab::invisible'],
+});
 
 export default AdminInfraPanel;
 
 export function buildAdminInfraPanel(tab, extras) {
-  return AdminInfraPanel.extend({ activeTab: equal('selectedTab', tab) }, extras || {});
+    return AdminInfraPanel.extend({
+      activeTab: Ember.computed.equal('selectedTab', tab)
+  }, extras || {});
 }

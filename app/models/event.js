@@ -1,7 +1,7 @@
 import Resource from 'ember-api-store/models/resource';
 
 var Event = Resource.extend({
-  type:    'event',
+  type: 'event',
   actions: {},
 });
 

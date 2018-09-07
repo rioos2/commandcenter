@@ -1,19 +1,19 @@
+import Ember from 'ember';
 import C from 'nilavu/utils/constants';
-import { get } from '@ember/object';
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
+import { denormalizeName } from 'nilavu/utils/denormalize';
+const {get} = Ember;
 
-export default Component.extend({
-  intl:     service(),
+export default Ember.Component.extend({
+  intl:       Ember.inject.service(),
   tagName: 'rio-radio',
-  enable:  '',
+  enable: '',
 
   selectionChecker: function() {
-    this.set('active', (this.get('selected') === this.get('name')));
+    this.set("active", (this.get("selected") == this.get("name")));
   }.observes('activate'),
 
   aliasName: function(){
-    return this.get('name') === C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.statistics.rx_tx') : this.get('name');
+    return this.get('name') == C.NETWORK.PACKETMEASURETYPE.ERROR ? get(this, 'intl').t('dashboard.nodeStatistics.errorAliceName') : this.get('name');
   }.property('name'),
 
   actions: {

@@ -1,15 +1,13 @@
 import C from 'nilavu/utils/constants';
-import { get } from '@ember/object';
-import Controller from '@ember/controller';
-import { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
+import Ember from 'ember';
+const  { get } = Ember;
 
-export default Controller.extend({
-  notifications: service('notification-messages'),
-  intl:          service(),
+export default Ember.Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
+  intl:          Ember.inject.service(),
 
   img: function() {
-    if (this.get('model.profile.avatar') === null) {
+    if (this.get('model.profile.avatar') == null) {
       return 'assets/images/user/default.png';
     }
 
@@ -17,7 +15,7 @@ export default Controller.extend({
   }.property('model'),
 
   alertMessage: function() {
-    if (C.BADGATEWAY_HTTP_CODES.includes(this.get('model.logData.code'))) {
+    if (this.get('model.logData.code') == '502') {
       this.get('notifications').warning(get(this, 'intl').t('auditLogsPage.connectionError'), {
         htmlContent:   true,
         autoClear:     true,
@@ -55,7 +53,7 @@ export default Controller.extend({
   tableData: function() {
     let data = this.get('model.logData.content');
 
-    if (!isEmpty(data)) {
+    if (!Ember.isEmpty(data)) {
       data.forEach((e) => {
         if (e.envelope.timestamp) {
           e.envelope.timestamp = this.auditedTimestamp(e.envelope.timestamp);
@@ -67,7 +65,7 @@ export default Controller.extend({
   }.property('model.logData'),
 
   tableLastData: function() {
-    if (!isEmpty(this.get('tableData'))) {
+    if (!Ember.isEmpty(this.get('tableData'))) {
       return {
         show:    true,
         type:    'warning',

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import config from 'nilavu/config/environment';
 
 /* A singleton Countly preconfigured with standard push events.

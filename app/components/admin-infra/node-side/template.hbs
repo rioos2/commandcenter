@@ -4,26 +4,26 @@
 			{{#if nodeAvailable}}{{name}} {{else}} &nbsp;{{/if}}
 		</div>
 		<div class="network-active-detail-detail">
-			<div class="sd-subheader">{{t 'dojos.dashboard.storages.details.title'}}</div>
+			<div class="sd-subheader">{{t 'stackPage.admin.network.detail'}}</div>
 			{{#if nodeAvailable}}
 				<div class="sd-ip-detail sd-table">
-					<div class="sd-title">{{t 'dojos.dashboard.storages.details.ip'}}</div>
+					<div class="sd-title">{{t 'stackPage.admin.node.ip'}}</div>
 					<div class="sd-value">{{ip}}</div>
 				</div>
 				<div class="sd-cdate-detail sd-table">
-					<div class="sd-title">{{t 'dojos.dashboard.ninjas.details.bridges.status'}}</div>
+					<div class="sd-title">{{t 'stackPage.admin.node.status'}}</div>
 					<div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
 				</div>
 				<div class="sd-ip-detail sd-table">
-					<div class="sd-title">{{t 'dojos.dashboard.ninjas.details.bridges.metrics'}}</div>
-					<div class="sd-value">{{#link-to "infrastructure-tab.data-center"}}{{t 'actions.view'}}{{/link-to}}</div>
+					<div class="sd-title">{{t 'stackPage.admin.node.metrics'}}</div>
+					<div class="sd-value">{{#link-to "infrastructure-tab.data-center"}}{{t 'stackPage.admin.node.metricsShow'}}{{/link-to}}</div>
 				</div>
 				{{else}}
 				<div class="sd-empty-pool">{{emptyError}}</div>
 			{{/if}}
 		</div>
 		<div class="network-active-detail-nodes">
-			<div class="sd-subheader">{{t 'dojos.dashboard.ninjas.details.bridges.title'}}</div>
+			<div class="sd-subheader">{{t 'stackPage.admin.node.bridges'}}</div>
 			{{#if nodeAvailable}}
 				{{#each bridges as |bridge|}}
 					{{admin-infra/node-bridge bridge=bridge }}
