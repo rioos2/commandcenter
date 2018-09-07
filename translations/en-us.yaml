@@ -628,22 +628,22 @@ account:
     suspend:
       header: 'Are you sure you want to suspend "{firstName}"?'
       buttonCancel: Cancel
-      buttonSuspend: Suspend
+      buttonSuspend: Save
       suspendNote: Rio/OS will not be accessible for this user
     revokeSuspend:
       header: 'Are you sure you want to revoke suspend for "{firstName}"?'
       buttonCancel: Cancel
-      buttonRevokeSuspend: Revoke Suspend
+      buttonRevokeSuspend: Save
       revokeSuspendNote: Rio/OS will be accessible for this user
     admin:
       header: 'Are you sure you want to make "{firstName}" as admin ?'
       buttonCancel: Cancel
-      buttonMakeAdmin: Make admin
+      buttonMakeAdmin: Save
       makeAdminNote: 'Rio/OS will be accessible to "{firstName}" as super user'
     revokeAdmin:
       header: 'Are you sure you want to revoke admin permission for "{firstName}"?'
       buttonCancel: Cancel
-      buttonRevokeAdmin: Revoke admin
+      buttonRevokeAdmin: Save
       revokeAdminNote: 'Rio/OS will be accessible to "{firstName}" as regular user'
 
 
@@ -734,8 +734,8 @@ confirmDelete:
   cancelAction: Cancel
   largeDeleteText: '{key} and {othersCount} others'
 QRCode:
-  title: QR code
-  qrNote: 'Note: show the QR code to Access'
+  title: Scan QR
+  qrNote: <span>Using the mobile app <a href="https://play.google.com/store/apps/details?id=co.krypt.kryptonite&hl=en_IN" target="_blank">kryptonite</a>.Refer <a href="http://rio.digital/docs/" target="_blank">http://rio.digital</a> to use  this advanced security. </span>
   cancelAction: Cancel
 
 
