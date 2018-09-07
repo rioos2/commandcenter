@@ -1,7 +1,7 @@
 <div class="r-p40 model-delete text-center">
   <h1 class="header model-genric">{{t 'QRCode.title'}}</h1>
-  <p>{{t 'QRCode.qrNote'}}</p>
-  <img src={{name}} alt="QR code" height="200px" width="200px">
+  <p>{{note}}</p>
+  <img src={{originalModel.key}} alt="QR code" height="200px" width="200px">
 
   <div class="footer-actions">
     <button {{action "cancel"}} class="btn btn-primary">{{t 'confirmDelete.cancelAction'}}</button>
