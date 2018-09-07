@@ -1,10 +1,9 @@
-import Ember from 'ember';
-//import computed from "ember-computed-decorators";
+import TextField from '@ember/component/text-field';// import computed from "ember-computed-decorators";
 
-export default Ember.TextField.extend({
+export default TextField.extend({
   attributeBindings: ['autocorrect', 'autocapitalize', 'autofocus', 'maxLength'],
 
-  /*@computed("placeholderKey")
+  /* @computed("placeholderKey")
   placeholder(placeholderKey) {
     return placeholderKey ? I18n.t(placeholderKey) : "";
   }*/

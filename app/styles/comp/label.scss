@@ -11,11 +11,11 @@
 	padding-left: 26px;
 }
 
-.node-compute {
+.node-compute, .success-green {
 	background-color: #4CAF50;
 }
 
-.node-storage {
+.node-storage, .success {
 	background-color: #2196F3;
 }
 
@@ -35,6 +35,6 @@
 	background-color: #4CAF50;
 }
 
-.node-NinjaNotReady {
+.node-NinjaNotReady, .error {
 	background-color: #e65c5c;
 }

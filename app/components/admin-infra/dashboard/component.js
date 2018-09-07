@@ -1,13 +1,15 @@
-  export default Ember.Component.extend({
-    tagName: 'section',
-    className: '',
-    selectedInfraTab: 'sensei',
-    panels: [],
+import Component from '@ember/component';
 
-    actions: {
-      triggerReload: function() {
-        this.sendAction('reloadModel');
-      }
+export default Component.extend({
+  tagName:          'section',
+  className:        '',
+  selectedInfraTab: 'senseis',
+  panels:           [],
+
+  actions: {
+    triggerReload() {
+      this.sendAction('reloadModel');
     }
+  }
 
-  });
+});

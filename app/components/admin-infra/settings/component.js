@@ -1,15 +1,14 @@
-export default Ember.Component.extend({
-  tagName: 'section',
-  className: '',
-  selectedSettingTab: 'entitlement',
-  panels: [],
+import Component from '@ember/component';
 
-  licenses: function(){
-    return Ember.isEmpty(this.get('model.license.content'))? [] : this.get('model.license.content');
-  }.property('model.license'),
+export default Component.extend({
+  tagName:            'section',
+  className:          '',
+  selectedSettingTab: 'entitlement',
+  panels:             [],
+
 
   actions: {
-    triggerReload: function() {
+    triggerReload() {
       this.sendAction('reloadModel');
     }
   }

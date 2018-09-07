@@ -1,22 +1,20 @@
 import Route from '@ember/routing/route';
 import C from 'nilavu/utils/constants';
-import {
-  messageNow
-} from '../utils/message';
+import { messageNow } from '../utils/message';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  access: service(),
-  cookies: service(),
+  access:   service(),
+  cookies:  service(),
   language: service('user-language'),
   settings: service(),
-  modal: service(),
+  modal:    service(),
   // es6-eventemitter is to transmit to events for analytics
-  events: service('es6-eventemitter'),
+  events:   service('es6-eventemitter'),
 
   // Routes are extended to set previous params and previous route in initializers (initailzers/extend-ember-route)
   previousParams: null,
-  previousRoute: null,
+  previousRoute:  null,
 
   updateWindowTitle: function() {
     document.title = this.get('settings.appName') || 'Rio/OS';
@@ -41,9 +39,7 @@ export default Route.extend({
     this.get('language').initLanguage();
 
     transition.finally(() => {
-      this.controllerFor('application').setProperties({
-        redirectTo: null,
-      });
+      this.controllerFor('application').setProperties({ redirectTo: null, });
     });
 
     if (params.redirectTo) {
@@ -84,8 +80,11 @@ export default Route.extend({
       }
 
       this.controllerFor('application').set('error', err);
-      this.transitionTo('failWhale');
-
+      if (C.AUTHORIZATION_DENIED.includes(err.code)){
+        this.transitionTo('access-denied');
+      } else {
+        this.transitionTo('failWhale');
+      }
       console.log('» [ ✘ ] -----------------');
       console.error('» [ ✘ ] Application Error', (err ? err.stack : undefined));
       console.log('» [ ✘ ] -----------------');
@@ -110,7 +109,7 @@ export default Route.extend({
 
       session.set(C.SESSION.ACCOUNT_ID, null);
       // When we open multiple tab window the tab session used as bowser store.
-      //Clear that as well
+      // Clear that as well
       this.get('tab-session').clear();
 
       access.clearSessionKeys();
@@ -119,14 +118,12 @@ export default Route.extend({
         session.set(C.SESSION.BACK_TO, window.location.href);
       }
 
-      //TO-DO verifiy after migrating model internally, remove lacsso
+      // TO-DO verifiy after migrating model internally, remove lacsso
       if (this.get('modal.modalVisible')) {
         this.get('modal').toggleModal();
       }
 
-      let params = {
-        queryParams: {}
-      };
+      let params = { queryParams: {} };
 
       if (timedOut) {
         params.queryParams.timedOut = true;

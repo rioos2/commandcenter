@@ -1,0 +1,20 @@
+<div class="origin dashboard">
+  <div class="tabs">
+    {{#each categories as |category|}}
+      {{radio-button checked=(eq category selectedTab) value=selectedTab selection=selectedTab id=category name="tab-control"}}
+    {{/each}}
+    <ul class="dashboardNav">
+      {{#each categories as |category|}}
+       {{organization/organization-index-tab panels=panels selectedTab=selectedTab tab=category}}
+      {{/each}}
+    </ul>
+    <div class="slider slider-one">
+      <div class="indicator"></div>
+    </div>
+    <div class="content">
+      {{#each panels as |tab|}}
+        {{component tab selectedTab=selectedTab showInnerSpinner=showInnerSpinner reloadInner="reloadInner" model=model category=tab isAdmin=isAdmin}}
+      {{/each}}
+    </div>
+  </div>
+</div>

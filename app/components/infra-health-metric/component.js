@@ -1,40 +1,42 @@
-/* global renderBlueGaugeChart, d3, particlesJS */
+/* global renderBlueGaugeChart, d3 */
 import Component from '@ember/component';
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
 
 export default Component.extend({
-    classNames: ["gauge-chart"],
-    power: 100,
-    guage: '',
+  classNames: ['gauge-chart'],
+  power:      100,
+  guage:      '',
 
-    guageOne: function() {
-      this.updateGuages();
-    }.observes('model.counter'),
+  guageOne: function() {
+    this.updateGuages();
+  }.observes('model.counter'),
 
-    updateGuages() {
-      let value = this.get('model.counter');
-      this.set('power', value);
-      this.get('gauge').data({ value: value });
+  initializeChart: on('didInsertElement', function() {
 
-      let id = "g-" + this.get('model.name');
-      self.$("#" + id + " text").text(Math.round(value)+ "%");
-    },
+    let c_name = `.b-${  this.get('model.name') }`;
 
-    initializeChart: Ember.on('didInsertElement', function() {
+    let blue = renderBlueGaugeChart()
+      .data({ value: 100 });
 
-        let id = "g-" + this.get('model.name');
-        let c_name = ".b-" + this.get('model.name');
+    d3.select(c_name).call(blue);
 
-        let blue = renderBlueGaugeChart()
-        .data({ value: 100 });
+    let value = this.get('model.counter');
 
-        d3.select(c_name).call(blue);
+    this.set('power', value);
+    blue.data({ value });
 
-        let value = this.get('model.counter');
-        this.set('power', value);
-        blue.data({ value: value});
+    this.set('gauge', blue);
 
-          this.set('gauge', blue);
+  }),
+  updateGuages() {
+    let value = this.get('model.counter');
 
-    })
+    this.set('power', value);
+    this.get('gauge').data({ value });
+
+    let id = `g-${  this.get('model.name') }`;
+
+    self.$(`#${  id  } text`).text(`${ Math.round(value) }%`);
+  },
+
 });

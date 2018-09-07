@@ -1,5 +1,7 @@
-import Ember from 'ember';
-export default Ember.Component.extend({
+import Component from '@ember/component';
+import { isEqual } from '@ember/utils';
+
+export default Component.extend({
 
   virtualNetworkName: function(){
     return this.get('model.object_meta.name');
@@ -14,6 +16,6 @@ export default Ember.Component.extend({
   }.property('model.network_type'),
 
   active: function() {
-    return Ember.isEqual(this.get('selectedVirtualNetwork'),this.get('model.id'))? "active" :"";
+    return isEqual(this.get('selectedVirtualNetwork'), this.get('model.id')) ? 'active' : '';
   }.property('selectedVirtualNetwork'),
 });

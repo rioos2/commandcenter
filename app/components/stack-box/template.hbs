@@ -1,31 +1,31 @@
 <div class="left">
   <div class="domain">
-    <div class="icon status" data-tooltip="{{assemblyState}}">
-      {{svg/svg-status status=assemblyStatus}}
+    <div class="icon status" data-tooltip="{{statusToolTip}}">
+      {{svg/svg-status status=statusAttr}}
     </div>
     <p class="text1" title={{name}}>{{name}}</p>
-    <p class="text2">{{assemblyPhase}}</p>
+    <p class="text2">{{statusPhase}}</p>
   </div>
   <div class="ip">
-    <div class="icon">
+    <div class="icon status">
       {{fa-icon "tasks"}}
     </div>
-    <p class="text1">{{ipType}}</p>
-    <p class="text2">{{ip}}</p>
+    {{ips}}
   </div>
   <div class="location">
     <div class="icon">
       {{fa-icon "tag"}}
     </div>
-    <p class="text1">{{region}}</p>
-    <p class="text2">{{appliedBluePrintName}}</p>
+    <p class="text1">{{location}}</p>
+    <p class="text2">{{blueprintName}}</p>
   </div>
 </div>
 <div class="right">
   <div class="stack-action">
-    {{action-menu model=model msg=assemblyConditionMessage id=id}}
+    {{action-menu model=model msg=statusHistory id=id}}
   </div>
   <div class="gauge stack-box">
-    {{infra-health-metric model=metricsData showName=false showOS=true image=image version=version}}
+    {{infra-health-metric model=metricsData showName=false showOS=true
+    image=blueprintParentIcon version=blueprintVersion}}
   </div>
 </div>

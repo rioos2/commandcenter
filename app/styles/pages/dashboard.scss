@@ -105,8 +105,7 @@
         .slider {
             position: relative;
             box-shadow: 0px -3px 15px 0px $rio-second-color;
-            width: #{100%/$tab-count};/* TODO ----- need for blockchain*/
-            // width: 50%;
+            width: #{100%/$tab-count};
             transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
             .indicator {
                 position: relative;
@@ -115,6 +114,14 @@
                 height: $indicator-height;
                 background: $rio-second-color;
             }
+        }
+
+        .slider.slider-one {
+          width: 100%;
+        }
+
+        .slider.slider-two {
+          width: 50%;
         }
 
         .content {

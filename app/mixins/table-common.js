@@ -8,19 +8,19 @@ import { task } from 'ember-concurrency';
 export default Mixin.create({
   store: service(),
 
-  page: 0,
+  page:  0,
   limit: 10,
-  dir: 'asc',
-  sort: 'firstName',
+  dir:   'asc',
+  sort:  'firstName',
 
-  isLoading: computed.oneWay('fetchRecords.isRunning'),
+  isLoading:   computed.oneWay('fetchRecords.isRunning'),
   canLoadMore: true,
-  enableSync: true,
+  enableSync:  true,
 
-  model: null,
-  meta: null,
+  model:   null,
+  meta:    null,
   columns: null,
-  table: null,
+  table:   null,
 
   init() {
     this._super(...arguments);
@@ -38,6 +38,7 @@ export default Mixin.create({
 
   fetchRecords: task(function*() {
     let records = yield this.get('store').query('user', this.getProperties(['page', 'limit', 'sort', 'dir']));
+
     this.get('model').pushObjects(records.toArray());
     this.set('meta', records.get('meta'));
     this.set('canLoadMore', !isEmpty(records));
@@ -51,13 +52,13 @@ export default Mixin.create({
       }
     },
 
-    onColumnClick(column, model) {
+    onColumnClick(column, /* model*/) {
       if (column.sorted) {
         this.setProperties({
-          dir: column.ascending ? 'asc' : 'desc',
-          sort: column.get('valuePath'),
+          dir:         column.ascending ? 'asc' : 'desc',
+          sort:        column.get('valuePath'),
           canLoadMore: true,
-          page: 0
+          page:        0
         });
         this.get('model').clear();
       }

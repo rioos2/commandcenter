@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
-  tagName    : '',
-  icon       : null,
-  text       : null,
-  options    : null,
+export default Component.extend({
+  tagName: '',
+  icon:    null,
+  text:    null,
+  options: null,
 });

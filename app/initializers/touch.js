@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export function initialize(/* application*/) {
   // Add 'touch' or 'no-touch' to the <body> so CSS can depend on the device type.
 

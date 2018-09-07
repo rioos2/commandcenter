@@ -11,8 +11,8 @@ describe('Unit: Route: wizard/index', -function() {
   });
 
   it('exists', function() {
-    let route = this.subject();
+    let model = this.subject();
 
-    expect(route).to.be.ok;
+    expect(model.get('type')).to.equal('exists');
   });
 });
