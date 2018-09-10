@@ -10,6 +10,4 @@ describe('Unit: Model: assembly', () => {
 
     expect(model.get('type')).to.equal('assembly');
   });
-
-
 });

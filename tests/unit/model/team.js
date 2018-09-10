@@ -10,6 +10,4 @@ describe('Unit: Model: team', () => {
 
     expect(model.get('type')).to.equal('team');
   });
-
-
 });
