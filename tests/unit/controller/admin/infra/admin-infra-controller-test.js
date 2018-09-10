@@ -12,18 +12,16 @@ describe('Unit: Controller: admin/infra', () => {
       let controller = this.subject();
 
       controller.set('session', EmberObject.create({
-        selectedTab() {},
-        panels() {},
-        modelSpinner() {}
+        selectedTab:  {},
+        panels:       {},
+        modelSpinner: {}
       }));
     }
   });
-});
+  // Replace this with your real tests.
+  it('exists', function() {
+    let controller = this.subject();
 
-
-// Replace this with your real tests.
-it('exists', function() {
-  let controller = this.subject();
-
-  expect(controller).to.be.ok;
+    expect(controller).to.be.ok;
+  });
 });

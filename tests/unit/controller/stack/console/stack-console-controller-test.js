@@ -18,11 +18,11 @@ describe('Unit: Controller: stack/console', () => {
       let controller = this.subject();
 
       controller.set('session', EmberObject.create({
-        queryParams() {},
-        host() {},
-        port() {},
-        name() {},
-        sendCtrlAltDel(){}
+        queryParams:    {},
+        host:           {},
+        port:           {},
+        name:           {},
+        sendCtrlAltDel: {}
       }));
     }
   });

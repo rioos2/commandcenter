@@ -19,10 +19,11 @@ describe('Unit: Route: authenticated/admin/infra', () => {
       controller.set('session', EmberObject.create({ service() {}, }));
     }
   });
-});
-// Replace this with your real tests.
-it('exists', function() {
-  let controller = this.subject();
 
-  expect(controller).to.be.ok;
+  // Replace this with your real tests.
+  it('exists', function() {
+    let controller = this.subject();
+
+    expect(controller).to.be.ok;
+  });
 });

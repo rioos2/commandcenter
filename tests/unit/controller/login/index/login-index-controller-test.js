@@ -1,39 +1,40 @@
+import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import { it, describe } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import EmberObject from '@ember/object';
 
-describe('login-index-controller', () => {
+describe('Unit: Controller: editor', () => {
   setupTest('controller:login/index', {
-    // needs: [
-    //   'service:session',
-    //   'service:access',
-    //   'service:intl'
-    // ]
-    beforeEach() {
-      let controller = this.subject();
+    needs: [
+      'service:access',
+      'service:intl',
+    ]
+  });
 
-      controller.set('session', EmberObject.create({
-        service() {},
-        // tooltipService() {},
-        // resourceActions() {}
+  // Replace this with your real tests.
+  it('editor controller exists', function() {
+    let controller = this.subject();
 
-      }));
-    }
+    controller.set('session', EmberObject.create({
+      controller: {},
+      service:    {},
+    }));
+
+    expect(controller).to.be.not_ok;
+  });
+
+  it('set username and password test', function() {
+    let ctrl = this.subject();
+    let controller = this.subject();
+
+    controller.set('session', EmberObject.create({
+      controller: {},
+      service:    {},
+    }));
+    ctrl.set('username', 'riouser');
+    // ctrl.set('password', '12345');
+    expect(ctrl.get('username')).to.equal('riouser');
+    // expect(ctrl.get('password')).to.equal('12345');
+
   });
 });
-// Replace this with your real tests.
-it('exists', function() {
-  let controller = this.subject();
-
-  expect(controller).to.be.ok;
-});
-
-
-//   it('exists', function() {
-//     let route = this.subject();
-//
-//     expect(route).to.be.ok;
-//
-//   });
-// });

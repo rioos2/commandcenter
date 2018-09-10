@@ -5,26 +5,23 @@ import EmberObject from '@ember/object';
 
 describe('Unit: Controller: application', () => {
   setupTest('controller:application', {
-  //   needs: [
-  //     'service:settings',
-  //     'service:tooltipService',
-  //     'service:resourceActions',
-  //   ]
-  // });
-    beforeEach() {
-      let controller = this.subject();
-
-      controller.set('session', EmberObject.create({
-        settings() {},
-        tooltipService() {},
-        resourceActions() {}
-      }));
-    }
+    needs: [
+      'service:settings',
+      'service:tooltipService',
+      'service:resourceActions',
+      'queryParams',
+      'redirectTo'
+    ]
   });
-});
-// Replace this with your real tests.
-it('exists', function() {
-  let controller = this.subject();
+  it('application controller exists', function() {
+    let controller = this.subject();
 
-  expect(controller).to.be.ok;
+    controller.set('session', EmberObject.create({
+      resourceActions: {},
+      service:         {},
+    }));
+
+    expect(controller).to.be.not_ok;
+  });
+
 });

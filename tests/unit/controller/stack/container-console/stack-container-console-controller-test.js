@@ -21,11 +21,12 @@ describe('Unit: Controller: stack/container-console', () => {
       controller.set('session', EmberObject.create({ queryParams() {}, }));
     }
   });
-});
 
-// Replace this with your real tests.
-it('exists', function() {
-  let controller = this.subject();
 
-  expect(controller).to.be.ok;
+  // Replace this with your real tests.
+  it('exists', function() {
+    let controller = this.subject();
+
+    expect(controller).to.be.ok;
+  });
 });

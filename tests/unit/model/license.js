@@ -10,6 +10,4 @@ describe('Unit: Model: license', () => {
 
     expect(model.get('type')).to.equal('license');
   });
-
-
 });

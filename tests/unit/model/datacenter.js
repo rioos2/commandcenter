@@ -10,6 +10,4 @@ describe('Unit: Model: datacenter', () => {
 
     expect(model.get('type')).to.equal('datacenter');
   });
-
-
 });

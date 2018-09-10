@@ -23,13 +23,14 @@ describe('Unit: Route: wizard/index', () => {
     beforeEach() {
       let route = this.subject();
 
-      route.set('session', EmberObject.create({ queryParams() {}, }));
+      route.set('session', EmberObject.create({ queryParams: {}, }));
     }
   });
-});
-// Replace this with your real tests.
-it('exists', function() {
-  let route = this.subject();
 
-  expect(route).to.be.ok;
+  // Replace this with your real tests.
+  it('exists', function() {
+    let route = this.subject();
+
+    expect(route).to.be.ok;
+  });
 });

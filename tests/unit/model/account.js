@@ -10,6 +10,4 @@ describe('Unit: Model: account', () => {
 
     expect(model.get('type')).to.equal('account');
   });
-
-
 });

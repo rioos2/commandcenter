@@ -10,6 +10,4 @@ describe('Unit: Model: audit', () => {
 
     expect(model.get('type')).to.equal('audit');
   });
-
-
 });
