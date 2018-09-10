@@ -6,19 +6,13 @@ import EmberObject from '@ember/object';
 
 describe('Unit: Route: authenticated/admin/infra', () => {
   setupTest('route:admin/infra', {
-    // needs: [
-    //   'service:session',
-    //   'service:access',
-    //   'service:intl',
-    //   'service:tab-session',
-    //   'service:organization'
-    // ]
-    beforeEach() {
-      let controller = this.subject();
-
-      controller.set('session', EmberObject.create({ service() {}, }));
-    }
-  });
+    needs: [
+      'service:session',
+      'service:access',
+      'service:intl',
+      'service:tab-session',
+      'service:organization'
+    ]
 
   // Replace this with your real tests.
   it('exists', function() {

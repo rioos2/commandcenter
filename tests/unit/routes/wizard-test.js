@@ -3,20 +3,6 @@ import { expect } from 'chai';
 import { setupTest } from 'ember-mocha';
 import EmberObject from '@ember/object';
 
-// describe('Unit: Route: wizard/index', -function() {
-//   setupTest('route:wizard/index', {
-//     needs: [
-//       'service:session',
-//       'service:access'
-//     ]
-//   });
-//
-//   it('exists', function() {
-//     let route = this.subject();
-//
-//     expect(route).to.be.ok;
-//   });
-// });
 describe('Unit: Route: wizard/index', () => {
   setupTest('route:wizard/index', {
 

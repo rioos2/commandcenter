@@ -3,15 +3,6 @@ import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import EmberObject from '@ember/object';
 
-// describe('stack console controller', () => {
-//   setupTest();
-//
-//   it('exists', function() {
-//     let controller = this.owner.lookup('controller:stack/console');
-//
-//     expect(controller).to.be.ok;
-//   });
-// });
 describe('Unit: Controller: stack/console', () => {
   setupTest('controller:stack/console', {
     beforeEach() {
