@@ -32,9 +32,7 @@ describe('Unit: Controller: editor', () => {
       service:    {},
     }));
     ctrl.set('username', 'riouser');
-    // ctrl.set('password', '12345');
     expect(ctrl.get('username')).to.equal('riouser');
-    // expect(ctrl.get('password')).to.equal('12345');
 
   });
 });

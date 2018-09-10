@@ -3,8 +3,6 @@ import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
 import EmberObject from '@ember/object';
 
-// import { run } from '@ember/runloop';
-// import wait from 'ember-test-helpers/wait';
 
 describe('Unit: Controller: admin/infra', () => {
   setupTest('controller:admin/infra', {
