@@ -1,18 +1,22 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { setupTest } from 'ember-mocha';
+import EmberObject from '@ember/object';
 
-describe('Unit: Route: wizard/index', -function() {
+describe('Unit: Route: wizard/index', () => {
   setupTest('route:wizard/index', {
-    needs: [
-      'service:session',
-      'service:access'
-    ]
+
+    beforeEach() {
+      let route = this.subject();
+
+      route.set('session', EmberObject.create({ queryParams: {}, }));
+    }
   });
 
+  // Replace this with your real tests.
   it('exists', function() {
-    let model = this.subject();
+    let route = this.subject();
 
-    expect(model.get('type')).to.equal('exists');
+    expect(route).to.be.ok;
   });
 });

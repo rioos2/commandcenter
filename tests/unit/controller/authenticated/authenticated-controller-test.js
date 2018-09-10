@@ -1,18 +1,23 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupTest } from 'ember-mocha';
-import wait from 'ember-test-helpers/wait';
 
-describe('authenticated-controller', function() { // eslint-disable-line
-  setupTest();
+describe('Unit: Controller: authenticated/project', () => {
+  setupTest('controller:authenticated', {
+    needs: [
+      'controller:application',
+      'service:settings',
+      'service:guardian',
+    ]
+  });
+  // Replace this with your real tests.
+  it('exists', function() {
+    let controller = this.subject();
 
-  it('exists', function(done) {
-    let controller = this.owner.lookup('controller:authenticated');
+    // expect(controller).to.be.ok;
 
-    wait().then(() => {
+    expect(controller.get('hasHosts')).to.be.true;
 
-      expect(controller).to.be.ok;
-      done();
-    });
+    controller.set('hasHosts', 'test');
   });
 });

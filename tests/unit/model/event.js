@@ -10,6 +10,4 @@ describe('Unit: Model: event', () => {
 
     expect(model.get('type')).to.equal('event');
   });
-
-
 });

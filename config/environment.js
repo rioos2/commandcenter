@@ -1,4 +1,6 @@
 /* jshint node: true */
+/* eslint-disable */
+
 var pkg = require('../package.json');
 var fs = require('fs');
 var path = require('path');

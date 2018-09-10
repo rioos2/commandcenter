@@ -1,21 +1,38 @@
-import { expect } from 'chai';
 import { describe, it } from 'mocha';
+import { expect } from 'chai';
 import { setupTest } from 'ember-mocha';
+import EmberObject from '@ember/object';
 
-describe('login-index-controller', () => {
+describe('Unit: Controller: editor', () => {
   setupTest('controller:login/index', {
     needs: [
-      'service:session',
       'service:access',
-      'service:intl'
+      'service:intl',
     ]
   });
 
-  it('exists', function() {
+  // Replace this with your real tests.
+  it('editor controller exists', function() {
+    let controller = this.subject();
 
-    let route = this.subject();
+    controller.set('session', EmberObject.create({
+      controller: {},
+      service:    {},
+    }));
 
-    expect(route).to.be.ok;
+    expect(controller).to.be.not_ok;
+  });
+
+  it('set username and password test', function() {
+    let ctrl = this.subject();
+    let controller = this.subject();
+
+    controller.set('session', EmberObject.create({
+      controller: {},
+      service:    {},
+    }));
+    ctrl.set('username', 'riouser');
+    expect(ctrl.get('username')).to.equal('riouser');
 
   });
 });

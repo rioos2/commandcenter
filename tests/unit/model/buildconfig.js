@@ -10,6 +10,4 @@ describe('Unit: Model: buildconfig', () => {
 
     expect(model.get('type')).to.equal('buildconfig');
   });
-
-
 });
