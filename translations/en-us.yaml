@@ -479,8 +479,8 @@ launcherPage:
     emptynetwork:                     No blockchain network available
     network:                          Blockchain Networks
   containerApp:
-    title:                        Container App
-    subtitle:                     Select preferred system
+    title:                            Container Application
+    subtitle:                         Select preferred application
   serverOs:
     title:                            Server OS
     subtitle:                         Select preferred system
