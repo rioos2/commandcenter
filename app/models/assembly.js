@@ -97,7 +97,7 @@ var Assembly = Resource.extend(DefaultHeaders, {
   },
 
   downloadAndWarnIfNone(res) {
-    let key = res.data['rioos_sh/ssh_pubkey'] || '';
+    let key = res.data['rioos_sh/ssh_privatekey'] || '';
 
     if (!this.hasDownloaded(key, this.get('name'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.secrets.downloadFailed'), {

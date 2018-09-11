@@ -31,13 +31,16 @@ export default Service.extend(DefaultHeaders, {
    the tab-session.  hasOrganization mtd can tell does user have origin
   */
   hasOrganization() {
-    return !isEmpty(this.get('organization').get('currentOrganization'));
+    return !isEmpty(this.get('tab-session').get(C.TABSESSION.ORGANIZATION));
   },
 
   hasTeam() {
     return !isEmpty(this.get('tab-session').get(C.TABSESSION.TEAM));
   },
 
+  hasSuspended() {
+    return this.get('session').get(C.SESSION.SUSPEND);
+  },
   /**
    transByAccountState update account state => structure below
    {
@@ -60,11 +63,11 @@ export default Service.extend(DefaultHeaders, {
         transition = '/organization';
       } else if (!this.hasTeam()) {
         msg = htmlSafe(this.get('intl').t('guardian.admin.team.noTeam'));
-        transition = `/organization/${ this.get('organization').get('currentOrganization') }`;
+        transition = `/organization/${ this.get('tab-session').get(C.TABSESSION.ORGANIZATION) }`;
       }
       break;
     case false:
-      if (!this.hasOrganization()) {
+      if (!this.hasOrganization() || this.hasSuspended()) {
         transition = '/accounts/contact-admin';
       }
       break;

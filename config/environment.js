@@ -1,4 +1,6 @@
 /* jshint node: true */
+/* eslint-disable */
+
 var pkg = require('../package.json');
 var fs = require('fs');
 var path = require('path');
@@ -10,9 +12,9 @@ var toml = require('toml-parser');
 function normalizeHost(host, defaultPort) {
   if (host.indexOf('http') !== 0) {
     if (host.indexOf(':') === -1) {
-      host = `http://${  host  }${ defaultPort ? `:${  defaultPort }` : '' }`;
+      host = 'http://' + host + (defaultPort ? ':' + defaultPort : '');
     } else {
-      host = `http://${  host }`;
+      host = 'http://' + host;
     }
   }
 
@@ -26,8 +28,7 @@ function normalizeHost(host, defaultPort) {
 function readLocales(environment) {
   var files = fs.readdirSync('./translations');
   var translationsOut = {};
-
-  files.forEach((filename) => {
+  files.forEach(function (filename) {
     if (!filename.match(/\.ya?ml$/) && !filename.match(/\.json$/)) {
       // Ignore non-YAML files
       return;
@@ -37,13 +38,11 @@ function readLocales(environment) {
       // Don't show the "None" language in prod
       return;
     }
-    var ymlFile = YAML.load(`./translations/${  filename }`);
+    var ymlFile = YAML.load('./translations/' + filename);
     var label = ymlFile.languageName;
     var locale = filename.split('.')[0];
-
     translationsOut[locale] = label;
   });
-
   return translationsOut;
 }
 //
@@ -57,8 +56,7 @@ function readUIConfig(environment) {
   }
 
   const uiConfigPath = path.join(process.env.RIOOS_HOME, 'config', 'ui.toml');
-
-  console.info(`✔ ui config path =${  uiConfigPath }`);
+  console.info("✔ ui config path =" + uiConfigPath);
 
   const tomlStr = fs.readFileSync(uiConfigPath, 'utf-8');
 
@@ -67,22 +65,21 @@ function readUIConfig(environment) {
   }
 }
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   const loaded = readUIConfig(environment);
-
   if (loaded) {
-    console.log('✔ ui config loaded.');
+    console.log("✔ ui config loaded.");
   } else {
-    console.error(`✘ ui config load failed.\n${  loaded }`);
+    console.error("✘ ui config load failed.\n" + loaded);
   }
 
   var ENV = {
-    modulePrefix:            'nilavu',
-    environment,
+    modulePrefix: 'nilavu',
+    environment: environment,
     exportApplicationGlobal: true,
-    baseURL:                 '/',
-    locationType:            process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
-    EmberENV:                {
+    baseURL: '/',
+    locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
+    EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -94,17 +91,21 @@ module.exports = function(environment) {
     //   icons: 'bootstrap'
     // },
 
-    minifyCSS: { enabled: false },
+    minifyCSS: {
+      enabled: false
+    },
 
-    minifyJS: { enabled: false },
+    minifyJS: {
+      enabled: false
+    },
 
     contentSecurityPolicy: {
-      'style-src':  "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000 'unsafe-inline'",
-      'font-src':   "'self' console.rioos.xyz ui.rioos.svc.local",
+      'style-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000 'unsafe-inline'",
+      'font-src': "'self' console.rioos.xyz ui.rioos.svc.local",
       'script-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000",
       'object-src': "'self' console.rioos.xyz ui.rioos.svc.local",
-      'img-src':    "'self' console.rioos.xyz ui.rioos.svc.local avatars.githubusercontent.com gravatar.com localhost:3000 data:",
-      'frame-src':  "'self' console.rioos.xyz ui.rioos.svc.local",
+      'img-src': "'self' console.rioos.xyz ui.rioos.svc.local avatars.githubusercontent.com gravatar.com localhost:3000 data:",
+      'frame-src': "'self' console.rioos.xyz ui.rioos.svc.local",
 
       // Allow connect to anywhere, for console and event stream socket
       'connect-src': '*'
@@ -113,24 +114,24 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      version:              pkg.version,
-      appName:              `Rio/OS - ${  pkg.version }`,
-      desktop:              process.env.EMBER_CLI_ELECTRON,
-      proxyPort:            '8000',
-      proxyHost:            '127.0.0.1',
-      apiServer:            loaded.http_api || 'http://localhost:9636',
-      apiEndpoint:          '/api/v1',
-      wsServer:             loaded.uwatch_server || 'ws://localhost:9443',
-      wsEndpoint:           '/api/v1/',
-      vncServer:            loaded.vnc_server || 'wss://localhost:8005',
-      containerConsolePort: loaded.container_console_port || '10250',
-      countlyServer:        loaded.countly_server || 'http://countly.rioos.xyz',
-      appKey:               loaded.app_key || '9653325d8d0f5fe63c3491c93259bf4ff77821ca',
-      sendAnalytics:        loaded.send_analytics || false,
-      baseAssets:           '/',
-      configPath:           process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
-      locales:              readLocales(environment),
-      activationComplete:   checkComplition()
+      version: pkg.version,
+      appName: 'Rio/OS - ' + pkg.version,
+      desktop: process.env.EMBER_CLI_ELECTRON,
+      proxyPort: "8000",
+      proxyHost: "127.0.0.1",
+      apiServer: loaded.http_api || "http://localhost:9636",
+      apiEndpoint: '/api/v1',
+      wsServer: loaded.uwatch_server || "ws://localhost:9443",
+      wsEndpoint: '/api/v1/',
+      vncServer: loaded.vnc_server || "wss://localhost:8005",
+      containerConsolePort: loaded.container_console_port || "10250",
+      countlyServer: loaded.countly_server || "http://countly.rioos.xyz",
+      appKey: loaded.app_key || "9653325d8d0f5fe63c3491c93259bf4ff77821ca",
+      sendAnalytics: loaded.send_analytics || false,
+      baseAssets: '/',
+      configPath: process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
+      locales: readLocales(environment),
+      activationComplete: checkComplition()
     },
   };
 
@@ -143,21 +144,25 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
-    // Testem prefers this...
-    ENV.locationType = 'none';
+      // Testem prefers this...
+      ENV.locationType = 'none';
 
-    // keep test console output quieter
-    ENV.APP.LOG_ACTIVE_GENERATION = false;
-    ENV.APP.LOG_VIEW_LOOKUPS = false;
+      // keep test console output quieter
+      ENV.APP.LOG_ACTIVE_GENERATION = false;
+      ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-    ENV.APP.rootElement = '#ember-testing';
+      ENV.APP.rootElement = '#ember-testing';
 
-    // This is needed so that browserify dependencies in tests work correctly
-    // See https://github.com/ef4/ember-browserify/issues/14
-    ENV.browserify = { tests: true };
+      // This is needed so that browserify dependencies in tests work correctly
+      // See https://github.com/ef4/ember-browserify/issues/14
+      ENV.browserify = {
+          tests: true
+      };
 
-    // Withuot manually setting this, pretender won't track requests
-    ENV['ember-cli-mirage'] = { trackRequests: true };
+      // Withuot manually setting this, pretender won't track requests
+      ENV['ember-cli-mirage'] = {
+          trackRequests: true
+      };
   }
 
 
@@ -184,7 +189,6 @@ module.exports = function(environment) {
   }
 
   var pl = process.env.PL;
-
   if (pl) {
     ENV.APP.pl = pl;
   } else {

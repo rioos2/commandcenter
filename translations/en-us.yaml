@@ -13,12 +13,14 @@ generic:
   cancel:                             Cancel
   closeModal:                         Close
   created:                            Created
+  createdAt:                          Created At
   default:                            Default
   description:                        Description
   disable:                            Disable
   disabled:                           Disabled
   domainName:                         Domain Name
   edit:                               Edit
+  email:                              Email
   emptyString:                        ""
   enable:                             Enable
   enabled:                            Enabled
@@ -44,6 +46,7 @@ generic:
   saving:                             Saving
   search:                             Search
   state:                              State
+  status:                             Status
   test:                               Test
   testing:                            Testing
   to:                                 To
@@ -54,6 +57,8 @@ generic:
   # These are not "yes" and "no" to avoid being parsed as bools by yaml parser.
   noo:                                No
   yess:                               Yes
+  statusNotSeleted:                   success
+  statusSeleted:                      selected
 
 
 ##############################
@@ -132,7 +137,7 @@ auditLogsPage:
   connectionError:                    <span>Failed to pull audits data from blockchain.Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot. </span>
 
 consolePage:
-  header:                             'Shell:'
+  header:                             'CONSOLE'
   closeButton:                        Close
 
 validate:
@@ -603,6 +608,48 @@ signupPage:
   alredyAccount:                      Already have an account?
   signin:                             Sign in
 
+account:
+  userManagement:
+    active: Active
+    suspend:
+      title: Suspend
+      success: '{email} suspended.'
+      failed: 'Update failed'
+    revokeSuspend:
+      title: Revoke Suspend
+      success: '{email} suspend revoked.'
+      failed: 'Update failed'
+    admin:
+      title: Admin
+      success: '{email} is an admin now.'
+      failed: 'Update failed'
+    revokeAdmin:
+      title: Revoke Admin
+      success: '{email} admin permession revoked.'
+      failed: 'Update failed'
+  actionPopup:
+    suspend:
+      header: 'Are you sure you want to suspend "{firstName}"?'
+      buttonCancel: Cancel
+      buttonSuspend: Save
+      suspendNote: Rio/OS will not be accessible for this user
+    revokeSuspend:
+      header: 'Are you sure you want to revoke suspend for "{firstName}"?'
+      buttonCancel: Cancel
+      buttonRevokeSuspend: Save
+      revokeSuspendNote: Rio/OS will be accessible for this user
+    admin:
+      header: 'Are you sure you want to make "{firstName}" as admin ?'
+      buttonCancel: Cancel
+      buttonMakeAdmin: Save
+      makeAdminNote: 'Rio/OS will be accessible to "{firstName}" as super user'
+    revokeAdmin:
+      header: 'Are you sure you want to revoke admin permission for "{firstName}"?'
+      buttonCancel: Cancel
+      buttonRevokeAdmin: Save
+      revokeAdminNote: 'Rio/OS will be accessible to "{firstName}" as regular user'
+
+
 dashboard:
   maingauges:                         Main Gauges
   statistics:                         Statistics
@@ -690,9 +737,9 @@ confirmDelete:
   cancelAction:                       Cancel
   largeDeleteText:                    '{key} and {othersCount} others'
 QRCode:
-  title:                              QR code
-  qrNote: 'Note:                      show the QR code to Access'
-  cancelAction:                       Cancel
+  title: Scan QR
+  qrNote: <span>Using the mobile app <a href="https://play.google.com/store/apps/details?id=co.krypt.kryptonite&hl=en_IN" target="_blank">kryptonite</a>.Refer <a href="http://rio.digital/docs/" target="_blank">http://rio.digital</a> to use  this advanced security. </span>
+  cancelAction: Cancel
 
 
 containerShell:
@@ -1005,6 +1052,7 @@ nav:
     tab2:
       index:                          Team
     show:
+<<<<<<< HEAD
       selectTeam:                     'Switch team:'
       createdAt:                      Created At
       account:                        Account ID
@@ -1012,6 +1060,14 @@ nav:
       status:                         success
       count:                          origins
       add:                            + Add
+=======
+      selectTeam: 'Switch team:'
+      createdAt: Created At
+      account: Account
+      emptyBtn: +Add origin
+      count: origins
+      add: + Add
+>>>>>>> origin/2-0-stable
     index:
       name:                           Organizations
   team:
@@ -1056,6 +1112,7 @@ nav:
 # Resource Actions
 ##############################
 action:
+<<<<<<< HEAD
   activate:                           Activate
   backup:                             Backup Snapshot
   deleteBackup:                       Delete Backup
@@ -1104,6 +1161,60 @@ action:
   retryInstallNode:                   Retry Install
   view:                               View
   switch:                             Switch
+=======
+  activate: Activate
+  backup: Backup Snapshot
+  deleteBackup: Delete Backup
+  cancelUpgrade: Cancel Upgrade
+  cancelRollback: Cancel Rollback
+  clone: Clone
+  console: Open Console
+  deactivate: Deactivate
+  edit: Edit
+  evacuate: Evacuate
+  execute: Execute Shell
+  exportConfig: Export Config
+  finishUpgrade: Finish Upgrade
+  logs: View Logs
+  machineConfig: Machine Config
+  purge: Purge
+  remove: Delete
+  replay: Replay
+  restart: Restart
+  restore: Restore
+  retry: Retry
+  rollback: Rollback
+  revertToSnapshot: Revert Volume to Snapshot
+  restoreFromBackup: Restore Volume from Backup
+  setDefault: Set as Default
+  snapshot: Snapshot
+  start: Start
+  startServices: Start Services
+  stop: Stop
+  stopServices: Stop Services
+  switchNamespace: Switch to this Namespace
+  switchEnvironment: Switch to this Environment
+  upgrade: Upgrade
+  upgradeOrEdit: Upgrade/Edit
+  viewConfig: View Config
+  viewGraph: View Graph
+  viewInApi: View in API
+  viewInstance: View Instance
+  downloadSecret: Download secret
+  showQRcode: Show QR code
+  externalUrl: Open UI
+  nodeEdit: Edit node
+  nodeInstall: Install node
+  createSecret: Create Secret
+  installNode: Install
+  retryInstallNode: Retry Install
+  view: View
+  switch: Switch
+  makeAdmin: Make Admin
+  makeSuspend: Suspend
+  revokeAdmin: Revoke Admin
+  revokeSuspend: Revoke Suspend
+>>>>>>> origin/2-0-stable
 
 ##############################
 # Resource Actions

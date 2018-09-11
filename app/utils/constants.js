@@ -17,6 +17,8 @@ var C = {
 
   BADGATEWAY_HTTP_CODES: ['502'],
 
+  AUTHORIZATION_DENIED: ['403'],
+
 
   /* --------  The section  that has  various Rio objects  ----*/
 
@@ -58,7 +60,8 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED:   'Registered',
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
-    ROLES: { SUPERUSER: 'RIOOS:SUPERUSER', },
+    ROLES:  { SUPERUSER: 'RIOOS:SUPERUSER', },
+    STATES: ['approval', 'suspend'],
   },
 
   /*
@@ -283,6 +286,7 @@ var C = {
     TOKEN:          'token',
     EMAIL:          'email',
     USER_ROLES:     'is_admin',
+    SUSPEND:        'suspend',
     // User belongs to origansation (origins) origins have teams.
     ORIGIN:         'metadata.origin',
     TEAM:           'metadata.team',
@@ -294,6 +298,7 @@ var C = {
   TABSESSION: {
     PROJECT:      'projectId',
     TEAM:         'team',
+    ID:           'id',
     ORGANIZATION:     'organization',
     PROJECTDATA:  'projectData',
     NAMESPACE:    'namespaceId',
@@ -464,6 +469,7 @@ C.TOKEN_TO_SESSION_KEYS = [
   C.SESSION.EMAIL,
   C.SESSION.TOKEN,
   C.SESSION.USER_ROLES,
+  C.SESSION.SUSPEND,
 ];
 
 //  Initial state of assembly

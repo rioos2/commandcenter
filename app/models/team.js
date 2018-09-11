@@ -1,38 +1,56 @@
 import Resource from 'ember-api-store/models/resource';
 import { inject as service } from '@ember/service';
+import { getOwner } from '@ember/application';
+import { later } from '@ember/runloop';
+import C from 'nilavu/utils/constants';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+
 
 var Team = Resource.extend({
+
+  fullName:   alias('team.full_name'),
+  originName: alias('metadata.origin'),
 
   availableActions: function() {
 
     return [{
       label:   'action.view',
       icon:    'fa fa-eye',
-      action:  'goTeam',
+      action:  'goToTeam',
       enabled: true,
     },
     {
       label:   'action.switch',
       icon:    'fa fa-toggle-on',
-      action:  'selectTeam',
-      enabled: true,
+      action:  'switchTeam',
+      enabled: this.get('canSwitch'),
     }
     ];
   }.property('id', 'actionLinks'),
 
-  router:       service(),
-  organization: service(),
+  canSwitch: computed('fullName', function() {
+    return  !(this.get('tab-session').get(C.TABSESSION.TEAM) === this.get('fullName'));
+  }),
+
+  router:            service(),
+  organization:      service(),
+  waitAndChangeTeam:    null,
+  'tab-session':     service('tab-session'),
 
   actions: {
 
-    goTeam(){
-      this.get('router').transitionTo('organization.team', this.get('metadata.origin'), this.get('team.id'));
+    goToTeam(){
+      this.get('router').transitionTo('organization.team', this.get('originName'), this.get('team.id'));
     },
 
-    selectTeam() {
-      this.get('organization').selectOrganizationAndTeam(this.get('metadata.origin'), this.get('team.full_name'));
+    switchTeam() {
+      let authenticated = getOwner(this).lookup('route:authenticated');
 
-      location.reload();
+      authenticated.send('switchOrigin', this.get('originName'), this);
+      this.set('waitAndChangeTeam', later(() => {
+        location.reload();
+      }, 2000));
     }
 
   },
