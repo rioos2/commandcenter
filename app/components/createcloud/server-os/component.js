@@ -8,8 +8,8 @@ export default Component.extend({
   intl:          service(),
   notifications: service('notification-messages'),
   store:         service(),
+  activate:      false,
 
-  activate:   false,
   groupedVms: function() {
     return this.groupingVms();
   }.property('model.plans'),

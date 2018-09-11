@@ -67,12 +67,12 @@ generic:
 guardian:
   admin:
     organization:
-      noOrigin: One small step to complete your signup. Add an organization</br> *You can always add organizations later from the profile menu at the top right of your screen
+      noOrigin:                       One small step to complete your signup. Add an organization</br> *You can always add organizations later from the profile menu at the top right of your screen
     team:
-      noTeam: One small step to complete your signup. Add a team in an organization</br> *You can always add teams for an organization later from the profile menu at the top right of your screen
+      noTeam:                         One small step to complete your signup. Add a team in an organization</br> *You can always add teams for an organization later from the profile menu at the top right of your screen
   regular:
     organization:
-      noOrigin: One small step to complete your signup.</br>Your account has not been approved by a staff member yet. You will be sent an email when it is approved.
+      noOrigin:                       One small step to complete your signup.</br>Your account has not been approved by a staff member yet. You will be sent an email when it is approved.
 
 accountsPage:
   index:
@@ -410,7 +410,7 @@ stackPage:
           failure:                    License activation failed
       logs:
         title:                        Logs
-        noLogs:                        No logs added yet.
+        noLogs:                       No logs added yet.
 launcherPage:
   compute:
     selectType:                       Pick Cloud Type
@@ -483,6 +483,9 @@ launcherPage:
     subtitle:                         Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
     emptynetwork:                     No blockchain network available
     network:                          Blockchain Networks
+  containerApp:
+    title:                            Container Application
+    subtitle:                         Select preferred application
   serverOs:
     title:                            Server OS
     subtitle:                         Select preferred system
@@ -677,10 +680,10 @@ vnc:
 
 notifications:
   Stacks:
-    DeleteFailed: Delete failed try after some time
-    DeleteSuccess: Deleted successfully
+    DeleteFailed:                     Delete failed try after some time
+    DeleteSuccess:                    Deleted successfully
   QRcode:
-    downloadFailed:             <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
+    downloadFailed:                   <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
   secrets:
     downloadFailed:                   Download failed try after some time
   emailExist:                         Sorry, that email is not available.
@@ -727,12 +730,12 @@ infraPage:
     percent:                          "%"
 
 confirmDelete:
-  title: 'Are you sure you want to delete ?'
-  deleteNote: 'Note: All resources inside this "{name}" will be permanently removed.'
-  protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
-  confirmAction: Delete
-  cancelAction: Cancel
-  largeDeleteText: '{key} and {othersCount} others'
+  title:                              'Are you sure you want to delete ?'
+  deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
+  protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
+  confirmAction:                      Delete
+  cancelAction:                       Cancel
+  largeDeleteText:                    '{key} and {othersCount} others'
 QRCode:
   title: Scan QR
   qrNote: <span>Using the mobile app <a href="https://play.google.com/store/apps/details?id=co.krypt.kryptonite&hl=en_IN" target="_blank">kryptonite</a>.Refer <a href="http://rio.digital/docs/" target="_blank">http://rio.digital</a> to use  this advanced security. </span>
@@ -1023,82 +1026,142 @@ allServices:
 # Navigation
 ##############################
 nav:
-  dashboard: Dashboard
-  manage: Manage
-  digitalcloud: Digital cloud
-  docker: Container
-  blockchain: Blockchain
-  customApp: Application from Git
-  deploy: Deploy
-  infrastructureNetwork: Deploy network
-  deployApplication: Deploy application
+  dashboard:                          Dashboard
+  manage:                             Manage
+  digitalcloud:                       Digital cloud
+  docker:                             Container
+  blockchain:                         Blockchain
+  customApp:                          Application from Git
+  deploy:                             Deploy
+  infrastructureNetwork:              Deploy network
+  deployApplication:                  Deploy application
   organization:
     create:
-      header: Add Organization
-      nameLable: Name
-      orgNoteLabel: 'NOTE: '
+      header:                         Add Organization
+      nameLable:                      Name
+      orgNoteLabel: 'NOTE:            '
       orgNote: "Allow you to organize your resources into groups that fit the way you work. You can group resources (like Digital cloud and Containers) in ways that align with the  your projects. Example 'Organization: RioEngineering  grouped to Teams: QA, R&D'."
-      orgAddBtn: Add
-      orgNameEmpty: Enter organization name
+      orgAddBtn:                      Add
+      orgNameEmpty:                   Enter organization name
     team:
-      addBtn: Team
-      emptyTeam: No team added yet
-      teamCount: Team
+      addBtn:                         Team
+      emptyTeam:                      No team added yet
+      teamCount:                      Team
     tab:
-      index: Organization
+      index:                          Organization
     tab2:
-      index: Team
+      index:                          Team
     show:
+<<<<<<< HEAD
+      selectTeam:                     'Switch team:'
+      createdAt:                      Created At
+      account:                        Account ID
+      emptyBtn:                       +Add origin
+      status:                         success
+      count:                          origins
+      add:                            + Add
+=======
       selectTeam: 'Switch team:'
       createdAt: Created At
       account: Account
       emptyBtn: +Add origin
       count: origins
       add: + Add
+>>>>>>> origin/2-0-stable
     index:
-      name: Organizations
+      name:                           Organizations
   team:
     create:
-      header: 'Add team in '
-      header1: 'Add member in'
-      nameLable: Name
-      emailLable: Emails
-      descriptionLable: Description
-      tmNoteLabel: 'NOTE: '
-      tmNote: Teams you can invite and manage users and control your resource spend
-      tmAddBtn: Add
-      tmNameEmpty: Enter team name
-      tmEmailEmpty: Enter Email id
-      tmDescriptionEmpty: Enter description
-      inviteButton: Invite
-      emailFieldNote: Fill in the members emails you want to invite, one per line
+      header:                         'Add team in '
+      header1:                        'Add member in'
+      nameLable:                      Name
+      emailLable:                     Emails
+      descriptionLable:               Description
+      tmNoteLabel: 'NOTE:             '
+      tmNote:                         Teams you can invite and manage users and control your resource spend
+      tmAddBtn:                       Add
+      tmNameEmpty:                    Enter team name
+      tmEmailEmpty:                   Enter Email id
+      tmDescriptionEmpty:             Enter description
+      inviteButton:                   Invite
+      emailFieldNote:                 Fill in the members emails you want to invite, one per line
     show:
-      createdAt: Created At
-      inviteTo: Invite To
-      about: About
-      emptyBtn: +Add team
-      selectPlaceHolder: Select team
-      count: teams
-      add: + Add
+      createdAt:                      Created At
+      inviteTo:                       Invite To
+      about:                          About
+      emptyBtn:                       +Add team
+      selectPlaceHolder:              Select team
+      count:                          teams
+      add:                            + Add
     member:
-      emptyBtn: +invite
-      status: Status
-      email: Email
+      emptyBtn:                       +invite
+      status:                         Status
+      email:                          Email
     totalCounts:
-      member: member
+      member:                         member
 
   user:
-    org: Organization
-    createOrg: Add organization
-    linkOrg: Organizations
-    profile: Profile
-    logout: Logout
-    admin: Admin
+    org:                              Organization
+    createOrg:                        Add organization
+    linkOrg:                          Organizations
+    profile:                          Profile
+    logout:                           Logout
+    admin:                            Admin
 
 ##############################
 # Resource Actions
 ##############################
 action:
+<<<<<<< HEAD
+  activate:                           Activate
+  backup:                             Backup Snapshot
+  deleteBackup:                       Delete Backup
+  cancelUpgrade:                      Cancel Upgrade
+  cancelRollback:                     Cancel Rollback
+  clone:                              Clone
+  console:                            Open Console
+  deactivate:                         Deactivate
+  edit:                               Edit
+  evacuate:                           Evacuate
+  execute:                            Execute Shell
+  exportConfig:                       Export Config
+  finishUpgrade:                      Finish Upgrade
+  logs:                               View Logs
+  machineConfig:                      Machine Config
+  purge:                              Purge
+  remove:                             Delete
+  replay:                             Replay
+  restart:                            Restart
+  restore:                            Restore
+  retry:                              Retry
+  rollback:                           Rollback
+  revertToSnapshot:                   Revert Volume to Snapshot
+  restoreFromBackup:                  Restore Volume from Backup
+  setDefault:                         Set as Default
+  snapshot:                           Snapshot
+  start:                              Start
+  startServices:                      Start Services
+  stop:                               Stop
+  stopServices:                       Stop Services
+  switchNamespace:                    Switch to this Namespace
+  switchEnvironment:                  Switch to this Environment
+  upgrade:                            Upgrade
+  upgradeOrEdit:                      Upgrade/Edit
+  viewConfig:                         View Config
+  viewGraph:                          View Graph
+  viewInApi:                          View in API
+  viewInstance:                       View Instance
+  downloadSecret:                     Download secret
+  showQRcode:                         Show QR code
+  externalUrl:                        Open UI
+  nodeEdit:                           Edit node
+  nodeInstall:                        Install node
+  createSecret:                       Create Secret
+  installNode:                        Install
+  retryInstallNode:                   Retry Install
+  view:                               View
+  switch:                             Switch
+=======
   activate: Activate
   backup: Backup Snapshot
   deleteBackup: Delete Backup
@@ -1151,6 +1214,7 @@ action:
   makeSuspend: Suspend
   revokeAdmin: Revoke Admin
   revokeSuspend: Revoke Suspend
+>>>>>>> origin/2-0-stable
 
 ##############################
 # Resource Actions
