@@ -5,8 +5,8 @@ import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 
 export default Component.extend({
-  intl:        service(),
-  storageType: alias('model.stacksfactory.resources.storage_type'),
+  intl:            service(),
+  storageType:     alias('model.stacksfactory.resources.storage_type'),
 
   isSelectedFlash: function() {
     return this.get('storageType') === C.VPS.RESOURSE.SSD;

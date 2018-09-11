@@ -2,7 +2,6 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import { setupTest } from 'ember-mocha';
-import EmberObject from '@ember/object';
 
 describe('Unit: Route: authenticated/admin/infra', () => {
   setupTest('route:admin/infra', {
@@ -13,7 +12,7 @@ describe('Unit: Route: authenticated/admin/infra', () => {
       'service:tab-session',
       'service:organization'
     ]
-
+  });
   // Replace this with your real tests.
   it('exists', function() {
     let controller = this.subject();
