@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { alternateLabel } from 'nilavu/utils/platform';
-import Terminal from 'npm:xterm';
+import Terminal from 'xterm';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import { inject as service } from '@ember/service';
 import { next } from '@ember/runloop';

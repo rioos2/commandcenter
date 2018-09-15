@@ -1,7 +1,7 @@
 
 import Service from '@ember/service';
 import C from '../utils/constants';
-import EventEmitter from 'npm:es6-eventemitter';
+import EventEmitter from 'es6-eventemitter';
 
 const emitter = new EventEmitter();
 
