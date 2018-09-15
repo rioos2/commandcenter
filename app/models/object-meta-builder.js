@@ -1,4 +1,4 @@
-import Haikunator from 'npm:haikunator';
+import Haikunator from 'haikunator';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import EmberObject from '@ember/object';

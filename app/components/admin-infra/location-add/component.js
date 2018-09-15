@@ -2,8 +2,8 @@
 import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import isoCurreny from 'npm:iso-country-currency';
-import Cities from 'npm:full-countries-cities';
+import isoCurreny from 'iso-country-currency';
+import Cities from 'full-countries-cities';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
 import { htmlSafe } from '@ember/string';

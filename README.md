@@ -239,11 +239,16 @@ line 78 of tmp/sass_compiler-input_base_path-FxbFVHBM.tmp/app/styles/dashboard.s
 Do a clean all.
 
 ```
-yarn cache clean
-rm -rf dist
-rm -rf node_modules
-yarn install
+make clean
 ```
+
+3. Disable eslint during test 
+
+ eslint can be disable while doing `yarn test`. 
+ 
+ It can be done by set property in `ember-cli-build.js` 
+ 
+ (enable this line `"hinting: !isTesting"`)
 
 ## Further Reading / Useful Links
 

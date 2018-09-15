@@ -1,5 +1,5 @@
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import Downloadjs from 'npm:downloadjs';
+import Downloadjs from 'downloadjs';
 import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';

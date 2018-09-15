@@ -1,0 +1,20 @@
+# unconventional js
+/config/*
+/vendor/
+/public/
+/server/
+
+# compiled output
+/dist/
+/tmp/
+
+# dependencies
+/bower_components/
+
+# misc
+/coverage/
+/tests
+
+# ember-try
+/.node_modules.ember-try/
+/package.json.ember-try

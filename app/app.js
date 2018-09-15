@@ -16,6 +16,10 @@ App = Application.extend({
 // For now we print it on the console.
 // TO-DO Need to send error to slack channel
 Ember.onerror = function(error) {
+  /* Ti-DO: Fix it up for prod.
+   * reportErrorToService(error);
+   **/
+
   console.log('(✖╭╮✖)  ****         Uncaught Exception             ****');
   console.log(`          ,--.!,
        __/   -*-
@@ -23,6 +27,10 @@ Ember.onerror = function(error) {
      0088MM
      '9MMP'   `);
   console.error(error);
+  // Throw the errors back, if you are testing.
+  if (Ember.testing) {
+    throw error;
+  }
 }
 
 loadInitializers(App, config.modulePrefix);

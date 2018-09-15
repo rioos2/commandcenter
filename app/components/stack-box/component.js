@@ -20,6 +20,10 @@ export default Component.extend({
   assemblyFactory:           alias('spec.assembly_factory'),
   assemblyFactoryObjectMeta: alias('assemblyFactory.object_meta'),
 
+  // Telemtry of a single stack box
+  // CPU consumed
+  consumption: alias('spec.metrics'),
+
   // The Basic plan
   //
   blueprint:  alias('assemblyFactory.spec.plan'),
@@ -75,14 +79,14 @@ export default Component.extend({
   }),
 
   // The style attr of the status
-  statusAttr: computed('status.phase', function() {
+  statusAttr: computed('statusPhase', function() {
     const health = get(this, 'status.phase');
 
     return  VisualStatus.create({ health }).attr();
   }),
 
   // An enhanced tooltip
-  statusToolTip: computed('status.phase', function() {
+  statusToolTip: computed('statusPhase', function() {
     const health = get(this, 'status.phase');
 
     return  VisualStatus.create({ health }).tooltip();
@@ -135,29 +139,25 @@ export default Component.extend({
 
   }.property('endpoints.subsets.addresses'),
 
-  metricsData: function() {
-    if (this.get('spec.metrics')) {
-      this.set('spec.metrics.name', `gauge${  this.get('model.id') }`);
+  // At the moment the dial show the cpu usage consumed
+  cpuPercentage: function() {
+    const a = get(this, 'consumption');
+
+    let cpu = {
+
+      name:  get(this, 'id'),
+
+      counter: 0
+    };
+
+    if (!isEmpty(a) && !isEmpty(a.id)) {
+      cpu.counter = parseInt(get(this, `consumption.${ a.id }`));
     }
 
-    return this.metricsDataFinder();
-  }.property('model.spec.metrics.@each'),
+    return cpu;
 
+  }.property('cpuConsumed.@each'),
 
-  metricsDataFinder() {
-
-    if (!(this.get(`model.spec.metrics.${  this.get('model.id') }`) === undefined)) {
-      this.set('model.spec.metrics.counter', parseInt(this.get(`model.spec.metrics.${  this.get('model.id') }`)));
-      alert(`=> metrics ${  this.get('spec.metrics') }`);
-
-      return this.get('spec.metrics');
-    }
-
-    return {
-      name:    `gauge${  this.get('model.id') }`,
-      counter: 0,
-    }
-  },
 
 
 });
