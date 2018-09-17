@@ -3,39 +3,42 @@ import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';
+import {
+  get, set, observer
+} from '@ember/object';
 
 export default Component.extend({
   tagName: '',
   enable:  '',
 
-  selectionChecker: function() {
-    var check = this.get('secretType') === this.get('key');
+  selectionChecker: observer('activate', function() {
+    var check = get(this, 'secretType') === get(this, 'key');
 
     if (check) {
-      this.set('active', true);
+      set(this, 'active', true);
     } else {
-      this.set('active', false);
+      set(this, 'active', false);
     }
-  }.observes('activate'),
+  }),
 
   didInsertElement() {
 
-    if (this.get('key') === this.validateSecret()) {
+    if (get(this, 'key') === this.validateSecret()) {
       this.send('sendType');
     }
 
-    if (D.VPS.disableSecretTypes.includes(this.get('key'))) {
-      this.set('enable', 'disable');
+    if (D.VPS.disableSecretTypes.includes(get(this, 'key'))) {
+      set(this, 'enable', 'disable');
     }
   },
 
   actions: {
     sendType() {
-      this.sendAction('getSecretType', this.get('key'));
+      this.sendAction('getSecretType', get(this, 'key'));
     },
   },
   validateSecret() {
-    return this.get('model.settings')[denormalizeName(`${ C.SETTING.SECRET_TYPE }`)] || D.VPS.defaultSecret;
+    return get(this, 'settings')[denormalizeName(`${ C.SETTING.SECRET_TYPE }`)] || D.VPS.defaultSecret;
   },
 
 });

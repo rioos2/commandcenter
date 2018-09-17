@@ -2,35 +2,39 @@ import Component from '@ember/component';
 import GeoTools from 'npm:geo-tools'; // eslint-disable-line
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
+import {
+  get, set, computed
+} from '@ember/object';
 
 export default Component.extend({
   notifications:   service('notification-messages'),
   showField:       false,
-  initializeChart: on('didInsertElement', function() {
-    this.set('model.locationList', this.getCountry(this.get('model')));
 
-    renderGlobeChart(this.get('model'), this.get('notifications')); // eslint-disable-line
+  initializeChart: on('didInsertElement', function() {
+    set(this, 'locationList', this.getCountry(get(this, 'datacenters')));
+
+    renderGlobeChart( get(this, 'stacksfactory'), get(this, 'locationList'), get(this, 'notifications')); // eslint-disable-line
   }),
 
-  locationAvailable: function(){
-    return this.get('model.datacenters.content').length > 0;
-  }.property('model.datacenters.content'),
+  locationAvailable: computed('datacenters.content', function() {
+    return get(this, 'datacenters.content').length > 0;
+  }),
 
   actions: {
     showInputField() {
-      this.set('showField', true);
+      set(this, 'showField', true);
     },
     closeInputField() {
-      this.set('showField', false);
+      set(this, 'showField', false);
     },
 
     getLocation() {
       renderGlobeChart.getLocation(); // eslint-disable-line
     }
   },
-  getCountry(model) {
+  getCountry(datacenters) {
     const self = this;
-    let features = model.datacenters.content.map((x) => {
+    let features = datacenters.content.map((x) => {
       return {
         'type':     'Feature',
         'City':     x.object_meta.name,

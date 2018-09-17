@@ -9,13 +9,14 @@ import { inject as service } from '@ember/service';
 import { Promise } from 'rsvp';
 import EmberObject from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import { get } from '@ember/object';
 
 export default Route.extend(DefaultHeaders,  {
   settings: service(),
   access:   service(),
   router:   service(),
   model() {
-    let setting = this.get('settings');
+    let setting = get(this, 'settings');
     let promise = new Promise((resolve, reject) => {
       let tasks = {
         datacenters: this.cbFind('datacenter', 'datacenters'),
@@ -51,7 +52,7 @@ export default Route.extend(DefaultHeaders,  {
         results = null;
       }
 
-      return this.get('store').findAll(type, this.opts(url)).then((res) => {
+      return get(this, 'store').findAll(type, this.opts(url)).then((res) => {
         cb(null, res);
       }).catch((err) => {
         cb(err, null);
@@ -78,7 +79,7 @@ export default Route.extend(DefaultHeaders,  {
       metadata:    {},
     };
 
-    return this.get('store').createRecord(secretData);
+    return get(this, 'store').createRecord(secretData);
   },
 
   modelForNew(settings) {
@@ -87,7 +88,7 @@ export default Route.extend(DefaultHeaders,  {
     settings.cloudType = C.CATEGORIES.MACHINE;
     stacksfactoryData = {
       object_meta: ObjectMetaBuilder.buildObjectMeta(settings),
-      type:        'stacksfactory',
+      type:        'machinefactory',
       replicas:    1,
       resources:   {
         compute_type: settings[denormalizeName(`${ C.SETTING.COMPUTE_TYPE }`)] || D.VPS.computeType,
@@ -104,7 +105,7 @@ export default Route.extend(DefaultHeaders,  {
       os:      settings[denormalizeName(`${ C.SETTING.OS_NAME }`)] || D.VPS.destro,
     };
 
-    return this.get('store').createRecord(stacksfactoryData);
+    return get(this, 'store').createRecord(stacksfactoryData);
   }
 
 

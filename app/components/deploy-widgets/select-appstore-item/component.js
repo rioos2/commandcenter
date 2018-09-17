@@ -1,28 +1,32 @@
 import Component from '@ember/component';
+import {
+  get, set, computed, observer
+} from '@ember/object';
+
 
 export default Component.extend({
   tagName:  '',
   activate: false,
 
-  selectionChecker: function() {
-    var check = this.get('model.stacksfactory.os') === this.get('selected.type');
+  icon: computed('selected', function() {
+    return get(this, 'selected.icon');
+  }),
+
+  selectionChecker: observer('selected', function() {
+    var check = get(this, 'stacksfactory.os') === get(this, 'selected.type');
 
     if (check) {
-      this.set('meSelected', true);
+      set(this, 'meSelected', true);
     } else {
-      this.set('meSelected', false);
+      set(this, 'meSelected', false);
 
     }
-  }.observes('selected'),
-
-  icon: function() {
-    return this.get('selected.icon');
-  }.property('selected'),
+  }),
 
   actions: {
     done() {
       this.toggleProperty('activate');
-      this.set('meSelected', true);
+      set(this, 'meSelected', true);
     },
   }
 

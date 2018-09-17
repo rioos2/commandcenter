@@ -1,28 +1,33 @@
-import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import C from 'nilavu/utils/constants';
+import { alias } from '@ember/object/computed';
+import {
+  get, set, computed
+} from '@ember/object';
 
 export default Component.extend({
-  intl:          service(),
-  notifications: service('notification-messages'),
-  store:         service(),
+  intl:                   service(),
+  notifications:          service('notification-messages'),
+  store:                  service(),
+  activate:      false,
 
-  activate:   false,
-  groupedVms: function() {
+  stacksfactoryResources: alias('stacksfactory.resources'),
+
+  groupedVms: computed('plans', function() {
     return this.groupingVms();
-  }.property('model.plans'),
+  }),
 
   didInsertElement() {
     this.checkPlanEmpty();
-    if (!isEmpty(this.get('groupedVms'))) {
+    if (!isEmpty(get(this, 'groupedVms'))) {
       let item_found = false;
 
-      this.get('groupedVms').forEach((e) => {
-        if (e.type === this.get('model.stacksfactory.os')) {
+      get(this, 'groupedVms').forEach((e) => {
+        if (e.type === get(this, 'stacksfactory.os')) {
           e.version.forEach((v) => {
-            if (v.version === this.get('model.stacksfactory.resources.version')) {
+            if (v.version === get(this, 'stacksfactoryResources.version')) {
               item_found = true;
               this.refreshPlan(e, v);
             }
@@ -33,28 +38,28 @@ export default Component.extend({
         this.setFirstPlanFactory();
       }
     } else {
-      this.set('model.stacksfactory.os', '');
-      this.set('model.stacksfactory.plan', '');
-      this.set('model.stacksfactory.resources.version', '');
+      set(this, 'stacksfactory.os', '');
+      set(this, 'stacksfactory.plan', '');
+      set(this, 'stacksfactoryResources.version', '');
     }
   },
 
   actions: {
 
     refreshAfterSelect(item) {
-      this.set('selected', item);
+      set(this, 'selected', item);
       this.setDescription(item);
-      this.set('model.stacksfactory.current_os_tab', item.type);
+      set(this, 'stacksfactory.current_os_tab', item.type);
       this.toggleProperty('activate');
     },
 
     navigatorRight() {
       var index = this.indexReader();
 
-      if (index < ((this.get('groupedVms')).length) - 1) {
-        this.send('refreshAfterSelect', this.get('groupedVms')[index + 1]);
-        this.setPlan(this.get('groupedVms')[index + 1]);
-        this.setIcon(this.get('groupedVms')[index + 1]);
+      if (index < ((get(this, 'groupedVms')).length) - 1) {
+        this.send('refreshAfterSelect', get(this, 'groupedVms')[index + 1]);
+        this.setPlan(get(this, 'groupedVms')[index + 1]);
+        this.setIcon(get(this, 'groupedVms')[index + 1]);
       }
     },
 
@@ -62,9 +67,9 @@ export default Component.extend({
       var index = this.indexReader();
 
       if (!(index === 0)) {
-        this.send('refreshAfterSelect', this.get('groupedVms')[index - 1]);
-        this.setPlan(this.get('groupedVms')[index - 1]);
-        this.setIcon(this.get('groupedVms')[index - 1]);
+        this.send('refreshAfterSelect', get(this, 'groupedVms')[index - 1]);
+        this.setPlan(get(this, 'groupedVms')[index - 1]);
+        this.setIcon(get(this, 'groupedVms')[index - 1]);
       }
     },
 
@@ -75,7 +80,7 @@ export default Component.extend({
 
 
   setFirstPlanFactory() {
-    let plan = this.get('groupedVms')[0];
+    let plan = get(this, 'groupedVms')[0];
     let planFirstItem = plan.version[0];
 
     this.refreshPlan(plan, planFirstItem);
@@ -83,15 +88,15 @@ export default Component.extend({
   },
 
   refreshPlan(plan, planFirstItem) {
-    this.set('model.stacksfactory.os', planFirstItem.type);
-    this.set('model.stacksfactory.plan', planFirstItem.id);
-    this.set('model.stacksfactory.resources.version', planFirstItem.version);
+    set(this, 'stacksfactory.os', planFirstItem.type);
+    set(this, 'stacksfactory.plan', planFirstItem.id);
+    set(this, 'stacksfactoryResources.version', planFirstItem.version);
     this.send('refreshAfterSelect', plan);
   },
 
   checkPlanEmpty(){
-    if (isEmpty(this.get('groupedVms'))){
-      this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
+    if (isEmpty(get(this, 'groupedVms'))){
+      get(this, 'notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
         autoClear:     true,
         clearDuration: 6000,
         cssClasses:    'notification-warning'
@@ -103,7 +108,7 @@ export default Component.extend({
     var planGroup = [];
     var uniqueVmGroup = [];
     var groupVms = [];
-    var planfactory = this.get('model.plans.content');
+    var planfactory = get(this, 'plans.content');
 
     planfactory.forEach((plan) => {
       if (plan.category.toLowerCase() === C.CATEGORIES.MACHINE && plan.status.phase.toLowerCase() === C.PHASE.READY) {
@@ -141,34 +146,34 @@ export default Component.extend({
   },
 
   indexReader() {
-    var types = this.get('groupedVms').map((vm) => {
+    var types = get(this, 'groupedVms').map((vm) => {
       return vm.type
     })
 
-    return types.indexOf(this.get('selected.type'));
+    return types.indexOf(get(this, 'selected.type'));
   },
 
   setPlan(plan) {
     let planFirstItem = plan.version[0];
 
-    this.set('model.stacksfactory.os', planFirstItem.type);
-    this.set('model.stacksfactory.plan', planFirstItem.id);
-    this.set('model.stacksfactory.resources.version', planFirstItem.version);
+    set(this, 'stacksfactory.os', planFirstItem.type);
+    set(this, 'stacksfactory.plan', planFirstItem.id);
+    set(this, 'stacksfactoryResources.version', planFirstItem.version);
   },
 
   setIcon(plan) {
-    this.set('model.selected_icon', plan.icon);
+    set(this, 'selectedIcon', plan.icon);
   },
 
   setDescription(item) {
     let des = (item.version.get('firstObject')).description
 
     item.version.forEach((v) => {
-      if (v.id === this.get('model.stacksfactory.plan')) {
+      if (v.id === get(this, 'stacksfactory.plan')) {
         des = v.description;
       }
     });
-    this.set('model.distro_description', des);
+    set(this, 'distroDescription', des);
   },
 
 });

@@ -14,7 +14,7 @@
         <p class="title">{{t 'launcherPage.location.globe.display'}}</p>
         <ul class="rio-location-ul hex with-add">
           {{#if locationAvailable}}
-          {{#each model.datacenters.content as |data|}}
+          {{#each datacenters.content as |data|}}
             {{deploy-widgets/show-locations model=data}}
           {{/each}}
           {{else}}

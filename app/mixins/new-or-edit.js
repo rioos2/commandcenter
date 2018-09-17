@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import Mixin from '@ember/object/mixin';
 import { alias } from '@ember/object/computed';
 import { resolve } from 'rsvp';
+import { get, set } from '@ember/object';
 
 export default Mixin.create({
   originalModel:           null,
@@ -17,22 +18,33 @@ export default Mixin.create({
 
   initFields() {
     this._super();
-    this.set('errors', null);
-    this.set('saving', false);
+    set(this, 'errors', null);
+    set(this, 'saving', false);
   },
 
   didReceiveAttrs() {
     this._super();
-    this.set('errors', null);
-    this.set('saving', false);
+    set(this, 'errors', null);
+    set(this, 'saving', false);
   },
 
   validate() {
+    var model = get(this, 'primaryResource');
+    var errors = model.validationErrors();
+
+    if ( errors.get('length') ) {
+      set(this, 'errors', errors);
+
+      return false;
+    }
+
+    set(this, 'errors', null);
+
     return true;
   },
 
   generateUrl(object) {
-    var name = this.get('access').namespaceName();
+    var name = get(this, 'access').namespaceName();
     var kind = object.kind;
     var url = '';
 
@@ -50,9 +62,9 @@ export default Mixin.create({
       if (err) {
         var body = Errors.stringify(err);
 
-        this.set('errors', [body]);
+        set(this, 'errors', [body]);
       } else {
-        this.set('errors', null);
+        set(this, 'errors', null);
       }
     },
 
@@ -76,7 +88,7 @@ export default Mixin.create({
           })
           .finally(() => {
             try {
-              this.set('saving', false);
+              set(this, 'saving', false);
 
               if (cb) {
                 cb();
@@ -89,7 +101,7 @@ export default Mixin.create({
 
   // willSave happens before save and can stop the save from happening
   willSave() {
-    this.set('errors', null);
+    set(this, 'errors', null);
     var ok = this.validate();
 
     if (!ok) {
@@ -97,12 +109,12 @@ export default Mixin.create({
       return false;
     }
 
-    if (this.get('saving')) {
+    if (get(this, 'saving')) {
       // Already saving
       return false;
     }
 
-    this.set('saving', true);
+    set(this, 'saving', true);
 
     return true;
   },
@@ -110,7 +122,7 @@ export default Mixin.create({
   doSave(opt) {
     const self = this;
 
-    return this.get('primaryResource').save(opt).then((newData) => {
+    return get(this, 'primaryResource').save(opt).then((newData) => {
       if (newData.objects && newData.type === 'Template') {
         let objects = newData.objects;
 
@@ -139,7 +151,7 @@ export default Mixin.create({
   },
 
   mergeResult(newData) {
-    var original = this.get('originalPrimaryResource');
+    var original = get(this, 'originalPrimaryResource');
 
     if (original) {
       if (Resource.detectInstance(original)) {
@@ -159,7 +171,7 @@ export default Mixin.create({
 
   // doneSaving happens after didSave
   doneSaving(neu) {
-    return neu || this.get('originalPrimaryResource') || this.get('primaryResource');
+    return neu || get(this, 'originalPrimaryResource') || get(this, 'primaryResource');
   },
 
   // errorSaving can be used to do additional cleanup of dependent resources on failure
