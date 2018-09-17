@@ -1,7 +1,7 @@
 import InputValidation from 'nilavu/models/input-validation';
 import { computed } from '@ember/object';
 import Mixin from '@ember/object/mixin';
-import validator from 'npm:validator';
+import validator from 'validator';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';

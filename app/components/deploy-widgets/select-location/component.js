@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import GeoTools from 'npm:geo-tools'; // eslint-disable-line
+import GeoTools from 'geo-tools'; // eslint-disable-line
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 

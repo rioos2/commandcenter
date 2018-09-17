@@ -1,6 +1,7 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const Sass = require('node-sass');
 const environment = process.env.EMBER_ENV;
 const isTesting = environment === 'test';
 
@@ -19,6 +20,20 @@ module.exports = function(defaults) {
     },
     minifyCSS: {
       enabled: true
+    },
+    babel: {
+      blacklist: ['regenerator'],
+      plugins: [
+        'transform-decorators-legacy',
+        'transform-class-properties',
+      ]
+    },
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js']
+    },
+    sassOptions: {
+      implementation: Sass
     },
     //For disable eslint when yarn test
     // hinting: !isTesting,
