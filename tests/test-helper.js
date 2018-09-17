@@ -1,9 +1,10 @@
-import resolver from './helpers/resolver';
-import { setResolver } from 'ember-mocha';
+import Application from '../app';
+import config from '../config/environment';
+import { setApplication } from '@ember/test-helpers';
+import { start } from 'ember-qunit';
+import 'ember-feature-flags/test-support/helpers/with-feature';
 
-setResolver(resolver);
+setApplication(Application.create(config.APP));
 
-mocha.setup({ // eslint-disable-line
-  timeout: 15000,
-  slow:    500
-});
+
+start();

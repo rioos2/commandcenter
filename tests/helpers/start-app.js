@@ -1,20 +1,32 @@
+/*eslint-disable */
 import Application from '../../app';
 import config from '../../config/environment';
+import registerClipboardHelpers from '../helpers/ember-cli-clipboard';
 import { merge } from '@ember/polyfills';
 import { run } from '@ember/runloop';
 
+import './sign-in-user';
+import './wait-for-element';
+
+registerClipboardHelpers();
+
 export default function startApp(attrs) {
-  let application;
-
   let attributes = merge({}, config.APP);
-
+  attributes.autoboot = true;
   attributes = merge(attributes, attrs); // use defaults, but you can override;
 
-  run(() => {
-    application = Application.create(attributes);
+  let clearStorage = (storage) => {
+    storage.removeItem('token');
+    storage.removeItem('user');
+  };
+
+  clearStorage(localStorage);
+  clearStorage(sessionStorage);
+
+  return run(() => {
+    let application = Application.create(attributes);
     application.setupForTesting();
     application.injectTestHelpers();
+    return application;
   });
-
-  return application;
 }
