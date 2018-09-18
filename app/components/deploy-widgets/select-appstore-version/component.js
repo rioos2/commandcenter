@@ -1,35 +1,40 @@
 import Component from '@ember/component';
+import { alias } from '@ember/object/computed';
+import {
+  get, set, computed, observer
+} from '@ember/object';
 
 export default Component.extend({
-  tagName: '',
+  tagName:                '',
+  stacksfactoryResources: alias('stacksfactory.resources'),
 
-  selectionChecker: function() {
-    var check = (this.get('model.stacksfactory.os') === this.get('versionDetail.type') && this.get('model.stacksfactory.resources.version') === this.get('versionDetail.version'));
-
-    if (!check) {
-      this.set('active', '');
-    }
-  }.observes('activate'),
-
-  active: function() {
-    var check = (this.get('model.stacksfactory.os') === this.get('versionDetail.type') && this.get('model.stacksfactory.resources.version') === this.get('versionDetail.version'));
+  active: computed('stacksfactory.os', 'stacksfactoryResources.version', function() {
+    var check = (get(this, 'stacksfactory.os') === get(this, 'versionDetail.type') && get(this, 'stacksfactoryResources.version') === get(this, 'versionDetail.version'));
 
     if (check) {
-      this.set('model.stacksfactory.plan', this.get('versionDetail.id'));
-      this.set('model.distro_description', this.get('versionDetail.description'));
+      set(this, 'stacksfactory.plan', get(this, 'versionDetail.id'));
+      set(this, 'distroDescription', get(this, 'versionDetail.description'));
     }
 
-    return (this.get('model.stacksfactory.os') === this.get('versionDetail.type') && this.get('model.stacksfactory.resources.version') === this.get('versionDetail.version')) ? 'selected' : '';
-  }.property('model.stacksfactory.os', 'model.stacksfactory.resources.version'),
+    return (get(this, 'stacksfactory.os') === get(this, 'versionDetail.type') && get(this, 'stacksfactoryResources.version') === get(this, 'versionDetail.version')) ? 'selected' : '';
+  }),
+
+  selectionChecker: observer('activate', function() {
+    var check = (get(this, 'stacksfactory.os') === get(this, 'versionDetail.type') && get(this, 'stacksfactoryResources.version') === get(this, 'versionDetail.version'));
+
+    if (!check) {
+      set(this, 'active', '');
+    }
+  }),
 
   actions: {
     chooseVM() {
-      this.set('model.stacksfactory.plan', this.get('versionDetail.id'));
-      this.set('model.stacksfactory.resources.version', this.get('versionDetail.version'));
-      this.set('model.stacksfactory.os', this.get('versionDetail.type'));
-      this.set('model.distro_description', this.get('versionDetail.description'));
-      this.set('active', 'selected');
-      this.sendAction('done', this.get('versionDetail.type'));
+      set(this, 'stacksfactory.plan', get(this, 'versionDetail.id'));
+      set(this, 'stacksfactoryResources.version', get(this, 'versionDetail.version'));
+      set(this, 'stacksfactory.os', get(this, 'versionDetail.type'));
+      set(this, 'distroDescription', get(this, 'versionDetail.description'));
+      set(this, 'active', 'selected');
+      this.sendAction('done', get(this, 'versionDetail.type'));
     }
   }
 });

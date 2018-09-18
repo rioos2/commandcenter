@@ -1,14 +1,17 @@
-import { get } from '@ember/object';
 import Component from '@ember/component';
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import { isEqual } from '@ember/utils';
+import { alias } from '@ember/object/computed';
+import {
+  get, set, computed
+} from '@ember/object';
 
 export default Component.extend({
-  intl:          service(),
-  notifications: service('notification-messages'),
-  networks:      {
+  intl:                    service(),
+  notifications:           service('notification-messages'),
+  networksPatten:      {
     'private_ipv4': 'Private IPv4',
     'public_ipv4':  'Public IPv4',
     'private_ipv6': 'Private IPv6',
@@ -16,25 +19,27 @@ export default Component.extend({
   },
   disabledNetworks: [],
 
-  initializeChart: on('didInsertElement', function() {
+  stacksfactoryObjectMeta: alias('stacksfactory.object_meta'),
+  clusterName:             alias('stacksfactoryObjectMeta.cluster_name'),
+  initializeChart:         on('didInsertElement', function() {
     this.waringMessage();
   }),
 
-  selectedVirtualNetworks: function() {
+  selectedVirtualNetworks: computed('clusterName', function() {
     var self = this;
-    var virtualNetworks = Object.keys(this.get('networks')).map((key) => {
+    var virtualNetworks = Object.keys(get(this, 'networksPatten')).map((key) => {
       return key;
     });
 
-    this.get('disabledNetworks').map((disable) => {
+    get(this, 'disabledNetworks').map((disable) => {
       self.set(disable, '');
     });
 
-    if (!isEmpty(this.get('model.stacksfactory.object_meta.cluster_name')) && !isEmpty(this.get('model.datacenters.content')) && !isEmpty(self.get('model.networks.content'))) {
-      this.get('model.datacenters.content').filter((location) => {
-        if (isEqual(location.object_meta.name, self.get('model.stacksfactory.object_meta.cluster_name'))) {
+    if (!isEmpty(get(this, 'clusterName')) && !isEmpty(get(this, 'datacenters.content')) && !isEmpty(self.get('networks.content'))) {
+      get(this, 'datacenters.content').filter((location) => {
+        if (isEqual(location.object_meta.name, self.get('clusterName'))) {
           location.networks.map((network_id) => {
-            self.get('model.networks.content').map((network) => {
+            self.get('networks.content').map((network) => {
               if (isEqual(network.id, network_id)) {
                 virtualNetworks.removeObject(network.network_type);
               }
@@ -44,30 +49,30 @@ export default Component.extend({
       });
     }
     this.disableNetworks(virtualNetworks);
-  }.property('model.stacksfactory.object_meta.cluster_name'),
+  }),
 
   actions: {
     selected(net_type) {
       var self = this;
 
-      this.set('model.stacksfactory.network', '');
+      set(this, 'stacksfactory.network', '');
       this.toggleProperty(`${ net_type  }_check`);
       if (this.checkActiveNetwork(net_type)) {
-        var cc = this.get('model.stacksfactory.resources');
+        var cc = get(this, 'stacksfactory.resources');
 
         if (!cc[net_type]) {
           cc[net_type] = 'true';
-          this.set(net_type, 'selected');
+          set(this, net_type, 'selected');
         } else {
-          this.set(net_type, '');
+          set(this, net_type, '');
           delete cc[net_type];
         }
-        this.set('model.stacksfactory.resources', cc);
+        set(this, 'stacksfactory.resources', cc);
       }
-      Object.keys(this.get('networks')).map((key) => {
-        Object.keys(self.get('model.stacksfactory.resources')).map((network_type) => {
+      Object.keys(get(this, 'networksPatten')).map((key) => {
+        Object.keys(self.get('stacksfactory.resources')).map((network_type) => {
           if (isEqual(key, network_type)) {
-            self.set('model.stacksfactory.network', network_type);
+            self.set('stacksfactory.network', network_type);
           }
         });
       });
@@ -75,15 +80,15 @@ export default Component.extend({
   },
 
   disableNetworks(disableNetworks = []) {
-    this.set('disabledNetworks', disableNetworks);
+    set(this, 'disabledNetworks', disableNetworks);
     disableNetworks.forEach((disable) => {
-      this.set(disable, 'disable-network');
+      set(this, disable, 'disable-network');
     });
   },
 
   waringMessage() {
-    if (isEmpty(this.get('model.networks.content'))) {
-      this.get('notifications').warning(get(this, 'intl').t('notifications.network.empty'), {
+    if (isEmpty(get(this, 'networks.content'))) {
+      get(this, 'notifications').warning(get(this, 'intl').t('notifications.network.empty'), {
         autoClear:     true,
         clearDuration: 6000,
         cssClasses:    'notification-warning'
@@ -94,7 +99,7 @@ export default Component.extend({
   checkActiveNetwork(network) {
     var active = true;
 
-    this.get('disabledNetworks').forEach((n) => {
+    get(this, 'disabledNetworks').forEach((n) => {
       if (n === network) {
         active = false;
       }

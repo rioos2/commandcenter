@@ -1,6 +1,6 @@
 <p class="sub-title">{{t 'launcherPage.domain.title'}}</p>
 <p class="sub-description">{{t 'launcherPage.domain.subtitle'}}</p>
-<p class="domain-name">{{model.stacksfactory.object_meta.name}}</p>
+<p class="domain-name">{{stacksfactoryObjectMeta.name}}</p>
 {{editable-popup-textbox placeholder=domainPlaceHolder showSpinner=showSpinner targetActionName="setNewDomain" showEditBox=showDomainEditBox}}
 
 <div class="row generate">
@@ -9,7 +9,7 @@
       <p class="title">{{t 'launcherPage.secret.title'}}</p>
       <div class="rio-selectbtn row">
         {{#each secretTypes as |key|}}
-          {{deploy-widgets/generate-secret-pair secretType=secretType getSecretType="getSecretType" model=model activate=activate key=key}}
+          {{deploy-widgets/generate-secret-pair secretType=secretType getSecretType="getSecretType" settings=settings activate=activate key=key}}
         {{/each}}
       </div>
     </div>

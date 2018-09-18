@@ -1,16 +1,19 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
-import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
+import {
+  get, set, computed
+} from '@ember/object';
 
 export default Component.extend({
   intl:        service(),
-  storageType: alias('model.stacksfactory.resources.storage_type'),
+  storageType: alias('stacksfactory.resources.storage_type'),
 
-  isSelectedFlash: function() {
-    return this.get('storageType') === C.VPS.RESOURSE.SSD;
-  }.property('storageType'),
+
+  isSelectedFlash: computed('storageType', function() {
+    return get(this, 'storageType') === C.VPS.RESOURSE.SSD;
+  }),
 
   resourceCpu: function(){
     return {
@@ -40,12 +43,12 @@ export default Component.extend({
 
   actions: {
     clickFlash() {
-      this.set('isSelectedFlash', true);
-      this.set('storageType', C.VPS.RESOURSE.SSD);
+      set(this, 'isSelectedFlash', true);
+      set(this, 'storageType', C.VPS.RESOURSE.SSD);
     },
     clickHDD() {
-      this.set('isSelectedFlash', false);
-      this.set('storageType', C.VPS.RESOURSE.HDD);
+      set(this, 'isSelectedFlash', false);
+      set(this, 'storageType', C.VPS.RESOURSE.HDD);
     },
   }
 });
