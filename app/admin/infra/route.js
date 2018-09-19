@@ -6,8 +6,6 @@ import { hash } from 'rsvp';
 export default Route.extend(DefaultHeaders, {
 
   access:    service(),
-  session:   service(),
-  intl:      service(),
   userStore: service('user-store'),
 
   model() {
@@ -20,6 +18,7 @@ export default Route.extend(DefaultHeaders, {
       license:           this.get('store').findAll('license', this.opts('licenses', true)),
       senseis:           this.get('store').findAll('sensei', this.opts('senseis')),
       logs:              this.get('store').find('log', null, this.opts('logs')),
+      audits:            this.get('store').find('audit', null, this.opts('audits')),
       accounts:          this.get('store').find('account', null, this.opts('accounts')),
     });
   },

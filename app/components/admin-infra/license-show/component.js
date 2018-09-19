@@ -54,11 +54,19 @@ export default Component.extend(DefaultHeaders, {
   }),
 
   activated: computed('activation', function(){
-    return  get(this, 'activation').no_of_activations_available + get(this, 'intl').t('stackPage.admin.settings.entitlement.used');
+    return  get(this, 'activation').no_of_activations_available + get(this, 'intl').t('dojos.settings.entitlement.show.used');
   }),
 
   allowed: computed('activation', function() {
-    return get(this, 'activation').total_number_of_activations + get(this, 'intl').t('stackPage.admin.settings.entitlement.total')  ;
+    return get(this, 'activation').total_number_of_activations + get(this, 'intl').t('dojos.settings.entitlement.show.total')  ;
+  }),
+
+  licenseId: computed('activation', function() {
+    return get(this, 'intl').t('dojos.settings.entitlement.edit.code.id')  ;
+  }),
+
+  licensePassword: computed('activation', function() {
+    return  get(this, 'intl').t('dojos.settings.entitlement.edit.code.password')  ;
   }),
 
   expired: computed('status', 'expiredAt', function(){
@@ -68,7 +76,7 @@ export default Component.extend(DefaultHeaders, {
       return C.LICENSE.STATUS.EXPIRED;
     }
 
-    return   get(this, 'intl').t('stackPage.admin.settings.entitlement.expired') + get(this, 'expiredAt') + get(this, 'intl').t('stackPage.admin.settings.entitlement.days');
+    return   get(this, 'intl').t('dojos.settings.entitlement.edit.static1') + get(this, 'expiredAt') + get(this, 'intl').t('dojos.settings.entitlement.edit.static2');
 
 
   }),
@@ -77,7 +85,7 @@ export default Component.extend(DefaultHeaders, {
 
     performActivation(id, password) {
       if (isEmpty(id.trim()) || isEmpty(password.trim()))  {
-        this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.emptyActiveCode'), {
+        this.get('notifications').warning(get(this, 'intl').t('dojos.settings.entitlement.edit.code.title'), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
@@ -103,7 +111,7 @@ export default Component.extend(DefaultHeaders, {
     })).then(() => {
       this.checkLicense();
     }).catch(() => {
-      this.get('notifications').warning(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.failure'), {
+      this.get('notifications').warning(get(this, 'intl').t('dojos.settings.entitlement.edit.code.error'), {
         autoClear:     true,
         clearDuration: 4200,
         cssClasses:    'notification-warning'
@@ -127,7 +135,7 @@ export default Component.extend(DefaultHeaders, {
 
     later(() => {
       if (self.get('status') ===  C.LICENSE.STATUS.ACTIVE) {
-        self.get('notifications').info(get(this, 'intl').t('stackPage.admin.settings.entitlement.activation.success'), {
+        self.get('notifications').info(get(this, 'intl').t('dojos.settings.entitlement.edit.code.success'), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-success'
@@ -150,4 +158,3 @@ export default Component.extend(DefaultHeaders, {
 
 
 });
-

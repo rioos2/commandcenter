@@ -157,6 +157,24 @@ dashboard:
   error: '<p>Failed to pull metrics about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>'
 
 ##########
+# Profile
+##########
+profile:
+  sessions:
+    title: Session
+    table:
+      colDevice: Device
+      colCategory: Category
+      colVersion: Version
+      colIp: IP
+      colDateTime: Date and time
+  events:
+    title: Event
+    required: 'No events added yet.'
+  notifications:
+    title: Notification
+
+##########
 # Events
 ##########
 eventsPage:
@@ -206,11 +224,22 @@ dojos:
       table:
         info: Description
         dateAndTime: 'Date and time'
+    audits:
+      title:  Audits
+      required: 'No logs added yet.'
+      table:
+        info: Description
+        dateAndTime: 'Date and time'
+        ip: 'IP'
     entitlement:
       title: Licenses
+      show:
+        used: " used"
+        total: " total"
+        btn: Activate
       edit:
         title: 'Edit activation code'
-        static1: ' -  Expires in '
+        static1: ' Expires in '
         static2: ' days'
         trial: Trial
         code:
@@ -476,7 +505,7 @@ launcherPage:
       subtitle: 'Select preferred system'
       select: select
       selected: selected
-      required: 'no appstore os selected'
+      required: 'No appstore os selected'
   network:
     title: Networking
     required: 'No network selected'
@@ -611,4 +640,3 @@ validation:
     min: '"{key}" should be at least {val}'
     max: '"{key}" should be at most {val}'
   chars: '"{key}" contains {count, plural, =1 {an invalid character} other {# invalid characters}}: {chars}'
-

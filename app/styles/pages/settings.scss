@@ -1,169 +1,186 @@
 .user {
-    padding: 42px 100px 60px;
-    @media (max-width: 768px) {
-        padding: 7px;
-    }
-
-    background-color: $bg-second-color;
-    .userinfo {
-        padding-left: 15px;
-        padding-right: 15px;
-
-        .person {
-            background-color: white;
-            padding: 38px 47px;
-            position: relative;
-
-            .settings {
-                position: absolute;
-                left: 20px;
-                top: 20px;
-                font-size: 18px;
-                cursor: pointer;
-                color: gray;
-            }
-
-            img {
-                border-radius: 50%;
-                width: 95px;
-                height: 95px;
-                margin-right: 28px;
-                float: left;
-                display: inline-block;
-            }
-
-            .avata {
-                display: inline-block;
-
-                .name {
-                    font-size: 42px;
-                    font-weight: bold;
-                    margin: 0px;
-                }
-
-                .state {
-                    margin-left: 3px;
-                    margin-top: -3px;
-                    width: 110px;
-                    border-radius: 4px;
-                    color: white;
-                    text-transform: uppercase;
-                    position: relative;
-
-                    i {
-                        position: absolute;
-                        top: 11px;
-                        left: 5px;
-                        font-size: 10px;
-                    }
-
-                    p {
-                        margin: 0;
-                        padding: 9px 6px 4px 20px;
-                    }
-                }
-                .platinum {
-                    background-color: #59d4e3;
-                }
-
-                .silver {
-                    background-color: #80b5de;
-                }
-
-                .gold {
-                    background-color: #ebbb3b;
-                }
-
-                @media (max-width: 768px) {
-                    .name {
-                        font-size: 26px;
-                        margin-top: 5px;
-                    }
-                }
-
-                @media (max-width: 576px) {
-                    .name {
-                        font-size: 18px;
-                        margin-top: 20px;
-                    }
-
-                    .state {
-                        margin: 0;
-                        width: 89px;
-
-                        p {
-                            padding: 9px 6px 4px 16px;
-                        }
-                    }
-                }
-            }
-        }
-
-        .certification {
-            // height: 172px;
-            background-color: #2a2f44;
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            padding: 58px 0 46px 65px;
-            position: relative;
-
-            .certisficated_date {
-                color: #ffd338;
-                font-size: 34px;
-                margin: 0;
-                text-shadow: 1px 1px 2px black, 0 0 25px #e77e0d;
-            }
-
-            .certisficated{
-                color: #99a0b8;
-                padding-left: 3px;
-                margin: 0;
-            }
-
-            .certi-icon {
-                position: absolute;
-                width: 80px;
-                height: auto;
-                left: -40px;
-                top: 43px;
-                cursor: pointer;
-                filter: drop-shadow(0px 12px 10px rgba(21, 58, 141, 0.16));
-
-                .certi-glow,
-                .certi-color {
-                    fill: #3a6de9;
-                }
-
-                svg:hover .certi-glow { // stroke works fine, filter doesn't work
-                    stroke: rgba(21, 58, 141, 0.36);
-                    filter: url(#blur-filter);
-                }
-                svg:hover .certi-color {
-                    stroke: rgba(21, 58, 141, 0.36);
-                }
-
-                .cls-2, .cls-1 {
-                    fill: white;
-                }
-            }
-            @media (max-width: 576px) {
-                border-radius: 0;
-                .certi-icon {
-                    left: 10px;
-                }
-
-                p {
-                    padding-left: 40px !important;
-                }
-            }
-        }
-    }
-}
-.logs {
-    padding: 30px 50px 60px;
-    @media (max-width: 768px) {
-        padding: 7px;
-    }
-
-    background-color: $bg-second-color;
+  padding: 42px 100px 60px;
+  @media (max-width: 768px) {
+    padding: 7px;
   }
+  background-color: $bg-second-color;
+
+  .userinfo {
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .person {
+      background-color: white;
+      padding: 38px 47px;
+      position: relative;
+
+      .settings {
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        color: gray;
+      }
+
+      img {
+        border-radius: 50%;
+        width: 95px;
+        height: 95px;
+        margin-right: 28px;
+        float: left;
+        display: inline-block;
+      }
+
+      .avata {
+        display: inline-block;
+
+        .name {
+          font-size: 42px;
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .state {
+          margin-left: 3px;
+          margin-top: -3px;
+          width: 110px;
+          border-radius: 4px;
+          color: white;
+          text-transform: uppercase;
+          position: relative;
+
+          i {
+            position: absolute;
+            top: 11px;
+            left: 5px;
+            font-size: 10px;
+          }
+
+          p {
+            margin: 0;
+            padding: 9px 6px 4px 20px;
+          }
+        }
+
+        .platinum {
+          background-color: #59d4e3;
+        }
+
+        .silver {
+          background-color: #80b5de;
+        }
+
+        .gold {
+          background-color: #ebbb3b;
+        }
+        @media (max-width: 768px) {
+          .name {
+            font-size: 26px;
+            margin-top: 5px;
+          }
+        }
+        @media (max-width: 576px) {
+          .name {
+            font-size: 18px;
+            margin-top: 20px;
+          }
+
+          .state {
+            margin: 0;
+            width: 89px;
+
+            p {
+              padding: 9px 6px 4px 16px;
+            }
+          }
+        }
+      }
+    }
+
+    .certification {
+      // height: 172px;
+      background-color: #2a2f44;
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+      padding: 58px 0 46px 65px;
+      position: relative;
+
+      .certisficated_date {
+        color: #ffd338;
+        font-size: 34px;
+        margin: 0;
+        text-shadow: 1px 1px 2px black, 0 0 25px #e77e0d;
+      }
+
+      .certisficated {
+        color: #99a0b8;
+        padding-left: 3px;
+        margin: 0;
+      }
+
+      .certi-icon {
+        position: absolute;
+        width: 80px;
+        height: auto;
+        left: -40px;
+        top: 43px;
+        cursor: pointer;
+        filter: drop-shadow(0px 12px 10px rgba(21, 58, 141, 0.16));
+
+        .certi-color,
+        .certi-glow {
+          fill: #3a6de9;
+        }
+
+        svg:hover .certi-glow {
+          // stroke works fine, filter doesn't work
+          stroke: rgba(21, 58, 141, 0.36);
+          filter: url(#blur-filter);
+        }
+
+        svg:hover .certi-color {
+          stroke: rgba(21, 58, 141, 0.36);
+        }
+
+        .cls-1,
+        .cls-2 {
+          fill: white;
+        }
+      }
+      @media (max-width: 576px) {
+        border-radius: 0;
+
+        .certi-icon {
+          left: 10px;
+        }
+
+        p {
+          padding-left: 40px !important;
+        }
+      }
+    }
+  }
+
+  .empty-event {
+    text-align: -webkit-center;
+    padding: 74px;
+    background-color: white;
+
+    .error-msg {
+      line-height: 25px;
+      font-family: fselliot;
+      font-size: 18px;
+      color: #A1A1A1;
+      letter-spacing: 0;
+    }
+  }
+}
+
+.logs {
+  padding: 30px 50px 60px;
+  @media (max-width: 768px) {
+    padding: 7px;
+  }
+  background-color: $bg-second-color;
+}

@@ -5,7 +5,7 @@
                 {{fa-icon "cog" class="settings"}}
                 <img src={{img}}>
                 <div class="avata">
-                    <p class="name" style="text-transform: capitalize;">{{model.profile.first_name}}</p>
+                    <p class="name" style="text-transform: capitalize;">{{profile.first_name}}</p>
                     <div class="state {{model.state}}">
                         {{fa-icon "circle"}}
                         <p>{{memberShip}}</p>
@@ -19,8 +19,26 @@
             </div>
         </div>
     </div>
-    {{page-alert alert=tableLastData}}
   <br>
-    {{common-table model=tableData class="info-table"}}
+  <div class="dashboard">
+  	<div class="tabs">
+  		{{radio-button checked=(eq "sessions" selectedTab) value=selectedTab selection=selectedTab id="sessions" name="tab-control"}}
+      {{radio-button checked=(eq "events" selectedTab) value=selectedTab selection=selectedTab id="events" name="tab-control"}}
+      {{radio-button checked=(eq "notifications" selectedTab) value=selectedTab selection=selectedTab id="notifications" name="tab-control"}}
+  		<ul class="dashboardNav">
+  			{{profile/profile-tab panels=panels selectedTab=selectedTab tab="sessions"}}
+        {{profile/profile-tab panels=panels selectedTab=selectedTab tab="events" }}
+  			{{profile/profile-tab panels=panels selectedTab=selectedTab tab="notifications"}}
+  		</ul>
+  		<div class="slider">
+  			<div class="indicator"></div>
+  		</div>
+  		<div class="content">
+  			{{#each panels as |tab|}}
+  				{{component tab selectedTab=selectedTab model=model modelSpinner=modelSpinner}}
+        {{/each}}
+  		</div>
+    </div>
+  	</div>
 </div>
 {{page-footer}}
