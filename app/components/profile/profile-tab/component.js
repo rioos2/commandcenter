@@ -21,7 +21,7 @@ export default Component.extend({
   }),
 
   iconName: computed('tab', () => {
-    return `svg/svg-event`;
+    return `svg/svg-log`;
   }),
 
   _addToCollection: on('didInsertElement', function() {
