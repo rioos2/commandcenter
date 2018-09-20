@@ -1,0 +1,150 @@
+
+# TO-DO: 1. PROXY TO START COMMANDCENTER
+# DONT CHANGE THIS, WE START COMMANDCENTER in DOMAIN NAME
+upstream riooscommandcenter {
+  server 127.0.0.1:443;
+}
+
+proxy_cache_path /var/nginx/cache keys_zone=one:10m max_size=200m;
+
+# attempt to preserve the proto, must be in http context
+map $http_x_forwarded_proto $thescheme {
+  default $scheme;
+  https https;
+}
+
+server {
+listen 80;
+server_name commandcenter.rioos.sh;
+rewrite ^ https://commandcenter.rioos.sh$request_uri? permanent;
+}
+
+server {
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1000;
+    gzip_comp_level 5;
+    gzip_types application/json text/css application/x-javascript application/javascript;
+
+    listen 443;
+    # TO-DO: 2. OPTIONAL, all subdomains with rioos.sh are allowed.
+    server_name commandcenter.rioos.sh;
+    ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    server_tokens off;
+    sendfile on;
+    keepalive_timeout 65;
+
+    # TO-DO: 3 SET THE www files directory
+    set $command_center_root /home/rajesh/code/conf/www;
+
+    # TO-DO: 4 SET THE certificates in the  www files directory
+    ssl on;
+    ssl_certificate      /home/rajesh/code/conf/www/server.crt;
+    ssl_certificate_key  /home/rajesh/code/conf/www/server.key;
+
+    # Prevent Internet Explorer 10 "compatibility mode", which breaks CommandCenter.
+    # If other subdomains under your domain are supposed to use Internet Explorer Compatibility mode,
+    # it may be used for this one too, unless you explicitly tell IE not to use it.  Alternatively,
+    # some people have reported having compatibility mode "stuck" on for some reason.
+    # (This will also prevent compatibility mode in IE 8 and 9, but those browsers aren't supported anyway.
+    add_header X-UA-Compatible "IE=edge";
+
+    # without weak etags we get zero benefit from etags on dynamically compressed content
+    # further more etags are based on the file in nginx not sha of data
+    # use dates, it solves the problem fine even cross server
+    etag off;
+
+    # TO-DO: 5 SET  THE PROXY PASS WITH  THE WEBSOCKET WATCH ENDPOINT
+  	# In this case this points to 127.0.0.1
+    location /api/v1/*/watch/ {
+        access_log on;
+        proxy_pass https://localhost:9443;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+
+    # TO-DO: 6 THE PROXY PASS WITH  THE API ENDPOINT
+  	# In this case this points to 127.0.0.1
+    location /api/v1/ {
+        access_log on;
+        proxy_pass https://localhost:7443;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+		# TO-DO: 7 SET THE PROXY PASS TO THE VNC ENDPOINT
+	  # In this case it points to localhost:444
+    location /vnc/ {
+        access_log on;
+        proxy_pass https://localhost:444;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # WebSocket support (nginx 1.4)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+
+		# Serve the assets, fonts, ping
+    location / {
+        root $command_center_root;
+        add_header ETag "";
+        location ~* assets/.*\.(eot|ttf|woff|woff2|ico)$ {
+           expires 1y;
+           add_header Cache-Control public;
+        }
+
+       location ~ ^/assets/ {
+          expires 1y;
+          gzip_static on;
+          add_header Cache-Control public;
+        }
+
+        location /assets/fonts  {
+          add_header "Access-Control-Allow-Origin" *;
+          alias $command_center_root/assets/fonts;
+        }
+
+        location = /ping {
+       	  access_log off;
+        	log_not_found off;
+        	proxy_set_header Host $http_host;
+        	proxy_set_header X-Real-IP $remote_addr;
+        	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        	proxy_set_header X-Forwarded-Proto $thescheme;
+        	proxy_pass https://localhost:7443/api/v1/ping;
+        	break;
+    }
+
+  }
+  # The final proxier to 127.0.0.1 (setup at the top)
+  location @riooscommandcenter {
+    proxy_pass https://riooscommandcenter;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $thescheme;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+
+   # everything else to index.html in nginx $RIOOS_HOME/www
+    location /index.html {
+      root $command_center_root;
+
+      index index.html
+      try_files $uri $uri/ /index.html;
+     }
+ }
