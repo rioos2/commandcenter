@@ -48,6 +48,7 @@ actions:
   view: View
   add: Add
   deploy: Deploy
+  activate: Activate
 #########################
 # The main navigation bar
 ########################
@@ -160,8 +161,8 @@ dashboard:
 # Profile
 ##########
 profile:
-  sessions:
-    title: Session
+  recent-activity:
+    title: Recent activity
     table:
       colDevice: Device
       colCategory: Category
@@ -169,10 +170,10 @@ profile:
       colIp: IP
       colDateTime: Date and time
   events:
-    title: Event
+    title: Events
     required: 'No events added yet.'
-  notifications:
-    title: Notification
+  alerts:
+    title: Alerts
 
 ##########
 # Events
@@ -236,7 +237,6 @@ dojos:
       show:
         used: " used"
         total: " total"
-        btn: Activate
       edit:
         title: 'Edit activation code'
         static1: ' Expires in '
@@ -249,7 +249,7 @@ dojos:
           success: 'Awesome. You have activated the full version successfully'
           error: "Couldn't activate the full version. Try again"
 
-  dashboard:
+  infrastructure:
     title:  Infrastructure
     senseis:
       title: Senseis
@@ -383,13 +383,13 @@ dojos:
         nodes: NODES
         netmask: Netmask
         range: Range
-      add:
-        title: 'Add Virtual Network'
         subnet: 'Subnet IP'
         bridge:
           title: 'Bridge Type'
           select: 'Select Nodes'
           required: 'No nodes attached.'
+      add:
+        title: 'Add Virtual Network'
       edit:
         title: 'Edit Virtual Network'
       error:

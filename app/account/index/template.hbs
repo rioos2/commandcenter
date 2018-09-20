@@ -1,0 +1,44 @@
+<div class="user">
+    <div class="userinfo">
+        <div class="row">
+            <div class="col-sm-6 col-md-8 person clearfix">
+                {{fa-icon "cog" class="settings"}}
+                <img src={{avatar}}>
+                <div class="avata">
+                    <p class="name" style="text-transform: capitalize;">{{profile.first_name}}</p>
+                    <div class="state {{myAuthority}}">
+                        {{fa-icon "circle"}}
+                        <p>{{myAuthority}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 certification">
+                {{svg/svg-hex-certification class="certi-icon"}}
+                <p class="certisficated_date">{{createdAt}}</p>
+                <p class="certisficated">{{memberShipStatus}}</p>
+            </div>
+        </div>
+    </div>
+  <br>
+  <div class="dashboard">
+  	<div class="tabs">
+  		{{radio-button checked=(eq "recent-activity" selectedTab) value=selectedTab selection=selectedTab id="recent-activity" name="tab-control"}}
+      {{radio-button checked=(eq "events" selectedTab) value=selectedTab selection=selectedTab id="events" name="tab-control"}}
+      {{radio-button checked=(eq "alerts" selectedTab) value=selectedTab selection=selectedTab id="alerts" name="tab-control"}}
+  		<ul class="dashboardNav">
+  			{{profile/basic-tab panels=panels selectedTab=selectedTab tab="recent-activity"}}
+        {{profile/basic-tab panels=panels selectedTab=selectedTab tab="events" }}
+  			{{profile/basic-tab panels=panels selectedTab=selectedTab tab="alerts"}}
+  		</ul>
+  		<div class="slider">
+  			<div class="indicator"></div>
+  		</div>
+  		<div class="content">
+  			{{#each panels as |tab|}}
+  				{{component tab selectedTab=selectedTab model=model}}
+        {{/each}}
+  		</div>
+    </div>
+  	</div>
+</div>
+{{page-footer}}

@@ -85,13 +85,13 @@
               <!-- Admin link-->
               {{#if isAdmin}}
               <li>
-                 {{#link-to "admin.infra"}} {{t 'nav.admin'}}{{/link-to}}
+                 {{#link-to "admin.dojos"}} {{t 'nav.admin'}}{{/link-to}}
               </li>
               <li role="presentation" class="divider"></li>
               {{/if}}
               <!-- Account link-->
               <li>
-                {{#link-to "accounts.index"}}{{t 'nav.user.profile'}}{{/link-to}}
+                {{#link-to "account.index"}}{{t 'nav.user.profile'}}{{/link-to}}
               </li>
               <!-- Logout action-->
               <li {{action "logout"}}>

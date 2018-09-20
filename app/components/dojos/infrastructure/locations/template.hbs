@@ -1,0 +1,43 @@
+ {{dojos/infrastructure/locations/location-add model=model modelSpinner=modelSpinner doReload="doReload"}}
+<div class="col-sm-9 content-left">
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'dojos.infrastructure.locations.connected'}} ({{availableSize}})
+      </div>
+      <div class="pull-right kv-right-head-button">
+        <button type="button" {{action "openModal"}} class="btn">+ {{t 'actions.add'}}</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      {{#if modelSpinner}}
+      <div class="spinner infra-spinner">
+      {{stack-launch-spinner size=25 showSpinner=true}}
+      </div>
+      {{else}}
+
+      {{#if locationAvailable}}
+        <div class="cluster-container">
+          {{#each locations as |location|}}
+            {{dojos/infrastructure/locations/location-detail model=location virtualNetworks=virtualNetworks selectedCluster=selectedCluster storages=storages selectedLocations=selectedLocations click=(action "SideData" location)}}
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="empty-network">
+          <div class="pin-img">
+            <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+          </div>
+          <div class="empty-network-add-link">
+            <span>{{t 'stackPage.admin.locations.noCluster'}}</span>
+            <a href="#addcluster_modal" data-toggle="modal" data-target="#addcluster_modal">{{t 'stackPage.admin.locations.addCluster'}}</a>
+          </div>
+        </div>
+        {{/if}}
+      {{/if}}
+
+    </div>
+  </div>
+</div>
+<div class="col-sm-3 content-right">
+    {{dojos/infrastructure/locations/location-side model=selectedLocations selectedNodes=selectedNodes selectedStorage=selectedStorage selectedVirtualNetworks=selectedVirtualNetworks }}
+</div>

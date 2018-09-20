@@ -104,10 +104,8 @@ Router.map(function() {
       });
     });
 
-    this.route('accounts', { resetNamespace: true }, function() {
+    this.route('account', { resetNamespace: true }, function() {
       this.route('index', { path: '/' });
-      this.route('info', { path: '/info' });
-      this.route('infra', { path: '/infra' });
       this.route('contact-admin', { path: '/contact-admin' });
     });
 
@@ -117,6 +115,7 @@ Router.map(function() {
     }, function() {
       this.route('index', { path: '/' });
       this.route('infra', { path: '/infra' });
+      this.route('dojos', { path: '/dojos' });
     });
 
     this.route('access-denied', {

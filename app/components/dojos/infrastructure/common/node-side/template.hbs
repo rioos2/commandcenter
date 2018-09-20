@@ -1,0 +1,37 @@
+<div class="network-detail-container">
+	<div class="network-detail-box" id="sd_detail1">
+		<div class="network-active-detail-name">
+			{{#if nodeAvailable}}{{name}} {{else}} &nbsp;{{/if}}
+		</div>
+		<div class="network-active-detail-detail">
+			<div class="sd-subheader">{{t 'dojos.infrastructure.storages.details.title'}}</div>
+			{{#if nodeAvailable}}
+				<div class="sd-ip-detail sd-table">
+					<div class="sd-title">{{t 'dojos.infrastructure.storages.details.ip'}}</div>
+					<div class="sd-value">{{ip}}</div>
+				</div>
+				<div class="sd-cdate-detail sd-table">
+					<div class="sd-title">{{t 'dojos.infrastructure.ninjas.details.bridges.status'}}</div>
+					<div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
+				</div>
+				<div class="sd-ip-detail sd-table">
+					<div class="sd-title">{{t 'dojos.infrastructure.ninjas.details.bridges.metrics'}}</div>
+					<div class="sd-value">{{#link-to "infrastructure-tab.data-center"}}{{t 'actions.view'}}{{/link-to}}</div>
+				</div>
+				{{else}}
+				<div class="sd-empty-pool">{{emptyError}}</div>
+			{{/if}}
+		</div>
+		<div class="network-active-detail-nodes">
+			<div class="sd-subheader">{{t 'dojos.infrastructure.ninjas.details.bridges.title'}}</div>
+			{{#if nodeAvailable}}
+				{{#each bridges as |bridge|}}
+					{{dojos/infrastructure/common/node-side/node-bridge bridge=bridge }}
+				{{/each}}
+			{{else}}
+				<div class="sd-empty-pool">{{t 'stackPage.admin.node.noBridges'}}</div>
+			{{/if}}
+		</div>
+	</div>
+
+</div>

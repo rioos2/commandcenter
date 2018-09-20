@@ -1,0 +1,29 @@
+{{dojos/infrastructure/common/node-credentials id=model.id model=model doReload="doReload"}}
+<div class="network-box-outer">
+  <div class="network-box">
+    <div class="network-subbox-1">
+      <div class="pull-left st-name">
+        {{model.id}}
+      </div>
+      <div class="pull-right st-pin">
+        <div class="stack-action">
+          {{action-menu model=model}}
+        </div>
+      </div>
+    </div>
+    <div class="network-subbox-2">
+      <span class="sub-title">{{t 'stackPage.admin.node.ip'}}</span>
+      <span class="sub-name">{{model.node_ip}}</span>
+      <br>
+      <span class="sub-title">{{t 'stackPage.admin.node.nodeStatus'}}</span>
+      <span class="sub-name">{{t 'stackPage.admin.node.nodeNewReady'}}</span>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group riolabel pleft-26">
+          <span class="label ptop-5 node-new">{{t 'stackPage.admin.node.labelNew'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

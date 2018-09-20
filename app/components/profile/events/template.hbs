@@ -1,4 +1,4 @@
-{{#if emptyLogs}}
+{{#if hasLogs}}
 <div class="empty-event">
   <div class="pin-img">
     <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
@@ -9,5 +9,5 @@
 </div>
 {{else}}
 <br>
-{{table/event-table model=tableData class="info-table"}}
+{{table model=tableData columns=columns class="info-table"}}
 {{/if}}

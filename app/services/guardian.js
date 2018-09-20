@@ -68,7 +68,7 @@ export default Service.extend(DefaultHeaders, {
       break;
     case false:
       if (!this.hasOrganization() || this.hasSuspended()) {
-        transition = '/accounts/contact-admin';
+        transition = '/account/contact-admin';
       }
       break;
     }

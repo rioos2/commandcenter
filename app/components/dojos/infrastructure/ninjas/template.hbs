@@ -1,0 +1,75 @@
+ {{dojos/infrastructure/ninjas/node-add nodes=nodes modelSpinner=modelSpinner}}
+<div class="col-sm-9 content-left">
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'dojos.infrastructure.ninjas.detail.title'}} ({{availableSize}})
+      </div>
+      <div class="pull-right kv-right-head-button">
+        <button type="button" {{action "openModal"}} class="btn">+ {{t 'dojos.infrastructure.ninjas.discovery.search'}}</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      {{#if modelSpinner}}
+        <div class="spinner infra-spinner">
+          {{stack-launch-spinner size=25 showSpinner=true}}
+        </div>
+      {{else}}
+        {{#if ninjaNodes}}
+          <div class="network-container">
+            {{#each ninjaNodes as |node|}}
+              {{dojos/infrastructure/common/node-detail model=node selectedNode=selecedNode reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="empty-network">
+            <div class="pin-img">
+              <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+            </div>
+            <div class="empty-network-add-link">
+              <span>{{t 'dojos.infrastructure.ninjas.required'}}</span>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+<div class="col-sm-3 content-right">
+  {{dojos/infrastructure/common/node-side type=nodeType model=selectedNode}}
+</div>
+
+<div class="col-sm-9 content-left">
+  <div class="panel panel-default kv-panel">
+    <div class="panel-heading">
+      <div class="panel-header">
+        {{t 'dojos.infrastructure.ninjas.discovery.title'}} ({{availableCalmNodeSize}})
+      </div>
+    </div>
+    <div class="panel-body">
+      {{#if modelSpinner}}
+        <div class="spinner infra-spinner">
+          {{stack-launch-spinner size=25 showSpinner=true}}
+        </div>
+      {{else}}
+        {{#if calmNodes}}
+          <div class="network-container">
+            {{#each calmNodes as |node|}}
+              {{dojos/infrastructure/ninjas/node-search-detail model=node reload="reload"}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="empty-network">
+            <div class="pin-img">
+              <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+            </div>
+            <div class="empty-network-add-link">
+              <span>{{t 'dojos.infrastructure.ninjas.discovery.required'}}</span>
+              <a href="#" data-toggle="modal" data-target="#node_add_modal">+{{t 'dojos.infrastructure.ninjas.discovery.discover'}}</a>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{{dojos/infrastructure/storages/storage-side/storage-pool-list/storage-pool-count disks=disks}}
+<div class="sd-pool-name sd-table">
+  <div class="sd-title">{{t 'generic.name'}} </div>
+  <div class="sd-value">{{name}}</div>
+</div>
+<div class="sd-pool-name sd-table">
+  <div class="sd-title">{{t 'generic.status'}} </div>
+  <div class="sd-value {{show-status-bulp  status}}">{{status}}</div>
+</div>
+<div class="sd-pool-type sd-table">
+  <div class="sd-title">{{t 'dojos.infrastructure.storages.disks.size'}} </div>
+  <div class="sd-value">{{diskSize}}</div>
+</div>
+<div class="sd-pool-detail sd-table">
+<div class="sd-title">{{t 'dojos.infrastructure.storages.disks.title'}}</div>
+<span class="sd-value sd-more-cluster-nodes" data-toggle="modal" data-target="#storage_count" >{{t 'actions.view'}}</span>
+</div>
+<div class="pool-active">
+</div>
