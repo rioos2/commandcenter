@@ -18,7 +18,7 @@
 			{{#if virtualNetworkAvailable}}
 			<div class="network-container">
 				{{#each virtualNetworks as |net|}}
-					{{dojos/infrastructure/networks/network-detail model=net nodes=selectedNodes virtualNetwork=virtualNetwork selectedVirtualNetwork=selectedVirtualNetwork click=(action "SideData" net)}}
+					{{dojos/infrastructure/networks/all-detail model=net nodes=selectedNodes virtualNetwork=virtualNetwork selectedVirtualNetwork=selectedVirtualNetwork click=(action "SideData" net)}}
 				{{/each}}
 				</div>
 			{{else}}
@@ -37,5 +37,5 @@
 	</div>
 </div>
 <div class="col-sm-3 content-right">
-		{{dojos/infrastructure/networks/network-side model=virtualNetwork nodes=selectedNodes allnodes=nodes modelSpinner=modelSpinner virtualNetworkReload="virtualNetworkReload"}}
+		{{dojos/infrastructure/networks/single-detail model=virtualNetwork nodes=selectedNodes allnodes=nodes modelSpinner=modelSpinner virtualNetworkReload="virtualNetworkReload"}}
 </div>

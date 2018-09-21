@@ -1,4 +1,4 @@
- {{dojos/infrastructure/locations/location-add model=model modelSpinner=modelSpinner doReload="doReload"}}
+ {{dojos/infrastructure/locations/modal-location-add model=model modelSpinner=modelSpinner doReload="doReload"}}
 <div class="col-sm-9 content-left">
   <div class="panel panel-default kv-panel">
     <div class="panel-heading">
@@ -19,7 +19,7 @@
       {{#if locationAvailable}}
         <div class="cluster-container">
           {{#each locations as |location|}}
-            {{dojos/infrastructure/locations/location-detail model=location virtualNetworks=virtualNetworks selectedCluster=selectedCluster storages=storages selectedLocations=selectedLocations click=(action "SideData" location)}}
+            {{dojos/infrastructure/locations/all-detail model=location virtualNetworks=virtualNetworks selectedCluster=selectedCluster storages=storages selectedLocations=selectedLocations click=(action "SideData" location)}}
           {{/each}}
         </div>
       {{else}}
@@ -39,5 +39,5 @@
   </div>
 </div>
 <div class="col-sm-3 content-right">
-    {{dojos/infrastructure/locations/location-side model=selectedLocations selectedNodes=selectedNodes selectedStorage=selectedStorage selectedVirtualNetworks=selectedVirtualNetworks }}
+    {{dojos/infrastructure/locations/single-detail model=selectedLocations selectedNodes=selectedNodes selectedStorage=selectedStorage selectedVirtualNetworks=selectedVirtualNetworks }}
 </div>

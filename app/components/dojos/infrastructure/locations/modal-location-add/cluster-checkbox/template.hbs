@@ -10,7 +10,7 @@
 <div class="col-xs-8">
   {{#each virtualNetworkFilterForNode as |virtualNetwork|}}
     <div class="col-xs-6">
-      {{dojos/infrastructure/locations/location-add/cluster-checkbox/network-checkbox name=virtualNetwork.name enable=active data=virtualNetwork updateVirtualNetworkData="updateVirtualNetworkData"}}
+      {{dojos/infrastructure/locations/modal-location-add/cluster-checkbox/network-checkbox name=virtualNetwork.name enable=active data=virtualNetwork updateVirtualNetworkData="updateVirtualNetworkData"}}
     </div>
   {{/each}}
 </div>

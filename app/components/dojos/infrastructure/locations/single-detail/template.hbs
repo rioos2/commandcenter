@@ -38,7 +38,7 @@
       {{#if locationAvaliable}}
 
         {{#each selectedVirtualNetworks as |net|}}
-          {{dojos/infrastructure/locations/location-side/location-network network=net }}
+          {{dojos/infrastructure/locations/single-detail/network-name network=net }}
         {{/each}}
       {{else}}
         <div class="sd-empty-pool">{{t 'dojos.infrastructure.locations.noClusterNetwork'}}</div>

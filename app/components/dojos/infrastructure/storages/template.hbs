@@ -1,4 +1,4 @@
-{{dojos/infrastructure/storages/storage-pool-add pools=storagespool connector=storageData storages=storages modelSpinner=modelSpinner doReload="doReload"}}
+{{dojos/infrastructure/storages/pool-add pools=storagespool connector=storageData storages=storages modelSpinner=modelSpinner doReload="doReload"}}
 
 <div class="col-sm-9 content-left">
 	<div class="panel panel-default kv-panel">
@@ -16,7 +16,7 @@
 			{{#if storageAvailable}}
 				<div class="storage-container">
 					{{#each storages as |storage|}}
-						{{dojos/infrastructure/storages/storage-detail model=storage storagespool=storagespool selectedStorage=selectedStorage storageData=storageData click=(action "SideData" storage) }}
+						{{dojos/infrastructure/storages/all-detail model=storage storagespool=storagespool selectedStorage=selectedStorage storageData=storageData click=(action "SideData" storage) }}
 					{{/each}}
 				</div>
 			{{else}}
@@ -34,5 +34,5 @@
 	</div>
 </div>
 <div class="col-sm-3 content-right">
-	{{dojos/infrastructure/storages/storage-side model=storageData storagespool=storagespool doStorageReload="doStorageReload" modelSpinner=modelSpinner}}
+	{{dojos/infrastructure/storages/single-detail model=storageData storagespool=storagespool doStorageReload="doStorageReload" modelSpinner=modelSpinner}}
 </div>
