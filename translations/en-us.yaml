@@ -4,6 +4,7 @@ generic:
   about: About
   actions: Actions
   createdAt: 'Created At'
+  ago: 'Ago'
   description: Description
   emptyString: ""
   enable: Enable

@@ -26,11 +26,11 @@
           <div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
         </div>
         <div class="sd-cdate-detail sd-table">
-          <div class="sd-title">{{t 'generic.createdAt'}}</div>
-          <div class="sd-value">{{createdAt}}</div>
+          <div class="sd-title">{{t 'generic.ago'}}</div>
+          <div class="sd-value">{{format-time createdAt}}</div>
         </div>
       {{else}}
-        <div class="sd-empty-pool">{{t 'stackPage.admin.storage.noStorageData'}}</div>
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.required'}}</div>
       {{/if}}
     </div>
   </div>
@@ -53,7 +53,7 @@
       <div class="sd-link sdpool-link">
         <a href="#pooladd" {{action "openModal"}}>{{t 'dojos.infrastructure.storages.pools.addPool'}}</a></div>
       {{#if count}}
-        <div class="sd-empty-pool">{{t 'stackPage.admin.storage.pool.noPool'}}</div>
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.pools.required'}}</div>
       {{else}}
         {{#each pools as |pool|}}
           {{dojos/infrastructure/storages/single-detail/pool-list pool=pool }}
@@ -78,7 +78,7 @@
 
     <div id="disks" class="collapse-boarder {{enabler_disk}}">
       {{#if diskSize}}
-        <div class="sd-empty-pool">{{t 'stackPage.admin.storage.disk.noDisk'}}</div>
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.disks.required'}}</div>
       {{else}}
         {{#each disks as |disk|}}
           {{dojos/infrastructure/storages/single-detail/storage-disk disk=disk storageData=storageData }}
