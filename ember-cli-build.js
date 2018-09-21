@@ -105,5 +105,11 @@ module.exports = function(defaults) {
 
   app.import('node_modules/@bower_components/bootstrap/dist/js/bootstrap.js');
 
+  app.import('node_modules/@sentry/browser/dist/index.js', {
+    using: [
+      { transformation: 'cjs', as: '@sentry/browser' }
+  ]
+  });
+
   return app.toTree();
 };
