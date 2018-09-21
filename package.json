@@ -15,7 +15,7 @@
     "build": "./node_modules/.bin/ember build",
     "test": "./node_modules/.bin/ember test --reporter dot"
   },
-  "repository": "https://gitlab.com/rioos/commmandcenter_v2",
+  "repository": "https://gitlab.com/rioos/commmandcenter.git",
   "engines": {
     "node": ">= 8.0",
     "yarn": ">= 1.9.0"
@@ -44,6 +44,7 @@
     "ember-cli-app-version": "~3.2.0",
     "ember-cli-autoprefixer": "0.8.1",
     "ember-cli-babel": "^6.16.1",
+    "ember-cli-cjs-transform": "^1.3.0",
     "ember-cli-bootstrap-sassy": "^0.5.8",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-dependency-checker": "^2.1.1",
@@ -93,6 +94,7 @@
     "javascript-obfuscator": "^0.17.0",
     "lacsso": "0.0.59",
     "loader.js": "^4.7.0",
+    "@sentry/browser" : "^4.0.3",
     "semver": "^5.5.0",
     "testem": "2.8.2",
     "validator": "10.4.0",
