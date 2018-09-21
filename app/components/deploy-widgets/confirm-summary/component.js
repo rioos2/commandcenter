@@ -96,7 +96,6 @@ export default Component.extend(DefaultHeaders, NewOrEdit, {
       var id = get(this, 'session').get('id');
 
       set(this, 'machinefactory.object_meta.account', id);
-
       this.resourceUpdate();
       this.send('save', (success) =>  {
         set(this, 'showSpinner', true);

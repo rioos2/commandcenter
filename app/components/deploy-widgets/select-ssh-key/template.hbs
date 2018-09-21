@@ -1,0 +1,29 @@
+<div class="row generate">
+  <div class="g-left row">
+    <div class="col-md-9">
+      <p class="title">{{t 'launcherPage.secret.title'}}</p>
+      <div class="rio-selectbtn row">
+        {{#each secretTypes as |key|}}
+          {{deploy-widgets/generate-secret-pair secretType=secretType getSecretType="getSecretType" settings=settings activate=activate key=key}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-md-3">
+      <p class="title">{{t 'launcherPage.secret.bitkey'}}</p>
+      <p class="bits-key">
+        {{bitsInKey}}
+      </p>
+    </div>
+  </div>
+
+  <div class="g-right">
+    {{stack-launch-spinner size=25 showSpinner=showSpinner}}
+    {{#unless showSpinner}}
+      {{#if doneCreate}}
+        {{svg/svg-generate class="generated"}}
+      {{else}}
+        {{svg/svg-generate click=(action "createSecret")}}
+      {{/if}}
+    {{/unless}}
+  </div>
+</div>

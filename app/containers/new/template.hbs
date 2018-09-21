@@ -3,15 +3,14 @@
         {{#link-to "infrastructure-tab.data-center"}}<img class="logo-img" src="assets/images/logo2.png">{{/link-to}}
         <div class="col-container">
             <div class="col-right">
-                {{deploy-widgets/select-compute-type class="cloud-type cblock" model=model}}
-                {{deploy-widgets/select-domain class="select-domain cblock" model=model}}
-                {{deploy-widgets/select-location class="select-location cblock" model=model}}
-                {{deploy-widgets/select-compute-resources class="cloud-performance cblock" model=model}}
-                {{deploy-widgets/appstore-containers class="server-os cblock" model=model}}
-                {{deploy-widgets/select-network class="networking cblock" model=model}}
-                {{scaling/cloud-scaling class="cloud-performance cblock" model=model }}
-                {{deploy-widgets/confirm-summary class="summary cblock" model=model networking=model.networking}}
-                {{page-footer}}
+              {{deploy-widgets/select-compute-type class="cloud-type cblock" stacksfactory=stacksfactory}}
+              {{deploy-widgets/select-domain class="select-domain cblock" stacksfactory=stacksfactory settings=settings secret=secret}}
+              {{deploy-widgets/select-location class="select-location cblock" stacksfactory=stacksfactory datacenters=datacenters}}
+              {{deploy-widgets/select-compute-resources class="cloud-performance cblock" stacksfactory=stacksfactory}}
+              {{deploy-widgets/appstore-machines class="server-os cblock" selectedIcon=selectedIcon stacksfactory=stacksfactory settings=settings plans=plans}}
+              {{deploy-widgets/select-network class="networking cblock" stacksfactory=stacksfactory networks=networks datacenters=datacenters}}
+              {{deploy-widgets/confirm-summary class="summary cblock" model=stacksfactory selectedIcon=selectedIcon networking=model.networking}}
+              {{page-footer}}
             </div>
         </div>
     </div>

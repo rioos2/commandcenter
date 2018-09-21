@@ -41,10 +41,3 @@ export default  EmberObject.extend({
   },
 
 });
-
-
-
-
-
-
-
