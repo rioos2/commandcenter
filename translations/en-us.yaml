@@ -441,6 +441,7 @@ launcherPage:
     subtitle: 'Generate a self signed certificate.'
     bitkey: 'BITS IN KEY'
     success: 'Secret key generated successfully.'
+    required: 'Select secret type'
   location:
     title: 'Select Location'
     required: 'You forgot to select a location'
@@ -611,4 +612,3 @@ validation:
     min: '"{key}" should be at least {val}'
     max: '"{key}" should be at most {val}'
   chars: '"{key}" contains {count, plural, =1 {an invalid character} other {# invalid characters}}: {chars}'
-

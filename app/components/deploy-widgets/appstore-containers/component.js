@@ -1,18 +1,31 @@
-import { get } from '@ember/object';
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { isEmpty } from '@ember/utils';
+import {
+  inject as service
+} from '@ember/service';
+import {
+  isEmpty
+} from '@ember/utils';
 import C from 'nilavu/utils/constants';
+import {
+  alias
+} from '@ember/object/computed';
+import {
+  get,
+  set,
+  computed
+} from '@ember/object';
 
 export default Component.extend({
-  intl:          service(),
+  intl: service(),
   notifications: service('notification-messages'),
-  store:         service(),
+  store: service(),
+  activate: false,
 
-  activate:   false,
-  groupedVms: function() {
+  stacksfactoryResources: alias('stacksfactory.resources'),
+
+  groupedVms: computed('plans', function() {
     return this.groupingVms();
-  }.property('model.plans'),
+  }),
 
   didInsertElement() {
     this.checkPlanEmpty();
@@ -20,22 +33,22 @@ export default Component.extend({
       let item_found = false;
 
       this.get('groupedVms').forEach((e) => {
-        if (e.type === this.get('model.stacksfactory.os')) {
+        if (e.type === this.get('stacksfactory.os')) {
           e.version.forEach((v) => {
-            if (v.version === this.get('model.stacksfactory.resources.version')) {
+            if (v.version === this.get('stacksfactoryResources.version')) {
               item_found = true;
               this.refreshPlan(e, v);
             }
           });
         }
       });
-      if (!item_found){
+      if (!item_found) {
         this.setFirstPlanFactory();
       }
     } else {
-      this.set('model.stacksfactory.os', '');
-      this.set('model.stacksfactory.plan', '');
-      this.set('model.stacksfactory.resources.version', '');
+      this.set('stacksfactory.os', '');
+      this.set('stacksfactory.plan', '');
+      this.set('stacksfactoryResources.version', '');
     }
   },
 
@@ -44,7 +57,7 @@ export default Component.extend({
     refreshAfterSelect(item) {
       this.set('selected', item);
       this.setDescription(item);
-      this.set('model.stacksfactory.current_os_tab', item.type);
+      this.set('stacksfactory.current_os_tab', item.type);
       this.toggleProperty('activate');
     },
 
@@ -68,7 +81,7 @@ export default Component.extend({
       }
     },
 
-    stepDone(){
+    stepDone() {
       this.sendAction('done', 'step5');
     },
   },
@@ -82,23 +95,22 @@ export default Component.extend({
   },
 
   refreshPlan(plan, planFirstItem) {
-    this.set('model.stacksfactory.os', planFirstItem.type);
-    this.set('model.stacksfactory.plan', planFirstItem.id);
-    this.set('model.stacksfactory.resources.version', planFirstItem.version);
+    this.set('stacksfactory.os', planFirstItem.type);
+    this.set('stacksfactory.plan', planFirstItem.id);
+    this.set('stacksfactoryResources.version', planFirstItem.version);
     this.send('refreshAfterSelect', plan);
   },
 
   setIcon(plan) {
-
-    this.set('model.selected_icon', plan.icon);
+    this.set('selectedIcon', plan.icon);
   },
 
-  checkPlanEmpty(){
-    if (isEmpty(this.get('groupedVms'))){
+  checkPlanEmpty() {
+    if (isEmpty(this.get('groupedVms'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
-        autoClear:     true,
+        autoClear: true,
         clearDuration: 6000,
-        cssClasses:    'notification-warning'
+        cssClasses: 'notification-warning'
       });
     }
   },
@@ -107,8 +119,7 @@ export default Component.extend({
     var planGroup = [];
     var uniqueVmGroup = [];
     var groupVms = [];
-    var planfactory = this.get('model.plans.content');
-
+    var planfactory = this.get('plans.content');
     planfactory.forEach((plan) => {
       if (plan.category.toLowerCase() === C.CATEGORIES.CONTAINER && plan.status.phase.toLowerCase() === C.PHASE.READY) {
         planGroup.pushObject(plan.object_meta.name);
@@ -119,10 +130,10 @@ export default Component.extend({
     });
     uniqueVmGroup.forEach((vm) => {
       let createVmGroup = {
-        'type':    vm,
-        'icon':    '',
+        'type': vm,
+        'icon': '',
         'version': [],
-        'item':    []
+        'item': []
       }
 
       planfactory.forEach((plan) => {
@@ -130,10 +141,10 @@ export default Component.extend({
           createVmGroup.item.pushObject(plan);
           createVmGroup.icon = plan.icon;
           createVmGroup.version.pushObject({
-            'version':     plan.version,
-            'id':          plan.id,
-            'type':        plan.object_meta.name,
-            'icon':        plan.icon,
+            'version': plan.version,
+            'id': plan.id,
+            'type': plan.object_meta.name,
+            'icon': plan.icon,
             'description': plan.description
           });
         }
@@ -156,20 +167,20 @@ export default Component.extend({
   setPlan(plan) {
     let planFirstItem = plan.version[0];
 
-    this.set('model.stacksfactory.os', planFirstItem.type);
-    this.set('model.stacksfactory.plan', planFirstItem.id);
-    this.set('model.stacksfactory.resources.version', planFirstItem.version);
+    this.set('stacksfactory.os', planFirstItem.type);
+    this.set('stacksfactory.plan', planFirstItem.id);
+    this.set('stacksfactoryResources.version', planFirstItem.version);
   },
 
   setDescription(item) {
     let des = (item.version.get('firstObject')).description
 
     item.version.forEach((v) => {
-      if (v.id === this.get('model.stacksfactory.plan')) {
+      if (v.id === this.get('stacksfactory.plan')) {
         des = v.description;
       }
     });
-    this.set('model.distro_description', des);
+    this.set('distroDescription', des);
   },
 
 });

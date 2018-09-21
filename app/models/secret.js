@@ -12,7 +12,7 @@ var Secret = Resource.extend({
   validationErrors() {
 
     if (isEmpty(get(this, 'secret_type'))) {
-      return get(this, 'intl').t('notifications.secret');
+      return get(this, 'intl').t('launcherPage.secret.required');
     } else {
       return '';
     }

@@ -2,7 +2,7 @@
 <p class="sub-description">{{t 'launcherPage.appstore.machine.subtitle'}}</p>
 
 <div class="row p-t-40">
-    {{deploy-widgets/select-appstore-item model=model selected=selected stepDone="stepDone"}}
+    {{deploy-widgets/select-appstore-item stacksfactory=stacksfactory distroDescription=distroDescription selected=selected stepDone="stepDone"}}
 </div>
 
 <div class="row">
@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-10 os-content">
         {{#each groupedVms as |vm|}}
-        {{svg/svg-os model=model refreshAfterAction="refreshAfterSelect" activate=activate vm=vm}}
+        {{svg/svg-os stacksfactory=stacksfactory settings=settings refreshAfterAction="refreshAfterSelect" activate=activate vm=vm}}
         {{/each}}
     </div>
 </div>
