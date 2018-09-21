@@ -1052,7 +1052,6 @@ nav:
     tab2:
       index:                          Team
     show:
-<<<<<<< HEAD
       selectTeam:                     'Switch team:'
       createdAt:                      Created At
       account:                        Account ID
@@ -1060,14 +1059,6 @@ nav:
       status:                         success
       count:                          origins
       add:                            + Add
-=======
-      selectTeam: 'Switch team:'
-      createdAt: Created At
-      account: Account
-      emptyBtn: +Add origin
-      count: origins
-      add: + Add
->>>>>>> origin/2-0-stable
     index:
       name:                           Organizations
   team:
@@ -1112,7 +1103,6 @@ nav:
 # Resource Actions
 ##############################
 action:
-<<<<<<< HEAD
   activate:                           Activate
   backup:                             Backup Snapshot
   deleteBackup:                       Delete Backup
@@ -1161,60 +1151,10 @@ action:
   retryInstallNode:                   Retry Install
   view:                               View
   switch:                             Switch
-=======
-  activate: Activate
-  backup: Backup Snapshot
-  deleteBackup: Delete Backup
-  cancelUpgrade: Cancel Upgrade
-  cancelRollback: Cancel Rollback
-  clone: Clone
-  console: Open Console
-  deactivate: Deactivate
-  edit: Edit
-  evacuate: Evacuate
-  execute: Execute Shell
-  exportConfig: Export Config
-  finishUpgrade: Finish Upgrade
-  logs: View Logs
-  machineConfig: Machine Config
-  purge: Purge
-  remove: Delete
-  replay: Replay
-  restart: Restart
-  restore: Restore
-  retry: Retry
-  rollback: Rollback
-  revertToSnapshot: Revert Volume to Snapshot
-  restoreFromBackup: Restore Volume from Backup
-  setDefault: Set as Default
-  snapshot: Snapshot
-  start: Start
-  startServices: Start Services
-  stop: Stop
-  stopServices: Stop Services
-  switchNamespace: Switch to this Namespace
-  switchEnvironment: Switch to this Environment
-  upgrade: Upgrade
-  upgradeOrEdit: Upgrade/Edit
-  viewConfig: View Config
-  viewGraph: View Graph
-  viewInApi: View in API
-  viewInstance: View Instance
-  downloadSecret: Download secret
-  showQRcode: Show QR code
-  externalUrl: Open UI
-  nodeEdit: Edit node
-  nodeInstall: Install node
-  createSecret: Create Secret
-  installNode: Install
-  retryInstallNode: Retry Install
-  view: View
-  switch: Switch
   makeAdmin: Make Admin
   makeSuspend: Suspend
   revokeAdmin: Revoke Admin
   revokeSuspend: Revoke Suspend
->>>>>>> origin/2-0-stable
 
 ##############################
 # Resource Actions
