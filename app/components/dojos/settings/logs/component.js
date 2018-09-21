@@ -2,6 +2,7 @@ import { isEmpty } from '@ember/utils';
 import { buildSettingPanel } from '../basic-panel/component';
 import { get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { formatTime } from 'nilavu/helpers/format-time';
 
 export default buildSettingPanel('logs', {
 
@@ -17,7 +18,7 @@ export default buildSettingPanel('logs', {
     if (!isEmpty(data)) {
       data.forEach((e) => {
         if (e.time) {
-          e.time = this.auditedTimestamp(e.time);
+          e.time = formatTime([e.time]);
         }
       });
     }
@@ -42,7 +43,4 @@ export default buildSettingPanel('logs', {
     }];
   }),
 
-  auditedTimestamp(date) {
-    return moment(date).utcOffset(date).format('MMM DD YYYY, h:mm:ss a').toString();
-  },
 });

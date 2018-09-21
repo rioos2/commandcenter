@@ -24,34 +24,12 @@ export default Controller.extend({
     return `data:image/png;base64,${  myPicture }`;
   }),
 
-
   createdAt: computed('profile.object_meta.created_at', function() {
-    if (get(this, 'profile.object_meta.created_at')) {
-      return this.profileTimestamp(get(this, 'profile.object_meta.created_at'));
-    }
-
-    return ' ';
+    return get(this, 'profile.object_meta.created_at');
   }),
-
-  // createdAt: computed('profile.object_meta.created_at', function() {
-  //   return get(this, 'profile.object_meta.created_at');
-  // }),
 
   myAuthority: computed('profile.is_admin', function() {
     return get(this, 'profile.is_admin') ? C.ACCOUNT.AUTHORITY_AS_STRING.ADMIN : C.ACCOUNT.AUTHORITY_AS_STRING.NOT_ADMIN;
   }),
-
-
-  memberShipStatus: computed('profileLables.rioos_sh_membership_status', function() {
-    if (get(this, 'profileLables.rioos_sh_membership_status')) {
-      return get(this, 'profileLables.rioos_sh_membership_status');
-    }
-
-    return C.ACCOUNT.MEMBERSHIPSTATUS.MEMBERSHIPSTATUSREGISTERED;
-  }),
-
-  profileTimestamp(date) {
-    return moment(date).utcOffset(date).format('MMM DD, YYYY').toString();
-  },
 
 });

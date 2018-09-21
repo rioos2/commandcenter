@@ -13,7 +13,7 @@ export default Route.extend(DefaultHeaders, {
     return hash({
       profile:  this.get('store').find('account', null, this.opts(`accounts/${  this.get('session').get('id') }`)),
       sessions: this.get('store').find('session', null, this.opts('sessions')),
-      events:   this.get('store').find('event', null, this.opts('events')),
+      // events:   this.get('store').find('event', null, this.opts('events')),
     });
   },
 

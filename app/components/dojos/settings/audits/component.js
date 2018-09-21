@@ -3,6 +3,8 @@ import { buildSettingPanel } from '../basic-panel/component';
 import { alias } from '@ember/object/computed';
 import { get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { formatTime } from 'nilavu/helpers/format-time';
+
 
 export default buildSettingPanel('audits', {
 
@@ -20,7 +22,7 @@ export default buildSettingPanel('audits', {
     if (!isEmpty(data)) {
       data.forEach((e) => {
         if (e.envelope.timestamp) {
-          e.envelope.timestamp = this.auditedTimestamp(e.envelope.timestamp);
+          e.envelope.timestamp = formatTime([e.envelope.timestamp]);
         }
       });
     }
@@ -51,8 +53,4 @@ export default buildSettingPanel('audits', {
       sortable:       true,
     }];
   }),
-
-  auditedTimestamp(date) {
-    return moment(date).utcOffset(date).format('MMM DD YYYY, h:mm:ss a').toString();
-  },
 });

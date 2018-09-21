@@ -18,13 +18,6 @@ export default Component.extend({
     return (this.get('name') === this.get('currentOrigin')) ? this.get('intl').t('generic.statusSeleted') : this.get('intl').t('generic.statusNotSeleted');
   }),
 
-  hoursAgo: computed('createdAt', function() {
-    const date = this.get('createdAt');
-
-    return moment(this.get(date)).utcOffset(date).format('MMM DD, YYYY').toString();
-
-  }),
-
   currentOrigin: computed('tab-session', function() {
     return this.get('tab-session').get(C.TABSESSION.ORGANIZATION);
   }),

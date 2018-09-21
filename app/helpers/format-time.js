@@ -1,10 +1,17 @@
+import { helper as buildHelper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/string';
-import { helper } from '@ember/component/helper';
-import timeAgoInWords from 'nilavu/utils/time-ago-in-words';
 
-export default helper((params) => {
-  const [time] = params;
-  const timeText = timeAgoInWords(time) || '-';
+export function formatTime([params]) {
+  const timeText = params;
 
-  return new htmlSafe(timeText);
-});
+  if (timeText) {
+
+    let date = moment(timeText).utcOffset(timeText);
+
+    return new htmlSafe(`<span>${ date.format('MMM DD') } (${ date.fromNow() })<span>`);
+  }
+
+  return '';
+}
+
+export default buildHelper(formatTime);

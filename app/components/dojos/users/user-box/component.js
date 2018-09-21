@@ -20,10 +20,4 @@ export default Component.extend({
     return state;
   }),
 
-  createdAt: computed('objectMeta.created_at', function() {
-    const date = this.get('objectMeta.created_at');
-
-    return moment(date).utcOffset(date).format('MMM DD, YYYY').toString();
-  }),
-
 });
