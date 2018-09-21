@@ -1,0 +1,13 @@
+{{#if hasLogs}}
+<div class="empty-event">
+  <div class="pin-img">
+    <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+  </div>
+  <div class="error-msg">
+    <span>{{t 'profile.events.required'}}</span>
+  </div>
+</div>
+{{else}}
+<br>
+{{scrollable-table model=tableData columns=columns class="info-table"}}
+{{/if}}

@@ -1,0 +1,41 @@
+  <div class="team-box left">
+    <div class="domain">
+      <div class="icon status" data-tooltip="{{memberStatus}}">
+        {{svg/svg-status status=memberStyle}}
+      </div>
+      <p class="text1"> {{t 'generic.email'}}</p>
+      <p class="text2">{{model.email}}</p>
+      <div class="pull-right st-pin">
+        <div class="team-action">
+          {{action-menu model=model}}
+        </div>
+      </div>
+    </div>
+    <div class="ip">
+      <div class="icon">
+        {{fa-icon "tasks"}}
+      </div>
+      <p class="text1">{{t 'generic.status'}}</p>
+      <p class="text2">
+        <div class="form-group riolabel">
+          {{#if user.suspend}}
+          <span class="label ptop-5 error">{{t 'account.userManagement.suspend.title'}}</span>
+          {{else}}
+          <span class="label ptop-5 success">{{t 'account.userManagement.active'}}</span>
+          {{/if}}
+          {{#if user.is_admin}}
+          <span class="label ptop-5 success-green">{{t 'account.userManagement.admin.title'}}</span>
+          {{/if}}
+        </div>
+
+      </p>
+    </div>
+    <div class="location">
+      <div class="icon">
+        {{fa-icon "tag"}}
+      </div>
+      <p class="text1">{{t 'generic.ago'}}</p>
+      <p class="text2">{{format-time objectMeta.created_at}}</p>
+    </div>
+
+  </div>

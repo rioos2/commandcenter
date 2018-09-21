@@ -65,8 +65,12 @@ var C = {
       MEMBERSHIPSTATUSREGISTERED:   'Registered',
       MEMBERSHIPSTATUSCERTIFICATED: 'Certified',
     },
-    ROLES:  { SUPERUSER: 'RIOOS:SUPERUSER', },
-    STATES: ['approval', 'suspend'],
+    ROLES:               { SUPERUSER: 'RIOOS:SUPERUSER', },
+    STATES:              ['approval', 'suspend'],
+    AUTHORITY_AS_STRING: {
+      ADMIN:     'Admin',
+      NOT_ADMIN: 'User',
+    },
   },
 
   /* --------  The section  that has  various  builtin telemetry specifications   ----*/

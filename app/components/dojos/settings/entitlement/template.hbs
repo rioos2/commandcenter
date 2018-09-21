@@ -1,0 +1,13 @@
+<div class="col-sm-12 content-left activate">
+	<div class="panel panel-default kv-panel">
+		{{#if modelSpinner}}
+			<div class="spinner infra-spinner">
+				{{stack-launch-spinner size=25 showSpinner=true}}
+			</div>
+		{{else}}
+			{{#each licenses as |license|}}
+				{{dojos/settings/entitlement/license-information model=license showInnerSpinner=modelSpinner doReload="doReload"}}
+			{{/each}}
+		{{/if}}
+	</div>
+</div>

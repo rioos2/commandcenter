@@ -1,0 +1,50 @@
+<div class="modal fade" id="storage_edit" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">{{t 'dojos.infrastructure.storages.details.edit'}}</h4>
+			</div>
+      <div class="modal-body">
+        <form action="#">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!-- name -->
+                <label for="storage_name">{{t 'generic.name'}}</label> {{input type="text" class="form-control " id="storage_name" value=name}}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!-- storage_type -->
+                <label for="storage_type">{{t 'dojos.infrastructure.storages.details.type'}}</label> {{input type="text" class="form-control disabled" id="storage_type" value=type}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!-- host_ip -->
+                <label for="storage_host_ip">{{t 'dojos.infrastructure.storages.details.ip'}}</label> {{input type="text" class="form-control disabled" id="storage_host_ip" value=hostIp}}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <!-- status -->
+                <label for="storage_status">{{t 'generic.status'}}</label> {{input type="text" class="form-control disabled" id="storage_status" value=status}}
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" {{action 'editStorage'}} class="btn btn-default">
+            {{t 'actions.save'}}
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

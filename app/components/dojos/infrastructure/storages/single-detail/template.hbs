@@ -1,0 +1,90 @@
+{{dojos/infrastructure/storages/single-detail/modal-storage-edit model=model modelSpinner=modelSpinner doReloaded="doReloaded"}}
+<div class="storage-detail-container">
+  <div class="storage-detail-box" id="sd_detail1">
+    <div class="storage-active-detail-name">
+      {{#if storageAvailable}}{{name}}
+        <span class="storage-edit">
+          <a href="#storage_edit" {{action "openEditModal"}}>
+            {{t 'actions.edit'}}</a>
+          </span>
+      {{else}}&nbsp;{{/if}}
+    </div>
+    <div class="storage-active-detail-detail">
+      <div class="sd-subheader">{{t 'dojos.infrastructure.storages.details.title'}}</div>
+      {{#if storageAvailable}}
+
+        <div class="sd-ip-detail sd-table">
+          <div class="sd-title">{{t 'dojos.infrastructure.storages.details.ip'}}</div>
+          <div class="sd-value">{{ip}}</div>
+        </div>
+        <div class="sd-type-detail sd-table">
+          <div class="sd-title">{{t 'dojos.infrastructure.storages.details.type'}}</div>
+          <div class="sd-value">{{type}}</div>
+        </div>
+        <div class="sd-status-detail sd-table">
+          <div class="sd-title">{{t 'dojos.infrastructure.ninjas.details.bridges.status'}}</div>
+          <div class="sd-value {{show-status-bulp  status }}">{{status}}</div>
+        </div>
+        <div class="sd-cdate-detail sd-table">
+          <div class="sd-title">{{t 'generic.ago'}}</div>
+          <div class="sd-value">{{format-time createdAt}}</div>
+        </div>
+      {{else}}
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.required'}}</div>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="storage-active-detail-pools">
+    <div data-target="#pools" aria-expanded= {{ariaEexpanded_pool}} class= {{collapsed_pool}}>
+
+      <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_pool'}}>
+        <div class="sd-title leader">{{t 'dojos.infrastructure.storages.pools.title'}}</div>
+        {{#if ariaEexpanded_pool}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
+        {{else}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
+
+        {{/if}}
+      </div>
+    </div>
+
+    <div id="pools" class="collapse-boarder {{enabler_pool}}">
+      <div class="sd-link sdpool-link">
+        <a href="#pooladd" {{action "openModal"}}>{{t 'dojos.infrastructure.storages.pools.addPool'}}</a></div>
+      {{#if count}}
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.pools.required'}}</div>
+      {{else}}
+        {{#each pools as |pool|}}
+          {{dojos/infrastructure/storages/single-detail/pool-list pool=pool }}
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="storage-active-detail-disks">
+    <div data-target="#disks" aria-expanded= {{ariaEexpanded_disk}} class= {{collapsed_disk}}>
+
+      <div class="sd-disk-name sd-table collapse-thm" {{action 'collapse_disk'}}>
+        <div class="sd-title leader">{{t 'dojos.infrastructure.storages.disks.title'}}</div>
+        {{#if ariaEexpanded_disk}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-up"}}</span>
+        {{else}}
+          <span class="sd-disk-collapse-icon">{{fa-icon "chevron-circle-down"}}</span>
+
+        {{/if}}
+      </div>
+    </div>
+
+    <div id="disks" class="collapse-boarder {{enabler_disk}}">
+      {{#if diskSize}}
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.storages.disks.required'}}</div>
+      {{else}}
+        {{#each disks as |disk|}}
+          {{dojos/infrastructure/storages/single-detail/storage-disk disk=disk storageData=storageData }}
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+
+</div>

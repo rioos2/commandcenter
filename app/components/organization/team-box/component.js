@@ -24,11 +24,4 @@ export default Component.extend({
     return this.get('tab-session').get(C.TABSESSION.TEAM);
   }),
 
-  hoursAgo: computed('createdAt', function() {
-    const date = this.get('createdAt');
-
-    return moment(this.get(date)).utcOffset(date).format('MMM DD, YYYY').toString();
-
-  }),
-
 });
