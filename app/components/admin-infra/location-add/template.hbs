@@ -36,7 +36,7 @@
 								<div class="form-group">
 									<label for="modal_cluster_currency">{{t 'stackPage.admin.locations.add_city'}}</label>
 									{{#if innerSpinner}}
-
+									<i class="fa fa-circle-o-notch fa-spin"></i>
 									{{else}}
 										<select class="form-control" id="cities" name="cities" onchange= {{action "selectCity" value="target.value"}}>
 								  </select>
