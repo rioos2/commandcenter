@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import GeoTools from 'npm:geo-tools'; // eslint-disable-line
+import Cities from 'npm:cities.json'; // eslint-disable-line
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 
@@ -51,10 +51,13 @@ export default Component.extend({
   getCoordinates(x) {
     var f = [];
 
-    geocode(x, (coordinates) => { // eslint-disable-line
-      f.pushObjects([coordinates.lng, coordinates.lat]);
+    let coods = Cities.filter((city) => {
+      return city.name.toLowerCase() === x.toLowerCase();
+    })
 
-    });
+    if (coods){
+      f.pushObjects([coods[0].lng, coods[0].lat]);
+    }
 
     return f;
   },

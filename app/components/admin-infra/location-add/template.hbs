@@ -35,10 +35,12 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label for="modal_cluster_currency">{{t 'stackPage.admin.locations.add_city'}}</label>
-									{{#unless selectingCountry}}
+									{{#if innerSpinner}}
+
+									{{else}}
 										<select class="form-control" id="cities" name="cities" onchange= {{action "selectCity" value="target.value"}}>
 								  </select>
-									{{/unless}}
+									{{/if}}
 								</div>
 							</div>
 						</div>

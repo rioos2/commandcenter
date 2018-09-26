@@ -3,7 +3,8 @@ import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import isoCurreny from 'npm:iso-country-currency';
-import Cities from 'npm:full-countries-cities';
+import Cities from 'npm:cities.json'; // eslint-disable-line
+
 import DefaultHeaders from 'nilavu/mixins/default-headers';
 import flagsISo from 'nilavu/mixins/flags-iso';
 import { htmlSafe } from '@ember/string';
@@ -99,11 +100,11 @@ export default Component.extend(DefaultHeaders, flagsISo, {
     },
 
     selectCountry(isoType) {
+      this.set('innerSpinner', true);
       let info = isoCurreny.getAllInfoByISO(isoType)
-
       this.set('currency', info.currency);
       this.set('country', info.countryName);
-      this.citiesUpdate();
+      this.citiesUpdate(isoType);
     },
 
     updateNodeData(select, data) {
@@ -112,10 +113,21 @@ export default Component.extend(DefaultHeaders, flagsISo, {
 
   },
 
+  citiesUpdate(isoType) {
+    let promise = new Promise((resolve, reject) => {
+      resolve(Cities.filter((c) => {
+        return c.country === isoType;
+      }).map((c) => {
+        return c.name;
+      }))
+    }).then((results) => {
+       this.appendingCities(results);
+    });
+  },
 
-  citiesUpdate() {
-    var cities = this.citiesByCountry();
+  appendingCities(cities) {
     var self = this;
+    this.set('innerSpinner', false);
 
     $(() => {
       var citiesData = cities;
@@ -143,12 +155,6 @@ export default Component.extend(DefaultHeaders, flagsISo, {
         self.set('city', '');
       }
     });
-
-
-  },
-
-  citiesByCountry() {
-    return Cities.getCities(this.get('country'));
   },
 
   storageId(name) {
