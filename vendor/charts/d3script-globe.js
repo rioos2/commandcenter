@@ -284,6 +284,19 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
       .attr('x', attrs.width / 2)
       .attr('y', attrs.height * 3 / 5);
 
+    var tooltip = d3.select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .style("font-size", "12px")
+      .style("color", "#fff")
+      .style("min-width", "80px")
+      .style("border-radius", "5px")
+      .style("pointer-events", "none")
+      .style("background", "rgba(0,0,0,0.7)")
+      .style("text-align", "center");
+
     path.pointRadius((d) => {
       return 10;
     });
@@ -317,6 +330,16 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
         // console.log(d);
         step(d.geometry.coordinates);
         stackfactory.set('object_meta.cluster_name', d.City);
+      })
+      .on("mouseover", function(d) {
+        return tooltip.text(d.City)
+          .style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+        return tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+      })
+      .on("mouseout", function() {
+        return tooltip.style("visibility", "hidden");
       });
 
   });
