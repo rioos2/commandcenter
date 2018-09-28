@@ -506,7 +506,7 @@ launcherPage:
       ipv6:                           IPv6
   summary:
     title:                            Summary
-    subtitle:                         verify preferred system
+    subtitle:                         Verify preferred system
     cloudType:                        Cloud Type
     launch:                           Launch your cloud
     launchThank:                      Thank You
@@ -521,7 +521,7 @@ launcherPage:
     config:
       core:                           Cores
       number:                         Number
-      ram:                            Ram
+      ram:                            RAM
   scaling:
     emptyScaling:                     You forgot to type a resource
     description:                      Select scaling configuration ( Horizontal / vertical )
@@ -726,7 +726,7 @@ logs:
 
 infraPage:
   metric:
-    power:                            "usage -"
+    power:                            "usage "
     percent:                          "%"
 
 confirmDelete:
@@ -1219,3 +1219,4 @@ model:
     min:                              Minimum Scale
     max:                              Maximum Scale
     amount:                           By
+
