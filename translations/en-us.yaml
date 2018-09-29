@@ -72,7 +72,10 @@ guardian:
       noTeam:                         One small step to complete your signup. Add a team in an organization</br> *You can always add teams for an organization later from the profile menu at the top right of your screen
   regular:
     organization:
-      noOrigin:                       One small step to complete your signup.</br>Your account has not been approved by a staff member yet. You will be sent an email when it is approved.
+      noOrigin:                       You must be part of an organization to continue. Contact administrator requesting an invitation.
+      acceptOrigin:                   Your account has not been approved by a staff member yet. (or) you must accept the invitation emailed to you. If you didn't receive an email
+      clickHere:                      Click Here
+      acceptText:                     to accept the invitation by <strong style="color:#3900aa">{accountName}</strong> to join the <em style="color:green">{orgName}</em> organization as a member of the <em style="color:green">{teamName}</em> team.
 
 accountsPage:
   index:

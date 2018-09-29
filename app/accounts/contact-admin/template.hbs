@@ -5,8 +5,14 @@
               <div class="page">
                 <div class="modal-dialog modal-dialog-wizard-step">
                   <div class="modal-content">
-                    <div class="modal-body">
+                    <div class="modal-body">                      
+                      {{#if model.invitation.id}}
+                      <p>{{inviteMsg}}</p>
+                      <a class="admin-hand" style="font-weight: bold;" {{action "accept"}}>{{t 'guardian.regular.organization.clickHere'}}</a>
+                      &nbsp;{{inviteAcceptMsg}}
+                      {{else}}
                       {{msg}}
+                      {{/if}}
                     </div>
                   </div>
                 </div>
