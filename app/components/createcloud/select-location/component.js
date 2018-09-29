@@ -53,14 +53,16 @@ export default Component.extend({
 
   getCoordinates(q) {
     let m = new RioGeo().fillWithGeoInfo(q, 'US');
-    alert(JSON.stringify(m));
-    const lkv = R.pick(['lat', 'lng'], m);
 
-    alert(JSON.stringify(lkv));
-    const latlng = R.values(lkv);
+    const lm =  l =>  R.props(['lat', 'lng'], l);
 
-    alert(JSON.stringify(latlng));
+    const latlng = R.map(lm)(m);
 
+    const b = R.flatten(latlng);
+
+    alert(JSON.stringify(b));
+
+    return b;
 
   },
 

@@ -4615,6 +4615,7 @@ ecc-jsbn@~0.1.1:
 echarts@^4.2.0-rc.1:
   version "4.2.0-rc.1"
   resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.2.0-rc.1.tgz#c76bc392e9d34f914480f8299305f66fa0b79cb7"
+  integrity sha512-zhjpI+iTewF6U9Q9+eGEBTKXpOQe9h1pRoHJMKDw2ppCScQ0UulksqWlVNSE50lriBDJtCx8PNF7Tqa59lv2ag==
   dependencies:
     zrender "4.0.5"
 
@@ -7465,13 +7466,6 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-full-countries-cities@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/full-countries-cities/-/full-countries-cities-0.0.8.tgz#ef3d153f628d4240a4f1c830f5f2aec51fe8a7f0"
-  integrity sha512-PzDeDKuYE2xB291R2MU76Gl+lmOiQio8qctwURgyeP8dvLoQiWXXuSeMs9evI1KI1kPR2b8UlyXRPmEbE+AIDA==
-  dependencies:
-    underscore "^1.8.3"
-
 function-bind@^1.0.2, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
@@ -7530,11 +7524,6 @@ generate-object-property@^1.1.0:
   integrity sha1-nA4cQDCM6AT0eDYYuTf6iPmdUNA=
   dependencies:
     is-property "^1.0.0"
-
-geo-tools@0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/geo-tools/-/geo-tools-0.1.2.tgz#b294d914709d581c8b33dcc3c811b38d3fbe4e13"
-  integrity sha1-spTZFHCdWByLM9zDyBGzjT++ThM=
 
 geoip_from_cities@1.8.0:
   version "1.8.0"
@@ -14701,11 +14690,6 @@ underscore@>=1.8.3:
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
   integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
-underscore@^1.8.3:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.0.tgz#31dbb314cfcc88f169cd3692d9149d81a00a73e4"
-  integrity sha512-4IV1DSSxC1QK48j9ONFK1MoIAKKkbE8i7u55w2R6IqBqbT7A/iG7aZBCR2Bi8piF0Uz+i/MG1aeqLwl/5vqF+A==
-
 union-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.0.tgz#5c71c34cb5bad5dcebe3ea0cd08207ba5aa1aea4"
@@ -15511,3 +15495,4 @@ zip-stream@~0.4.0:
 zrender@4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.5.tgz#6e8f738971ce2cd624aac82b2156729b1c0e5a82"
+  integrity sha512-SintgipGEJPT9Sz2ABRoE4ZD7Yzy7oR7j7KP6H+C9FlbHWnLUfGVK7E8UV27pGwlxAMB0EsnrqhXx5XjAfv/KA==
