@@ -18,8 +18,12 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label for="modal_cluster_currency">{{t 'stackPage.admin.locations.add_country'}}</label>
-									<select class="form-control" id="modal_cluster_storage" name="country" onchange= {{action "selectCountry" value="target.value"}}>
-											</select>
+                  {{searchable-select
+                     content=filteredCountries
+                     sortBy="name.iso"
+                     selected=initialCountry
+                     on-change=(action "countryChanged")
+                     on-search=(action "countryDidChange")}}
 								</div>
 
 								<div class="form-group">
@@ -35,10 +39,16 @@
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label for="modal_cluster_currency">{{t 'stackPage.admin.locations.add_city'}}</label>
-									{{#unless selectingCountry}}
-										<select class="form-control" id="cities" name="cities" onchange= {{action "selectCity" value="target.value"}}>
-								  </select>
-									{{/unless}}
+                  {{searchable-select
+                     content=filteredCities
+                     sortBy="title"
+                     prompt="Type a city"
+                     searchPrompt	="Atleast 3 chars. eg: Chica "
+                     isLoading=isLoadingCity
+                     loadingMessage="Searching..."
+                     on-change=(action "cityChanged")
+                     on-search=(action "cityDidChange")
+                     on-close=(action "clearCitySearches")}}
 								</div>
 							</div>
 						</div>
