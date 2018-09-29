@@ -1,5 +1,6 @@
 import Component from '@ember/component';
-import GeoTools from 'npm:geo-tools'; // eslint-disable-line
+import RioGeo from 'npm:geoip_from_cities';
+import R from 'npm:ramda';
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 
@@ -31,6 +32,8 @@ export default Component.extend({
   getCountry(model) {
     const self = this;
     let features = model.datacenters.content.map((x) => {
+      alert(JSON.stringify(x));
+
       return {
         'type':     'Feature',
         'City':     x.object_meta.name,
@@ -48,15 +51,17 @@ export default Component.extend({
     return country;
   },
 
-  getCoordinates(x) {
-    var f = [];
+  getCoordinates(q) {
+    let m = new RioGeo().fillWithGeoInfo(q, 'US');
+    alert(JSON.stringify(m));
+    const lkv = R.pick(['lat', 'lng'], m);
 
-    geocode(x, (coordinates) => { // eslint-disable-line
-      f.pushObjects([coordinates.lng, coordinates.lat]);
+    alert(JSON.stringify(lkv));
+    const latlng = R.values(lkv);
 
-    });
+    alert(JSON.stringify(latlng));
 
-    return f;
+
   },
 
 });
