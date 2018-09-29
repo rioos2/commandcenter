@@ -1,6 +1,7 @@
 import C from 'nilavu/utils/constants';
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
+import echarts from 'npm:echarts';
 export default Component.extend({
 
   isActive: false,
@@ -9,8 +10,6 @@ export default Component.extend({
   showDropDown: function() {
     return this.get('isActive') ? 'active' : '';
   }.property('isActive'),
-
-
 
   chartData: function() {
     return this.filteredData();
@@ -35,8 +34,7 @@ export default Component.extend({
   }.property('networkBridge'),
 
   changed: function() {
-    this.set('chartData', this.filteredData());
-    this.drawNetworkStatistics();
+    this.buildData(this.filteredData());
   }.observes('selectBridge', 'selected'),
 
   selected: function() {
@@ -45,7 +43,7 @@ export default Component.extend({
 
   didInsertElement() {
     this.send('packetFliper', this.get('selected'));
-    this.drawNetworkStatistics();
+    this.buildData(this.filteredData());
   },
 
   actions: {
@@ -64,43 +62,39 @@ export default Component.extend({
     },
 
   },
-  drawNetworkStatistics() {
-    var self = this;
 
-    google.charts.load('current', { 'packages': ['corechart'] }); // eslint-disable-line
-    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
+  buildData(data) {
+    let myChart = echarts.init(document.getElementById(`id-${  this.get('model').id  }${ this.get('nodeType') }`));
+    // specify chart configuration item and data
+    let option = {
+      title: {
+        text:      'Network Speed',
+        subtext:   'MB per second',
+        x:         'center',
+        textStyle: {
+          color:      '#5c5e75',
+          fontWeight: 'normal',
+          fontSize:   15
+        }
+      },
+      tooltip: { trigger: 'axis'  },
+      color:   ['#2192C8', '#17BDD2', '#3AE0C4', '#96EBBC', '#F8E06F', '#FF9997', '#EE5E8E', '#ED5293', '#D3359A',  '#E57FBB', '#E2B0E7', '#A670DD', '#7D50D1', '#A5A7EF'],
+      grid:    {
+        left:         '3%',
+        t:            '4%',
+        bottom:       '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        data: data.labels,
+      },
+      yAxis:  { type: 'value' },
+      series: data.data,
+    };
 
-    function drawChart() {
-      if (self.get('networkBridgeEmpty')) {
-        self.set('chartData', self.setEmpty());
-      }
-      var data = google.visualization.arrayToDataTable(self.get('chartData')); // eslint-disable-line
-
-      var options = {
-        title: 'Network Speed',
-        hAxis: {
-          title:          'Time',
-          titleTextStyle: { color: '#333' },
-          girdlines:      {
-            color: '#333',
-            count: 4
-          },
-        },
-        vAxis: {
-          minValue: 0,
-          title:    'MB per second',
-
-        },
-        height: 320,
-        width:  460,
-        colors: ['#CC9008', '#AA38E6'],
-
-      };
-
-      var chart = new google.visualization.AreaChart(document.getElementById(`id-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
-
-      chart.draw(data, options);
-    }
+    // use configuration item and data specified to show chart
+    myChart.setOption(option);
   },
 
   filteredData() {
@@ -113,39 +107,82 @@ export default Component.extend({
   },
 
   networkThroughput() {
-    let throughput = [
-      ['Date', 'Download', 'Upload']
-    ];
+
+    let labels = [];
+    let downloadData = [];
+    let uploadData = [];
 
     this.get('model.network').forEach((n) => {
       if (n.name === this.get('selectBridge')) {
         n.throughput.forEach((t) => {
-          throughput.push(t);
+          labels.push(t[0]);
+          downloadData.push(t[1]);
+          uploadData.push(t[2]);
         });
       }
     });
 
-    return throughput;
+    return {
+      labels,
+      data: [
+        {
+          name: 'Upload',
+          type: 'line',
+          step: 'start',
+          data: uploadData
+        },
+        {
+          name: 'Download',
+          type: 'line',
+          step: 'middle',
+          data: downloadData
+        }
+      ]
+    };
   },
 
   networkError() {
-    let error = [
-      ['Date', 'Download', 'Upload']
-    ];
+    let labels = [];
+    let downloadData = [];
+    let uploadData = [];
 
     this.get('model.network').forEach((n) => {
       if (n.name === this.get('selectBridge')) {
         n.error.forEach((t) => {
-          error.push(t);
+          labels.push(t[0]);
+          downloadData.push(t[1]);
+          uploadData.push(t[2]);
         });
       }
     });
 
-    return error;
+    return {
+      labels,
+      data: [
+        {
+          name: 'Upload',
+          type: 'line',
+          step: 'start',
+          data: uploadData
+        },
+        {
+          name: 'Download',
+          type: 'line',
+          step: 'middle',
+          data: downloadData
+        }
+      ]
+    };
   },
 
   setEmpty() {
-    return [['Year', 'Download', 'Upload'], ['0', 0, 0]];
+    return [{
+      name: 'Upload',
+      data: []
+    }, {
+      name: 'Download',
+      data: []
+    }];
   },
 
 });
