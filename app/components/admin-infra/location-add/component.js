@@ -175,7 +175,6 @@ export default Component.extend(DefaultHeaders, {
 
   },
 
-
   storageId(name) {
     let id;
 

@@ -24,7 +24,7 @@ export default Component.extend({
   willRender() {
     var icon = this.get('icon');
 
-    if ( icon.indexOf('icon-') === -1 ) {
+    if ( icon && icon.indexOf('icon-') === -1 ) {
       this.set('prefix', 'icon icon-fw');
     }
   },
