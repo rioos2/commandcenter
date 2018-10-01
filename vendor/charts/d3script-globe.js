@@ -38,7 +38,7 @@ function renderGlobeChart(params, notifications) {
         step(coord);
         exists = true;
         svg.select('g').selectAll('path.cities').select('animate').remove();
-        svg.select('g').select(`path# ${  locationlist[x].City }` ).append('animate')
+        svg.select("g").select("path#" + locationlist[x].City.trim()).append("animate")
           .attr('attributeName', 'stroke-width')
           .attr('begin', '0s')
           .attr('dur', '1s')
@@ -48,18 +48,18 @@ function renderGlobeChart(params, notifications) {
       }
     }
     if (y.length !== 0) {
-      notifications.warning(`Globe navigated to  + ${ y } . Select  ${ y } to confirm `, {
-        autoClear:     true,
+      notifications.warning(`Globe navigated to  ${ y } . Select  ${ y } to confirm `, {
+        autoClear: true,
         clearDuration: 4200,
-        cssClasses:    'notification-success'
+        cssClasses: 'notification-success'
       });
     }
 
     if (exists === false) {
       notifications.warning("We don't have a data center near your location", {
-        autoClear:     true,
+        autoClear: true,
         clearDuration: 4200,
-        cssClasses:    'notification-success'
+        cssClasses: 'notification-success'
       });
     }
   }
@@ -80,7 +80,7 @@ function renderGlobeChart(params, notifications) {
   var velocity = [.015, -0];
 
   var centroid = d3.geoPath()
-    .projection( function(d) {
+    .projection(function(d) {
       return d;
     })
     .centroid;
