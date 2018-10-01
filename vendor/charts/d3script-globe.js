@@ -29,35 +29,37 @@ function renderGlobeChart(params, notifications) {
     var y = [];
     var exists = false;
     var x;
+
     for (x = 0; x < locationlist.length; x++) {
       var coord = locationlist[x].geometry.coordinates;
+
       if (Math.abs(currlong - coord[0]) < 10 && Math.abs(currlat - coord[1]) < 10) {
         y.pushObject(locationlist[x].City);
         step(coord);
         exists = true;
-        svg.select("g").selectAll("path.cities").select("animate").remove();
-        svg.select("g").select("path#" + locationlist[x].City).append("animate")
-          .attr("attributeName", "stroke-width")
-          .attr("begin", "0s")
-          .attr("dur", "1s")
-          .attr("repeatCount", "indefinite")
-          .attr("from", "5")
-          .attr("to", "25");
+        svg.select('g').selectAll('path.cities').select('animate').remove();
+        svg.select('g').select(`path# ${  locationlist[x].City }` ).append('animate')
+          .attr('attributeName', 'stroke-width')
+          .attr('begin', '0s')
+          .attr('dur', '1s')
+          .attr('repeatCount', 'indefinite')
+          .attr('from', '5')
+          .attr('to', '25');
       }
     }
-    if (y.length != 0) {
-      notifications.warning("Globe navigated to " + y + ". Select " + y + " to confirm ", {
-        autoClear: true,
+    if (y.length !== 0) {
+      notifications.warning(`Globe navigated to  + ${ y } . Select  ${ y } to confirm `, {
+        autoClear:     true,
         clearDuration: 4200,
-        cssClasses: 'notification-success'
+        cssClasses:    'notification-success'
       });
     }
 
-    if (exists == false) {
+    if (exists === false) {
       notifications.warning("We don't have a data center near your location", {
-        autoClear: true,
+        autoClear:     true,
         clearDuration: 4200,
-        cssClasses: 'notification-success'
+        cssClasses:    'notification-success'
       });
     }
   }
@@ -78,7 +80,7 @@ function renderGlobeChart(params, notifications) {
   var velocity = [.015, -0];
 
   var centroid = d3.geoPath()
-    .projection(function(d) {
+    .projection( function(d) {
       return d;
     })
     .centroid;
@@ -271,6 +273,19 @@ function renderGlobeChart(params, notifications) {
       .attr("x", attrs.width / 2)
       .attr("y", attrs.height * 3 / 5);
 
+    var tooltip = d3.select("body")
+      .append("div")
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      .style("font-size", "12px")
+      .style("color", "#fff")
+      .style("min-width", "80px")
+      .style("border-radius", "5px")
+      .style("pointer-events", "none")
+      .style("background", "rgba(0,0,0,0.7)")
+      .style("text-align", "center");
+
     path.pointRadius(function(d) {
       return 10;
     });
@@ -303,6 +318,15 @@ function renderGlobeChart(params, notifications) {
         //console.log(d);
         step(d.geometry.coordinates);
         params.set("stacksfactory.object_meta.cluster_name", d.City);
+      }).on("mouseover", function(d) {
+        return tooltip.text(d.City)
+          .style("visibility", "visible");
+      })
+      .on("mousemove", function() {
+        return tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+      })
+      .on("mouseout", function() {
+        return tooltip.style("visibility", "hidden");
       });
 
   });
