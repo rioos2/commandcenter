@@ -2892,11 +2892,7 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-<<<<<<< HEAD
-cities.json@1.1.2:
-=======
 cities.json@~1.1.2:
->>>>>>> origin/2-0-stable
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/cities.json/-/cities.json-1.1.2.tgz#10623f4adf24696971999da7c832cef621b599ee"
 
@@ -6665,8 +6661,6 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-<<<<<<< HEAD
-=======
 geoip_from_cities@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/geoip_from_cities/-/geoip_from_cities-1.8.0.tgz#6ec5742c9608ad21dce2489ec85dc6b2c7c02f7a"
@@ -6674,7 +6668,6 @@ geoip_from_cities@1.8.0:
     cities.json "~1.1.2"
     ramda "~0.25.0"
 
->>>>>>> origin/2-0-stable
 get-caller-file@^1.0.0, get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
@@ -12856,13 +12849,7 @@ underscore.string@~3.3.4:
 underscore@>=1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
   integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
->>>>>>> origin/2-0-stable
->>>>>>> origin/2-0-stable
 
 union-value@^1.0.0:
   version "1.0.0"

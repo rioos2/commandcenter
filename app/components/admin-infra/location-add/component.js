@@ -175,18 +175,6 @@ export default Component.extend(DefaultHeaders, {
 
   },
 
-  citiesUpdate(isoType) {
-    let promise = new Promise((resolve, reject) => {
-      resolve(Cities.filter((c) => {
-        return c.country === isoType;
-      }).map((c) => {
-        return c.name;
-      }))
-    }).then((results) => {
-       this.appendingCities(results);
-    });
-  },
-
   storageId(name) {
     let id;
 
