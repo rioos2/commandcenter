@@ -54,7 +54,6 @@ export default Component.extend({
     return country;
   },
 
-
   getCoordinates(q, r) {
 
     let m = new RioGeo().fillWithGeoInfo(q, r);
