@@ -128,8 +128,7 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
-<<<<<<< HEAD
-=======
+
    # everything else to index.html in nginx $RIOOS_HOME/www
     location /index.html {
       root $command_center_root;
@@ -137,5 +136,4 @@ server {
       index index.html
       try_files $uri $uri/ /index.html;
      }
->>>>>>> origin/2-0-stable
  }
