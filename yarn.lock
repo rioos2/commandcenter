@@ -4040,7 +4040,6 @@ ecc-jsbn@~0.1.1:
 echarts@^4.2.0-rc.1:
   version "4.2.0-rc.1"
   resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.2.0-rc.1.tgz#c76bc392e9d34f914480f8299305f66fa0b79cb7"
-  integrity sha512-zhjpI+iTewF6U9Q9+eGEBTKXpOQe9h1pRoHJMKDw2ppCScQ0UulksqWlVNSE50lriBDJtCx8PNF7Tqa59lv2ag==
   dependencies:
     zrender "4.0.5"
 
@@ -6661,9 +6660,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-geoip_from_cities@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/geoip_from_cities/-/geoip_from_cities-1.8.0.tgz#6ec5742c9608ad21dce2489ec85dc6b2c7c02f7a"
+geoip_from_cities@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/geoip_from_cities/-/geoip_from_cities-1.9.0.tgz#090ef813ba6e21ed7da02d230dd32e8597ebfd08"
   dependencies:
     cities.json "~1.1.2"
     ramda "~0.25.0"
@@ -12849,7 +12848,6 @@ underscore.string@~3.3.4:
 underscore@>=1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
-  integrity sha1-Tz+1OxBuYJf8+ctBCfKl6b36UCI=
 
 union-value@^1.0.0:
   version "1.0.0"
@@ -13543,4 +13541,3 @@ zip-stream@~0.4.0:
 zrender@4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.5.tgz#6e8f738971ce2cd624aac82b2156729b1c0e5a82"
-  integrity sha512-SintgipGEJPT9Sz2ABRoE4ZD7Yzy7oR7j7KP6H+C9FlbHWnLUfGVK7E8UV27pGwlxAMB0EsnrqhXx5XjAfv/KA==
