@@ -2,23 +2,58 @@
 import { get } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import isoCurreny from 'npm:iso-country-currency';
-import Cities from 'npm:cities.json'; // eslint-disable-line
-
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import flagsISo from 'nilavu/mixins/flags-iso';
 import { htmlSafe } from '@ember/string';
 import { isEmpty } from '@ember/utils';
+import { computed } from '@ember/object';
+import currency from 'npm:iso-country-currency';
+import RioGeo from 'npm:geoip_from_cities';
+import  R  from 'npm:ramda';
 
-export default Component.extend(DefaultHeaders, flagsISo, {
+export default Component.extend(DefaultHeaders, {
 
   intl:                    service(),
   notifications:           service('notification-messages'),
   tagName:                 '',
+
+  // default selected city is US
+  selectedCountry: 'US',
+  filteredCountries: null,
+ // the selected city
+  selectedCity: '',
+  // the default selected currency is $
+  selectedCurrency: 'USD',
+  // the filtered city results
+  filteredCities: null,
   selectedNodes:           [],
-  selectedVirtualNetworks: [],
   selectedStorage:         '',
+  selectedVirtualNetworks: [],
+
+  // Is this used ?
   error:                   false,
+
+  initialCountry: computed('selectedCountry', function()  {
+    const co = get(this, 'selectedCountry');
+
+    const cy = htmlSafe(
+        `<span class="flag-icon flag-icon-${ co.toLowerCase() } flag-icon-squared"></span>` +
+        `<span class="flag-text" style="margin-left: 10px;">${ co } </span>`
+      );
+
+    return { name: co, title: cy  };
+  }),
+
+  countries: computed('model', function() {
+
+    const cy =  c => htmlSafe(
+        `<span class="flag-icon flag-icon-${ c.toLowerCase() } flag-icon-squared"></span>` +
+        `<span class="flag-text" style="margin-left: 10px;">${ c }</span>`
+      );
+
+     const abbrev = y => {return { name: y, title: cy(y.iso) } };
+
+      return R.map(abbrev)(currency.getAllISOCodes());
+   }),
 
   storages: function() {
     return this.nameGetter(this.get('model.storageConnectors.content'));
@@ -34,36 +69,75 @@ export default Component.extend(DefaultHeaders, flagsISo, {
 
   didInsertElement() {
     this.set('error', this.displayMessage());
-    var flags = this.flagsIso();
-
-    $(() => {
-      var isoCountries = flags;
-
-      function formatCountry(country) {
-        if (!country.id) {
-          return country.text;
-        }
-        var $country = $(
-          `<span class="flag-icon flag-icon-${  country.id.toLowerCase()  } flag-icon-squared"></span>` +
-          `<span class="flag-text" style="margin-left: 10px;">${  country.text  }</span>`
-        );
-
-        return $country;
-      }
-
-      $("[name='country']").select2({
-        placeholder:    'Select a country',
-        templateResult: formatCountry,
-        data:           isoCountries
-      });
-      $("[name='country']").val('US');
-      $("[name='country']").trigger('change');
-    });
+    this.set('filteredCountries', get(this, 'countries'));
   },
 
-
-
   actions: {
+
+    // action that records the new country.
+    countryChanged(country) {
+      const iso  = country.name.iso;
+      const cy   = country.name.currency;
+      const name = country.name.countryName;
+      this.set('selectedCurrency', cy);
+      this.set('selectedCountry', name);
+      this.set('selectedCountryISO', iso);
+    },
+
+    countryDidChange(country) {
+      const q = R.trim(country).toUpperCase();
+      const all = get(this, 'countries');
+
+      // Start search if a minimum of 3 chars is entered.
+      if (isEmpty(q) ||  q.length < 1 ) {
+        this.set('filteredCountries', get(this, 'countries'));
+        return;
+      }
+
+      const isLike =  n  =>  {
+        return  n.name.iso.indexOf(q) >= 0;
+      }
+
+      const composeFn =   R.compose(R.filter(isLike));
+
+      this.set('filteredCountries', composeFn(all));
+    },
+
+    // action that records the new city.
+    cityChanged(city) {
+      this.set('selectedCity', city);
+    },
+
+    // action called when the atleast 3 characters of a city was typed
+    cityDidChange(text) {
+      const q = R.trim(text);
+
+      // Start search if a minimum of 3 chars is entered.
+      if (isEmpty(q) ||  q.length < 3 ) {
+        return;
+      }
+      // If you have a slow AJAX response, you can pass
+      // in an `isLoading` flag to display a loader.
+      // Set to true while you're fetching results...
+      this.set('isLoadingCity', true);
+
+      const withTitle = x => { return { title: x } };
+
+      let matches = R.map(withTitle)(new RioGeo().locateCity(q, this.get('selectedCountryISO')));
+       // ...then set back to false once the AJAX call resolves.
+
+      // Here, we pretend have a slow response using .setTimeout().
+      // With a real AJAX fetch this would happen in the callback or
+      // promise resolution.
+      window.setTimeout(() => {
+        this.set('filteredCities', matches);
+        this.set('isLoadingCity', false);
+      }, 1000);
+    },
+
+    clearCitySearches() {
+      this.set('filteredCities', null);
+    },
 
     createLocation() {
       this.set('showSpinner', true);
@@ -71,7 +145,7 @@ export default Component.extend(DefaultHeaders, flagsISo, {
         this.get('userStore').rawRequest(this.rawRequestOpts({
           url:    '/api/v1/datacenters',
           method: 'POST',
-          data:   this.getData(),
+          data:   this.saveData(),
         })).then(() => {
           this.set('modelSpinner', true);
           this.set('showSpinner', false);
@@ -95,18 +169,6 @@ export default Component.extend(DefaultHeaders, flagsISo, {
       this.set('selectedStorage', storage);
     },
 
-    selectCity(city) {
-      this.set('city', city);
-    },
-
-    selectCountry(isoType) {
-      this.set('innerSpinner', true);
-      let info = isoCurreny.getAllInfoByISO(isoType)
-      this.set('currency', info.currency);
-      this.set('country', info.countryName);
-      this.citiesUpdate(isoType);
-    },
-
     updateNodeData(select, data) {
       select ? this.get('selectedNodes').push(data) : this.get('selectedNodes').removeObject(data);
     },
@@ -122,38 +184,6 @@ export default Component.extend(DefaultHeaders, flagsISo, {
       }))
     }).then((results) => {
        this.appendingCities(results);
-    });
-  },
-
-  appendingCities(cities) {
-    var self = this;
-    this.set('innerSpinner', false);
-
-    $(() => {
-      var citiesData = cities;
-
-      function formatCities(city) {
-        if (!city.id) {
-          return city.text;
-        }
-        var $city = $(
-          `<span class="flag-text" style="margin-left: 10px;">${  city.text  }</span>`
-        );
-
-        return $city;
-      }
-      $('#cities').select2().empty();
-      $('#cities').select2({
-        placeholder:    'Select a city',
-        templateResult: formatCities,
-        data:           citiesData,
-      });
-      if (citiesData) {
-        $('#cities').val(citiesData[0]);
-        $('#cities').trigger('change');
-      } else {
-        self.set('city', '');
-      }
     });
   },
 
@@ -204,13 +234,13 @@ export default Component.extend(DefaultHeaders, flagsISo, {
   validation() {
     var validationString = '';
 
-    if (isEmpty(this.get('city'))) {
+    if (isEmpty(this.get('selectedCity'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.cityError'));
     }
     if (isEmpty(this.get('selectedStorage'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.storageError'));
     }
-    if (isEmpty(this.get('currency'))) {
+    if (isEmpty(this.get('selectedCurrency'))) {
       validationString = validationString.concat(get(this, 'intl').t('stackPage.admin.locations.add.currencyError'));
     }
     if (isEmpty(this.get('selectedNodes'))) {
@@ -262,27 +292,29 @@ export default Component.extend(DefaultHeaders, flagsISo, {
     return JSON.stringify(filtedData) === JSON.stringify(selectedData);
   },
 
-  getData() {
+  saveData() {
+    let city = this.get('selectedCity.title').split(',')
     return {
       nodes:             this.get('selectedNodes'),
       networks:          this.uniqueSelected(this.get('selectedVirtualNetworks')),
       storage:           this.storageId(this.get('selectedStorage')),
-      currency:          this.get('currency'),
-      flag:              `${ this.get('currency')  }.svg`,
+      currency:          this.get('selectedCurrency'),
+      flag:              `${ this.get('selectedCurrency')  }.svg`,
       enabled:           true,
-      advanced_settings: { country: this.get('country') },
-      object_meta:       { name: this.get('city'), },
+      advanced_settings: { country: this.get('selectedCountry'), country_code: this.get('selectedCountryISO') },
+      object_meta:       { name: city[0] },
       status:            { phase: 'ready' }
     };
   },
+
   refresh() {
     this.setProperties({
       selectedNodes:           '',
       selectedVirtualNetworks: '',
       selectedStorage:         '',
-      currency:                '',
-      country:                 '',
-      city:                    '',
+      selectedCurrency:        '',
+      selectedCountry:         '',
+      selectedCity:            '',
     });
   },
 

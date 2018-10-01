@@ -48,20 +48,27 @@ buildbin:
 # We are not ready with lint and scramble,
 # So just comment it for now.
 #ship: build lint scramble sync
-.PHONY: ship sync scramble
-ship: build sync scramble
+.PHONY: ship sync
+ship: build sync
 sync:
-	rsync -avze "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete --progress $(PWD)/node_modules/ $(WWW_PATH)
 	rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete --progress $(PWD)/dist/ $(WWW_PATH)
-	sudo mkdir -p /etc/nginx/sites-available/commandcenter.rioos.sh
-	sudo cp $(PWD)/commandcenter_rioos_sh /etc/nginx/sites-available/commandcenter.rioos.sh
-	sudo ln -s /etc/nginx/sites-available/commandcenter.rioos.sh /etc.nginx/sites-enabled/commandcenter.rioos.sh
-	@systemctl stop nginx
-	@systemctl start nginx
+	sudo cp $(PWD)/ssl/server.crt $(PWD)/ssl/server.key $(WWW_PATH)
 	@echo "» Deployed in nginx. Make sure you have an entry for commandcenter.rioos.sh in /etc/hosts"
 	@echo "  Watch the asciicast to  add an entry in /etc/hosts https://asciinema.org/a/6KMGPGzyv5lRWRu5woDwDEfjZ"
 scramble:
 	  yarn scramble
+
+.PHONY: ship-local lsync
+ship-local: build lsync
+lsync:
+	rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" --delete --progress $(PWD)/dist/ $(WWW_PATH)
+	sudo cp $(PWD)/ssl/server.crt $(PWD)/ssl/server.key $(WWW_PATH)
+	sudo cp $(PWD)/ssl/server.crt $(PWD)/ssl/server.key $(WWW_PATH)
+	sudo cp $(PWD)/local_rioos_sh /etc/nginx/sites-available/default
+	@sudo systemctl stop nginx
+	@sudo systemctl start nginx
+	@echo "» Deployed in nginx. Make sure you have an entry for commandcenter.rioos.sh in /etc/hosts"
+	@echo "  Watch the asciicast to  add an entry in /etc/hosts https://asciinema.org/a/6KMGPGzyv5lRWRu5woDwDEfjZ"
 
 .PHONY: lint eslint
 lint:  eslint  ## executes all components' lints

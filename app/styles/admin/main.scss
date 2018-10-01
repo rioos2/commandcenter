@@ -1137,53 +1137,8 @@ header {
   overflow-y: scroll;
 }
 
-.select2-container {
-  width: 100% !important;
-  min-height: 56px;
-}
 
-.select2-container--default .select2-selection--multiple {
-  border: 1px solid #CED6E1 !important;
-  min-height: 56px !important;
 
-  .select2-selection__rendered {
-    width: 100% !important;
-    position: relative;
-  }
-
-  .select2-selection__choice {
-    background: rgba(206, 214, 225, 0.5) !important;
-    font-family: fselliot;
-    font-size: 16px;
-    color: #5151BF;
-    padding: 4px 9px !important;
-  }
-
-  .select2-selection__choice__remove {
-    font-family: fselliot;
-    font-size: 16px;
-    color: #D02F44 !important;
-    float: right;
-    margin-left: 8px;
-  }
-}
-
-.select2-selection.select2-selection--single {
-  border: 1px solid #CED6E1 !important;
-  border-radius: 3px !important;
-  height: 56px !important;
-
-  span {
-    padding-top: 14px;
-    box-sizing: border-box;
-    font-family: 'fselliot';
-    padding-left: 16px !important;
-  }
-
-  .select2-selection__arrow {
-    padding-top: 55px;
-  }
-}
 
 .scroll-wrapper {
   overflow: hidden !important;
