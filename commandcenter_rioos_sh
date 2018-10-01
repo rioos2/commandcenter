@@ -82,24 +82,12 @@ server {
         proxy_set_header Connection "upgrade";
     }
 
-		# TO-DO: 7 SET THE PROXY PASS TO THE VNC ENDPOINT
-	  # In this case it points to localhost:444
-    location /vnc/ {
-        access_log on;
-        proxy_pass $ENV{"VNC_SERVER"};
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        # WebSocket support (nginx 1.4)
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-    }
-
 		# Serve the assets, fonts, ping
     location / {
         root $command_center_root;
         add_header ETag "";
+        rewrite ^ /index.html break;
+
         location ~* assets/.*\.(eot|ttf|woff|woff2|ico)$ {
            expires 1y;
            add_header Cache-Control public;
@@ -140,6 +128,8 @@ server {
     proxy_cache_bypass $http_upgrade;
   }
 
+<<<<<<< HEAD
+=======
    # everything else to index.html in nginx $RIOOS_HOME/www
     location /index.html {
       root $command_center_root;
@@ -147,4 +137,5 @@ server {
       index index.html
       try_files $uri $uri/ /index.html;
      }
+>>>>>>> origin/2-0-stable
  }
