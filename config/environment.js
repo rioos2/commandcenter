@@ -7,6 +7,27 @@ var path = require('path');
 var YAML = require('yamljs');
 var toml = require('toml-parser');
 
+// Read the version built
+// The package.json version is what will be eventually
+//
+function readVersion(environment) {
+   try {
+      if (!process.env.RIOOS_HOME) {
+          process.env.RIOOS_HOME = path.join(__dirname);
+      }
+
+      const versionPath = path.join(process.env.RIOOS_HOME, 'config', 'VERSION');
+      console.info("→ Path VERSION =" + versionPath);
+
+      return fs.readFileSync(versionPath, 'utf-8');
+  } catch (e) {
+    if (e.code !== "ENOENT")
+      throw e;
+    else
+      return null;
+  }
+}
+
 // host can be an ip "1.2.3.4" -> http://1.2.3.4:8080
 // or a URL+port
 function normalizeHost(host, defaultPort) {
@@ -46,9 +67,6 @@ function readLocales(environment) {
   return translationsOut;
 }
 //
-function checkComplition(environment) {
-  return Math.random();
-}
 //
 function readUIConfig(environment) {
   if (!process.env.RIOOS_HOME) {
@@ -56,7 +74,7 @@ function readUIConfig(environment) {
   }
 
   const uiConfigPath = path.join(process.env.RIOOS_HOME, 'config', 'ui.toml');
-  console.info("✔ ui config path =" + uiConfigPath);
+  console.info("→ Path ui.toml =" + uiConfigPath);
 
   const tomlStr = fs.readFileSync(uiConfigPath, 'utf-8');
 
@@ -68,9 +86,9 @@ function readUIConfig(environment) {
 module.exports = function (environment) {
   const loaded = readUIConfig(environment);
   if (loaded) {
-    console.log("✔ ui config loaded.");
+    console.log("✔ Path ui.toml.");
   } else {
-    console.error("✘ ui config load failed.\n" + loaded);
+    console.error("✘ Path ui.toml.\n" + loaded);
   }
 
   var ENV = {
@@ -102,20 +120,19 @@ module.exports = function (environment) {
     contentSecurityPolicy: {
       'style-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000 'unsafe-inline'",
       'font-src': "'self' console.rioos.xyz ui.rioos.svc.local",
-      'script-src': "'self' console.rioos.xyz ui.rioos.svc.local localhost:3000",
+      'script-src': "'self' 'unsage-inline' 'unsafe-eval' console.rioos.xyz ui.rioos.svc.local localhost:3000",
       'object-src': "'self' console.rioos.xyz ui.rioos.svc.local",
-      'img-src': "'self' console.rioos.xyz ui.rioos.svc.local avatars.githubusercontent.com gravatar.com localhost:3000 data:",
+      'img-src': "'self' console.rioos.xyz ui.rioos.svc.local avatars.githubusercontent.com gravatar.com localhost:3000 data: app.getsentry.com",
       'frame-src': "'self' console.rioos.xyz ui.rioos.svc.local",
-
       // Allow connect to anywhere, for console and event stream socket
       'connect-src': '*'
     },
-
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      version: pkg.version,
-      appName: 'Rio/OS - ' + pkg.version,
+      version: readVersion(environment) || pkg.version,
+      repository:  pkg.repository,
+      appName: 'Rio/OS - ' + this.version,
       desktop: process.env.EMBER_CLI_ELECTRON,
       proxyPort: "8000",
       proxyHost: "127.0.0.1",
@@ -131,8 +148,14 @@ module.exports = function (environment) {
       baseAssets: '/',
       configPath: process.env.RIOOS_HOME ? path.join(process.env.RIOOS_HOME, 'config') : '',
       locales: readLocales(environment),
-      activationComplete: checkComplition()
     },
+
+    sentry: {
+      dsn: 'https://75c79d44e3014faf8fe5f7d2313b6f81@sentry.io/1284843',
+      debug: true,
+      globalErrorCatching: true,
+      development: false
+    }
   };
 
   if (environment === 'development') {
@@ -141,6 +164,8 @@ module.exports = function (environment) {
     ENV.APP.LOG_TRANSITIONS = true;
     ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.sentry.development = false;
   }
 
   if (environment === 'test') {

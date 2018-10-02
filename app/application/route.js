@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import C from 'nilavu/utils/constants';
 import { messageNow } from '../utils/message';
 import { inject as service } from '@ember/service';
+import * as Sentry from '@sentry/browser'
 
 export default Route.extend({
   access:   service(),
@@ -88,6 +89,8 @@ export default Route.extend({
       console.log('» [ ✘ ] -----------------');
       console.error('» [ ✘ ] Application Error', (err ? err.stack : undefined));
       console.log('» [ ✘ ] -----------------');
+
+      Sentry.captureException(err);
 
     },
 

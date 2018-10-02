@@ -1,0 +1,7 @@
+<div class="cloud-lists row">
+  {{#each users as |user|}}
+    <div class="list col-sm-5 col-md-3">
+      {{dojos/users/user-box model=user}}
+    </div>
+  {{/each}}
+</div>

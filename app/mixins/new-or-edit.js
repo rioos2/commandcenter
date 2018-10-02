@@ -32,8 +32,9 @@ export default Mixin.create({
     var model = get(this, 'primaryResource');
     var errors = model.validationErrors();
 
-    if ( errors.get('length') ) {
+    if ( errors ) {
       set(this, 'errors', errors);
+      set(this, 'primaryResource.error', errors);
 
       return false;
     }

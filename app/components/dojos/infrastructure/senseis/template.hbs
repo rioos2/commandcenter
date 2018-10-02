@@ -1,0 +1,31 @@
+
+<div class="col-sm-9 content-left">
+ <div class="panel panel-default kv-panel">
+   <div class="panel-heading">
+     <div class="panel-header">
+       {{t 'dojos.infrastructure.locations.connected'}} ({{availableSize}})
+     </div>
+   </div>
+   <div class="panel-body">
+       {{#if senseiNodes}}
+         <div class="network-container">
+           {{#each senseiNodes as |node|}}
+             {{dojos/infrastructure/common/node-detail model=node selectedNode=selecedNode showSchedule=false reload="reload" selectedNodeTab=selectedNodeTab click=(action "SideData" node)}}
+           {{/each}}
+         </div>
+       {{else}}
+         <div class="empty-network">
+           <div class="pin-img">
+             <img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+           </div>
+           <div class="empty-network-add-link">
+             <span>{{t 'dojos.infrastructure.senseis.required'}}</span>
+           </div>
+         </div>
+       {{/if}}
+   </div>
+ </div>
+</div>
+<div class="col-sm-3 content-right">
+ {{dojos/infrastructure/common/node-side type=nodeType model=selectedNode}}
+</div>

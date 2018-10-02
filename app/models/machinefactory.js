@@ -6,6 +6,7 @@ import C from 'nilavu/utils/constants';
 
 
 var MachineFactory = Resource.extend({
+
   type:          'machinefactory',
   intl:              service(),
   notifications:     service('notification-messages'),
