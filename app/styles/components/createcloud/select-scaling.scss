@@ -1,0 +1,358 @@
+.select-scaling {
+    .createcloud-ico {
+        width: 90px;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 55px;
+        filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.3));
+
+        cursor: pointer;
+        .cls-1{fill:#2953bd;}
+        .cls-2{fill:#26fdff;}
+        .cls-3{fill:#ffb238;}
+        .cls-3,.cls-4,.cls-5,.cls-6{fill-rule:evenodd;}
+        .cls-4,.cls-5,.cls-6{fill:none;}
+        .cls-4{fill:#fff;}
+        .cls-5{fill:#fff;}
+        .cls-4,.cls-5{stroke-miterlimit:10;}
+
+        svg:hover {
+            filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.3));
+        }
+    }
+
+    .layout1 {
+        background-image: url(/assets/images/createcloud/cloudbg.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        overflow-x: hidden;
+
+        p {
+            text-align: center;
+            margin-top: 36px;
+            text-transform: uppercase;
+            font-size: 30px;
+            letter-spacing: 6px;
+            padding-bottom: 50px;
+        }
+    }
+
+    .layout2 {
+        background-image: url(/assets/images/createcloud/serverosbg.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        overflow-x: hidden;
+
+        p {
+            margin-top: 36px;
+            text-transform: none;
+            letter-spacing: normal;
+            margin-top: 10px;
+        }
+    }
+
+
+    .rows {
+        padding: 90px 0;
+        background: #f8faff;
+        position: relative;
+    }
+
+    .show-info {
+        border: 10px solid #265dfc;
+        background: white;
+        margin: 0 -16px;
+        padding: 0;
+        text-align: center;
+        padding: 20px 0 50px 0;
+
+        svg {
+            width: 120px;
+            .cls-1,
+            .cls-2 {
+                display: none;
+            }
+            .cls-3 {
+                fill: #567bd8;
+            }
+        }
+    }
+
+    .title {
+        color: #000;
+        font-size: 27px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .description {
+        color: #7a7a91;
+        font-size: 12px;
+        text-align: justify;
+        margin-bottom: 20px;
+        padding: 0 40px;
+    }
+
+    .dots-ico {
+        width: 6px;
+        position: absolute;
+        left: calc(50% - 3px);
+        top: -14px;
+
+        svg .cls-1{
+            fill:#d9dfeb;
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 8px;
+        font-size: 34px;
+        color: #000;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .vert-description {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform-origin: left top 0;
+        margin-top: 255px;
+        color: #999aab;
+        text-transform: uppercase;
+        position: absolute;
+        left: calc(50% - 12px);
+        font-size: 20px;
+        letter-spacing: 2px;
+        @media only screen and (max-width: 767px) {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            left: calc(50% - 135px);
+        }
+    }
+
+    .info {
+        position: absolute;
+        right: 8px;
+        top: 97px;
+        font-size: 20px;
+        padding: 3px 13px 0;
+        background: #567bd8;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+            background: #3586ff;
+            box-shadow: 4px 5px 20px 0px rgba(108,143,255,0.26);
+        }
+    }
+
+    .cpu-ico,
+    .gpu-ico {
+        cursor: pointer;
+        width: 210px;
+        .cls-1{fill:#fff;}
+        .cls-2{fill:#fff;}
+        .cls-3{fill:#2954be;}
+        .cls-4{font-size:24px;
+            fill:#231f20;
+            font-weight: bold}
+        filter: drop-shadow(0px 8px 6px rgba(41, 49, 190, 0.1));
+
+        &:hover,
+        &:active,
+        &.selected {
+            .cls-1{fill:#2958cd;}
+        }
+    }
+
+    .cpu-ico {
+        float: right;
+        margin-right: 60px;
+    }
+
+    .gpu-ico {
+        float: left;
+        margin-left: 60px;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .cpu-ico,
+        .gpu-ico {
+            margin-left: auto;
+            margin-right: auto;
+            float: none;
+        }
+
+        .cpu-ico {
+            margin-bottom: 50px;
+        }
+
+        .description {
+            padding: 0;
+        }
+    }
+    .performance-content {
+        background-image: url(/assets/images/createcloud/cloudperformance.png);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        padding-top: 100px;
+        // background-color: #f9fafe;
+    }
+
+    .sub-title {
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .chart-cores {
+        text-align: center;
+    }
+
+    .storage-content {
+        padding-bottom: 77px;
+
+        .title {
+            font-size: 25px;
+            color: #bcbdce;
+            text-align: center;
+            padding-top: 60px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            position: relative;
+            margin: 0 auto;
+            width: 380px;
+        }
+    }
+
+    .text-or {
+        position: absolute;
+        left: 180px;
+        top: 56px;
+        font-size: 24px;
+        color: #64687c;
+    }
+
+
+
+    .ram-content {
+        text-align: right;
+        padding: 0;
+    }
+
+    .capacity-content {
+        text-align: left;
+        padding: 0;
+    }
+    .scaling-content {
+        padding-bottom: 10px;
+        .title {
+            font-size: 25px;
+            color: #bcbdce;
+            text-align: center;
+            // padding-top: 10px !important;
+            margin-bottom: 20px;
+      }
+    }
+
+    .chart-ram svg,
+    .chart-storage svg{
+        box-shadow:0px 14px 20px -10px rgba(41, 49, 190, 0.3);
+    }
+
+    .rio-hdd {
+        margin-left: 75px;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .storage-content .content {
+            width: 320px;
+        }
+
+        .rio-hdd {
+            margin-left: 16px;
+        }
+
+        .text-or {
+            left: 150px;
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        .performance-content {
+            background-image: url(/assets/images/createcloud/cloudperformance1.png);
+            background-color: #1c2032;
+        }
+
+        .storage-content {
+            background: #1a1d2d;
+            margin:0 15px;
+            padding-bottom: 76px;
+        }
+
+        .ram-content {
+            text-align: center;
+            background: #1f2335;
+        }
+        .capacity-content {
+            text-align: center;
+            background: #24273b;
+        }
+
+        .chart-ram svg,
+        .chart-storage svg{
+            box-shadow: none;
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        .cores-content {
+            margin-left: -15px;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        .cores-content {
+            margin-left: -40px;
+        }
+
+        .ram-content,
+        .capacity-content {
+            margin-left: -15px;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .ram-content,
+        .capacity-content {
+            margin-left: -40px;
+        }
+
+        .storage-content .content {
+            margin-left: -15px;
+        }
+
+
+        .cores-content {
+            margin-left: -70px;
+        }
+
+    }
+    .scaling-count{
+      background-image: url(/assets/images/createcloud/cloudperformance.png) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% auto !important;
+      padding-top: 100px !important;
+    }
+}

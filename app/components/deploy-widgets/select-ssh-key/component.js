@@ -8,9 +8,7 @@ import NewOrEdit from 'nilavu/mixins/new-or-edit';
 import { denormalizeName } from 'nilavu/utils/denormalize';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
-import {
-  get, set, computed
-} from '@ember/object';
+import {  get, set, computed} from '@ember/object';
 
 
 export default Component.extend(DefaultHeaders,NewOrEdit,{
