@@ -24,6 +24,7 @@ generic:
   noo: No
   yess: Yes
   note: 'NOTE:  '
+  active_btn: Add
   M: M
   N: N
   O: O
@@ -229,6 +230,19 @@ dojos:
     audits:
       title:  Audits
       required: 'No logs added yet.'
+      table:
+        info: Description
+        dateAndTime: 'Date and time'
+        ip: 'IP'
+    alerts:
+      title:  Alerts
+      required: 'No alerts added yet.'
+      connected: 'Connected Rules'
+      rules: 
+        title: 'Service Alerts'
+        placeholder: 'Alert rules edit expressions'
+        type: 'Choose alert type'
+        expressions: 'Edit rule expressions'
       table:
         info: Description
         dateAndTime: 'Date and time'

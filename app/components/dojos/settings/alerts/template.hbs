@@ -1,0 +1,30 @@
+{{dojos/settings/alerts/modal-alert-rules model=model modelSpinner=modelSpinner doReload="doReload"}}
+<div class="col-sm-12 content-left activate">
+	<div class="panel panel-default kv-panel">
+	<div class="panel-heading">
+      <div class="panel-header">
+        {{t 'dojos.settings.alerts.connected'}} ({{availableSize}})
+      </div>
+      <div class="pull-right kv-right-head-button">
+        <button type="button" {{action "openModal"}} class="btn">+ {{t 'actions.add'}}</button>
+      </div>
+    </div>
+		<div class="panel-body">
+			{{#if hasAlerts}}
+				<div class="empty-network">
+					<div class="pin-img">
+						<img src="assets/images/admin/3pin.PNG" class="img-responsive" alt="pin">
+					</div>
+					<div class="empty-network-add-link">
+						<span>{{t 'dojos.settings.alerts.required'}}</span>
+					</div>
+				</div>
+
+			{{else}}
+				<div class="logs">
+					<br> {{scrollable-table columns=columns model=tableData class="info-table"}}
+				</div>
+			{{/if}}
+		</div>
+	</div>
+</div>

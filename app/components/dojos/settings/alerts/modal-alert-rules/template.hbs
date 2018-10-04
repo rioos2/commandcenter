@@ -1,0 +1,36 @@
+<div class="modal fade node_discovery node_modal" id="alert_rule_modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{t 'dojos.settings.alerts.rules.title'}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.type'}}</label>
+              <select class="form-control" id="alerts_rules_type" name="alerts_rules_type" onchange= {{action "selectStorage" value="target.value"}}>
+                {{#each inActiveRuleTypes as |type|}}
+                <option value={{type.value}}>{{type.text}}</option>
+                {{/each}}
+                </select>
+            </div>
+          </div>
+        </div>        
+
+        <div class="row ">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="alertsRulesDescription">{{t 'dojos.settings.alerts.rules.expressions'}}</label> 
+              <p>{{selectType}}</p>
+              <p>{{buildTypeText}}</p>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+
+  </div>
+</div>
