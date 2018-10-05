@@ -2,7 +2,7 @@
   {{svg/svg-edit class=(if showEditBox "edit-ico" "display-none") click=(action 'clickInputIcon')}}
   <div class= {{if showEditBox "display-none" "showform"}}>
     {{input type="text" placeholder=placeholder value=editedText}}
-    <button {{action "setPopupData" editedText }}>{{t 'generic.active_btn'}}
+    <button {{action "setPopupData" editedText targetRef}}>{{t 'generic.active_btn'}}
     {{#if showSpinner}}
     <i class="fa fa-circle-o-notch fa-spin"></i>
     {{/if}}

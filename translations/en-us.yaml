@@ -243,6 +243,9 @@ dojos:
         placeholder: 'Alert rules edit expressions'
         type: 'Choose alert type'
         expressions: 'Edit rule expressions'
+        required: "Value must fill for apply alert policies."
+        empty: 'value is empty'
+        somethingWrong: 'Unable to connect'
       table:
         info: Description
         dateAndTime: 'Date and time'

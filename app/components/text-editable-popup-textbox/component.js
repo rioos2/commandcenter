@@ -10,8 +10,9 @@ export default Component.extend({
       this.set('showEditBox', true);
     },
 
-    setPopupData(editedText) {
-      this.sendAction('targetActionName', editedText);
+    setPopupData(editedText, targetRef) {
+      this.set('showEditBox', true);
+      this.sendAction('targetActionName', editedText, targetRef);
     },
   }
 

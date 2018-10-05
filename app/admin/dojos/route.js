@@ -21,6 +21,7 @@ export default Route.extend(DefaultHeaders, {
       // audits:            this.get('store').find('audit', null, this.opts('audits')),
       accounts:          this.get('store').find('account', null, this.opts('accounts')),
       alertRules:        this.rules(),
+      //alertRules:        this.get('store').findAll('alertrule', this.opts('alertrules')),
     });
   },
 
@@ -31,7 +32,7 @@ export default Route.extend(DefaultHeaders, {
 "object_meta": {
   "name": "role_group"
 },
-"state": "inactive",
+"state": "active",
 "rules": [
   {
     "rule_type": "NodesDown",
@@ -39,7 +40,8 @@ export default Route.extend(DefaultHeaders, {
     "for": "",
     "record": "",
     "expression": "up{job='rioos_sh_nodes',rioos_node_name='{{rioos_node_name}}', rioos_node_id='{{rioos_node_id}}'} == 0",
-    "labels": {"rioos_node_name": "", "rioos_node_id": ""},
+    "builtin_expression": "up{job='rioos_sh_nodes',rioos_node_name='{{rioos_node_name}}', rioos_node_id='{{rioos_node_id}}'} == 0",
+    "labels": {"rioos_node_name": "Ninja Server name", "rioos_node_id": "Ninja server id"},
     "annotations": {
     "rioos_sh_alert_repeat_interval": "1h",
   },
@@ -60,7 +62,7 @@ export default Route.extend(DefaultHeaders, {
     "for": "",
     "record": "",
     "expression": "query={{'{{clip_level}}' - (avg by (rioos_assembly_id) (irate('{{clip_name}}'{job='rioos-assemblys',mode='idle',rioos_assemblyfactory_id='{{rioos_assemblyfactory_id}}'}[5m])) * 100)",
-    "labels": {"rioos_assemblyfactory_id": "", "clip_level": "70" },
+    "labels": {"rioos_assemblyfactory_name": "Enter Digital cloud/Containers name", "rioos_assemblyfactory_id": "Enter Digital cloud/Containers id", "clip_level": "clip level values in %", "clip_name": "RAM/CPU/DISK" },
     "annotations": {
         "rioos_sh_alert_repeat_interval": "1h" 
       },

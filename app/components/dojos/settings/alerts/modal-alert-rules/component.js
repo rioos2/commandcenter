@@ -2,17 +2,19 @@
 
 import Component from '@ember/component';
 import EmberObject from '@ember/object';
-import { get, computed } from '@ember/object';
+import { set, get, computed } from '@ember/object';
 import { filter } from '@ember/object/computed';
 import C from 'nilavu/utils/constants';
 import { inject as service } from '@ember/service';
+import { substrings } from 'nilavu/helpers/substrings';
+import { isEmpty } from '@ember/utils';
 
 export default Component.extend({
-  intl:         service(),
-  state:        "inactive",  
-  isActive:     false,
-  showSpinner:             false,
-  showalertRuleDescriptionEditBox: true,
+  intl:          service(),
+  notifications: service('notification-messages'),
+  state:         "inactive",  
+  isActive:      false,
+  showSpinner:   false,
 
   descriptionPlaceHolder: computed('descriptionPlaceHolder', function() {
     return get(this, 'intl').t('dojos.settings.alerts.rules.placeholder');
@@ -28,19 +30,14 @@ export default Component.extend({
 
   selectType: function() {
     let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
-    return rule.rules[0].description;
-  }.property('selectedType'),
-
-  buildTypeText: function() {
-    let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
-    return this.getFromBetween.get(rule.rules[0].description,"{{","}}");
-  }.property('selectedType'),
+    return rule.rules[0].reason;
+  }.property('selectedType'),  
 
   inActiveRules: computed('model.alertRules', function() {    
     return this.get('model.alertRules').filter((rule) => {     
       return rule.state == this.get('state');
     });
-  }),  
+  }),    
 
   inActiveRuleTypes: function() {
     return this.get('inActiveRules').map((rule) => {
@@ -51,66 +48,100 @@ export default Component.extend({
     });
   }.property('model'),  
 
-  getFromBetween: {
-    results:[],
-    string:"",
-    getFromBetween:function (sub1,sub2) {
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var SP = this.string.indexOf(sub1)+sub1.length;
-        var string1 = this.string.substr(0,SP);
-        var string2 = this.string.substr(SP);
-        var TP = string1.length + string2.indexOf(sub2);
-        return this.string.substring(SP,TP);
-    },
-    removeFromBetween:function (sub1,sub2) {
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
-        var removal = sub1+this.getFromBetween(sub1,sub2)+sub2;
-        this.string = this.string.replace(removal,"");
-    },
-    getAllResults:function (sub1,sub2) {
-        // first check to see if we do have both substrings
-        if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
+  selectedRuleTypes: function() {
+    let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
+    let findedSubStrings = substrings().get(rule.rules[0].description,"{{","}}");
+    this.set('splitedRules', findedSubStrings.map((val) => {
+      set(this, `showEditBox-${val}`, true);
+      return {
+        'id': val,
+        'label': rule.rules[0].labels[val],
+      }
+    }));
+    this.buildRuleExprJSON(findedSubStrings);
+    return this.get('splitedRules');
+  }.property('selectedType'),
 
-        // find one result
-        var result = this.getFromBetween(sub1,sub2);
-        // push it to the results array
-        this.results.push(result);
-        // remove the most recently found one from the string
-        this.removeFromBetween(sub1,sub2);
-
-        // if there's more substrings
-        if(this.string.indexOf(sub1) > -1 && this.string.indexOf(sub2) > -1) {
-            this.getAllResults(sub1,sub2);
-        }
-        else return;
-    },
-    get:function (string,sub1,sub2) {
-        this.results = [];
-        this.string = string;
-        this.getAllResults(sub1,sub2);
-        return this.results;
+  buildRuleExprJSON(rules) {
+    var jsonObj = {};
+    for (var i = 0 ; i < rules.length; i++) {
+      jsonObj[rules[i]] = "";
     }
-  },
-  
+    this.set('rulesExprJSON', jsonObj);
+  }, 
 
   actions: {
     selectStorage(type) {
       this.set('selectedType', type);
     },
 
-    setNewDomain(value) {
-      set(this, 'showalertRuleDescriptionEditBox', true);
-      console.log(value);
-      /*if (isEmpty(newDomainName.trim())) {
-        get(this, 'notifications').warning(get(this, 'intl').t('validation.domain.required'), {
+    setRuleExpr(value, targetRef) {
+      set(this, `showEditBox-${targetRef}`, true);
+      if (isEmpty(value.trim())) {
+        this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.required'), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
         });
-      } else {
-        set(this, 'stacksfactoryObjectMeta.name', this.nameSpliter(newDomainName));
-      }*/
+      } else {        
+        set(this, `rulesExprJSON-${targetRef}`, value);
+        document.getElementById(`rulesExprValue-${targetRef}`).innerHTML = value;
+      }
     },
+
+    apply() {
+      let exprs = this.get('splitedRules');
+      let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
+      let expr = rule.rules[0].expression;
+      let flag = true;
+      for (var i = 0 ; i < exprs.length; i++) {
+        if (isEmpty(this.get(`rulesExprJSON-${exprs[i].id}`))) {
+          flag = false;
+        } else {
+          expr = substrings().replace(expr, `{{${exprs[i].id}}}`, this.get(`rulesExprJSON-${exprs[i].id}`))
+        }        
+      }
+      if (!flag) {
+        this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.required'), {
+          autoClear:     true,
+          clearDuration: 4200,
+          cssClasses:    'notification-warning'
+        });
+        return;
+      }
+
+      //update value filled expression into rule object and update it
+      rule.rules[0].expression = expr;
+
+      this.set('showSpinner', true);
+      if (!error) {
+        this.get('store').request(this.rawRequestOpts({
+          url:    '/api/v1/alertrules/'+rule.rules[0].id,
+          method: 'PUT',
+          data:   rule,
+        })).then(() => {
+          $('#alert_rule_modal').modal('hide');
+          this.set('modelSpinner', false);
+          this.set('showSpinner', false);
+          this.refresh();
+        }).catch(() => {
+          this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.somethingWrong'), {
+            autoClear:     true,
+            clearDuration: 4200,
+            cssClasses:    'notification-warning'
+          });
+          this.set('showSpinner', false);
+          this.set('modelSpinner', false);
+        });
+      } else {
+        this.set('showSpinner', false);
+        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
+          autoClear:     true,
+          clearDuration: 4200,
+          cssClasses:    'notification-warning'
+        });
+      }
+    }
 
   }
 

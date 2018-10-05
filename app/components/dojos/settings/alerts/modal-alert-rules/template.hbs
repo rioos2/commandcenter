@@ -1,4 +1,4 @@
-<div class="modal fade node_discovery node_modal" id="alert_rule_modal" role="dialog">
+<div class="modal fade node_discovery node_modal settings" id="alert_rule_modal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -24,11 +24,29 @@
             <div class="form-group">
               <label for="alertsRulesDescription">{{t 'dojos.settings.alerts.rules.expressions'}}</label> 
               <p>{{selectType}}</p>
-              <p>{{buildTypeText}}</p>
             </div>
           </div>
         </div>
+
+        <div class="row">
+          {{#each selectedRuleTypes as |type|}}
+            <div class="col-sm-6">
+            <div class="form-group">
+              <label class="text-center" >{{type.label}}</label>
+              <label class="text-center mini-text" id="rulesExprValue-{{type.id}}">{{t 'dojos.settings.alerts.rules.empty'}}</label>
+              {{text-editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setRuleExpr" showEditBox="showEditBox-{{type.id}}" targetRef=type.id}}
+            </div>
+          </div>
+          {{/each}}          
+        </div>
       
+        <button type="submit" {{action 'apply'}} class="btn btn-default">
+            {{t 'actions.activate'}}
+            {{#if showSpinner}}
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            {{/if}}
+          </button>
+
       </div>
     </div>
 
