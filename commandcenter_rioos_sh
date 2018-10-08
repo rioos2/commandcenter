@@ -1,4 +1,3 @@
-
 # TO-DO: 1. PROXY TO START COMMANDCENTER
 # DONT CHANGE THIS, WE START COMMANDCENTER in DOMAIN NAME
 upstream riooscommandcenter {
@@ -70,7 +69,7 @@ server {
 
     # TO-DO: 6 SET  THE PROXY PASS WITH THE WEBSOCKET HEALTHZ OVERALL
   	# In this case this points to 127.0.0.1
-    location /api/v1/healthz/overall {
+    location /api/v1/healthz/overall/watch {
         access_log on;
         proxy_pass $ENV{"WATCH_SERVER"};
         proxy_set_header X-Real-IP $remote_addr;
