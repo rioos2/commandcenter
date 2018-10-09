@@ -11,12 +11,12 @@
             <div class="form-group">
               <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.type'}}</label>
               <select class="form-control" id="alerts_rules_type" name="alerts_rules_type" onchange= {{action "selectStorage" value="target.value"}}>
-                {{#each inActiveRuleTypes as |type|}}
+                {{#each rulesForSelectBox as |type|}}
                 <option value={{type.value}}>{{type.text}}</option>
                 {{/each}}
                 </select>
             </div>
-          </div>
+          </div>          
         </div>        
 
         <div class="row ">
@@ -38,8 +38,21 @@
             </div>
           </div>
           {{/each}}          
-        </div>
-      
+        </div>      
+
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+              <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.actions'}}</label>
+              {{ember-select-guru
+                value=multipleValue
+                options=options
+                onSelect=(action "handleMultiSelect")
+                multiple=true}}
+            </div>
+            </div>
+          </div>
+
         <button type="submit" {{action 'apply'}} class="btn btn-default">
             {{t 'actions.activate'}}
             {{#if showSpinner}}

@@ -35,6 +35,9 @@ module.exports = function(defaults) {
     sassOptions: {
       implementation: Sass
     },
+    emberSelectGuru: {
+      includeCss: false
+    },
     //For disable eslint when yarn test
     // hinting: !isTesting,
   });

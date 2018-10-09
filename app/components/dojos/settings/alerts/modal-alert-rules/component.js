@@ -8,16 +8,28 @@ import C from 'nilavu/utils/constants';
 import { inject as service } from '@ember/service';
 import { substrings } from 'nilavu/helpers/substrings';
 import { isEmpty } from '@ember/utils';
+import DefaultHeaders from 'nilavu/mixins/default-headers';
 
-export default Component.extend({
+const {  A } = Ember;
+
+export default Component.extend(DefaultHeaders, {
   intl:          service(),
   notifications: service('notification-messages'),
-  state:         "inactive",  
   isActive:      false,
   showSpinner:   false,
+  multipleValue: new A([]),
+  options: new A(C.SETTING.NOTIFIERS),
 
   descriptionPlaceHolder: computed('descriptionPlaceHolder', function() {
     return get(this, 'intl').t('dojos.settings.alerts.rules.placeholder');
+  }),
+
+  alertActions: function() {
+    return [C.SETTINGS.EMAIL, C.SETTINGS.SLACK];
+  },
+
+  builtinRules: computed('model.alertBuiltinRules', function() {
+    return this.get('model.alertBuiltinRules.content');
   }),
 
   showDropDown: function() {
@@ -25,22 +37,16 @@ export default Component.extend({
   }.property('isActive'),
 
   selectedType: function() {
-    return this.get('model.alertRules')[0].id;
+    return this.get('builtinRules')[0].id;
   }.property('model'),
 
   selectType: function() {
-    let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
+    let rule = this.get('builtinRules').findBy("id", this.get('selectedType'));
     return rule.rules[0].reason;
   }.property('selectedType'),  
 
-  inActiveRules: computed('model.alertRules', function() {    
-    return this.get('model.alertRules').filter((rule) => {     
-      return rule.state == this.get('state');
-    });
-  }),    
-
-  inActiveRuleTypes: function() {
-    return this.get('inActiveRules').map((rule) => {
+  rulesForSelectBox: function() {
+    return this.get('builtinRules').map((rule) => {
       return {
         'value': rule.id,
         'text':  rule.rules[0].rule_type,
@@ -49,9 +55,9 @@ export default Component.extend({
   }.property('model'),  
 
   selectedRuleTypes: function() {
-    let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
-    let findedSubStrings = substrings().get(rule.rules[0].description,"{{","}}");
-    this.set('splitedRules', findedSubStrings.map((val) => {
+    let rule = this.get('builtinRules').findBy("id", this.get('selectedType'));
+    let findedSubStrings = substrings().get(rule.rules[0].expression,"{{","}}");
+    set(this, 'splitedRules', findedSubStrings.map((val) => {
       set(this, `showEditBox-${val}`, true);
       return {
         'id': val,
@@ -67,12 +73,16 @@ export default Component.extend({
     for (var i = 0 ; i < rules.length; i++) {
       jsonObj[rules[i]] = "";
     }
-    this.set('rulesExprJSON', jsonObj);
+    set(this, 'rulesExprJSON', jsonObj);
   }, 
 
   actions: {
     selectStorage(type) {
-      this.set('selectedType', type);
+      set(this, 'selectedType', type);
+    },
+
+    handleMultiSelect(options) {
+      set(this, 'alertActions', options);
     },
 
     setRuleExpr(value, targetRef) {
@@ -90,59 +100,101 @@ export default Component.extend({
     },
 
     apply() {
-      let exprs = this.get('splitedRules');
-      let rule = this.get('model.alertRules').findBy("id", this.get('selectedType'));
-      let expr = rule.rules[0].expression;
-      let flag = true;
-      for (var i = 0 ; i < exprs.length; i++) {
-        if (isEmpty(this.get(`rulesExprJSON-${exprs[i].id}`))) {
-          flag = false;
-        } else {
-          expr = substrings().replace(expr, `{{${exprs[i].id}}}`, this.get(`rulesExprJSON-${exprs[i].id}`))
-        }        
-      }
-      if (!flag) {
+      if (!this.validate()) {
         this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.required'), {
           autoClear:     true,
           clearDuration: 4200,
           cssClasses:    'notification-warning'
         });
         return;
-      }
-
-      //update value filled expression into rule object and update it
-      rule.rules[0].expression = expr;
-
-      this.set('showSpinner', true);
-      if (!error) {
-        this.get('store').request(this.rawRequestOpts({
-          url:    '/api/v1/alertrules/'+rule.rules[0].id,
-          method: 'PUT',
-          data:   rule,
-        })).then(() => {
-          $('#alert_rule_modal').modal('hide');
-          this.set('modelSpinner', false);
-          this.set('showSpinner', false);
-          this.refresh();
-        }).catch(() => {
-          this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.somethingWrong'), {
-            autoClear:     true,
-            clearDuration: 4200,
-            cssClasses:    'notification-warning'
-          });
-          this.set('showSpinner', false);
-          this.set('modelSpinner', false);
-        });
       } else {
-        this.set('showSpinner', false);
-        this.get('notifications').warning(htmlSafe(this.get('validationWarning')), {
-          autoClear:     true,
-          clearDuration: 4200,
-          cssClasses:    'notification-warning'
-        });
-      }
+         set(this, 'showSpinner', true);
+
+          this.get('store').request(this.rawRequestOpts({
+            url:    '/api/v1/alertrules',
+            method: 'POST',
+            data:   this.buildAlertRules(),
+          })).then(() => {
+            $('#alert_rule_modal').modal('hide');
+            set(this, 'modelSpinner', false);
+            set(this, 'showSpinner', false);
+            this.refresh();
+            this.sendAction('doReload');
+          }).catch((err) => {
+            this.get('notifications').warning(get(this, 'intl').t('dojos.settings.alerts.rules.somethingWrong'), {
+              autoClear:     true,
+              clearDuration: 4200,
+              cssClasses:    'notification-warning'
+            });
+            set(this, 'showSpinner', false);
+            set(this, 'modelSpinner', false);
+          });              
+      }         
     }
+},
 
-  }
+  validate() {
+    let exprs = this.get('splitedRules');     
+    let flag = true;
+    for (var i = 0 ; i < exprs.length; i++) {
+      if (isEmpty(this.get(`rulesExprJSON-${exprs[i].id}`))) {
+        flag = false;
+      } 
+    }      
+    return flag;
+  },
 
-});
+  buildAlertActions() {
+    return get(this, 'alertActions').map((val) => {
+      return val.name
+    });
+  },
+
+  buildAlertRules() {
+    let exprs = this.get('splitedRules');
+    let rule = this.get('builtinRules').findBy("id", this.get('selectedType'));
+    let expr = rule.rules[0].expression;
+    let labels = rule.rules[0].labels;
+    let flag = true;
+    for (var i = 0 ; i < exprs.length; i++) {        
+      //insert expression values into labels
+      labels[`${exprs[i].id}_value`] = this.get(`rulesExprJSON-${exprs[i].id}`);
+
+      //build expression data
+      expr = substrings().replace(expr, `{{${exprs[i].id}}}`, this.get(`rulesExprJSON-${exprs[i].id}`))
+    }      
+
+    //update value filled expression into rule object and update it
+    rule.rules[0].expression = expr;
+
+    rule.rules[0].labels = labels;   
+
+    let alertrule = {
+      "object_meta": rule.object_meta,
+      "state":    C.SETTING.ACTIVE,
+      "rules":    rule.rules,
+      "metadata": {"alertbuiltinrule": rule.id},
+      "notifiers": buildAlertActions(),
+    };
+
+    return alertrule;
+  },
+
+  clearExprs() {
+    let exprs = this.get('splitedRules');     
+    for (var i = 0 ; i < exprs.length; i++) {
+      set(this, `rulesExprJSON-${exprs[i].id}`, '');
+      set(this, `rulesExprValue-${exprs[i].id}`, '');
+    }      
+  },
+
+  refresh() {
+    this.clearExprs();
+    $('#alerts_rules_type').val(this.get('rulesForSelectBox')[0].value).trigger('change');
+    this.setProperties({
+      alertActions: [],
+      multipleValue: new A([])
+    });
+  },
+
+})

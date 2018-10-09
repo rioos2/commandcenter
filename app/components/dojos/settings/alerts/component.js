@@ -1,56 +1,55 @@
 import { isEmpty } from '@ember/utils';
 import { buildSettingPanel } from '../basic-panel/component';
 import { alias } from '@ember/object/computed';
-import { get, computed } from '@ember/object';
+import { set, get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { formatTime } from 'nilavu/helpers/format-time';
 
 
 export default buildSettingPanel('alerts', {
 
-  alerts: alias('model.alerts'),
-  intl:       service(),
+  alerts: alias('model.alertRules.content'),
+  intl:   service(),
 
-
-  hasAlerts: computed('alerts.content', function() {    
-    return isEmpty(get(this, 'alerts.content'));
+  hasAlerts: computed('alerts', function() {    
+    return isEmpty(get(this, 'alerts'));
   }),
 
-  tableData: computed('alerts.content', function() {
-    let data = isEmpty(get(this, 'alerts.content')) ? [] : get(this, 'alerts.content');
+  alertsCount: computed('alerts', function() {
+    return get(this, 'alerts').length;
+  }),
+
+  tableData: computed('alerts', function() {
+    let data = isEmpty(get(this, 'alerts')) ? [] : get(this, 'alerts');
 
     if (!isEmpty(data)) {
       data.forEach((e) => {
-        if (e.envelope.timestamp) {
-          e.envelope.timestamp = formatTime([e.envelope.timestamp]);
+        if (e.rules[0].reason) {
+          set(e, 'type', e.rules[0].rule_type);
+          set(e, 'reason', e.rules[0].reason);
         }
       });
     }
-
     return data;
   }),
 
+  rules: function(rules) {
+    return rules[0].rule_type;
+  },
+
   columns: computed(function() {
     return [{
-      label:          get(this, 'intl').t('dojos.settings.alerts.table.info'),
-      valuePath:      'envelope.event.message',
+      label:          get(this, 'intl').t('dojos.settings.alerts.table.type'),
+      valuePath:      'type',
       cellClassNames: 'info-column',
       sortable:       false,
+      width:          '20%',
       cellComponent:  'label-info'
     }, {
-      label:          get(this, 'intl').t('dojos.settings.alerts.table.ip'),
-      valuePath:      'envelope.address',
+      label:          get(this, 'intl').t('dojos.settings.alerts.table.reason'),
+      valuePath:      'reason',
       cellClassNames: 'ipaddress-column',
-      width:          '16%',
       sortable:       false,
-
-    }, {
-      label:          get(this, 'intl').t('dojos.settings.alerts.table.dateAndTime'),
-      valuePath:      'envelope.timestamp',
-      style:          'font-weight:bold',
-      cellClassNames: 'date-column',
-      width:          '20%',
-      sortable:       true,
     }];
   }),
 

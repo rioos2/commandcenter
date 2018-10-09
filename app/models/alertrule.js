@@ -1,10 +1,10 @@
 import Resource from 'ember-api-store/models/resource';
 
-var Alertrule = Resource.extend({
+var AlertRule = Resource.extend({
   type:    'alertrule',
   actions: {},
 
 
 });
 
-export default Alertrule;
+export default AlertRule;
