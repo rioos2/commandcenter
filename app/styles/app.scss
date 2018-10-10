@@ -38,11 +38,12 @@
 @import 'admin/chef_work';
 @import 'admin/jscrollbar';
 @import 'admin/main';
-@import 'admin/select2';
 @import 'admin/sweetalert';
 @import 'admin/settings';
 @import 'flag/flags';
 @import 'wizard/wizard';
+@import 'components/editable';
+@import "ember-searchable-select/style";
 //TO-DO: Why is this hanging here ?
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @font-face {

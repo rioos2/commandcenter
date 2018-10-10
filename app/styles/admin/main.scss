@@ -1050,6 +1050,23 @@ header {
   }
 }
 
+#alert_rule_modal {
+  .btn {
+    background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
+    border-radius: 3px;
+    font-family: fselliot;
+    font-size: 20px;
+    color: #FFFFFF;
+    height: 50px;
+    min-width: 120px;
+    float: right;
+  }
+
+  .form-group {
+    margin-bottom: 45px;
+  }
+}
+
  .node_modal {
   .btn {
     background-image: linear-gradient(-180deg, #6782FA 0, #3C59D6 100%);
@@ -1112,10 +1129,12 @@ header {
   #addcluster_modal .modal-dialog,
   #addnetwork_modal .modal-dialog,
   #addstorage_modal .modal-dialog,
+  #alert_rule_modal .modal-dialog,
   #network_edit .modal-dialog,
   #storage_edit .modal-dialog {
     width: 740px;
   }
+  
 }
 @media screen and (min-width: 991px) and (max-width: 1199px) {
   .kv-secondary-menu {
@@ -1131,6 +1150,13 @@ header {
 }
 
 #addcluster_modal .modal-dialog .form-control {
+  border: 1px solid #CED6E1;
+  border-radius: 3px;
+  height: 56px;
+  overflow-y: scroll;
+}
+
+#alert_rule_modal .modal-dialog .form-control {
   border: 1px solid #CED6E1;
   border-radius: 3px;
   height: 56px;

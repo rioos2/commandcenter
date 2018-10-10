@@ -384,6 +384,21 @@ var C = {
     SECRET_TYPE:              'ui$digicloud$secret_type',
     DEFAULT_SECRET_TYPE:      'ui$digicloud$default_secret_type',
     SECRET_KEY_LENGTH:        'ui$digicloud$secret_key_length',
+    ACTIVE:                   'ACTIVE',
+    ALERTRULETYPE:            'AlertRule',
+    EMAIL:                    'email',
+    SLACK:                    'slack',
+    NOTIFIERS:                [
+                                {
+                                  name: 'slack',
+                                  description: 'Alerts send to slack.'
+                                },
+                                {
+                                  name: 'email',
+                                  description: 'Alerts sends to email.'
+                                },                               
+                              ],
+
   },
 
   USER: {

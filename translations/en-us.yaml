@@ -24,6 +24,7 @@ generic:
   noo: No
   yess: Yes
   note: 'NOTE:  '
+  active_btn: Add
   M: M
   N: N
   O: O
@@ -233,6 +234,24 @@ dojos:
         info: Description
         dateAndTime: 'Date and time'
         ip: 'IP'
+    alerts:
+      title:  Alerts
+      required: 'No alerts added yet.'
+      connected: 'Connected Rules'
+      rules: 
+        title: 'Service Alerts'
+        select: 'Select your option'
+        placeholder: 'Alert rules edit expressions'
+        type: 'Choose alert type'
+        expressions: 'Edit rule expressions'
+        required: "Value must fill for apply alert policies."
+        empty: 'value is empty'
+        somethingWrong: 'Unable to connect'
+        actions: 'Actions'
+      table:
+        type: Type
+        dateAndTime: 'Date and time'
+        reason: 'Reason'
     entitlement:
       title: Licenses
       show:
