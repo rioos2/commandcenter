@@ -386,16 +386,19 @@ var C = {
     SECRET_KEY_LENGTH:        'ui$digicloud$secret_key_length',
     ACTIVE:                   'ACTIVE',
     ALERTRULETYPE:            'AlertRule',
+    EMAIL:                    'email',
+    SLACK:                    'slack',
     NOTIFIERS:                [
-                                Ember.Object.create({
+                                {
                                   name: 'slack',
                                   description: 'Alerts send to slack.'
-                                }),
-                                Ember.Object.create({
+                                },
+                                {
                                   name: 'email',
                                   description: 'Alerts sends to email.'
-                                }),                               
+                                },                               
                               ],
+
   },
 
   USER: {

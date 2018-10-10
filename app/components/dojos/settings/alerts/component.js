@@ -4,7 +4,7 @@ import { alias } from '@ember/object/computed';
 import { set, get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { formatTime } from 'nilavu/helpers/format-time';
-
+import { R } from 'ramda';
 
 export default buildSettingPanel('alerts', {
 
@@ -20,16 +20,30 @@ export default buildSettingPanel('alerts', {
   }),
 
   tableData: computed('alerts', function() {
-    let data = isEmpty(get(this, 'alerts')) ? [] : get(this, 'alerts');
+    let typeLens = R.lensProp('type');
+    let reasonLens = R.lensProp('reason');
+    let rulesLens = R.lensProp('rules');
 
-    if (!isEmpty(data)) {
+    let data = isEmpty(get(this, 'alerts')) ? [] : get(this, 'alerts');
+    if (!isEmpty(data)) {    
+
+      //append type value   
+      var mergeRulesType = x => R.set(typeLens,R.view(typeLens, nth(0, R.view(rulesLens, x))), x);
+      R.map(mergeRulesType, data);
+
+      //append reason value
+      var mergeRulesReason = x => R.set(reasonLens,R.view(reasonLens, nth(0, R.view(rulesLens, x))), x);
+      R.map(mergeRulesReason, data);
+    }
+
+   /* if (!isEmpty(data)) {
       data.forEach((e) => {
         if (e.rules[0].reason) {
           set(e, 'type', e.rules[0].rule_type);
           set(e, 'reason', e.rules[0].reason);
         }
       });
-    }
+    }*/
     return data;
   }),
 

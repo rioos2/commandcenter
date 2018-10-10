@@ -44,11 +44,13 @@
         <div class="col-sm-12">
             <div class="form-group">
               <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.actions'}}</label>
-              {{ember-select-guru
-                value=multipleValue
-                options=options
-                onSelect=(action "handleMultiSelect")
-                multiple=true}}
+                {{!-- BEGIN-SNIPPET multiple --}}
+                {{searchable-select
+                  content=filteredCountries
+                  sortBy="title"
+                  multiple=true
+                  prompt="Choose alert actions"
+                  on-change=(action "handleMultiSelect")}}
             </div>
             </div>
           </div>

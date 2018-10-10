@@ -9,24 +9,36 @@ import { inject as service } from '@ember/service';
 import { substrings } from 'nilavu/helpers/substrings';
 import { isEmpty } from '@ember/utils';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-
-const {  A } = Ember;
+import  R  from 'ramda';
 
 export default Component.extend(DefaultHeaders, {
   intl:          service(),
   notifications: service('notification-messages'),
   isActive:      false,
   showSpinner:   false,
-  multipleValue: new A([]),
-  options: new A(C.SETTING.NOTIFIERS),
+  filteredCountries: null,
+  contents:      ['slack', 'email'],
+
+  alertActionsArray: function() {
+    return [C.SETTING.EMAIL, C.SETTING.SLACK];
+  },
+
+  alertActions: computed('model', function() {    
+
+     const abbrev = y => {return { title: y } };
+
+     let arr = R.map(abbrev)(this.alertActionsArray());
+      return arr;
+   }),
+
+  didInsertElement() {
+    this.set('filteredCountries', get(this, 'alertActions'));
+  },
+
 
   descriptionPlaceHolder: computed('descriptionPlaceHolder', function() {
     return get(this, 'intl').t('dojos.settings.alerts.rules.placeholder');
-  }),
-
-  alertActions: function() {
-    return [C.SETTINGS.EMAIL, C.SETTINGS.SLACK];
-  },
+  }),  
 
   builtinRules: computed('model.alertBuiltinRules', function() {
     return this.get('model.alertBuiltinRules.content');
@@ -83,6 +95,7 @@ export default Component.extend(DefaultHeaders, {
 
     handleMultiSelect(options) {
       set(this, 'alertActions', options);
+      alert(JSON.stringify(get(this, 'alertActions')));
     },
 
     setRuleExpr(value, targetRef) {
@@ -193,7 +206,6 @@ export default Component.extend(DefaultHeaders, {
     $('#alerts_rules_type').val(this.get('rulesForSelectBox')[0].value).trigger('change');
     this.setProperties({
       alertActions: [],
-      multipleValue: new A([])
     });
   },
 
