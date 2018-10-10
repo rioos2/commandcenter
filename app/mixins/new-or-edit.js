@@ -6,7 +6,9 @@ import { alias } from '@ember/object/computed';
 import { resolve } from 'rsvp';
 import { get, set } from '@ember/object';
 
-export default Mixin.create({
+import DefaultHeaders from 'nilavu/mixins/default-headers';
+
+export default Mixin.create(DefaultHeaders, {
   originalModel:           null,
   errors:                  null,
   saving:                  false,
@@ -70,6 +72,7 @@ export default Mixin.create({
     },
 
     save(cb) {
+
       // Will save can return true/false or a promise
       resolve(this.willSave()).then((ok) => {
         if (!ok) {
@@ -77,7 +80,8 @@ export default Mixin.create({
           if (cb) {
             cb();
           }
-          // return;
+
+          return;
         }
 
         this.doSave()
@@ -122,6 +126,14 @@ export default Mixin.create({
 
   doSave(opt) {
     const self = this;
+    var session = this.get('session');
+
+    opt = {
+      headers: {
+        'X-AUTH-RIOOS-EMAIL': session.get('email'),
+        'Authorization':      `Bearer ${  this.encodedHeaderFromTabSession() }`,
+      },
+    }
 
     return get(this, 'primaryResource').save(opt).then((newData) => {
       if (newData.objects && newData.type === 'Template') {

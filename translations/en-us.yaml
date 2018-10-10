@@ -471,7 +471,7 @@ launcherPage:
     subtitle: 'Generate a self signed certificate.'
     bitkey: 'BITS IN KEY'
     success: 'Secret key generated successfully.'
-    required: 'Select secret type'
+    required: 'Select secret type and generate'
   location:
     title: 'Select Location'
     required: 'You forgot to select a location'
@@ -606,7 +606,7 @@ validation:
     contains_symbols: 'subdomain should be alphanumeric'
     required: 'You forgot to type a subdomain name'
   secret:
-    error: 'Failed to generate secret key. You can''t access to digital cloud upon launch.'
+    error: "Failed to generate secret key. You can't access to digital cloud upon launch."
   invitations:
     message: 'Thanks for accepting your invitation to {teamName}. Welcome'
     error: 'Your invite was not accepted. Please contact the site''s administrator'

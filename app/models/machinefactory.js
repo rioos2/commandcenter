@@ -14,13 +14,13 @@ var MachineFactory = Resource.extend({
   // Will be fired when the resoure get saving
   validationErrors() {
     if (isEmpty(get(this, 'secret.id')) && get(this, 'object_meta.labels.rioos_category') !== C.CATEGORIES.BLOCKCHAIN) {
-      return  get(this, 'intl').t('notifications.secret');
+      return  get(this, 'intl').t('launcherPage.secret.required');
     }  else if (isEmpty(get(this, 'object_meta.cluster_name'))) {
-      return  get(this, 'intl').t('notifications.region');
+      return  get(this, 'intl').t('launcherPage.location.required');
     } else if (isEmpty(get(this, 'os'))) {
-      return  get(this, 'intl').t('notifications.plan.noSelection');
+      return  get(this, 'intl').t('launcherPage.appstore.machine.required');
     } else if (isEmpty(get(this, 'network'))) {
-      return  get(this, 'intl').t('notifications.network.noSelection');
+      return  get(this, 'intl').t('launcherPage.network.required');
     } else {
       return '';
     }
