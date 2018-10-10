@@ -81,6 +81,7 @@ export default Component.extend(DefaultHeaders, {
       const name = country.name.countryName;
       this.set('selectedCurrency', cy);
       this.set('selectedCountry', name);
+      this.set('selectedCountryISO', iso);
     },
 
     countryDidChange(country) {
@@ -122,7 +123,7 @@ export default Component.extend(DefaultHeaders, {
 
       const withTitle = x => { return { title: x } };
 
-      let matches = R.map(withTitle)(new RioGeo().locateCity(q, "US"));
+      let matches = R.map(withTitle)(new RioGeo().locateCity(q, this.get('selectedCountryISO')));
        // ...then set back to false once the AJAX call resolves.
 
       // Here, we pretend have a slow response using .setTimeout().
@@ -173,7 +174,6 @@ export default Component.extend(DefaultHeaders, {
     },
 
   },
-
 
   storageId(name) {
     let id;
@@ -281,6 +281,7 @@ export default Component.extend(DefaultHeaders, {
   },
 
   saveData() {
+    let city = this.get('selectedCity.title').split(',')
     return {
       nodes:             this.get('selectedNodes'),
       networks:          this.uniqueSelected(this.get('selectedVirtualNetworks')),
@@ -288,8 +289,8 @@ export default Component.extend(DefaultHeaders, {
       currency:          this.get('selectedCurrency'),
       flag:              `${ this.get('selectedCurrency')  }.svg`,
       enabled:           true,
-      advanced_settings: { country: this.get('selectedCountry') },
-      object_meta:       { name: this.get('selectedCity'), },
+      advanced_settings: { country: this.get('selectedCountry'), country_code: this.get('selectedCountryISO') },
+      object_meta:       { name: city[0] },
       status:            { phase: 'ready' }
     };
   },

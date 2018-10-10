@@ -7334,10 +7334,10 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-geoip_from_cities@1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/geoip_from_cities/-/geoip_from_cities-1.8.0.tgz#6ec5742c9608ad21dce2489ec85dc6b2c7c02f7a"
-  integrity sha512-/4ljb6r2KN6BmPMkXc+jSd3FA57dOmkk7iMTqcrLzh8yQdg+saCv7WS8G2pmCPLCGdd/lZ/T9Ymup+WPjpUkGw==
+geoip_from_cities@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/geoip_from_cities/-/geoip_from_cities-1.9.0.tgz#090ef813ba6e21ed7da02d230dd32e8597ebfd08"
+  integrity sha512-25pAKHXg4gq3cYsxNcM0CemPCPQ5Lsjhm9wmLpBIFmNQgk/yfClqp7uJCR9u3OryWm3Z1C+kRPmqC0vLTtGR9g==
   dependencies:
     cities.json "~1.1.2"
     ramda "~0.25.0"

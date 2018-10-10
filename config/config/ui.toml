@@ -13,13 +13,13 @@ uwatch_server = "ws://localhost:9443"
 
 ## vnc server that we connect to using insecure mode.
 ## replace it to wss if we wish to connect via secure mode.
-vnc_server = "wss://localhost:444"
+vnc_server = "wss://www.servernet.in:444"
 
 ## Nodelet port for containers console
 container_console_port = "10250"
 
 ## count.ly url that provided by count.ly
-countly_server = "http://countly.rioos.xyz"
+countly_server = "https://countly.rioos.xyz"
 
 ##key that provided by count.ly
 app_key = "9653325d8d0f5fe63c3491c93259bf4ff77821ca"
