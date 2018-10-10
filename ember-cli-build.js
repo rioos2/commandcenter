@@ -38,11 +38,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
 
-  // app.import('bower_components/bootstrap/dist/css/bootstrap.css');
-  // app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
-  //     destDir: 'assets'
-  // });
-
   app.import('vendor/charts/d3.min.js');
   app.import('vendor/charts/d3script-area.js');
   app.import('vendor/charts/d3script-gauge.js');
@@ -54,7 +49,6 @@ module.exports = function(defaults) {
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');
-  app.import('vendor/charts/loader.js');
   app.import('vendor/dropdown/position-calculator.js');
 
   app.import('vendor/analytics/countly.js');
