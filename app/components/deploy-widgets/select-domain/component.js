@@ -1,7 +1,6 @@
 import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 import DefaultHeaders from 'nilavu/mixins/default-headers';
-import ObjectMetaBuilder from 'nilavu/models/object-meta-builder';
 import C from 'nilavu/utils/constants';
 import D from 'nilavu/utils/default';
 import { denormalizeName } from 'nilavu/utils/denormalize';

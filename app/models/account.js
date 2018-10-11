@@ -9,22 +9,22 @@ var Account = Resource.extend(DefaultHeaders, {
   availableActions: function() {
 
     return [{
-      label:   'action.makeAdmin',
+      label:   'actions.makeAdmin',
       action:  'makeAsAdmin',
       enabled: !this.get('is_admin'),
     },
     {
-      label:   'action.revokeAdmin',
+      label:   'actions.revokeAdmin',
       action:  'revokeAdmin',
       enabled: this.get('is_admin'),
     },
     {
-      label:   'action.makeSuspend',
+      label:   'actions.makeSuspend',
       action:  'suspendUser',
       enabled: !this.get('suspend'),
     },
     {
-      label:   'action.revokeSuspend',
+      label:   'actions.revokeSuspend',
       action:  'revokeSuspendedUser',
       enabled: this.get('suspend'),
     },

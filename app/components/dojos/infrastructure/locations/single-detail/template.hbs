@@ -30,7 +30,7 @@
           {{dojos/infrastructure/common/network-node node=node }}
         {{/each}}
       {{else}}
-        <div class="sd-empty-pool">{{t 'dojos.infrastructure.locations.noClusterNode'}}</div>
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.locations.details.required'}}</div>
       {{/if}}
     </div>
     <div class="cluster-active-detail-detail">
@@ -41,7 +41,7 @@
           {{dojos/infrastructure/locations/single-detail/network-name network=net }}
         {{/each}}
       {{else}}
-        <div class="sd-empty-pool">{{t 'dojos.infrastructure.locations.noClusterNetwork'}}</div>
+        <div class="sd-empty-pool">{{t 'dojos.infrastructure.locations.details.requiredNetwork'}}</div>
       {{/if}}
     </div>
   </div>

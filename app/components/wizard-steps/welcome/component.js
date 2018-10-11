@@ -10,7 +10,7 @@ export default Component.extend({
   className: '',
 
   didInsertElement() {
-    this.set('welcomeMsg', htmlSafe(get(this, 'intl').t('wizard.welcomeMessage')));
+    this.set('welcomeMsg', htmlSafe(get(this, 'intl').t('wizards.step1.detail')));
   },
 
   actions: {
