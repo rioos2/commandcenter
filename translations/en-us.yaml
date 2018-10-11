@@ -235,6 +235,7 @@ dojos:
     audits:
       title:  Audits
       required: 'No logs added yet.'
+      error: '<p>Failed to pull audit logs. Refer <a href="http://rio.digital/docs" target="_blank">documentation</a> to troubleshoot.</p>'
       table:
         info: Description
         dateAndTime: 'Date and time'
@@ -495,7 +496,7 @@ launcherPage:
     subtitle: 'Generate a self signed certificate.'
     bitkey: 'BITS IN KEY'
     success: 'Secret key generated successfully.'
-    required: 'Select secret type'
+    required: 'Select secret type and generate'
   location:
     title: 'Select Location'
     required: 'You forgot to select a location'
@@ -635,7 +636,7 @@ validation:
     contains_symbols: 'subdomain should be alphanumeric'
     required: 'You forgot to type a subdomain name'
   secret:
-    error: 'Failed to generate secret key. You can''t access to digital cloud upon launch.'
+    error: "Failed to generate secret key. You can't access to digital cloud upon launch."
   invitations:
     message: 'Thanks for accepting your invitation to {teamName}. Welcome'
     error: 'Your invite was not accepted. Please contact the site''s administrator'

@@ -16,10 +16,10 @@ import C from 'nilavu/utils/constants';
 export default Component.extend(DefaultHeaders, NewOrEdit, {
   session:           service(),
   intl:              service(),
-  notifications:     service('notification-messages'),
   noImage:           true,
   validationWarning: '',
   networkExist:      true,
+  resourceUpdated:   false,
 
   domainName:     '',
   machinefactory: alias('model'),
@@ -91,17 +91,20 @@ export default Component.extend(DefaultHeaders, NewOrEdit, {
 
   actions: {
     addStacksFactory() {
-      set(this, 'filpper', 'dive');
 
       var id = get(this, 'session').get('id');
 
       set(this, 'machinefactory.object_meta.account', id);
-      this.resourceUpdate();
+      if (!get(this, 'resourceUpdated')) {
+        this.resourceUpdate();
+        set(this, 'resourceUpdated', true);
+      }
       this.send('save', (success) =>  {
         set(this, 'showSpinner', true);
         set(this, 'saving', false);
         set(this, 'saved', ( success === true ));
         if (get(this, 'saved')){
+          set(this, 'filpper', 'dive');
           window.location = '/apps/stacks';
         }
       });
