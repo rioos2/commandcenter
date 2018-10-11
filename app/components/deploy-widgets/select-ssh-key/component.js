@@ -8,10 +8,12 @@ import NewOrEdit from 'nilavu/mixins/new-or-edit';
 import { denormalizeName } from 'nilavu/utils/denormalize';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
-import {  get, set, computed} from '@ember/object';
+import {
+  get, set, computed
+} from '@ember/object';
 
 
-export default Component.extend(DefaultHeaders,NewOrEdit,{
+export default Component.extend(DefaultHeaders, NewOrEdit, {
   intl:                    service(),
   session:                 service(),
   notifications:           service('notification-messages'),
@@ -20,7 +22,7 @@ export default Component.extend(DefaultHeaders,NewOrEdit,{
   showSpinner:             false,
   stacksfactoryObjectMeta: alias('stacksfactory.object_meta'),
   secretObjectMeta:        alias('secret.object_meta'),
-  model:        alias('secret'),
+  model:                   alias('secret'),
 
 
   bitsInKey: computed('settings', function() {
@@ -51,14 +53,13 @@ export default Component.extend(DefaultHeaders,NewOrEdit,{
         set(this, 'secretObjectMeta', ObjectMetaBuilder.buildObjectMeta());
         set(this, 'secretObjectMeta.name', get(this, 'stacksfactoryObjectMeta.name'));
 
-        var id = get(this, 'session').get('id');
+        let id = get(this, 'session').get('id');
 
         set(this, 'secretObjectMeta.account', id);
-        var url = 'secrets';
-
+        // var url = 'secrets';
         this.send('save', (success) =>  {
           set(this, 'doneCreate', true);
-          set(this, 'stacksfactory.secret.id', result.id);
+          set(this, 'stacksfactory.secret.id', id);
           set(this, 'showSpinner', true);
           set(this, 'saving', false);
           set(this, 'saved', ( success === true ));
@@ -84,12 +85,13 @@ export default Component.extend(DefaultHeaders,NewOrEdit,{
 
 
   checkDomain() {
-  let checkDomain =  isEmpty(get(this, 'stacksfactoryObjectMeta.name'));
-  if (checkDomain) {
-    set(this, 'errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));
-  }
+    let checkDomain =  isEmpty(get(this, 'stacksfactoryObjectMeta.name'));
 
-  return checkDomain;
+    if (checkDomain) {
+      set(this, 'errorMsg', get(this, 'intl').t('launcherPage.domain.keyGenerate.emptyDomain'));
+    }
+
+    return checkDomain;
   },
 
 

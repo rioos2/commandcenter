@@ -21,10 +21,14 @@ export default Route.extend(DefaultHeaders, HashSettledFilter, {
       logs:              this.get('store').find('log', null, this.opts('logs')),
       audits:            this.get('store').find('audit', null, this.opts('audits')),
       accounts:          this.get('store').find('account', null, this.opts('accounts')),
+      alertRules:        this.get('store').findAll('alertrule', this.opts('alertrules')),
+      alertBuiltinRules: this.get('store').findAll('alertBuiltinRule', this.opts('alertbuiltinrules')),
     }).then((hash) => {
       return this.responseHandler(hash);
     });
   },
+
+
   actions: {
     // This will reload after edit processed by component
     reloadModel() {

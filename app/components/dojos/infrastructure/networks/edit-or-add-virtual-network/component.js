@@ -101,7 +101,7 @@ export default Component.extend(DefaultHeaders, {
 
   requiredNodesToProceed() {
     if (isEmpty(this.get('nodes'))) {
-      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
+      this.set('pageWarning', get(this, 'intl').t('dojos.infrastructure.locations.add.error.requiredNodes'));
 
       return true;
     } else {

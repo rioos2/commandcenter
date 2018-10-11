@@ -24,6 +24,7 @@ generic:
   noo: No
   yess: Yes
   note: 'NOTE:  '
+  active_btn: Add
   M: M
   N: N
   O: O
@@ -50,6 +51,11 @@ actions:
   add: Add
   deploy: Deploy
   activate: Activate
+  active: Active
+  admin: Admin
+  revokeAdmin: Revoke Admin
+  makeSuspend: Suspend
+  cancel: Cancel
 #########################
 # The main navigation bar
 ########################
@@ -234,6 +240,24 @@ dojos:
         info: Description
         dateAndTime: 'Date and time'
         ip: 'IP'
+    alerts:
+      title:  Alerts
+      required: 'No alerts added yet.'
+      connected: 'Connected Rules'
+      rules: 
+        title: 'Service Alerts'
+        select: 'Select your option'
+        placeholder: 'Alert rules edit expressions'
+        type: 'Choose alert type'
+        expressions: 'Edit rule expressions'
+        required: "Value must fill for apply alert policies."
+        empty: 'value is empty'
+        somethingWrong: 'Unable to connect'
+        actions: 'Actions'
+      table:
+        type: Type
+        dateAndTime: 'Date and time'
+        reason: 'Reason'
     entitlement:
       title: Licenses
       show:
@@ -587,6 +611,11 @@ messages:
       downloadFailed: '<p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>'
   secrets:
     downloadFailed: 'Download failed try after some time'
+  admin:
+    infra:
+      user:
+        revokeAdmin: 'Are you sure you want to revoke admin permission for "Rio"?'
+        revokeAdminNote: 'Rio/OS will be accessible to "Rio" as regular user'
 
 error:
   apiserver_is_down: 'API Server is down.'

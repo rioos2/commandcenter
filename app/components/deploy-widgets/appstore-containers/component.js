@@ -1,15 +1,15 @@
 import Component from '@ember/component';
-import {inject as service} from '@ember/service';
-import {  isEmpty} from '@ember/utils';
+import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 import C from 'nilavu/utils/constants';
-import {  alias} from '@ember/object/computed';
-import {  get,  set,  computed} from '@ember/object';
+import { alias } from '@ember/object/computed';
+import { get,  computed } from '@ember/object';
 
 export default Component.extend({
-  intl: service(),
+  intl:          service(),
   notifications: service('notification-messages'),
-  store: service(),
-  activate: false,
+  store:         service(),
+  activate:      false,
 
   stacksfactoryResources: alias('stacksfactory.resources'),
 
@@ -98,9 +98,9 @@ export default Component.extend({
   checkPlanEmpty() {
     if (isEmpty(this.get('groupedVms'))) {
       this.get('notifications').warning(get(this, 'intl').t('notifications.plan.empty'), {
-        autoClear: true,
+        autoClear:     true,
         clearDuration: 6000,
-        cssClasses: 'notification-warning'
+        cssClasses:    'notification-warning'
       });
     }
   },
@@ -110,6 +110,7 @@ export default Component.extend({
     var uniqueVmGroup = [];
     var groupVms = [];
     var planfactory = this.get('plans.content');
+
     planfactory.forEach((plan) => {
       if (plan.category.toLowerCase() === C.CATEGORIES.CONTAINER && plan.status.phase.toLowerCase() === C.PHASE.READY) {
         planGroup.pushObject(plan.object_meta.name);
@@ -120,10 +121,10 @@ export default Component.extend({
     });
     uniqueVmGroup.forEach((vm) => {
       let createVmGroup = {
-        'type': vm,
-        'icon': '',
+        'type':    vm,
+        'icon':    '',
         'version': [],
-        'item': []
+        'item':    []
       }
 
       planfactory.forEach((plan) => {
@@ -131,10 +132,10 @@ export default Component.extend({
           createVmGroup.item.pushObject(plan);
           createVmGroup.icon = plan.icon;
           createVmGroup.version.pushObject({
-            'version': plan.version,
-            'id': plan.id,
-            'type': plan.object_meta.name,
-            'icon': plan.icon,
+            'version':     plan.version,
+            'id':          plan.id,
+            'type':        plan.object_meta.name,
+            'icon':        plan.icon,
             'description': plan.description
           });
         }

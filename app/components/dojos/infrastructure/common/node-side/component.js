@@ -18,7 +18,7 @@ export default Component.extend({
   }.property('model.status.phase'),
 
   emptyError: function() {
-    return this.get('intl').t(`stackPage.admin.${  this.get('type')  }.noNode`);
+    return this.get('intl').t(`dojos.infrastructure.ninjas.detail.required`);
   }.property('type'),
 
   bridges: function() {
