@@ -229,6 +229,7 @@ dojos:
     audits:
       title:  Audits
       required: 'No logs added yet.'
+      error: '<p>Failed to pull audit logs. Refer <a href="http://rio.digital/docs" target="_blank">documentation</a> to troubleshoot.</p>'
       table:
         info: Description
         dateAndTime: 'Date and time'
