@@ -202,11 +202,11 @@ export default Component.extend(DefaultHeaders, {
 
   displayMessage() {
     if (isEmpty(this.get('storages'))) {
-      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.storagesDisplayError'));
+      this.set('pageWarning', get(this, 'intl').t('dojos.infrastructure.storages.disks.view.required'));
 
       return true;
     } else if (isEmpty(this.get('nodes'))) {
-      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.locations.add.nodesDisplayError'));
+      this.set('pageWarning', get(this, 'intl').t('dojos.infrastructure.locations.add.error.requiredNodes'));
 
       return true;
     } else if (isEmpty(this.get('virtualNetworks'))) {

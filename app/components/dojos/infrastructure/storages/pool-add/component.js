@@ -154,7 +154,7 @@ export default Component.extend(DefaultHeaders, {
   },
   displayMessage() {
     if (isEmpty(this.get('storages'))) {
-      this.set('pageWarning', get(this, 'intl').t('stackPage.admin.storage.pool.storagesDisplayError'));
+      this.set('pageWarning', get(this, 'intl').t('dojos.infrastructure.storages.disks.required'));
 
       return true;
     } else {

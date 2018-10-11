@@ -51,6 +51,11 @@ actions:
   add: Add
   deploy: Deploy
   activate: Activate
+  active: Active
+  admin: Admin
+  revokeAdmin: Revoke Admin
+  makeSuspend: Suspend
+  cancel: Cancel
 #########################
 # The main navigation bar
 ########################
@@ -605,6 +610,11 @@ messages:
       downloadFailed: '<p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>'
   secrets:
     downloadFailed: 'Download failed try after some time'
+  admin:
+    infra:
+      user:
+        revokeAdmin: 'Are you sure you want to revoke admin permission for "Rio"?'
+        revokeAdminNote: 'Rio/OS will be accessible to "Rio" as regular user'
 
 error:
   apiserver_is_down: 'API Server is down.'

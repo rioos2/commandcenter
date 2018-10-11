@@ -21,10 +21,11 @@
           {{#if user.suspend}}
           <span class="label ptop-5 error">{{t 'account.userManagement.suspend.title'}}</span>
           {{else}}
-          <span class="label ptop-5 success">{{t 'account.userManagement.active'}}</span>
+          <span class="label ptop-5 success">{{t 'actions.active'}}</span>
+
           {{/if}}
           {{#if user.is_admin}}
-          <span class="label ptop-5 success-green">{{t 'account.userManagement.admin.title'}}</span>
+          <span class="label ptop-5 success-green">{{t 'actions.admin'}}</span>
           {{/if}}
         </div>
 
