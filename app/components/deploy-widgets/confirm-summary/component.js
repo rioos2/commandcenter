@@ -16,7 +16,6 @@ import C from 'nilavu/utils/constants';
 export default Component.extend(DefaultHeaders, NewOrEdit, {
   session:           service(),
   intl:              service(),
-  notifications:     service('notification-messages'),
   noImage:           true,
   validationWarning: '',
   networkExist:      true,
@@ -107,12 +106,6 @@ export default Component.extend(DefaultHeaders, NewOrEdit, {
         if (get(this, 'saved')){
           set(this, 'filpper', 'dive');
           window.location = '/apps/stacks';
-        } else {
-          this.get('notifications').warning(this.get('model.error'), {
-            autoClear:     true,
-            clearDuration: 6000,
-            cssClasses:    'notification-warning'
-          });
         }
       });
     },
