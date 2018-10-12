@@ -1,0 +1,3 @@
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+EmberApp	/home/ram/code/rioos/node/commandcenter/ember-cli-build.js	/^var EmberApp = require('ember-cli\/lib\/broccoli\/ember-app');$/;"	v	language:JavaScript
+module.exports	/home/ram/code/rioos/node/commandcenter/ember-cli-build.js	/^module.exports = function(defaults) {$/;"	f	language:JavaScript

@@ -98,10 +98,11 @@ export default Route.extend(DefaultHeaders,  {
         memory:       parseInt(settings[denormalizeName(`${ C.SETTING.RAM }`)] || D.VPS.ram),
         storage:      parseInt(settings[denormalizeName(`${ C.SETTING.DISK }`)] || D.VPS.storage)
       },
-      status:  { phase: '', },
-      secret:  { id: '' },
-      plan:    '',
-      network: '',
+      status:   { phase: '', },
+      secret:   { id: '' },
+      plan:     '',
+      network:  '',
+
       os:      settings[denormalizeName(`${ C.SETTING.OS_NAME }`)] || D.VPS.destro,
     };
 

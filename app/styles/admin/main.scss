@@ -1156,6 +1156,7 @@ header {
   overflow-y: scroll;
 }
 
+<<<<<<< HEAD
 #alert_rule_modal .modal-dialog .form-control {
   border: 1px solid #CED6E1;
   border-radius: 3px;
@@ -1184,32 +1185,10 @@ header {
     color: #5151BF;
     padding: 4px 9px !important;
   }
+=======
+>>>>>>> 2-0-stable
 
-  .select2-selection__choice__remove {
-    font-family: fselliot;
-    font-size: 16px;
-    color: #D02F44 !important;
-    float: right;
-    margin-left: 8px;
-  }
-}
 
-.select2-selection.select2-selection--single {
-  border: 1px solid #CED6E1 !important;
-  border-radius: 3px !important;
-  height: 56px !important;
-
-  span {
-    padding-top: 14px;
-    box-sizing: border-box;
-    font-family: 'fselliot';
-    padding-left: 16px !important;
-  }
-
-  .select2-selection__arrow {
-    padding-top: 55px;
-  }
-}
 
 .scroll-wrapper {
   overflow: hidden !important;

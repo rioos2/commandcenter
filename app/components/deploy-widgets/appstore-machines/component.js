@@ -8,6 +8,7 @@ import {
 } from '@ember/object';
 
 export default Component.extend({
+<<<<<<< HEAD:app/components/deploy-widgets/appstore-machines/component.js
   intl:                   service(),
   notifications:          service('notification-messages'),
   store:                  service(),
@@ -16,6 +17,14 @@ export default Component.extend({
   stacksfactoryResources: alias('stacksfactory.resources'),
 
   groupedVms: computed('plans', function() {
+=======
+  intl:          service(),
+  notifications: service('notification-messages'),
+  store:         service(),
+  activate:      false,
+
+  groupedVms: function() {
+>>>>>>> 2-0-stable:app/components/createcloud/server-os/component.js
     return this.groupingVms();
   }),
 

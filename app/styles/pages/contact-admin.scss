@@ -41,6 +41,10 @@
       font-family: fselliot;
       font-size: 18px;
     }
+
+    .admin-hand:hover {
+      cursor: pointer;
+    }
   }
   @media only screen and (max-width: 600px) {
     .col-container {

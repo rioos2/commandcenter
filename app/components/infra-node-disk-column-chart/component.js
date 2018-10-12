@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
+import echarts from 'npm:echarts';
 export default Component.extend({
 
   isActive: false,
@@ -29,50 +30,86 @@ export default Component.extend({
     },
 
     processFilter(type) {
-      this.set('chartData', this.diskData(type));
-      this.drawProcessStatistics();
+      this.buildData(this.diskData(type));
       this.set('selectType', type);
     },
   },
 
-  drawProcessStatistics() {
-    var self = this;
+  buildData(data) {
+    let myChart = echarts.init(document.getElementById(`id-disk-column-${  this.get('model').id  }${ this.get('nodeType') }`));
 
-    google.charts.load('current', { packages: ['corechart'] }); // eslint-disable-line
-    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
-
-    function drawChart() {
-      if (isEmpty(self.get('chartData'))) {
-        self.set('chartData', self.setEmpty());
-      }
-      var data = google.visualization.arrayToDataTable(self.get('chartData.data')); // eslint-disable-line
-      var view = new google.visualization.DataView(data); // eslint-disable-line
-
-      view.setColumns([0, 1,
-        {
-          calc:         'stringify',
-          sourceColumn: 1,
-          type:         'string',
-          role:         'annotation'
+    // specify chart configuration item and data
+    let option = {
+      title: {
+        text:      'Disk IO statistics',
+        x:          'center',
+        textStyle: {
+          color:      '#5c5e75',
+          fontSize:   15,
+          fontWeight: 'normal'
+        }
+      },
+      tooltip: {},
+      xAxis:   {
+        data:      ['reads MB/s', 'write MB/s', 'io MB/s (read + write)'],
+        axisLabel: { textStyle: { color: '#5c5e75' } },
+        axisTick:  { show: false  },
+        axisLine:  { show: false  },
+        z:         10,
+      },
+      yAxis: {
+        axisLine:  { show: false },
+        axisLabel: { textStyle: { color: '#999' } }
+      },
+      series: [{
+        name:      'Disk Statistics',
+        type:      'bar',
+        data:      data.data,
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(
+              0, 0, 0, 1,
+              [
+                {
+                  offset: 0,
+                  color:  '#96EBBC'
+                },
+                {
+                  offset: 0.5,
+                  color:  '#188df0'
+                },
+                {
+                  offset: 1,
+                  color:  '#3c1c76'
+                }
+              ]
+            )
+          },
+          emphasis: {
+            color: new echarts.graphic.LinearGradient(
+              0, 0, 0, 1,
+              [
+                {
+                  offset: 0,
+                  color:  '#2378f7'
+                },
+                {
+                  offset: 0.7,
+                  color:  '#2378f7'
+                },
+                {
+                  offset: 1,
+                  color:  '#83bff6'
+                }
+              ]
+            )
+          }
         },
-        2
-      ]);
+      }]
+    };
 
-      var options = {
-        title: 'Disk IO statistics',
-        hAxis: {
-          title:          `The number of I/Os currently in progress  ${  self.get('chartData.total') }`,
-          titleTextStyle: { color: '#333' },
-        },
-        width:  440,
-        height: 320,
-        bar:    { groupWidth: '55%' },
-        legend: { position: 'none' },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById(`id-disk-column-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
-
-      chart.draw(view, options);
-    }
+    // use configuration item and data specified to show chart
+    myChart.setOption(option);
   },
 
   diskData(type) {
@@ -93,22 +130,19 @@ export default Component.extend({
   compressChartData(d) {
     return {
       data: [
-        ['Types', 'MB/s', { role: 'style' }],
-        ['reads MB/s', parseFloat(d.node_disk_mega_bytes_read), '#3366cc'],
-        ['write MB/s', parseFloat(d.node_disk_mega_bytes_written), '#329ac7'],
-        ['io MB/s (read + write)', parseFloat(d.node_disk_mega_bytes_io_total), '#f69930']
+        parseFloat(d.node_disk_mega_bytes_read),
+        parseFloat(d.node_disk_mega_bytes_written),
+        parseFloat(d.node_disk_mega_bytes_io_total)
       ],
       total: d.node_disk_io_now
     };
   },
 
   setEmpty() {
-    return [
-      ['Types', 'MB/s', { role: 'style' }],
-      ['reads MB/s', 0, '#3366cc'],
-      ['write MB/s', 0, '#329ac7'],
-      ['io MB/s (read + write)', 0, '#f69930']
-    ], '0';
+    return {
+      data:  [],
+      total: 0
+    };
   },
 
 });

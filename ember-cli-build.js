@@ -21,20 +21,13 @@ module.exports = function(defaults) {
     minifyCSS: {
       enabled: true
     },
-    babel: {
-      blacklist: ['regenerator'],
-      plugins: [
-        'transform-decorators-legacy',
-        'transform-class-properties',
-      ]
-    },
     sourcemaps: {
       enabled: true,
       extensions: ['js']
     },
     sassOptions: {
       implementation: Sass
-    },    
+    },
     //For disable eslint when yarn test
     // hinting: !isTesting,
   });
@@ -53,11 +46,6 @@ module.exports = function(defaults) {
   // along with the exports of each module as its value.
 
 
-  // app.import('bower_components/bootstrap/dist/css/bootstrap.css');
-  // app.import('bower_components/bootstrap/dist/css/bootstrap.css.map', {
-  //     destDir: 'assets'
-  // });
-
   app.import('vendor/charts/d3.min.js');
   app.import('vendor/charts/d3script-area.js');
   app.import('vendor/charts/d3script-gauge.js');
@@ -69,7 +57,6 @@ module.exports = function(defaults) {
   app.import('vendor/charts/d3script-storage.js');
   app.import('vendor/charts/d3script-ram.js');
   app.import('vendor/charts/d3script-cores.js');
-  app.import('vendor/charts/loader.js');
   app.import('vendor/dropdown/position-calculator.js');
 
   app.import('vendor/analytics/countly.js');
@@ -81,7 +68,6 @@ module.exports = function(defaults) {
   app.import('vendor/moment.js');
   app.import('vendor/charts/d3script-globe.js');
   app.import('vendor/admin/jquery-scrollbar.js');
-  
 
   app.import('node_modules/@bower_components/async/dist/async.js');
 
