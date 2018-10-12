@@ -21,7 +21,7 @@ export default Mixin.create({
       subscriber: Subscriber.create()
     });
     const healthzSubscriber  = EmberObject.create({
-      url:        `ws://${  websocketHost  }${ this.get('app.wsEndpoint')  }healthz/overall`,
+      url:        `ws://${  websocketHost  }${ this.get('app.wsEndpoint')  }healthz/overall/watch`,
       subscriber: Subscriber.create()
     });
 

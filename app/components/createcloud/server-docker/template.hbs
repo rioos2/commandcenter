@@ -1,0 +1,18 @@
+<p class="sub-title">{{t 'launcherPage.containerApp.title'}}</p>
+<p class="sub-description">{{t 'launcherPage.containerApp.title'}}</p>
+
+<div class="row p-t-40">
+    {{createcloud/cloud-iso-image model=model selected=selected stepDone="stepDone"}}
+</div>
+
+<div class="row">
+    <div class="col-md-2 slide-content">
+        {{svg/svg-slide-left class="slide-btn" click=(action "navigatorLeft")}}
+        {{svg/svg-slide-right class="slide-btn" click=(action "navigatorRight")}}
+    </div>
+    <div class="col-md-10 os-content">
+        {{#each groupedVms as |vm|}}
+        {{svg/svg-os model=model refreshAfterAction="refreshAfterSelect" activate=activate vm=vm}}
+        {{/each}}
+    </div>
+</div>

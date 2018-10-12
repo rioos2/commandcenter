@@ -42,8 +42,14 @@
 @import 'admin/settings';
 @import 'flag/flags';
 @import 'wizard/wizard';
+<<<<<<< HEAD
 @import 'components/editable';
 @import "ember-searchable-select/style";
+=======
+@import "ember-searchable-select/style";
+
+
+>>>>>>> 2-0-stable
 //TO-DO: Why is this hanging here ?
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @font-face {
