@@ -1,10 +1,10 @@
 import Component from '@ember/component';
 import C from 'nilavu/utils/constants';
-import { isEmpty } from '@ember/utils';
-
+import echarts from 'npm:echarts';
 export default Component.extend({
 
   isActive:     false,
+
   showDropDown: function() {
     return this.get('isActive') ? 'active' : '';
   }.property('isActive'),
@@ -24,37 +24,66 @@ export default Component.extend({
     },
 
     processFilter(type) {
-      this.set('chartData', this.filteredData(type));
-      this.drawProcessStatistics();
       this.set('selectType', type);
+      this.buildData(this.filteredData(type));
     },
   },
 
-  drawProcessStatistics() {
-    var self = this;
+  buildData(data) {
+    let myChart = echarts.init(document.getElementById(`id-process-${  this.get('model').id  }${ this.get('nodeType') }`));
+    // specify chart configuration item and data
+    let option = {
+      title: {
+        text:      `Top 10 running processes by percent of ${  this.get('selectType')  } usage`,
+        x:          'center',
+        textStyle: {
+          color:      '#5c5e75',
+          fontSize:   15,
+          fontWeight: 'normal'
+        }
+      },
+      tooltip: {
+        trigger:    'item',
+        formatter:  '{a} <br/>{b} : {c} ({d}%)'
+      },
+      color: [
+        '#258be2',
+        '#666666',
+        '#f45b5b',
+        '#8085e9',
+        '#8d4654',
+        '#7798bf',
+        '#aaeeee',
+        '#ff0066',
+        '#eeaaee',
+        '#55bf3b',
+        '#df5353',
+        '#7798bf',
+        '#aaeeee'
+      ],
+      series: [
+        {
+          name:   'Running Processes',
+          type:   'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          data:   data.tasks,
+          label:  {
+            show:      true,
+            formatter: '{b}: {d}%'
+          },
+          itemStyle: {
+            emphasis: {
+              shadowBlur:     10,
+              shadowOffsetX:  0,
+              shadowColor:    'rgba(0, 0, 0, 0.5)',
+            }
+          }
+        }]
+    };
+    // use configuration item and data specified to show chart
 
-    google.charts.load('current', { packages: ['corechart'] }); // eslint-disable-line
-    google.charts.setOnLoadCallback(drawChart); // eslint-disable-line
-
-    function drawChart() {
-      if (isEmpty(self.get('chartData'))) {
-        self.set('chartData', self.setEmpty());
-      }
-      var data = google.visualization.arrayToDataTable(self.get('chartData')); // eslint-disable-line
-
-      var options = {
-        title:  `Top 10 running processes by percent of ${  self.get('selectType')  } usage`,
-        is3D:   true,
-        height: 320,
-        width:  460,
-        // Please open it if the colors wants as like as OS USAGE
-        // colors: ['#F74479', '#AA38E6', '#00FFAF', '#4EE2FA', '#ffeb3b']
-      };
-
-      var chart = new google.visualization.PieChart(document.getElementById(`id-process-${  self.get('model').id  }${ self.get('nodeType') }`)); // eslint-disable-line
-
-      chart.draw(data, options);
-    }
+    myChart.setOption(option);
   },
 
   filteredData(type) {
@@ -96,9 +125,7 @@ export default Component.extend({
   },
 
   compressChartData(data) {
-    let process = [
-      ['Task', 'Current data'],
-    ];
+    let tasks = [];
     let processStacks = data.map((p) => p.command).filter((v, i, a) => a.indexOf(v) === i);
 
     processStacks.forEach((k) => {
@@ -110,17 +137,17 @@ export default Component.extend({
           totalValue += parseInt(p.value);
         }
       });
-      process.push([k, totalValue])
+      tasks.push( {
+        value:  totalValue,
+        name:   k
+      })
     });
 
-    return process;
+    return { tasks };
   },
 
   setEmpty() {
-    return [
-      ['Task', 'Current data'],
-      ['None', 100]
-    ];
+    return {  tasks: [] };
   },
 
   types: C.PROCESS.TYPE,
