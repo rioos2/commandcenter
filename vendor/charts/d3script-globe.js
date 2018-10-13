@@ -39,11 +39,7 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
         step(coord);
         exists = true;
         svg.select('g').selectAll('path.cities').select('animate').remove();
-<<<<<<< HEAD
-        svg.select('g').select(`path#${  locationlist[x].City }`).append('animate')
-=======
         svg.select("g").select("path#" + locationlist[x].City.trim()).append("animate")
->>>>>>> 2-0-stable
           .attr('attributeName', 'stroke-width')
           .attr('begin', '0s')
           .attr('dur', '1s')
@@ -52,15 +48,9 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
           .attr('to', '25');
       }
     }
-<<<<<<< HEAD
     if (y.length != 0) {
       notifications.warning(`Globe navigated to ${  y  }. Select ${  y  } to confirm `, {
         autoClear:     true,
-=======
-    if (y.length !== 0) {
-      notifications.warning(`Globe navigated to  ${ y } . Select  ${ y } to confirm `, {
-        autoClear: true,
->>>>>>> 2-0-stable
         clearDuration: 4200,
         cssClasses:    'notification-success'
       });
@@ -286,15 +276,6 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
 
     country = svg.selectAll('.country')
       .data(countries)
-<<<<<<< HEAD
-      .enter().insert('path', '.line')
-      .attr('class', 'country')
-      .attr('d', path);
-
-    var title = svg.append('text')
-      .attr('x', attrs.width / 2)
-      .attr('y', attrs.height * 3 / 5);
-=======
       .enter().insert("path", ".line")
       .attr("class", "country")
       .attr("d", path);
@@ -302,7 +283,6 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
     var title = svg.append("text")
       .attr("x", attrs.width / 2)
       .attr("y", attrs.height * 3 / 5);
->>>>>>> 2-0-stable
 
     var tooltip = d3.select("body")
       .append("div")
@@ -317,11 +297,7 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
       .style("background", "rgba(0,0,0,0.7)")
       .style("text-align", "center");
 
-<<<<<<< HEAD
-    path.pointRadius((d) => {
-=======
     path.pointRadius(function(d) {
->>>>>>> 2-0-stable
       return 10;
     });
 
@@ -353,14 +329,9 @@ function renderGlobeChart(stackfactory, locationList, notifications) {
           .attr('to', '25');
         // console.log(d);
         step(d.geometry.coordinates);
-<<<<<<< HEAD
         stackfactory.set('object_meta.cluster_name', d.City);
       })
       .on("mouseover", function(d) {
-=======
-        params.set("stacksfactory.object_meta.cluster_name", d.City);
-      }).on("mouseover", function(d) {
->>>>>>> 2-0-stable
         return tooltip.text(d.City)
           .style("visibility", "visible");
       })

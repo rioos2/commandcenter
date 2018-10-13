@@ -1,10 +1,6 @@
 import Component from '@ember/component';
-<<<<<<< HEAD:app/components/deploy-widgets/select-location/component.js
-import GeoTools from 'geo-tools'; // eslint-disable-line
-=======
-import RioGeo from 'npm:geoip_from_cities';
-import R from 'npm:ramda';
->>>>>>> 2-0-stable:app/components/createcloud/select-location/component.js
+import RioGeo from 'geoip_from_cities';
+import R from 'ramda';
 import { on } from '@ember/object/evented';
 import { inject as service } from '@ember/service';
 import {
@@ -12,7 +8,6 @@ import {
 } from '@ember/object';
 
 export default Component.extend({
-<<<<<<< HEAD:app/components/deploy-widgets/select-location/component.js
   notifications:   service('notification-messages'),
   showField:       false,
 
@@ -25,21 +20,6 @@ export default Component.extend({
   locationAvailable: computed('datacenters.content', function() {
     return get(this, 'datacenters.content').length > 0;
   }),
-=======
-
-  notifications: service('notification-messages'),
-  showField:     false,
-
-  initializeChart: on('didInsertElement', function() {
-    this.set('model.locationList', this.getCountry(this.get('model')));
-    renderGlobeChart(this.get('model'), this.get('notifications')); // eslint-disable-line
-  }),
-
-  locationAvailable: function() {
-    return this.get('model.datacenters.content').length > 0;
-  }.property('model.datacenters.content'),
->>>>>>> 2-0-stable:app/components/createcloud/select-location/component.js
-
 
   actions: {
     showInputField() {
@@ -54,12 +34,8 @@ export default Component.extend({
       renderGlobeChart.getLocation(); // eslint-disable-line
     }
   },
-<<<<<<< HEAD:app/components/deploy-widgets/select-location/component.js
-  getCountry(datacenters) {
-=======
 
-  getCountry(model) {
->>>>>>> 2-0-stable:app/components/createcloud/select-location/component.js
+  getCountry(datacenters) {
     const self = this;
     let features = datacenters.content.map((x) => {
       return {

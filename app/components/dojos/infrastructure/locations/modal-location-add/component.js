@@ -6,15 +6,9 @@ import DefaultHeaders from 'nilavu/mixins/default-headers';
 import { htmlSafe } from '@ember/string';
 import { isEmpty } from '@ember/utils';
 import { computed } from '@ember/object';
-<<<<<<< HEAD:app/components/dojos/infrastructure/locations/modal-location-add/component.js
 import currency from 'iso-country-currency';
 import RioGeo from 'geoip_from_cities';
 import  R  from 'ramda';
-=======
-import currency from 'npm:iso-country-currency';
-import RioGeo from 'npm:geoip_from_cities';
-import  R  from 'npm:ramda';
->>>>>>> 2-0-stable:app/components/admin-infra/location-add/component.js
 
 export default Component.extend(DefaultHeaders, {
 
@@ -75,11 +69,7 @@ export default Component.extend(DefaultHeaders, {
 
   didInsertElement() {
     this.set('error', this.displayMessage());
-<<<<<<< HEAD:app/components/dojos/infrastructure/locations/modal-location-add/component.js
-    this.set('filteredCountries', get(this, 'countries'));   
-=======
     this.set('filteredCountries', get(this, 'countries'));
->>>>>>> 2-0-stable:app/components/admin-infra/location-add/component.js
   },
 
   actions: {

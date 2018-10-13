@@ -1134,7 +1134,7 @@ header {
   #storage_edit .modal-dialog {
     width: 740px;
   }
-  
+
 }
 @media screen and (min-width: 991px) and (max-width: 1199px) {
   .kv-secondary-menu {
@@ -1156,38 +1156,12 @@ header {
   overflow-y: scroll;
 }
 
-<<<<<<< HEAD
 #alert_rule_modal .modal-dialog .form-control {
   border: 1px solid #CED6E1;
   border-radius: 3px;
   height: 56px;
   overflow-y: scroll;
 }
-
-.select2-container {
-  width: 100% !important;
-  min-height: 56px;
-}
-
-.select2-container--default .select2-selection--multiple {
-  border: 1px solid #CED6E1 !important;
-  min-height: 56px !important;
-
-  .select2-selection__rendered {
-    width: 100% !important;
-    position: relative;
-  }
-
-  .select2-selection__choice {
-    background: rgba(206, 214, 225, 0.5) !important;
-    font-family: fselliot;
-    font-size: 16px;
-    color: #5151BF;
-    padding: 4px 9px !important;
-  }
-=======
->>>>>>> 2-0-stable
-
 
 
 .scroll-wrapper {
