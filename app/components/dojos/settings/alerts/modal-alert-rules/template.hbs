@@ -10,52 +10,55 @@
           <div class="col-sm-12">
             <div class="form-group">
               <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.type'}}</label>
-              <select class="form-control" id="alerts_rules_type" name="alerts_rules_type" onchange= {{action "selectStorage" value="target.value"}}>
-                {{#each rulesForSelectBox as |type|}}
-                <option value={{type.value}}>{{type.text}}</option>
+              <select class="form-control" id="alerts_rules_type"
+              name="alerts_rules_type" onchange= {{action "ruleChanged" value="target.value"}}>
+                {{#each formattedRules as |rule|}}
+                <option value={{rule.value}}>{{rule.text}}</option>
                 {{/each}}
                 </select>
             </div>
-          </div>          
-        </div>        
+          </div>
+        </div>
 
         <div class="row ">
           <div class="col-sm-12">
             <div class="form-group">
-              <label for="alertsRulesDescription">{{t 'dojos.settings.alerts.rules.expressions'}}</label> 
-              <p>{{selectType}}</p>
+              <label for="alertsRulesDescription">{{t 'dojos.settings.alerts.rules.expressions'}}</label>
+              <p>{{rule.id}}</p>
             </div>
           </div>
         </div>
 
         <div class="row">
-          {{#each selectedRuleTypes as |type|}}
+          {{#each labelsBtwn as |fill|}}
             <div class="col-sm-6">
             <div class="form-group">
-              <label class="text-center" >{{type.label}}</label>
-              <label class="text-center mini-text" id="rulesExprValue-{{type.id}}">{{t 'dojos.settings.alerts.rules.empty'}}</label>
-              {{text-editable-popup-textbox placeholder="" showSpinner=showSpinner targetActionName="setRuleExpr" showEditBox="showEditBox-{{type.id}}" targetRef=type.id}}
+              <label class="text-center" >{{fill.label}}</label>
+              <label class="text-center mini-text" id="kvExpressionValue-{{fill.id}}">{{t 'dojos.settings.alerts.rules.empty'}}</label>
+              {{text-editable-popup-textbox placeholder=""
+              showSpinner=showSpinner targetActionName="expressionUpdated"
+              showEditBox="showEditBox-{{fill.id}}" targetRef=fill.id}}
             </div>
           </div>
-          {{/each}}          
-        </div>      
+          {{/each}}
+        </div>
 
         <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
               <label for="alerts_rules_type">{{t 'dojos.settings.alerts.rules.actions'}}</label>
-                {{!-- BEGIN-SNIPPET multiple --}}
                 {{searchable-select
-                  content=filteredCountries
+                  content=content
+                  selected=selectedNotifiers
                   sortBy="title"
                   multiple=true
                   prompt="Choose alert actions"
-                  on-change=(action "handleMultiSelect")}}
+                  on-change=(action "notifierChanged")}}
             </div>
             </div>
           </div>
 
-        <button type="submit" {{action 'apply'}} class="btn btn-default">
+        <button type="submit" {{action 'submit'}} class="btn btn-default">
             {{t 'actions.activate'}}
             {{#if showSpinner}}
             <i class="fa fa-circle-o-notch fa-spin"></i>

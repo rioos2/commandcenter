@@ -96,5 +96,7 @@ module.exports = function(defaults) {
   ]
   });
 
+  app.import('node_modules/ramda/dist/ramda.js');
+
   return app.toTree();
 };

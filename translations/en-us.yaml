@@ -1,7 +1,6 @@
 languageName: English
 rioosXYZ: Rio/OS
 generic:
-<<<<<<< HEAD
   about: About
   actions: Actions
   createdAt: 'Created At'
@@ -25,7 +24,6 @@ generic:
   noo: No
   yess: Yes
   note: 'NOTE:  '
-  active_btn: Add
   M: M
   N: N
   O: O
@@ -52,11 +50,6 @@ actions:
   add: Add
   deploy: Deploy
   activate: Activate
-  active: Active
-  admin: Admin
-  revokeAdmin: Revoke Admin
-  makeSuspend: Suspend
-  cancel: Cancel
 #########################
 # The main navigation bar
 ########################
@@ -171,83 +164,6 @@ dashboard:
 profile:
   recent-activity:
     title: Recent activity
-=======
-  actions:                            Actions
-  activate:                           Activate
-  any:                                Any
-  as:                                 As
-  cancel:                             Cancel
-  closeModal:                         Close
-  created:                            Created
-  createdAt:                          Created At
-  default:                            Default
-  description:                        Description
-  disable:                            Disable
-  disabled:                           Disabled
-  domainName:                         Domain Name
-  edit:                               Edit
-  email:                              Email
-  emptyString:                        ""
-  enable:                             Enable
-  enabled:                            Enabled
-  environment:                        Environment
-  expires:                            Expires
-  healthy:                            Healthy
-  id:                                 ID
-  image:                              Image
-  internal:                           Internal
-  ipAddress:                          IP Address
-  limit:                              Limit
-  loading:                            "Loading..."
-  missing:                            "*%MISSING%*"
-  moreActions:                        More Actions
-  na:                                 'n/a'
-  name:                               Name
-  none:                               None
-  ports:                              Ports
-  remove:                             Remove
-  role:                               Role
-  save:                               Save
-  saved:                              Saved
-  saving:                             Saving
-  search:                             Search
-  state:                              State
-  status:                             Status
-  test:                               Test
-  testing:                            Testing
-  to:                                 To
-  total:                              Total
-  type:                               Type
-  unknown:                            Unknown
-  uuid:                               UUID
-  # These are not "yes" and "no" to avoid being parsed as bools by yaml parser.
-  noo:                                No
-  yess:                               Yes
-  statusNotSeleted:                   success
-  statusSeleted:                      selected
-
-
-##############################
-# Routes
-##############################
-guardian:
-  admin:
-    organization:
-      noOrigin:                       One small step to complete your signup. Add an organization</br> *You can always add organizations later from the profile menu at the top right of your screen
-    team:
-      noTeam:                         One small step to complete your signup. Add a team in an organization</br> *You can always add teams for an organization later from the profile menu at the top right of your screen
-  regular:
-    organization:
-      noOrigin:                       You must be part of an organization to continue. Contact administrator requesting an invitation.
-      acceptOrigin:                   Your account has not been approved by a staff member yet. (or) you must accept the invitation emailed to you. If you didn't receive an email
-      clickHere:                      Click Here
-      acceptText:                     to accept the invitation by <strong style="color:#3900aa">{accountName}</strong> to join the <em style="color:green">{orgName}</em> organization as a member of the <em style="color:green">{teamName}</em> team.
-
-accountsPage:
-  index:
-    header:                           Accounts
-    localLink:                        Add Account
->>>>>>> 2-0-stable
     table:
       colDevice: Device
       colCategory: Category
@@ -318,24 +234,6 @@ dojos:
         info: Description
         dateAndTime: 'Date and time'
         ip: 'IP'
-    alerts:
-      title:  Alerts
-      required: 'No alerts added yet.'
-      connected: 'Connected Rules'
-      rules: 
-        title: 'Service Alerts'
-        select: 'Select your option'
-        placeholder: 'Alert rules edit expressions'
-        type: 'Choose alert type'
-        expressions: 'Edit rule expressions'
-        required: "Value must fill for apply alert policies."
-        empty: 'value is empty'
-        somethingWrong: 'Unable to connect'
-        actions: 'Actions'
-      table:
-        type: Type
-        dateAndTime: 'Date and time'
-        reason: 'Reason'
     entitlement:
       title: Licenses
       show:
@@ -460,7 +358,6 @@ dojos:
         required: 'No nodes attached.'
         requiredNetwork: 'No virtual networks attached.'
       add:
-<<<<<<< HEAD
         title: 'Add Location'
         city: 'Select City'
         nodes:
@@ -548,86 +445,6 @@ managePage:
 ##########/
 # launcher Page
 # digitalcloud, containers
-=======
-        cityError:                    Select city</br>
-        storageError:                 Select storage</br>
-        currencyError:                Select country</br>
-        nodesError:                   Select nodes</br>
-        networksError:                Select network</br>
-        storagesDisplayError:         Create storage before attempting add.
-        nodesDisplayError:            Create nodes before attempting add.
-        networksDisplayError:         Create networks before attempting add.
-        networksSelectError:          Apply virtual networks for the selected nodes.</br>
-    network:
-      title:                          Virtual Networks
-      ipRange:                        IP Range
-      range:                          Range
-      connected:                      'Connected Virtual Networks'
-      filterBy:                       'Filter by:'
-      digitalcloud:                   Digitalcloud
-      container:                      Containers
-      noNetwork:                      'No virtual networks added yet.'
-      addNetwork:                     'Add Virtual Network'
-      detail:                         DETAILS
-      type:                           Type
-      subnet:                         Subnet IP
-      gateway:                        Gateway
-      bridge:                         Bridge Type
-      status:                         Status
-      netmask:                        Netmask
-      nodes:                          NODES
-      name:                           Name
-      selectNode:                     Select Nodes
-      noNetworkData:                  No virtual networks added yet.
-      nodeData:                       No nodes attached.
-      edit:                           Edit
-      edit_title:                     Edit Virtual Network
-
-      nameError: 'Missing name (example: riopub001)</br>'
-      typeError:                      Missing type</br>
-      subnetError: 'Missing Subnet IP in CIDR (example: 192.168.1.1/29)</br>'
-      gatewayError: 'Missing Gateway IP (example: 192.168.2.1)</br>'
-      brigeHostError:                 Missing bridge</br>
-      nodesError:                     Select node</br>
-      netmaskError: 'Missing Netmask (example: 255.255.255.0)</br>'
-      bridgeError:                    Select bridge for selected nodes.<br>
-      subnetRangeErroripv4: 'Enter vaild Subnet IP in CIDR (example: 192.168.1.0/29)</br>'
-      subnetRangeErroripv6: 'Enter vaild Subnet IP in CIDR (example: 2001:db8:1234:0000::/50)</br>'
-      gatewayErroripv4: 'Enter vaild Gateway IP (example: 192.168.2.1)</br>'
-      gatewayErroripv6: 'Enter vaild Gateway IP (example: 64:ff9b::192.0.2.33)</br>'
-      netmaskErroripv4: 'Enter vaild Netmask (example: 255.255.255.0)</br>'
-      netmaskErroripv6: 'Enter vaild Netmask (example: ffff:ffff:ffff:ffff::ffff)</br>'
-    dashboard:
-      title:                          Infrastructure
-    users:
-      title:                          Users
-    reports:
-      title:                          Reports
-    flavours:
-      title:                          Flavours
-    settings:
-      title:                          Settings
-      entitlement:
-        title:                        License
-        description:                  Edit activation code
-        node:                         '{optionName}:Activated  {Activated}/{Allowed}'
-        expired:                      "  Expires in "
-        days:                         " days"
-        trial:                        Trial
-        rioProduct:                   Rio/OS
-        activeCode:                   Enter activation code
-        emptyActiveCode:              You forgot to type activation code
-        licenceid:                    Enter licence id
-        licencepassword:              Enter licence password
-        used:                         " used"
-        total:                        " total"
-        activation:
-          success:                    License activated successfully
-          failure:                    License activation failed
-      logs:
-        title:                        Logs
-        noLogs:                       No logs added yet.
->>>>>>> 2-0-stable
 launcherPage:
   machine:
     title: 'CREATING A DIGITAL CLOUD'
@@ -657,7 +474,6 @@ launcherPage:
     success: 'Secret key generated successfully.'
     required: 'Select secret type and generate'
   location:
-<<<<<<< HEAD
     title: 'Select Location'
     required: 'You forgot to select a location'
     globe:
@@ -693,59 +509,6 @@ launcherPage:
       select: select
       selected: selected
       required: 'No appstore os selected'
-=======
-    title:                            Select Location
-    description:                      Select a data center that is close to your location
-    locations:                        Your location(s)
-    empty:                            Nothing found
-    noLocation:                       No location available
-  sysConfig:
-    title:                            Cloud Performance
-    subtitle:                         CLOUD PERFORMANCE
-    description:                      Select system configuration
-    storageType:
-      title:                          Storage type
-      flash:                          Flash
-      or:                             or
-      hdd:                            HDD
-    storageCapacity:
-      title:                          Storage Capacity
-      description:                    you can set any capacity
-      suffix:                         ' GB'
-      suffix-i:                       ' GiB'
-    cpuChooser:
-      title:                          Select number of cores
-      description:                    From 1 to 30
-    peerChooser:
-      title:                          Select number of peers
-      description:                    From 1
-    ramChooser:
-      title:                          ram
-  repo:
-    title:                            Select Repository
-    subtitle: 'Edit repository, eg:   https://github.com/rioadvancement/build-blockchain-insurance-app.git'
-    urlPlaceHolder:                   Enter repository
-    emptyUrl:                         You forgot to type a url
-    invalidFormat:                    Enter vaild url
-  blockchainApp:
-    title:                            Select a Blockchain Network
-    subtitle:                         Select preferred blockchain infrastructure to deploy (Hyperledger Fabric)
-    emptynetwork:                     No blockchain network available
-    network:                          Blockchain Networks
-  containerApp:
-    title:                            Container Application
-    subtitle:                         Select preferred application
-  serverOs:
-    title:                            Server OS
-    subtitle:                         Select preferred system
-    select:                           select
-    selected:                         selected
-    description:                      Troublesome aspect of the slider. Proper use of the settings required a secret knowledge of the underlying codebase, and did not allow for intuitive configuration. Plainly put - the carousel config was poopy.No longer! In version 4.1 the carousel
-      functionality and settings have been re-worked to function in a straight forward, intuitive manner.
-    empty:                            no image selected
-  buildconfig:
-    success:                          Build Config created successfully.
->>>>>>> 2-0-stable
   network:
     title: Networking
     required: 'No network selected'
@@ -755,7 +518,6 @@ launcherPage:
       ipv4: IPv4
       ipv6: IPv6
   summary:
-<<<<<<< HEAD
     title: Summary
     subtitle: 'verify preferred system'
     cloudType: 'Cloud Type'
@@ -764,25 +526,6 @@ launcherPage:
     launch:
       now: 'Launch your cloud'
       done: 'Thank You'
-=======
-    title:                            Summary
-    subtitle:                         Verify preferred system
-    cloudType:                        Cloud Type
-    launch:                           Launch your cloud
-    launchThank:                      Thank You
-    domain:
-      empty:                          You forgot to type a domain
-      name:                           Domain Name
-    region:
-      empty:                          You forgot to select a location
-      name:                           Location
-    image:
-      empty:                          No server OS selected
-    config:
-      core:                           Cores
-      number:                         Number
-      ram:                            RAM
->>>>>>> 2-0-stable
   scaling:
     title: SCALING
     subtitle: 'Select scaling configuration ( Horizontal / Vertical )'
@@ -830,7 +573,6 @@ launcherPage:
       scalingWaitTimeTitle: 'Select Autoscale Wait Time'
 
 failWhalePage:
-<<<<<<< HEAD
   header: Error
   reload: "<a href=\"#\" onclick=\"window.location.href = window.location.href; return false;\">Reload</a> to try again or\n"
   logout: 'log out'
@@ -843,125 +585,13 @@ messages:
     novnc: "Deploying..Console isn''t ready yet."
     QRcode:
       downloadFailed: '<p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>'
-=======
-  header:                             Error
-  reloadButton:                       |
-    <a href="#" onclick="window.location.href = window.location.href; return false;">Reload</a> to try again or
-  logoutButton:                       log out
-
-loginPage:
-  greeting:                           "SIGN IN"
-  usernameLabel:                      "User name"
-  passwordLabel:                      "Password"
-  loggingInLabel:                     " (START VERIFICATION)"
-  signupLabel:                        "Sign up"
-  error:
-    generic:                          "There was an error ({errorCode}) while trying to log you in. Please try again."
-    authFailed:                       Username or Password incorrect.
-    timedOut:                         Your session has timed out.  Log in again to continue.
-
-signupPage:
-  signup:                             SIGN UP
-  companyName:                        Company name
-  firstName:                          First name
-  lastName:                           Last name
-  phone:                              Phone
-  email:                              Email
-  activateOnCode:                     Activate on code
-  createAccount:                      Create account
-  alredyAccount:                      Already have an account?
-  signin:                             Sign in
-
-account:
-  userManagement:
-    active: Active
-    suspend:
-      title: Suspend
-      success: '{email} suspended.'
-      failed: 'Update failed'
-    revokeSuspend:
-      title: Revoke Suspend
-      success: '{email} suspend revoked.'
-      failed: 'Update failed'
-    admin:
-      title: Admin
-      success: '{email} is an admin now.'
-      failed: 'Update failed'
-    revokeAdmin:
-      title: Revoke Admin
-      success: '{email} admin permession revoked.'
-      failed: 'Update failed'
-  actionPopup:
-    suspend:
-      header: 'Are you sure you want to suspend "{firstName}"?'
-      buttonCancel: Cancel
-      buttonSuspend: Save
-      suspendNote: Rio/OS will not be accessible for this user
-    revokeSuspend:
-      header: 'Are you sure you want to revoke suspend for "{firstName}"?'
-      buttonCancel: Cancel
-      buttonRevokeSuspend: Save
-      revokeSuspendNote: Rio/OS will be accessible for this user
-    admin:
-      header: 'Are you sure you want to make "{firstName}" as admin ?'
-      buttonCancel: Cancel
-      buttonMakeAdmin: Save
-      makeAdminNote: 'Rio/OS will be accessible to "{firstName}" as super user'
-    revokeAdmin:
-      header: 'Are you sure you want to revoke admin permission for "{firstName}"?'
-      buttonCancel: Cancel
-      buttonRevokeAdmin: Save
-      revokeAdminNote: 'Rio/OS will be accessible to "{firstName}" as regular user'
-
-
-dashboard:
-  maingauges:                         Main Gauges
-  statistics:                         Statistics
-  throughput:                         Throughput
-  errorSwitch:                        Error
-  osUsage:                            OS usage by time
-  maingaugesFirstSec:                 M
-  maingaugesSecondSec:                ain gauges
-  statisticsFirstSec:                 S
-  statisticsSecondSec:                tatistics
-  statisticsFirstSecNinja:            N
-  statisticsSecondSecNinja:           inja
-  statisticsFirstSecSensei:           S
-  statisticsSecondSecSensei:          ensei
-  emptyNode:
-    ninja:                            <p>You must connect ninjas to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup ninjas in Rio OS.</p>
-    sensei:                           <p>You must connect senseis to see statistics. Refer <a href="https://bit.ly/rioos_sh_adminguide" target="_blank">Admin Guide</a> to setup senseis in Rio OS.</p>
-  osUsageFirstSec:                    O
-  osUsageSecondSec:                   s usage by time
-  error:                              <p>Failed to pull data about the datacenter. Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</p>
-  nodeStatistics:
-    errorAliceName:                   Tx/Rx errors
-
-vnc:
-  title:                              CONSOLE
-  view:                               viewer
-  del:                                Send CtrlAltDel
-
-notifications:
-  Stacks:
-    DeleteFailed:                     Delete failed try after some time
-    DeleteSuccess:                    Deleted successfully
-  QRcode:
-    downloadFailed:                   <p>QR code not found</br>Failed to pair Krypton with your computer.</br>Refer <a href="https://bit.ly/rioos_sh_admin_guide" target="_blank">Admin Guide</a> to troubleshoot.</br></p>
->>>>>>> 2-0-stable
   secrets:
     downloadFailed: 'Download failed try after some time'
-  admin:
-    infra:
-      user:
-        revokeAdmin: 'Are you sure you want to revoke admin permission for "Rio"?'
-        revokeAdminNote: 'Rio/OS will be accessible to "Rio" as regular user'
 
 error:
   apiserver_is_down: 'API Server is down.'
   apiserver_returned_code: 'Code => ({code}) while trying to log you in. Please try again (or) contact administrator.'
 
-<<<<<<< HEAD
 
 confirmDelete:
     title: 'Are you sure you want to delete ?'
@@ -971,443 +601,6 @@ confirmDelete:
     cancelAction: Cancel
     largeDeleteText: '{key} and {othersCount} others'
 
-=======
-infraPage:
-  metric:
-    power:                            "usage "
-    percent:                          "%"
-
-confirmDelete:
-  title:                              'Are you sure you want to delete ?'
-  deleteNote: 'Note:                  All resources inside this "{name}" will be permanently removed.'
-  protip: 'ProTip:                    Hold the {key} key while clicking Delete to bypass this confirmation.'
-  confirmAction:                      Delete
-  cancelAction:                       Cancel
-  largeDeleteText:                    '{key} and {othersCount} others'
-QRCode:
-  title: Scan QR
-  qrNote: <span>Using the mobile app <a href="https://play.google.com/store/apps/details?id=co.krypt.kryptonite&hl=en_IN" target="_blank">kryptonite</a>.Refer <a href="http://rio.digital/docs/" target="_blank">http://rio.digital</a> to use  this advanced security. </span>
-  cancelAction: Cancel
-
-
-containerShell:
-  protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
-  status:
-    initializing:                     Initializing...
-    error: "Error:                    {error}"
-    connecting:                       Connecting...
-    connected:                        Connected
-    disconnected:                     Disconnected
-    closed:                           Closed
-    somethingWrong:                   Unable to connect
-
-formatIp:
-  noIp:                               None
-  unknownIp:                          Unknown
-
-modalShell:
-  title: "Shell:                      {instanceName}"
-
-saveCancel:
-  saving:                             Saving...
-  saved:                              Saved!
-  edit:                               Save
-  create:                             Create
-  cancel:                             Cancel
-
-schema:
-  inputBoolean:
-    y:                                "True"
-    n:                                "False"
-  inputCertificate:
-    prompt:                           Choose a Certificate...
-  inputEnum:
-    option:                           Choose an option...
-  inputService:
-    prompt:                           Choose a Service...
-    custom:
-      prompt:                         Custom...
-      placeholder:                    e.g. region1/environment1/stack1/service1
-  inputSecret:
-    prompt:                           Choose a Secret...
-
-schedulingRuleRow:
-  theHost:                            The host
-  must:                               must
-  should:                             should
-  shouldNot:                          should not
-  mustNot:                            must not
-  haveA:                              have a
-  of:                                 of
-  hostLabel:                          host label
-  containerLabel:                     container with label
-  serviceName:                        service with the name
-  containerName:                      container with the name
-
-serviceLink:
-  withAlias:
-      sameStack:                      "{service} as {alias}"
-      differentStack:                 "{stack}/{service} as {alias}"
-  noAlias:
-      sameStack:                      "{service}"
-      differentStack:                 "{stack}/{service}"
-
-sidekickAddtlInfo:
-  info:                               Info
-  image:                              Image
-  entryPoint:                         Entrypoint
-  command:                            Command
-  containers:                         Containers
-  noContainers:                       No Containers
-  labels:                             Labels
-  noLabels:                           No Labels
-
-siteAccess:
-  header:                             Site Access
-  helpText:                           "Configure who should be allowed to log in and use {appName}."
-  unrestricted:                       "Allow any valid {individuals}"
-  restricted:                         "Allow members of Environments, plus Authorized {individuals} and {collection}"
-  required:                           "Restrict access to only Authorized {individuals} and {collection}"
-  listHeader:                         "Authorized {individuals} and {collection}"
-  noIdentity:                         None
-  users:                              Users
-  groups:                             Groups
-  organizations:                      Organizations
-
-snapshotTimeline:
-  noData:                             No Snapshot Data
-
-stackSection:
-  outputs:                            Outputs
-  description:                        Description
-  none:                               No Services
-  tags:                               Tags
-  container:                          |
-    {numContainers, plural,
-      =1 {Container}
-      other {Containers}
-    }
-  service:                            |
-    {numServices, plural,
-      =1 {Service}
-      other {Services}
-    }
-  sidekick:                           |
-    {numSidekicks, plural,
-      =1 {+ 1 Sidekick}
-      other {+ # Sidekicks}
-    }
-  add:
-    service:                          Add Service
-    loadBalancer:                     Add Load Balancer
-    serviceAlias:                     Add Service Alias
-    externalService:                  Add External Service
-    virtualMachine:                   Add Virtual Machine
-  table:
-    dataTitle:
-      state:                          State
-      serviceName:                    Service Name
-      kind:                           Kind
-      details:                        Details
-      containers:                     Containers
-      actions:                        Actions
-  upgradeImage:                       Upgrade Container Image
-
-
-snapshotSection:
-  none:                               Not backed up
-  multiple: 'Multiple:                {latestDate}'
-
-storagePoolSection:
-  outputs:                            Outputs
-  readOnly:                           "(read-only)"
-  hosts:
-    header:                           Hosts
-    none:                             No Hosts
-  volumes:
-    header:                           Volumes
-    add:                              Add Volume
-    none:                             No Volumes
-  models:
-    table:
-      header:
-        volumeName:                   'Volume Name'
-        snapshotState:                'Snapshot State'
-        snapshotName:                 'Snapshot Name'
-        backedUp:                     'Backed Up'
-        mounts: 'Mounts (Container:   Path)'
-
-svgServiceContainer:
-  sidekicks:                          Sidekicks
-
-swarm:
-  containerSection:
-    state:                            State
-    name:                             Container Name
-    image:                            Image
-    none:                             No Containers
-  serviceSection:
-    state:                            State
-    name:                             Service Name
-    ports:                            Ports
-    containers:                       Containers
-    none:                             No Services
-
-swarmTab:
-  dashboard:
-    header:                           Dashboard
-    dashboard:
-      content:                        Portainer is a lightweight management UI which allows you to easily manage your Docker swarm cluster
-      button:                         Portainer UI
-
-tooltipLink:
-  list:                               List
-  linkGraph:                          Link Graph
-  composeYaml:                        Compose YAML
-
-tooltipWarning:
-  notConfigured:                      Access Control Not Configured
-  dismiss:                            Dismiss
-
-upgradeBtn:
-  version:
-    current:                          'Current'
-  status:
-    none:                             'None'
-    loading:                          'Checking upgrades...'
-    current:                          'Up to date'
-    available:                        'Upgrade available'
-    inprogress:                       'Upgrade in progress'
-    upgraded: 'Upgraded:              Finish Upgrade'
-    notfound:                         'Template version not found'
-    error:                            'Error checking for upgrade'
-    required:                         'Upgrade required'
-
-viewEditDescription:
-  form:
-    name:
-      placeholder:                    e.g. lab
-    description:
-      placeholder:                    e.g. Environment for developer experimentation
-
-viewEditProject:
-  showEdit:
-    edit:                             "Edit Environment:"
-    add:                              Add Environment
-    template:                         Environment Template
-    accessControl:                    Access Control
-    noMembers:                        Add one or more members who can use this environment.
-  networkPolicy:
-    label:                            Network Policy
-    description:                      Control what containers are allowed to communicate with each other over the Managed Network.
-    unsupported:                      This environment has network policy rules which are not yet supported by the UI.  Please use the API to manage the policy.
-    noManager:                        Network Policies are available only for environments using Cattle Orchestration with the Network Policy Manager infrastructure template deployed.
-    withinStack:                      Within Stack
-    withinService:                    Within Service
-    withinLinked:                     Between Linked Services
-    default:                          Everything Else
-    allow:                            Allow
-    deny:                             Deny
-  header:                             "Environment:"
-  description:                        Description
-  helpBlock:                          |
-    Access Control is not enabled.<br/>
-    Anybody with access to the API/UI acts as an admin and will be able to use any environment.
-
-
-vmConsole:
-  header:                             "Console:"
-  protip: "ProTip:                    Hold the {key} key when opening shell access to launch a new window."
-  canvas:                             Canvas not supported.
-  footerActions:
-    buttonSend:                       Send Ctrl-Alt-Delete
-    buttonCancel:                     Close
-
-volumeRow:
-  mounts:
-    readOnly:                         "(read-only)"
-
-waitOrchestration:
-  count:                              '({sub} of {count})'
-
-waitKubernetes:
-  addHost:                            'Add at least one host'
-  activateHost:                       'Waiting for a host to be active'
-  createStack:                        'Creating Kubernetes system stack'
-  startServices:                      'Starting services'
-  waitApi:                            'Waiting for Kubernetes API'
-
-waitMesos:
-  addHost:                            'Add at least three hosts'
-  activateHost:                       'Waiting for hosts to be active'
-  createStack:                        'Creating Mesos system stack'
-  startServices:                      'Starting services'
-  waitApi:                            'Waiting for leading Mesos Master'
-
-waitSwarm:
-  addHost:                            'Add at least one host'
-  activateHost:                       'Waiting for a host to be active'
-  createStack:                        'Creating Swarm system stack'
-  startServices:                      'Starting services'
-
-##############################
-# Mixins
-##############################
-containerChoices:
-  hostGroup: "Host:                   {name}"
-  hostGroupWithState: "Host:          {name} ({state})"
-  unknownHost: "Host:                 ???"
-  containerOption:                    "{name}"
-  containerOptionWithState:           "{name} ({state})"
-
-driver:
-  multiHostNames:                     "Hosts will be named <b>{first}</b> &mdash; <b>{last}</b>"
-
-##############################
-# Services
-##############################
-allServices:
-  stackGroup: "Stack:                 {name}"
-  noName: "(Stack:                    {id})"
-
-##############################
-# Navigation
-##############################
-nav:
-  dashboard:                          Dashboard
-  manage:                             Manage
-  digitalcloud:                       Digital cloud
-  docker:                             Container
-  blockchain:                         Blockchain
-  customApp:                          Application from Git
-  deploy:                             Deploy
-  infrastructureNetwork:              Deploy network
-  deployApplication:                  Deploy application
-  organization:
-    create:
-      header:                         Add Organization
-      nameLable:                      Name
-      orgNoteLabel: 'NOTE:            '
-      orgNote: "Allow you to organize your resources into groups that fit the way you work. You can group resources (like Digital cloud and Containers) in ways that align with the  your projects. Example 'Organization: RioEngineering  grouped to Teams: QA, R&D'."
-      orgAddBtn:                      Add
-      orgNameEmpty:                   Enter organization name
-    team:
-      addBtn:                         Team
-      emptyTeam:                      No team added yet
-      teamCount:                      Team
-    tab:
-      index:                          Organization
-    tab2:
-      index:                          Team
-    show:
-      selectTeam:                     'Switch team:'
-      createdAt:                      Created At
-      account:                        Account ID
-      emptyBtn:                       +Add origin
-      status:                         success
-      count:                          origins
-      add:                            + Add
-    index:
-      name:                           Organizations
-  team:
-    create:
-      header:                         'Add team in '
-      header1:                        'Add member in'
-      nameLable:                      Name
-      emailLable:                     Emails
-      descriptionLable:               Description
-      tmNoteLabel: 'NOTE:             '
-      tmNote:                         Teams you can invite and manage users and control your resource spend
-      tmAddBtn:                       Add
-      tmNameEmpty:                    Enter team name
-      tmEmailEmpty:                   Enter Email id
-      tmDescriptionEmpty:             Enter description
-      inviteButton:                   Invite
-      emailFieldNote:                 Fill in the members emails you want to invite, one per line
-    show:
-      createdAt:                      Created At
-      inviteTo:                       Invite To
-      about:                          About
-      emptyBtn:                       +Add team
-      selectPlaceHolder:              Select team
-      count:                          teams
-      add:                            + Add
-    member:
-      emptyBtn:                       +invite
-      status:                         Status
-      email:                          Email
-    totalCounts:
-      member:                         member
-
-  user:
-    org:                              Organization
-    createOrg:                        Add organization
-    linkOrg:                          Organizations
-    profile:                          Profile
-    logout:                           Logout
-    admin:                            Admin
-
-##############################
-# Resource Actions
-##############################
-action:
-  activate:                           Activate
-  backup:                             Backup Snapshot
-  deleteBackup:                       Delete Backup
-  cancelUpgrade:                      Cancel Upgrade
-  cancelRollback:                     Cancel Rollback
-  clone:                              Clone
-  console:                            Open Console
-  deactivate:                         Deactivate
-  edit:                               Edit
-  evacuate:                           Evacuate
-  execute:                            Execute Shell
-  exportConfig:                       Export Config
-  finishUpgrade:                      Finish Upgrade
-  logs:                               View Logs
-  machineConfig:                      Machine Config
-  purge:                              Purge
-  remove:                             Delete
-  replay:                             Replay
-  restart:                            Restart
-  restore:                            Restore
-  retry:                              Retry
-  rollback:                           Rollback
-  revertToSnapshot:                   Revert Volume to Snapshot
-  restoreFromBackup:                  Restore Volume from Backup
-  setDefault:                         Set as Default
-  snapshot:                           Snapshot
-  start:                              Start
-  startServices:                      Start Services
-  stop:                               Stop
-  stopServices:                       Stop Services
-  switchNamespace:                    Switch to this Namespace
-  switchEnvironment:                  Switch to this Environment
-  upgrade:                            Upgrade
-  upgradeOrEdit:                      Upgrade/Edit
-  viewConfig:                         View Config
-  viewGraph:                          View Graph
-  viewInApi:                          View in API
-  viewInstance:                       View Instance
-  downloadSecret:                     Download secret
-  showQRcode:                         Show QR code
-  externalUrl:                        Open UI
-  nodeEdit:                           Edit node
-  nodeInstall:                        Install node
-  createSecret:                       Create Secret
-  installNode:                        Install
-  retryInstallNode:                   Retry Install
-  view:                               View
-  switch:                             Switch
-  makeAdmin: Make Admin
-  makeSuspend: Suspend
-  revokeAdmin: Revoke Admin
-  revokeSuspend: Revoke Suspend
-
-##############################
-# Resource Actions
-##############################
->>>>>>> 2-0-stable
 validation:
   required: '"{key}" is required'
   domain:
@@ -1450,49 +643,4 @@ validation:
     min: '"{key}" should be at least {val}'
     max: '"{key}" should be at most {val}'
   chars: '"{key}" contains {count, plural, =1 {an invalid character} other {# invalid characters}}: {chars}'
-<<<<<<< HEAD
-=======
 
-##############################
-# Model Properties
-##############################
-model:
-  account:
-    kind:
-      registeredAgent:                Registered Agent
-      agent:                          Agent
-      service:                        Service
-      user:                           User
-      admin:                          Admin
-      project:                        Environment
-  identity:
-    displayType:
-      user:                           User
-      team:                           Team
-      group:                          Group
-      org:                            Organization
-      localUser:                      Local User
-      unknown:                        "{type}?"
-  openldapconfig:
-    server:
-      label:                          Hostname or IP Address
-    serviceAccountUsername:
-      label:                          Service Account Username
-    serviceAccountPassword:
-      label:                          Service Account Password
-    domain:
-      label:                          User Search Base
-      placeholder:                    "e.g. ou=Users,dc=mycompany,dc=com"
-      help:                           "Only users below this base will be used."
-  projectMember:
-    role:
-      member:                         Member
-      owner:                          Owner
-      readonly:                       Read-Only
-      restricted:                     Restricted
-  scaleService:
-    min:                              Minimum Scale
-    max:                              Maximum Scale
-    amount:                           By
-
->>>>>>> 2-0-stable

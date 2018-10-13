@@ -1,7 +1,7 @@
 import C from 'nilavu/utils/constants';
 import Component from '@ember/component';
 import { isEmpty } from '@ember/utils';
-import echarts from 'npm:echarts';
+import echarts from 'echarts';
 export default Component.extend({
 
   isActive: false,
