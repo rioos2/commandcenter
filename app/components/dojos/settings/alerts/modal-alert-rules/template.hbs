@@ -13,7 +13,7 @@
               <select class="form-control" id="alerts_rules_type"
               name="alerts_rules_type" onchange= {{action "ruleChanged" value="target.value"}}>
                 {{#each formattedRules as |rule|}}
-                <option value={{rule.value}}>{{rule.text}}</option>
+                  <option value={{rule.value}}>{{rule.text}}</option>
                 {{/each}}
                 </select>
             </div>
@@ -70,3 +70,5 @@
 
   </div>
 </div>
+
+

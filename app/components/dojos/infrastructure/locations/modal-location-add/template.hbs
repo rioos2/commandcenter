@@ -61,7 +61,7 @@
 									<label for="modal_cluster_network">{{t 'stackPage.admin.locations.add_select_network'}}</label>
 								</div>	<div class="rio-radio mov-top">
 			              {{#each nodes as |node|}}
-			                  {{admin-infra/cluster-checkbox name=node.name data=node virtualNetworks=virtualNetworks selectedVirtualNetworks=selectedVirtualNetworks updateData="updateNodeData"}}
+			                  {{dojos/infrastructure/locations/modal-location-add/cluster-checkbox name=node.name data=node virtualNetworks=virtualNetworks selectedVirtualNetworks=selectedVirtualNetworks updateData="updateNodeData"}}
 			              {{/each}}
 			            </div>
 								</div>

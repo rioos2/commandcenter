@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 import Component from '@ember/component';
 import { set, get, computed } from '@ember/object';
 import C from 'nilavu/utils/constants';
@@ -28,6 +27,7 @@ export default Component.extend(DefaultHeaders, {
   didInsertElement() {
     this.set('content', get(this, 'notifiers'));
     this.set('selectedNotifiers', []);
+    alert("--- test");
   },
 
   allRules: computed('model.alertBuiltinRules', function() {
@@ -35,27 +35,26 @@ export default Component.extend(DefaultHeaders, {
   }),
 
   ruleById: computed('allRules', 'id', function() {
-    const rules = get('allRules');
+    const rules = get(this,'allRules');
     const id = get(this, 'id');
-
+alert("ruleById");
     return R.find(R.propEq('id', id))(rules);
   }),
 
   rule: computed('ruleById', function() {
     const r = get(this, 'ruleById');
 
-    if (isEmpty(r) && isEmpty(r.rules)) {
-        return {};
+    if (!isEmpty(r) && !isEmpty(r.rules)) {
+      return r.rules.firstObject;
     }
-
-    return r.rules.firstObject;
+    return {};
   }),
 
   formattedRules: computed('allRules', function() {
     const r = get(this, 'allRules');
 
     const abbrev = x => {
-      const rt = "";
+      let rt = "";
 
       if(!isEmpty(x.rules) && x.rules.firstObject) {
          rt = x.rules.firstObject.rule_type;
@@ -65,10 +64,10 @@ export default Component.extend(DefaultHeaders, {
     };
   }),
 
-  labelsBtwn:computed(' ', function() {
+  labelsBtwn:computed('rule', function() {
     const rule = get(this, 'rule');
 
-    if (isEmptry(rule)) {
+    if (isEmpty(rule) || isEmpty(rule.expression)) {
       return {};
     }
 
@@ -101,7 +100,7 @@ export default Component.extend(DefaultHeaders, {
   actions: {
 
     ruleChanged(id) {
-      const r = get(this, 'ruleById', id);
+      const r = get(this, 'ruleById');
 
       set(this, 'rule', r);
     },
@@ -109,7 +108,7 @@ export default Component.extend(DefaultHeaders, {
     notifierChanged(notifier) {
      const n = get(this, 'selectedNotifiers');
 
-      n.push(noifier);
+      n.push(notifier);
       // is this needed ?
       set(this, 'selectedNotifiers', n);
     },
@@ -207,8 +206,8 @@ export default Component.extend(DefaultHeaders, {
     const u = this.get('unfilled');
 
     const cr = c =>  {
-      set(this, `asExpression-${c.id}`, '');
-      set(this, `rulesExprValue-${cid}`, '');
+      set(this, `kvExpression-${c.id}`, '');
+      set(this, `kvExpressionValue-${c.id}`, '');
     };
 
     R.map(cr,u);
