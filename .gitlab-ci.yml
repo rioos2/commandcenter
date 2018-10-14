@@ -2,9 +2,9 @@ stages:
   - prepare
   - test
 variables:
-  EMBER_CLI_VERSION: "3.2.2"
+  EMBER_CLI_VERSION: "3.4.3"
 install_dependencies:
-  image: node:10.8.0-slim
+  image: node:10.12.0-slim
   stage: prepare
   tags:
     - docker
@@ -20,7 +20,7 @@ install_dependencies:
     paths:
       - node_modules/
 test:
-  image: node:10.8.0-slim
+  image: node:10.12.0-slim
   stage: test
   tags:
     - docker
