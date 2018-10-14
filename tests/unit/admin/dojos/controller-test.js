@@ -1,11 +1,11 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Route | accounts info', function (hooks) {
+module('Unit | Controller | admin dojos', function (hooks) {
   setupTest(hooks);
 
   test('it does not require access', function (assert) {
-    let route = this.owner.lookup('route:accounts/info');
-    assert.ok(route);
+    let controller = this.owner.lookup('controller:admin/dojos');
+    assert.ok(controller);
   });
 });
